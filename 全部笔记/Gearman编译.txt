@@ -1,0 +1,145 @@
+需要boost 库>=1.39
+-------------------------------------------
+到sourceforge.net下载
+boost_1_48_0.tar.bz2，解压后有300多M
+
+进入解压后目录：
+# ./bootstrap.sh --prefix=/usr/local/boost
+
+完成后生成bjam以后，再执行
+./bjam install
+执行软链接
+ln -s /usr/local/boost/include/boost/ /usr/local/include/boost
+ln -s /usr/local/boost/lib/libboost_program_options.so  /usr/lib/libboost_program_options.so
+-------------------------------------------
+支持memcached和sqlite3
+
+./configure --prefix=/usr/local/services/gearmand --with-memcached=/usr/local/services/memcached/bin/memcached --with-sqlite3
+
+-------------------------------------------
+Configuration summary for gearmand version 0.26
+
+   * Installation prefix:       /usr/local/services/gearmand
+   * System type:               unknown-linux-gnu
+   * Host CPU:                  x86_64
+   * C Compiler:                gcc (GCC) 4.1.2 20080704 (Red Hat 4.1.2-51)
+   * Assertions enabled:        yes
+   * Debug enabled:             no
+   * Warnings as failure:       
+   * Building with libsqlite3   no
+   * Building with libdrizzle   no
+   * Building with libmemcached no
+   * Building with libpq        no
+   * Building with tokyocabinet no
+
+-------------------------------------------
+于是尝试# yum install sqlite-devel.x86_64 
+./configure仍然不能build with libsqlite3（其实就是持久任务队列存储），
+后来在google论坛上看到有人用0.23的gearmand成功使用libsqlite3，于是下了这个版本重新./configure
+附下载地址:http://launchpad.net/gearmand/trunk/0.23/+download/gearmand-0.23.tar.gz 
+
+编译结果如下 ：
+Configuration summary for gearmand version 0.23
+
+   * Installation prefix:       /usr/local/services/gearmand
+   * System type:               unknown-linux-gnu
+   * Host CPU:                  x86_64
+   * C Compiler:                gcc (GCC) 4.1.2 20080704 (Red Hat 4.1.2-51)
+   * Assertions enabled:        yes
+   * Debug enabled:             no
+   * Warnings as failure:       no
+   * Building with libsqlite3   yes
+   * Building with libdrizzle   no
+   * Building with libmemcached no
+   * Building with libpq        no
+   * Building with tokyocabinet no
+
+可以看到   * Warnings as failure:       no
+并且       * Building with libsqlite3   yes
+
+-------------------------------------------
+#make && make install后转到安装目录的sbin下
+[root@bogon sbin]# ./gearmand 
+./gearmand: error while loading shared libraries: libboost_program_options.so.1.48.0: cannot open shared object file: No such file or directory
+
+意思是没有找到该动态链接库，使用ldd命令查看gearmand依赖于哪些库
+[root@bogon sbin]# ldd gearmand 
+        linux-vdso.so.1 =>  (0x00007fff5a7fd000)
+        libboost_program_options.so.1.48.0 => not found
+        libsqlite3.so.0 => /usr/local/lib/libsqlite3.so.0 (0x00002b5fa8b6f000)
+        libdl.so.2 => /lib64/libdl.so.2 (0x00000036e7c00000)
+        libpthread.so.0 => /lib64/libpthread.so.0 (0x00000036e8000000)
+        libevent-2.0.so.5 => /usr/local/lib/libevent-2.0.so.5 (0x00002b5fa8dce000)
+        librt.so.1 => /lib64/librt.so.1 (0x00000036e8800000)
+        libstdc++.so.6 => /usr/lib64/libstdc++.so.6 (0x00000036f9e00000)
+        libm.so.6 => /lib64/libm.so.6 (0x00000036e7800000)
+        libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x00000036f7e00000)
+        libc.so.6 => /lib64/libc.so.6 (0x00000036e7400000)
+        /lib64/ld-linux-x86-64.so.2 (0x00000036e7000000)
+定位一下
+[root@bogon sbin]# locate  libboost_program_options.so.1.48.0
+/usr/local/boost/lib/libboost_program_options.so.1.48.0
+把这个路径加入或者弄个软链接
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/boost/lib/
+以守护进程启动 ./gearman -d -u gearmand 
+-------------------------------------------
+gearman的php扩展
+
+wget http://pecl.php.net/get/gearman-1.0.1.tgz
+
+解压后
+#phpize
+#./configure  --with-php-config=/usr/local/services/php-5.3.5/bin/php-config
+如果出现
+checking whether to enable gearman support... yes, shared
+not found
+做一次软链接
+# ln -s /usr/local/services/gearmand/include/libgearman /usr/local/include/libgearman
+#make && make install
+-------------------------------------------
+修改php.ini,如果第一次使用phpize，还要修改extension_dir
+
+[gearman]
+ extension=gearman.so
+
+#pkill -9 php-fpm
+#php-fpm &
+#netstat -tlnp | grep php-fpm
+-------------------------------------------
+查看phpinfo 是否存在
+
+gearman
+gearman support	enabled
+extension version 	1.0.1
+libgearman version 	0.23
+Default TCP Host 	127.0.0.1
+Default TCP Port 	4730
+
+-------------------------------------------
+附gearman PHP扩展的API函数参考：
+http://cn2.php.net/gearman
+
+测试脚本
+-------------------------------------------
+client.php
+
+<?php
+$client = new GearmanClient();
+$client->addServer('127.0.0.1',4730);
+echo $client->doNormal('reverse','Hello World');
+
+-------------------------------------------
+worker.php
+
+<?php
+$worker = new GearmanWorker();
+$worker->addServer();
+$worker->addFunction('reverse','my_reverse_function');
+while($worker->work());
+function my_reverse_function($job)
+{
+	return strrev($job->workload());
+}
+-------------------------------------------
+php worker.php &
+

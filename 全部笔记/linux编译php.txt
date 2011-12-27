@@ -1,0 +1,19 @@
+1.yum使用网络更新太慢，遂使用安装DVD镜像作为光盘源,
+
+#mkdir /media/cdrom
+#mount -t iso9660 /dev/cdrom /media/cdrom
+
+2.修改repo
+用vi 打开 /etc/yum.repos.d/CentOs-Media.repo
+把[c5-media]下的baseurl改成/media/cdrom
+屏蔽网络源并修改yum
+
+#export yum="yum --disablrepo=* --enabelrepo=c5-media -y install gcc gcc-c++"
+
+
+
+3.yum安装编译环境
+#yum -y install gcc gc-c++
+
+4.wget php tar.gz包
+rpm -qa | grep libcurl 查安装的rpm包
