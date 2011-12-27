@@ -1,0 +1,52 @@
+
+wget http://redis.googlecode.com/files/redis-2.4.4.tar.gz
+
+安装tcl
+
+wget http://downloads.sourceforge.net/project/tcl/Tcl/8.5.11/tcl8511-src.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Ftcl%2Ffiles%2F&ts=1324449720&use_mirror=nchc
+
+明明下了个8.5.11的tcl，编译出来竟然是8.4的，坑爹啊，最后只能locate,然后手动删除了相关文件，不知道这样有没有问题，重新下了个8.5.9的。这次指定了安装目录。然后把tclsh8.5做软链接到/usr/bin下面
+
+
+-------------------------------------------
+make test 报错
+*** [err]: PUBLISH/SUBSCRIBE after UNSUBSCRIBE without arguments in tests/unit/pubsub.tcl
+Expected '1' to be equal to '0'
+*** [err]: PUBLISH/PSUBSCRIBE after PUNSUBSCRIBE without arguments in tests/unit/pubsub.tcl
+Expected '1' to be equal to '0'
+Cleanup: may take some time... OK
+make[1]: *** [test] Error 1
+make[1]: Leaving directory `/tmp/redis-2.4.4/src'
+
+-------------------------------------------
+2.4.4版本的redis无法通过make test，改成使用redis 2.2.13,
+#make
+#make PREFIX=/usr/local/services/redis(手动指定安装目录) install
+#make test
+非常冗长，大概要10分钟，通过
+
+复制安装源文件夹的redis.conf 到/usr/local/services/redis/etc中
+-------------------------------------------
+修改配置文件
+一般需要把daemonize no 改为 daemonize yes其他的看需要修改.
+-------------------------------------------
+启动
+# /usr/local/services/redis/bin/redis-server /usr/local/services/redis/etc/redis.conf
+
+-------------------------------------------
+编译php-redis
+
+#假定模块源文件为php-redis-2.1.3.tar.gz,PHP安装路径为/usr/local/services/php-5.3.5
+tar -xzvf php-redis-2.1.3.tar.gz
+cd php-redis-2.1.3
+/usr/local/services/php-5.3.5/bin/phpize
+./configure --enable-redis --with-php-config=/usr/local/services/php-5.3.5/bin/php-config
+make
+make install
+
+修改php.in配置，加入
+[redis]
+ extensio=redis.so
+
+把extension_dir指定为编译后redis.so所在目录。
+-------------------------------------------
