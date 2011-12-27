@@ -1,0 +1,3 @@
+<?php
+function my_http_build_query2($data){ $str = ''; foreach($data as $key=>$value){  foreach(child_str($value) as $v){   $str .= "$key$v&";  } } return substr($str, 0, strlen($str)-1);}
+ function child_str($data){ $str = array(); if(is_array($data)){  foreach($data as $key=>$value){   foreach(child_str($value) as $v){    $str[] = "[$key]$v";   }  } }else{   $data = str_replace('&', '%26', '='.$data);  $str[] = $data; } return $str;}

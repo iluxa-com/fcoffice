@@ -1,0 +1,98 @@
+参考资料：
+http://www.ibm.com/developerworks/cn/opensource/os-php-gearman/
+http://gearman.org/
+
+
+Gearman 是一个把作业分发到更适合完成该任务的机器或线程的的通用应用框架。
+
+允许并行作业和负载均衡，支持在不同语言间调用函数。广泛应用于各项应用，从追求高可用性的网站到数据库复制备份事件。从另一个角度来说，它是各种分发线程通信的神经系统。
+
+百度知道这则介绍很不错
+
+Gearman
+求助编辑百科名片
+
+Gearman是一个用来把工作委派给其他机器、分布式的调用更适合做某项工作的机器、并发的做某项工作在多个调用间做负载均衡、或用来在调用其它语言的函数的系统。
+
+目录
+
+    Gearman 简介
+    Gearman运行过程
+    Gearman新版本介绍
+    安装 Gearman
+展开
+
+编辑本段Gearman 简介
+　　通常，多语言多系统之间的集成是个大问题，一般来说，人们多半会采用 WebService 的方式来处理此类集成问题，但不管采用何种风格的 WebService，如 RPC 风格，或者 REST 风格，其本身都有一定的复杂性。相比之下，Gearman 也能实现类似的作用，而且更简单易用。
+编辑本段Gearman运行过程
+　　一个Gearman请求的处理过程涉及三个角色：Client -> Job -> Worker。
+　　Client：请求的发起者，可以是 C，PHP，Perl，MySQL UDF 等等。
+　　Job：请求的调度者，用来负责协调把 Client 发出的请求转发给合适的 Work。
+　　Worker：请求的处理者，可以是 C，PHP，Perl 等等。
+　　因为 Client，Worker 并不限制用一样的语言，所以有利于多语言多系统之间的集成。
+　　甚至我们通过增加更多的 Worker，可以很方便的实现应用程序的分布式负载均衡架构。
+编辑本段Gearman新版本介绍
+　　Gearman 1 月 16 日发布了 c 语言的 0.2 版本，gearman 提供了一个 work 传递其他机器，或者调用其他机器功能的框架，通过 gearman 你可以实现并行的工作，负载均衡处理，调用其他语言的函数。它可以应用在多种场合，从高可用性的 web 服务到数据库复制，换句话说，它是分布式处理的中枢神经。gearman 早期是 sixpart 实现的 perl 语言开发的版本，名字来源于“Manager”，这一框架只负责分发要做的工作，本身并不做任何实际的工作。（这点与 spread toolkit 相同 译者注）。
+编辑本段安装 Gearman
+安装 Gearman server and library
+　　tar zxf gearmand-0.8.tar.gz[1]
+　　cd gearmand-0.8
+　　./configure
+　　make
+　　make install
+安装 Gearman PHP extension
+　　tar zxf gearman-0.4.0.tgz
+　　cd gearman-0.4.0
+　　phpize
+　　./configure
+　　make
+　　make install
+　　编辑 php.ini 配置文件加载相应模块并使之生效：
+　　extension = "gearman。so"
+　　启动Job：
+　　gearmand -d
+　　如果当前用户是 root 的话，则需要这样操作：
+　　gearmand -d -u root
+　　缺省会使用 4730 端口，下面会用到。
+　　注意：如果找不到 gearmand 命令的路径，别忘了用 whereis gearmand 确认。
+编写 Worker
+　　worker.php 文件内容如下：
+　　<?php
+　　$worker= new GearmanWorker();
+　　$worker->addServer('127.0.0.1', 4730);
+　　$worker->addFunction('reverse', 'my_reverse_function');
+　　while ($worker->work());
+　　function my_reverse_function($job) {
+　　return strrev($job->workload());
+　　}
+　　?>
+设置后台运行 work
+　　php worker.php &
+编写 Client
+　　client.php 文件内容如下：
+　　<?php
+　　$client= new GearmanClient();
+　　$client->addServer('127.0.0.1', 4730);
+　　echo $client->do('reverse', 'Hello World!'), "\n";
+　　?>
+运行 client
+　　php client.php
+　　输出：!dlroW olleH
+　　出于方便的考虑，Worker，Client 使用的都是PHP，但这并不影响演示，实际应用中，你完全可以通过 Gearman 集成不同语言实现的 Worker，Client。或许此时你还想了解前面提到的负载均衡功能：很简单，只要增加多个 Worker 即可，你可以按照 worker.php 的样子多写几个类似的文件，并设置不同的返回值用以识别演示效果。然后依次启动这几个 Worker 文件，并多次使用 client.php 去请求，你就会发现 Job 会把 Client 请求转发给不同的 Worker。
+命令行工具
+　　如果你觉得安装 PHP 之类的东西太麻烦的话，你也可以仅仅通过命令行工具来体验 Gearman 的功能：
+　　启动 Worker：gearman -w -f wc -- wc -l &
+　　运行 Client：gearman -f wc < /etc/passwd
+　　具体可以参考官方文档，还有一些不错的 PDF。
+
+参考资料
+
+        1
+
+        Gearman PHP extension 下载地址  
+
+        http://pecl.php.net/get/gearman-0.4.0.tgz
+
+
+
+
