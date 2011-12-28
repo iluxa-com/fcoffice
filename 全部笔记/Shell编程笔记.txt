@@ -60,6 +60,7 @@ crontab [-u username] -e -l -r
 写入
 50,51,52, 18 * * * /bin/echo `date` >/dev/console
 使用#注释cron脚本
+$ crontab davecron
 新建的文件副本会放置在/var/spool/cron目录内，文件名为对应的用户名
 -------------------------------------------
 at命令
