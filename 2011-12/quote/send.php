@@ -10,7 +10,7 @@
         do {
             $id = rand(0,count($matches[1])-1);
             ++$i;
-            if($i>count($matches[1])) {
+            if($i>=count($matches[1])) {
                 $failed = true;
                 break ;
             }
