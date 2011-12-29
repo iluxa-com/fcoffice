@@ -50,6 +50,7 @@ crontab [-u username] -e -l -r
 -l 列出crontab文件的内容
 -r 删除crontab文件
 -------------------------------------------
+
 如
 30 21 * * * /apps/bin/clear.sh
 0,30 18-23 * * * /apps/bin/dbcheck.sh
