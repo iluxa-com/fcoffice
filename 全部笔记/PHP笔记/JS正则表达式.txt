@@ -1,0 +1,16 @@
+
+
+
+------------------------------------------------------------------------------
+自定义Javascript的 preg_replace_all
+
+function preg_match_all(regexpstr,string){
+	matcharr=new Array();
+	regexp=new RegExp(regexpstr);
+	while(true){
+		result=regexp.exec(string);
+		if(result!=null) matcharr.push(result);
+		else break;
+	}
+	return matcharr;
+}

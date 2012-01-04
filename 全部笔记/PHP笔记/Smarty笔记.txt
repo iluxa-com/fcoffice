@@ -1,0 +1,323 @@
+smary 保留关键字之日期
+{$smarty.now|date_format:"%Y-%m-%d %H:%M:%S"}
+------------------------------------------------------------------------------
+内部创建变量或者分配变量的方法
+{assign var="foo" value="abc"}
+{assign var="logo" value="`$rows[class].logo`"}
+{assign var="logo" value="`<img src=$baseUrl/public/images/ajax/ajax2.gif>`"}
+------------------------------------------------------------------------------
+
+`` 一个{}有多个变量时用的吧。。
+------------------------------------------------------------------------------
+
+{""}双引号
+Smarty可以识别嵌入在双引号的变量
+`$foo.bar` 将被看作一个变量
+
+
+{"$testName.bbc"} 假设$testName为falcon,将输出falcon.bbc
+$foo.bar 为变量与字符的结合。
+
+------------------------------------------------------------------------------
+习惯用法
+
+PRACTICAL EXAMPLES:
+{include file="subdir/$tpl_name.tpl"} <-- $tpl_name将被值替换
+{cycle values="one,two,`$smarty.config.myval`"} <-- 必须用``
+
+------------------------------------------------------------------------------
+变量间可以相互运算
+{$bar+$foo}
+
+------------------------------------------------------------------------------
+从配置文件读取变量
+1.配置文件一般放config_dir 如foo.conf 可分节
+2.读入配置文件  {config_load file="foo.conf" section="play"} 不分节时section可省
+3.应用配置 <body bgcolor="{#bodyBgColor#}"> 双引号{}# 注意这个写法 
+另 一 替 代 写 法:
+{$smarty.config.pageTitle}
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+但是当变量作为属性值并被引号括住的时候，
+
+{include file="#includefile#"} 这样#includefile#将被当作字符处理，而不表示配置文件变量但可以这样表示 {include file="`$smarty.config.includefile`"}
+不要忘了加``  这是为了里面那个不嵌夽的{}吧。
+
+
+------------------------------------------------------------------------------
+
+保留变量
+Request variables[页面请求变量](译注：就是get,post,server,session等变量)
+{$smarty.now} 
+{$smarty.const} 
+{$smarty.capture} 
+{$smarty.config} 
+{$smarty.section}, {$smarty.foreach} 
+{$smarty.template} 
+
+------------------------------------------------------------------------------
+
+页面请求
+{* display value of page from URL (GET) http://www.domain.com/index.php?page=foo *}
+{$smarty.get.page}
+
+{* display the variable "page" from a form (POST) *}
+{$smarty.post.page}
+
+{* display the value of the cookie "username" *}
+{$smarty.cookies.username}
+
+{* display the server variable "SERVER_NAME" *}
+{$smarty.server.SERVER_NAME}
+
+{* display the system environment variable "PATH" *}
+{$smarty.env.PATH}
+
+{* display the php session variable "id" *}
+{$smarty.session.id}
+
+{* display the variable "username" from merged get/post/cookies/server/env *}
+{$smarty.request.username}
+------------------------------------------------------------------------------
+
+
+调节器
+
+{$smarty.server.HTTP_USER_AGENT|upper}
+注意变量与调节器之间不间有空格！
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+如果你给数组变量应用单值变量的调节，结果是数组的每个值都被调节。 如果你只想要调节器用一个值调节整
+个数组，你必须在调节器名字前加上@符号。 例如： {$articleTitle|@count}（这将会在 $articleTitle 数
+组里输出元素的数目） 
+
+------------------------------------------------------------------------------
+smarty输出数组 ：注意关联数组的表示方式
+
+关联数组
+{*相当于php中$test['name']*}
+{$test.name} 
+索引数组
+{$test[0]}
+
+------------------------------------------------------------------------------
+计算字符数，参数为真，连空格算
+{$arr2.b} :{$arr2.b|count_characters:true}
+
+------------------------------------------------------------------------------
+Cat 连接字符注意``的用法
+
+{$arr2.a|cat:"`$arr2.b`"}
+
+------------------------------------------------------------------------------
+计算段落/句子/单词
+count_paragraphs/count_sentences/cont_words(按空格分的)
+
+------------------------------------------------------------------------------
+时间日期
+时间日期格式：{$smarty.now|date_format:"%b, %e, %a,%Y:%H:%M:%S"}
+输出
+时间日期格式：Jul, 19, Mon,2010:17:45:59 
+a为星期，B为月，e 为天，其他同PHP
+------------------------------------------------------------------------------
+试验默认值,双竖线不行啊。。。只好赋值了
+{$df}={$smarty.now|date_format:"%b, %e, %a,%Y:%H:%M:%S"}
+{$time|default:"`$df`"}
+------------------------------------------------------------------------------
+编码：防采集不错。。。用hexentity参数.可是，中文乱码了……
+<a href="{$home|escape:hex}">{$home|escape:"hexentity"}</a>
+
+可选参数：html,htmlall,
+url,quotes,
+hex,
+hexentity,
+javascript
+
+------------------------------------------------------------------------------
+
+缩进,第一个参数是缩进几个，第二个是用什么来替换
+
+{$indent|indent:4:"&nbsp;"}
+
+------------------------------------------------------------------------------
+lower 小写
+upper 大写
+nl2br 换行 变<br />
+------------------------------------------------------------------------------
+regex_replace正则替换
+
+语法参考preg_replace
+{$indent|regex_replace:"/封装/":" "}
+
+------------------------------------------------------------------------------
+简单匹配替换
+{$title|replace:"ss":"falcon"}
+
+------------------------------------------------------------------------------
+spacify
+插空(不知道这个词是什么意思,顾名思义了^^)是一种在字符串的每个字符之间插入空格或
+者其他的字符(串).
+
+插空中文，乱码了
+------------------------------------------------------------------------------
+
+string_format
+
+使用sprintf语法格式化
+{$pi|string_format:"%.3f"}
+------------------------------------------------------------------------------
+strip 去除多余空格
+{$title|strip:"&nbsp;"}
+
+------------------------------------------------------------------------------
+strip_tags 去除html标签
+
+------------------------------------------------------------------------------
+truncate 
+截取字符串
+第一个参数表示截取的字符个数（是连第二个参数，如果有，加在一起的总字符数），第二个表示加到截取字符的字符，第三个是精确截取还是截取到词，默认按词(false)
+{$indent|truncate:11:"...":true}
+
+------------------------------------------------------------------------------
+wordwrap
+行宽约束
+可以指定段落的宽度，多少个字符一行，超过换行。
+
+第一个参数指定段落宽度
+第二个表示用什么字符约束，默认\n ，不必附加入第一个参数的字符数，跟truncate不同
+第三个表示是否精确还是单词约束，同truncate
+
+------------------------------------------------------------------------------
+组合修改器：用|分隔
+
+                
+{$articleTitle}
+{$articleTitle|upper|spacify}
+{$articleTitle|lower|spacify|truncate}
+{$articleTitle|lower|truncate:30|spacify}
+{$articleTitle|lower|spacify|truncate:30:". . ."}
+
+------------------------------------------------------------------------------
+capture
+
+{* we don't want to print a table row unless content is displayed *} 
+{* 该例在捕获到内容后输出一行包含数据的表格，如果没有捕获到就什么也不输出 *}
+{capture name=banner}
+{include file="get_banner.tpl"}
+{/capture}
+{if $smarty.capture.banner ne ""}
+        <tr>
+                <td>
+                        {$smarty.capture.banner}
+                </td>
+        </tr>
+{/if}
+
+------------------------------------------------------------------------------
+foreach 处理简单数组，注意变量的写法，除来自php的变量在foreach节不用$,但在其他节又必须加上$ ,个人不喜欢这种写法.
+
+{foreach from=$arr name=myforeach key=key item=value}
+	{$key}:{$value}{$br}
+{*可加入*}
+{foreachelse} 数组为空时
+{/foreach}
+
+
+------------------------------------------------------------------------------
+include 参数分别代表：
+        1.文件路径            
+	2.将此文件内容放入变量 
+	3.替换文件中同名变量，这里用PHP传递来的$name是替换了tpl文件中的$test变量
+	貌似第三个参数一般用Hard Code. 如:{include file="footer.tpl" logo="http://my.domain.com/logo.gif"}
+
+{include file="test/test.tpl" assign=content test=$name}
+{$content} {$br}
+------------------------------------------------------------------------------
+
+include_php
+
+在待包含PHP文件中可以使用$this访问smarty，如$this->assign('section',$sql->record)
+
+{include_php file = "php_file"}
+用查询来做导航条时好像很好。
+------------------------------------------------------------------------------
+
+insert 类似include，但不会被缓存，做广告条、实时更新、投票、天气预报很适用。。。
+
+参数：
+name  string 插入函数的名称(必须)
+assign string No n/a  该属性指定一个变量保存待插入函数输出
+script string No n/a   插入函数前需要先包含的php脚本名称
+[var ...] [var type]No n/a  传递给待插入函数的本地参数
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+例如你在页面上端使用一个带有广告条位置的模板，广告条可以包含任何HTML、图象、FLASH等混合信
+息. 因此这里不能使用一个静态的链接，同时我们也不希望该广告条被缓存. 这就需要在 insert 函数指定
+#banner_location_id# 和 #site_id# 值(从配置文件中取)，同时需要一个函数取广告条的内容信息.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+注意这个例子
+{* example of fetching a banner *}
+{insert name="getBanner" lid=#banner_location_id# sid=#site_id#}
+
+在此例中，我们使用了 getBanner 作为 name 属性，同时传递了 #banner_location_id# 和 
+#site_id# 两个参数. 接下来 Smarty 在你的 php 程序中搜索名为 insert_getBanner() 的函数，
+#banner_location_id# 和 #site_id# 的值被组合成一个数组作为函数的第一个参数传递给该函数. 为了
+避免函数命名混乱，所有的 insert 函数都必须以 insert_ 开头. 你的 insert_getBanner() 函数根据传递
+的参数执行并返回执行的结果. 这些结果就显示在模板中调用该函数的位置. 在此例中 Smarty 调用该函数
+类似insert_getBanner(array("lid"=>"12345","sid"=>67890"));并将返回的结果显示在调用的位置
+
+如果设置了 assign 属性，该属性对应的变量名用于保存待包含函数的输出，这样待包含函数的输出就不会
+直接显示了.注意：赋给模板变量的输出信息在缓存的时候同样无效.
+
+
+------------------------------------------------------------------------------
+
+if,elseif,else  //使用修饰词时必须和变量或常量用空格格开.
+
+修饰词：eq、ne、neq、gt、lt、lte、le、
+gte、ge、is even、is odd、is not even、is not odd、not、mod、div by、even by、odd by、==、!=、>、<、<=、>=. 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+注意
+使用这些修饰词时必须和变量或常量用空格格开.
+------------------------------------------------------------------------------
+显示设定的分隔符
+{ldelim}
+{rdelim}
+
+------------------------------------------------------------------------------
+处于
+{literal}{/literal}之间的内容将直接显示，如处理javascript时很有用
+
+------------------------------------------------------------------------------
+section 
+name随便取，但一定要有，loop有两个作用，既是实际的循环变量，又是循环指示器，决定循环的次数。
+如下数组
+$arr=array(
+        array('ip'=>"127.0.0.1",'ua'=>"IE"),
+        array('ip'=>"127.0.0.3",'ua'=>"firefox")
+    );
+
+{section name=login loop=$arr2}
+	用户代理 : {$arr[login].ua}<br>
+	{sectionelse}
+	没有数据，谢谢
+{/section}
+
+------------------------------------------------------------------------------
+
+截取中文
+
+function smarty_modifier_truncate_cn($string, $length = 80, $code = 'UTF-8', $etc = '')
+ {
+     if ($length == 0)
+         return '';
+     if($code == 'UTF-8'){
+         $pa = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|\xe0[\xa0-\xbf][\x80-\xbf]|[\xe1-\xef][\x80-\xbf][\x80-\xbf]|\xf0[\x90-\xbf][\x80-\xbf][\x80-\xbf]|[\xf1-\xf7][\x80-\xbf][\x80-\xbf][\x80-\xbf]/";
+     }
+     else{
+         $pa = "/[\x01-\x7f]|[\xa1-\xff][\xa1-\xff]/";
+    }
+    preg_match_all($pa, $string, $t_string);
+    if(count($t_string[0]) > $length)
+        return join('', array_slice($t_string[0], 0, $length)).$etc;
+    return join('', array_slice($t_string[0], 0, $length));
+}

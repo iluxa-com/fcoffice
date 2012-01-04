@@ -1,0 +1,206 @@
+rewrite 的设置
+------------------------------------------------------------------------------
+RewriteEngine on
+#把所有非以下列后缀名结束的访问请求 转发到index.php
+#如果把这条写在网站的根目录，应该可以把非根目录的ZFW项目文件指定为根一般访问
+#这样也就可以不用设置前端控制器的setBaseUrl()了。
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
+
+
+------------------------------------------------------------------------------
+前端控制器的setBaseUrl()设置
+
+入口文件在根目录则不用设置，不在就需要设置成所在目录的位置，这样访问首页和其他文件就直接跳转到项目文件的位置。
+
+发现一个入口文件不在根目录，也可以不改setBaseUrl的方法
+只要如下修改根的.htaccess ，zfHomework是入口文件所在的文件夹
+
+RewriteEngine on
+#RewriteRule ^([a-z0-9]*)\.asp$ $1.php
+RewriteRule ^(.*)$ zfHomework/$1
+------------------------------------------------------------------------------
+
+ZFW库可以用.htaccess 来包含
+php_value include_path "path/to/ZFW"
+
+在无权控制php.ini时可用
+------------------------------------------------------------------------------
+
+配置错误信息：
+
+------------------------------------------------------------------------------
+
+用的是APACHE服务器,
+在原理上在.htaccess设置 RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
+就会把所有的请求发送到index.php,包括不存在的文件和目录
+
+可是我只有在输入 http://localhost/zend/ 才能正访问,
+如果输入 http://localhost/zend/ 和任意不存的目录或文件就会出错,出错信息如下:
+
+Fatal error: Uncaught exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (error)' in C:\php\library\Zend\Controller\Dispatcher\Standard.php:241 Stack trace: #0 C:\php\library\Zend\Controller\Front.php(934): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http)) #1 G:\WEB\php\Z\index.php(36): Zend_Controller_Front->dispatch() #2 {main} thrown in C:\php\library\Zend\Controller\Dispatcher\Standard.php on line 241
+
+
+
+解决方法：
+在配置文件index.php加入：
+$frontController->setParam('useDefaultControllerAlways', true);
+
+这样可以按rewrite的规则，直接访问http://localhost/zend/index.php没有错误信息了
+
+------------------------------------------------------------------------------
+MVC之我见：
+
+学习写的框架：14章：PHP高级程序设计
+
+写框架的原理大概 是这样的，
+首先在入口index.php里，载入相关的类文件，也就是Model里面的几个类，控制器类，视图类，前端控制器类
+
+用静态方法初始化一个前端控制器（这样可以保证在内存中只存在一个前端控制器对象，所有实例内容直接设置到时这个对象上），通过构造函数从URL中取得参数并赋值为控制器名，action名和传递的参数，此后程序由前端控制器接手，
+
+前端控制器通过路由实例化控制器类的对象，设定错误处理，调用控制器里的action的方法（因为涉及到ReflectionClass的内容，这一步不太懂）。
+
+控制器实例化一个视图对象，（视图类用到ArrayObject,也不太懂）把变量参数绑定到视图变量，（变量参数可以通过前端控制器的方法从URL中取得），调用提交方法，并返回解析后的结果，再把结果设定前
+端控制器，最后由前端控制器显示内容。
+
+------------------------------------------------------------------------------
+
+ZendFramework
+
+request 和response对象
+
+1.request对象
+
+getQuery($key = null, $default = null)
+getPost($key = null, $default = null)
+getCookie($key = null, $default = null)
+getServer($key = null, $default = null)
+getEnv($key = null, $default = null)
+如果$key传入null，将获得信息的一个完整数组，如果传入一个键值 ，将只获得那个键值对应的数据。还可以传入一个默认值 。
+getHeader($header)
+
+这些都是替换get变量的方法。
+
+getParam($key,$default =null)也可以访问Query和Post信息
+返回包含所有参数、query和post信息的一个数组。
+
+确认HTTP请求的方法：getMethod().
+isPost()函数。等
+
+在控制器中获得当前请求对象的一个引用，可以用$this->getRequest()方法
+------------------------------------------------------------------------------
+2.response对象
+
+//设置状态码：
+$this->getResponse()->setHttpResponseCode()
+设置404或者503错误页面
+
+//设置response对象内容类型的头信息，有意思，很方便
+
+$this->getResponse()->setHeader('Content-Type','application/json');
+$jason = '{"Name":"Falcon"}';
+$this->getResponse()->setBody($json);
+
+//以下这句表示不输出到模板。
+$this->getHelper('ViewRenderer')->setNoRender();
+
+
+   function deleteAction()
+    {
+    	$this->getHelper('ViewRenderer')->setNoRender();
+        //echo "<p>in IndexController::deleteAction()</p>";
+
+	//设置response对象内容类型的头信息
+	$this->getResponse()->setHeader('Content-Type','application/json');
+	$jason = '{"Name":"Falcon"}';
+	$this->getResponse()->setBody($json);		
+    }
+
+------------------------------------------------------------------------------
+
+辅助类 
+可以通过Zend_Controller_Action类getHelper()方法访问所有的辅助类
+
+redirector
+void goto ($action, $controller=null, $module=null, $params=array())
+
+public function redirectAction(){
+	$this->getHelper('redirector')->goto('index');
+}
+重定向到index 的Action.
+
+怎样转到不同控制器的指定 action呢？
+
+------------------------------------------------------------------------------
+FlashMessenger
+访问setms action跳转到show,在show显示一条消息，刷新不再显示
+
+    function setmsAction(){
+    	$this->getHelper('FlashMessenger')->addMessage('This is set here');
+    	$this->getHelper('Redirector')->goto('show');
+    }
+    function showAction(){
+    	 $this->getHelper('ViewRenderer')->setNoRender(false);
+    	 //返回数组
+    	$this->view->messages=$this->getHelper('FlashMessenger')->getMessages();
+    	//$this->view->messages=array('apple','orange','pear');
+    }
+
+
+
+<?php foreach($this->messages as $message) { ?>
+<?php echo $message; ?><br />
+<?php }>
+
+------------------------------------------------------------------------------
+
+视图辅助类
+写进视图内：
+
+  <form action=../test/test method="post" >
+ 	<?php echo $this->formText('name')?>
+ 	<?php echo $this->formSubmit('submit',"提交");?>
+  </form>
+
+------------------------------------------------------------------------------
+Zend_Debug::dump()相当于var_dump 
+使用前确保zend/debug.php在路径中
+
+------------------------------------------------------------------------------
+为不同浏览器设置模板目录：
+
+function init(){
+		$this->initView();
+		//$this->getHelper('ViewRenderer')->setNoRender();
+		$broswer=strtoupper($_SERVER['HTTP_USER_AGENT']);
+		$this->view->baseUrl=$this->_request->getBaseUrl();
+		if(false !==strpos($broswer,'MSIE')){
+		//如果是IE，设定其模板目录为scripts/ie;
+		//不要设置为../application/views/scripts/ie/,并且下面还要新建一个控制器名的文件夹，因为用initView() 函数初始		化的，系统会默认在这个控制器名的文件夹查找
+		$this->view->setScriptPath('./application/views/scripts/ie/');
+		}
+
+	}
+
+------------------------------------------------------------------------------
+
+另一种初始化视图的方法，这样系统不会在控制器名的文件夹下找模板，PHP100的做法。
+
+	$view = new Zend_View();
+	$view->setScriptPath('./application/views/scripts/');//设置模板显示路径,这样系统不会在控制器名的文件夹下找模板这个路径实致上是相对入口文件的，无论是写在入口文件还是控制器的init()都是这样写的
+	$registry['view'] = $view;//注册View
+//上面的可以写在 入口文件里
+
+	$this->view=$view;
+------------------------------------------------------------------------------
+获得指定控制器的视图路径 test是控制器名
+$this->view->getScriptPath('test');
+
+------------------------------------------------------------------------------
+设置模块目录,这个路径也是相对于入口文件的。
+$frontController->addModuleDirectory('./path/to/module') 
+
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+
+

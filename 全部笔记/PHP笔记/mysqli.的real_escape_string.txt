@@ -1,0 +1,8 @@
+$mysqli->real_escape_string($city)
+对特殊字符编码以插入到数据库
+
+
+Characters encoded are NUL (ASCII 0), \n, \r, \, ', ", and Control-Z. 
+
+取得特定结果mysql_result(result,行号，列号)
+

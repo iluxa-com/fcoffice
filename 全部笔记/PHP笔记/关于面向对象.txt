@@ -1,0 +1,16 @@
+1.set 和get
+__set需要两个参数。当对象试图调用private属性时生效，结果是调用的属性名为第一个参数，后面的赋值为第二个参数。自动调用的的参数！诡异。
+如对象为$a,$test为私有属性
+ $a->test="falcon";
+function __set($arg1,$arg2) 
+这时$arg1为test的值,$arg2为"falcon"
+
+对__get也类似
+面向对象的__get方法必须有一个参数,而给这个参数赋值的是实例化对象调用私有属性时后面带的变量名.如果不必在类中使用,可以是任意变量名.否则请使用类里面的变量.
+__get($arg)里面调用参数时：$this->$arg。
+
+
+2.$this
+
+ $this 使用类的属性时::$this->arg ;调用类里传入的参数时 $this->$arg,
+(如$arg为参数,如在__get($arg),__set($arg,$arg2):$this->$arg

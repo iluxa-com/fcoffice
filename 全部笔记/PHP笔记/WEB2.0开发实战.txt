@@ -1,0 +1,494 @@
+什么是Web2.0 
+******************************************************************************
+1.使用标准兼容的HTML和CSS
+2.使用Ajax提供富用户界面
+3.使用Web提要和Web服务共享数据。
+   >web提要如RSS或Atom
+   >web服务允许一个网站使用来自其他网站的数据如使用Google Map 的API
+
+4.结合社交网络工具。
+  >博客和论坛使用户之间可以相互通信
+------------------------------------------------------------------------------
+网站特征：
+
+1.网站主页和用户主页
+	显示所有用户的博客帖子
+	用户主页显示用户的所有帖子
+2.用户注册
+	验证用户的详细信息
+	使用CAPTCHA防止自动注册
+	在数据库创建用户帐户
+	向用户发送Email，确认他们的帐户信息
+3.帐户登录和管理
+	管理用户的博客
+	更新帐户信息，如用户的Email，密码之类
+	注销帐户。这个……
+4.用户博客
+	增加编辑删除博客帖子
+	为帖子加标签
+	向博客帖子上传图像，并针对用户帐户显示一个图库
+	为博客绑定地理数据（地图）
+5.网站搜索
+	搜索网站上出现的任何内容并且类似GoogleSuggest的自动完成
+
+6.应用管理
+	查看网站统计信息或向网站发布新闻等	
+
+
+其他：SEO  PHPDoc风格的注释
+
+安全性：SQL注入、跨站脚本(cross-site scripting,XSS)、跨站请求伪造(cross-site Request Foreries,CSRF)  要对用户提交的数据进行转义！
+
+应用日志：记录重要事件，安全与性能
+
+可维护性和可扩展性：
+	以可扩展的方式自行开发一些定制类，以便 将来能够很容易地在这	些类上扩展
+	
+	模板引擎	
+	数据库抽象
+	面向对象
+
+
+版本控制和单元测试。	
+------------------------------------------------------------------------------
+ 
+
+Zend_Auth 和Zend_Acl 登录和用户认证，检查用户权限
+
+Zend_Controller 处理客户请求，并将请求定向到适当的类
+
+Zend_Db 用于与应用Mysql数据库交互
+
+Zend_Mail 用于向用户发送Email
+
+Zend_Validate 和Zend_Filter 检查和清洁处理用户在表单中提交的数据
+
+Zend_Search 全文搜索
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+------------------------------------------------------------------------------
+使用的数据库：phpweb20 
+	      用户名 :41164
+	      密码： 7340985
+
+
+ ------------------------------------------------------------------------------
+
+搭建框架
+
+Zend Framework 1.10.2 + Smarty-2.6.26 +Apache/2.2.4 (Win32) PHP/5.3.1 +MySQL 客户端版本: mysqlnd 5.0.5-dev - 081106 - $Revision: 289630 $
+
+
+
+使用的数据库：phpweb20 
+	      用户名 :41164
+	      密码： 7340985
+
+******************************************************************************
+日志
+******************************************************************************
+系统默认等级：
+
+Zend_Log::EMERG
+Zend_Log::ALERT
+Zend_Log::CRIT
+Zend_Log::ERR
+Zend_Log::WARN
+Zend_Log::NOTICE
+Zend_Log::INFO
+Zend_Log::DEBUG
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+两种方法调用
+$log=Zend_Log(new Zend_Log_Writer('x.file');
+$log->log("message",Zend_Log::ERR);
+或者
+$log->ERR("message"); //这是一种简写，ERR表示系统等级
+$log->DEBUG("message");
+
+******************************************************************************
+用户登录验证
+
+基本信息表 users
+user_id用 serial 等同big int unsight autoincrease not null
+
+
+用户信息表 users_profile
+外键设定
+create table users_profile (
+user_id bigint unsigned not null,
+profile_key varchar(255) not null,
+profile_value text not null,
+primary key (user_id,profile_key),
+foreign key (user_id) references users (user_id)
+) type = InnoDB
+
+******************************************************************************
+验证
+
+
+实例化一个Zend_Auth_Adapter_Dbtable的类(实现Zend_Auth_Adapter接口)，提供基于数据库的验证，使用Zend_auth对象的authenticate方法(Zend_Auth_Adapter_Dbtable对象作为参数)此时返回一个Zend_Auth_Result对象.
+
+注意Zend_Auth是单一实例 的：（单件模式）
+
+    public static function getInstance()
+    {
+        if (null === self::$_instance) {
+            self::$_instance = new self();
+        }
+
+        return self::$_instance;
+    }
+
+
+	$auth = Zend_Auth::getInstance();
+	//使用Session存储?
+	$auth->setStorage(new Zend_Auth_Storage_Session());
+	$db=Zend_Registry::get('db');
+	$adapter = new Zend_Auth_Adapter_DbTable($db,'users','user_name','user_password','md5(?)');
+		//这里传入用户名和密码
+		$adapter->setIdentity('falcon');
+		//这是传入的原始密码，验证时会加密成MD5来验证
+		$adapter->setCredential('7340985');
+		$result =$auth->authenticate($adapter);
+		//返回Zend_Auth_Result对象
+		if($result->isValid()) {
+			//echo "successfully authenticated";
+			
+		}else {
+			//针对返回的错误码提示，安全原因，实际不这样做
+			switch ($result->getCode()) {
+				case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
+
+					echo "Identity not found";
+					break;
+					//含混不清，是不是意味着表中存在多个相同用户名
+				case Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS:
+					echo "Mutiple users found";
+					break;
+					//密码无效
+				case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
+					echo "Invalid password";
+					break;
+				default:
+					var_dump($result->getMessages());
+
+			}
+		}
+用 $auth->getIdentity()得到具体的用户名。
+
+$adapter->getResultRowObject() //得到验证对象在表中的其他字段内容
+也可以不用auth类，直接使用adapter，然后使用storage存储。
+
+$adapter->getResultRowObject()->user_id
+
+//加入额外验证。。。
+$adapter = new Zend_Auth_Adapter_DbTable($db,'users','user_name',
+		'user_password','md5(?) AND user_type ="admin"');
+
+//使用Session读 写
+
+//这里写入一个对象 
+$auth->getStorage( )->write($identity); 
+
+echo $auth->getStorage()->read()->userName; 
+//这个与
+echo Zend_Auth::getInstance()->getIdentity()->userName等价
+
+//从Session验证
+if($auth->hasIdentity())
+------------------------------------------------------------------------------
+Zend_Acl 访问控制表
+
+实例化对象后
+1.addRole 增加角色
+2.add	  增加资源
+3.增加完整的权限表（使用allow()或deny()指示角色有权访问哪些资源）	
+4.用isAllowed()确定特定角色是否有权访问特定资源/权限组合。
+5.按需要重复上一步。
+
+$acl=new Zend_Acl();
+$acl->addRole(new Zend_Acl_Role('member'));
+$acl->addRole(new Zend_Acl_Role('admin'),member);
+
+$acl->add(new Zend_Acl_Resource('news','view');
+$acl->add(new Zend_Acl_Resource(array('account','news'),array('login','add'));
+
+//Note 除非开发者指明一个"allow" 规则，Zend_Acl 禁止任何 role 对任何 resource 的任何访问权限。 
+ 
+//未指定或null表示所有,数组表示多个控制器或动作
+//未指定allow，默认全部都是deny，即拒绝所有访问。
+//一般来说，当且仅当更具体的规则没有使用， Zend_Acl 就服从已给定的规则。 
+//当为一个角色指定多重父（角色）时，请记住，对于一个授权查询的可用规则，最后列出的父（角色）是首先被搜索的。 
+
+
+$acl->allow(null,null);
+$acl->deny('member','admin',array('add','remove'));
+$acl->allow('admin');
+
+
+$acl->isAllowed('memeber','admin','add');
+$acl->isAllowed('admin','null','view');
+
+//移除
+$acl->removeDeny('member','admin','remove');
+
+echo $acl->isAllowed('member','admin','remove')?'allowed':'deney';
+
+------------------------------------------------------------------------------
+自定义 databaseObject_user对象用法 
+
+增加
+	$db = Zend_Registry::get('db');
+		$user=new DatabaseObject_User($db);
+		$user->user_name='admin2';
+		$user->user_password = md5('mypsw');
+		$user->save();
+
+用load方法定位，对于指定的更新和删除，须用load方法指定id ，再执行相应操作
+
+	$user->load(10);
+	$user->delete();
+
+	$user->load(1);
+	$user->user_name='falcond';
+	$user->save();
+load方法用法之二:第一个是值，第二个指定字段
+        $user->load('falcon','user_name');
+	$user->laset_login=now();
+	$user->save();
+------------------------------------------------------------------------------
+
+Profile_User 类 在users_profile表中设置个性值。
+
+增加纪录，不用load方法
+	$db = Zend_Registry::get('db');
+   	$db = Zend_Registry::get('db');
+   	$profile= new Profile_User($db);
+//外键一定要存在。
+   	$profile->setUserId(11);
+   	$profile->name='aac';
+   	$profile->save();
+
+ 这是更新，setUserId一定要设置，或者在new 时作为第二个参数传进来
+   	$db = Zend_Registry::get('db');
+   	$profile= new Profile_User($db);
+   	$profile->setUserId(11);
+   	$profile->load();
+   	$profile->name='aac';
+   	$profile->save();
+删除，删除全部该ID的个性化记录
+   	$profile->setUserId(11);
+   	$profile->delete();
+仅删除一条特定个性化记录
+	if(isset($profile->email))
+	unset($profile->email);
+
+
+------------------------------------------------------------------------------
+为应用 增加用户注册功能
+
+
+{if $error|@is_array || $error|strlen >0}
+
+	{assign var=hasError value=true}
+{else}
+	{assign var=hasError value=false}
+{/if}
+<div class="error"{if !hasError}style="display:none"{if}>
+	{if $error|@is_array}
+	  <ul>
+		{foreach from=$error item=str}
+		<li>{$str|escape}</li>
+	 </ul>
+	{else}
+		{$error|escape}
+	{/if}
+</div>
+
+------------------------------------------------------------------------------
+不输出到模板
+	public function captchaAction() {
+		$this->getHelper('ViewRenderer')->setNoRender();
+		
+	}
+
+------------------------------------------------------------------------------
+登录模板
+{include file = 'header.tpl'}
+
+<form method = "post" action = "/account/login">
+<fieldset>
+	<input type"hidden" name = "redirect" value="{$redirect|escape}" />
+	<legend>登录</legend>
+<div class="row" id="Form_username_container">
+	<label for="form_username">Username</label>
+	<input type="text" id="form_username" name="username" value="{$username|escape}" />
+	{include file='lib/error.tpl' error=$errors.username}
+</div>
+
+<div class="row" id="Form_password_container">
+	<label for="form_password">Password</label>
+	<input type="text" id="form_password" name="password" value="" />
+	{include file='lib/error.tpl' error=$errors.password}
+</div>
+
+<div class= "submit"> 
+	<input type="submit" value ="Login" />
+</div>
+</fieldset>
+</form>
+{include file='footer.tpl'}
+
+
+------------------------------------------------------------------------------
+
+使用Zend_Auth验证用户登录
+
+
+------------------------------------------------------------------------------
+
+$this->_redirect ("account/login"); //
+$this->_forward("login");
+
+使用这两者的页面 区别是 
+_redirect的 $_SERVER['REQUESt_URI'] 和显示的URL 是转向后的 
+_forward $_SERVER['REQUESt_URI'] 和显示的URL 是转向前的
+所以在注销页面中不应该用_forward,因为如果在登录后转向使用 REQUESt_URI取得，那么此时会重定向到注销页的。
+
+如果用  HTTP_REFERER (如$request->getServer("HTTP_REFERER");)，无论是_redirect还是_forward都取不到转向的地址。
+
+
+但是对Zend_acl怎么重定向没有研究。所以。。。。
+不过我猜想对没有权限的页面应该使用类似_forward的方法 !
+这样才可能在登录页获得之前的地址以便重定向。
+
+
+//由于BaseUrl的不同，用$this->_request->getPathInfo()反而比较方便,如果是_forword过来的，仍然是提交forward之前的页面地址
+
+------------------------------------------------------------------------------
+如果登录成功，则重定向到用户首页，所以此时的
+
+
+
+
+Zend_Request对象
+
+
+controller与action属性
+
+
+	$this->view->title=$this->_request->controller/action;
+  
+
+
+------------------------------------------------------------------------------
+使用自己写的profile_user::setEmail,profile::getId()方法取得ID ，可以使用Email来重置密码。
+
+$profile=new Profile_user(Zend_Registry::get('db'));
+$test= new DatabaseObject_user(Zend_Registry::get('db'));	
+		$profile->setEmail("w@ww.com");
+		$id=$profile->getId();
+		//var_dump($id);
+		
+		$test->load($id);
+		echo $test->user_name;
+
+------------------------------------------------------------------------------
+_request对象的getParam() 和getParams() 
+比 getQuery 要好。
+
+
+------------------------------------------------------------------------------
+Zend_Db
+
+
+1.建立一个连接
+$params=array('host'=>'localhost',
+											"dbname"=>'41164',
+											"username"=>'root',
+											"password"=>"root");
+
+			$db2=Zend_Db::factory('Mysqli',$params);
+
+2.fetchAll 与fetchRow ,前者是取得所有记录放入一个数组，后者是取得一行记录。
+
+			$query="SELECT * FROM `users_profile` WHERE `profile_key` = 'email'";
+			$result=$db2->fetchAll($query);
+      $result2=$db->fetchRow($query);
+
+  //这是访问方法的差异，都是数组
+    echo $result[1]["user_id"];
+    echo $result2["user_id"];
+
+3.准备语句
+      //注意这个写法 ? 不能这样写 "?" 不能用fetchRow方法
+      $query="SELECT * FROM `users_profile` WHERE `profile_key` = ?";
+			
+      $stmt=$db2->prepare($query);
+			$stmt->execute(array('email'));
+			$rs=$stmt->fetchAll();
+
+    
+    //多个参数时
+  		$query="SELECT * FROM `users_profile` WHERE `profile_key` = ? and `profile_value`=?";
+
+			$stmt=$db2->prepare($query);
+			$stmt->execute(array('email',"w@ww.com"));
+			$rs=$stmt->fetchAll();
+
+
+      $stmt->excute(array('firstname','a'));
+      $rs=$stmt->fetchAll();
+
+------------------------------------------------------------------------------
+				Zend_Registry::get('logger')->ERR($reason) ;
+
+------------------------------------------------------------------------------
+使用注册表及将变量解析到另一模板
+	$newView=Zend_Registry::getInstance()->get('view');
+	$newView->name="falcon";
+	$newView->tilte="test View";
+
+	$a=$newView->render('lib/test.tpl');
+
+------------------------------------------------------------------------------
+ZEND_DB_adpapt的update
+				//写入数据库
+					$set=array("password"=>md5($newPassword));
+
+					$table="user";
+
+					$where=$this->db->quoteInto('id = ?', $uid);
+
+					$this->db->update($table,$set,$where);
+
+					$rowsAffected = $this->db->update($table, $set, $where);
+
+------------------------------------------------------------------------------
+flash信息
+第一页面：发出信息
+$this->getHelper("FlashMessenger")->addMessage("评论成功");
+
+$this->getHelper("FlashMessenger")->addMessage($insertId); 
+
+多条则组成数组
+
+第二页面：接收信息
+
+		$messages=$this->getHelper("FlashMessenger")->getMessages();
+
+		$this->view->message0=$messages[0];
+
+		$this->view->message1=$messages[1]; //传递的是inserId.
+
+------------------------------------------------------------------------------
+$result = $db->query(
+    'SELECT * FROM example WHERE date > :placeholder',
+    array('placeholder' => '2006-01-01')
+);
+
+// 使用PDOStatement对象$result将所有结果数据放到一个数组中
+$rows = $result->fetchAll();
+

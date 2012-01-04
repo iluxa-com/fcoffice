@@ -1,0 +1,100 @@
+把一个XML文件解析成对象：
+simplexml_load_file($file,$className（应该是simplexml的子类,这样将返回特定的对象默认SimpleXMLElement）,LIBXML的常量（见libXml库函数）)
+
+
+原型：object simplexml_load_file ( string filename [, string class_name [, int options]] )
+
+用法
+1：$xml=simplexml_load_file($file,'SimpleXMLElement',LIBXML_COMPACT);
+2：$xml=simplexml_load_file($file);
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  if(!file_exists($file)){throw new exception("$file 不存在");}
+  $xml=simplexml_load_file($file,'SimpleXMLElement',LIBXML_COMPACT);
+  //$xml2=$xml=simplexml_load_file($file,'SimpleXMLElement',LIBXML_ERR_NONE);
+  //var_dump($xml);
+  echo $xml->movie->plot;
+------------------------------------------------------------------------------
+可以读取属性：用属性名作为关联数组的键名
+foreach ($xml->movie[0]->rating as $rating) {
+    switch((string) $rating['type']) { // Get attributes as element indices
+    case 'thumbs':
+        echo $rating, ' thumbs up';
+        break;
+    case 'stars':
+        echo $rating, ' stars';
+        break;
+    }
+}
+
+
+simplexml_load_string 用法类似上例，把字符串读入生成的XML对象
+
+object simplexml_load_string ( string data [, string class_name [, int options]] )
+
+------------------------------------------------------------------------------
+返回一个指定搜索结点（可为相对路径）的数组。
+$result=$xml->xpath('/a/b/c') ;
+while(list( ,$node) =each($result){
+echo '/a/b/c:', $node; 
+
+注意这个while/list/each 循环，经典喔，而且list的赋值是从右到左的。这个是刚发现的，先把数组后面的元素赋值给$node，然后把前面的xml对象赋值为空变量。
+
+------------------------------------------------------------------------------
+simplexml_import_dom(DOM $dom)
+
+导入 一个DOM结点
+<?php
+$dom = new domDocument;
+$dom->loadXML('<books><book><title>blah</title></book></books>');
+if (!$dom) {
+    echo 'Error while parsing the document';
+    exit;
+}
+
+$s = simplexml_import_dom($dom);
+
+echo $s->book[0]->title; // blah
+?> 
+------------------------------------------------------------------------------
+把元素的属性和属性值读入一个数组。不能用var_dump查看？
+SimpleXMLElement->attributes()
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+foreach($xml->foo[0]->attributes() as $a => $b) {
+    echo $a,'="',$b,"\"\n";
+------------------------------------------------------------------------------
+$xml->asXML();
+这个可以把字符串输出成XML的格式，用来生成XML文件时很有用！
+好像就多加了一句：<?xml version="1.0"?>
+我晕！
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+<?php
+$string = <<<XML
+<a>
+<b>
+  <c>text</c>
+  <c>stuff</c>
+</b>
+<d>
+  <c>code</c>
+</d>
+</a>
+XML;
+
+$xml = simplexml_load_string($string);
+
+echo $xml->asXML(); // <?xml ... <a><b><c>text</c><c>stuff</c> ...
+
+?> 
+------------------------------------------------------------------------------
+还是上面的XML字符串，这里把结点弄成xml结点了。如果不加asXMl()，只会输出文本。加了会输出元素和文本
+$result = $xml->xpath('/a/b/c');
+while(list( , $node) = each($result)) {
+    echo $node->asXML(); // <c>text</c> and <c>stuff</c>
+    //var_dump($node);
+}
+------------------------------------------------------------------------------
+

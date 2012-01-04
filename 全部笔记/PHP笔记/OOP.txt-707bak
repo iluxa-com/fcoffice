@@ -1,0 +1,257 @@
+判断对象是否为某个类的实例
+if(!$Objec instanceof Class1){...}
+------------------------------------------------------------------------------
+
+$this 伪变量，指向一个对象实例的引用.注意这句话。
+------------------------------------------------------------------------------
+如果是'string'的'false'，PHP在进行类型bool转换时也是返回true.因为这是非空的字符串
+
+必要时可用函数检测参数类型
+确定变量数据类型的函数
+is_array
+is_integer
+is_object 
+is_resource //判断数据库和文件等
+is_null
+is_bool
+is_double
+
+------------------------------------------------------------------------------
+加入一个方法参数类型提示  //指定参数为必须为ShopProduct的实例，非此类型的参数都会产生致命错误！
+类型提示不能检查基本的数据类型，除了array, 必须在方法中调用检测数据类型函数
+public function write(ShopProduct $shopProduct){}//这是要参数接收ShopProduct类型的参数
+
+
+------------------------------------------------------------------------------
+
+
+
+
+static关键字定义的属性只能通过两种方法访问
+
+静态属性：
+	public static $static //未声明则为public
+
+1.类名::属性名 ，继承类名::属性名
+	foo::$static
+	bar::$static
+
+2.在类里面定义一个方法，在方法里用self::属性名返回。在继承类里可以通过parent::属性名在实例里调用这个方法
+	fucntion fooStatic(){
+		return self::$static;
+		}
+
+
+注意：
+1.不能用实例化对象->属性名的方法调用，也不能用实例化对象::属性名 调用
+	如
+	class Falcon extends Foo{ }
+	$falcon=new Falcon;
+	$falcon->$static; //不能用
+	$falcon::$static; //不能用
+		
+
+用例
+------------------------------------------------------------------------------
+<?php
+class Foo
+{
+    public static $my_static = 'foo';
+
+    public function staticValue() {
+        return self::$my_static;
+    }
+}
+
+class Bar extends Foo
+{
+    public function fooStatic() {
+        return parent::$my_static;
+    }
+}
+
+
+print Foo::$my_static . "\n";
+
+$foo = new Foo();
+print $foo->staticValue() . "\n";
+print $foo->my_static . "\n";      // Undefined "Property" my_static 
+
+// $foo::my_static is not possible
+
+print Bar::$my_static . "\n";
+$bar = new Bar();
+print $bar->fooStatic() . "\n";
+?> 
+
+------------------------------------------------------------------------------
+但是静态方法：可以在实例中自由调用。。。
+既可以用类名::方法名，
+也可以用实例名::方法名 //但这个好像会在ec出点错
+还可以用实例名->方法名
+
+------------------------------------------------------------------------------
+声明方法时强制规定参数的对象类型 （适用于对象和数组类型）基本类型仍然需要在对象方法里判断。
+
+
+------------------------------------------------------------------------------
+
+重载构造函数并调用父类的构造函数  加入新的元素
+
+function __construct ($a,$b,$c) 
+{
+    parenet::__construct($a,$b);
+    $this->connection=$c;  
+}
+
+------------------------------------------------------------------------------
+调用父类方法灵活实现类的内部方法
+
+ class father{
+ 	function abcfuck(){
+ 	return '主机名:';
+ }
+ }
+ class child extends father{
+ 	function getAddr($ip)
+ 	{
+ 		return parent::abcfuck().gethostbyaddr($ip);
+ 	}
+ }
+
+$test=new child();
+echo $test->getAddr('127.0.0.1');
+
+------------------------------------------------------------------------------
+可见性关键字：
+通过阻止客户访问特定的属性，有时绕过公开的接口方法，访问到不应该访问的属性是不好的，还有助于防止bug.
+对于外面的对象来说，private的属性就像不存在一样。
+
+------------------------------------------------------------------------------
+外部不需要,只在类里面使用的方法可以设置为private.
+
+------------------------------------------------------------------------------
+应尽量保证类的属性只能通过getter/setter来访问。
+把属性尽量不可见。
+class student{
+	private $id;
+	function getId(){
+	return $this->id;
+	}
+	function setId($num){
+	$this->id=$num;
+	}
+}
+------------------------------------------------------------------------------
+静态方法的声明，真他妈的长啊。。。
+
+static public  function staticMethod(){}
+
+------------------------------------------------------------------------------
+静态属性：只要改变静态属性的值，所有的实例化对象的这个属性都会改变。
+
+
+class StaticClass{
+		static $action;
+		static public  function staticMethod(){
+			return 'hi';
+		}
+		function getStatic(){
+			return self::$action;
+		}
+		function setStatic($str)
+		{
+			return self::$action=$str;
+		}
+	}
+
+$test=new StaticClass();
+$test2=new StaticClass();
+echo $test->setStatic('falcon');
+echo "<br>";
+echo $test->setStatic('Dream');
+echo "<br>----------------------------------<br> ";
+//精彩开始了，只要改变静态属性的值，所有的实例化对象的这个属性都会改变。
+StaticClass::$action='haha';
+echo $test->getStatic();
+echo "<br>";
+echo $test2->getStatic();
+
+------------------------------------------------------------------------------
+
+简单来说，在类的外部使用类名，在内部使用self关键字访问静态属性，在子类使用parent关键字。
+self指向当前类，$this指向当前对象
+------------------------------------------------------------------------------
+一般来说，一个方法如果不需要使用类的其他属性或者方法，定义成静态方法是非常合适的，比如生成某种对象的工厂模式
+------------------------------------------------------------------------------
+ //生产对象，工厂模式，哈哈
+class FactoryMode{
+	static function getInstance($id,PDO $pdo){
+		$sql="SELECT * FROM TABLE PRODUCT WHERE ID = '$id'";
+		$row=$pdo->query($sql)->fetch();
+		if(empty($row)){return ;}
+		if($row['type']=='cd'){
+			//生成新对象
+			$newOb=new CdProduct();
+			$newOb->name=$row['name'];
+			$newOb->playList=$row['playList'];
+		}
+		if($row['type']=='book'){
+			$newOb=new BookPoduct();
+			$newOb->name=$row['name'];
+			$newOb->page=$row['pages'];
+		}
+		$newOb->name=$row['name'];
+		return $newOb;
+		}
+}
+------------------------------------------------------------------------------
+可以使用类名::对象名的方法访问非静态方法，这只表示它是特定某个类的方法，这只存在文档中，实际这样写会报错的！！
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Strict Standards: Non-static method StaticClass::getStatic() should not be called statically in D:\htdocs\Class_study\staticMembers.php on line 38
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+常量不能使用对象类型，一般都为大写字母，不带$
+教程说只能用类名::常量名访问，事实上也可以用实例对象来访问。但静态属性只能通过类名访问
+  class ConstTest{
+  	const FALCON = 'NoFalcon.tk';
+
+  }
+  $test=new ConstTest();
+  echo $test::FALCON;
+  echo ConstTest::FALCON;
+------------------------------------------------------------------------------
+
+抽象类:大多数情况下包括一个抽象方法。
+abstract class House{
+protected $device;
+//注意它的定义方法。后面没有{}
+abstract public function addDevice();
+}
+
+------------------------------------------------------------------------------
+扩展类 对实现方法的访问控制不能比抽象方法的访问控制更严格
+
+
+------------------------------------------------------------------------------
+
+接口：之前对这个了解不多
+ 
+接口只是纯粹的模板，只提供功能不包含实现的内容
+interface Changable{
+//	同样后面没有{}
+	public funcion getPrice();
+}
+
+class shop implements Changable{
+	public function getPrice(){...}
+}
+//接口的意义使一个对象属于了另一个类，而只要知道一个对象的类型，就知道它能做什么！
+//好！
+//接口可以有效地将不相关的类型连接起来？！
+
+//extends在implements前
+class falcon extends Nofalcon implements falconinterface{}
+
+------------------------------------------------------------------------------

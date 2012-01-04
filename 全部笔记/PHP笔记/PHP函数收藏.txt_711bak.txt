@@ -1,0 +1,544 @@
+
+在.htaccess里修改php.ini 
+如果是修改值的类型为字符串或数字时，前面为php_value,为boolean时，前面为php_flg
+可以修改除PHP_SYSTEM的变量。
+
+# php_value include_path "e:/"
+#php_value session.save_path "e:/"
+php_value date.timezone  'Asia/Shanghai'
+php_flag short_open_tag off
+
+php_value upload_max_filesize 8M
+------------------------------------------------------------------------------
+
+$_SERVER['REQUEST_METHOD']
+
+判断提交方法是否为POST
+if($_SERVER['REQUEST_METHOD'] == 'POST') ....;
+
+
+------------------------------------------------------------------------------
+$_SERVER['REQUEST_URI']
+
+------------------------------------------------------------------------------
+gethostbyaddr()根据IP地址获得主机名；
+  echo gethostbyaddr('127.0.0.1');
+gethostbynamel() 根据主机名获得主机的IP，注意，返回的是数组，因为指向同一个主机名的可能有多个IP
+  print_r( gethostbynamel ( 'localhost' ));
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<?php 
+$netscapeftp=gethostbynamel("ftp.netscape.com"); 
+echo "Netscape FTP 网站 IP Address:<ol type=1>"; 
+for ($i=0; $i<count($netscapeftp); $i++) { 
+echo "<li>".$netscapeftp[$i]; 
+} 
+echo "</ol>"; 
+?> 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+------------------------------------------------------------------------------
+
+
+
+addslashes()
+
+string addslashes ( string str )
+
+
+返回字符串，该字符串为了数据库查询语句等的需要在某些字符前加上了反斜线。这些字符是单引号（'）、双引号（"）、反斜线（\）与 NUL（NULL 字符）。
+------------------------------------------------------------------------------
+
+
+
+extract($array[,重名处理方式,'前缀'])
+ //把数组的键转为变量名，值作为变量值，多种处理方式转后的变量名与脚本中原来的变量名冲突的方法。用在处理提交数据时有点方便。
+
+1.冲突则在所得的变量名前加前缀wddx_
+extract($var_array, EXTR_PREFIX_SAME, "wddx");
+
+
+------------------------------------------------------------------------------
+strrchr($str,"字符标志或数字") 返回字符标志之后的字符串，含字符串，标志以最后出现在字符串的为准
+
+strchr($str,"字符标志或数字") 用法基本同上，不同的是它的标志是以第一次出现为准。
+
+strrchr("http://www.gdufs.edu.cn","."); //返回.cn
+
+strchr("http://www.gdufs.edu.cn","."); //返回.gdufs.edu.cn
+
+------------------------------------------------------------------------------
+
+strpos 显示标志第一次出现的位置,
+strrpos 显示标志最后一次出现的位置  
+
+
+当不存在时返回false，存在返回int，为0时 要注意类型
+常用这个来判断目标字符串里是否存在特定字符串
+如
+
+if(strpos($sAgent, 'MSIE') !== false)
+
+
+
+
+------------------------------------------------------------------------------
+boolean function_exists(string functiionName) 函数(内置或者用户定义的)是否存在.
+
+------------------------------------------------------------------------------
+htmlspecialchars 将HTML的标签改成&...编码
+
+如把用户提交的内容转换
+extract($_POST);
+foreach ($_POST AS $key=> &$value){
+	$value=htmlspecialchars($value);
+}
+
+------------------------------------------------------------------------------
+htmlentities 对中文还要指定编码和对引号的处理
+如：
+	$value=htmlentities($value,ENT_QUOTES,"GB2312");
+
+------------------------------------------------------------------------------
+preg_match(reg,$sourceString,$storeArray);
+
+用途：比较字符串，并取得特定内容
+preg_match( "|AppleWebKit/(\d+)|i", $sAgent, $matches )
+------------------------------------------------------------------------------
+array_shift() ：两个效果，1.原来的数组第一个元素被移出，总元素少了一个，2.移出的元素被返回到变量
+array_shift() 将 array 的第一个单元移出并作为结果返回，将 array 的长度减一并将所有其它单元向前移动一位。所有的数字键名将改为从零开始计数，文字键名将不变。如果 array 为空（或者不是数组），则返回 NULL。 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+<?php
+$stack = array("orange", "banana", "apple", "raspberry");
+$fruit = array_shift($stack);
+print_r($stack);
+?> 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+------------------------------------------------------------------------------
+file_exists()
+------------------------------------------------------------------------------
+getcwd() 取得当前工作目录
+------------------------------------------------------------------------------
+$_SERVER(SCRIPT_FILENAME) 当前脚本路径 和__FILE__一样的。。。
+------------------------------------------------------------------------------
+gettype()取得变量类型
+------------------------------------------------------------------------------
+set_include_path()设置include的路径
+
+<?php
+$path = '/usr/lib/pear';
+set_include_path(get_include_path() . PATH_SEPARATOR . $path);
+?> 
+
+------------------------------------------------------------------------------
+返回一个Internet或Unix 域的Socket连接句柄，
+返回一个文件指针，这个指针可能与其他一些文件处理函数如fgets(),fgetss(),fwrite(),fcolse() 和feof()一起使用。
+
+fsockopen() returns a file pointer which may be used together with the other file functions (such as fgets(), fgetss(), fwrite(), fclose(), and feof()). 
+
+resource fsockopen ( string target [, int port [, int &errno [, string &errstr [, float timeout]]]] )
+
+------------------------------------------------------------------------------
+pfsockopen用法与fsocketopen类似，不同的是它返回一个持久连接。
+------------------------------------------------------------------------------
+在一个流里设定连接超时
+
+bool stream_set_timeout ( resource stream, int seconds [, int microseconds] )
+
+stream_set_timeout -- Set timeout period on a stream
+
+当连接超时时，streamtime_set_timeout 返回true,但没有任何警告，可以通过判断steam_get_meta_data()返回的数组的键名为'timeout'的键值。如果为真则超时
+
+
+<?php
+$fp = fsockopen("www.example.com", 80);
+if (!$fp) {
+    echo "Unable to open\n";
+} else {
+
+    fwrite($fp, "GET / HTTP/1.0\r\n\r\n");
+    stream_set_timeout($fp, 2);
+    $res = fread($fp, 2000);
+
+    $info = stream_get_meta_data($fp);
+    fclose($fp);
+
+    if ($info['timed_out']) {
+        echo 'Connection timed out!';
+    } else {
+        echo $res;
+    }
+
+}
+?> 
+------------------------------------------------------------------------------
+stream_get_meta_data -- 从封装协议文件指针中取得报头／元数据
+
+mixed stream_get_meta_data ( int fp )
+
+
+返回现有 stream 的信息。可以是任何通过 fopen()，fsockopen() 和 pfsockopen() 建立的流。返回的数组包含以下项目： 
+
+
+timed_out (bool) - 如果在上次调用 fread() 或者 fgets() 中等待数据时流超时了则为 TRUE。 
+
+blocked (bool) - 如果流处于阻塞 IO 模式时为 TRUE。参见 socket_set_blocking()。 
+
+eof (bool) - 如果流到达文件末尾时为 TRUE。注意对于 socket 流甚至当 unread_bytes 为非零值时也可以为 TRUE。要测定是否有更多数据可读，用 feof() 替代读取本项目的值。 
+
+unread_bytes (int) - 当前读取缓冲区中的字节数。 
+
+
+------------------------------------------------------------------------------
+strtotime
+
+$date = strtotime('+7 days', $date) 
+******************************************************************************
+******************************************************************************
+	面向对象
+******************************************************************************
+******************************************************************************
+------------------------------------------------------------------------------
+self是面向对象的自己本身的类吗？
+------------------------------------------------------------------------------
+ini_get('post_max_size')取得php.ini里的变量设定值
+ini_set(string  var ,str value)改变预定义值，只作用于脚本执行时期
+ini_get_all()取得所有php.ini里的变量设定值
+------------------------------------------------------------------------------
+合并两个有相同个元素的数组，其中第一个数组作为新数组的键，第二个作为值
+array_combine($keys,$values);
+------------------------------------------------------------------------------
+
+缓存内容
+ob_start()
+
+调用回传函数处理缓冲内容
+ob_start("callback");
+
+//清除(发送)输出缓冲，关闭输出缓冲
+ob_end_flush();
+
+
+//丢弃最顶层输出缓冲的内容并关闭输出缓冲
+bool ob_end_clean(void)
+
+//返回输出缓冲的内容,如果输出缓冲没有激活，返回false
+string ob_get_contents ( void )
+
+//返回输出缓冲内容的长度,如果输出缓冲没有激活，返回false
+int ob_get_length ( void )
+
+//返回输出缓冲区的内容并清除缓冲
+string ob_get_clean(void)
+------------------------------------------------------------------------------
+<?php
+
+function callback($buffer) 
+{
+  // replace all the apples with oranges
+  return (str_replace("apples", "oranges", $buffer));
+}
+
+ob_start("callback");
+
+?>
+<html>
+<body>
+<p>It's like comparing apples to oranges.</p>
+</body>
+</html>
+<?php
+
+ob_end_flush();
+
+?> 
+------------------------------------------------------------------------------
+测试输出
+
+var_dump()
+var_export()
+
+var_export也可以定义第二个参数为真，此时会赋值给一个变量,用echo 输出变量值
+$falcon=var_export($a,TRUE);
+echo $falcon;
+echo $falcon;
+------------------------------------------------------------------------------
+
+__CLASS__ 返回类名
+------------------------------------------------------------------------------
+
+instanceof
+
+------------------------------------------------------------------------------
+return $this; 只是返回原来类或对象的指针，并没有创建新的对象。
+
+------------------------------------------------------------------------------
+确定变量数据类型的函数
+is_array
+is_integer
+is_object 
+is_resource //判断数据库和文件等
+is_null
+is_bool
+is_double
+...
+------------------------------------------------------------------------------
+
+$XML=simplexml_load_file('xmlfile.xml');//返回一个对象
+//resovedomains是对象的节
+echo (string)$XML->resovedomains;
+
+------------------------------------------------------------------------------
+检查方法在对象中是否存在，注意有两个参数。
+bool method_exists ( object object, string method_name )
+
+以下为各种对对象或类的检查函数
+
+call_user_method_array --  调用一个用户方法，同时传递参数数组［已停用］ 
+call_user_method --  调用特定对象的用户方法［已停用］ 
+class_exists -- 检查类是否已定义
+get_class_methods -- 返回由类的方法名组成的数组
+get_class_vars --  返回由类的默认属性组成的数组 
+get_class -- 返回对象的类名
+get_declared_classes -- 返回由已定义类的名字所组成的数组
+get_declared_interfaces --  Returns an array of all declared interfaces 
+get_object_vars -- 返回由对象属性组成的关联数组
+get_parent_class -- 返回对象或类的父类名
+interface_exists -- Checks if the interface has been defined
+is_a --  如果对象属于该类或该类是此对象的父类则返回 TRUE 
+is_subclass_of --  如果此对象是该类的子类，则返回 TRUE 
+method_exists -- 检查类的方法是否存在
+property_exists --  Checks if the object or class has a property 
+
+------------------------------------------------------------------------------
+
+require_once开销比require大，但是他可以防止类和方法的重复定义的错误
+require_once /require比较安全。include_once include还是在模板一类使用好了。
+
+------------------------------------------------------------------------------
+使用PEAR的命名方法。和ZFW的很像。
+XML_RPC_Server
+
+------------------------------------------------------------------------------
+/*
+命名空间:实际上php5.3已经支持了，但不建议在生产环境中使用。
+在EC中编写，IDE会提示错误，但执行是没问题的。因为哥的PHP就是5.3的。呵呵
+同时getclass 时也可以获得命名空间的名。
+然而写多重命名空间还是会出错。
+*/
+namespace business;
+//支持多重命名空间。
+namespace a::b::c::d;
+
+
+------------------------------------------------------------------------------
+命名空间确实可以有效减少冗长的命名
+使用import关键字
+
+namespace test::falcon;
+import a::b::c::d;
+require_once("falcon.php");
+
+class a extends falcon{..}
+------------------------------------------------------------------------------
+as关键字
+import a::b::c::d as nsTest;
+...
+class a extends nsTest::falcon{}
+
+------------------------------------------------------------------------------
+在.htaccess里定义include_path;很有意义和必要
+
+php_value include_path value .:
+
+
+------------------------------------------------------------------------------
+array_pop 弹出最后一个元素。返回剩下的数组和弹出元素  和array_shift类似
+
+
+------------------------------------------------------------------------------
+搜索特定的值，返回找到的第一个值的键名，数组放后面
+@param mix
+@param array
+@return string key
+array_search(mix $value ,array $array) ;
+
+
+------------------------------------------------------------------------------
+
+自定义了一个array_remove函数，只移除找到匹配的第一个键值。
+
+
+function array_remove(array $arr,$value){
+	$i=array_search($value,$arr);
+	if(empty($i)) return false;
+	unset($arr[$i]);
+	return $arr;
+}
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+移除数组多个搜索的值(上例的递归没写出来，只好用foreach来了)
+
+function array_remove_all(array $arr, $value){
+
+	foreach ($arr AS $k =>$v) {
+		if ($v==$value) 
+		{unset($arr[$k]); $i=1;}
+	}
+	if(!isset($i)) return false;
+	return $arr;
+}
+------------------------------------------------------------------------------
+ucfirst -- Make a string's first character uppercase //返回字符串首字母大写。
+
+Description
+string ucfirst ( string str)
+
+------------------------------------------------------------------------------
+PHP的参数个数是可变的
+
+func_num_args() //返回参数的个数
+func_get_args() //返回所有参数的数组
+func_get_arg(Int) //返回指定的索引参数，从0开始
+
+
+------------------------------------------------------------------------------
+function foo(){
+	print "argNumbers:".func_num_args();
+	echo "<br>----------------------------------<br> \n";
+	print "the 4th argNum:".func_get_arg(3);
+}
+
+------------------------------------------------------------------------------
+compact()在当前表中查找指定的变量名对应的值，如果找到刚把变量名作为键名，变量值作为键值放入一个数组，如果没有找到相应的变量值，则忽略，参数为数组会递归把数组的键值作为变量名查找。
+
+与extract 作用相反。
+
+<?php
+$city  = "San Francisco";
+$state = "CA";
+$event = "SIGGRAPH";
+
+$location_vars = array("city", "state");
+
+$result = compact("event", "nothing_here", $location_vars);
+?> 
+//这是结果
+Array
+(
+    [event] => SIGGRAPH
+    [city] => San Francisco
+    [state] => CA
+) 
+
+------------------------------------------------------------------------------
+动态创建匿名函数 create_function(参数,语句) 推荐用''包含语句和参数。
+<?php
+// lambda 函数
+$newfunc = create_function('$a,$b', 'return "$a + $b = " . $a + $b;'); //创建了一个匿名函数
+print "\nNew anonymous function: $newfunc\n";
+print $newfunc(2, 4);
+print "\n";
+//效果类似于
+function test($a,$b){
+return "$a + $b = " . $a + $b;
+}
+print test(2, 4);
+?>
+
+------------------------------------------------------------------------------
+通过自定义的__autoload函数动态加载类。
+
+<?php
+// ClassA.php, 这段代码写在 ClassA.php
+class A {
+function __construct() {
+print 'yeah!';
+}
+}
+?>
+<?php
+//这段代码写在 b.php
+function __autoload($className) {
+//这里用条件可以包含不同目录下的脚本
+require_once $className . '.php';
+}
+new A(); //程序运行到这里的时候,A类未定义，将自动调用__autoload()函数
+?>
+
+------------------------------------------------------------------------------
+设置异常处理函数:set_error_handler('error_handler'); 
+
+<?php
+set_error_handler('error_handler'); // 设置错误时调用的自定义处理错误函数,设置自定义异常
+//处理函数为 set_exception_handler()
+print $a/0; //这里逻辑错了，调用 error_handler()报错
+function error_handler($errno, $message, $filename, $line) {
+if ($errno & (E_ALL ^ E_NOTICE)) {
+$types = array(
+1 => 'error',
+2 => 'warning',
+4 => 'parse error',
+8 => 'notice',
+16 => 'core error',
+32 => 'core warning',
+64 => 'compile error',
+128 => 'compile warning',
+256 => 'user error',
+512 => 'user warning',
+1024 => 'user notice',
+2048 => 'strict warning'
+);
+print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+print $types[$errno] .': '. $message .' in '. $filename .' on line '. $line .'.';
+print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+exit;
+}
+}
+?>
+
+
+------------------------------------------------------------------------------
+
+文件修改与访问时间，都返回Unix 时间戳
+
+getlastmod()取得当前文件的最后修改时间
+filemtime()取得指定文件的最后修改时间
+fileatime()取得指定文件的最后访问时间
+filectime()取得指定文件的inode最后改变时间
+
+
+受缓存影响，可用 clearstatcache();清除缓存，取得最新的修改时间。
+------------------------------------------------------------------------------
+
+
+usleep() 等待一段时间执行下一个操作。
+
+------------------------------------------------------------------------------
+ 获得当前加载的全部类：
+$a=get_declared_classes();
+foreach ($a as $k =>$v) {
+	printf("%s =>%s <br>\n",$k,$v);
+}
+
+------------------------------------------------------------------------------
+headers输出Json的方法 
+原文件名
+header('Content-type: application/json');
+
+作为附件下载
+header('Content-Disposition: attachment; filename="downloaded.json"');
+
+------------------------------------------------------------------------------
+处理下载文件：
+header('Content-Disposition: attachment; filename="downloaded.pdf"');
+
+// 读入文件到缓冲
+readfile('original.pdf');
+
+------------------------------------------------------------------------------
+演示下载ZIP文件
+ 	$file='falcon_'.substr(time(),-4).'.zip';
+	header("Content-Disposition: attachment; filename=$file");
+	readfile('abc.zip');

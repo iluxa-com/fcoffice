@@ -1,0 +1,21 @@
+
+
+<table id="aa"><tr class="bb"><td><p class="ccc"><a></a></p>
+
+正则匹配标签并分类
+$open :<table id="aa"><tr class="bb"><td><p class="ccc"><a>
+$close : </a></p>
+
+
+$open反转并加Slash：$openSlash: </a></p class="ccc"></td></tr class="bb"></table id="aa">
+
+$openSlash与$close对比（这个对比要应该用strpos类型严格不等于false来） 得出补全代码
+
+  $BothTag：</td></tr class="bb"></table id="aa">
+    $BothTag 不反转只取空格之前的内容(可用:explode）并加>得到CurrentEndTags： </td></tr></table> 
+     
+    $BothTag 反转并去/ 得到下一页的NextStartOpenTag 如果不是数组最后一项则加入下一操作字符页面再重复以上过程
+    
+  于是 当前页补全为：</td></tr></table>
+  下页开始为<table id="aa"></tr class="bb"><td>
+  

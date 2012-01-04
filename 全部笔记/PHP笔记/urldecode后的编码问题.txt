@@ -1,0 +1,5 @@
+
+网址直接使用GET传递中文的值时，是urlencode的中文的，再用urldecode解析，出来的编码是GBK的，
+
+在UTF-8下无法正常显示，必须转码。
+  echo iconv('gbk','utf-8',$arg);

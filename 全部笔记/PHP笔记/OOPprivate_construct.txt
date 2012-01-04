@@ -1,0 +1,19 @@
+定义__constucte为private属性后，不能直接实例化，可以调用一个静态方法返回一个赋值给静态属性的对象以实例化。
+
+------------------------------------------------------------------------------
+class Test{
+  	public $a="falcon";
+  	static $b;
+  	static function instanceMe(){
+  		if(self::$b==''){
+  			return self::$b=new self();
+  		}
+  	}
+  	private function __construct(){
+  		$this->a="DREAM";
+  	}
+  }
+
+$falcon=new Test;//这是不允许的
+$falcon=Test::instanceMe();//这是可以的
+var_dump($falcon);

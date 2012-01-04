@@ -1,0 +1,167 @@
+sc工具。.net sdk的工具
+作为服务启动
+sc create svnserve binpath= "C:\Program Files\Subversion\bin\svnserve.exe --service --root D:\svn_repo" displayname= "Subversion" depend= tcpip start= auto
+
+删除服务
+"sc delete svnservice"，"svnservice"就是我们创建服务时使用的名字。
+------------------------------------------------------------------------------
+SVN(Subversion)是一个优秀的版本控制软件，近日完成了SVN在Windows服务器上的安装配置，备忘如下：
+
+1 下载服务器端svn-1.4.4-setup.exe，下载地址：http://subversion.tigris.org/project_packages.html
+2 安装服务器端
+3 创建一个版本库，命令：svnadmin create 新版本库路径
+4 修改用户名和口令。进入新版本库所在目录，
+  找到conf目录下的svnserve.conf，将其中  # password-db = passwd 的#去掉。
+  找到conf目录下的passwd文件，将其中# harry = harryssecret 和 # sally = sallyssecret 改成自己的用户名和密码。=前面是用户名，=后面是密码，用户名前面不要有空格。
+5 启动SVN服务器 
+  方式一：命令行方式： svnserve.exe -d -r 版本库路径
+  方式二：服务方式：sc create svnserve binpath= "SVN的BIN目录\svnserve.exe --service --root 版本库路径" displayname= "Subversion" depend= tcpip start= auto
+
+C:\Program Files\Subversion\bin
+
+sc create svnserve binpath= "C:\Program Files\Subversion\bin\svnserve.exe --service --root D:\svn_repo" displayname= "Subversion" depend= tcpip start= auto
+
+          如sc create svnserve binpath= "E:\Subversion\bin\svnserve.exe --service --root e:\svn" displayname= "Subversion" depend= tcpip start= auto，注意：版本库路径后面不要带\。
+          其中sc命令不是windows自带的，是微软.net sdk中的一个工具。
+
+  至此SVN服务器已经能运行，SVN服务器的访问地址为 svn://服务器名或IP地址 
+
+6 下载SVN客户端TortoiseSVN-1.4.4.9706-win32-svn-1.4.4.msi 和 中文包，下载地址：http://tortoisesvn.net/downloads
+7 安装SVN客户端，重启后，安装中文包。完成后，Windows右键菜单就会多出来TortoiseSVN的菜单，选TortoiseSVN->Setting可以把菜单设成中文。
+8 Windows右键菜单 TortoiseSVN->导入 ，就可以将本地文件导入至服务器中的版本库。
+
+SVN中文参考网站：http://www.subversion.org.cn/
+
+要删除前面添加的服务，只需要运行"sc delete svnservice"，"svnservice"就是我们创建服务时使用的名字。
+
+******************************************************************************
+Windows下搭建Subversion 服务器 
+一、准备工作
+
+1、获取 Subversion 服务器程序
+
+到官方网站（http://subversion.tigris.org/）下载最新的服务器安装程序。目前最新的是1.5版本，具体下载地址在：http://subversion.tigris.org/servlets/ProjectDocumentList?folderID=8100&expandFolder=8100&folderID=91
+
+
+
+
+2、获取 TortoiseSVN 客户端程序
+
+从官方网站 http://tortoisesvn.net/downloads 获取最新的 TortoiseSVN 。TortoiseSVN 是一个客户端程序，用来与 subvers 服务器端通讯。Subversion 自带一个客户端程序 svn.exe ,但 TortoiseSVN 更好操作，提高效率。
+
+
+
+
+二、安装服务器端和客户端
+
+安装 Subversion（以下简称SVN）的服务器端和客户端。下载下来的服务器端是个 zip 压缩包，直接解压缩即可，比如我解压到 E:\subversion 。客户端安装文件是个 exe 可执行文件，直接运行按提示安装即可，客户端安装完成后提示重启。
+
+
+
+
+三、建立版本库（Repository）
+
+运行Subversion服务器需要首先要建立一个版本库（Repository）。版本库可以看作是服务器上集中存放和管理数据的地方。
+
+开始建立版本库。首先建立 e:\svn 空文件夹作为所有版本库的根目录。然后，进入命令行并切换到subversion的bin目录。输入如下命令：
+
+svnadmin create E:\svn\repos1
+
+此命令在 E:\svn 下建立一个版本库 repos1 。repos1 下面会自动生成一些文件夹和文件。
+
+我们也可以使用 TortoiseSVN 图形化的完成这一步：
+
+先建立空目录 E:\svn\repos1 ，注意一定是要空的。然后在 repos1 文件夹上“右键->TortoiseSVN->Create Repository here...”，然后可以选择版本库模式，这里使用默认的FSFS即可，然后就创建了一系列文件夹和文件，同命令行建立的一样。
+
+
+四、运行独立服务器
+
+此时 subversion 服务还没有开始，只是通过它的命令建立了版本库。继续在刚才的命令窗口输入：
+
+svnserve.exe --daemon
+
+svnserve 将会在端口 3690 等待请求，--daemon（两个短横线）选项告诉 svnserve 以守护进程方式运行，这样在手动终止之前不会退出。注意不要关闭命令行窗口，关闭窗口会把 svnserve 停止。
+
+为了验证svnserve正常工作，使用TortoiseSVN -> Repo-browser 来查看版本库。在弹出的 URL 对话框中输入： 
+
+svn://localhost/svn/repos1
+
+点 OK 按钮后就可以看见 repos1 版本库的目录树结构了，只不过这时 repos1 是个空库。
+
+你也可以使用--root选项设置根位置来限制服务器的访问目录，从而增加安全性和节约输入svnserve URL的时间：
+
+svnserve.exe --daemon --root drive:\path\to\repository
+
+以前面的测试作为例，svnserve 将会运行为：
+
+svnserve.exe --daemon --root e:\svn
+
+然后TortoiseSVN中的版本库浏览器URL缩减为：
+
+svn://localhost/repos1
+
+
+
+
+五、配置用户和权限
+
+用文本编辑器打开E:\svn\repos1\conf目录，修改svnserve.conf：
+
+将：
+
+# password-db = passwd
+
+改为：
+
+password-db = passwd 
+
+即去掉前面的 # 注释符，注意前面不能有空格。
+
+然后修改同目录的passwd文件，增加一个帐号：
+
+将：
+
+[users]
+# harry = harryssecret
+# sally = sallyssecret
+
+增加帐号：
+
+[users]
+#harry = harryssecret
+#sally = sallyssecret
+test = test
+
+
+
+
+六、初始化导入
+
+下面就是将我们的数据（项目）导入到这个版本库，以后就由版本库管理我们的数据。我们的任何改动都回被版本库记录下来，甚至我们自己丢失、改错数据时版本库也能帮我们找回数据。
+
+比如，我在 d:\wwwroot 下有个 guestbook 文件夹，里面存放的是我编写的留言簿程序。在此文件夹上“右键 -> TortoiseSVN -> Import...” ，在弹出对话框的“URL of repository”输入“svn://localhost/repos1/guestbook”。在“Import message”输入“导入整个留言簿”作为注释。
+点 OK 后要求输入帐号。我们在用户名和密码处都输入 test 。完成后 guestbook 中的内容全部导入到了 svn://localhost/svn/repos1/guestbook 。
+
+我们看到在 e:\svn\repos1 没有任何变化，连个 guestbook 文件夹都没有建立，唯一的变化就是e:\svn\repos1容量变大了。实际上我们源guestbook中的内容已经导入 repos1 版本库了，源 guestbook 文件夹可以删除了。
+
+需要注意的是，这一步操作可以完全在另一台安装了 TortoiseSVN 的客户机上进行。例如运行svnserve的主机的IP是133.96.121.22，则URL部分输入的内容就是“svn://133.96.121.22” 。
+
+
+
+
+七、基本操作流程
+
+1、取出（check out）
+
+取出版本库到一个工作拷贝：
+
+来到任意空目录下，比如在f分区建立一个空文件夹 f:\work 。“右键 -> SVN Checkout”。在“URL of repository”中输入“svn://localhost/svn/repos1/guestbook”，这样我们就得到了一份 guestbook 中内容的工作拷贝。
+
+2、存入（check in）/提交（commit）
+
+在工作拷贝中作出修改并提交：
+
+在 guestbook 工作拷贝中随便打开一个文件，作出修改，然后“右键 -> SVN Commit... ”。这样我们就把修改提交到了版本库，版本库根据情况存储我们提交的数据。
+
+在修改过的文件上“右键 -> TortoiseSVN -> Show Log” ，可以看到对这个文件所有的提交。在不同的 revision 条目上“右键 -> Compare with working copy”，我们可以比较工作拷贝的文件和所选 revision 版本的区别。
+

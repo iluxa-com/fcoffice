@@ -1,0 +1,42 @@
+session的php.ini设置
+-----------------------------------------------------------------------------
+
+1.session.save_handler = files|mm|sqlite|user
+
+2.当设置为files时必须设定
+session.save_path=string ,为安全起见，不能设置为位于服务器文档根的某个目录。
+
+3.session.auto_start = 0|1
+为0时只能通过session_start启动会话，如果在网站中一直使用会话，也可以将session.auto_start设置为1自动启动会话.
+
+4.设置会话名称,默认为PHPSESSID.
+session.name=string
+
+5.cookie还是URL重写 1为使用COOKIE进行SID传播
+session.use_cookies = 1 |0 
+
+
+6自动进行URL重写，选项5设置为0时，
+session.use_trans_sid=0|1
+为1则启用指令自动完成。	
+
+7.设置会话cookie生存期
+session.cookie_lifetime=integer设置会话cookie的有效期。以秒为单位。
+
+8.有效路径
+session.cookie_path=string
+
+9.有效域
+session.cookie_domain=string
+
+10.URL重写时的传播会话ID的安全性验证，没有包括此子串SID将失效。
+session.refer_check=string
+
+11.session.entropy_file (string)
+SID的生成信息源设定
+
+12.session.entropy_length (integer)
+确定从session.entropy_file读取的字节数。
+
+
+309

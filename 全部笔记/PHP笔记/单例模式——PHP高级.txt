@@ -1,0 +1,48 @@
+单例类至少拥有三种公共元素
+
+1.必须拥有一个构造函数，并且被标记为private.
+2.拥有一个保存类的实例的静态成员变量
+3.拥有一个访问这个实例的公共的静态方法。
+
+
+另外，为防止被克隆，必须创建一个空的私有的__clone()方法！
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+class Database {
+	private $_db;
+	static $_instance;
+	
+	private function __construct() {
+		$this->_db = pg_connect ('dbname =example_db');
+	}
+
+	private function __clone () {}
+
+	public static function getInstance () {
+		if(!(self::$_instance instanceof self)) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
+	}
+	
+	public function query($sql) {
+	
+		return $this->_db->query($sql);
+	}
+}
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+通过getInstance可以调用 类中定义的任何非静态的方法。
+
+
+
+------------------------------------------------------------------------------
+不能被实例化的纯静态类,因为构造函数私有了
+
+class Someclass {
+	private function __construct () {
+	}
+	public static funtion Somemethod () {
+	//..
+	}
+}

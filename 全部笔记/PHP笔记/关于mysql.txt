@@ -1,0 +1,3 @@
+SQL查询的语句貌似在PHP的变量全得加'',全局变量里的[]不能加''了，而加在$前了.
+
+全局变量如$_SERVER['PHP_AUTH_USER']在SELECT语句下里面的PHP_AUTH_USER不要加'';

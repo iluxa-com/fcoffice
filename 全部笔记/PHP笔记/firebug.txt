@@ -1,0 +1,111 @@
+console.debug("I am debug"); 
+console.info("I am info"); 
+console.warn("I am warn"); 
+console.error("I am error");
+console.log("It's a C language Style %d",num);
+
+断言
+  console.assert(false,"it's false");
+  console.assert(a=1);
+  console.log(a);
+  
+  
+  console.clear()清空信息
+  
+  
+ 以列表的形式 打印对象的所有属性
+  var object={"name":"falcon","sex":"male"};
+  console.dir(object);
+  
+  
+  //打印节点的html代码  console.dirxml(node)
+  //需要在加载完HTML节点后再执行
+<h1 id="h1">hello world</h1>
+<div id="a" style="font-size:12px;color:#f0c">
+ 这是测试打印节点的html<b>代码</b>
+</div>
+<!--注意要先加载HTML-->
+<script>
+console.dirxml(document.getElementById('a'));
+</script>
+  
+  
+  console.trace()
+  //函数的调用跟踪
+function fn1(){
+  fn2();
+}
+function fn2(){
+  fn3();
+}
+function fn3(){
+  console.log("how to be called");
+  console.trace();
+}
+
+fn1();
+  查看当前函数的调用堆栈顺序
+  回溯？
+
+
+
+
+
+//分组输出
+console.group(object);
+
+  console.groupCollapsed("haha"); //与group方法类似，不过这是折叠的
+  console.groupEnd();//结束
+
+
+console.group("group1");
+console.log('log');
+console.groupEnd();
+
+
+//测试执行时间
+console.time("name");
+for(var i=0;i<1000;$i++){
+  document.write(i);
+  document.write("\n");
+}
+
+console.timeEnd("name");
+
+
+//分析函数之间的执行情况
+console.profile(name)
+console.profileEnd();
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function fn(){
+  for(var i=0;i<10000;i++){
+  document.write(i);
+  document.write("<br />");
+  
+}
+
+}
+console.group("cycle profile");
+console.profile("test cycle")
+fn();
+console.profileEnd();
+console.groupEnd();
+
+
+//查看函数被调用的次数
+var fntest=function(){
+  document.write('/');
+  console.count("fntest被调用的次数");
+}
+ for(var n=0; n<100;n++){
+  fntest();
+ }
+ 
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ console.table firebug1.6支持
+ var data={"name":"falcon","sex":"male","age":"x"};
+console.table(data);
+ 之前用console.dir(data);也不错
+ ------------------------------------------------------------------------------
+ 

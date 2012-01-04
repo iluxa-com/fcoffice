@@ -1,0 +1,11 @@
+javascript代码如下：
+<script>
+function go2b(){
+  window.location = "b.html";
+  window.close();
+} 
+setTimeout( "go2b()",5000 ); //5秒钟后自动执行go2b()
+</script>
+
+------------------------------------------------------------------------------
+

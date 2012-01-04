@@ -1,0 +1,19 @@
+把引号替换 为\引号
+
+$str=<<<HTML
+''"我的IP查询"地址" '精确查找测试:' 'http://amfalcon.eu5.org/ip"''
+HTML;
+
+echo $str;
+echo "\n<br />------------str_replace --------------<br />\n";
+
+// 1.str_replace 
+$var1=array("'","\"");
+$var2=array("\'",'\"');
+$new1=str_replace($var1,$var2,$str);
+echo($new1);
+
+echo "\n<br />-------------preg_replace-------------<br />\n";
+//2.preg_replace正则替换
+$new2=preg_replace("#(\'|\")#","\\\\$1",$a); //注意第二个参数！
+echo($new2);

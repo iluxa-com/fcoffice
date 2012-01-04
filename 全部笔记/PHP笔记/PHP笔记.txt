@@ -1,0 +1,641 @@
+1,下载安装apache2.2.4, 指定路径安装。解压PHP5的zip包到e:\php5\。
+2.配置apache:
+
+在httpd.conf的LoadModule后面中加入：
+
+LoadModule php5_module e:\php5\php5apache2_2.dll 
+#书本是php5apache2.dll,由于实际安装的是apache2.2.4，所以要改动。如果是apache2的2.0版本的话，应该按书本方法处理。尽信书不如无书！在这里郁闷了一个小时。
+AddType application/x-httpd-php .php  
+#一定要加入的，使用apache解析.php文件，很好理解
+PHPIniDir e:\php5
+#书上是有这么一句的，不加入测试phpinfo() 工作正常。加入反而不正常。好假.....
+应该是指定PHP.ini所在的目录吧，保存，重启apache.
+
+3.配置php
+把PHP目录下的php.ini_recommend或php.ini_dist 改为php.ini
+
+4.新建一个PHP文件test.php，写入<?phpinfo()?>保存到apache安装目录下的htdocs文件夹.浏览器输入http://localhost/test.php.如果正常显示刚表示安装成功。
+
+--------------------------------------------------------------
+另外一点，如果是在Windows下安装的PHP的二进制文件格式，那么php.ini应该放在C:\windows目录下或者PHPRC中指定路径php.ini所在目录，php.ini原文注释如下
+
+; This file controls many aspects of PHP's behavior.  In order for PHP to
+; read it, it must be named 'php.ini'.  PHP looks for it in the current
+; working directory, in the path designated by the environment variable
+; PHPRC, and in the path that was defined in compile time (in that order).
+; Under Windows, the compile-time path is the Windows directory.  The
+; path in which the php.ini file is looked for can be overridden using
+; the -c argument in command line mode.
+
+虽然说PHP会在当前工作目录下寻找php.ini文件，或者在环境变量PHPRC中指定，在windows下，编译路径为windows目录,这个路径可以在命令行模式下通过-c参数更改。
+
+通过环境变量改的话,命令行下:
+set phprc=C:\php52\
+echo %phprc%
+理论上是这样的没错，但是实际并没有实现想要的结果，
+那么就用另外一个方法：在我的电脑右键，高级，环境变量中改动，重启后生效。郁闷的重启。
+
+但是我发现很奇怪的一件事，虽然说会在PHP当前目录下寻找配置文件，然而即使变更php.ini里的一些重要变量如在语言选项中把engine改为off仍然能正常使用PHP引擎解析，把asp_tags设为on仍然不能使用<% %>的标记等等。然而如果把php.ini放在Windows目录或者环境变量指定目录的话，以上两个改动是会被实现的.所以我的猜测是当php作为CGI安装时三种方法都是有效的，如果作为Apache模块的话，只有使用后面两种方法。phpinfo()的页面可以看到 
+Configuration File (php.ini) Path  C:\WINDOWS  
+Loaded Configuration File  C:\php52\php.ini  
+
+还有一个，即使PHP.ini不存在，也不会影响PHP的解析，这令我很怀疑PHP是否本身就有默认的配置。
+
+Configuration File (php.ini) Path  C:\WINDOWS  
+Loaded Configuration File  none
+不用载入配置文件的话也能正常解析，很奇怪吧。
+
+-----------------------------------------------------
+作用域：
+PHP_INI_PERDIR : php.ini httpd.conf .htaccess
+PHP_INI_SYSTEM : php.ini httpd.conf
+PHP_INI_USER : 用户脚本
+PHP_INI_ALL ：任何地方
+-----------------------------------------------------
+PHP.ini 的配置指令：
+1。语言选项
+short_open_tags=on
+precision=14 | 12 
+y2k_compliance=on 
+output_buffering=off
+输出缓冲区，可为数值或者On|Off,打开时将允许向浏览器发送部分内容如Body部后再发送header或cookie的信息.
+output_handler=string 
+可对输出进行压缩，output_handler="ob_gzhandler"时，ob-gzhandler()是PHP压缩处理函数，此时不可与zlib.output_compression同时启用。
+zlib.output_compression=off
+输出压缩
+zlib.output_handler =NULL
+如果zlib不可用，此指令将指定一个特定的函数处理压缩，然而当zlib_output_compression激活时，不能同时激活此指令，因为它的功能与output_handler一样的，只是执行顺序不同.(PHP.ini原文）
+implicit_flush=On|Off 
+默认off ，启用时，每次调用print()或echo()以及完成各个嵌入的HTML后将自动清除或刷新其内容输出缓冲区，只有当服务器需要相当长的时间来编译结果或者完成某些计算时有用，可以利用这个特性向用户输出状态更新.而不是等到服务器完成整个过程才输出。
+unserialize_callback_func=string
+请求实例化一个未定义的类时,能控制逆串行化器(unserializer)的响应.
+serialize_precision=integer 
+确定在串行化双精度和单精度浮点数时小数点后存储的位娄，把这个数值设置为适当的值可以确保这些数字逆串行化时不会损失精度。默认100
+allow_call_time_pass_reference = On
+函数参数传递方式,on 传址，Off传值. 默认off.以后版本的PHP可能不支持。设置为off时会有warning并按传值处理.
+---------------
+安全模式：
+safe_mode=on|off
+safe_mode_gid=on |off
+on时gid检查，禁用会强制执行更为严格的UID检查
+safe_mode_include_dir =string 
+启用上述两个选项后，safe_mode_include_dir提供一个安全目录可以避免强制的UID/GID检查
+safe_mode_exec_dir =string 
+safe_mode=on时,可限定exec()函数只能执行选定目录的可执行程序
+safe_mode_allowed_env_vars = PHP_
+安全模式下，只允许修改的系统环境变量的前缀，设置为空时表示用户可以修改任何环境变量。
+safe_mode_protected_env_vars= string
+禁止用户修改的变量，如safe_mode_protected_env_vars = LD_LIBRARY_PATH
+即使safe_mode_allowed_env_vars 已经设置的变量，也能在此生效。
+open_basedir=string
+限定用户的操作目录,这个指令的影响并不依赖于safe_mode指令
+disable_functions =string
+禁止执行的函数 不依赖安全模式影响。如disable_functions=exec, system
+disable_classes=string
+禁止启用部分类库的某些特定类。不依赖安全模式影响。
+ignore_user_abort =on
+用户退出浏览器或time out时，请求仍然可以完成.
+-----------------------------------------------------
+3.语法高亮,通过使用.phps，或者show_show_source()，highlight_file()函数启用此特例，使用phps扩展名时，需要向httpd.conf增加以下代码:
+AddType application/x-httpd-php-source .phps
+------------------------------------------------------
+4.杂项
+expose_php=On |off
+打开/关闭服务器签名。
+
+------------------------------------------------------
+5.资源限制
+max_excution_time = integer
+PHP脚本执行时间，为0时取消最大限制，通过exec(),system()函数执行的命令不在此限制内。
+max_input_time =integer
+
+默认为60秒，对PHP脚本解析请求数据的最大时间限制，使用PHP上传大文件时很有用。
+memory_limit =integerM
+PHP脚本分配的最大内存量，默认8MB
+———————————————————————————
+
+6。数据处理
+arg_separator.output = "&amp;"
+PHP能自动生成URL，并使用标准的&符号分隔输入变量
+arg_separator.input = ";&"
+&是通过POST或GET方法分隔传入的输入变量的标准字符。
+variables_order = "EGPCS"
+确定EVIRONMENT GET POST COOKIE SERVER变量的解析顺序。
+register_globals = Off
+为了安全，通常禁用。
+register_long_arrays = On
+用废弃的语法注册各个输入数组（EGPCS），出于对性能的考虑，应该禁用这个指令。
+register_argc_argv = On
+通过GET方法传入变量信息类似向可执行文件传递参数，argc是参数个数argv是一个包含参数的索引数组，如果希望声明变量$argc和$argv并模拟这个功能就要启用。
+post_max_size = integer M
+通过POST传输的最大数据量
+magic_quotes_gpc = On
+用\转义GPC中的引号（单双），反斜线，空字符
+magic_quotes_runtime = Off
+用\转义所有来自外部(数据库或者文本）的引号
+magic_quotes_sybase = Off
+当magic_quotes_runtime启用时，这个参数启用将使用一个单引号而非反斜线进行转义.
+auto_append_file =NULL
+在PHP脚本执行前后插入指定页脚模板文件名和路径，并在脚本中预先导入这些函数，某些免费空间的页脚广告应该就是通过这个参数来实现的。
+default_mimetype = "text/html"
+MIME类型，
+;default_charset = "iso-8859-1"
+字符集设置，如果要支持中文需要利用这个指令改变字符集设置。
+;always_populate_raw_post_data = On
+PHP会为$HTTP_RAW_POST_DATA赋一个字符串，即使其中包含以POST方法传递名/值对时（即使表单变量没有相应的值。）
+如:echo $HTTP_RAW_POST_DATA;
+两个值都不填时：name=&email=
+都填写时：name=falcon&email=falcon@gmail.com
+________________________________________________
+7路径和目录
+include_path=string
+此参数指定的路径是include(),require()和fopen_with_path()等函数使用的基本路径，可以指定多个目录，通过分号进行分隔。Windows的路径要使用反斜线。
+doc_root=string
+PHP脚本默认位置，非空时才使用。
+user_dir =string 
+用户目录/~username 的指定位置。非空时才使用。
+
+extension_dir = "./"
+可加载扩展位置，Windows下为PHP安装文件夹的ext目录。
+enable_dl=On|Off
+enable_dl()函数是否允许用户在运行脚本期间加载扩展。
+----------------------------------------------------
+8Fopen包装器
+allow_url_fopen = On
+允许PHP将远程文件看作本地文件，如果远程服务器的文件有正确的权限，PHP脚本能够访问和修改这些文件。
+from=string
+确定完成FTP连接的匿名用户密码。
+user_agent= string
+PHP随所处理的输出发送一个内容首部其中包含一个用户代理属性。用这个指令要确定这个属性的值。
+default_socket_timeout=integer 
+socket流的超时值，以秒为单位。
+auto_detect_line_endings=On | Off
+行结束符（EOL）的读取，启用这个参数可以确定fgets()和file()读取的数据是采用哪种操作系统的文件约定。
+-----------------------------------------------------
+动态加载扩展
+extension=string
+注意相应的扩展可能需要系统安装了适应的软件。
+
+————————————————————————————
+关于DW与PHP：《PHP 与DreamWeaver基础教程》David Powers 
+--------------------------------------------------------
+
+IDE :
+DW CS3, PDT, Notepad++; Zend Studio
+
+--------------------------------------------------------
+
+#3 PHP基础
+标准用法1：
+<?php
+?>
+标准用法2:
+<script language="php">
+</script>
+应该禁用 
+<? 
+?>
+<%
+%>
+在PHP.ini中设定short_open_tags=Off 
+__________________________________
+注释：
+C++风格  //
+shell风格 #
+	利用phpDocumentor生成高级文档
+多行C语法
+<?php 
+	/* 
+	...
+	*/
+?>
+------------------------------------
+输出
+int print ()
+void echo (参数1,参数2...) //用于输出多个参数。
+boolean printf(string format,[,mix args]) //格式输出
+string sprintf() //功能与printf()相似，但将输出指派到字符串而不是直接指派到浏览器。$cost=sprintf("$%.2f",43.2)
+
+常见类型指示符：
+%b binary
+%c charactor of ASCII
+%d decimal number 
+%f floating-point number
+%o octal number
+%s string
+%u unsighed decimal number 
+%x lowcase hexadecimal number
+%X uppercase hexadecimal number
+
+-----------------------------------------
+数据类型 
+1.标量数据类型
+布尔型 //true/false 非0/0
+整型	//不包含小数部分的数，十进制，八进制，十六进制。
+浮点型  //包含小数部分的数.
+字符串
+2.复合数据类型
+数组
+对象
+-----------------------------------------
+强制类型转换操作符
+()
+array  		//转换数组时，所转换的值将成为数组的第一个值，强制转换到一个存在的数组时，原数组将被清空。
+bool/boolean
+int/integer 	//将float强制转换成int时向下取值.
+real/double/float
+string
+object
+-----------------------------------------
+自动类型转换
+如果字符串类型的前面有数值时，转换成数值/布尔类型时会取前面的值，
+如果字符串里含有包含.eE的字符串，这个字符串将作为浮点数进行计算。
+
+-----------------------------------------
+与类型有关的函数
+string gettype(mix var) //获取类型
+boolean settype(mix var, string type) //转换类型
+---------------------------------------------
+类型标识符函数 boolean is_name(mixed var)
+is_array() is_bool() is_float() is_integer() is_null()
+is_number() is_object() is_resource() is_scalar() is_string()
+
+---------------------------------------------
+标识符（变量，对象，函数名用户自定义的术语）
+1只能由字母数字下划线和从127—255的其他ASCII字符组成，并且只能以字母或下划线开头。
+2不能与PHP预定义关键字相同
+3任意长度，区分大小写
+
+PHP变量
+1。区分大小写
+2。不需要显式声明
+
+赋值：
+1。值赋值(=)
+2。引用赋值(=&) 
+<?php 
+	$value1="hello";
+	$value2=& $value1; //另一种 赋值法$value2= &$value
+	$value2="goodbye"; //两个变量同时改变
+?>
+
+变量作用域
+局部变量 
+函数参数（传值不改变原先参数，传址会对原参数有影响）
+全局变量 GLOBAL关键字
+$GLOBALS["不带$的变量名"]
+静态作用域 STATIC $somevvar;
+	静态变量的每次改变都会被保留下来。
+----------------------------------------------------
+PHP超级全局变量
+//输出与给定的WEB服务器和脚本执行有关的预定义变量(数组)。（track_vars必须启用,怎样改php.ini？）
+1.SERVER
+<?php
+foreach ($_SERVER as $var =>value){
+	echo "$var=>$value <br>";
+}
+?>
+printf( "Your IP address is %s" ,$_SERVER["REMOTE_ADDR"];
+
+2.POST GET
+只能使用全局变量$_POST $_GET的方式来访问POST　GET变量。不能直接以变量名引用。如$_POST['email']合法 $email引用则不合法.
+
+4.$_COOKIE
+5.$_FILES通过POST方法向服务器上传有关数据的二维数组。
+$_FILES['upload-name']['name']
+$_FILES['upload-name']['type']
+$_FILES['upload-name']['size']
+$_FILES['upload-name']['tmp_name']
+$_FILES['upload-name']['error']
+
+5.$_ENV PHP 解析器所在服务器的环境
+6 $GLOBALS和$_REQUEST.
+7$_SESSION 
+________________________________________________________
+
+变量的变量
+<?php
+$a="wel";
+$$a="come";
+echo $a,$wel;
+echo "<br>";
+echo $a ,$$a;
+?>
+______________________________________________________
+常量constant
+define() 函数定义常量:
+boolean define(string name, mixed value [,bool case_insesitive])
+
+define("PI",3.1415);
+常量引用前面不用加$；
+常量是全局的；
+两个常量生成的值必须存储在另一个变量中。
+-----------------------------------------------------
+表达式 ：所有表达式至少由一个操作数和一个或多个操作符组成。
+操作数
+操作符
+拼接操作符(.)和拼接赋值操作符(.=)
+=====================================================
+自增自减操作符（++ -- ）
+<?php
+	$a=11;
+	$b=$a--; //先赋值再自减
+	$c=--$a; //先自减再赋值	
+	printf("\$b=%d,\c=%d",$b,$c);
+?>
+-----------------------------------------------------
+逻辑操作符
+&& =AND
+||= OR
+XOR 
+$a XOR $b :如果只有$a或$b为true时才会true,如此而言，相当于OR少一种两个都为真的情况。
+
+比较操作符
+==
+!= 
+=== //类型和数值都一样时为真。
+三元操作符
+($a==12)?5:-1 //如果$a=12就返回5，否则返回-1
+
+--------------------------------------------------------
+位操作
+
+$a & $b 	与	位相与
+$a | $b		或	位相或
+$a ^ $b		异或	位相异或
+~ $b		非 	取反
+$a << $b	左移	$a将接收$b左移两位的值
+$a >> $b 	右移	$a将接收$b右移两位的值
+
+——The Art of Assembly Language Programming《汇编语言编程艺术>
+-------------------------------------------------
+
+转义序列
+\n	换行符 	//只显示在源代码的换行...
+\r 	回车
+\t	水平制表符
+\\	反斜杠
+\"	双引号
+\[0-7]{1,3} 	八进制记法
+\x[0-9A-Fa-f]{1,2}	十六进制
+--------------------------------------------------
+双引号 ：变量与转义序列都会解析
+单引号 ：变量与转义序列不解析,内容包含的'必须用\'转义。除非启用magic_quotes_gpc配置指令，否则将导致语法错误。反斜杠在最后也需要转义。
+----------------------------------------------------
+heredoc语法--如果需要处理大量内容，又不希望使用转义引号时。
+<?php
+<<<EXCEPT
+....
+EXCEPT; //标志符必须放置最前。
+?>
+———————————————————————————
+控制语句:
+1.if 语句
+if (expression) {
+statement
+}
+条件体只包含一条语句时可以不用{}
+2.else语句
+<?php
+$secretNo="665";
+if ($_POST['guess']==$secretNo) echo "you are Right"; else echo "please guess again."
+?>
+3.elseif
+4.switch
+<?php
+	switch ($category){
+		case "news":
+			echo "<p>What news</p>";
+			break;
+		case "sports":
+			echo "<p>I like sports</p>";
+			break;
+		default:
+			echo "welcome!";
+	}
+?>
+--------------------------------------------------
+循环语句
+1.while
+2.do while
+do {
+	statements 
+}while (expressions)
+	
+3.for (expression1;expression2;expression3) {statements} //exp1第一次循环的初始值，exp2每次循环判断是否继续，exp3每次循环结束时计算。
+
+4.foreach
+
+	foreach(array_expr as $value){
+		statement
+	}
+
+	foreach (array_expr as $key => $value) {
+		statement
+	}
+------------------------------------
+1.break
+2.goto
+3.continue
+-------------------------------------
+文件包含语句：
+1.include() 在条件语句中使用include()必须包围在语句块大括号中，或者用其他语句包围符括起。
+<?php 
+	if (expression) {
+		include('filename');
+	} else {
+		include('another_filename');
+	}
+?>
+
+include()语句还能包含位于远程服务器的文件。
+
+2.确保文件只包含一次
+include_once() 功能与include()大致相同，但首先对包含文件进行验证，如果之前已经包含，则不再执行include_once()
+
+3.require(filename)
+无论require()位置，即使if为假仍被包含，当包含文件为出错时，将停止执行，而include()则会继续执行。
+===================================================
+
+函数
+1.创建和调用
+function name($a,$b){
+statements
+}
+
+2.传递信息返回信息
+传值与传引用.
+function name($a,&$b) {
+statements
+}
+
+function name($a,$b=.05,$c){
+statements
+}
+name(4,"",1);
+
+3.---用list()构造接收多个值
+function retrieveUserProfile()
+{
+	$user[]="Jason";
+	$user[]="admin@jason.com";
+	$user[]="English";
+	return $user; //返回数组的值
+}
+list($name,$email,$language)=retrieveUserProfile();
+printf("Name:%s,Email:%s,Language:%s",$name,$email,$language);
+---------------------------------------------------------------
+4.递归
+--------------------------------------------------------------- 
+5.创建和调用函数库
+数组
+
+创建数组
+	直接创建
+	$state[0]="Alabama";
+	$state["AL"]="Alabama";
+	array创建
+	数值索引
+	$states=array(0 =>"Alabama,1 => "Alaska" ...49=> "wyoming");
+	$states[0]	
+	关联键
+	$states=array("OH"=>"ohio" ,"PA"=>"Pennsylvania"...)
+	$states["OH"]
+	多维数组
+	states=array("ohio"=>array	("population"=>"11,353,140",...),"NY"=>array("population"="...")
+
+
+预定义的值创建数组：array range(int low, int high[,int step])
+如：$die=range(0,20,2);$letter=range("A","F")
+输出数组
+
+list()
+
+测试数组
+boolean print_r(mix variable [,boolean return])
+boolean is_array(mixd varable)
+----------------------------------------------
+添加和删除数组元素
+1.在数组头添加元素：
+int array_unshift(array array, mixed variable [, mixd variable...])成功后返回数组的元素个数。
+
+如$home=array("falcon","chen");
+array_unshif($home,"sea");
+//$home = array("sea","falcon","chen");
+2.在数组尾添加元素:
+int array_push(array array,mix varibles [,mixed variable...])成功后返回数组的元素个数。
+
+3.从数组头删除元素:
+mix array_shift(array array);成功后返回的是删除的元素。执行一次删除一个元素。
+4.数组尾删除元素:
+mix array_pop(array target_array)
+
+
+定位数组元素
+1。boolean in_array(mixed needle, array haystack [,boolean strict]) //第三个参数是强制搜索时是否考虑类型
+如:
+$state = "Ohio";
+$states = array("NY","New Zerse","Hawaii");
+if (in_array($state,$states)) echo "it's in the \states";
+--------------------------------------------------------------
+2。数组键中搜索指定的一个键：boolean array_key_exists(mixed key, array array)
+3.搜索关联数组值，返回相应的键。找不到返回FALSE：mixed array_search(mixed needle, array haystack [,boolean strict])
+4.获取数组键:
+array array_keys(array array [,mixed search_value])
+如果第二个参数不使用，则返回包含数组的全部键的数组。
+5.获取数组值并自动索引
+array array_values(array array)
+
+-----------------------------------------------------------------
+遍历数组
+1.获取当前数组键
+mixed key(array array)//返回input_array指针所在位置的键.
+2.获取当前数组值
+mixed current(array array) // 返回input_array指针所在位置的值.
+---------------------------
+移动数组指针：
+mixed next(array array)
+mixed prev(array array)
+mixed reset(array array) //将指针移到第一个数组位置
+mixed end(array array) //移动到最后一个数组位置
+-----------------------------
+获取当前组键和值
+array each(array array)返回数组包含四个键(?)当指针位于数组末尾时，返回false.
+向函数传递数组值：
+boolean array_walk(array &array, callback function)
+确定数组大小和元素的唯一性
+确定数组的大小：
+integer count(array array [,int mode])
+别名：sizeof()
+当mode 设置为1时，数组将进行递归计数。统计多维数组时很有用。
+------------------------------------
+统计数组元素出现的频度。
+array array_count_values(array array) //返回一个当前数组的值为键，出现次数为值的数组。
+删除数组重复的值
+array array_unique(array array)
+
+-------------------------------------------------
+数组排序
+逆置数组元素
+array_reverse(array array [,boolean preserver_keys])如果preserve_key 设置为ture,对于自动索引的数组会保持键映射，关联数组则始终不受影响地保持键映射。
+接受数组 array  作为输入并返回一个单元为相反顺序的新数组，如果 preserve_keys  为 TRUE 则保留原来的键名。
+置换数组键与值的角色
+array array_flip(array array)
+排序：
+void sort(array array [,int sort_flags]) //sort_flags参数可选，
+    * SORT_REGULAR - 正常比较单元（不改变类型）
+    * SORT_NUMERIC - 单元被作为数字来比较
+    * SORT_STRING - 单元被作为字符串来比较
+    * SORT_LOCALE_STRING - 根据当前的区域（locale）设置来把单元当作字符串比较。PHP 4.4.0 和 5.0.2 新加。在 PHP 6 之前，使用了系统的区域设置，可以用 setlocale() 来改变。自 PHP 6 起，必须用 i18n_loc_set_default() 函数。
+关联数组排序后键/值关联不再保持。保持键值对要使用void asort(array array [,int sort_flags])
+rsort()与sort()相同，只不过按相反的顺序（降序）对数组元素排序。arsort()保持键/值关联。
+
+数组自然排序：
+void natsort(array array); //自然排序（p1,p2,p10,p20...）
+void natcasesort(array array) ; //功能与natsort()相同，不区分大小写。
+数组合并、拆分、接合和分解
+1.合并
+array array_merge(array1,...array n);
+array array_merge_recursive(array1,...array n); 
+//两者的区别在于前者如果输入的某个键中已经存在，前者会覆盖前面存在的键值对，后者将两个值合并在一起形成一个新的数组，并以原有的键作为数组名。
+array array_combine(array keys, array values) //由一组提交的键和对应的值组成，两个数组必须大小相同，不能为空。
+
+2.拆分数组:
+array array_slice($array offset[,length]) //offset为正数时，表示从第offset键开始取值，为负值时，表示从末端倒数-offset位开始取值，length为正数时表示取length个位值,为负时，表示从取至末端剩余-length位为止。
+
+3.接合数组:
+array array_splice(array array,int offset [,int length [,array replacement]])//如果没有后面的参数，效果相当于array_slice,如果有replacement参数，表示把replacement接合在原来删除的位置上。注意，返回的是删除的数组，如果需要接合的数组即为之前的input_array
+
+4。求数组的交集 array_intersect()返回一个保留键的数组，这个数组只由第一个数组中出现的且在其他每个输入数组都出现的值组成:
+array array_intersect(array array1, array array2 [,arryN.])
+
+5.求关联数组的交集，array_intersect_assoc()与array_intersect基本相同，只不还要考虑数组的键。
+
+6.求数组的差集:
+array_diff(array array1, array2 [,arrayN...]); //返回出现在第一个数组而没有在其他输入数组的值。与array_intersect()相反,
+
+7.求关联数组的差集，考虑了key
+array_diff_assoc
+
+===================
+其他
+ 返回一组随机键 // 键不是值
+mix array_rand(array array [, int num_entries])
+	
+随机洗牌数组元素
+void shuffle(array input_array)
+
+对数组对和，将input_array所有值加起来返回最终的和
+mixed array_sum(array array)
+如果含有其他数据类型，这些值将被忽略。
+
+分解为一个多维数组
+array array_chunk(array array, int size [,boolean preserve_keys]) //由包含size个元素的数组组成，无法整除时最后一个数组包含的元素将少于size，启用presever_keys将保留各个值对应的键，忽略时每个数组索引从0开始
+
+--------------------------------------------------------------
+OOP
+对象的创建：
+$employee = new Employee();
+
+字段
+声明：

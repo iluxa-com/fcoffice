@@ -1,0 +1,32 @@
+　　1)普通提交form 的数据验证传值
+
+　　html页面输入:
+
+<form onsubmit="return checkForm1(this);" name =”form1”>
+
+<input…..>
+
+</form>
+
+
+Javascript 获得值并处理:
+
+<script language=”javascript ”>
+
+function checkForm1(text1)
+
+{
+
+if(text1.name.value==””)
+
+{alert(“null”);
+
+return false;
+
+}
+
+return true;
+
+}
+
+</script>

@@ -1,0 +1,29 @@
+setInterval(myTime,1000); 	//每隔一秒向服务器请求一次时间 //参数
+	 function myTime(){
+	 	/*
+	 	$.get('../11/getTime.php',function(data){ 
+			$('#time').text(data);
+     //在GET时参数要可变
+		});*/
+
+		$('#time').load('../11/getTime.php',{'id':'ii'});
+    //post时必须提交一个参数
+		//alert('hello');
+		return false;
+	 }
+
+//另一个函数可以终止他 ,在自动轮播里使用到的 jquery/play.js
+//clearInterval
+
+
+	$oAutoSave.toggle(
+		function(){
+			save();
+			autoSave=1;			
+			t = setInterval("save()", 300000);  //5分钟一次自动保存
+			
+		},
+		function(){
+			autoSave=0;
+			clearInterval(t);
+		}

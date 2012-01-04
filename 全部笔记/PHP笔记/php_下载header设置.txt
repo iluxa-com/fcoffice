@@ -1,0 +1,4 @@
+<?php
+  header('Content-Disposition: attachment; filename="qq.txt"');
+  readfile('qq_upload.wml');
+?>

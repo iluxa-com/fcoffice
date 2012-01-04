@@ -1,0 +1,7 @@
+ÀýÒ»£º
+
+echo "<script>location.href='session.php'</script>";
+
+Àý¶þ£º
+
+echo "<script>location.href='catche2.php?start=".$start."&web=".$web2."&stop=".$stop."'</script>";

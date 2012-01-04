@@ -1,0 +1,237 @@
+PHP取得图片类型提交按钮的点击坐标
+
+/*
+
+  <form action='plustest.php' method='POST'>
+<input type="image" name="myImage" src="image/139.jpg" /> //替代按钮提交
+<input type="input" name="id" value="000" />
+
+</form>
+*/
+/*取得点击图片的XY轴坐标*/
+echo 'x=',$_POST['myImage_x'] ,'y=',$_POST['myImage_y'] ;
+
+echo $_POST['id'];
+
+------------------------------------------------------------------------------
+福昕
+
+__sleep() 
+__wakeup()
+
+能被用来自定义对象的序列化过程
+
+PHP4没有 抽象类 Final类 PPP方法 接口
+
+htmlentities()
+
+https传输
+
+序列化serialize
+
+
+------------------------------------------------------------------------------
+ob_start 
+改变输出顺序的一种方式：写入缓冲，缓冲内容用ob_get_contents赋给变量
+ob_start ();
+for($i=0;$i<10;$i++) {
+	echo $i;
+}
+$output=ob_get_contents();
+ob_end_clean();
+echo "now is the output:<br>";
+echo $output;
+------------------------------------------------------------------------------
+
+session过期问题
+session.gc_maxlifetime设置的是用户最后一次请求到session被回收的时间间隔!
+------------------------------------------------------------------------------
+session保存路径
+ session_start();
+ echo session_save_path();
+------------------------------------------------------------------------------
+setrawcookie
+
+******************************************************************************
+
+数组
+
+
+12.PHP数组的写时copy和懒COPY
+
+给函数传递数组变量时，只有在数组变量确实发生改变时，它才会产生一个副本，
+如果只读，通过值传递 ，由于不产生副本(lazy copy)，反而效率比引用高，
+因为引用需要创建一套机制来维持一个引用
+
+------------------------------------------------------------------------------
+数组的索引键为整型，如果定义键为浮点型，则会转化为整型的键
+<?php
+   $array=array(0.1 => 'a', 0.2 => 'b');
+   var_dump($array);
+?>
+显示为:array(1) { [0]=> string(1) "b" } 
+------------------------------------------------------------------------------
+
+排序的关键
+给数组元素设置数字键时，PHP从可用的最小数字开始，递增设置，
+也就是这样，如果第一个元素的键是5,那么将从最小数字将从5开始。
+除非后面的元素指定键，否则最小的键是5.
+
+$mutiArray = array('5'=>'a',42,'b'=>'bbc','1'=>'d','10');
+print_r($mutiArray);
+
+//Array ( [5] => a [6] => 42 [b] => bbc [1] => d [7] => 10 ) 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+shuffle洗牌，打乱元素顺序
+
+
+serialize /unserialize
+
+natsort //自然排序
+
+ksort  //按键名排序
+krsort  //按键名降序
+
+asort //不改变索引进行升序排列
+arsort //不改变索引降序排列
+
+array_flip() //交换数组的键与值
+
+sort  //升序排列，会改变索引，关联数组键会变成索引数字，顺序为键值从string到数字类型。对于同为string的类型，数字优先于字母。
+rsort //逆向排序，改变索引
+
+usort // 使用用户自定义的比较函数对数组中的值进行排序 
+array_flip //键和值交换 返回数组，并不改变原来的数组。
+
+array_reverse //逆向排序
+
+计算
+array_intersect //返回数组交集，键名不变，以第一个为准。
+
+array_sum //计算数组中所有元素的总和
+array_count_values 元素值出现的频率，返回数组
+
+
+array_walk //对数组里每一个元素应用用户定义函数 
+
+array_walk($array2,'myfun');  
+
+//第一个参数是键值，第二个是键名。增加其他参数这样写 array_walk($array2,'myfun','plus');
+//这时'plus'作为第三个参数传入函数中
+function myfun($item,$key,$arg) {
+	echo "{$key}:{$item}->{$arg}";
+}
+
+
+
+https传输发生时，浏览器与服务端立即完成加密机制的握手，之后的数据传输都是密文的，无论URL还是
+查询字符串
+
+------------------------------------------------------------------------------
+
+对收到的查询字串，同名的，后一个会将前一个覆盖。。。而非组成数组。。。
+
+
+******************************************************************************
+字符串与数字比较时
+字符串将转成数字，跟ASP相反。
+var_dump('test'==0); //返回true;
+
+ 'test'==test //Notice 此时test将被看成常量
+
+在PHP中，加号并不能合并两个字符串，+号绝对不会转成.使用，只是加法运算
+strcmp 安全的字符串比较机制
+.的运算优先级比+高。
+用.连接字符与数字类型时，.实际执行的是加法运算，如果字符不含数字，将被转成0
+
+echo 'test'.1+'2'.4 ; //6
+
+
+echo 'test'.1+2.'45';
+strcasecmp
+str_rot13
+crypt()
+crc32()
+strtok
+preg_split()
+str_split()
+chop
+
+strip_tags带两个参数的用法
+
+
+字符转换 
+encode_hex()
+pack()
+hex2bin
+bin2hex
+printf
+str_pad
+
+******************************************************************************
+锁与临时文件
+flock()
+tempnam()
+mkdir()
+tmpfile()
+------------------------------------------------------------------------------
+readfile 与file_get_contents
+
+sscanf()
+fscanf()
+fnmatch
+fpos
+ftok
+
+缓存
+clearstatcache()
+fflush
+ob_flush()
+touch()
+reset
+feek(0,SEEK_SET)
+
+stat()
+fstat()
+
+number_format
+
+
+php.ini 的auto_detect_line_endings能够自动侦测行结束符号的类型
+******************************************************************************
+strftime 根据脚本中的地区设置来决定使用的语言
+
+date仅格式化输出英文表示日期，
+时间日期
+
+date
+microtime
+典型用法，用浮点数表示
+echo array_sum(explode(' ',microtime()));
+
+checkdate
+strftime
+mktime
+
+本地化
+strftime 根据脚本中的地区设置来决定使用的语言(可以通过setlocale来改变)
+在php5中，无论是strftime还是mktime都支持负值吧
+
+
+
+gmmktime()
+
+数据库处理时间的能力比PHP强，所以无论是日期验证还是计算，都应该由数据库来完成
+
+无论客户机时区设置，只要使用time()+指定秒数 都能指定一个COOKIE的过期时间。
+
+getdate 返回一个对时间戳处理（如果没有则指定，使用当前时间）的数组
+
+
+
+wordwrap
+
+substr_replace()带参数的使用
+

@@ -1,0 +1,103 @@
+错误处理
+PHP.ini:
+1.报告错误 
+报告所有错误
+error_reporting = E_ALL //开发时的设置
+
+只考虑致命的运行时错误、解析错误和核心错误
+error_reporting= E_ERROR | E_PARSE |E_CORE_ERROR
+
+报告除用户导致的错误之外的所有错误，用~表示NOT
+error_reporting= E_ALL & ~(E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE)
+
+2.怎样显示错误
+display_errors = On/Off //配置完成后要禁止显示到浏览器上。
+display_startup_errors =On/Off //同上
+
+3.记录错误
+log_errors=On/Off 应该始终启用
+error_log=	//日志记录文件的位置,如果设置为syslog（Web服务器进程所有者必须有足够的权限）则发送到linux的syslog，Windows则发送到事件日志。
+
+4.每个日志项的最大长度，以字节为单位，0表示不指定最大长度。
+log_errors_max_len
+
+5.忽略重复错误
+ignore_repeated_errors = Off
+
+6.忽略相同位置发生的错误
+ignore_repeated_source = Off
+
+7.在变量中存储最近发生的错误
+启用track_errors会使PHP在$php_errormsg中存储最近发生的错误消息。
+
+————————————————————————————
+操作日志
+1。初始化PHP日志工具。是使用openlog() ,closelog() ,syslog()函数的必需。
+void define_syslog_variables(void)
+
+2.打开日志连接
+int openlog(staring ident,int option,int facility)
+
+ident消息标识，一般为“PHP”
+
+option 确定生成消息时使用哪些日志选项。如果需要多个选项，各个选项间要用竖线(|)分隔。
+选项如下：
+LOG_CONS 写入syslog时发生错误，则发送到系统控制台
+
+LOG_NDELAY 立即打开与syslog的连接
+
+LOG_ODELAY  不要打开连接，直到提交了第一条消息为止。默认值
+
+LOG_PERROR  要记录的消息要同时输出到syslog和标准错误(Standard error)
+
+LOG_PID  每个消息都带有进程（PID)
+
+
+facility  有助于确定记录消息日志的程序属于哪一类。对此有多个类别，包括LOG_CRON ,LOG_USER,LOG_MAIL,LOG_DAEMON,LOG_AUTH,LOG_LPR,LOG_LOCALN,参见syslog文档，不同参数发送到不同的文件中去。一般为LOG_USER.
+N表示从0到7的值。
+
+3.关闭日志文件
+int closelog(void)
+
+4.向日志目标发送消息
+int syslog(int priority, string message)
+优先级：
+LOG_EMERG 严重的系统问题
+LOG_ALERT 必须解决的情况
+LOG_CRIT 紧急错误	
+LOG_ERR	一般错误
+LOG_WARNING 一般警告
+LOG_NOTICE 正常但值得注意的情况
+LOG_INFO   一般信息	
+LOG_DEBUG  一般只与调试应用程序有关的信息。
+ 
+文本消息：如果希望记录由PHP引擎提供错误消息，就可以在message中包括字符串%m。此字符串将被PHP引擎在运行时提供的错误消息字符串(strerror代替）	
+-------------------------------------------------------------------
+
+异常处理的四个步骤：
+(1)应用程序尝试做一些操作
+(2)如果尝试失败，则异常处理特性抛出一个异常
+(3)指定的处理器捕获该异常完成必要的任务
+(4)异常处理特性清除在尝试期间占用的资源
+----------------------------------------------------------------------
+try/catch
+
+默认构造函数
+throw new Exception(),
+重载构造函数
+message:提供一个友好的解释，可以由getMessage()方法传递给用户
+error code：保存错误标识符，可以映射到某个标识符-消息表。可以通过getcode()方法得到。
+调用这个构造函数
+例如：
+throw new Exception("Something bad just happened",4)
+
+方法：
+getMessage()
+getCode()
+getLine()
+getFile()
+getTrace()
+getTraceAsString()
+
+----------------------------
+使用扩展类处理多个异常
