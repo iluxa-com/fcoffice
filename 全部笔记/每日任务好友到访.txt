@@ -1,0 +1,21 @@
+
+-------------------------------------------
+
+出处：
+  每日任务:拜访10个好友家园
+
+利用方法和影响:
+
+   可对同一个好友重复访问10次，而非必须为10不同好友。即可使用同一好友id作为参数请求FriendService::getFriendInfo 10次以取得奖励。奖励小，影响不大。
+
+原因：
+  FriendService::getFriendInfo在更新该每日任务进度时前没有在VisitModel集合中检查好友id是否存在，并且没有在每天第一次到访时将好友id加入该集合。
+
+修改：
+
+到访时执行私有方法_addToVistiList，并对返回值判断,只有返回值不为false时才更新该每日任务进度。
+if($this->_addToVistiList($friendUserId) !== false) {
+   User::updateDayTask(2);
+}
+
+-------------------------------------------
