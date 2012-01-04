@@ -12,6 +12,7 @@
             ++$i;
             if($i>=count($matches[1])) {
                 $failed = true;
+                $id = -1;
                 break ;
             }
         } while(in_array($id,$id_arr));
