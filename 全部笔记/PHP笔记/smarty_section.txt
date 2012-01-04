@@ -1,0 +1,33 @@
+{section name = name loop = $varName[, start = $start, step = $step, max = $max, show = true]}
+
+name: section的名称，不用加$
+$loop: 要循环的变量，在程序中要使用assign对这个变量进行操作。
+$start: 开始循环的下标，循环下标默认由0开始
+$step: 每次循环时下标的增数
+$max: 最大循环下标
+$show: boolean类型，决定是否对这个块进行显示，默认为true
+
+这里有个名词需要说明：
+循环下标：实际它的英文名称为index，是索引的意思，这里我将它译成"下标"，主要是为了好理解。它表示在显示这个循环块时当
+
+前的循环索引，默认从0开始，受$start的影响，如果将$start设为5，它也将从5开始计数，在模板设计部分我们使用过它，这是当前
+
+{section}的一个属性，调用方式为$smarty.section.sectionName.index,这里的sectionName指的是函数原型中的name属性。
+{section}块具有的属性值，分别为：
+1. index: 上边我们介绍的"循环下标"，默认为0
+2. index_prev: 当前下标的前一个值，默认为-1
+3. index_next: 当前下标的下一个值，默认为1
+4. first: 是否为第一下循环
+5. last: 是否为最后一个循环
+6. iteration: 循环次数
+7. rownum: 当前的行号，iteration的另一个别名
+8. loop: 最后一个循环号，可用在section块后统计section的循环次数
+9. total: 循环次数，可用在section块后统计循环次数
+10. show: 在函数的声明中有它，用于判断section是否显示
+
+sms.api.bz 飞信API
+
+用法
+           	{section name=num loop=$photoArticles}
+                    <li>{$smarty.section.num.index+1}</li>
+                 {/section}

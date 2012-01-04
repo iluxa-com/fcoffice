@@ -1,0 +1,4 @@
+全局变量注册
+PHP5默认是Off,不支持通过网址直接的传值，$_SEVER,$_COOKIE,$_GET,$_POST
+如果程序中有一变量为$a,就不能通过 网址?a=XXX的方式进行参数的get传值，这里可以把$a改为$_GET['a']就可以进行参数的网址传值。
+或者修改Php.ini，使regist_globals=On，但是不安全！重启Apache。

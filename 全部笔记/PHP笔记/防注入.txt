@@ -1,0 +1,34 @@
+
+urlencode的中文再用urldecode解析，出来的编码是用GBK的，
+  echo iconv('gbk','utf-8',$arg);
+在UTF-8下无法正常显示，必须转码。
+
+
+
+防注入
+http://zhidao.baidu.com/question/1652338140.html?fr=ala0&fr2=wise
+
+吕滔
+http://www.lvtao.net/showarticle.php?articleid=1035
+
+httpd.ini设置
+http://ewangsoft.blog.163.com/blog/static/77215582200942310254298
+
+虚拟机httpd.ini重定向
+ http://zhidao.baidu.com/question/205406718.html?fr=ala0&fr2=wise
+ 
+ 
+ 
+ httpd.ini 与.htaccess 301
+ http://www.admin5.com/plus/view.php?aid=276641
+ 
+ 迭代
+ http://www.chinaaspx.com/archive/develop/12496.htm
+ 
+ 人人网API
+ 
+ 做啥API
+ 
+ 豆瓣API
+ 
+ Google日历 PHP

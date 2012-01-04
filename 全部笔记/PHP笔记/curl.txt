@@ -1,0 +1,25 @@
+//用来检测服务器环境
+echo checkServer('http://192.168.56.2');
+
+
+function checkServer($url=''){
+     if($url==null) $url=$_SERVER['HTTP_HOST'];
+     if(!function_exists("curl_init"))
+      throw new Exception("检测失败:系统没有启用curl扩展");
+     $url=strip_tags(trim($url));
+     $ch=curl_init($url);
+     curl_setopt($ch,CURLOPT_HEADER,1);
+     curl_setopt($ch,CURLOPT_NOBODY,1);
+     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+     $data=curl_exec($ch);
+     $link=preg_match("#http(.*)200|OK(.*)\n#i",$data,$arr);
+     if(!$link) throw new Exception("连接{$url} 失败，请检查地址！");
+
+
+     $rs=preg_match("#server:(.*)\n#iUs",$data,$arr);
+     if($arr[1]==null) throw new Exception("站点已将标志隐藏");
+     return $arr[1];
+
+}
+
+------------------------------------------------------------------------------

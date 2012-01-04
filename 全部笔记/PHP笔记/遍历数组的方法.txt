@@ -1,0 +1,45 @@
+一维数组：
+
+	foreach($s_array as $s) {
+		echo $s."<BR>";	
+        }
+关联数组想把键一起打印出来的时候
+1.	while($key=key($pathinfo)) {
+		printf("%s :%s<br>",$key,current($pathinfo));
+		next($pathinfo);
+	}
+
+	
+2.	while($value=current($pathinfo)) {
+		printf("%s :%s<br>",key($pathinfo),$value);
+		next($pathinfo);
+	}
+3.	foreach($pathinfo as $key=>$value) {
+		printf("%s : %s <br>",$key,$value);
+	}
+
+
+注：
+foreach (array_expression as $value)
+    statement
+foreach (array_expression as $key => $value)
+    statement
+
+第一种格式遍历给定的 array_expression 数组。每次循环中，当前单元的值被赋给 $value 并且数组内部的指针向前移一步（因此下一次循环中将会得到下一个单元）。 
+
+第二种格式做同样的事，只除了当前单元的键名也会在每次循环中被赋给变量 $key。
+
+------------------------------------------------
+自 PHP 5 起，可以很容易地通过在 $value 之前加上 & 来修改数组的单元。此方法将以引用赋值而不是拷贝一个值。 
+
+<?php
+$arr = array(1, 2, 3, 4);
+foreach ($arr as &$value) {
+    $value = $value * 2;
+}
+// $arr is now array(2, 4, 6, 8)
+?> 
+此方法仅在被遍历的数组可以被引用时才可用（例如是个变量）。  
+-----------------------------------------------------
+
+ foreach 循环运行到结束，原数组的内部指针将指向数组的结尾。

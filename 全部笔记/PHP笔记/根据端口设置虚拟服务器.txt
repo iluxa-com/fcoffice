@@ -1,0 +1,16 @@
+Listen 81
+#Name VirtualHost www.falcon.com
+<VirtualHost *:81>
+	#ServerName falcon
+	ServerAdmin flacon@zf.com
+	DocumentRoot "D:/zf"
+	#Listen 8848
+</VirtualHost>	
+
+------------------------------------------------------------------------------
+直接访问localhost:81即可
+
+或者用falcon:81
+在windows/system32/drivers/etc/host下
+加入:
+127.0.0.1	falcon

@@ -1,0 +1,13 @@
+Warning: date() [function.date.html]: It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected 'UTC' for '8.0/no DST' instead in C:\apache2\htdocs\datetime\date_test.php on line 22
+
+
+方法一:
+打开php.ini  找到;date.timezone
+去掉前面的分号并设置成
+date.timezone ='PRC'
+需要重启Apache.
+
+
+方法二:
+在PHP页面中加入:
+date_default_timezone_set('PRC') ;

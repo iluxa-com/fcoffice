@@ -1,0 +1,52 @@
+void header (string $string ,[bool $replace [,int $http_response_code]])
+header()用于发送原始HTTP 文件头(HTTP header) 
+
+注意事项:header()必须在任何实际输出前被调用。前面即使空白字符，html标识（包括<html>)甚至前面不允许有include()或require(); 
+
+string
+
+header("HTTP/1.0 404 Not Found") ; //404错误
+header("Location: http://www.example.com/"); //重定向并返回302的状态码
+header('WWW-Authenticate: Neogotiation'); // 登录验证
+header('WWW-Authenticate: Base Realm='提示文字'');//登录验证2
+header('WWW-Authenticate: NTLM'); //登录验证3
+
+replace
+
+ //replace参数提示header是否替换前一个相似的header或增加第二个相同类型的header，默认状态下它会进行替换，但如果你第二个参数使用FALSE，你将强制多个相同类型的header. 如:
+ 
+<?php
+header('WWW-Authenticate: Negotiate');
+header('WWW-Authenticate: NTLM', false);
+?> 	
+
+
+其他用法：
+1.下载对话框
+<?php
+// We'll be outputting a PDF
+header('Content-type: application/pdf');
+
+// It will be called downloaded.pdf
+header('Content-Disposition: attachment; filename="downloaded.pdf"');
+
+// The PDF source is in original.pdf
+readfile('original.pdf');
+?> 
+
+
+2.缓存指令控制
+<?php
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+?> 
+
+3.重定向到当前目录下另一文件
+<?php
+/* Redirect to a different page in the current directory that was requested */
+$host  = $_SERVER['HTTP_HOST'];
+$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+$extra = 'mypage.php';
+header("Location: http://$host$uri/$extra");
+exit;
+?> 

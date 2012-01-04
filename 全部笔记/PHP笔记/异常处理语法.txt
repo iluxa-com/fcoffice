@@ -1,0 +1,11 @@
+<?php 
+	try{
+			echo $_SESSION['uname'];
+			if(!isset($_SESSION['uname'])){
+				throw new Exception("²»´æÔÚ") ;
+			}
+ 	}	catch(Exception $e){
+ 		echo $e->getLine()."ÐÐ:".$e->getMessage();
+ 	}
+
+?>

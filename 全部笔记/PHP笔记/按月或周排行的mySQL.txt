@@ -1,0 +1,29 @@
+ 预备知识：group by，MYSQL函数week()、month()
+在设计数据库时一般都有一个字段来记录文章的点击率，如果我们要统计一周或一个月点击率排行光靠这一个字段是肯定是无法实现的。这时就要新建一个表，用来记录每篇文章每天的点击率。
+假设这个表名为ranking，定义四个字段:rid(表ID)，contentid(与文章ID关联)，hits(记录每天点击率)，date（时间，重要，查询时作比较）
+ranking大致结构
+id      contentid      hits      date
+1       2                   12        2010-12-18
+2       2                   23        2010-12-19
+3       1                   15        2010-12-19
+4       2                   21       2010-12-20
+一、统计
+第一步就是要记录文章每天的点击率，这步非常简单，当用户查看某篇文章时，PHP程序会进行一次数据库查询，判断是否存在该条记录，如果不存在，说明是当天第一次浏览该文章，需要插入一条记录，后面的访客再看这篇文章时，只要更新点击率就行。这就是记录某篇文章一天的点击率。
+PHP:
+$date = date("Y-m-d",time());
+$contentid = $_GET[id];//当前文章ID
+$query = mysql_query("select * from ranking where contentid='$contentid' and date='$date'); //查询数据库
+if($value = mysql_fetch_array($query)){
+    mysql_query("update ranking set hits = hits+1 where id='$value[id]' ");//如果有记录，只需点击率+1
+}else{
+    mysql_query("insert into ranking (`contentid`,`hits`,`date`) values('$contentid','1','$date')");//如果是第一次浏览，插入一条数据，点击率为1
+}
+二、查询
+此时统计工作已经完成，接下来要把这些文章按一周或一个月点击率总和的顺序查询出来，这是个难点。
+1.先要给文章分组并计算总点击率：select *,sum(hits) from ranking group by contentid order by sum(hits) desc
+2.取本周数据筛选出来:select *,sum(hits) from ranking where week(date)=week(now()) group by contentid order by sum(hits) desc
+这是周排行的查询语句，相对比较复杂，查询出来后再放到数组中依次显示出来，月排行也是这样，换一下函数就行，完整的PHP代码我就不写出来了。
+ 
+http://bbs.php100.com/mode.php?m=o&q=user&u=53700
+
+

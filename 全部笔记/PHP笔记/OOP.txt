@@ -1,0 +1,711 @@
+方法名不区分大小写！
+------------------------------------------------------------------------------
+抽象方法在抽象类里是这样定义的。 注意不需要方法体！后面直接加;
+abstract function display();
+
+接口的写法：
+
+//关键字interface 命名习惯加I在前面,无abstract，因为本身就是抽象的
+interfalce IFalcon{
+
+//同样不需要加方法体，而且不用abstract
+	function fly();
+
+}
+
+一个类先继承后实现接口，可以实现多个接口
+------------------------------------------------------------------------------
+
+个人认为，new关键字返回的是一个对象，在其__construct里放return语句是不合适的，
+------------------------------------------------------------------------------
+
+判断对象是否为某个类的实例
+if(!$Objec instanceof Class1){...}
+------------------------------------------------------------------------------
+
+$this 伪变量，指向一个对象实例的引用.注意这句话。
+------------------------------------------------------------------------------
+如果是'string'的'false'，PHP在进行类型bool转换时也是返回true.因为这是非空的字符串
+
+必要时可用函数检测参数类型
+确定变量数据类型的函数
+is_array
+is_integer
+is_object 
+is_resource //判断数据库和文件等
+is_null
+is_bool
+is_double
+
+------------------------------------------------------------------------------
+加入一个方法参数类型提示  //指定参数为必须为ShopProduct的实例，非此类型的参数都会产生致命错误！
+类型提示不能检查基本的数据类型，除了array, 必须在方法中调用检测数据类型函数
+public function write(ShopProduct $shopProduct){}//这是要参数接收ShopProduct类型的参数
+
+
+------------------------------------------------------------------------------
+
+
+
+
+static关键字定义的属性只能通过两种方法访问
+
+静态属性：
+	public static $static //未声明则为public
+
+1.类名::属性名 ，继承类名::属性名
+	foo::$static
+	bar::$static
+
+2.在类里面定义一个方法，一个getter，没什么特别的，在方法里用self::属性名返回。在继承类里可以通过parent::属性名在实例里调用这个方法
+	fucntion fooStatic(){
+		return self::$static;
+		}
+
+
+注意：
+1.不能用实例化对象->属性名的方法调用，也不能用实例化对象::属性名 调用
+	如
+	class Falcon extends Foo{ }
+	$falcon=new Falcon;
+	$falcon->$static; //不能用
+	$falcon::$static; //不能用
+		
+
+用例
+------------------------------------------------------------------------------
+<?php
+class Foo
+{
+    public static $my_static = 'foo';
+
+    public function staticValue() {
+        return self::$my_static;
+    }
+}
+
+class Bar extends Foo
+{
+    public function fooStatic() {
+        return parent::$my_static;
+    }
+}
+
+
+print Foo::$my_static . "\n";
+
+$foo = new Foo();
+print $foo->staticValue() . "\n";
+print $foo->my_static . "\n";      // Undefined "Property" my_static 
+
+// $foo::my_static is not possible
+
+print Bar::$my_static . "\n";
+$bar = new Bar();
+print $bar->fooStatic() . "\n";
+?> 
+
+------------------------------------------------------------------------------
+但是静态方法：可以在实例中自由调用。。。
+既可以用类名::方法名，
+也可以用实例名::方法名 //但这个好像会在ec出点错
+还可以用实例名->方法名
+
+------------------------------------------------------------------------------
+声明方法时强制规定参数的对象类型 （适用于对象和数组类型）基本类型仍然需要在对象方法里判断。
+
+
+------------------------------------------------------------------------------
+
+重载构造函数并调用父类的构造函数  加入新的元素
+
+function __construct ($a,$b,$c) 
+{
+    parenet::__construct($a,$b);
+    $this->connection=$c;  
+}
+
+------------------------------------------------------------------------------
+调用父类方法灵活实现类的内部方法
+
+ class father{
+ 	function abcfuck(){
+ 	return '主机名:';
+ }
+ }
+ class child extends father{
+ 	function getAddr($ip)
+ 	{
+ 		return parent::abcfuck().gethostbyaddr($ip);
+ 	}
+ }
+
+$test=new child();
+echo $test->getAddr('127.0.0.1');
+
+------------------------------------------------------------------------------
+可见性关键字：
+通过阻止客户访问特定的属性，有时绕过公开的接口方法，访问到不应该访问的属性是不好的，还有助于防止bug.
+对于外面的对象来说，private的属性就像不存在一样。
+
+------------------------------------------------------------------------------
+外部不需要,只在类里面使用的方法可以设置为private.
+
+------------------------------------------------------------------------------
+应尽量保证类的属性只能通过getter/setter来访问。
+把属性尽量不可见。
+class student{
+	private $id;
+	function getId(){
+	return $this->id;
+	}
+	function setId($num){
+	$this->id=$num;
+	}
+}
+------------------------------------------------------------------------------
+静态方法的声明，真他妈的长啊。。。
+
+static public  function staticMethod(){}
+
+------------------------------------------------------------------------------
+静态属性：只要改变静态属性的值，所有的实例化对象的这个属性都会改变。
+
+
+class StaticClass{
+		static $action;
+		static public  function staticMethod(){
+			return 'hi';
+		}
+		function getStatic(){
+			return self::$action;
+		}
+		function setStatic($str)
+		{
+			return self::$action=$str;
+		}
+	}
+
+$test=new StaticClass();
+$test2=new StaticClass();
+echo $test->setStatic('falcon');
+echo "<br>";
+echo $test->setStatic('Dream');
+echo "<br>----------------------------------<br> ";
+//精彩开始了，只要改变静态属性的值，所有的实例化对象的这个属性都会改变。
+echo $test->getStatic;
+StaticClass::$action='haha';
+echo $test->getStatic();
+echo "<br>";
+echo $test2->getStatic();
+
+------------------------------------------------------------------------------
+
+简单来说，在类的外部使用类名，在内部使用self关键字访问静态属性，在子类使用parent关键字。
+self指向当前类，$this指向当前对象
+------------------------------------------------------------------------------
+一般来说，一个方法如果不需要使用类的其他属性或者方法，定义成静态方法是非常合适的，比如生成某种对象的工厂模式
+------------------------------------------------------------------------------
+ //生产对象，工厂模式，哈哈
+class FactoryMode{
+	static function getInstance($id,PDO $pdo){
+		$sql="SELECT * FROM TABLE PRODUCT WHERE ID = '$id'";
+		$row=$pdo->query($sql)->fetch();
+		if(empty($row)){return ;}
+		if($row['type']=='cd'){
+			//生成新对象
+			$newOb=new CdProduct();
+			
+			$newOb->playList=$row['playList'];
+		}
+		if($row['type']=='book'){
+			$newOb=new BookPoduct();
+			
+			$newOb->page=$row['pages'];
+		}
+		$newOb->name=$row['name'];
+		return $newOb;
+		}
+}
+------------------------------------------------------------------------------
+可以使用类名::对象名的方法访问非静态方法，这只表示它是特定某个类的方法，这只存在文档中，实际这样写会报错的！！
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Strict Standards: Non-static method StaticClass::getStatic() should not be called statically in D:\htdocs\Class_study\staticMembers.php on line 38
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+常量不能使用对象类型，一般都为大写字母，不带$
+教程说只能用类名::常量名访问，事实上也可以用实例对象来访问。但静态属性只能通过类名访问
+  class ConstTest{
+  	const FALCON = 'NoFalcon.tk';
+
+  }
+  $test=new ConstTest();
+//对象也是可以直接访问的。
+  echo $test::FALCON;
+  echo ConstTest::FALCON;
+------------------------------------------------------------------------------
+
+抽象类:大多数情况下包括一个抽象方法。
+abstract class House{
+protected $device;
+//注意它的定义方法。后面没有{}
+abstract public function addDevice();
+}
+
+------------------------------------------------------------------------------
+扩展类 对实现方法的访问控制不能比抽象方法的访问控制更严格
+
+
+------------------------------------------------------------------------------
+
+接口：之前对这个了解不多
+ 
+接口只是纯粹的模板，只提供功能不包含实现的内容
+interface Changable{
+//	同样后面没有{}
+	public funcion getPrice();
+}
+
+class shop implements Changable{
+	public function getPrice(){...}
+}
+//接口的意义使一个对象属于了另一个类，而只要知道一个对象的类型，就知道它能做什么！
+//好！
+//接口可以有效地将不相关的类型连接起来？！
+
+//extends在implements前
+class falcon extends Nofalcon implements falconinterface{}
+
+------------------------------------------------------------------------------
+异常的处理
+
+自定义异常
+class	FileException extends Exception{
+ 	private $error;
+ 	function __construct($msg){
+ 		/*
+ 		$shortName=basename($e->file);
+ 		$msg="{$shortName} ,line {$e->line}, col {$e->col}, {$e->message}";
+ 		$this->error=$e;
+ 		*/
+ 		parent::__construct($msg);
+ 		//$this->error=new Exception
+		$this->file=basename($this->file);
+		echo "文件异常".$this->message;
+ 	}
+
+ 	function getError()
+ 	{
+ 		return $this->error;
+ 	}
+ }
+
+ class writer{
+ 	function test($file){
+ 		if(!is_file($file)){throw new FileException("file $file isn't existed");}
+ 		echo 'Test';
+
+ 	}
+ }
+class run{
+	function running(){
+		try {
+			$a=new writer();
+			$a->test('d:/bbc.a');
+		}catch(FileException $e){}
+		//当产生异常时，应先用自定义的异常来捕捉。
+		catch(Exception $e){}
+		//如果都没有捕捉到，则引发致使错误。
+
+	}
+}
+
+$myException = new run();
+$myException->running();
+------------------------------------------------------------------------------
+当抛出异常时，即生成一个异常对象。
+当类方法用throw抛出一个异常后，方法的其余部分将不再执行，即方法体内throw 后的代码不被执行。貌似跳出了该方法的效果，
+如果把异常捕捉到时，主体仍可继续执行。否则致命错误。
+------------------------------------------------------------------------------
+
+
+内置的异常类结构
+<?php
+class Exception
+{
+    protected $message = 'Unknown exception';   // 异常信息
+    protected $code = 0;                        // 用户自定义异常代码
+    protected $file;                            // 发生异常的文件名
+    protected $line;                            // 发生异常的代码行号
+
+    function __construct($message = null, $code = 0);
+
+    final function getMessage();                // 返回异常信息
+    final function getCode();                   // 返回异常代码
+    final function getFile();                   // 返回发生异常的文件名
+    final function getLine();                   // 返回发生异常的代码行号
+    final function getTrace();                  // backtrace() 数组
+    final function getTraceAsString();          // 已格成化成字符串的 getTrace() 信息
+
+    /* 可重载的方法 */
+    function __toString();                       // 可输出的字符串
+}
+?> 
+
+------------------------------------------------------------------------------
+final 
+终止类的继承或方法的重载。
+
+放在类或方法的最前面。
+
+------------------------------------------------------------------------------
+用大括号包含变量是有好处的，这样就不用写麻烦的引号和连接符。
+echo "f{$b}()";
+------------------------------------------------------------------------------
+拦截器
+
+//访问一个不存在的属性或者非public 属性时被调用。会传入一个属性名的字符串作为参数
+__get($property)
+//在未定义的属性上调用isset,被触发，同样会传入一个属性名的字符串作为参数
+__isset($property)
+
+//需要设定的属性不存在时调用。
+__set($property,$value)
+
+//外界调用unset($property)时触发
+__unset($property)
+
+//调用 内部不存在的方法时触发，典型的应用 是委托。
+__call($methodName, $argArray)
+
+------------------------------------------------------------------------------
+__get的使用，很实用。将实际访问的不存在的属性或者非public ,改成getter的方法后台返回。
+装成对外界好像这个属性存在或者PUBLiC的一样。
+
+
+class TestGet{
+	function __get($property){
+//构造一个新的方法名，PS:大括号这种用法很好很清晰。值得学习一下。
+		$method="get{$property}";
+		if(method_exists($this,$method)){
+			return $this->$method();
+		}
+	}
+	function getName()
+	{return 'falcon';}
+
+	function getId ()
+	{return '20050400803';}
+}
+
+
+$name=new TestGet();
+echo $name->Name; //字符串Name被传入__get.
+echo $name->id;
+
+------------------------------------------------------------------------------
+与上例类似，结合setter,访问不能直接修改的属性时调用setter方法。
+Ps:貌似private 的属性前面加_,难道这是个习惯，看起来是不错。
+
+class TestSet{
+
+	private $_Name;
+	private $_Id;
+	function __set($property,$value){
+//构造一个新的方法名，PS:大括号这种用法很好很清晰。值得学习一下。
+		$method="set{$property}";
+		if(method_exists($this,$method)){
+			return $this->$method($value);
+		}
+	}
+	function setName($value)
+	{return $this->_Name=$value;}
+
+	function setId ($value)
+	{return  $this->_Id=$value;}
+}
+
+
+$name=new TestSet();
+$name->Name="Xeon";
+$name->Id='990';
+
+------------------------------------------------------------------------------
+类似上例
+
+function __unset($property){
+
+	$method="set{$property}";
+	if(method_exists($this,$method){
+		$this->$method(null)
+	}
+}
+
+------------------------------------------------------------------------------
+ 
+ /**
+  * 以下是委托 的一种用法：
+  * Student类实例化时在构造方法里传入一个实例化的Magic对象作为私有属性，
+  * 当Student的实例调用一个不存在的方法时，__call函数触发，结果是检查成员属性对象magic是否有
+  * 以那个传进来的方法名（此时是字符串）命名的方法，然后调用这个方法，并把当前对象（伪对象）和参数（外部实例的）
+  * 作为参数传给writer方法。writer又调用了实例里的两个方法。
+  * 这样，Student对象就神奇地多了一个writer 的方法。相当于一个动态的接口
+  * 至少外部看起来就是这样的。。。。
+  * 亮点是把Magic对象作为成员属性，把$this伪类传到Magic的一个方法
+  * 还有 __call 传进来的参数，一个是方法名的字符串，另一个是数组的参数。
+  * 作者称之为magic Method （魔法）! 哈哈。
+  *   缺点是这样的代码不够清晰，有时甚至是难以理解的。
+  */
+class Magic{
+
+	function writer(Student $student,array $args){
+		list($name,$age)=$args;
+		echo "{$student->getName($name)}:{$student->getAge($age)}";
+	}
+}
+
+class Student{
+	private $magic,$name,$age;
+	function __construct(Magic $magic){
+		$this->magic=$magic;
+	}
+	function __call($method,$args){
+		//print_r($args);
+		if(method_exists($this->magic,$method)){
+			$this->magic->writer($this,$args);
+		}
+	}
+	function getName($name){
+		return $this->name=$name;
+	}
+	function getAge($age){
+		return $this->age=$age;
+	}
+}
+
+$test=new Student(new Magic());
+$test->writer('falcon','20');
+
+------------------------------------------------------------------------------
+//析构：在清除对象(unset())或者对象不再被使用时执行的一些操作。例如写入数据库。。。
+//魔法之二,但不总是好的，因为它会付出隐性的代价，书里的案例好搞笑。
+
+  class TestDestruct{
+
+  	function __destruct(){
+  		print "goobye";
+  	}
+
+  }
+  $test=new TestDestruct();
+  unset($test);
+------------------------------------------------------------------------------
+
+PHP5对象的赋值传递的是引用。
+PHP4传递的是对象的一个副本。
+
+等值检测无论是== 还是===都是检测不出来的。
+
+------------------------------------------------------------------------------
+对象克隆：
+可以用来clone传递对象的副本，通过__clone方法控制副本复制哪些内容和变更。
+
+  class CloneMe{
+  	public $id='0';
+  	function __clone(){
+  		$this->id='10';
+  	}
+  }
+
+  $first=new CloneMe();
+  $second=clone $first;
+  echo $first->id;
+  echo $second->id;
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+被对象克隆里如果存在一个对象类型的属性，那么在复制的副本里面也会有指向这个对象的一个
+引用 ，注意，是引用，也就是说这个时候这个对象被共享了！
+解决方法是在__clone()里把这个对象属性也克隆了。这样就确保传递的是副本，不会被同时操作到了。
+function __clone(){
+	$this->id= 0;
+	$this->account=clone $this->account;//如果没有这条，在复制后的对象里这个对象是共享的。
+	}
+
+------------------------------------------------------------------------------
+
+__toString()方法，对象作为字符串打印时的输出内容。
+
+------------------------------------------------------------------------------
+get_class 返回对象的类名
+get_class_methods 返回对象的方法名组成的数组
+get_object_vars 返回对象属性组成的关联数组
+
+get_parent_class 返回对象或类的父类名
+
+method_exists 检查对象的方法是否存在
+property_exists 检查对象或类是否存在这样的属性。
+
+//打印声明的类，包括系统内置的类
+print_r(get_declared_classes());
+
+
+------------------------------------------------------------------------------
+在.htaccess里定义include_path;很有意义和必要. fopen 第三个参数设置为true时会在include_path寻找文件
+
+php_value include_path value .:/path/to/include/
+
+
+空间为unix/Linux的，分隔符为 :
+windows的分隔符为 ;
+在eu5.org中
+在.htaccess
+php_value include_path value .:/usr/share/pear:/usr/share/php:我的zend库
+
+但是在ZFW的入口文件有一个通用的方法。而且ZFW的单一入口，使得在index.php里设置的路径全局可用。
+相当于在.htaccess里设置。但比.htaccess灵活多了，因为它还可以使用get_include_path取得当前的include_path 再用set_include_path的方法设置。而且可以使用分隔符常量PATH_SEPARATOR。这样就提高通用性了。
+
+如下 ：
+
+
+set_include_path('.' . PATH_SEPARATOR . './library'
+  . PATH_SEPARATOR . './application/models/'
+     . PATH_SEPARATOR . get_include_path());
+
+
+------------------------------------------------------------------------------
+处理跨系统的一些常量
+PATH_SEPARATOR
+DIRECTORY_SEPARATOR
+
+
+------------------------------------------------------------------------------
+自动载入，这只是一个函数而已。译者吹成方法。靠一个。
+ 我认为函数和方法还是有区别的，它们本质上就不是同一个范畴的。
+当然也可以在类里面调用，但不像之前的__，它要手动调用。
+在类外面倒可以自动调用。实例化新对象的调用。
+
+<?php
+/*
+ * Created on 2010-7-7
+ *
+ *Author : falcon
+ * Class :
+ * Function :
+ * Usage :
+ * http://i.amfalcon.tk/Class_study/
+ */
+  	function __autoload($className){
+  		require "{$className}.php";
+  	}
+  $n=new CloneMe();
+?>
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+//模拟ZendLoader::Autoload()
+class ZendLoader{
+	static function Autoload($className){
+			$path=str_replace('_',DIRECTORY_SEPARATOR,$className);
+			require_once DIRECTORY_SEPARATOR."{$path}.php";
+		}
+		//$a=$className::getInstance();
+
+}
+
+//如载入Zend_Auth.php
+ZendLoader::Autoload("Zend_Auth");
+
+$test=Zend_Auth::getInstance();
+
+var_dump($test);
+
+------------------------------------------------------------------------------
+instanceof 检查是否属于某个类的家族
+
+get_class_methods($obj);返回对象全部方法数组
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ $test=new Exception();
+ var_dump(get_class_methods($test));
+ get_parent_class('Cdproduct');
+ is_callable(array($product,$method));//方法是否可以调用
+					 $product //对象 //类名
+				       $ method //方法名
+bool method_exists ( object object, string method_name ) //第一个参数可以 是对象，也可以是类名。
+
+get_class_vars() //参数是类名，获得Public的属性。 
+
+$rs=get_parent_class('BadNews'); //获得父类的类名，基类返回false.
+var_dump($rs);
+
+$rs2=is_subclass_of('BadNews','News'); //判断前者是否为后者的子类 ，父类放在后面，不可用来检测接口，检测接口是否被实现应该使用 instancesof 关键字
+var_dump($rs2);
+
+
+call_user_func ()//调用函数或方法。函数时把函数名放进去，参数放后面，方法时为数组，参数也放在后面
+
+call_user_func_array()//功能同上，但把参数当一个数组传递，作者说在__call用委托时有用。我看不出来。。。 call 后面参数的不也是数组吗。    用了这个函数就会传递独立参数而不是一个单独的数组参数？
+难道说它把数组拆分成了几个参数不成。。。'
+
+应该是这样的，这样方法接收的不是数组，而是分拆成的几个元素，
+这个用extract也可以办到吧，但是比较麻烦
+
+
+
+ class News{
+ 	protected $name;
+ 	public $id;
+ 	public $content;
+ 	function test($name,$id,$content){
+ 		$this->name = $name;
+ 		$this->id = $id;
+ 		$this->content = $content;
+ 		echo "Good News";
+ 	}
+ }
+$testExam=new News();
+call_user_func_array(array($testExam,'test'),array('falcon','0','falcon has dream.'));
+
+var_dump($testExam);
+------------------------------------------------------------------------------
+
+终于到了期待已久的Reflection API 了！！
+
+Reflection //提供静态函数export输出类的摘要 
+
+Reflection::export(new ReflectionClass('falconClass')
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ReflectionClass //提供类的信息
+
+Reflection::export(new ReflectionClass('ReflectionClass'); //查看一下
+用法：
+$test=new ReflectionClass('MyClassName');
+$test->getFileName();
+$test->getStartLine();
+$test->isinstantiable();
+$test->isAbstract();
+...
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ReflectionMethod
+
+//ReflectionClass->getMethod('methodName')返回一个ReflectionMethod对象
+//ReflectionClass->getMethods()返回ReflectionMethod对象的数组
+
+
+$test=new ReflectionClass("FalconClass");
+$methods=$test->getMethods();
+foreach($methods as $method){
+	printf("%s<br />",$method->getName());
+	printf('public:%s<br />',$method->isPublic());
+	printf('%s<br>',$method->returnsReference()); //只有类方法中明确声明返回引用时才为true,如
+FalconClass类中function &writer(){...}
+}
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+ReflectionParameter
+
+用法如ReflectionMethod
+从ReflectiionClass对象的getParameter/s方法中取得 

@@ -1,0 +1,96 @@
+异常的处理
+
+自定义异常
+class	FileException extends Exception{
+ 	private $error;
+ 	function __construct($msg){
+ 		/*
+ 		$shortName=basename($e->file);
+ 		$msg="{$shortName} ,line {$e->line}, col {$e->col}, {$e->message}";
+ 		$this->error=$e;
+ 		*/
+ 		parent::__construct($msg);
+ 		//$this->error=new Exception
+		$this->file=basename($this->file);
+		echo "文件异常".$this->message;
+ 	}
+
+ 	function getError()
+ 	{
+ 		return $this->error;
+ 	}
+ }
+
+ class writer{
+ 	function test($file){
+ 		if(!is_file($file)){throw new FileException("file $file isn't existed");}
+ 		echo 'Test';
+
+ 	}
+ }
+class run{
+	function running(){
+		try {
+			$a=new writer();
+			$a->test('d:/bbc.a');
+		}catch(FileException $e){}
+		//当产生异常时，应先用自定义的异常来捕捉。
+		catch(Exception $e){}
+		//如果都没有捕捉到，则引发致使错误。
+
+	}
+}
+
+$myException = new run();
+$myException->running();
+------------------------------------------------------------------------------
+当抛出异常时，即生成一个异常对象。
+当类方法用throw抛出一个异常后，方法的其余部分将不再执行，即方法体内throw 后的代码不被执行。貌似跳出了该方法的效果，
+如果把异常捕捉到时，主体仍可继续执行。否则致命错误。
+------------------------------------------------------------------------------
+
+
+内置的异常类结构
+<?php
+class Exception
+{
+    protected $message = 'Unknown exception';   // 异常信息
+    protected $code = 0;                        // 用户自定义异常代码
+    protected $file;                            // 发生异常的文件名
+    protected $line;                            // 发生异常的代码行号
+
+    function __construct($message = null, $code = 0);
+
+    final function getMessage();                // 返回异常信息
+    final function getCode();                   // 返回异常代码
+    final function getFile();                   // 返回发生异常的文件名
+    final function getLine();                   // 返回发生异常的代码行号
+    final function getTrace();                  // backtrace() 数组
+    final function getTraceAsString();          // 已格成化成字符串的 getTrace() 信息
+
+    /* 可重载的方法 */
+    function __toString();                       // 可输出的字符串
+}
+?> 
+------------------------------------------------------------------------------
+
+大概可以这样写：没错吧
+
+<?php
+	class www{
+		function www($file){
+			try{
+				if(!is_file($file)){throw new FileException('smeinfomation');}
+				if(!is_writable($file)){throw new FileException('otherthings',1);}
+				if('somethingelse') {throw new OtherException('Blahbah');}
+				do something ;
+			}catch (FileException $e){echo $e->getMessage();}
+			 catch (OtherException $e){echo $e->__toString();}
+			 catch (Exception $e) {echo $e->getMessage();}
+
+		}
+	}
+
+?>
+
+------------------------------------------------------------------------------

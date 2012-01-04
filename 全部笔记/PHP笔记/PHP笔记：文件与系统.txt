@@ -1,0 +1,13 @@
+basename(string path,"string2ignored") //显示路径文件的文件名
+dirname(string path) //获取路径目录
+pathinfo(string path) //创建一个包含路径三个部分的关联数组：目录名、基本名、扩展名
+realpath(string path) // 获取相对路径的绝对路径
+	//获取当前文件的绝对路径，要去掉当前目录的"/"
+	$path=ltrim($_SERVER['PHP_SELF'],"/");
+	realpath($path);
+
+
+如果文件名存在并且为目录则返回 TRUE。如果 filename 是一个相对路径，则按照当前工作目录检查其相对路径。
+
+所以最好是用绝对路径吧
+is_dir()

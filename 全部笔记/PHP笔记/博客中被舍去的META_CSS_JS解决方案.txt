@@ -1,0 +1,51 @@
+在index.tpl
+{assign var="meta" value=$this->headMeta()}
+{assign var='css' value=$this->headLink()}
+{assign var='script' value=$this->headScript()}
+{config_load file="default.conf" section="root"} {*这是载入路径配置文件*}
+{*以下为加载的内容*}
+{assign var="metas value=$meta->appendHttpEquiv('expires', 'Wed, 26 Feb 1997 08:21:57 GMT')}
+
+{assign var='stylesheets' value=$css->appendStylesheet('/styles/basic.css','all')}
+{assign var='javascripts' value=$script->appendFile("`$baseUrl`/public/scripts/config.js")}
+{assign var='javascripts' value=$script->appendFile("`$baseUrl`/public/scripts/config3.js")}
+{assign var='javascripts' value=$script->appendFile("`$baseUrl`/public/scripts/config4.js")}
+{include file="header.tpl" tags=$popTags}
+
+在header.tpl中
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+
+<head>
+<meta content={$dictation|default:"PHP学习,PHP"} name=description />
+<meta content={section name=tag loop=$tags}{$tags[tag].item},{sectionelse}PHP,Mysql,{/section} Falcon的个人博客 name=keywords />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="falcon" name=author />
+<meta content="falcon2010.com" name=copyright />
+{*额外的meta*}
+{$metas}
+
+<!--样式表-->
+{*动态载入基本CSS*}
+<link href="{$baseUrl}/public/styles/base.css" media="screen" rel="stylesheet" type="text/css"  />
+{$stylesheets}
+
+
+{*载入js:配置与Jquery*}
+<!--javascript 脚本-->
+
+<script type="text/javascript" src="{$baseUrl}/public/scripts/config.js"></script>
+<script type="text/javascript" src="{$baseUrl}/public/scripts/jquery.js"></script>
+
+{*额外的js文件*}
+{$javascripts}
+
+</head>
+<title>{$title|default:$action|cat:"@"|cat:$controller}</title>
+
+
+
+舍去原因：
+太繁琐，在每个tpl中必须声明assign的变量，二是不支持{assign var='javascripts' value=$script->appendFile("`#jsDir#`/public/scripts/config.js")}的方式加载配置文件
+

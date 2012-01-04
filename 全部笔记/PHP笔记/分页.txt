@@ -1,0 +1,24 @@
+用oophper的分页：
+	
+public function pagerAction(){
+				$this->getHelper('ViewRenderer')->setNoRender(false);
+ 			$query="SELECT * From article ";//最后留有空格的，妈的！
+        $page=$this->_request->getParam('page');
+
+		$condition=NULL;
+		//$condition="`".TABLE_PRE."article`.show = '1' GROUP BY ".TABLE_PRE."article.id ";
+		$sortby=' add_time  DESC ';
+		Zend_Loader::loadClass('Custom_Plugin_KenPager');
+		$basePageIndex=1;
+		$Pagers = new Custom_Plugin_KenPager($this->db,$page,'2',$condition,$sortby,$basePageIndex,$query) ;
+		$this->view->pageInfo = $Pagers->getNavBar($this->baseUrl.'/test/pager/');
+
+
+		$articles = $Pagers->findAll();
+		 $this->view->articles =$articles;
+
+
+
+	}
+
+用自己的分页

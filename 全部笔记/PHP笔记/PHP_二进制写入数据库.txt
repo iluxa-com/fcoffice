@@ -1,0 +1,27 @@
+
+//把二进制文件写入数据库
+$file=addslashes(file_get_contents("a.jpg")); //这里必须使用addslashes进行转义，否则不能写入
+$mysqli=new Mysqli('localhost','root','root','41164');
+$sql="INSERT INTO `41164`.`data` (`id`, `data`) VALUES(NULL,'{$file}')";
+$mysqli->query($sql) or die('写入失败');
+
+//var_dump($mysqli->query($sql));
+
+
+//从数据库中读取文件
+$fileId=$mysqli->insert_id;
+if($fileId){
+		$sql2="SELECT * FROM `data` WHERE `id` ={$fileId}";
+		$result=$mysqli->query($sql2);
+		$row=$result->fetch_array(MYSQLI_ASSOC);
+		if(strlen($row['data'])>0){		
+//下载文件
+				$name=substr(uniqid(),-4);
+				$name='picture_'.$name;
+				header('Content-type:image/jpg');
+				header("Content-Disposition: attachment; filename={$name}.jpg");
+				echo $row['data'];
+		}
+}
+
+$mysqli->close();

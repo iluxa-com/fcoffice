@@ -1,0 +1,6 @@
+原因是mysql传输用的编码是UTF8,页面本身的编码为gbk或gb2312,即UTF-8被当成GBK解析了，解决的方法有两种：
+
+
+1.在执行mysql查询前先执行这句mysql_query("SET NAMES 'GBK'");
+
+2.在页面顶加入<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />的标志：

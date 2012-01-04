@@ -1,0 +1,17 @@
+<style>
+	label.test {
+		display:block;
+		float:left;
+		background:#F93;
+		width:100px;
+		/*clear:both; */
+	}
+	input {
+		display:block;
+	}
+</style>
+<body>
+    <label class='test'>I believe</label><input type="text" />
+    <label class='test'>you</label><input type="text" />
+    <label class='test'>on</label><input type="text" />
+</body>

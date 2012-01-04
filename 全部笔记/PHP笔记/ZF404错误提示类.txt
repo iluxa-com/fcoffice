@@ -1,0 +1,15 @@
+Class TemplateController extends Zend_Controller_Action{
+      public function indexAction() {
+      header('HTTP/1.0 404 Not Found');
+      $view = Zend::registry('view'); //假设$view已经被创建并在//index.php里面注册
+      echo $view->render('404.php');
+      }
+      public function noRouteAction() {
+      header('HTTP/1.0 404 Not Found');
+      $view = Zend::registry('view'); //假设$view已经被创建并在//index.php里面注册
+      echo $view->render('404.php'); }
+      public function __call($method,$arguments) {
+      header('HTTP/1.0 404 Not Found');
+      $view = Zend::registry('view'); //假设$view已经被创建并在//index.php里面注册
+      echo $view->render('404.php'); }
+}

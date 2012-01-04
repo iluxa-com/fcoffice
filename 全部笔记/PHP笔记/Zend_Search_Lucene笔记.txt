@@ -1,0 +1,23 @@
+ //创建新索引
+$dir='index';
+$index=new Zend_Search_Lucene($dir,true); //创建新索引时第二个参数必须设置为true
+$doc=new Zend_Search_Lucene_Document();
+
+//创建类型字段
+$doc->addField(Zend_Search_Lucene_Field::Text('url',$docUrl));
+$doc->addField(Zend_Search_Lucene_Field::UnStored('contents',$docContent));
+
+//将文档对象添加到索引
+$index->addDocument($doc);
+//更新索引
+$index->commit();
+
+
+//建立查询
+//搜索结果
+//结果评分
+
+Query的项
+单独项:"hello"
+短语项:"hello world"
+子查询项:"(hello world)"

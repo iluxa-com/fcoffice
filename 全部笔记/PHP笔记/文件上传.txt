@@ -1,0 +1,20 @@
+php.ini的配置
+
+file_uploads = On
+
+;遇到致命错误前的最大执行时间(s)
+max_execution_time = 30
+
+; Maximum amount of memory a script may consume (128MB)
+memory_limit = 128M
+
+; Maximum allowed size for uploaded files.
+; http://php.net/upload-max-filesize
+upload_max_filesize = 2M
+
+; 上传文件的临时目录
+;upload_tmp_dir =
+
+; Maximum size of POST data that PHP will accept.
+; http://php.net/post-max-size
+post_max_size = 8M

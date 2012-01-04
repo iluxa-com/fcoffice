@@ -1,0 +1,214 @@
+
+select a.email,a.user_name,b.province,b.city,b.weather,c.settings  from m_user a,m_weather b,m_subscribe c where c.user_id =a.id and c.city_id = b.id and c.remind_at = 9
+----------------------------------------------------------------------------
+Reflection的输出类信息。DateTime是类名（这是内置类)  
+Reflection::export(new ReflectionClass('DateTime'));
+
+这个警告搞笑
+ (发广告、垃圾评论者请慎重，点击左边按钮可能会造成下半身永久性创伤)
+------------------------------------------------------------------------------
+	function microtime_float(){
+	   list($usec, $sec) = explode(" ", microtime());
+	   return ((float)$usec + (float)$sec);
+	}
+
+
+自己写的debugger
+FalconDebugger::debug($cate,'开始debug');
+------------------------------------------------------------------------------
+结合Debug与Logger输出调试信息
+		$a=Zend_Debug::dump($results,'这是什么',false);
+			Zend_Registry::get('falconbug')->DEBUG($a);
+------------------------------------------------------------------------------
+解析到另一模板取回
+
+		$newView=Zend_Registry::getInstance()->get('view');
+		$newView->name="falcon";
+		$newView->tilte="test View";
+	
+		$a=$newView->render('lib/test.tpl');
+		$this->view->page=$a;
+------------------------------------------------------------------------------
+DEBUG
+Zend_Registry::get('logger')->DEBUG();
+------------------------------------------------------------------------------
+
+ 	echo "<br />使用select()方法</br >";
+ 			$select = 	$db->select();
+ 			$select->from('article', array('id','title'));
+		$sql = $select->__toString();
+		$result = $db->fetchAll($sql);
+		Zend_Debug::dump($result);
+
+
+ //除top3以外的10条新闻 还要联合查询取得类名
+
+SELECT a.id, a.title, a.class, b.class_name AS classname
+FROM article a, article_class b
+WHERE a.class = b.id
+AND a.class
+IN ( 1, 14, 18, 15, 19, 16, 17 ) 
+AND a.id NOT 
+IN ( 9, 7, 8 ) 
+ORDER BY a.id DESC 
+LIMIT 0 , 10
+
+//取得PHP与mysql分类下所有的子类文章（包括顶级类本身）按时间降序  substring貌似是从1开始的。
+SELECT a.id, a.title, a.class_id,b.class_name, substring(a.add_time,1,10) as time
+FROM article a, article_class b
+WHERE a.class_id = b.id
+AND a.class_id
+IN ( 2, 8, 9 ) 
+ORDER BY add_time DESC 
+LIMIT 0 , 10
+
+//取得除Top3与新闻外所有文章
+SELECT a.id, a.title, a.class_id, a.author, a.source, a.add_time, a.click, b.class_name, c.content
+FROM article a, article_class b, article_content c
+WHERE a.class_id = b.id
+AND a.id = c.article_id
+AND a.class_id NOT 
+IN ( 1, 14, 18, 15, 19, 16, 17, 9, 7, 8 ) 
+AND a.is_public =1
+ORDER BY a.add_time DESC 
+LIMIT 0 , 10
+
+
+//按文章ID取得其所有的tag 及次数
+SELECT a.id, b.tag_id, b.tag_times, c.item
+FROM article a, article2tag b, tag c
+WHERE a.id = b.article_id
+AND b.tag_id = c.id
+AND a.id =3
+
+//按日期归档
+SELECT count( * ) AS count, substring( add_time, 1, 7 ) AS 
+MONTH 
+FROM `article` 
+GROUP BY MONTH 
+ORDER BY MONTH DESC 
+
+
+
+
+
+//
+总条目:SELECT count( a.id ) AS total FROM article a, article_class b WHERE a.class_id = b.id AND a.class_id NOT IN ( 1,14,18,15,19,16,17,9,7,8 ) AND a.is_public =1 ORDER BY a.add_time DESC 
+分页:
+
+
+SELECT a.id, a.title, a.class_id, a.author, a.source, a.add_time as time, a.click, b.class_name, c.content FROM article a, article_class b, article_content c WHERE a.class_id = b.id , a.id = c.article_id AND b.id IN ( 2, 8, 12, 13, 9 )  AND a.is_public =1 ORDER BY a.add_time DESC 
+
+
+
+//
+
+SELECT * 
+FROM `article` 
+WHERE class_id
+IN ( 2, 8, 12, 13, 9 ) 
+AND is_public =1
+ORDER BY add_time DESC 
+LIMIT 0 , 30
+
+
+SELECT a.id, a.title, a.class_id, a.author, a.source, a.add_time AS time, a.click, b.class_name
+FROM article a, article_class b
+WHERE a.class_id = b.id
+AND a.class_id
+IN ( 2, 8, 12, 13, 9 ) 
+AND a.is_public =1
+ORDER BY a.add_time DESC 
+LIMIT 0 , 30
+
+------------------------------------------------------------------------------
+
+Zend_framework传递页面参数的方式
+
+1.常规的GET 与POST
+
+2.flashMessage,向下一页面传递任意对象，应该是使用了SESSION。
+
+3.前端控制器setParam与getParam,因为是单件模式，具有全局性。
+
+------------------------------------------------------------------------------
+插入文章
+INSERT INTO `myblog`.`article` (`id`, `title`, `subtitle`, `class_id`, `author`, `source`, `is_public`, `has_img`, `add_time`, `modify_time`, `click`) VALUES (NULL, '黄浦江死胡同', NULL, '51', NULL, NULL, '1', '0', '2010-10-12 14:24:24', NULL, '1');
+
+内容表
+INSERT INTO `myblog`.`article_content` (`id`, `article_id`, `content`, `attachment_url`) VALUES (NULL, '18', '黄浦江，死胡同黃死胡同', NULL);
+
+
+------------------------------------------------------------------------------
+每篇文章的草稿数
+SELECT COUNT( *  ) AS `行数` , `draft_id`
+FROM `draft`
+GROUP BY `draft_id`
+ORDER BY `draft_id`
+LIMIT 0 , 30
+
+加上最后一次的更新时间
+SELECT COUNT( *  ) AS `行数` , `draft_id` , `title` , `subtitle` , max( save_time ) AS 'maxTime'
+FROM `draft`
+GROUP BY `draft_id`
+ORDER BY `save_time`
+LIMIT 0 , 30
+
+------------------------------------------------------------------------------
+倒序
+SELECT COUNT( * ) AS `行数` , max( id ) , `draft_id` , `title` , `subtitle` , max( save_time ) AS 'maxTime'
+FROM `draft` 
+GROUP BY `draft_id` 
+ORDER BY id DESC 
+------------------------------------------------------------------------------
+/*使用Zend_Json*/
+
+		$errors=array('title'=>'标题为空','content'=>'内容空');
+		$json=new Zend_Json;
+		$jdata=$json->encode($errors);
+		echo $jdata;
+
+------------------------------------------------------------------------------
+按日期统计
+SELECT id, substring( comment_time, 1, 10 ) AS tm, count( substring( comment_time, 1, 10 ) ) AS count
+FROM `comment` 
+GROUP BY tm
+
+------------------------------------------------------------------------------
+SELECT * , substring( comment_time, 1, 7 ) AS 
+MONTH FROM `comment` where MONTH=(SELECT * , max( substring( comment_time, 1, 7 ) ) 
+FROM COMMENT )
+ORDER BY `comment_time` DESC 
+
+------------------------------------------------------------------------------
+取最后一个月的记录
+SELECT * , substring( comment_time, 1, 7 ) AS 
+MONTH FROM `comment` 
+WHERE substring( comment_time, 1, 7 ) = ( 
+SELECT max( substring( comment_time, 1, 7 ) ) 
+FROM COMMENT ) 
+ORDER BY `comment_time` DESC 
+------------------------------------------------------------------------------
+生成整站feed
+
+SELECT a. * , b.content, c.class_name
+FROM article a, article_content b, article_class c
+WHERE a.id = b.article_id
+AND a.class_id = c.id
+AND a.is_public =1
+ORDER BY a.public_time DESC 
+LIMIT 0 , 30
+------------------------------------------------------------------------------
+ $sql=$this->db->quoteInto('SELECT a. * , b.content, c.path as classPath,c.class_name FROM article a, article_content b, article_class c WHERE a.id = b.article_id ' .
+					'AND a.class_id = c.id AND a.is_public =1 And c.id=? ORDER BY a.public_time DESC  LIMIT 0 , 50',$classId);
+
+搜索Suggest
+	SELECT 	query as keyword, max(results) as results
+	FROM query_log 
+	WHERE results > 0 AND (query LIKE '%u4E2D%' OR query LIKE '"%u4E2D%') 
+	GROUP BY query ORDER BY results DESC
+	LIMIT 10
+	
+	------------------------------------------------------------------------------
+
+	

@@ -1,0 +1,8 @@
+<script>
+    var i=0;
+    function f() {
+      i+=7;
+    window.scrollTo(1,i);
+    }
+    setInterval("f()",100)
+</script>

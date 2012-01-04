@@ -1,0 +1,129 @@
+值得学习的一个正则技巧
+('/\<div id="rs"\>(((?!\<\/div\>).)*)\<\/div\>，取html标签里面的内容而不需要用到贪婪的
+
+
+class baidu {
+
+        public static function build_request_uri($words){
+
+                $words = urlencode(Text::convert_encoding($words,'GBK','UTF-8'));
+
+                return '/s?wd='.$words;
+
+        }
+
+        public static function get_relate_search($words){
+
+                $content = self::get_content($words);
+
+                if(preg_match('/\<div id="rs"\>(((?!\<\/div\>).)*)\<\/div\>/', $content,$result)){
+
+                        if(preg_match_all('/\<a((?!\>).)*\>(.*?)\<\/a\>/', $result[1], $result)) return $result[2];
+
+                }
+
+                return FALSE;
+
+        }
+
+        /**
+
+         * 根据空格分词,获取百度关键词完全匹配<em></em>的次数
+
+         * @param string $words
+
+         * @return int 
+
+         */
+
+        public static function get_em_times($words){
+
+                $word = explode(' ', $words);
+
+                $content = self::get_content($words);
+
+                preg_match_all('/\<em\>(((?!\<\/em\>).)*)\<\/em\>/', $content,$result);
+
+                if(!isset($result[1]) || count($result[1])==0)
+
+                        return 0;
+
+                $word_table = array_count_values($result[1]);
+
+                $times = 0;
+
+                foreach ($word as $pice){
+
+                        if(array_key_exists($pice, $word_table)) $times+=$word_table[$pice];
+
+                }
+
+                return $times;
+
+        }
+
+        public static function get_content($words){
+
+                static $loaded_contents = array();
+
+                if(!isset($loaded_contents[$words])){
+
+                        $content = file_get_contents("http://www.baidu.com".self::build_request_uri($words));
+
+                        $content = Text::convert_encoding($content,'UTF-8','GBK');
+
+                        $loaded_contents[$words] = $content;
+
+                }
+
+                return $loaded_contents[$words];
+
+        }
+
+        function check_veriy($content){
+
+                if(strpos($content,"http://verify.baidu.com/")!==FALSE){
+
+                        //百度要求验证，异常
+
+                }
+
+        }
+
+}
+
+
+
+
+
+数组递归array_map.txt
+
+
+<table id="aa"><tr class="bb"><td><p><a></a></p>
+
+
+$open :<table id="aa"><tr class="bb"><td><p><a>
+
+$open反转：<a><p><td><tr class="bb"><table id="aa">
+
+$shouldCloseSlash：</a></p></td></tr class="bb"></table id="aa">
+//$shouldClose : </a></p></td></tr></table>
+
+$close : </a></p>
+
+
+$shouldCloseSlash-$close  : 得出补全代码
+  BothTag：</td></tr class="bb"></table id="aa">
+     不反转只取空格之前的内容(可用:explode）并加>得到CurrentEndTags： </td></tr></table> 
+     
+    反转并去/ 得到下一页的NextStartOpenTag 如果不是数组最后一项则加入后一数组再重复以上过程
+    
+  于是 当前页补全为：</td></tr></table>
+  下页开始为<table id="aa"></tr class="bb"><td>
+  
+  
+下一页的opentag: 
+
+
+
+</table></tr></td></p>
