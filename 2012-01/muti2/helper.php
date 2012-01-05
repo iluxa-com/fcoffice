@@ -20,7 +20,7 @@ function muti_selector($config) {
             <span class="controller_items" id="ok">确定<span>
         </div>
     </div>
-    <label for = "select_members">{$config['label']}<input type="text" readonly=“true" class="test" id="{$config['display']}" value=""></label>
+    <label for = "{$config['display']}">{$config['label']}<input type="text" readonly=“true" class="test" id="{$config['display']}" value=""></label>
 HEREDOC;
     $html .= javascript_tag(javascript_path('muti-selector.js'));
     $html.=js_open();
