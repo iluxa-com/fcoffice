@@ -179,6 +179,126 @@ egrep
 
 #egrep '(abc|xyz)' data.file //查找符号两边或全部
 -------------------------------------------
+awk
+===========================================
+
+[root@falconHost ~]# awk -F: 'BEGIN {print "name\thome\n---------"} {print $1"\t"$6} END {print "\n--EOF"}' /etc/passwd
+
+
+双引号：awk 'BEGIN{print "\""}'
+这里使用""是因为awk里面打印常量都要用""括起来，\是转义，免得前两个双引号配对，产生错误。
+单 引号：awk 'BEGIN{print "'\''"}'
+这里其实可以这样理解awk 'BEGIN{print "'       \'              '"}'
+注意配对方式，先打印BEGIN{print "，然后是\'，然后是"}，因为\'被bash解析成'，所以awk得到的是BEGIN{print "'"}
+
+BEGIN{print "'"}，为什么要用双引号括起来，前面说过了。
+如 果你使用文件(awk -f)，那么还会简单一点：
+14:38:18#www#test> cat a.awk
+#!/usr/bin/awk -f
+BEGIN{print "'"}
+14:38:23#www#test> awk -f a.awk
+'
+14:38:26#www#test>
+因为bash不会转义文件里面的东西，所以就不用\和里面那层''了。
+-------------------------------------------
+
+#awk -F: '{print $1"'\'s\ home\ is\ '"$6}' testfile 
+
+root's home is /root
+bin's home is /bin
+daemon's home is /sbin
+adm's home is /var/adm
+lp's home is /var/spool/lpd
+sync's home is /sbin
+shutdown's home is /sbin
+halt's home is /sbin
+mail's home is /var/spool/mail
+news's home is /etc/news
+uucp's home is /var/spool/uucp
+...
+...
+或者
+awk -F: '{print $1"\047s home is "$6}' testfile 
+-------------------------------------------
+正则表达式
+[root@falconHost ~]# awk '{if($2~/^g/) print $0}' testfile2
+12 games /usr/games
+13 gopher /var/gopher
+42 gdm /var/gdm
+504 gearmand /home/gearmand
+-------------------------------------------
+统计CSDN邮箱
+[root@falconHost ~]# awk -F " # " '{if($3~/@qq\.com/) print $0}' csdn.sql |wc -l
+1909819
+[root@falconHost ~]# awk -F " # " '{if($3~/@[126\.com|163\.com|netease\.com]/) print $0}' csdn.sql |wc -l
+3456342
+[root@falconHost ~]# awk -F " # " '{if($3~/@gmail\.com/) print $0}' csdn.sql |wc -l
+185140
+
+否定
+-------------------------------------------
+
+awk常量
+
+ARGC 命令行参数个数
+ARGV 命令行参数排列
+ENVIRON 支持队列中系统环境变量的使用
+FILENAME awk浏览的文件名
+FNR 浏览文件的记录数
+FS 设置输入域分隔符，等价于命令行-F选项
+NF 浏览记录的域个数
+NR 已读的记录数
+OFS 输出域分隔符
+ORS 输出记录分隔符
+RS 控制记录分隔符
+-------------------------------------------
+[root@falconHost ~]# awk -F " # " '{print NF,NR,$0} END{print FILENAME}' csdn.sql |head -10
+3 1 zdg # 12344321 # zdg@csdn.net
+3 2 LaoZheng # 670203313747 # chengming_zheng@163.com
+3 3 fstao # 730413 # fstao@tom.com
+3 4 huwolf # 2535263 # hujiye@263.net
+3 5 cadcjl # KIC43dk6! # ccedcjl@21cn.com
+3 6 netsky # s12345 # songmail@21cn.com
+3 7 Michael # apple # appollp@netease.com
+3 8 siclj # lj7202 # junlu@peoplemail.com.cn
+3 9 jinbuhuan # 12345 # jinbuhuan@163.net
+3 10 Eie # hebeibdh # fwg@jxfw.com
+
+-------------------------------------------
+[root@falconHost ~]# awk -F " # " '{if(NR<=10 || NF!=3) print NF,NR,$0}' csdn.sql 
+3 1 zdg # 12344321 # zdg@csdn.net
+3 2 LaoZheng # 670203313747 # chengming_zheng@163.com
+3 3 fstao # 730413 # fstao@tom.com
+3 4 huwolf # 2535263 # hujiye@263.net
+3 5 cadcjl # KIC43dk6! # ccedcjl@21cn.com
+3 6 netsky # s12345 # songmail@21cn.com
+3 7 Michael # apple # appollp@netease.com
+3 8 siclj # lj7202 # junlu@peoplemail.com.cn
+3 9 jinbuhuan # 12345 # jinbuhuan@163.net
+3 10 Eie # hebeibdh # fwg@jxfw.com
+-------------------------------------------
+取当前路径所在目录
+[root@falconHost init.d]# echo $PWD
+/etc/rc.d/init.d
+[root@falconHost init.d]# echo $PWD | awk -F/ '{print $NF}'
+init.d
+
+因为NF表示域数目，$NF即为最后一个成员
+-------------------------------------------
+密码与用户名相同的用户
+[root@falconHost ~]# awk -F" # " '{name=$1;password=$2;email=$3; if(name==password) print NR":" name "->" password}' csdn.sql |wc -l
+292661
+-------------------------------------------
+密码名与用户名相同且都为数字
+
+[root@falconHost ~]# awk -F" # " '{name=$1;password=$2;email=$3; if(name==password && name~/^[0-9]+$/) print NR":" name "->" password}' csdn.sql 
+
+-------------------------------------------
+取记录总行数
+[root@falconHost ~]# wc -l csdn.sql | awk '{print $1}'
+6428631
+-------------------------------------------
+
 
 
 
