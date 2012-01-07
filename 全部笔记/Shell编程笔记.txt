@@ -13,6 +13,7 @@ DNSpod£ºwonderfulcxm@gmail.com
 
 Push
 [root@falconHost dotcloud]:#dotcloud push falcon python_on_dotcloud/
+
 -------------------------------------------
 
 dotcloud:php+mysql
