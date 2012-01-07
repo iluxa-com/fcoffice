@@ -1,0 +1,24 @@
+1.到 http://www.jetbrains.com/idea/下载社区版本的IntelliJ IDEA
+11.0.1版本下载地址:
+http://download-ln.jetbrains.com/idea/ideaIC-11.0.1.exe
+两个选择版本
+http://www.jetbrains.com/idea/download/download_thanks.jsp
+
+社区版的不支持，装完后提示com.intellj.css找不到
+看官网的描述：
+Connects Firebug CSS editor with any IDE with CSS capabilities (IntelliJ IDEA Ultimate, PhpStorm, WebStorm, PyCharm, RubyMine).
+
+
+2.在IDE里安装css-x-fire 插件，完成后安装提示的cssfire.xpi插件
+重启
+-------------------------------------------
+
+发现一个修改css的好东西 cssUpdater
+http://www.cssupdater.com/install
+我们知道在firebug里修改页面样式是非常方便的事情，然而有一个缺点就是它不能把修改保存到文件里，也就是说它的修改是保存在内存里的，当重新载入页面时修改也被清空了，而cssUpdate就可以实现保存修改。
+
+首先当然要有Firefox + FireBug(v1.6+),然后要装Adobe Air(http://get.adobe.com/air/) ,
+
+下载cssUpdate服务端，并安装，完成后会要求你输入序列号，到
+http://www.cssupdater.com/index注册一个用户。到http://www.cssupdater.com/memberpage登录
+这2b的注册流程，忘记复制valid key了。
