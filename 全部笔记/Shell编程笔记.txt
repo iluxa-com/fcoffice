@@ -1,5 +1,25 @@
 没有程序语言是完美的，甚至没有一个唯一最好的语言，只有对于特定目的，比较适合和不适合的程序语言。
 
+dotcloud:python
+服务名:falcon.www
+http://falcon-falconpython.dotcloud.com/
+
+
+[root@falconHost ~]:#dotcloud alias add falcon.www py.onephper.tk
+Ok. Now please add the following DNS record:
+py.onephper.tk. IN CNAME gateway.dotcloud.com.
+
+DNSpod：wonderfulcxm@gmail.com
+
+Push
+[root@falconHost dotcloud]:#dotcloud push falcon python_on_dotcloud/
+-------------------------------------------
+
+dotcloud:php+mysql
+服务名gophp.www
+
+===========================================
+
 -------------------------------------------
 suid,guid
 suid文件属性首位设置为4
@@ -297,8 +317,32 @@ init.d
 取记录总行数
 [root@falconHost ~]# wc -l csdn.sql | awk '{print $1}'
 6428631
+
+------------------------------------------
+通常在BEGIN部分赋值是很有益的，方便以后修改
+-------------------------------------------
+[root@falconHost ~]:#awk -F' # ' '{if($1=="Zboy") ($1="xman");  if(NR>90) print NR ,$1}' testfile 
+
+[root@falconHost ~]:#awk -F" # " '{print substr($3,1,index($3,"@")-1)}' testfile
+
+-------------------------------------------
+awk传参：
+
+[root@falconHost ~]:#who | awk '{if($1==usr) print $1 " connect to "$2}' usr=$LOGNAME
+
+-------------------------------------------
+计算当前文件夹的总文件大小 
+[root@falconHost ~]:#ll | awk '($1~/^[^d]/) {tot+=$5} END {print "file total size:" tot}'
+file total size:287242130
 -------------------------------------------
 
+df -lh -查看硬盘使用率
+
+du -lh查看文件夹使用空间 ，指定目录的层数 --max-depth=
+
+-------------------------------------------
+C:\Documents and Settings\Administrator\VirtualBox VMs\Centos64\Centos64.vdi
+-------------------------------------------
 
 
 
