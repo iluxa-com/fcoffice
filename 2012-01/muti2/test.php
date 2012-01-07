@@ -1,51 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="muti-selector.css" />
 <title>多选下拉列表 - 点击弹出</title>
-<style>
-
-.muti_selector_float_div {
-    border-collapse: collapse;
-    font-size: 0.8em;
-    width: 150px;
-    background-color:#EEEEEE;
-    z-index: 999999;
-    position: absolute;
-    border: 1px solid #DDDDDD;
-    margin-top:2px;
-    display:none;
-
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-.muti_div_textarea {
-    background: #FFF;
-    font-size:0.8em;
-}
-
-.muti_selector_controller {
-    background: url("images/ui-bg_gloss-wave_35_f6a828_500x100.png") repeat-x scroll 50% 50% #F6A828;
-    border: 1px solid #E78F08;
-    color: #FFFFFF;
-    font-weight: bold;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    margin:2px;
-}
-.controller_items {
- cursor: pointer; 
-}
-.controller_items_ok {
- margin-left: 5px;
-}
-.controller_items_cancel {
- float: right;
- margin-right: 5px;
-}
-
-</style>
 <script type="text/javascript" src="jquery-1.6.2.min.js"></script>
 </head>
 <body>
