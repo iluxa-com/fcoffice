@@ -16,6 +16,8 @@
 .muti_div_textarea {
     background: #FFF;
     font-size:0.8em;
+	width: 200px;
+	height: 100px;
 }
 
 .muti_selector_controller {
