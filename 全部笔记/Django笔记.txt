@@ -1,0 +1,23 @@
+Windows下安装Django
+
+首先要安装python,2.4+,我使用的是python 2.6
+从Django官网下载最新安装包：https://www.djangoproject.com/download/
+我下载的是Django-1.3.1.tar.gz.解压到目录E:\python_source\Django\src,我是使用Netbeans建立的项目文件夹。
+
+python setup.py install 
+
+安装完成后在python命令行下
+>>>import django
+>>>django.VERSION
+会打印出
+(1, 3, 1, 'final', 0)
+
+但是使用idle打开会提示找不到django模块。因为django模块并没有像一些文档描述的那样安装到python的安装目录\Lib\site-packages下，于是按The django book2.0推荐安装svn版本的方法，在
+python的安装目录\Lib\site-packages下新建django.pth,向里面写入django解压时的目录，即E:\python_source\Django\src，保存后重启idle,执行以下命令。sys.path已经把django的安装路径加入进来了。
+
+>>> import django
+>>> import sys
+>>> print sys.path
+['C:\\Python26\\Lib\\idlelib', 'C:\\WINDOWS\\system32\\python26.zip', 'C:\\Python26\\DLLs', 'C:\\Python26\\lib', 'C:\\Python26\\lib\\plat-win', 'C:\\Python26\\lib\\lib-tk', 'C:\\Python26', 'C:\\Python26\\lib\\site-packages', 'E:\\python_source\\Django\\src']
+>>> django.VERSION
+(1, 3, 1, 'final', 0)
