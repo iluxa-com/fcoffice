@@ -21,3 +21,152 @@ pythonµÄ°²×°Ä¿Â¼\Lib\site-packagesÏÂĞÂ½¨django.pth,ÏòÀïÃæĞ´Èëdjango½âÑ¹Ê±µÄÄ¿Â¼£
 ['C:\\Python26\\Lib\\idlelib', 'C:\\WINDOWS\\system32\\python26.zip', 'C:\\Python26\\DLLs', 'C:\\Python26\\lib', 'C:\\Python26\\lib\\plat-win', 'C:\\Python26\\lib\\lib-tk', 'C:\\Python26', 'C:\\Python26\\lib\\site-packages', 'E:\\python_source\\Django\\src']
 >>> django.VERSION
 (1, 3, 1, 'final', 0)
+
+-------------------------------------------
+ÖªµÀ×òÌì³öÎÊÌâµÄÔ­Òò£¬Ò²¾ÍÊÇÎªÊ²Ã´djangoÃ»ÓĞ°²×°µ½python°²×°Ä¿Â¼ÏÂµÄLib/site-packagesÏÂ¡£
+
+ÒòÎªÖ®Ç°×°ÁËcywin,Ò»¸öÔÚwindowsÏÂÄ£Äâlinux»·¾³µÄ¹¤¾ß£¬Ïàµ±ÓÚĞéÄâ»ú£¬ÀïÃæÒ²ÊÇ×°ÓĞpython½âÎöÆ÷µÄ²¢ÇÒÓÅÏÈÓÚWindowsÏÂµÄpython½âÎöÆ÷£¬ÓÚÊÇÔÚµ÷ÓÃpython setup.py install Ê±£¬Èç¹ûÃ»´íµÄ»°£¬Êµ¼ÊÉÏÊÇ°²×°µ½ÁËcywinÏÂpythonµÄsite-packages,ÓÉÓÚÓÃÃüÁîĞĞµ÷ÓÃµÄÈÔÈ»ÊÇcywinÏÂµÄpython,ÓÃIdleÔòÊÇÊ¹ÓÃwinÏÂµÄpython£¬ËùÒÔ¾ÍÊÇ³öÏÖÁ½ÕßÔÚÑ°ÕÒdjangoÄ£¿éÂ·¾¶ÉÏµÄÎÊÌâ¡£
+
+½â¾öµÄ·½·¨£¬°ÑpythonµÄ°²×°Ä¿Â¼¼ÓÈëpath,²¢ÇÒ·ÅÔÚcywinµÄc:/cywind/winÇ°¡£ÕâÑù£¬ÏµÍ³µ÷ÓÃµÄ²ÅÊÇwinÏÂµÄpython½âÎöÆ÷¡£
+
+-------------------------------------------
+ÔËĞĞÃüÁîdjango-admin.py startproject mysite¡£ÕâÑù»áÔÚÄãµÄµ±Ç°Ä¿Â¼ÏÂ´´½¨Ò»¸öÄ¿Â¼¡£mysite
+
+ÒÔÏÂÃüÁîÆô¶¯¿ª·¢·şÎñÆ÷
+python manage.py runserver
+python manage.py runserver 8080
+python manage.py runserver 0.0.0.0:8000
+-------------------------------------------
+assert False ¿ÉÒÔÓÃÔÚÈÎÒâ´¦´¥·¢Òì³£È¡µÃDjangoµÄµ÷ÊÔĞÅÏ¢
+Êä³öĞÅÏ¢ÏêÏ¸£¬±ÈprintºÃÓÃ
+-------------------------------------------
+Èç¹ûÃüÁîĞĞ»òidleÏÂµ÷ÓÃtemplateÄ£¿é±¨
+DJANGO_SETTINGS_MODULE Î´¶¨Òå
+
+>>> from django.template import Template
+>>> t = Template('my name is {{name}}')
+
+ÔÚÏµÍ³»·¾³±äÁ¿¶¨Òå»·¾³±äÁ¿
+ ÏîÄ¿ÉèÖÃÄ£¿é
+¼´ÏîÄ¿×Ô¶¯Éú³ÉµÄsettings.pyÎÄ¼ş
+
+DJANGO_SETTINGS_MODULE Îª mysite.settings
+
+»òÕßÊ¹ÓÃ
+python manage.py shell Æô¶¯½»»¥½çÃæ¡£
+-------------------------------------------
+>>> from django.template import Template
+>>> t = Template('my name is {{name}}')
+>>> from django.template import Context
+>>> c = Context({'name':'Falcon'})
+>>> print t.render(c)
+my name is Falcon
+>>> 
+-------------------------------------------
+Õâ¾ÍÊÇÊ¹ÓÃDjangoÄ£°åÏµÍ³µÄ»ù±¾¹æÔò£º Ğ´Ä£°å£¬´´½¨ Template ¶ÔÏó£¬´´½¨ Context £¬ µ÷ÓÃ render() ·½·¨¡£
+
+-------------------------------------------
+Ê¹ÓÃÍ¬Ò»Ä£°åÔ´äÖÈ¾¶à¸öcontext
+>>> names = ('King','Falcon','Raw')
+>>> for name in names:
+	print t.render(Context({'name':name}))
+
+	
+my name is King
+my name is Falcon
+my name is Raw
+>>> 
+-------------------------------------------
+ÔÚÄ£°åÖĞ¿ÉÒÔÍ¨¹ı¾äµã·ÃÎÊ¶ÔÏñµÄÊôĞÔ»òÕß×ÖµäÖµ
+-------------------------------------------
+µãÓï·¨Ò²¿ÉÒÔÓÃÀ´ÒıÓÃ¶ÔÏóµÄ* ·½·¨*¡£ ÀıÈç£¬Ã¿¸ö Python ×Ö·û´®¶¼ÓĞ upper() ºÍ isdigit() ·½·¨£¬ÄãÔÚÄ£°åÖĞ¿ÉÒÔÊ¹ÓÃÍ¬ÑùµÄ¾äµãÓï·¨À´µ÷ÓÃËüÃÇ£º
+
+>>> from django.template import Template, Context
+>>> t = Template('{{ var }} -- {{ var.upper }} -- {{ var.isdigit }}')
+>>> t.render(Context({'var': 'hello'}))
+u'hello -- HELLO -- False'
+>>> t.render(Context({'var': '123'}))
+u'123 -- 123 -- True'
+
+×¢ÒâÕâÀïµ÷ÓÃ·½·¨Ê±²¢* Ã»ÓĞ* Ê¹ÓÃÔ²À¨ºÅ ¶øÇÒÒ²ÎŞ·¨¸ø¸Ã·½·¨´«µİ²ÎÊı£»ÄãÖ»ÄÜµ÷ÓÃ²»Ğè²ÎÊıµÄ·½·¨¡£ 
+-------------------------------------------
+¾äµãÒ²¿ÉÓÃÓÚ·ÃÎÊÁĞ±íË÷Òı£¬ÀıÈç£º
+
+>>> from django.template import Template, Context
+>>> t = Template('Item 2 is {{ items.2 }}.')
+>>> c = Context({'items': ['apples', 'bananas', 'carrots']})
+>>> t.render(c)
+u'Item 2 is carrots.'
+
+²»ÔÊĞíÊ¹ÓÃ¸ºÊıÁĞ±íË÷Òı¡£ Ïñ {{ items.-1 }} ÕâÑùµÄÄ£°å±äÁ¿½«»áÒı·¢`` TemplateSyntaxError``
+-------------------------------------------
+>>> t2 = Template('Item 2 is {{items.2}}')
+>>> c2 = Context({'items':['x','y','z']})
+>>> t2.render(c2)
+u'Item 2 is z'
+>>> class Person:
+	def __init__(self):
+		self.name = 'falcon'
+		self.age = '333'
+
+		
+>>> t3 = Template('Info \n name:{{person.name}} | age:{{person.age}}')
+>>> c3 = Context({'person':Person()})
+>>> t3.render(c3)
+u'Info \n name:falcon | age:333'
+>>> 
+-------------------------------------------
+ExceptionÀï¶¨Òåsilent_variable_failure ÊôĞÔÎª True Ê±£¬²»»á´«²¥Òì³£
+
+>>> class SilentAssertionError(AssertionError):
+...     silent_variable_failure = True
+>>> class PersonClass4:
+...     def first_name(self):
+...         raise SilentAssertionError
+>>> p = PersonClass4()
+>>> t.render(Context({"person": p}))
+u'My name is .'
+-------------------------------------------
+¼ÙÈçaccoutÀàÓĞÕâÑùÒ»¸ö·½·¨
+def delete(self):
+    # Delete the account
+delete.alters_data = True #¸Ã·½·¨µÄalter_dataÊôĞÔÎªÕæ£¬ÔòÔØÈëÄ£°åÊ±²¢²»»áÖ´ĞĞdelete·½·¨£¬»á¾²Ä¬´íÎóÍË³ö
+-------------------------------------------
+Ä¬ÈÏÇé¿öÏÂ£¬Èç¹ûÒ»¸ö±äÁ¿²»´æÔÚ£¬Ä£°åÏµÍ³»á°ÑËüÕ¹Ê¾Îª¿Õ×Ö·û´®£¬²»×öÈÎºÎÊÂÇéÀ´±íÊ¾Ê§°Ü
+-------------------------------------------
+{% if %}±êÇ©²»ÔÊĞíÔÚÍ¬Ò»¸ö±êÇ©ÄÚÍ¬Ê±Ê¹ÓÃand ºÍor,µ«¿ÉÒÔ¶à´ÎÊ¹ÓÃÍ¬Ò»¸öÂß¼­²Ù×÷·ûÈçand »òor ,²»Ö§³ÖÔ²À¨ºÅ×éºÏ±È½Ï²Ù×÷¡£¿ÉÒÔ¿¼ÂÇÒÆµ½Ä£°åÍâ´¦Àí»ò½ö½öÓÃÇ¶Ì×µÄ{% if %} ±êÇ©Ìæ»»
+
+{% if athlete_list %}
+    {% if coach_list or cheerleader_list %}
+        We have athletes, and either coaches or cheerleaders!
+    {% endif %}
+{% endif %}
+
+-------------------------------------------
+Ã»ÓĞ{% elif %} ±êÇ©
+-------------------------------------------
+¸ø±êÇ©Ôö¼ÓÒ»¸ö reversed Ê¹µÃ¸ÃÁĞ±í±»·´Ïòµü´ú£º
+
+{% for athlete in athlete_list reversed %}
+...
+{% endfor %}
+-------------------------------------------
+for Ö§³ÖÒ»¸ö¿ÉÑ¡µÄ{% empty %}·Ö¾ä£¬
+¿ÉÒÔ¶¨Òåµ±ÁĞ±íÎª¿ÕÊ±µÄÊä³öÄÚÈİ
+
+{% for student in students %}
+  <p>{{student.name}}</p>
+{% empty %}
+  <p>"no student in list"</p>
+{% endfor %}
+-------------------------------------------
+×¢ÊÍ
+{# This is a comment #}
+{% comment %}
+..line1
+..line2
+{% endcomment %}
+-------------------------------------------
+¹ıÂËÆ÷
+{{name|lower}}
+
