@@ -170,3 +170,71 @@ for 支持一个可选的{% empty %}分句，
 过滤器
 {{name|lower}}
 
+-------------------------------------------
+后台运行测试服务器并且不输出访问信息
+./manage.py runserver 1>/dev/null 2>&1 &
+-------------------------------------------
+
+模板继承和重载 (block标签和extends)
+基础模板base.html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <h1>My helpful timestamp site</h1>
+    {% block content %}{% endblock %}
+    {% block footer %}
+    <hr>
+    <p>Thanks for visiting my site.</p>
+    {% endblock %}
+</body>
+</html>
+
+子模板1 
+{% extends "base.html" %}
+
+{% block title %}The current time{% endblock %}
+
+{% block content %}
+<p>It is now {{ current_date }}.</p>
+{% endblock %}
+
+子模板2
+{% extends "base.html" %}
+
+{% block title %}Future time{% endblock %}
+
+{% block content %}
+<p>In {{ hour_offset }} hour(s), it will be {{ next_time }}.</p>
+{% endblock %}
+
+注意由于子模板并没有定义 footer 块，模板系统将使用在父模板中定义的值。 父模板 {% block %} 标签中的内容总是被当作一条退路。
+-------------------------------------------
+Django 对MVC的解释
+
+Django 紧紧地遵循这种 MVC 模式，可以称得上是一种 MVC 框架。 以下是 Django 中 M、V 和 C 各自的含义：
+
+    M ，数据存取部分，由django数据库层处理，本章要讲述的内容。
+
+    V ，选择显示哪些数据要显示以及怎样显示的部分，由视图和模板处理。
+
+    C ，根据用户输入委派视图的部分，由 Django 框架根据 URLconf 设置，对给定 URL 调用适当的 Python 函数。
+-------------------------------------------
+MTV 
+
+由于 C 由框架自行处理，而 Django 里更关注的是模型（Model）、模板(Template)和视图（Views），Django 也被称为 MTV 框架 。在 MTV 开发模式中：
+
+    M 代表模型（Model），即数据存取层。 该层处理与数据相关的所有事务： 如何存取、如何验证有效性、包含哪些行为以及数据之间的关系等。
+
+    T 代表模板(Template)，即表现层。 该层处理与表现相关的决定： 如何在页面或其他类型文档中进行显示。
+
+    V 代表视图（View），即业务逻辑层。 该层包含存取模型及调取恰当模板的相关逻辑。 你可以把它看作模型与模板之间的桥梁。
+
+-------------------------------------------
+Django 
+
+Django 对 MVC 的诠释中，视图用来描述要展现给用户的数据；不是数据 如何展现 ,而且展现 哪些 数据。 相比之下，Ruby on Rails 及一些同类框架提倡控制器负责决定向用户展现哪些数据，而视图则仅决定 如何 展现数据，而不是展现 哪些 数据。
+-------------------------------------------
+
