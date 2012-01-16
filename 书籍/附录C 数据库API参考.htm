@@ -1,0 +1,1283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+	
+<title>附录C 数据库API参考</title>
+
+<link rel="stylesheet" href="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/reset-min.css" type="text/css">
+<link rel="stylesheet" href="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/grids-min.css" type="text/css">
+<link rel="stylesheet" href="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/djangobook.css" type="text/css">
+<link href="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/container.css" type="text/css" media="screen" rel="stylesheet">
+<link href="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/tabs.css" type="text/css" media="screen" rel="stylesheet">
+<link href="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/resizable.css" type="text/css" media="screen" rel="stylesheet">
+</head>
+<body><div class="yresizable-proxy" id="djangobooktranslations-rzproxy"></div><div class="yresizable-proxy" id="djangobookcomments-rzproxy"></div>
+<div id="doc" class="yui-t7">
+      <div id="hd">
+        <h1><a href="http://djangobook.py3k.cn/">The Django Book</a></h1>
+        <div id="global-nav">
+            <a class="about" href="http://new.djangobook.com/about/">About</a>
+          |
+            <a class="comment-help" href="http://new.djangobook.com/about/comments/">Comment help</a>
+          |
+            <a class="contact" href="http://new.djangobook.com/contact/">Contact us</a>
+          |
+            <a class="errata" href="http://new.djangobook.com/errata/">Errata</a>
+          |
+            <a class="buy" href="http://www.amazon.com/gp/product/1590597257?ie=UTF8&amp;tag=jacobianorg-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1590597257">
+                Buy the print version on Amazon.com</a>
+        </div>
+        <div class="nav">
+            已完成 171段 共有 311段 完成度 54%
+        	<a href="http://djangobook.py3k.cn/appendixC/ecn/">| 中英文对照</a> |
+        	<a href="http://djangobook.py3k.cn/appendixC/en/">英文</a> |
+        	<a href="http://djangobook.py3k.cn/appendixC/">中文</a>
+        	<a href="http://djangobook.py3k.cn/appendixB/">| 上一章</a> |
+        	<a href="http://djangobook.py3k.cn/">目  录</a> |
+        	<a href="http://djangobook.py3k.cn/appendixD/">下一章 </a> |
+        	<a href="http://djangobook.py3k.cn/appendixC/translate/">翻译 </a>  |
+        </div>
+     </div>
+<div id="bd">
+<div id="yui-main">
+  <div class="yui-b">
+    <div id="chapter-body">  
+    	
+    <div class="document" id="c-api">
+<h1 class="cn title" id="cn0">附录C 数据库API参考<div style="height: 29px;" id="c0" class="comment-indicator has-comments"><span>50028</span></div><div style="height: 29px;" id="b0" class="translation-indicator has-translations"><span> </span></div></h1>
+<p class="cn" id="cn1">Django数据库API是附录B中讨论过的数据模型API的另一部分。一旦定义了数据模型，你将会在任何要访问数据库的时候使用数据库API。你已经在本书中看到了很多数据库API的例子，这篇附录对数据库API的各种变化详加阐释。<div style="height: 37px;" id="c1" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b1" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn2">和附录B中讨论的数据模型API时一样，尽管认为这些API已经很稳定，Django开发者一直在增加各种便捷方法。因此，查看最新的在线文档是个好方法，在线文档可以在  <a class="reference external" href="http://www.djangoproject.com/documentation/0.96/db-api/">http://www.djangoproject.com/documentation/0.96/db-api/</a> 找到.<div style="height: 37px;" id="c2" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b2" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn3">贯穿这个参考文档，我们都会提到下面的这个models。它或许来自于一个简单的博客程序。<div style="height: 19px;" id="c3" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b3" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn4">from django.db import models
+
+class Blog(models.Model):
+    name = models.CharField(max_length=100)
+    tagline = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class Author(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.name
+
+class Entry(models.Model):
+    blog = models.ForeignKey(Blog)
+    headline = models.CharField(max_length=255)
+    body_text = models.TextField()
+    pub_date = models.DateTimeField()
+    authors = models.ManyToManyField(Author)
+
+    def __str__(self):
+        return self.headline
+<div style="height: 612px;" id="c4" class="comment-indicator has-comments"><span>2</span></div></pre>
+<div class="section" id="id1">
+<span id="cn6"></span><h2 class="cn" id="cn6">创建对象<div style="height: 15px;" id="c6" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b6" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn7">要创建一个对象, 用模型类使用关键字参数实例化它, 接着调用 <tt class="docutils literal"><span class="pre">save()</span></tt>  将它保存到数据库中:<div style="height: 20px;" id="c7" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b7" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn8">&gt;&gt;&gt; from mysite.blog.models import Blog
+&gt;&gt;&gt; b = Blog(name='Beatles Blog', tagline='All the latest Beatles news.')
+&gt;&gt;&gt; b.save()
+<div style="height: 84px;" id="c8" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn10">这会在后台执行一个SQL语句.  如果您不显式地调用 <tt class="docutils literal"><span class="pre">save()</span></tt> , Django不会保存到数据库.<div style="height: 20px;" id="c10" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b10" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn11"><tt class="docutils literal"><span class="pre">save()</span></tt> 方法没有返回值.<div style="height: 20px;" id="c11" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b11" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn12">要在一个步骤中创建并保存一个对象, 参见会稍后讨论的 <tt class="docutils literal"><span class="pre">create</span></tt> 管理者方法,<div style="height: 20px;" id="c12" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b12" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="section" id="id2">
+<span id="cn13"></span><h3 class="cn" id="cn13">当您保存的时候发生了什么?<div style="height: 15px;" id="c13" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b13" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn14">当您保存一个对象的时候, Django执行下面的步骤:<div style="height: 19px;" id="c14" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b14" class="translation-indicator has-translations"><span> </span></div></p>
+<blockquote>
+<p class="cn" id="cn15"><strong>发出一个预存信号。</strong> 它发出一个将要存储一个对象的通知。你可以注册一个监听程序，在信号发出的时候就会被调用。到本书出版时，这些信号仍在开发中并且没有文档化，请查看在线文档来获得最新的消息。<div style="height: 56px;" id="c15" class="comment-indicator"><span></span></div><div style="height: 56px;" id="b15" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn16"><strong>预处理数据.</strong> 对于对象的每个字段，将根据需要进行自动的数据修改。<div style="height: 20px;" id="c16" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b16" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn17">大部分字段并不预处理，它们会保持它们原来的样子。预处理仅仅用在那些有特殊性质的字段，比如文件字段。<div style="height: 38px;" id="c17" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b17" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn18"><strong>为数据库准备数据。</strong> 每一个字段先要把当前值转化成数据库中可以保存的数据的类型。<div style="height: 20px;" id="c18" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b18" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn19">大多数字段的数据不需要预先准备。简单的数据类型，比如整型和字符串等python对象可以直接写进数据库。然而，更复杂的数据类型需要做一些修改。比如， <tt class="docutils literal"><span class="pre">DateFields</span></tt> 使用python的 <tt class="docutils literal"><span class="pre">datetime</span></tt> 对象来存储数据。数据库并不能存储 <tt class="docutils literal"><span class="pre">datetime</span></tt> 对象，所以该字段要存入数据库先要把值转化为符合ISO标准的日期字符串。<div style="height: 76px;" id="c19" class="comment-indicator"><span></span></div><div style="height: 76px;" id="b19" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn20"><strong>向数据库中插入数据。</strong> 经过预处理准备好的数据然后会组合成一条SQL语句来插入数据库。<div style="height: 20px;" id="c20" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b20" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn21"><strong>发出存毕信号。</strong> 与预存信号类似，存毕信号在对象成功保存之后发出。同样，这些信号也还没有文档化。<div style="height: 38px;" id="c21" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b21" class="translation-indicator has-translations"><span> </span></div></p>
+</blockquote>
+</div>
+<div class="section" id="id3">
+<span id="cn22"></span><h3 class="cn" id="cn22">自增主键<div style="height: 15px;" id="c22" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b22" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn23">为了方便，每个数据库模型都会添加一个自增主键字段，即 <tt class="docutils literal"><span class="pre">id</span></tt> 。除非你在某个字段属性中显式的指定 <tt class="docutils literal"><span class="pre">primary_key=True</span></tt> （参见附录B中题为AutoField的章节）。<div style="height: 38px;" id="c23" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b23" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn24">如果你的数据库模型中包括 <tt class="docutils literal"><span class="pre">AutoField</span></tt> ，这个自增量的值将会在你第一次调用 <tt class="docutils literal"><span class="pre">save()</span></tt> 时作为对象的一个属性计算得出并保存起来。<div style="height: 38px;" id="c24" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b24" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn25">&gt;&gt;&gt; b2 = Blog(name='Cheddar Talk', tagline='Thoughts on cheese.')
+&gt;&gt;&gt; b2.id     # Returns None, because b doesn't have an ID yet.
+None
+
+&gt;&gt;&gt; b2.save()
+&gt;&gt;&gt; b2.id     # Returns the ID of your new object.
+14
+<div style="height: 180px;" id="c25" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn27">在调用 <tt class="docutils literal"><span class="pre">save()</span></tt> 方法之前没有办法知道ID的值，因为这个值是数据库计算出来的，不是Django。<div style="height: 20px;" id="c27" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b27" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn28">如果你想在一个新数据存储时，定义其 <tt class="docutils literal"><span class="pre">AutoField</span></tt> 字段值，而不依赖于数据库自动分配，明确赋值即可。<div style="height: 20px;" id="c28" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b28" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn29">&gt;&gt;&gt; b3 = Blog(id=3, name='Cheddar Talk', tagline='Thoughts on cheese.')
+&gt;&gt;&gt; b3.id
+3
+&gt;&gt;&gt; b3.save()
+&gt;&gt;&gt; b3.id
+3
+<div style="height: 156px;" id="c29" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn31">如果你手动指定自增主键的值，要确保这个主键在数据库中不存在！如果你显式地指定主键来创建新对象，而这个主键在数据库中已经存在的话，Django会认为你要更改已经存在的那条记录，而不是创建一个新的。<div style="height: 37px;" id="c31" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b31" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn32">以前面的 <tt class="docutils literal"><span class="pre">'Cheddar</span> <span class="pre">Talk'</span></tt> blog为例，下面的例子会覆盖数据库中已经存在的记录：<div style="height: 20px;" id="c32" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b32" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn33">&gt;&gt;&gt; b4 = Blog(id=3, name='Not Cheddar', tagline='Anything but cheese.')
+&gt;&gt;&gt; b4.save()  # Overrides the previous blog with ID=3!
+<div style="height: 60px;" id="c33" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn35">如果你确信不会产生主键冲突的话，当需要保存大量对象的时候，明确指定自增主键的值是非常有用的。<div style="height: 19px;" id="c35" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b35" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+</div>
+<div class="section" id="id4">
+<span id="cn36"></span><h2 class="cn" id="cn36">保存对对象做的修改<div style="height: 15px;" id="c36" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b36" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn37">要保存一个已经在数据库中存在的对象的变更, 使用 <tt class="docutils literal"><span class="pre">save()</span></tt> .<div style="height: 20px;" id="c37" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b37" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn38">假定 <tt class="docutils literal"><span class="pre">b5</span></tt> 这个 <tt class="docutils literal"><span class="pre">Blog</span></tt> 实例已经保存到数据库中，下面这个例子更改了它的名字，并且更新了它在数据库中的记录：<div style="height: 20px;" id="c38" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b38" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn39">&gt;&gt;&gt; b5.name = 'New name'
+&gt;&gt;&gt; b5.save()
+<div style="height: 60px;" id="c39" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn41">这个例子在后台执行了 <tt class="docutils literal"><span class="pre">UPDATE</span></tt> 这一SQL语句。再次声明，Django在你显式地调用 <tt class="docutils literal"><span class="pre">save()</span></tt> 之前是不会更新数据库的。<div style="height: 20px;" id="c41" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b41" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn42">Django如何得知何时 <tt class="docutils literal"><span class="pre">UPDATE</span></tt> ，何时 <tt class="docutils literal"><span class="pre">INSERT</span></tt> 呢<div style="height: 20px;" id="c42" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b42" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn43">你可能已经注意到Django数据库对象在创建和更改对象时，使用了同一个 <tt class="docutils literal"><span class="pre">save()</span></tt> 函数。Django抽象化了对SQL语句中的 <tt class="docutils literal"><span class="pre">INSERT</span></tt> 和 <tt class="docutils literal"><span class="pre">UPDATE</span></tt> 的需求，当你调用 <tt class="docutils literal"><span class="pre">save()</span></tt> 的时候，Django会遵守下面的原则：<div style="height: 39px;" id="c43" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b43" class="translation-indicator has-translations"><span> </span></div></p>
+<ul class="simple">
+<li class="cn" id="cn44"><p class="first cn" id="cn44">如果对象的主键属性被设置成相当于 <tt class="docutils literal"><span class="pre">True</span></tt> 的值（比如 <tt class="docutils literal"><span class="pre">None</span></tt> 或者空字符串之外的值），Django会执行一个 <tt class="docutils literal"><span class="pre">SELECT</span></tt> 查询来检测是否已存在一个相同主键的记录。<div style="height: 38px;" id="c44" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b44" class="translation-indicator has-translations"><span> </span></div></p>
+<div style="height: 38px;" id="c44" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b44" class="translation-indicator"><span></span></div></li>
+</ul>
+<ul class="simple">
+<li class="cn" id="cn45"><p class="first cn" id="cn45">如果已经存在一个主键相同的记录，Django就执行 <tt class="docutils literal"><span class="pre">UPDATE</span></tt> 查询。<div style="height: 20px;" id="c45" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b45" class="translation-indicator has-translations"><span> </span></div></p>
+<div style="height: 20px;" id="c45" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b45" class="translation-indicator"><span></span></div></li>
+</ul>
+<ul class="simple">
+<li class="cn" id="cn46"><p class="first cn" id="cn46">如果对象的主键属性 <em>没有</em> 被设置，或者被设置但数据库中没有与之同主键的记录，那么Django就会执行 <tt class="docutils literal"><span class="pre">INSERT</span></tt> 查询。<div style="height: 20px;" id="c46" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b46" class="translation-indicator has-translations"><span> </span></div></p>
+<div style="height: 20px;" id="c46" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b46" class="translation-indicator"><span></span></div></li>
+</ul>
+<p class="cn" id="cn47">正因如此，如果你不能确信数据库中不存在主键相同的记录的话，你应该避免没有明确指定主键的值。<div style="height: 19px;" id="c47" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b47" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn48">更新 <tt class="docutils literal"><span class="pre">ForeignKey</span></tt> 字段原理是一样的，只是要给这个字段赋予正确类型的对象就行了。<div style="height: 20px;" id="c48" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b48" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn49">&gt;&gt;&gt; joe = Author.objects.create(name="Joe")
+&gt;&gt;&gt; entry.author = joe
+&gt;&gt;&gt; entry.save()
+<div style="height: 84px;" id="c49" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn51">如果你把一个错误类型的对象赋给它，Django会警报的。<div style="height: 19px;" id="c51" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b51" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="id5">
+<span id="cn52"></span><h2 class="cn" id="cn52">获取对象<div style="height: 15px;" id="c52" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b52" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn53">在这本书中，获取对象都使用下面这样的代码实现的：<div style="height: 19px;" id="c53" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b53" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn54">&gt;&gt;&gt; blogs = Blog.objects.filter(author__name__contains="Joe")
+<div style="height: 36px;" id="c54" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn56">在这幕后会有相当多的步骤：当你从数据库中获取对象的时候，你实际上用 <tt class="docutils literal"><span class="pre">Manager</span></tt> 模块构造了一个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，这个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 知道怎样去执行SQL语句并返回你想要的对象。<div style="height: 38px;" id="c56" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b56" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn57">附录B从模块定义的角度讨论了这两个对象，现在让我们研究一下它们是怎么工作的。<div style="height: 19px;" id="c57" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b57" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn58"><tt class="docutils literal"><span class="pre">QuerySet</span></tt> 代表了你的数据库中的对象的一个集合。它根据所给参数可以构造若干个 <em>过滤器</em> 来缩小这个集合的规模。用SQL术语来讲，一个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 就相当于一个 <tt class="docutils literal"><span class="pre">SELECT</span></tt> 语句，过滤器相当于诸如 <tt class="docutils literal"><span class="pre">WHERE</span></tt> 或者 <tt class="docutils literal"><span class="pre">LIMIT</span></tt> 的限定语。<div style="height: 39px;" id="c58" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b58" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn59">你通过模块的 <tt class="docutils literal"><span class="pre">Manager</span></tt> 就可以得到一个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 。每个模块至少有一个 <tt class="docutils literal"><span class="pre">Manager</span></tt> ，默认名称是 <tt class="docutils literal"><span class="pre">objects</span></tt> 。可以通过模块类来直接访问它，比如：<div style="height: 38px;" id="c59" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b59" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn60">&gt;&gt;&gt; Blog.objects
+&lt;django.db.models.manager.Manager object at 0x137d00d&gt;
+<div style="height: 60px;" id="c60" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn62">为了强制分离数据表级别的操作和数据记录级别的操作， <tt class="docutils literal"><span class="pre">Manager</span></tt> 只能通过模块类而不是模块实例来访问：<div style="height: 20px;" id="c62" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b62" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn63">&gt;&gt;&gt; b = Blog(name='Foo', tagline='Bar')
+&gt;&gt;&gt; b.objects
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+AttributeError: Manager isn't accessible via Blog instances.
+<div style="height: 132px;" id="c63" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn65">对一个模块来讲， <tt class="docutils literal"><span class="pre">Manager</span></tt> 是 <tt class="docutils literal"><span class="pre">QuerySets</span></tt> 的主要来源。它就像一个根本的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，可以对模块的数据库表中的所有对象进行描述。比如， <tt class="docutils literal"><span class="pre">Blog.objects</span></tt> 就是包含着数据库中所有的 <tt class="docutils literal"><span class="pre">Blog</span></tt> 对象的一个根本的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 。<div style="height: 39px;" id="c65" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b65" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="id6">
+<span id="cn66"></span><h2 class="cn" id="cn66">缓存与查询集<div style="height: 15px;" id="c66" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b66" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn67">为了减少数据库访问次数，每个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 包含一个缓存，要写出高效的代码，理解这一点很重要。<div style="height: 20px;" id="c67" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b67" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn68">在刚被创建的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 中，缓存是空的。当 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 第一次被赋值，就是执行数据库查询的时候，Django会把查询结果保存到这个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 的缓存中，并返回请求结果（例如， <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 迭代结束的时候，就会返回下一条记录）。再次使用 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 的值的话会重复使用缓存中的内容。<div style="height: 57px;" id="c68" class="comment-indicator"><span></span></div><div style="height: 57px;" id="b68" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn69">要时刻记住这种缓存机制，因为如果你不正确的使用 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 的话，可能会遇到麻烦。例如，下面这段代码会分别产生两个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，计算出来然后丢弃。<div style="height: 39px;" id="c69" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b69" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn70">print [e.headline for e in Entry.objects.all()]
+print [e.pub_date for e in Entry.objects.all()]
+<div style="height: 60px;" id="c70" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn72">这就意味着相同的数据库的查询会被执行两次，使数据库的负载加倍。而且这两个列表包含的数据可能不同，因为在两次查询的间隙，可能有一个 <tt class="docutils literal"><span class="pre">Entry</span></tt> 被添加或是删除了。<div style="height: 38px;" id="c72" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b72" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn73">避免这个问题，简单的方法是保存这个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt>  并且重用它。<div style="height: 20px;" id="c73" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b73" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn74">queryset = Poll.objects.all()
+print [p.headline for p in queryset] # Evaluate the query set.
+print [p.pub_date for p in queryset] # Reuse the cache from the evaluation.
+<div style="height: 84px;" id="c74" class="comment-indicator"><span></span></div></pre>
+</div>
+<div class="section" id="id7">
+<span id="cn76"></span><h2 class="cn" id="cn76">过滤器对象<div style="height: 15px;" id="c76" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b76" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn77">从数据表中获取对象的最简单的方法就是得到所有的对象，就是调用一个 <tt class="docutils literal"><span class="pre">Manager</span></tt> 的 <tt class="docutils literal"><span class="pre">all()</span></tt> 方法。<div style="height: 20px;" id="c77" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b77" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn78">&gt;&gt;&gt; Entry.objects.all()
+<div style="height: 36px;" id="c78" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn80"><tt class="docutils literal"><span class="pre">all()</span></tt> 方法返回一个包含数据库的所有对象的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 。<div style="height: 20px;" id="c80" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b80" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn81">但是通常情况下，只需要从所有对象中请求一个子集，这就需要你细化一下刚才的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，加一些过滤条件。用 <tt class="docutils literal"><span class="pre">filter()</span></tt> 和 <tt class="docutils literal"><span class="pre">exclude()</span></tt> 方法可以实现这样的功能：<div style="height: 39px;" id="c81" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b81" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn82">&gt;&gt;&gt; y2006 = Entry.objects.filter(pub_date__year=2006)
+&gt;&gt;&gt; not2006 = Entry.objects.exclude(pub_date__year=2006)
+<div style="height: 60px;" id="c82" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn84"><tt class="docutils literal"><span class="pre">filter()</span></tt> 和 <tt class="docutils literal"><span class="pre">exclude()</span></tt> 方法都接受 <em>字段查询</em> 参数，我们稍后会详细讨论。<div style="height: 20px;" id="c84" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b84" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="section" id="id8">
+<span id="cn85"></span><h3 class="cn" id="cn85">级联过滤器<div style="height: 15px;" id="c85" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b85" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn86">细化过的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 本身就是一个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，所以可以进一步细化，比如：<div style="height: 20px;" id="c86" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b86" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn87">&gt;&gt;&gt; qs = Entry.objects.filter(headline__startswith='What')
+&gt;&gt;&gt; qs = qs..exclude(pub_date__gte=datetime.datetime.now())
+&gt;&gt;&gt; qs = qs.filter(pub_date__gte=datetime.datetime(2005, 1, 1))
+<div style="height: 84px;" id="c87" class="comment-indicator has-comments"><span>1</span></div></pre>
+<p class="cn" id="cn89">这样，我们把最初过的数据库中所有内容的一个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 经过添加一个过滤器、一个反向过滤器和另外一个过滤器，得到一个最终的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，最终结果中包含了所有标题以“What”开头的2005年至今的出版的条目。<div style="height: 39px;" id="c89" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b89" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn90">这里需要指出的一点是，创建一个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 并不会牵涉到任何数据库动作。事实上，上面的三行并不会产生 <em>任何的</em> 数据库调用。就是说你可以连接任意多个过滤器，只要你不把这个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 用于赋值的话，Django是不会执行查询的。<div style="height: 39px;" id="c90" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b90" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn91">你可以用下面的方法来计算 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 的值：<div style="height: 20px;" id="c91" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b91" class="translation-indicator has-translations"><span> </span></div></p>
+<blockquote>
+<p class="cn" id="cn92"><em>迭代</em> ： <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 是可以迭代的，它会在迭代结束的时候执行数据库查询。例如，下面的这个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 在for循环迭代完毕之前，是不会被赋值的：<div style="height: 40px;" id="c92" class="comment-indicator"><span></span></div><div style="height: 40px;" id="b92" class="translation-indicator has-translations"><span> </span></div></p>
+</blockquote>
+<pre class="cn literal-block" id="cn93">qs = Entry.objects.filter(pub_date__year=2006)
+qs = qs.filter(headline__icontains="bill")
+for e in qs:
+    print e.headline
+<div style="height: 108px;" id="c93" class="comment-indicator has-comments"><span>1</span></div></pre>
+<blockquote>
+<p class="cn" id="cn95">它会打印2006年所有包含bill的标题，但只会触发一次数据库访问。<div style="height: 20px;" id="c95" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b95" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn96"><em>打印</em> ：对 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 使用 <tt class="docutils literal"><span class="pre">repr()</span></tt> 方法时，它是会被赋值的。这是为了方便Python的交互解释器，这样在交互环境中使用API时就会立刻看到结果。<div style="height: 39px;" id="c96" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b96" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn97"><em>切片</em> ： 在接下来的“限量查询集”一节中就会解释这一点， <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 是可以用Python的数组切片的语法来切片的。通常切片过的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 会返回另外一个（尚未赋值的） <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，但是如果在切片时使用步长参数的话，Django会执行数据库查询的。<div style="height: 58px;" id="c97" class="comment-indicator"><span></span></div><div style="height: 58px;" id="b97" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn98"><em>转化成列表</em> ：对 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 调用 <tt class="docutils literal"><span class="pre">list()</span></tt> 方法的话，就可以对它强制赋值，比如：<div style="height: 21px;" id="c98" class="comment-indicator"><span></span></div><div style="height: 21px;" id="b98" class="translation-indicator has-translations"><span> </span></div></p>
+</blockquote>
+<pre class="cn literal-block" id="cn99">&gt;&gt;&gt; entry_list = list(Entry.objects.all())
+<div style="height: 36px;" id="c99" class="comment-indicator"><span></span></div></pre>
+<blockquote>
+<p class="cn" id="cn101">但是，需要警告的是这样做会导致很大的内存负载，因为Django会把列表的每一个元素加载到内存。相比之下，对 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 进行迭代会利用数据库来加载数据，并且在需要的时候才会把对象实例化。<div style="height: 57px;" id="c101" class="comment-indicator"><span></span></div><div style="height: 57px;" id="b101" class="translation-indicator has-translations"><span> </span></div></p>
+</blockquote>
+<p class="cn" id="cn102">过滤过的查询集是独一无二的<div style="height: 19px;" id="c102" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b102" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn103">你每次细化一个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 都会得到一个崭新的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，绝不会与之前的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 有任何的瓜葛。每次的细化都会创建一个各自的截然不同的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，可以用来存储、使用和重用。<div style="height: 39px;" id="c103" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b103" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn104">q1 = Entry.objects.filter(headline__startswith="What")
+q2 = q1.exclude(pub_date__gte=datetime.now())
+q3 = q1.filter(pub_date__gte=datetime.now())
+<div style="height: 84px;" id="c104" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn106">这三个 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 是无关的。第一个基础查询集包含了所有标题以What开始的条目。第二个查询集是第一个的子集，只是过滤掉了 <tt class="docutils literal"><span class="pre">pub_date</span></tt> 比当前时间大的记录。第三个查询集也是第一个的子集，只保留 <tt class="docutils literal"><span class="pre">pub_date</span></tt> 比当前时间大的记录。初始的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> （ <tt class="docutils literal"><span class="pre">q1</span></tt> ）是不受细化过程的影响。<div style="height: 58px;" id="c106" class="comment-indicator"><span></span></div><div style="height: 58px;" id="b106" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="id9">
+<span id="cn107"></span><h3 class="cn" id="cn107">限量查询集<div style="height: 15px;" id="c107" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b107" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn108">可以用Python的数据切片的语法来限定 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 的结果数量，这和SQL中的 <tt class="docutils literal"><span class="pre">LIMIT</span></tt> 和 <tt class="docutils literal"><span class="pre">OFFSET</span></tt> 语句是一样的。<div style="height: 20px;" id="c108" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b108" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn109">比如，这句返回前五个条目（ <tt class="docutils literal"><span class="pre">LIMIT</span> <span class="pre">5</span></tt> ）：<div style="height: 20px;" id="c109" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b109" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn110">&gt;&gt;&gt; Entry.objects.all()[:5]
+<div style="height: 36px;" id="c110" class="comment-indicator has-comments"><span>1</span></div></pre>
+<p class="cn" id="cn112">这句返回第六到第十个条目（ <tt class="docutils literal"><span class="pre">OFFSET</span> <span class="pre">5</span> <span class="pre">LIMIT</span> <span class="pre">5</span></tt> ）：<div style="height: 20px;" id="c112" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b112" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn113">&gt;&gt;&gt; Entry.objects.all()[5:10]
+<div style="height: 36px;" id="c113" class="comment-indicator has-comments"><span>2</span></div></pre>
+<p class="cn" id="cn115">一般地，对 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 进行切片会返回一个新的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，但并不执行查询。如果你在Python切片语法中使用步长参数的话，就会出现特例。例如，要返回前十个对象中的偶序数对象的列表时，实际上会执行查询：<div style="height: 38px;" id="c115" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b115" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn116">&gt;&gt;&gt; Entry.objects.all()[:10:2]
+<div style="height: 36px;" id="c116" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn118">要得到 <em>单个</em> 对象而不是一个列表时（例如 <tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">foo</span> <span class="pre">FROM</span> <span class="pre">bar</span> <span class="pre">LIMIT</span> <span class="pre">1</span></tt> ），可以不用切片而是使用下标。例如，这样就会返回数据库中对标题进行字母排序后的第一个 <tt class="docutils literal"><span class="pre">Entry</span></tt> ：<div style="height: 39px;" id="c118" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b118" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn119">&gt;&gt;&gt; Entry.objects.order_by('headline')[0]
+<div style="height: 36px;" id="c119" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn121">刚才这句和下面的大致相当：<div style="height: 19px;" id="c121" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b121" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn122">&gt;&gt;&gt; Entry.objects.order_by('headline')[0:1].get()
+<div style="height: 36px;" id="c122" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn124">但是要记住，如果没有符合条件的记录的话，第一种用法会导致 <tt class="docutils literal"><span class="pre">IndexError</span></tt> ，而第二种用法会导致 <tt class="docutils literal"><span class="pre">DoesNotExist</span></tt> 。<div style="height: 20px;" id="c124" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b124" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="querysets">
+<span id="cn125"></span><h3 class="cn" id="cn125">返回新的 QuerySets 的 查询方法<div style="height: 15px;" id="c125" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b125" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn126">Django提供了一系列的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 细化方法，既可以修改 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> 返回的结果的类型，又可以修改对应的SQL查询的执行方法。这就是这一节我们要讨论的内容。其中有一些细化方法会接收字段查询参数，我们稍后会详细讨论。<div style="height: 38px;" id="c126" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b126" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="section" id="filter-lookup">
+<span id="cn127"></span><h4 class="cn" id="cn127">filter(**lookup)<div style="height: 15px;" id="c127" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b127" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn128">返回一个新的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，包含匹配参数lookup的对象。<div style="height: 20px;" id="c128" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b128" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="exclude-kwargs">
+<span id="cn129"></span><h4 class="cn" id="cn129">exclude(**kwargs)<div style="height: 15px;" id="c129" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b129" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn130">返回一个新的 <tt class="docutils literal"><span class="pre">QuerySet</span></tt> ，包含不匹配参数kwargs的对象。<div style="height: 20px;" id="c130" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b130" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="order-by-fields">
+<span id="cn131"></span><h4 class="cn" id="cn131">order_by(*fields)<div style="height: 15px;" id="c131" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b131" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn132">默认情况下，会返回一个按照models的metadata中的``ordering``选项排序的``QuerySet``（请查看附录B）。你可以调用``order_by()``方法按照一个特定的规则进行排序以覆盖默认的行为：<div style="height: 37px;" id="c132" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b132" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn133">&gt;&gt; Entry.objects.filter(pub_date__year=2005).order_by('-pub_date', 'headline')
+<div style="height: 36px;" id="c133" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn135">结果将先对 <tt class="docutils literal"><span class="pre">pub_date</span></tt> 进行降序排序，然后对 <tt class="docutils literal"><span class="pre">headline</span></tt> 进行升序排序。 <tt class="docutils literal"><span class="pre">"-pub_date"</span></tt> 前面的符号代表降序排序。如果没有 <tt class="docutils literal"><span class="pre">"-"</span></tt> ，默认为升序排序。要使用随机的顺序，使用 <tt class="docutils literal"><span class="pre">"?"</span></tt> ，比如：<div style="height: 39px;" id="c135" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b135" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn136">&gt;&gt;&gt; Entry.objects.order_by('?')
+<div style="height: 36px;" id="c136" class="comment-indicator"><span></span></div></pre>
+</div>
+<div class="section" id="distinct">
+<span id="cn138"></span><h4 class="cn" id="cn138">distinct()<div style="height: 15px;" id="c138" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b138" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn139">就像使用”SELECT DISTINCT”在SQL查询一样，返回一个新的”QuerySet “。这消除了查询结果中的重复行。<div style="height: 19px;" id="c139" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b139" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn140">默认的情况下， “QuerySet”并不能消除重复的行。在练习中，可能会产生问题，因为像 “Blog.objects”这么简单的查询并不一定能产生重复的行。<div style="height: 37px;" id="c140" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b140" class="translation-indicator has-translations"><span> translating....</span></div></p>
+<p class="cn" id="cn141">然而，如果你的查询是多表关联查询，那么``QuerySet``查询的结果可能会有重复数据.因此我们要用``distinct()`` .<div style="height: 19px;" id="c141" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b141" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="values-fields">
+<span id="cn142"></span><h4 class="cn" id="cn142">values(*fields)<div style="height: 15px;" id="c142" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b142" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn143">返回一个特殊的QuerySet相当于一个字典列表，而不是model的实例。每个字典代表一个对象，它的keys对应于这个model的属性名。<div style="height: 37px;" id="c143" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b143" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn144"># This list contains a Blog object.
+&gt;&gt;&gt; Blog.objects.filter(name__startswith='Beatles')
+[Beatles Blog]
+
+# This list contains a dictionary.
+&gt;&gt;&gt; Blog.objects.filter(name__startswith='Beatles').values()
+[{'id': 1, 'name': 'Beatles Blog', 'tagline': 'All the latest Beatles news.'}]
+<div style="height: 180px;" id="c144" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn146"><tt class="docutils literal"><span class="pre">values()</span></tt> 方法接受可选的位置参数，, <tt class="docutils literal"><span class="pre">*fields</span></tt> 参数定义了SELECT中所限定返回的特定字段的名称。如果你指定了这一参数，返回的字典中只会包含你制定的字段的字段名和字段值。如果不指定这个参数的话，返回的字典中会包含数据表中每个字段的字段名和字段值：<div style="height: 56px;" id="c146" class="comment-indicator"><span></span></div><div style="height: 56px;" id="b146" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn147">&gt;&gt;&gt; Blog.objects.values()
+[{'id': 1, 'name': 'Beatles Blog', 'tagline': 'All the latest Beatles news.'}],
+&gt;&gt;&gt; Blog.objects.values('id', 'name')
+[{'id': 1, 'name': 'Beatles Blog'}]
+<div style="height: 108px;" id="c147" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn149">当你从一小数目的可用字段获取值和不需要一个模型实例对象的时候，这个方法很有用。它的更有效率的领域只选择你需要使用<div style="height: 19px;" id="c149" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b149" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="dates-field-kind-order">
+<span id="cn150"></span><h4 class="cn" id="cn150">dates(field, kind, order)<div style="height: 15px;" id="c150" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b150" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn151">Returns a special <tt class="docutils literal"><span class="pre">QuerySet</span></tt> that evaluates to a list of <tt class="docutils literal"><span class="pre">datetime.datetime</span></tt> objects
+representing all available dates of a particular kind within the contents of the
+<tt class="docutils literal"><span class="pre">QuerySet</span></tt> .<div style="height: 39px;" id="c151" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b151" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn152">The <tt class="docutils literal"><span class="pre">field</span></tt> argument must be the name of a <tt class="docutils literal"><span class="pre">DateField</span></tt> or <tt class="docutils literal"><span class="pre">DateTimeField</span></tt> of your
+model. The <tt class="docutils literal"><span class="pre">kind</span></tt> argument must be either <tt class="docutils literal"><span class="pre">"year"</span></tt> , <tt class="docutils literal"><span class="pre">"month"</span></tt> , or <tt class="docutils literal"><span class="pre">"day"</span></tt> . Each
+<tt class="docutils literal"><span class="pre">datetime.datetime</span></tt> object in the result list is truncated to the given <tt class="docutils literal"><span class="pre">type</span></tt> :<div style="height: 58px;" id="c152" class="comment-indicator"><span></span></div><div style="height: 58px;" id="b152" class="translation-indicator has-translations"><span> </span></div></p>
+<ul class="simple">
+<li class="cn" id="cn153"><p class="first cn" id="cn153"><tt class="docutils literal"><span class="pre">"year"</span></tt> returns a list of all distinct year values for the field.<div style="height: 20px;" id="c153" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b153" class="translation-indicator has-translations"><span> </span></div></p>
+<div style="height: 20px;" id="c153" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b153" class="translation-indicator"><span></span></div></li>
+</ul>
+<ul class="simple">
+<li class="cn" id="cn154"><p class="first cn" id="cn154"><tt class="docutils literal"><span class="pre">"month"</span></tt> returns a list of all distinct year/month values for the field.<div style="height: 20px;" id="c154" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b154" class="translation-indicator has-translations"><span> </span></div></p>
+<div style="height: 20px;" id="c154" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b154" class="translation-indicator"><span></span></div></li>
+</ul>
+<ul class="simple">
+<li class="cn" id="cn155"><p class="first cn" id="cn155"><tt class="docutils literal"><span class="pre">"day"</span></tt> returns a list of all distinct year/month/day values for the field.<div style="height: 20px;" id="c155" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b155" class="translation-indicator has-translations"><span> </span></div></p>
+<div style="height: 20px;" id="c155" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b155" class="translation-indicator"><span></span></div></li>
+</ul>
+<p class="cn" id="cn156"><tt class="docutils literal"><span class="pre">order</span></tt> , which defaults to <tt class="docutils literal"><span class="pre">'ASC'</span></tt> , should be either <tt class="docutils literal"><span class="pre">'ASC'</span></tt> or <tt class="docutils literal"><span class="pre">'DESC'</span></tt> . This
+specifies how to order the results.<div style="height: 20px;" id="c156" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b156" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn157">Here are a few examples:<div style="height: 19px;" id="c157" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b157" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn158">&gt;&gt;&gt; Entry.objects.dates('pub_date', 'year')
+[datetime.datetime(2005, 1, 1)]
+
+&gt;&gt;&gt; Entry.objects.dates('pub_date', 'month')
+[datetime.datetime(2005, 2, 1), datetime.datetime(2005, 3, 1)]
+
+&gt;&gt;&gt; Entry.objects.dates('pub_date', 'day')
+[datetime.datetime(2005, 2, 20), datetime.datetime(2005, 3, 20)]
+
+&gt;&gt;&gt; Entry.objects.dates('pub_date', 'day', order='DESC')
+[datetime.datetime(2005, 3, 20), datetime.datetime(2005, 2, 20)]
+
+&gt;&gt;&gt; Entry.objects.filter(headline__contains='Lennon').dates('pub_date', 'day')
+[datetime.datetime(2005, 3, 20)]
+<div style="height: 348px;" id="c158" class="comment-indicator"><span></span></div></pre>
+</div>
+<div class="section" id="select-related">
+<span id="cn160"></span><h4 class="cn" id="cn160">select_related()<div style="height: 15px;" id="c160" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b160" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn161">Returns a <tt class="docutils literal"><span class="pre">QuerySet</span></tt> that will automatically follow foreign key relationships, selecting
+that additional related-object data when it executes its query. This is a performance
+booster that results in (sometimes much) larger queries but means later use of foreign key
+relationships wont require database queries.<div style="height: 56px;" id="c161" class="comment-indicator"><span></span></div><div style="height: 56px;" id="b161" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn162">The following examples illustrate the difference between plain lookups and
+<tt class="docutils literal"><span class="pre">select_related()</span></tt> lookups. Heres standard lookup:<div style="height: 38px;" id="c162" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b162" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn163"># Hits the database.
+&gt;&gt;&gt; e = Entry.objects.get(id=5)
+
+# Hits the database again to get the related Blog object.
+&gt;&gt;&gt; b = e.blog
+<div style="height: 132px;" id="c163" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn165">一下是select_related()查找<div style="height: 19px;" id="c165" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b165" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn166"># Hits the database.
+&gt;&gt;&gt; e = Entry.objects.select_related().get(id=5)
+
+# Doesn't hit the database, because e.blog has been prepopulated
+# in the previous query.
+&gt;&gt;&gt; b = e.blog
+<div style="height: 156px;" id="c166" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn168"><tt class="docutils literal"><span class="pre">select_related()</span></tt> follows foreign keys as far as possible. If you have the following
+models:<div style="height: 20px;" id="c168" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b168" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn169">class City(models.Model):
+    # ...
+
+class Person(models.Model):
+    # ...
+    hometown = models.ForeignKey(City)
+
+class Book(models.Model):
+    # ...
+    author = models.ForeignKey(Person)
+<div style="height: 252px;" id="c169" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn171">then a call to <tt class="docutils literal"><span class="pre">Book.objects.select_related().get(id=4)</span></tt> will cache the related <tt class="docutils literal"><span class="pre">Person</span></tt>
+<em>and</em> the related <tt class="docutils literal"><span class="pre">City</span></tt> :<div style="height: 20px;" id="c171" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b171" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn172">&gt;&gt;&gt; b = Book.objects.select_related().get(id=4)
+&gt;&gt;&gt; p = b.author         # Doesn't hit the database.
+&gt;&gt;&gt; c = p.hometown       # Doesn't hit the database.
+
+&gt;&gt;&gt; b = Book.objects.get(id=4) # No select_related() in this example.
+&gt;&gt;&gt; p = b.author         # Hits the database.
+&gt;&gt;&gt; c = p.hometown       # Hits the database.
+<div style="height: 180px;" id="c172" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn174">Note that <tt class="docutils literal"><span class="pre">select_related()</span></tt> does not follow foreign keys that have <tt class="docutils literal"><span class="pre">null=True</span></tt> .<div style="height: 20px;" id="c174" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b174" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn175">Usually, using <tt class="docutils literal"><span class="pre">select_related()</span></tt> can vastly improve performance because your application
+can avoid many database calls. However, in situations with deeply nested sets of
+relationships, <tt class="docutils literal"><span class="pre">select_related()</span></tt> can sometimes end up following too many relations and
+can generate queries so large that they end up being slow.<div style="height: 75px;" id="c175" class="comment-indicator"><span></span></div><div style="height: 75px;" id="b175" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="extra">
+<span id="cn176"></span><h4 class="cn" id="cn176">extra()<div style="height: 15px;" id="c176" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b176" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn177">Sometimes, the Django query syntax by itself cant easily express a complex <tt class="docutils literal"><span class="pre">WHERE</span></tt> clause.
+For these edge cases, Django provides the <tt class="docutils literal"><span class="pre">extra()</span></tt> <tt class="docutils literal"><span class="pre">QuerySet</span></tt> modifier a hook for
+injecting specific clauses into the SQL generated by a <tt class="docutils literal"><span class="pre">QuerySet</span></tt> .<div style="height: 58px;" id="c177" class="comment-indicator"><span></span></div><div style="height: 58px;" id="b177" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn178">By definition, these extra lookups may not be portable to different database engines
+(because youre explicitly writing SQL code) and violate the DRY principle, so you should
+avoid them if possible.<div style="height: 37px;" id="c178" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b178" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn179">Specify one or more of <tt class="docutils literal"><span class="pre">params</span></tt> , <tt class="docutils literal"><span class="pre">select</span></tt> , <tt class="docutils literal"><span class="pre">where</span></tt> , or <tt class="docutils literal"><span class="pre">tables</span></tt> . None of the
+arguments is required, but you should use at least one of them.<div style="height: 38px;" id="c179" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b179" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn180">The <tt class="docutils literal"><span class="pre">select</span></tt> argument lets you put extra fields in the <tt class="docutils literal"><span class="pre">SELECT</span></tt> clause. It should be a
+dictionary mapping attribute names to SQL clauses to use to calculate that attribute:<div style="height: 38px;" id="c180" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b180" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn181">&gt;&gt;&gt; Entry.objects.extra(select={'is_recent': "pub_date &gt; '2006-01-01'"})
+<div style="height: 36px;" id="c181" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn183">As a result, each <tt class="docutils literal"><span class="pre">Entry</span></tt> object will have an extra attribute, <tt class="docutils literal"><span class="pre">is_recent</span></tt> , a Boolean
+representing whether the entrys <tt class="docutils literal"><span class="pre">pub_date</span></tt> is greater than January 1, 2006.<div style="height: 39px;" id="c183" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b183" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn184">The next example is more advanced; it does a subquery to give each resulting <tt class="docutils literal"><span class="pre">Blog</span></tt> object
+an <tt class="docutils literal"><span class="pre">entry_count</span></tt> attribute, an integer count of associated <tt class="docutils literal"><span class="pre">Entry</span></tt> objects:<div style="height: 39px;" id="c184" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b184" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn185">&gt;&gt;&gt; subq = 'SELECT COUNT(*) FROM blog_entry WHERE blog_entry.blog_id = blog_blog.id'
+&gt;&gt;&gt; Blog.objects.extra(select={'entry_count': subq})
+<div style="height: 60px;" id="c185" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn187">(In this particular case, were exploiting the fact that the query will already contain the
+<tt class="docutils literal"><span class="pre">blog_blog</span></tt> table in its <tt class="docutils literal"><span class="pre">FROM</span></tt> clause.)<div style="height: 39px;" id="c187" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b187" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn188">You can define explicit SQL <tt class="docutils literal"><span class="pre">WHERE</span></tt> clauses perhaps to perform nonexplicit joins by using
+<tt class="docutils literal"><span class="pre">where</span></tt> . You can manually add tables to the SQL <tt class="docutils literal"><span class="pre">FROM</span></tt> clause by using <tt class="docutils literal"><span class="pre">tables</span></tt> .<div style="height: 39px;" id="c188" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b188" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn189"><tt class="docutils literal"><span class="pre">where</span></tt> and <tt class="docutils literal"><span class="pre">tables</span></tt> both take a list of strings. All <tt class="docutils literal"><span class="pre">where</span></tt> parameters are ANDed to
+any other search criteria:<div style="height: 20px;" id="c189" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b189" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn190">&gt;&gt;&gt; Entry.objects.extra(where=['id IN (3, 4, 5, 20)'])
+<div style="height: 36px;" id="c190" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn192">The <tt class="docutils literal"><span class="pre">select</span></tt> and <tt class="docutils literal"><span class="pre">where</span></tt> parameters described previously may use standard Python
+database string placeholders: <tt class="docutils literal"><span class="pre">'%s'</span></tt> to indicate parameters the database engine should
+automatically quote. The <tt class="docutils literal"><span class="pre">params</span></tt> argument is a list of any extra parameters to be
+substituted:<div style="height: 57px;" id="c192" class="comment-indicator"><span></span></div><div style="height: 57px;" id="b192" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn193">&gt;&gt;&gt; Entry.objects.extra(where=['headline=%s'], params=['Lennon'])
+<div style="height: 36px;" id="c193" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn195">始终用 “params” 而不是在”select” 或”where”中嵌值，因为”param”将按照特定数据库保证values被正确的引用<div style="height: 19px;" id="c195" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b195" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn196">下面是一个错误的用法<div style="height: 19px;" id="c196" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b196" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn197">Entry.objects.extra(where=["headline='%s'" % name])
+<div style="height: 36px;" id="c197" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn199">下面是一个正确的用法<div style="height: 19px;" id="c199" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b199" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn200">Entry.objects.extra(where=['headline=%s'], params=[name])
+<div style="height: 36px;" id="c200" class="comment-indicator"><span></span></div></pre>
+</div>
+</div>
+<div class="section" id="queryset-methods-that-do-not-return-querysets">
+<span id="cn202"></span><h3 class="cn" id="cn202">QuerySet Methods That Do Not Return QuerySets<div style="height: 15px;" id="c202" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b202" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn203">The following <tt class="docutils literal"><span class="pre">QuerySet</span></tt> methods evaluate the <tt class="docutils literal"><span class="pre">QuerySet</span></tt> and return something <em>otherthan</em> a <tt class="docutils literal"><span class="pre">QuerySet</span></tt> a single object, value, and so forth.<div style="height: 38px;" id="c203" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b203" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="section" id="get-lookup">
+<span id="cn204"></span><h4 class="cn" id="cn204">get(**lookup)<div style="height: 15px;" id="c204" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b204" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn205">返回给定对象匹配的查询参数，应在格式说明在外地查找部分，如果超过一个对象，“AssertionError”异常将被抛出<div style="height: 19px;" id="c205" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b205" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn206"><tt class="docutils literal"><span class="pre">get()</span></tt> raises a <tt class="docutils literal"><span class="pre">DoesNotExist</span></tt> exception if an object wasnt found for the given
+parameters. The <tt class="docutils literal"><span class="pre">DoesNotExist</span></tt> exception is an attribute of the model class, for example:<div style="height: 38px;" id="c206" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b206" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn207">&gt;&gt;&gt; Entry.objects.get(id='foo') # raises Entry.DoesNotExist
+<div style="height: 36px;" id="c207" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn209">The <tt class="docutils literal"><span class="pre">DoesNotExist</span></tt> exception inherits from <tt class="docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></tt> ,
+so you can target multiple <tt class="docutils literal"><span class="pre">DoesNotExist</span></tt> exceptions:<div style="height: 39px;" id="c209" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b209" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn210">&gt;&gt;&gt; from django.core.exceptions import ObjectDoesNotExist
+&gt;&gt;&gt; try:
+...     e = Entry.objects.get(id=3)
+...     b = Blog.objects.get(id=1)
+... except ObjectDoesNotExist:
+...     print "Either the entry or blog doesn't exist."
+<div style="height: 156px;" id="c210" class="comment-indicator"><span></span></div></pre>
+</div>
+<div class="section" id="create-kwargs">
+<span id="cn212"></span><h4 class="cn" id="cn212">create(**kwargs)<div style="height: 15px;" id="c212" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b212" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn213">这个快捷的方法可以一次性完成创建并保证对象。它让你完成了下面两个步骤：<div style="height: 19px;" id="c213" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b213" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn214">&gt;&gt;&gt; p = Person(first_name="Bruce", last_name="Springsteen")
+&gt;&gt;&gt; p.save()
+<div style="height: 60px;" id="c214" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn216">into a single line:<div style="height: 19px;" id="c216" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b216" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn217">&gt;&gt;&gt; p = Person.objects.create(first_name="Bruce", last_name="Springsteen")
+<div style="height: 36px;" id="c217" class="comment-indicator"><span></span></div></pre>
+</div>
+<div class="section" id="get-or-create-kwargs">
+<span id="cn219"></span><h4 class="cn" id="cn219">get_or_create(**kwargs)<div style="height: 15px;" id="c219" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b219" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn220">This is a convenience method for looking up an object and creating one if it doesnt exist.
+It returns a tuple of <tt class="docutils literal"><span class="pre">(object,</span> <span class="pre">created)</span></tt> , where <tt class="docutils literal"><span class="pre">object</span></tt> is the retrieved or created
+object and <tt class="docutils literal"><span class="pre">created</span></tt> is a Boolean specifying whether a new object was created.<div style="height: 56px;" id="c220" class="comment-indicator"><span></span></div><div style="height: 56px;" id="b220" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn221">This method is meant as a shortcut to boilerplate code and is mostly useful for data-import
+scripts, for example:<div style="height: 37px;" id="c221" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b221" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn222">try:
+    obj = Person.objects.get(first_name='John', last_name='Lennon')
+except Person.DoesNotExist:
+    obj = Person(first_name='John', last_name='Lennon', birthday=date(1940, 10, 9))
+    obj.save()
+<div style="height: 132px;" id="c222" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn224">This pattern gets quite unwieldy as the number of fields in a model increases. The previous
+example can be rewritten using <tt class="docutils literal"><span class="pre">get_or_create()</span></tt> like so:<div style="height: 38px;" id="c224" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b224" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn225">obj, created = Person.objects.get_or_create(
+    first_name = 'John',
+    last_name  = 'Lennon',
+    defaults   = {'birthday': date(1940, 10, 9)}
+)
+<div style="height: 132px;" id="c225" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn227">adsf<div style="height: 19px;" id="c227" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b227" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn228">defaults = kwargs.pop('defaults', {})
+params = dict([(k, v) for k, v in kwargs.items() if '__' not in k])
+params.update(defaults)
+obj = self.model(**params)
+obj.save()
+<div style="height: 132px;" id="c228" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn230">In English, that means start with any non-<tt class="docutils literal"><span class="pre">'defaults'</span></tt> keyword argument that doesnt
+contain a double underscore (which would indicate a nonexact lookup). Then add the contents
+of <tt class="docutils literal"><span class="pre">defaults</span></tt> , overriding any keys if necessary, and use the result as the keyword
+arguments to the model class.<div style="height: 57px;" id="c230" class="comment-indicator"><span></span></div><div style="height: 57px;" id="b230" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn231">If you have a field named <tt class="docutils literal"><span class="pre">defaults</span></tt> and want to use it as an exact lookup in
+<tt class="docutils literal"><span class="pre">get_or_create()</span></tt> , just use <tt class="docutils literal"><span class="pre">'defaults__exact'</span></tt> like so:<div style="height: 39px;" id="c231" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b231" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn232">Foo.objects.get_or_create(
+    defaults__exact = 'bar',
+    defaults={'defaults': 'baz'}
+)
+<div style="height: 108px;" id="c232" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn234">Note<div style="height: 19px;" id="c234" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b234" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn235">As mentioned earlier, <tt class="docutils literal"><span class="pre">get_or_create()</span></tt> is mostly useful in scripts that need to parse
+data and create new records if existing ones arent available. But if you need to use
+<tt class="docutils literal"><span class="pre">get_or_create()</span></tt> in a view, please make sure to use it only in <tt class="docutils literal"><span class="pre">POST</span></tt> requests unless
+you have a good reason not to. <tt class="docutils literal"><span class="pre">GET</span></tt> requests shouldnt have any effect on data; use
+<tt class="docutils literal"><span class="pre">POST</span></tt> whenever a request to a page has a side effect on your data.<div style="height: 77px;" id="c235" class="comment-indicator"><span></span></div><div style="height: 77px;" id="b235" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="count">
+<span id="cn236"></span><h4 class="cn" id="cn236">count()<div style="height: 15px;" id="c236" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b236" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn237">Returns an integer representing the number of objects in the database matching the
+<tt class="docutils literal"><span class="pre">QuerySet</span></tt> . <tt class="docutils literal"><span class="pre">count()</span></tt> never raises exceptions. Heres an example:<div style="height: 38px;" id="c237" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b237" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn238"># Returns the total number of entries in the database.
+&gt;&gt;&gt; Entry.objects.count()
+4
+
+# Returns the number of entries whose headline contains 'Lennon'
+&gt;&gt;&gt; Entry.objects.filter(headline__contains='Lennon').count()
+1
+<div style="height: 180px;" id="c238" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn240"><tt class="docutils literal"><span class="pre">count()</span></tt> performs a <tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">COUNT(*)</span></tt> behind the scenes, so you should always use
+<tt class="docutils literal"><span class="pre">count()</span></tt> rather than loading all of the records into Python objects and calling <tt class="docutils literal"><span class="pre">len()</span></tt>
+on the result.<div style="height: 39px;" id="c240" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b240" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn241">Depending on which database youre using (e.g., PostgreSQL or MySQL), <tt class="docutils literal"><span class="pre">count()</span></tt> may return
+a long integer instead of a normal Python integer. This is an underlying implementation
+quirk that shouldnt pose any real-world problems.<div style="height: 56px;" id="c241" class="comment-indicator"><span></span></div><div style="height: 56px;" id="b241" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="in-bulk-id-list">
+<span id="cn242"></span><h4 class="cn" id="cn242">in_bulk(id_list)<div style="height: 15px;" id="c242" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b242" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn243">Takes a list of primary key values and returns a dictionary mapping each primary key value
+to an instance of the object with the given ID, for example:<div style="height: 37px;" id="c243" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b243" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn244">&gt;&gt;&gt; Blog.objects.in_bulk([1])
+{1: Beatles Blog}
+&gt;&gt;&gt; Blog.objects.in_bulk([1, 2])
+{1: Beatles Blog, 2: Cheddar Talk}
+&gt;&gt;&gt; Blog.objects.in_bulk([])
+{}
+<div style="height: 156px;" id="c244" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn246">IDs of objects that dont exist are silently dropped from the result dictionary. If you pass
+<tt class="docutils literal"><span class="pre">in_bulk()</span></tt> an empty list, youll get an empty dictionary.<div style="height: 38px;" id="c246" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b246" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="latest-field-name-none">
+<span id="cn247"></span><h4 class="cn" id="cn247">latest(field_name=None)<div style="height: 15px;" id="c247" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b247" class="translation-indicator has-translations"><span> </span></div></h4>
+<p class="cn" id="cn248">Returns the latest object in the table, by date, using the <tt class="docutils literal"><span class="pre">field_name</span></tt> provided as the
+date field. This example returns the latest <tt class="docutils literal"><span class="pre">Entry</span></tt> in the table, according to the
+<tt class="docutils literal"><span class="pre">pub_date</span></tt> field:<div style="height: 39px;" id="c248" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b248" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn249">&gt;&gt;&gt; Entry.objects.latest('pub_date')
+<div style="height: 36px;" id="c249" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn251">If your models <tt class="docutils literal"><span class="pre">Meta</span></tt> specifies <tt class="docutils literal"><span class="pre">get_latest_by</span></tt> , you can leave off the <tt class="docutils literal"><span class="pre">field_name</span></tt>
+argument to <tt class="docutils literal"><span class="pre">latest()</span></tt> . Django will use the field specified in <tt class="docutils literal"><span class="pre">get_latest_by</span></tt> by
+default.<div style="height: 39px;" id="c251" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b251" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn252">Like <tt class="docutils literal"><span class="pre">get()</span></tt> , <tt class="docutils literal"><span class="pre">latest()</span></tt> raises <tt class="docutils literal"><span class="pre">DoesNotExist</span></tt> if an object doesnt exist with the
+given parameters.<div style="height: 20px;" id="c252" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b252" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+</div>
+</div>
+<div class="section" id="field-lookups">
+<span id="cn253"></span><h2 class="cn" id="cn253">Field Lookups<div style="height: 15px;" id="c253" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b253" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn254">Field lookups are how you specify the meat of an SQL <tt class="docutils literal"><span class="pre">WHERE</span></tt> clause. Theyre specified as
+keyword arguments to the <tt class="docutils literal"><span class="pre">QuerySet</span></tt> methods <tt class="docutils literal"><span class="pre">filter()</span></tt> , <tt class="docutils literal"><span class="pre">exclude()</span></tt> , and <tt class="docutils literal"><span class="pre">get()</span></tt> .<div style="height: 39px;" id="c254" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b254" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn255">Basic lookup keyword arguments take the form <tt class="docutils literal"><span class="pre">field__lookuptype=value</span></tt> (note the double
+underscore). For example:<div style="height: 38px;" id="c255" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b255" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn256">&gt;&gt;&gt; Entry.objects.filter(pub_date__lte='2006-01-01')
+<div style="height: 36px;" id="c256" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn258">translates (roughly) into the following SQL:<div style="height: 19px;" id="c258" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b258" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn259">SELECT * FROM blog_entry WHERE pub_date &lt;= '2006-01-01';
+<div style="height: 36px;" id="c259" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn261">If you pass an invalid keyword argument, a lookup function will raise <tt class="docutils literal"><span class="pre">TypeError</span></tt> .<div style="height: 20px;" id="c261" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b261" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn262">The supported lookup types follow.<div style="height: 19px;" id="c262" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b262" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="section" id="exact">
+<span id="cn263"></span><h3 class="cn" id="cn263">exact<div style="height: 15px;" id="c263" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b263" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn264">Performs an exact match:<div style="height: 19px;" id="c264" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b264" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn265">&gt;&gt;&gt; Entry.objects.get(headline__exact="Man bites dog")
+<div style="height: 36px;" id="c265" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn267">This matches any object with the exact headline Man bites dog.<div style="height: 19px;" id="c267" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b267" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn268">If you dont provide a lookup type that is, if your keyword argument doesnt contain a double
+underscore the lookup type is assumed to be <tt class="docutils literal"><span class="pre">exact</span></tt> .<div style="height: 38px;" id="c268" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b268" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn269">例如，下面两个语句是等效的：<div style="height: 19px;" id="c269" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b269" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn270">&gt;&gt;&gt; Blog.objects.get(id__exact=14) # Explicit form
+&gt;&gt;&gt; Blog.objects.get(id=14) # __exact is implied
+<div style="height: 60px;" id="c270" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn272">This is for convenience, because <tt class="docutils literal"><span class="pre">exact</span></tt> lookups are the common case.<div style="height: 20px;" id="c272" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b272" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="iexact">
+<span id="cn273"></span><h3 class="cn" id="cn273">iexact<div style="height: 15px;" id="c273" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b273" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn274">字符串比较（大小写无关）<div style="height: 19px;" id="c274" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b274" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn275">&gt;&gt;&gt; Blog.objects.get(name__iexact='beatles blog')
+<div style="height: 36px;" id="c275" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn277">This will match <tt class="docutils literal"><span class="pre">'Beatles</span> <span class="pre">Blog'</span></tt> , <tt class="docutils literal"><span class="pre">'beatles</span> <span class="pre">blog'</span></tt> , <tt class="docutils literal"><span class="pre">'BeAtLes</span> <span class="pre">BLoG'</span></tt> , and so forth.<div style="height: 20px;" id="c277" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b277" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="contains">
+<span id="cn278"></span><h3 class="cn" id="cn278">contains<div style="height: 15px;" id="c278" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b278" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn279">执行严格区分大小写的内容包含检测：<div style="height: 19px;" id="c279" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b279" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn280">Entry.objects.get(headline__contains='Lennon')
+<div style="height: 36px;" id="c280" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn282">这将会匹配标题为``’Today Lennon honored’`` 的，而不匹配 <a href="#id10"><span class="problematic" id="id11">``</span></a>‘today lennon honored’<a href="#id12"><span class="problematic" id="id13">``</span></a>。<div style="height: 19px;" id="c282" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b282" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="system-message" id="id10">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 1756); <em><a href="#id11">backlink</a></em></p>
+<p class="cn" id="cn282">Inline literal start-string without end-string.<div id="c282" class="comment-indicator"><span></span></div><div id="b282" class="translation-indicator"><span></span></div></p>
+</div>
+<div class="system-message" id="id12">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 1756); <em><a href="#id13">backlink</a></em></p>
+<p class="cn" id="cn282">Inline literal start-string without end-string.<div id="c282" class="comment-indicator"><span></span></div><div id="b282" class="translation-indicator"><span></span></div></p>
+</div>
+<p class="cn" id="cn283">SQLite不支持严格区分大小写的 <tt class="docutils literal"><span class="pre">LIKE</span></tt> 语句，所以在使用SQLite时``contains``的作用和``icontains``一样。<div style="height: 20px;" id="c283" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b283" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn284">除了LIKE语句中的百分号和下划线<div style="height: 19px;" id="c284" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b284" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn285">使用相当于``LIKE``的SQL查找语句(<tt class="docutils literal"><span class="pre">iexact</span></tt> , <tt class="docutils literal"><span class="pre">contains</span></tt> ,
+<tt class="docutils literal"><span class="pre">icontains</span></tt>, <tt class="docutils literal"><span class="pre">startswith</span></tt>, <tt class="docutils literal"><span class="pre">istartswith</span></tt>, <tt class="docutils literal"><span class="pre">endswith</span></tt>, 和``iendswith``)时，会自动的排除``LIKE``语句中使用的两个特殊符号：百分号、下划线。（在一条``LIKE``语句中，百分号是多个字符的通配符，下划线是单个字符的通配符）<div style="height: 56px;" id="c285" class="comment-indicator"><span></span></div><div style="height: 56px;" id="b285" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn286">这意味着使用的直观性，所以不会产生漏提取的。例如，查找所有含有一个百分号的项，只需要想用其他字符一样用一个百分号：<div style="height: 37px;" id="c286" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b286" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn287">Entry.objects.filter(headline__contains='%')
+<div style="height: 36px;" id="c287" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn289">Django 为你处理了这一引用。产生的SQL如下：<div style="height: 19px;" id="c289" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b289" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn290">SELECT ... WHERE headline LIKE '%\%%';
+<div style="height: 36px;" id="c290" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn292">The same goes for underscores. Both percentage signs and underscores are handled for you
+transparently.<div style="height: 19px;" id="c292" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b292" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="icontains">
+<span id="cn293"></span><h3 class="cn" id="cn293">icontains<div style="height: 15px;" id="c293" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b293" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn294">执行一个忽略大小写的内容包含检测：<div style="height: 19px;" id="c294" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b294" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn295">&gt;&gt;&gt; Entry.objects.get(headline__icontains='Lennon')
+<div style="height: 36px;" id="c295" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn297">与``contains``不同, <tt class="docutils literal"><span class="pre">icontains</span></tt> <em>会</em> 匹配 <tt class="docutils literal"><span class="pre">'today</span> <span class="pre">lennon</span> <span class="pre">honored'</span></tt> 。<div style="height: 20px;" id="c297" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b297" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="gt-gte-lt-and-lte">
+<span id="cn298"></span><h3 class="cn" id="cn298">gt, gte, lt, and lte<div style="height: 15px;" id="c298" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b298" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn299">这些即大于，大于或等于，小于，小于或等于:<div style="height: 19px;" id="c299" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b299" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn300">&gt;&gt;&gt; Entry.objects.filter(id__gt=4)
+&gt;&gt;&gt; Entry.objects.filter(id__lt=15)
+&gt;&gt;&gt; Entry.objects.filter(id__gte=0)
+<div style="height: 84px;" id="c300" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn302">这些查询分别返回 ID 大于 4，ID 小于 15，以及 ID 大于等于 0 的对象。<div style="height: 19px;" id="c302" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b302" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn303">Youll usually use these on numeric fields. Be careful with character fields since character
+order isnt always what youd expect (i.e., the string 4 sorts <em>after</em> the string 10).<div style="height: 37px;" id="c303" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b303" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="in">
+<span id="cn304"></span><h3 class="cn" id="cn304">in<div style="height: 15px;" id="c304" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b304" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn305">筛选出包含在给定列表中的数据：<div style="height: 19px;" id="c305" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b305" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn306">Entry.objects.filter(id__in=[1, 3, 4])
+<div style="height: 36px;" id="c306" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn308">这会返回所有ID为1，3，或4的条目。<div style="height: 19px;" id="c308" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b308" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="startswith">
+<span id="cn309"></span><h3 class="cn" id="cn309">startswith<div style="height: 15px;" id="c309" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b309" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn310">区分大小写的开头匹配：<div style="height: 19px;" id="c310" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b310" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn311">&gt;&gt;&gt; Entry.objects.filter(headline__startswith='Will')
+<div style="height: 36px;" id="c311" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn313">这将返回标题Will he run?和Willbur named judge，但是不会返回Who is Will? 和will found in crypt.<div style="height: 19px;" id="c313" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b313" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="istartswith">
+<span id="cn314"></span><h3 class="cn" id="cn314">istartswith<div style="height: 15px;" id="c314" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b314" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn315">Performs a case-insensitive starts-with:<div style="height: 19px;" id="c315" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b315" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn316">&gt;&gt;&gt; Entry.objects.filter(headline__istartswith='will')
+<div style="height: 36px;" id="c316" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn318">This will return the headlines Will he run?, Willbur named judge, and will found in crypt,
+but not Who is Will?<div style="height: 19px;" id="c318" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b318" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="endswith-and-iendswith">
+<span id="cn319"></span><h3 class="cn" id="cn319">endswith and iendswith<div style="height: 15px;" id="c319" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b319" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn320">区分大小写和忽略大小写的末尾匹配。<div style="height: 19px;" id="c320" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b320" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn321">&gt;&gt;&gt; Entry.objects.filter(headline__endswith='cats')
+&gt;&gt;&gt; Entry.objects.filter(headline__iendswith='cats')
+<div style="height: 60px;" id="c321" class="comment-indicator"><span></span></div></pre>
+</div>
+<div class="section" id="range">
+<span id="cn323"></span><h3 class="cn" id="cn323">range<div style="height: 15px;" id="c323" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b323" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn324">Performs an inclusive range check:<div style="height: 19px;" id="c324" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b324" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn325">&gt;&gt;&gt; start_date = datetime.date(2005, 1, 1)
+&gt;&gt;&gt; end_date = datetime.date(2005, 3, 31)
+&gt;&gt;&gt; Entry.objects.filter(pub_date__range=(start_date, end_date))
+<div style="height: 84px;" id="c325" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn327">You can use <tt class="docutils literal"><span class="pre">range</span></tt> anywhere you can use <tt class="docutils literal"><span class="pre">BETWEEN</span></tt> in SQL for dates, numbers, and even
+characters.<div style="height: 20px;" id="c327" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b327" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="year-month-and-day">
+<span id="cn328"></span><h3 class="cn" id="cn328">year, month, and day<div style="height: 15px;" id="c328" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b328" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn329">对date/datetime类型严格匹配年、月或日：<div style="height: 19px;" id="c329" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b329" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn330"># Year lookup
+&gt;&gt;&gt;Entry.objects.filter(pub_date__year=2005)
+
+# Month lookup -- takes integers
+&gt;&gt;&gt; Entry.objects.filter(pub_date__month=12)
+
+# Day lookup
+&gt;&gt;&gt; Entry.objects.filter(pub_date__day=3)
+
+# Combination: return all entries on Christmas of any year
+&gt;&gt;&gt; Entry.objects.filter(pub_date__month=12, pub_date_day=25)
+<div style="height: 276px;" id="c330" class="comment-indicator"><span></span></div></pre>
+</div>
+<div class="section" id="isnull">
+<span id="cn332"></span><h3 class="cn" id="cn332">isnull<div style="height: 15px;" id="c332" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b332" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn333">使用``True``或``False``，则分别相当于SQL语句中的``IS NULL``和``IS NOT NULL``:<div style="height: 19px;" id="c333" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b333" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn334">&gt;&gt;&gt; Entry.objects.filter(pub_date__isnull=True)
+<div style="height: 36px;" id="c334" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn336"><tt class="docutils literal"><span class="pre">__isnull=True</span></tt> vs. <tt class="docutils literal"><span class="pre">__exact=None</span></tt><div style="height: 20px;" id="c336" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b336" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn337"><tt class="docutils literal"><span class="pre">__isnull=True``和``__exact=None``有一个很主要的区别。因为SQL规定无值就等于``NULL</span></tt> ，所以``__exact=None``会 <em>总是</em> 返回一个空的结果。``__isnull``则取决于该阈是否当前有值 <a href="#id14"><span class="problematic" id="id15">``</span></a>NULL``而不进行比较。<div style="height: 38px;" id="c337" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b337" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="system-message" id="id14">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 2088); <em><a href="#id15">backlink</a></em></p>
+<p class="cn" id="cn337">Inline literal start-string without end-string.<div id="c337" class="comment-indicator"><span></span></div><div id="b337" class="translation-indicator"><span></span></div></p>
+</div>
+</div>
+<div class="section" id="search">
+<span id="cn338"></span><h3 class="cn" id="cn338">search<div style="height: 15px;" id="c338" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b338" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn339">A Boolean full-text search that takes advantage of full-text indexing. This is like
+<tt class="docutils literal"><span class="pre">contains</span></tt> but is significantly faster due to full-text indexing.<div style="height: 38px;" id="c339" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b339" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn340">Note this is available only in MySQL and requires direct manipulation of the database to add
+the full-text index.<div style="height: 37px;" id="c340" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b340" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="the-pk-lookup-shortcut">
+<span id="cn341"></span><h3 class="cn" id="cn341">The pk Lookup Shortcut<div style="height: 15px;" id="c341" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b341" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn342">For convenience, Django provides a <tt class="docutils literal"><span class="pre">pk</span></tt> lookup type, which stands for primary_key.<div style="height: 20px;" id="c342" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b342" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn343">In the example <tt class="docutils literal"><span class="pre">Blog</span></tt> model, the primary key is the <tt class="docutils literal"><span class="pre">id</span></tt> field, so these three
+statements are equivalent:<div style="height: 20px;" id="c343" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b343" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn344">&gt;&gt;&gt; Blog.objects.get(id__exact=14) # Explicit form
+&gt;&gt;&gt; Blog.objects.get(id=14) # __exact is implied
+&gt;&gt;&gt; Blog.objects.get(pk=14) # pk implies id__exact
+<div style="height: 84px;" id="c344" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn346">The use of <tt class="docutils literal"><span class="pre">pk</span></tt> isnt limited to <tt class="docutils literal"><span class="pre">__exact</span></tt> queries any query term can be combined with
+<tt class="docutils literal"><span class="pre">pk</span></tt> to perform a query on the primary key of a model:<div style="height: 38px;" id="c346" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b346" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn347"># Get blogs entries  with id 1, 4, and 7
+&gt;&gt;&gt; Blog.objects.filter(pk__in=[1,4,7])
+
+# Get all blog entries with id &gt; 14
+&gt;&gt;&gt; Blog.objects.filter(pk__gt=14)
+<div style="height: 132px;" id="c347" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn349"><tt class="docutils literal"><span class="pre">pk</span></tt> lookups also work across joins. For example, these three statements are equivalent:<div style="height: 20px;" id="c349" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b349" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn350">&gt;&gt;&gt; Entry.objects.filter(blog__id__exact=3) # Explicit form
+&gt;&gt;&gt; Entry.objects.filter(blog__id=3) # __exact is implied
+&gt;&gt;&gt; Entry.objects.filter(blog__pk=3) # __pk implies __id__exact
+<div style="height: 84px;" id="c350" class="comment-indicator"><span></span></div></pre>
+</div>
+</div>
+<div class="section" id="q">
+<span id="cn352"></span><h2 class="cn" id="cn352">使用Q对象做联合查找<div style="height: 15px;" id="c352" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b352" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn353"><a href="#id16"><span class="problematic" id="id17">``</span></a>filter()``等语句的参数都是取AND运算。如果想要执行更多的联合语句（如``OR``语句），你可以使用 <a href="#id18"><span class="problematic" id="id19">``</span></a>Q``对象。<div style="height: 19px;" id="c353" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b353" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="system-message" id="id16">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 2193); <em><a href="#id17">backlink</a></em></p>
+<p class="cn" id="cn353">Inline literal start-string without end-string.<div id="c353" class="comment-indicator"><span></span></div><div id="b353" class="translation-indicator"><span></span></div></p>
+</div>
+<div class="system-message" id="id18">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 2193); <em><a href="#id19">backlink</a></em></p>
+<p class="cn" id="cn353">Inline literal start-string without end-string.<div id="c353" class="comment-indicator"><span></span></div><div id="b353" class="translation-indicator"><span></span></div></p>
+</div>
+<p class="cn" id="cn354"><tt class="docutils literal"><span class="pre">Q</span></tt> 对象 (<tt class="docutils literal"><span class="pre">django.db.models.Q</span></tt> ) 是一个用来囊括参数间连接的对象。这些参数会放在指定的域查询的位置。<div style="height: 20px;" id="c354" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b354" class="translation-indicator has-translations"><span> translating....</span></div></p>
+<p class="cn" id="cn355">例如，这个``Q``对象就包括了一个``LIKE``条件：<div style="height: 19px;" id="c355" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b355" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn356">Q(question__startswith='What')
+<div style="height: 36px;" id="c356" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn358"><tt class="docutils literal"><span class="pre">Q</span></tt> 对象可以用运算符 <tt class="docutils literal"><span class="pre">&amp;</span></tt> 和 <tt class="docutils literal"><span class="pre">|</span></tt> 来联合。当一个运算符连接两个 <tt class="docutils literal"><span class="pre">Q</span></tt> 对象时，就产生了一个新的 <tt class="docutils literal"><span class="pre">Q</span></tt> 对象。例如，这句生成一个单一的 <tt class="docutils literal"><span class="pre">Q</span></tt> 对象。相当于两个``”question__startswith”<a href="#id20"><span class="problematic" id="id21">``</span></a>条件的OR：<div style="height: 38px;" id="c358" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b358" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="system-message" id="id20">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 2219); <em><a href="#id21">backlink</a></em></p>
+<p class="cn" id="cn358">Inline literal start-string without end-string.<div id="c358" class="comment-indicator"><span></span></div><div id="b358" class="translation-indicator"><span></span></div></p>
+</div>
+<pre class="cn literal-block" id="cn359">Q(question__startswith='Who') | Q(question__startswith='What')
+<div style="height: 36px;" id="c359" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn361">这相当于如下的SQL <a href="#id22"><span class="problematic" id="id23">``</span></a>WHERE``语句：<div style="height: 19px;" id="c361" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b361" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="system-message" id="id22">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 2237); <em><a href="#id23">backlink</a></em></p>
+<p class="cn" id="cn361">Inline literal start-string without end-string.<div id="c361" class="comment-indicator"><span></span></div><div id="b361" class="translation-indicator"><span></span></div></p>
+</div>
+<pre class="cn literal-block" id="cn362">WHERE question LIKE 'Who%' OR question LIKE 'What%'
+<div style="height: 36px;" id="c362" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn364">你可以用运算符``&amp;``和 <tt class="docutils literal"><span class="pre">|``连接``Q</span></tt> 对象组成任意复杂的语句。你也可以使用附加组。<div style="height: 20px;" id="c364" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b364" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn365">任一带关键字参数的的查找函数（如``filter()`` , <tt class="docutils literal"><span class="pre">exclude()</span></tt> ,``get()`` ）也可将一到多个``Q`` 对象作为参数。如果在一个查询函数中使用多个``Q`` 对象参数，这些参数会被全体做AND运算，例如：<div style="height: 38px;" id="c365" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b365" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn366">Poll.objects.get(
+    Q(question__startswith='Who'),
+    Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6))
+)
+<div style="height: 108px;" id="c366" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn368">大致上可转换为如下的SQL：<div style="height: 19px;" id="c368" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b368" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn369">SELECT * from polls WHERE question LIKE 'Who%'
+    AND (pub_date = '2005-05-02' OR pub_date = '2005-05-06')
+<div style="height: 60px;" id="c369" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn371">查询函数可以混合使用``Q``对象和关键字作参数。所有的参数作为查询函数的条件（无论他们是关键字参数还是``Q``对象）进行AND运算。然而，如果将一个``Q``对象作为条件，则它必须放在所有关键字参数定义之前。就像下面这样：<div style="height: 37px;" id="c371" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b371" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn372">Poll.objects.get(
+    Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6)),
+    question__startswith='Who')
+<div style="height: 84px;" id="c372" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn374">这是正确的，就相当于之前的例子。但如果这样：<div style="height: 19px;" id="c374" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b374" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn375"># INVALID QUERY
+Poll.objects.get(
+    question__startswith='Who',
+    Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6)))
+<div style="height: 108px;" id="c375" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn377">就是不正确的。<div style="height: 19px;" id="c377" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b377" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn378">在互联网上你可以找到一些例子
+<a class="reference external" href="http://www.djangoproject.com/documentation/0.96/models/or_lookups/">http://www.djangoproject.com/documentation/0.96/models/or_lookups/</a>.<div style="height: 19px;" id="c378" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b378" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="id24">
+<span id="cn379"></span><h2 class="cn" id="cn379">关系对象<div style="height: 15px;" id="c379" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b379" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn380">当你定义了一个关系模型（例如：外键，一对一域，或多对多域），这一模式的实例将有一个方便的API来访问相关的对象。<div style="height: 19px;" id="c380" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b380" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn381">例如，Entry对象e能获得相关的blog对象访问博客属性e.blog<div style="height: 19px;" id="c381" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b381" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn382">Django also creates API accessors for the other side of the relationship the link from the
+related model to the model that defines the relationship. For example, a <tt class="docutils literal"><span class="pre">Blog</span></tt> object
+<tt class="docutils literal"><span class="pre">b</span></tt> has access to a list of all related <tt class="docutils literal"><span class="pre">Entry</span></tt> objects via the <tt class="docutils literal"><span class="pre">entry_set</span></tt> attribute:
+<tt class="docutils literal"><span class="pre">b.entry_set.all()</span></tt> .<div style="height: 57px;" id="c382" class="comment-indicator"><span></span></div><div style="height: 57px;" id="b382" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn383">本节将继续使用之前定义的”Blog”, “Author”, “Entry”模型作为例子<div style="height: 19px;" id="c383" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b383" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn384">跨越关系查找<div style="height: 19px;" id="c384" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b384" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn385">Django offers a powerful and intuitive way to follow relationships in lookups, taking care
+of the SQL <tt class="docutils literal"><span class="pre">JOIN</span></tt> s for you automatically behind the scenes. To span a relationship, just
+use the field name of related fields across models, separated by double underscores, until
+you get to the field you want.<div style="height: 56px;" id="c385" class="comment-indicator"><span></span></div><div style="height: 56px;" id="b385" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn386">This example retrieves all <tt class="docutils literal"><span class="pre">Entry</span></tt> objects with a <tt class="docutils literal"><span class="pre">Blog</span></tt> whose <tt class="docutils literal"><span class="pre">name</span></tt> is <tt class="docutils literal"><span class="pre">'Beatles</span>
+<span class="pre">Blog'</span></tt> :<div style="height: 20px;" id="c386" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b386" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn387">&gt;&gt;&gt; Entry.objects.filter(blog__name__exact='Beatles Blog')
+<div style="height: 36px;" id="c387" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn389">这跨越可之深可想而知！<div style="height: 19px;" id="c389" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b389" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn390">It works backward, too. To refer to a reverse relationship, just use the lowercase name of
+the model.<div style="height: 19px;" id="c390" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b390" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn391">This example retrieves all <tt class="docutils literal"><span class="pre">Blog</span></tt> objects that have at least one <tt class="docutils literal"><span class="pre">Entry</span></tt> whose
+<tt class="docutils literal"><span class="pre">headline</span></tt> contains <tt class="docutils literal"><span class="pre">'Lennon'</span></tt> :<div style="height: 20px;" id="c391" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b391" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn392">&gt;&gt;&gt; Blog.objects.filter(entry__headline__contains='Lennon')
+<div style="height: 36px;" id="c392" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn394">外键关系<div style="height: 19px;" id="c394" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b394" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn395">如果一个模型里面有一个 <tt class="docutils literal"><span class="pre">ForeignKey</span></tt> 字段，那么它的实例化对象可以很轻易的通过模型的属性来访问与其关联的关系对象，例如：<div style="height: 38px;" id="c395" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b395" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn396">e = Entry.objects.get(id=2)
+e.blog # Returns the related Blog object.
+<div style="height: 60px;" id="c396" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn398">你可以通过外键属性来获取并设置关联的外键对象。如你所料，单纯修改外键的操作是不能马上将修改的内容同步到数据库中的，你还必须调用 <tt class="docutils literal"><span class="pre">save()</span></tt> 方法才行，例如：<div style="height: 38px;" id="c398" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b398" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn399">e = Entry.objects.get(id=2)
+e.blog = some_blog
+e.save()
+<div style="height: 84px;" id="c399" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn401">如果一个 <tt class="docutils literal"><span class="pre">ForeignKey</span></tt> 字段设置了 <tt class="docutils literal"><span class="pre">null=True</span></tt> 选项（允许 <tt class="docutils literal"><span class="pre">NULL</span></tt> 值）时，你可以将 <tt class="docutils literal"><span class="pre">None</span></tt> 赋给它（译注:但纯设置null=True其实还是不行的,会抛出异常的,还不须把blank=True也设了才行,不知道什么原因,我一直以来都有点怀疑这是个BUG)：<div style="height: 38px;" id="c401" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b401" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn402">e = Entry.objects.get(id=2)
+e.blog = None
+e.save() # "UPDATE blog_entry SET blog_id = NULL ...;"
+<div style="height: 84px;" id="c402" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn404">Forward access to one-to-many relationships is cached the first time the related object is
+accessed. Subsequent accesses to the foreign key on the same object instance are cached, for
+example:<div style="height: 37px;" id="c404" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b404" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn405">e = Entry.objects.get(id=2)
+print e.blog  # Hits the database to retrieve the associated Blog.
+print e.blog  # Doesn't hit the database; uses cached version.
+<div style="height: 84px;" id="c405" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn407">Note that the <tt class="docutils literal"><span class="pre">select_related()</span></tt> <tt class="docutils literal"><span class="pre">QuerySet</span></tt> method recursively prepopulates the cache of
+all one-to-many relationships ahead of time:<div style="height: 38px;" id="c407" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b407" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn408">e = Entry.objects.select_related().get(id=2)
+print e.blog  # Doesn't hit the database; uses cached version.
+print e.blog  # Doesn't hit the database; uses cached version.
+<div style="height: 84px;" id="c408" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn410"><tt class="docutils literal"><span class="pre">select_related()</span></tt> is documented in the QuerySet Methods That Return New QuerySets
+section.<div style="height: 20px;" id="c410" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b410" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn411">外键的反引用关系<div style="height: 19px;" id="c411" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b411" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn412">外键关系是自动对称反引用关系的,这可由一个外键可以指向另一个模型而得知.<div style="height: 19px;" id="c412" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b412" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn413">如果一个源模型含有一个外键,那么它的外键模型的实例,可以利用”Manager”返回这个源模型的
+所有实例.默认的这个”Manager”叫做”FOO_set”,这个”FOO”是源模型的名字,小写字母,这个”Manager”将返
+回”QuerySets”,对这个QuerySets进行过滤和操作,就像在检索对象章节中介绍的.<div style="height: 55px;" id="c413" class="comment-indicator"><span></span></div><div style="height: 55px;" id="b413" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn414">Heres an example:<div style="height: 19px;" id="c414" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b414" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn415">b = Blog.objects.get(id=1)
+b.entry_set.all() # Returns all Entry objects related to Blog.
+
+# b.entry_set is a Manager that returns QuerySets.
+b.entry_set.filter(headline__contains='Lennon')
+b.entry_set.count()
+<div style="height: 156px;" id="c415" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn417">通过在”ForeignKey()”中定义related_name参数,你可以重
+载”FOO_set”名字.举例,如果把”Entry”模型修改为”blog =ForeignKey(Blog, 
+related_name=’entries’)”,处理例子的代码如下:<div style="height: 37px;" id="c417" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b417" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn418">b = Blog.objects.get(id=1)
+b.entries.all() # Returns all Entry objects related to Blog.
+
+# b.entries is a Manager that returns QuerySets.
+b.entries.filter(headline__contains='Lennon')
+b.entries.count()
+<div style="height: 156px;" id="c418" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn420">你不能直接访问这个类的reverse “ForeignKey” “Manager”;它必须通过一个实例:<div style="height: 19px;" id="c420" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b420" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn421">Blog.entry_set # Raises AttributeError: "Manager must be accessed via instance".
+<div style="height: 36px;" id="c421" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn423">In addition to the <tt class="docutils literal"><span class="pre">QuerySet</span></tt> methods defined in the Retrieving Objects section, the
+<tt class="docutils literal"><span class="pre">ForeignKey</span></tt> <tt class="docutils literal"><span class="pre">Manager</span></tt> has these additional methods:<div style="height: 38px;" id="c423" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b423" class="translation-indicator has-translations"><span> </span></div></p>
+<blockquote>
+<p class="cn" id="cn424"><tt class="docutils literal"><span class="pre">add(obj1,</span> <span class="pre">obj2,</span> <span class="pre">...)</span></tt> : Adds the specified model objects to the related object set,
+for example:<div style="height: 39px;" id="c424" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b424" class="translation-indicator has-translations"><span> </span></div></p>
+</blockquote>
+<pre class="cn literal-block" id="cn425">b = Blog.objects.get(id=1)
+e = Entry.objects.get(id=234)
+b.entry_set.add(e) # Associates Entry e with Blog b.
+<div style="height: 84px;" id="c425" class="comment-indicator"><span></span></div></pre>
+<blockquote>
+<p class="cn" id="cn427"><tt class="docutils literal"><span class="pre">create(**kwargs)</span></tt> : Creates a new object, saves it, and puts it in the related object
+set. It returns the newly created object:<div style="height: 39px;" id="c427" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b427" class="translation-indicator has-translations"><span> </span></div></p>
+</blockquote>
+<pre class="cn literal-block" id="cn428">b = Blog.objects.get(id=1)
+e = b.entry_set.create(headline='Hello', body_text='Hi', pub_date=datetime.date(2005, 1, 1))
+# No need to call e.save() at this point -- it's already been saved.
+<div style="height: 84px;" id="c428" class="comment-indicator"><span></span></div></pre>
+<blockquote>
+<p class="cn" id="cn430">This is equivalent to (but much simpler than) the following:<div style="height: 20px;" id="c430" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b430" class="translation-indicator has-translations"><span> </span></div></p>
+</blockquote>
+<pre class="cn literal-block" id="cn431">b = Blog.objects.get(id=1)
+e = Entry(blog=b, headline='Hello', body_text='Hi', pub_date=datetime.date(2005, 1, 1))
+e.save()
+<div style="height: 84px;" id="c431" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn433">注意到,这并没有必要在定义了外键关系的模型中定义关键字参数.在之前的例子中,我们没有传递”blog”参数给”create()”.Django会解决这个新建的”Entry”对象的blog字段值设置为b.<div style="height: 37px;" id="c433" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b433" class="translation-indicator has-translations"><span> </span></div></p>
+<blockquote>
+<p class="cn" id="cn434"><tt class="docutils literal"><span class="pre">remove(obj1,</span> <span class="pre">obj2,</span> <span class="pre">...)</span></tt> : Removes the specified model objects from the related
+object set:<div style="height: 21px;" id="c434" class="comment-indicator"><span></span></div><div style="height: 21px;" id="b434" class="translation-indicator has-translations"><span> </span></div></p>
+</blockquote>
+<pre class="cn literal-block" id="cn435">b = Blog.objects.get(id=1)
+e = Entry.objects.get(id=234)
+b.entry_set.remove(e) # Disassociates Entry e from Blog b.
+<div style="height: 84px;" id="c435" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn437">为了阻止数据库的不稳定,这种方法只能对含有外键字段并且该字段可以为null的对象有效,如果关联
+字段不能设置为”None”(“NULL”),then an object can’t be removed from a relation 
+without being added to another. 在之前的例子中,从``b.entry_set()`` 
+中删除e,相当于”e.blog=None”,因为这个”blog”“ForeignKey”不能”nullTrue”,所以这是无效的删除.<div style="height: 55px;" id="c437" class="comment-indicator"><span></span></div><div style="height: 55px;" id="b437" class="translation-indicator has-translations"><span> </span></div></p>
+<blockquote>
+<p class="cn" id="cn438"><tt class="docutils literal"><span class="pre">clear()</span></tt> : Removes all objects from the related object set:<div style="height: 21px;" id="c438" class="comment-indicator"><span></span></div><div style="height: 21px;" id="b438" class="translation-indicator has-translations"><span> </span></div></p>
+</blockquote>
+<pre class="cn literal-block" id="cn439">b = Blog.objects.get(id=1)
+b.entry_set.clear()
+<div style="height: 60px;" id="c439" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn441">注意: 这并不会删除关联的对象,仅是断开与它们的关联<div style="height: 19px;" id="c441" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b441" class="translation-indicator has-translations"><span> </span></div></p>
+<blockquote>
+<p class="cn" id="cn442">Just like <tt class="docutils literal"><span class="pre">remove()</span></tt> , <tt class="docutils literal"><span class="pre">clear()</span></tt> is only available on <tt class="docutils literal"><span class="pre">ForeignKey``s</span> <span class="pre">where</span>
+<span class="pre">``null=True</span></tt> .<div style="height: 21px;" id="c442" class="comment-indicator"><span></span></div><div style="height: 21px;" id="b442" class="translation-indicator has-translations"><span> </span></div></p>
+</blockquote>
+<p class="cn" id="cn443">通过给关联集分配一个可迭代的对象可以实现一股脑的把多个对象赋给它<div style="height: 19px;" id="c443" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b443" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn444">b = Blog.objects.get(id=1)
+b.entry_set = [e1, e2]
+<div style="height: 60px;" id="c444" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn446">If the <tt class="docutils literal"><span class="pre">clear()</span></tt> method is available, any pre-existing objects will be removed from the
+<tt class="docutils literal"><span class="pre">entry_set</span></tt> before all objects in the iterable (in this case, a list) are added to the
+set. If the <tt class="docutils literal"><span class="pre">clear()</span></tt> method is <em>not</em> available, all objects in the iterable will be added
+without removing any existing elements.<div style="height: 57px;" id="c446" class="comment-indicator"><span></span></div><div style="height: 57px;" id="b446" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn447">Each reverse operation described in this section has an immediate effect on the database.
+Every addition, creation, and deletion is immediately and automatically saved to the
+database.<div style="height: 37px;" id="c447" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b447" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="section" id="id25">
+<span id="cn448"></span><h3 class="cn" id="cn448">多对多关系<div style="height: 15px;" id="c448" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b448" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn449">在多对多关系的两端，都可以通过相应的API来访问另外的一端。 API的工作方式跟前一节所描述的反向一对多关系差不多。<div style="height: 19px;" id="c449" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b449" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn450">唯一的不同在于属性的命名：定义了``ManyToManyField``的model的实例使用属性名称本身，另外一端的model的实例则使用model名称的小写加上``_set``来活得关联的对象集（就跟反向一对多关系一样）<div style="height: 37px;" id="c450" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b450" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn451">用例子来说明一下大家会更容易理解：<div style="height: 19px;" id="c451" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b451" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn452">e = Entry.objects.get(id=3)
+e.authors.all() # Returns all Author objects for this Entry.
+e.authors.count()
+e.authors.filter(name__contains='John')
+
+a = Author.objects.get(id=5)
+a.entry_set.all() # Returns all Entry objects for this Author.
+<div style="height: 180px;" id="c452" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn454">Like <tt class="docutils literal"><span class="pre">ForeignKey</span></tt> , <tt class="docutils literal"><span class="pre">ManyToManyField</span></tt> can specify <tt class="docutils literal"><span class="pre">related_name</span></tt> . In the preceding
+example, if the <tt class="docutils literal"><span class="pre">ManyToManyField</span></tt> in <tt class="docutils literal"><span class="pre">Entry</span></tt> had specified <tt class="docutils literal"><span class="pre">related_name='entries'</span></tt> ,
+then each <tt class="docutils literal"><span class="pre">Author</span></tt> instance would have an <tt class="docutils literal"><span class="pre">entries</span></tt> attribute instead of <tt class="docutils literal"><span class="pre">entry_set</span></tt> .<div style="height: 58px;" id="c454" class="comment-indicator"><span></span></div><div style="height: 58px;" id="b454" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn455">How Are the Backward Relationships Possible?<div style="height: 19px;" id="c455" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b455" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn456">Other object-relational mappers require you to define relationships on both sides. The
+Django developers believe this is a violation of the DRY (Dont Repeat Yourself) principle,
+so Django requires you to define the relationship on only one end. But how is this possible,
+given that a model class doesnt know which other model classes are related to it until those
+other model classes are loaded?<div style="height: 73px;" id="c456" class="comment-indicator"><span></span></div><div style="height: 73px;" id="b456" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn457">The answer lies in the <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting. The first time any model is loaded,
+Django iterates over every model in <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> and creates the backward
+relationships in memory as needed. Essentially, one of the functions of <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt>
+is to tell Django the entire model domain.<div style="height: 58px;" id="c457" class="comment-indicator"><span></span></div><div style="height: 58px;" id="b457" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn458">通过关联对象查询<div style="height: 19px;" id="c458" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b458" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn459">包含关联对象的搜索和包含普通字段的搜索遵循相同的规则。当指定一个值去查询时，你可以使用那个对象的一个实例，也可以使用它的主键值。<div style="height: 37px;" id="c459" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b459" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn460">For example, if you have a <tt class="docutils literal"><span class="pre">Blog</span></tt> object <tt class="docutils literal"><span class="pre">b</span></tt> with <tt class="docutils literal"><span class="pre">id=5</span></tt> , the following three queries
+would be identical:<div style="height: 20px;" id="c460" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b460" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn461">Entry.objects.filter(blog=b) # Query using object instance
+Entry.objects.filter(blog=b.id) # Query using id from instance
+Entry.objects.filter(blog=5) # Query using id directly
+<div style="height: 84px;" id="c461" class="comment-indicator"><span></span></div></pre>
+</div>
+</div>
+<div class="section" id="id26">
+<span id="cn463"></span><h2 class="cn" id="cn463">删除对象<div style="height: 15px;" id="c463" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b463" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn464">The delete method, conveniently, is named <tt class="docutils literal"><span class="pre">delete()</span></tt> . This method immediately deletes the
+object and has no return value:<div style="height: 38px;" id="c464" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b464" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn465">e.delete()
+<div style="height: 36px;" id="c465" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn467">You can also delete objects in bulk. Every <tt class="docutils literal"><span class="pre">QuerySet</span></tt> has a <tt class="docutils literal"><span class="pre">delete()</span></tt> method, which
+deletes all members of that <tt class="docutils literal"><span class="pre">QuerySet</span></tt> . For example, this deletes all <tt class="docutils literal"><span class="pre">Entry</span></tt> objects
+with a <tt class="docutils literal"><span class="pre">pub_date</span></tt> year of 2005:<div style="height: 39px;" id="c467" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b467" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn468">Entry.objects.filter(pub_date__year=2005).delete()
+<div style="height: 36px;" id="c468" class="comment-indicator has-comments"><span>1</span></div></pre>
+<p class="cn" id="cn470">When Django deletes an object, it emulates the behavior of the SQL constraint <tt class="docutils literal"><span class="pre">ON</span> <span class="pre">DELETE</span>
+<span class="pre">CASCADE</span></tt> in other words, any objects that had foreign keys pointing at the object to be
+deleted will be deleted along with it, for example:<div style="height: 56px;" id="c470" class="comment-indicator"><span></span></div><div style="height: 56px;" id="b470" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn471">b = Blog.objects.get(pk=1)
+# This will delete the Blog and all of its Entry objects.
+b.delete()
+<div style="height: 84px;" id="c471" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn473">Note that <tt class="docutils literal"><span class="pre">delete()</span></tt> is the only <tt class="docutils literal"><span class="pre">QuerySet</span></tt> method that is not exposed on a <tt class="docutils literal"><span class="pre">Manager</span></tt>
+itself. This is a safety mechanism to prevent you from accidentally requesting
+<tt class="docutils literal"><span class="pre">Entry.objects.delete()</span></tt> and deleting <em>all</em> the entries. If you <em>do</em> want to delete all
+the objects, then you have to explicitly request a complete query set:<div style="height: 57px;" id="c473" class="comment-indicator"><span></span></div><div style="height: 57px;" id="b473" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn474">Entry.objects.all().delete()
+<div style="height: 36px;" id="c474" class="comment-indicator"><span></span></div></pre>
+</div>
+<div class="section" id="extra-instance-methods">
+<span id="cn476"></span><h2 class="cn" id="cn476">Extra Instance Methods<div style="height: 15px;" id="c476" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b476" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn477">In addition to <tt class="docutils literal"><span class="pre">save()</span></tt> and <tt class="docutils literal"><span class="pre">delete()</span></tt> , a model object might get any or all of the
+following methods.<div style="height: 20px;" id="c477" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b477" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="section" id="get-foo-display">
+<span id="cn478"></span><h3 class="cn" id="cn478">get_FOO_display()<div style="height: 15px;" id="c478" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b478" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn479">For every field that has <tt class="docutils literal"><span class="pre">choices</span></tt> set, the object will have a <tt class="docutils literal"><span class="pre">get_FOO_display()</span></tt>
+method, where <tt class="docutils literal"><span class="pre">FOO</span></tt> is the name of the field. This method returns the human-readable value
+of the field. For example, in the following model:<div style="height: 38px;" id="c479" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b479" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn480">GENDER_CHOICES = (
+    ('M', 'Male'),
+    ('F', 'Female'),
+)
+class Person(models.Model):
+    name = models.CharField(max_length=20)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+<div style="height: 180px;" id="c480" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn482">每一个 <tt class="docutils literal"><span class="pre">Person</span></tt> 实例都将有一个 <tt class="docutils literal"><span class="pre">get_gender_display()</span></tt> 方法：<div style="height: 20px;" id="c482" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b482" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn483">&gt;&gt;&gt; p = Person(name='John', gender='M')
+&gt;&gt;&gt; p.save()
+&gt;&gt;&gt; p.gender
+'M'
+&gt;&gt;&gt; p.get_gender_display()
+'Male'
+<div style="height: 156px;" id="c483" class="comment-indicator"><span></span></div></pre>
+</div>
+<div class="section" id="get-next-by-foo-kwargs-and-get-previous-by-foo-kwargs">
+<span id="cn485"></span><h3 class="cn" id="cn485">get_next_by_FOO(**kwargs) and get_previous_by_FOO(**kwargs)<div style="height: 15px;" id="c485" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b485" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn486">对于任何不允许空值的DateField和DateTimeField字段，将会
+有”get_next_by_FOO()”和”get_previous_by_FOO()”这两个方法。FOO表示字段名。这两个方法将根据给定的日期
+字段返回其前一个、后一个对象，适当的时候会抛出”DoesNotExist”的异常。<div style="height: 55px;" id="c486" class="comment-indicator"><span></span></div><div style="height: 55px;" id="b486" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn487">两种方法都接受可选的关键词参数，这些参数应该遵循 “域查询”一节中的格式。<div style="height: 19px;" id="c487" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b487" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn488">Note that in the case of identical date values, these methods will use the ID as a fallback
+check. This guarantees that no records are skipped or duplicated. For a full example, see
+the lookup API samples at <a class="reference external" href="http://www.djangoproject.com/documentation/0.96/models/lookup/">http://www.djangoproject.com/documentation/0.96/models/lookup/</a>.<div style="height: 55px;" id="c488" class="comment-indicator"><span></span></div><div style="height: 55px;" id="b488" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="get-foo-filename">
+<span id="cn489"></span><h3 class="cn" id="cn489">get_FOO_filename()<div style="height: 15px;" id="c489" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b489" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn490">For every <tt class="docutils literal"><span class="pre">FileField</span></tt> , the object will have a <tt class="docutils literal"><span class="pre">get_FOO_filename()</span></tt> method, where
+<tt class="docutils literal"><span class="pre">FOO</span></tt> is the name of the field. This returns the full filesystem path to the file,
+according to your <tt class="docutils literal"><span class="pre">MEDIA_ROOT</span></tt> setting.<div style="height: 39px;" id="c490" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b490" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn491">注意到 <a href="#id27"><span class="problematic" id="id28">``</span></a>ImageField``从技术上是 <a href="#id29"><span class="problematic" id="id30">``</span></a>FileField``的子类，所以每个有``ImageField``的模型都有这个方法。<div style="height: 19px;" id="c491" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b491" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="system-message" id="id27">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 3083); <em><a href="#id28">backlink</a></em></p>
+<p class="cn" id="cn491">Inline literal start-string without end-string.<div id="c491" class="comment-indicator"><span></span></div><div id="b491" class="translation-indicator"><span></span></div></p>
+</div>
+<div class="system-message" id="id29">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 3083); <em><a href="#id30">backlink</a></em></p>
+<p class="cn" id="cn491">Inline literal start-string without end-string.<div id="c491" class="comment-indicator"><span></span></div><div id="b491" class="translation-indicator"><span></span></div></p>
+</div>
+</div>
+<div class="section" id="get-foo-url">
+<span id="cn492"></span><h3 class="cn" id="cn492">get_FOO_url()<div style="height: 15px;" id="c492" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b492" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn493">For every <tt class="docutils literal"><span class="pre">FileField</span></tt> , the object will have a <tt class="docutils literal"><span class="pre">get_FOO_url()</span></tt> method, where <tt class="docutils literal"><span class="pre">FOO</span></tt> is
+the name of the field. This returns the full URL to the file, according to your
+<tt class="docutils literal"><span class="pre">MEDIA_URL</span></tt> setting. If the value is blank, this method returns an empty string.<div style="height: 57px;" id="c493" class="comment-indicator"><span></span></div><div style="height: 57px;" id="b493" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="get-foo-size">
+<span id="cn494"></span><h3 class="cn" id="cn494">get_FOO_size()<div style="height: 15px;" id="c494" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b494" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn495">For every <tt class="docutils literal"><span class="pre">FileField</span></tt> , the object will have a <tt class="docutils literal"><span class="pre">get_FOO_size()</span></tt> method, where <tt class="docutils literal"><span class="pre">FOO</span></tt> is
+the name of the field. This returns the size of the file, in bytes. (Behind the scenes, it
+uses <tt class="docutils literal"><span class="pre">os.path.getsize</span></tt> .)<div style="height: 39px;" id="c495" class="comment-indicator"><span></span></div><div style="height: 39px;" id="b495" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="save-foo-file-filename-raw-contents">
+<span id="cn496"></span><h3 class="cn" id="cn496">save_FOO_file(filename, raw_contents)<div style="height: 15px;" id="c496" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b496" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn497">For every <tt class="docutils literal"><span class="pre">FileField</span></tt> , the object will have a <tt class="docutils literal"><span class="pre">save_FOO_file()</span></tt> method, where <tt class="docutils literal"><span class="pre">FOO</span></tt>
+is the name of the field. This saves the given file to the filesystem, using the given file
+name. If a file with the given file name already exists, Django adds an underscore to the
+end of the file name (but before the extension) until the file name is available.<div style="height: 74px;" id="c497" class="comment-indicator"><span></span></div><div style="height: 74px;" id="b497" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+<div class="section" id="get-foo-height-and-get-foo-width">
+<span id="cn498"></span><h3 class="cn" id="cn498">get_FOO_height() and get_FOO_width()<div style="height: 15px;" id="c498" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b498" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn499">For every <tt class="docutils literal"><span class="pre">ImageField</span></tt> , the object will have <tt class="docutils literal"><span class="pre">get_FOO_height()</span></tt> and <tt class="docutils literal"><span class="pre">get_FOO_width()</span></tt>
+methods, where <tt class="docutils literal"><span class="pre">FOO</span></tt> is the name of the field. This returns the height (or width) of the
+image, as an integer, in pixels.<div style="height: 38px;" id="c499" class="comment-indicator"><span></span></div><div style="height: 38px;" id="b499" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+</div>
+<div class="section" id="id31">
+<span id="cn500"></span><h2 class="cn" id="cn500">捷径<div style="height: 15px;" id="c500" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b500" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn501">As you develop views, you will discover a number of common idioms in the way you use the
+database API. Django encodes some of these idioms as shortcuts that can be used to simplify
+the process of writing views. These functions are in the <tt class="docutils literal"><span class="pre">django.shortcuts</span></tt> module.<div style="height: 56px;" id="c501" class="comment-indicator"><span></span></div><div style="height: 56px;" id="b501" class="translation-indicator has-translations"><span> </span></div></p>
+<div class="section" id="get-object-or-404">
+<span id="cn502"></span><h3 class="cn" id="cn502">get_object_or_404()<div style="height: 15px;" id="c502" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b502" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn503">One common idiom to use <tt class="docutils literal"><span class="pre">get()</span></tt> and raise <tt class="docutils literal"><span class="pre">Http404</span></tt> if the object doesnt exist. This
+idiom is captured by <tt class="docutils literal"><span class="pre">get_object_or_404()</span></tt> . This function takes a Django model as its
+first argument and an arbitrary number of keyword arguments, which it passes to the default
+managers <tt class="docutils literal"><span class="pre">get()</span></tt> function. It raises <tt class="docutils literal"><span class="pre">Http404</span></tt> if the object doesnt exist, for example:<div style="height: 76px;" id="c503" class="comment-indicator"><span></span></div><div style="height: 76px;" id="b503" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn504"># Get the Entry with a primary key of 3
+e = get_object_or_404(Entry, pk=3)
+<div style="height: 60px;" id="c504" class="comment-indicator"><span></span></div></pre>
+<p class="cn" id="cn506">When you provide a model to this shortcut function, the default manager is used to execute
+the underlying <tt class="docutils literal"><span class="pre">get()</span></tt> query. If you dont want to use the default manager, or if you want
+to search a list of related objects, you can provide <tt class="docutils literal"><span class="pre">get_object_or_404()</span></tt> with a
+<tt class="docutils literal"><span class="pre">Manager</span></tt> object instead:<div style="height: 57px;" id="c506" class="comment-indicator"><span></span></div><div style="height: 57px;" id="b506" class="translation-indicator has-translations"><span> </span></div></p>
+<pre class="cn literal-block" id="cn507"># Get the author of blog instance e with a name of 'Fred'
+a = get_object_or_404(e.authors, name='Fred')
+
+# Use a custom manager 'recent_entries' in the search for an
+# entry with a primary key of 3
+e = get_object_or_404(Entry.recent_entries, pk=3)
+<div style="height: 156px;" id="c507" class="comment-indicator"><span></span></div></pre>
+</div>
+<div class="section" id="get-list-or-404">
+<span id="cn509"></span><h3 class="cn" id="cn509">get_list_or_404()<div style="height: 15px;" id="c509" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b509" class="translation-indicator has-translations"><span> </span></div></h3>
+<p class="cn" id="cn510"><tt class="docutils literal"><span class="pre">get_list_or_404</span></tt> 行为与 <tt class="docutils literal"><span class="pre">get_object_or_404()</span></tt> 相同，但是它用 <tt class="docutils literal"><span class="pre">filter()</span></tt> 取代了 <tt class="docutils literal"><span class="pre">get()</span></tt> 。如果列表为空，它将引发 <tt class="docutils literal"><span class="pre">Http404</span></tt> 。<div style="height: 20px;" id="c510" class="comment-indicator"><span></span></div><div style="height: 20px;" id="b510" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+</div>
+<div class="section" id="sql">
+<span id="cn511"></span><h2 class="cn" id="cn511">回归原始的SQL操作<div style="height: 15px;" id="c511" class="comment-indicator"><span></span></div><div style="height: 15px;" id="b511" class="translation-indicator has-translations"><span> </span></div></h2>
+<p class="cn" id="cn512">如果你需要写一个SQL查询，但是用Django的数据库映射来实现的话太复杂了，那么你可以考虑使用原始的SQL语句。<div style="height: 19px;" id="c512" class="comment-indicator"><span></span></div><div style="height: 19px;" id="b512" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn513">解决这个问题的比较好的方法是，给模块写一个自定义的方法或者管理器方法来执行查询。尽管在Django中，数据库查询在模块中没有任何存在的 <em>必要性</em> ，但是这种解决方案使你的数据访问在逻辑上保持一致，而且从组织代码的角度讲也更灵活。操作指南见附录B。<div style="height: 55px;" id="c513" class="comment-indicator"><span></span></div><div style="height: 55px;" id="b513" class="translation-indicator has-translations"><span> </span></div></p>
+<p class="cn" id="cn514">最后，请记住Django的数据库层仅仅是访问数据库的一个接口，你可以通过其他的工具、编程语言或者数据库框架来访问数据库，它并不是特定于Django使用的。<div style="height: 37px;" id="c514" class="comment-indicator"><span></span></div><div style="height: 37px;" id="b514" class="translation-indicator has-translations"><span> </span></div></p>
+</div>
+</div>
+
+    
+    </div>
+  </div>
+</div>
+</div>
+<div id="ft">
+        <div class="nav">
+	<a href="http://djangobook.py3k.cn/appendixC/ecn/">| 中英文对照</a> |
+	<a href="http://djangobook.py3k.cn/appendixC/en/">英文</a> |
+	<a href="http://djangobook.py3k.cn/appendixC/">中文</a>
+	<a href="http://djangobook.py3k.cn/appendixB/">| 上一章</a> |
+	<a href="http://djangobook.py3k.cn/">目  录</a> |
+	<a href="http://djangobook.py3k.cn/appendixD/">下一章 </a> |
+	<a href="http://djangobook.py3k.cn/appendixC/translate/">翻译 </a>  |
+</div>
+
+</div>
+</div>
+<div style="visibility: hidden; opacity: 0.3; width: 750px;" id="highlight-floater"></div>
+<!-- comment dialog -->
+<div style="display: none; width: 498px; height: 398px;" id="djangobookcomments" class="yresizable-pinned">
+    <div class="hd" id="djangobookcomments-head">
+      Comments <span class="close" onclick="Comments.close();">X</span>
+    </div>
+    <div class="bd">
+        <div id="comment-tabs">
+            <!-- comment form -->
+            
+            <!-- comments on this node tab: filled in dynamically -->
+            
+            <!-- all comments tab: also dynamic -->
+            
+            <!-- help -->
+            
+        <div class=" tabset"><div class=" hd" id="tab-strip0"><ul id="tab-strip-list1"><li style="display: none;" id="elgen-4"><a><em>提交评注</em></a></li><li id="elgen-3" style="display: inline;" class=" on"><a><strong><em>提交评注</em></strong></a></li><li id="elgen-6"><a><em>本块的评注</em></a></li><li id="elgen-5" style="display: none;" class=" on"><a><strong><em>本块的评注</em></strong></a></li><li id="elgen-8"><a><em>所有评注</em></a></li><li id="elgen-7" style="display: none;" class=" on"><a><strong><em>所有评注</em></strong></a></li><li id="elgen-10"><a><em>帮助</em></a></li><li id="elgen-9" style="display: none;" class=" on"><a><strong><em>帮助</em></strong></a></li></ul></div></div><div style="width: 466px; height: 282px;" class=" yui-ext-tabbody" id="tab-body2"><div style="display: block;" id="comment-tabs-form" class="tab yui-ext-tabitembody">
+              <form action="comments/" method="post" id="commentform">
+                <p>
+                  <input name="nodenum" value="" type="hidden">
+                  <label for="id_name">姓名 (必填)</label>
+                  <input name="name" id="id_name" tabindex="1" type="text">
+                </p>
+                <p>
+                  <label for="id_email">E-mail (必填; 不会显示)</label>
+                  <input name="email" id="id_email" tabindex="2" type="text">
+                </p>
+                <p>
+                  <label for="id_url">网站</label>
+                  <input name="url" id="id_url" tabindex="3" type="text">
+                </p>
+                <p>
+                  <label for="id_comment">评注</label>
+                  <textarea style="width: 466px; height: 116px;" name="comment" id="id_comment" tabindex="4" cols="40" rows="15"></textarea>
+                </p>
+              </form>
+            </div><div style="display: none;" id="comment-tabs-current" class="tab yui-ext-tabitembody">
+              <ol id="current-comments-list"></ol>
+            </div><div style="display: none;" id="comment-tabs-all" class="tab yui-ext-tabitembody">
+              <ol id="all-comments-list"></ol>
+            </div><div style="display: none;" id="comment-tabs-help" class="tab yui-ext-tabitembody">
+              <h4>关于本评注系统</h4>
+              <p>
+                本站使用上下文关联的评注系统来收集反馈信息。不同于一般对整章做评注的做法，
+                我们允许你对每一个独立的“文本块”做评注。一个“文本块”看起来是这样的：
+              </p>
+              <p class="image">
+                <img src="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/comments1.png" width="350" height="100">
+              </p>
+              <p>
+                一个“文本块”是一个段落，一个列表项，一段代码，或者其他一小段内容。
+                你选中它会高亮度显示:
+              </p>
+              <p class="image">
+                <img src="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/comments2.png" width="350" height="100">
+              </p>
+              <p>
+                要对文本块做评注，你只需要点击它旁边的标识块:
+              </p>
+              <p class="image">
+                <img src="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/comments3.png" width="350" height="100">
+              </p>
+              <p>
+                我们会仔细阅读每个评论，如果可能的话我们也会把评注考虑到未来的版本中去:
+              </p>
+              <p>
+                如果你愿意你的评注被采用，请确保留下你的全名 (注意不是昵称或简称）
+              </p>
+              <p class="image">
+                <img src="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/comments4.png" width="350" height="100">
+              </p>
+              <p>
+                Many, many thanks to <a href="http://www.jackslocum.com/yui/">Jack Slocum</a>;
+                the inspiration and much of the code for the comment system comes from Jack's
+                blog, and this site couldn't have been built without his wonderful 
+                <code>YAHOO.ext</code> library.  Thanks also to Yahoo for YUI itself.
+              </p>
+            </div></div></div>
+    </div>
+    <div class="ft">
+       <div style="visibility: hidden;" class="" id="djangobookcomments-message"></div>
+       <div id="comments-submit-wrapper">
+        <input style="visibility: visible;" id="comment-submit" value="提交" onclick="Comments.submitComment();" type="button">
+        <input id="comment-close" value="关闭" onclick="Comments.close();" type="button">
+      </div>
+    </div>
+<div id="elgen-11" class="yresizable-handle yresizable-handle-east">&nbsp;</div><div id="elgen-12" class="yresizable-handle yresizable-handle-south">&nbsp;</div><div id="elgen-13" class="yresizable-handle yresizable-handle-southeast">&nbsp;</div></div>
+<!-- translation dialog -->
+<div style="display: none; width: 648px; height: 438px;" id="djangobooktranslations" class="yresizable-pinned">
+    <div class="hd" id="djangobooktranslations-head">
+      Translations <span class="close" onclick="Translations.close();">X</span>
+    </div>
+    <div class="bd">
+        <div id="translation-tabs">
+            <!-- comment form -->
+            
+            <!-- comments on this node tab: filled in dynamically -->
+            
+	    <!-- settings -->
+	    <div style="display: none;" id="translation-tabs-settings" class="tab yui-ext-tabitembody">
+              
+            </div>
+            <!-- help -->
+            
+        <div class=" tabset"><div class=" hd" id="tab-strip14"><ul id="tab-strip-list15"><li style="display: none;" id="elgen-18"><a><em>翻译</em></a></li><li id="elgen-17" style="display: inline;" class=" on"><a><strong><em>翻译</em></strong></a></li><li id="elgen-20"><a><em>翻译历史记录</em></a></li><li id="elgen-19" style="display: none;" class=" on"><a><strong><em>翻译历史记录</em></strong></a></li><li id="elgen-22"><a><em>帮助</em></a></li><li id="elgen-21" style="display: none;" class=" on"><a><strong><em>帮助</em></strong></a></li></ul></div></div><div style="width: 616px; height: 322px;" class=" yui-ext-tabbody" id="tab-body16"><div style="display: block;" id="translation-tabs-form" class="tab yui-ext-tabitembody">
+              <form action="translations/" method="post" id="translationform">
+              </form>
+            </div><div style="display: none;" id="translation-tabs-current" class="tab yui-ext-tabitembody">
+              <ol id="current-translations-list"></ol>
+            </div><div style="display: none;" id="translation-tabs-help" class="tab yui-ext-tabitembody">
+                帮助
+            </div></div></div>
+
+    </div>
+    <div class="ft">
+        <div style="visibility: hidden;" class="" id="djangobooktranslations-message">Loading .....</div>
+        <div id="translations-submit-wrapper">
+            <input style="visibility: visible;" id="translation-prev" value="上一段" onclick="Translations.prev();" type="button">
+	    <input style="visibility: visible;" id="translation-next" value="下一段" onclick="Translations.next();" type="button">
+	    <input style="visibility: visible;" id="translation-submit-next" value="提交&amp;下一段" onclick="Translations.submitNext();" type="button">
+	    <input style="visibility: visible;" id="translation-submit" value="提交" onclick="Translations.submitTranslation();" type="button">
+            <input id="translation-close" value="关闭" onclick="Translations.close();" type="button">
+        </div>
+    </div>
+<div id="elgen-23" class="yresizable-handle yresizable-handle-east">&nbsp;</div><div id="elgen-24" class="yresizable-handle yresizable-handle-south">&nbsp;</div><div id="elgen-25" class="yresizable-handle yresizable-handle-southeast">&nbsp;</div></div> <!-- end translation dialog -->
+
+<div id="ft">
+        
+        Copyright 2006 Adrian Holovaty and Jacob Kaplan-Moss.<br>This
+        work is licensed under the <a href="http://new.djangobook.com/license/">GNU Free Document
+        License</a>.
+        <br>
+        Hosting graciously provided by <a href="http://mediatemple.net/">
+        <img style="vertical-align: middle; position: relative; top: -1px;" src="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/mt.png" alt="media temple"></a>
+        <br>
+        Chinese translate hosting by <a href="mailto:info@py3k.cn">py3k.cn</a>.
+</div>
+<script type="text/javascript" src="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/djangobook.js"></script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="%E9%99%84%E5%BD%95C%20%E6%95%B0%E6%8D%AE%E5%BA%93API%E5%8F%82%E8%80%83_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-794487-4");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+
+</body></html>
