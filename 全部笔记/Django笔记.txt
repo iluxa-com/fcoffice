@@ -237,4 +237,159 @@ Django
 
 Django 对 MVC 的诠释中，视图用来描述要展现给用户的数据；不是数据 如何展现 ,而且展现 哪些 数据。 相比之下，Ruby on Rails 及一些同类框架提倡控制器负责决定向用户展现哪些数据，而视图则仅决定 如何 展现数据，而不是展现 哪些 数据。
 -------------------------------------------
+在settings.py里配置数据库连接信息，使用mysql
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'django-study',                      # Or path to database file if using sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': '123456',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+
+-------------------------------------------
+测试连接
+>>> from django.db import connection
+>>> cursor = connection.cursor()
+-------------------------------------------
+创建app
+python manage.py startapp books
+
+编写模型
+
+检查模型有效性
+python manage.py validate
+
+生成创建表语句
+python manage.py sqlall books
+
+同步模型到数据库，如果修改或者删除一个模型并不会同步到数据库，运行python manage.py syncdb总是安全的，因为它不会重复执行SQL语句。
+python manage.py syncdb
+
+-------------------------------------------
+利用Django高级api添加数据
+
+>>> from mysite.books.models import Publisher
+>>> p2 = Publisher(name='Falcon Home',address='my house',city='shenzhen',state_province='Guangdong',country='China',website='http://www.onephper.tk')
+>>> p2.save()
+
+查看数据
+>>> publisher_list = Publisher.objects.all()
+>>> publisher_list
+[<Publisher: Publisher object>, <Publisher: Publisher object>]
+-------------------------------------------
+与前面等价的做法，不必执行save
+>>> p1 = Publisher.objects.create(name='Apress',
+...     address='2855 Telegraph Avenue',
+...     city='Berkeley', state_province='CA', country='U.S.A.',
+...     website='http://www.apress.com/')
+
+-------------------------------------------
+
+加入__unicode__方法后
+    def __unicode__(self):
+        return self.name
+
+
+>>> from mysite.books.models import *
+>>> [publisher for publisher in Publisher.objects.all()]
+[<Publisher: Appress>, <Publisher: Falcon Home>, <Publisher: QingHua>, <Publisher: xman>, <Publisher: Xman>]
+
+但是在这里为了让我们的修改生效需要重启python shell或者在
+idle里要重启idle。当然有其他方法
+
+-------------------------------------------
+插入数据后会自动添加一个id
+>>> pp = Publisher(name='falcon',address='nowhere',city='SZ',state_province='bj',country='China',website='www.no.com')
+>>> pp.id
+>>> pp.save()
+>>> pp.id
+6L
+-------------------------------------------
+过滤
+
+1.精确匹配
+>>> Publisher.objects.filter(name='Falcon')
+[<Publisher: falcon>]
+
+2.LIKE匹配
+>>> Publisher.objects.filter(name__contains='man')
+[<Publisher: xman>, <Publisher: Xman>]
+
+其他 API,附录C
+-------------------------------------------
+获取单个对象，只返回一个记录集，如果结果是多个对象或者没有返回结果会抛出异常。
+
+>>> Publisher.objects.get(name='Falcon')
+<Publisher: falcon>
+没有结果可以使用DoesNotExist捕获
+
+try:
+    p = Publisher.objects.get(name='Apress')
+except Publisher.DoesNotExist:
+    print "Apress isn't in the database yet."
+else:
+    print "Apress is in the database."
+
+-------------------------------------------
+
+orderby
+
+
+或者使用内嵌类 #附录B,Meta
+    class Meta:
+        ordering=['name']
+-------------------------------------------
+Publisher.objects.filter(country="China").order_by("-name")
+
+-------------------------------------------
+range-slicing语法取出数据特定子集，不支持负索引
+
+>>> Publisher.objects.order_by('name')[0]
+<Publisher: Appress>
+>>> Publisher.objects.order_by('name')[0:3]
+[<Publisher: Appress>, <Publisher: falcon>, <Publisher: Falcon Home>]
+-------------------------------------------
+数据更新
+
+
+这样写会更新全部列
+>>> p = Publisher.objects.get(name='Apress')
+>>> p.name = 'Apress Publishing'
+>>> p.save()
+
+这样写只会更新特定列，更高效
+Publisher.objects.filter(id=52).update(name='Apress Publishing')
+-------------------------------------------
+数据删除
+
+#删除全部数据时要使用all方法,为了防止误删。
+Pubisher.objects.all().delete()
+#删除部分数据不需要
+Publisher.objects.filter('name=xman').delete()
+
+Publisher.objects.all();
+-------------------------------------------
+
+###########################################
+启用admin 模块
+除了按照the django book 2.0的设置外，还要注释掉usrls.py以下两行
+
+from django.contrib import admin
+admin.autodiscover()
+
+不然会出现
+Exception Value: 	
+
+name 'admin' is not defined
+-------------------------------------------
+
+
+
+
 
