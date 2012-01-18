@@ -1,0 +1,17 @@
+###SAE
+server {
+    listen 80;
+    server_name www.onephper.tk;
+    
+    location / {
+        proxy_redirect off;
+        proxy_pass http://saepy.sinaapp.com;
+        proxy_set_header Host "falcon.sinaapp.com"; 
+        proxy_set_header X-Real-IP $remote_addr; 
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_redirect false;
+        access_log off;
+        error_log off;
+    }
+    
+}
