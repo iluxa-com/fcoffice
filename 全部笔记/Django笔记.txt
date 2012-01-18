@@ -390,6 +390,61 @@ name 'admin' is not defined
 -------------------------------------------
 
 
+将自定义model加入到Admin管理中
 
+在安装的app下新建admin.py
+
+from django.contrib import admin
+from mysite.books.models import Publisher, Author, Book
+
+admin.site.register(Publisher)
+admin.site.register(Author)
+admin.site.register(Book)
+
+需要重启服务器后生效
+-------------------------------------------
+
+如果你想允许一个日期型（DateField、TimeField、DateTimeField）或数字型（IntegerField、DecimalField、FloatField）字段为空，你需要使用null=True * 和* blank=True。
+
+关于blank和null，做个简陋的笔记： 1.对于字符串型字段：只需要设置blank=True，无需关心null（事实上django自动添加not null，用来保证空值均为空字符串类型(""）从而便于查询），可以随意增加或删掉blank=True选项，无需关心更新数据库。 2.对于日期型和数字型字段：需要同时设置blank=True和null=True，并且如果是后添加或删除的话需要手动更新数据库。（更新数据库参考第十章）
+-------------------------------------------
+verbose_name这两种写法都是合法的
+    last_name = models.CharField(u'姓氏',max_length=40)
+    email = models.EmailField(blank=True,verbose_name='邮箱'.decode('utf-8'))
+-------------------------------------------
+
+过滤器，写一个子类继承admin.ModelAdmin, 在该子类中定义一些属性（用于Model数据的过滤和筛选），然后在admin.site.register中注册到相应的Model.
+
+该子类可以这样写
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'email')
+    search_fields = ('first_name', 'last_name')
+
+注册
+admin.site.register(Author,AuthorAdmin)
+-------------------------------------------
+
+class BookAdmin(admin.ModelAdmin):
+    '''表格显示的字段'''
+    list_display = ('title', 'publisher', 'publication_date',)
+    '''右侧的时间过滤条'''
+    list_filter = ('publication_date',)
+    '''查询依据，不区分大小写'''
+    search_fields = ('title', )
+    '''栏目头的日期筛选条'''
+    date_hierarchy = 'publication_date'
+    '''默认显示的按指定字段排序'''
+    ordering = ('-publication_date','title',)
+    '''自定义编辑表单,可以不显示某些字段，在增加或修改数据时使用'''
+    fields = ('title', 'authors', 'publisher', 'publication_date')
+    '''水平多选框'''
+    filter_horizontal = ('authors',)
+    '''垂直多选框'''
+    #filter_vertical = ('authors',)
+    '''上述两个多选框只能用于ManyToManyField,不能用于ForeignKey字段'''
+    '''这个属性可以使用外键表现为文本框选择而非下拉列表(默认)'''
+    raw_id_fields = ('publisher',)
+
+-------------------------------------------
 
 
