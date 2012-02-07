@@ -1,0 +1,19 @@
+Tue, 07 Feb 2012 06:40:09 +0000array (
+  'headers' => 
+  array (
+    'server' => 'nginx/1.0.11',
+    'date' => 'Tue, 07 Feb 2012 06:40:14 GMT',
+    'content-type' => 'text/html',
+    'connection' => 'close',
+  ),
+  'body' => '{"install_at":"Tue, 07 Feb 2012 14:40:14 +0800"}',
+  'response' => 
+  array (
+    'code' => 200,
+    'message' => 'OK',
+  ),
+  'cookies' => 
+  array (
+  ),
+  'filename' => NULL,
+)
