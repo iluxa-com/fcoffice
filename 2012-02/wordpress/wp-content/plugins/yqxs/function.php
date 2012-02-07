@@ -64,17 +64,35 @@ function yqxs_bind_sub() {
         if(strpos($content ,'charset=gb2312') !==FALSE) {
             $content = iconv('gbk','utf-8',$content);
         }
+        //页面标题 等到午夜 > 爱曼达·奎克 >
         if(preg_match('#<title>(.*?)</title>#iUs',$content,$matches)) {
-            $yqxs['title'] = $matches[1];
+            $title_tmp = $matches[1];
+            /*
+            $title_arr = explode('>',$title_tmp);
+            $yqxs['title'] = $title_arr[0];
+            $yqxs['author'] = $title_arr[1];
+             *
+             */
+            list($yqxs['title'], $yqxs['author']) = split('[]', $matches[1]);
         }
+        //简介
         if(preg_match('|<td width="?406"?.*?>(.*?)</tr>|is',$content,$matches)){
             $yqxs['summary'] = $matches[1];
         }
+        //章节地址
         if(preg_match("#<a href='(.*?)'>在线阅读</a>#",$content,$matches)) {
             $yqxs['chapters'] = $yqxs['url'] . $matches[1];
         }
-        
+        //<td width="260" align="center" valign="middle" bgcolor="#FDECF7" class="pic01"><img src="http://www.yqxs.com/data/pic2/1286337640.jpg"></td>
+        //小说图片地址，仅显示用
+        if(preg_match('|<td.*?class="pic01"><img src="(.*?)".*?>|is',$content,$matches)) {
+            $yqxs['img'] = $matches[1];
+        }
+
         var_dump($yqxs);
+        
+
+       
         
 
 
@@ -87,8 +105,8 @@ function yqxs_bind_sub() {
                             <h2>采集子选项设置</h2>
 
         <form action="{$menu_page_url}" enctype="multipart/form-data" method="post">
-            输入你要采集的url : <input name="yqxs_url" type="text">
-            <input type="submit" name="option_save" class="button-primary" value="保存设置" />
+            输入你要采集的url : <input name="yqxs_url" style="width:292px"type="text" value="">
+            <input type="submit" name="option_save" class="button-primary" value="确定" />
         </form>
         </div>
 HEREDOC;
