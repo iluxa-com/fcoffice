@@ -251,7 +251,7 @@ class WP_Http {
 		// Transport claims to support request, instantiate it and give it a whirl.
 		if ( empty( $transports[$class] ) )
 			$transports[$class] = new $class;
-
+                 fb($class);
 		$response = $transports[$class]->request( $url, $args );
 
 		do_action( 'http_api_debug', $response, 'response', $class, $args, $url );
