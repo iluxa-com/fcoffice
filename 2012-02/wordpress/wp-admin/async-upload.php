@@ -4,8 +4,9 @@
  *
  * @package WordPress
  * @subpackage Administration
+ *
  */
-
+//set_post_thumbnail_sizes()
 define('WP_ADMIN', true);
 
 if ( defined('ABSPATH') )
