@@ -27,6 +27,16 @@ get_header(); ?>
 			?>
 			</div><!-- #content -->
 		</div><!-- #container -->
-
+<?php 
+    $info = wp_read_image_metadata(ABSPATH . 'wp-content/uploads/2012/02/notimg.gif') ;
+    var_dump($info);
+?>
+<?php
+$url = 'http://www.baidu.com/';
+$width = 300;
+$shot = bm_mshot ($url, $width);
+echo "<img src={$shot}>快照";
+?>
+          
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

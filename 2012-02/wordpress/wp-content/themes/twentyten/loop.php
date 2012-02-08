@@ -55,6 +55,8 @@
 	 */ ?>
 <?php while ( have_posts() ) : the_post(); ?>
 
+
+
 <?php /* How to display posts of the Gallery format. The gallery category is the old way. */ ?>
 
 	<?php if ( ( function_exists( 'get_post_format' ) && 'gallery' == get_post_format( $post->ID ) ) || in_category( _x( 'gallery', 'gallery category slug', 'twentyten' ) ) ) : ?>
@@ -144,7 +146,12 @@
 				<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'twentyten' ), 'after' => '</div>' ) ); ?>
 			</div><!-- .entry-content -->
 	<?php endif; ?>
+    <?php if ( has_post_thumbnail() ) {  //特色图像?>
+    <?php the_post_thumbnail(); ?>
+    <?php } else {?>
+    <img src="<?php bloginfo('template_url'); ?>/screenshot.png" />
 
+    <?php } ?>
 			<div class="entry-utility">
 				<?php if ( count( get_the_category() ) ) : ?>
 					<span class="cat-links">
@@ -170,6 +177,9 @@
 
 	<?php endif; // This was the if statement that broke the loop into three parts based on categories. ?>
 
+
+    
+    
 <?php endwhile; // End the loop. Whew. ?>
 
 <?php /* Display navigation to next/previous pages when applicable */ ?>

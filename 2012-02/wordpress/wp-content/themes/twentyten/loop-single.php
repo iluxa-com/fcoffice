@@ -28,12 +28,18 @@
 					<div class="entry-meta">
 						<?php twentyten_posted_on(); ?>
 					</div><!-- .entry-meta -->
-
+            
 					<div class="entry-content">
 						<?php the_content(); ?>
 						<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'twentyten' ), 'after' => '</div>' ) ); ?>
 					</div><!-- .entry-content -->
+<?php if ( has_post_thumbnail() ) {  //特色图像?>
+<?php the_post_thumbnail(); ?>
+<?php } else {?>
+<img src="<?php bloginfo('template_url'); ?>/screenshot.png" />
 
+<?php } ?>
+    
 <?php if ( get_the_author_meta( 'description' ) ) : // If a user has filled out their description, show a bio on their entries  ?>
 					<div id="entry-author-info">
 						<div id="author-avatar">
