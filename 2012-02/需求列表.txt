@@ -9,3 +9,12 @@ wp 制作小说专题网站模版需求列表
 
 测试采集url
 http://www.yqxs.com/data/book2/B3U8L34357
+
+暂无全文
+http://www.yqxs.com/data/book2/fHC7x35507/
+
+
+增加一个数据表
+yqxs_data
+
+post_id,block_id,block_title,content

@@ -1,0 +1,38 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="http://61.4.185.48:81/g/"></script>
+<script type="text/javascript">
+/*
+if("undefined" != typeof id) {
+  var dataUrl = "http://m.weather.com.cn/data/" + id + ".html?";
+  jQuery.getJSON(dataUrl+"&callback=?", 
+  function(data) {
+      //console.log(data);
+      var info = data.weatherinfo;
+      alert(info);
+  });
+}
+*/
+/*
+var dataUrl = 'http://services.digg.com/stories/top?appkey=http%3A%2F%2Fmashup.com&type=javascript&callback=?';
+$.getJSON(dataUrl,function(data){
+   console.log(data);
+});
+*/
+if("undefined" != typeof id) {
+  var dataUrl = "http://localhost/wt_jsonp.php?id=" + id ;
+  jQuery.getJSON(dataUrl+"&callback=?", 
+  function(data) {
+      console.log(data);
+      var info = data.weatherinfo;
+      //alert(info.city+'（'+info.date_y+'):'+info.weather1+','+info.temp1);
+      alert(info.city+':'+info.weather1+info.temp1);
+  });
+}
+</script>
+
+</head>
+<body>
+</body>
+</html>

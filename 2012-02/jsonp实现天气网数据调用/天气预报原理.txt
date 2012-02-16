@@ -1,0 +1,32 @@
+
+-------------------------------------------
+1.通过客户端请求http://61.4.185.48:81/g/ 返回js,取得用户ip地址和城市id。然后城市id保存到cookie(一年),以后获取数据时就可以直接使用该cookie而无需请求前面的地址。
+
+2.请求http://m.weather.com.cn/data/城市id.html?（注意，最后的?不能漏掉）,返回一个包含6天天气信息的json数组。
+
+3.对json数组操作显示相应的信息。
+
+-------------------------------------------
+用途:
+可以不使用中国天气网的插件，该插件需要乃至iframe，我不喜欢。
+利用js的跨域请求来实现(JSONP)
+
+
+-------------------------------------------
+动态加载js
+<script type="text/javascript">
+// This is our function to be called with JSON data
+function showPrice(data) {
+    alert("Symbol: " + data.symbol + ", Price: " + data.price);
+}
+var url = “ticker.js”; // URL of the external script
+// this shows dynamic script insertion
+var script = document.createElement('script');
+script.setAttribute('src', url);
+
+// load the script
+document.getElementsByTagName('head')[0].appendChild(script); 
+</script>
+-------------------------------------------
+服务端:wt_jsonp.php
+客户端:wt_client.html
