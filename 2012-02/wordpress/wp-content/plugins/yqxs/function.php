@@ -135,8 +135,21 @@ function yqxs_test() {
      }
      var_dump($category_id);
     */
-    $user_id = yqxs_get_user_id('陈不存在');
-    var_dump($user_id);
+
+
+//    $user_id = yqxs_get_user_id('陈不存在');
+//    var_dump($user_id);
+        $url = 'http://m.weather.com.cn/m/pn7/weather.htm';
+        $http=new WP_Http();
+        $header['yqxs-request-url']=get_bloginfo('wpurl');
+      
+        $response=$http->request($url,array(
+		"method"=>'POST',
+		"timeout"=>10,
+		"user-agent"=>'yqxs',
+		"headers"=>$header,
+	));
+
 
 
 }
