@@ -1,0 +1,11 @@
+Windows下安装步骤：
+
+１、解压android-sdk_r16-windows.zip；
+
+２、在解压目录(SDK Manager.exe所在目录)中新建“temp”文件夹，将android-2.2_r03-linux.zip(2.2版SDK)、android-15_r02.zip(4.0.3版SDK)、platform-tools_r10-windows.zip等压缩文件拷到temp目录下，运行SDK Manager.exe，选择对应的SDK安装，这样可以无需下载安装，节省下载时间；
+
+３、安装JDK(按系统选择jdk-6u30-windows-i586.exe或jdk-6u30-windows-x64.exe)；
+
+４、安装java IDE(eclipse或netbeans)；
+
+５、eclipse安装ADT，Help->Install New Software->Add->选择ADT压缩包->接受协议；
