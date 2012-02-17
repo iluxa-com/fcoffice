@@ -1,0 +1,227 @@
+/* ::::: http://articles.csdn.net/styles/v1/css/main.css ::::: */
+
+/* ::::: http://articles.csdn.net/styles/v1/css/content.css ::::: */
+
+.utm_wrap { width: 1000px; margin: 0pt auto; }
+.utm_cont { width: 1000px; float: left; }
+.banner { height: 90px; margin-top: 6px; }
+.navigation { display: block; padding-bottom: 5px; text-align: left; }
+.navigation:after { content: "."; display: block; height: 0pt; clear: both; visibility: hidden; }
+.navigation a { color: rgb(0, 90, 152); }
+#search_wrapper { float: right; width: 440px; margin-top: 16px; }
+#searchbox-new { float: left; background-color: rgb(227, 227, 227); border: 0pt solid rgb(201, 201, 201); height: 28px; width: 400px; margin-right: 8px; }
+#queries_searchfield_query-new { border: 1px solid rgb(207, 207, 207); color: rgb(190, 190, 190); font-size: 12px; height: 15px; margin-top: 2px; margin-left: 3px; padding: 3px 20px 2px 2px; width: 370px; }
+html > body #queries_searchfield_query-new { margin-top: 3px; }
+#button_both { background: url('button_both.gif') no-repeat scroll left top transparent; border: medium none; cursor: pointer; height: 34px; margin: 0pt; padding: 0pt; width: 32px; }
+.contentarea { width: 998px; float: left; margin-bottom: 10px; border: 1px solid rgb(217, 217, 217); }
+.blkleft { text-align: left; float: left; width: 686px; overflow: hidden; border-right: 1px solid rgb(217, 217, 217); background: none repeat scroll 0% 0% rgb(248, 250, 253); padding-bottom: 20px; }
+html > body .blkleft { padding-bottom: 0pt; }
+h1 { font: bold 20px/30px "鐎瑰缍�"; text-align: center; }
+div.blkleft h1 { padding: 25px 20px 0px; }
+.artInfo { background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 1px solid rgb(223, 233, 242); margin: 10px 20px; padding: 5px; text-align: center; color: rgb(138, 138, 138); }
+.blueline a { color: rgb(0, 90, 152); text-decoration: underline; }
+.blackline a { color: rgb(0, 0, 0); text-decoration: underline; }
+.blkCont { margin: 20px; }
+.blkCont p { font-size: 14px; line-height: 25px; text-align: justify; }
+.comet { display: block; margin: 0pt 0pt 1em; font-size: 12px; color: rgb(138, 138, 138); }
+.comet:after { content: "."; display: block; height: 0pt; clear: both; visibility: hidden; }
+#arc_page { padding: 15px 0pt; margin: 0pt auto; text-align: center; }
+#arc_page ul { float: left; width: 450px; padding-left: 160px; }
+.blkarticle { margin: 0pt 20px 20px; background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 1px solid rgb(217, 217, 217); }
+.blkarticle dl { display: block; }
+.blkarticle dl:after { content: "."; display: block; height: 0pt; clear: both; visibility: hidden; }
+.blkarticle dl dt { clear: both; font-size: 14px; color: rgb(206, 0, 18); font-weight: bold; background: none repeat scroll 0% 0% rgb(244, 244, 244); border-bottom: 1px solid rgb(206, 206, 206); padding-left: 5px; line-height: 25px; }
+.blkarticle dl dd { float: left; background: url('icon.gif') no-repeat scroll 5px 8px transparent; padding-left: 12px; line-height: 22px; height: 22px; overflow: hidden; white-space: nowrap; width: 310px; }
+.blkarticle dl dd a { color: rgb(0, 90, 152); }
+.blkcomments { margin: 20px; }
+.navigation p { float: left; margin: 0px; padding: 0px; }
+.artInfo p { margin: 0px; padding: 0px; }
+.blkright { text-align: left; float: right; width: 310px; overflow: hidden; }
+.rtbrill { width: 300px; margin: 5px 5px 0pt; background: url('rtbrillbg.gif') no-repeat scroll left bottom transparent; padding-bottom: 20px; }
+.red { color: rgb(207, 101, 1); }
+.gray { color: rgb(255, 255, 255); }
+.rtlist { width: 300px; margin: 5px 5px 0pt; text-align: center; }
+.rtlist4 { width: 300px; margin: 5px 5px 0pt; }
+.title_h1 { font-family: "閻庣懓顑勭紞锟�"; font-size: 14px; background: none repeat scroll 0% 0% rgb(225, 236, 254); color: rgb(105, 105, 105); padding-left: 15px; line-height: 2em; text-align: left; }
+.newstop { padding: 8px 0pt 0pt 5px; }
+.newstop a:hover { color: rgb(1, 95, 182); text-decoration: underline; }
+.newstop dt { margin: 0pt; padding: 2px 0pt 3px 21px; }
+.newstop dt.top1 { background: url('csdnnews_pic35.gif') no-repeat scroll 0pt 2px transparent; overflow: hidden; white-space: nowrap; width: 260px; }
+.newstop dt.top2 { background: url('csdnnews_pic36.gif') no-repeat scroll 0pt 3px transparent; overflow: hidden; white-space: nowrap; width: 260px; }
+.newstop dt.top3 { background: url('csdnnews_pic37.gif') no-repeat scroll 0pt 3px transparent; overflow: hidden; white-space: nowrap; width: 260px; }
+.newstop dt.top4 { background: url('csdnnews_pic38.gif') no-repeat scroll 0pt 3px transparent; overflow: hidden; white-space: nowrap; width: 260px; }
+.newstop dt.top5 { background: url('csdnnews_pic39.gif') no-repeat scroll 0pt 3px transparent; overflow: hidden; white-space: nowrap; width: 260px; }
+.newstop dt.top6 { background: url('csdnnews_pic40.gif') no-repeat scroll 0pt 3px transparent; overflow: hidden; white-space: nowrap; width: 260px; }
+.newstop dt.top7 { background: url('csdnnews_pic41.gif') no-repeat scroll 0pt 3px transparent; overflow: hidden; white-space: nowrap; width: 260px; }
+.newstop dt.top8 { background: url('csdnnews_pic42.gif') no-repeat scroll 0pt 3px transparent; overflow: hidden; white-space: nowrap; width: 260px; }
+.newstop dt.top9 { background: url('csdnnews_pic43.gif') no-repeat scroll 0pt 3px transparent; overflow: hidden; white-space: nowrap; width: 260px; }
+.newstop dt.top10 { background: url('csdnnews_pic44.gif') no-repeat scroll 0pt 3px transparent; overflow: hidden; white-space: nowrap; width: 260px; }
+.rtlist3 { width: 300px; height: 210px; position: relative; margin: 5px; clear: both; }
+.rtlist3 h1 span { float: right; font-weight: normal; font-size: 12px; padding-right: 15px; }
+.txt_gray { color: rgb(102, 102, 102); }
+.rtlist3 h1 span a { padding: 0pt 0pt 0pt 5px; }
+.txt_gray a { color: rgb(102, 102, 102); }
+.rtlist2 { width: 300px; height: 275px; position: relative; margin: 5px; }
+.rtlist2 h1 span { float: right; font-weight: normal; font-size: 12px; padding-right: 15px; }
+.txt_gray { color: rgb(102, 102, 102); }
+.rtlist2 h1 span a { padding: 0pt 0pt 0pt 5px; }
+.txt_gray a { color: rgb(102, 102, 102); }
+ul.lay_photo { width: 270px; padding: 10px; margin: 0pt 10px; clear: both; }
+ul.lay_photo li { width: 100px; float: left; text-align: center; padding: 0pt 15px; }
+ul.lay_photo li a img { margin-left: 0pt; display: block; }
+.gg { overflow: hidden; width: 100%; text-align: center; }
+.newstop_recruit { padding: 8px 10px 0pt; }
+.newstop_recruit dl { height: 150px; overflow: hidden; margin: 10px 0pt; padding: 0pt; width: 24em; }
+.newstop_recruit a:hover { color: rgb(1, 95, 182); text-decoration: underline; }
+.newstop_recruit dd { background: url('csdnindex_pic5.gif') no-repeat scroll 2px 8px transparent; padding: 0pt 0pt 0pt 12px; margin-bottom: 6px; line-height: 20px; height: 20px; white-space: nowrap; overflow: hidden; }
+.artInfo { background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 1px solid rgb(223, 233, 242); margin: 10px 20px; padding: 5px; text-align: center; color: rgb(138, 138, 138); }
+.blkCont {  }
+.blkCont a { color: rgb(1, 95, 182); }
+.blkCont ul { margin: 0pt 0pt 1em 20px; }
+.blkCont ul li { list-style-type: disc; font-size: 14px; line-height: 25px; }
+.blkarticle { margin: 0pt 20px 20px; background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 1px solid rgb(217, 217, 217); }
+.blkcomments { margin: 20px; }
+.rtbrill { width: 300px; margin: 5px; background: url('rtbrillbg.gif') no-repeat scroll left bottom transparent; padding-bottom: 20px; display: inline; }
+.rtlist { width: 300px; margin: 5px; display: inline; }
+.rtlist4 { width: 300px; margin: 5px 5px 10px 10px; display: inline; }
+.title_h1 { color: rgb(51, 51, 51); }
+.title_h1 span { float: right; font-weight: normal; font-size: 12px; padding-right: 15px; }
+.insert_ad { text-align: center; }
+body { text-align: center; margin: 0pt; padding: 0pt; font: 12px/150% Helvetica,Tahoma,Arial,sans-serif; color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); }
+a { color: rgb(136, 136, 136); text-decoration: none; }
+a:hover { color: rgb(255, 102, 0); text-decoration: underline; }
+.clear { clear: both; }
+img { border: 0pt none; }
+h1, h2, h3, h4, h5, h6, dl, dt, dd, ol, ul, li, form { margin: 0pt; padding: 0pt; }
+ol, ul { list-style-type: none; }
+input, textarea, select { font-size: 12px; }
+code, samp, cite, dfn { font-style: normal; }
+#digestComment { display: none; }
+a { color: rgb(51, 51, 51); text-decoration: none; }
+.attention { margin: 0pt 20px 15px; padding: 20px 0pt; border: 1px solid rgb(204, 204, 204); font: 12px/20px Arial ! important; }
+.attention * { margin: 0pt; padding: 0pt; list-style: none outside none; text-decoration: none; }
+.attention ul { display: block; text-align: center; }
+.attention ul:after { content: "."; display: block; height: 0pt; clear: both; visibility: hidden; }
+.attention li { float: left; list-style: none outside none ! important; width: 80px; padding: 0pt 10px; text-align: left; }
+.attention li a { color: rgb(1, 95, 182); text-decoration: none; }
+.attention li li { float: none; width: auto; padding: 0pt; }
+.attention li li img { width: 50px; height: 50px; padding: 2px; border: 1px solid rgb(204, 204, 204); }
+.attention li li.tc { text-align: center; }
+.attention li input { margin: 0pt 2px; vertical-align: middle; }
+.attention li label { vertical-align: middle; }
+.attention p { clear: both; padding: 10px 0pt 0pt; text-align: center; }
+/* ::::: http://csdnimg.cn/www/css/csdn_pubstylelib.css ::::: */
+
+@media all and (min-width: 0px) {
+  .csdn_pubheader09_nav ul.row_2 li { padding: 0pt 11px 0pt 13px; }
+}
+.pub_footer { font: 12px simsun; text-align: center; border-top: 1px solid rgb(204, 204, 204); }
+.pub_footer img { border: 0pt none; }
+.pub_footer dd { line-height: 19px; color: rgb(68, 68, 68); }
+.pub_footer dd a { color: rgb(68, 68, 68); text-decoration: none; padding: 0pt 5px; }
+/* ::::: http://articles.csdn.net/static/news/css/article.css ::::: */
+
+/* ::::: http://comment2.csdn.net/style/comment.css ::::: */
+
+#comment { text-align: left; font: 12px '宋体',Arial,Verdana,sans-serif,"Lucida Grande","Bitstream Vera Sans"; }
+#comment * { line-height: 150%; }
+#comment a { color: rgb(31, 58, 135); text-decoration: none; }
+#comment a:hover { color: rgb(255, 51, 0); text-decoration: underline; }
+#comment { margin: 0px; padding: 0px; border: 1px solid rgb(153, 153, 153); background: none repeat scroll 0% 0% transparent; }
+#comment .tlt { margin: 10px; font-size: 14px; font-weight: bold; padding: 3px 0px 9px; border-bottom: 1px solid rgb(153, 153, 153); }
+#comment #commentlist { margin: 10px; overflow: hidden; }
+#comment #commentlist img { border: 0px none; }
+#comment #commentlist ul { list-style: none outside none; }
+.cmtNotice { margin-top: 20px; padding-top: 10px; border-top: 1px dotted rgb(153, 153, 153); }
+.commenttitle em { float: right; font-style: normal; }
+.commentlist { margin: 0px; padding: 0px; color: rgb(153, 153, 153); }
+.commentlist li { margin: 10px auto; padding: 0px 0px 9px 64px; border-bottom: 1px dotted rgb(119, 119, 119); }
+.commentlist li span {  }
+.commentlist li span.u { float: left; display: block; width: 60px; text-align: center; margin: 0px 0px 0px -64px; }
+.commentlist li span.u img { width: 48px; height: 48px; }
+.commentlist li span.t { color: rgb(0, 0, 153); background: url('dot.gif') no-repeat scroll 0px 3px transparent; padding-left: 12px; }
+.commentlist li p { color: rgb(0, 0, 0); margin: 6px auto; padding: 0px; font-size: 14px; word-wrap: break-word; }
+.commentlist li p.detail { font-size: 12px; color: rgb(153, 153, 153); margin: 3px; text-align: right; }
+.ccommentlist { margin: 20px 40px 0px 28px; }
+.commentform { margin: 15px 10px 20px; padding: 0px; }
+.commentform form { margin-top: 0px; padding: 0px; }
+.commentform .input { width: 48px; }
+.commentform .submit { float: right; cursor: pointer; }
+.commentform textarea { font-size: 14px; margin: 6px 0px; border-right: 1px solid rgb(212, 208, 200); border-width: 1px; border-style: solid; border-color: rgb(64, 64, 64) rgb(212, 208, 200) rgb(212, 208, 200) rgb(64, 64, 64); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; width: 90%; height: 90px; }
+.commentform input { font-size: 12px; }
+#cAImg, #rAImg { border: 1px solid rgb(204, 204, 204); cursor: pointer; }
+#cAImg:hover, #rAImg:hover { border: 1px solid rgb(153, 153, 153); }
+#commentpage { text-align: center; }
+#commentpage a { text-decoration: none; margin: 3px; padding: 3px 5px; border: 1px solid rgb(204, 204, 204); }
+#commentpage a.selc, #commentpage a:hover { text-decoration: none; color: rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(31, 58, 135); }
+#commentpage a.gray { color: rgb(153, 153, 153); text-decoration: none; }
+a.bshareDiv, #bsPanel, #bsMorePanel, #bshareF { border: medium none; background: none repeat scroll 0% 0% transparent; margin: 0pt; padding: 0pt; font: 12px/14px Arial,Helvetica,Tahoma,sans-serif,宋体; }
+a.bshareDiv div, #bsPanel div, #bsMorePanel div, #bshareF div { display: block; }
+a.bshareDiv img, a.bshareDiv div, a.bshareDiv span, a.bshareDiv a, #bshareF table, #bshareF tr, #bshareF td { text-decoration: none; background: none repeat scroll 0% 0% transparent; margin: 0pt; padding: 0pt; border: medium none; line-height: 1.2; }
+a.bshareDiv span { display: inline; float: none; }
+div.buzzButton { cursor: pointer; font-weight: bold; }
+span.bshareText { white-space: nowrap; }
+span.bshareText:hover { text-decoration: underline; }
+a.bsSiteLink { text-decoration: none; color: rgb(102, 102, 102); }
+a.bsSiteLink:hover { text-decoration: underline; }
+div.bsLogoM, div.bsLogoMSel { float: left; width: 111px; text-align: left; height: 16px; padding: 2px 4px; margin: 2px 0pt; border: 1px solid rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(255, 255, 255); }
+div.bsLogoM a, div.bsLogoMSel a { display: block; height: 16px; line-height: 16px; padding-left: 24px; text-decoration: none; color: rgb(102, 102, 102); border: medium none; white-space: nowrap; }
+div.bsLogoMLink { width: 242px; overflow: hidden; background: none repeat scroll 0% 0% rgb(255, 255, 255); float: left; margin: 3px 0pt; padding: 0pt; }
+#bsMorePanel { position: fixed; top: 50%; left: 50%; margin-top: -175px; margin-left: -140px; z-index: 100000001; font-size: 12px; width: 268px; background: url('background-opaque-dark.png') repeat scroll 0% 0% transparent; padding: 6px; border-radius: 5px 5px 5px 5px; }
+div.bsClear { clear: both; height: 0px; line-height: 0px; overflow: hidden; font-size: 0pt; }
+.bFind { background: none repeat scroll 0% 0% transparent; border: 0pt none; font-size: 11px; height: 16px; outline: medium none; width: 100%; }
+.bFind-wrapper-top, .bFind-wrapper { width: 210px; background: url('search-sprite.gif') no-repeat scroll 0pt 5px transparent; height: 20px; padding: 0pt 0pt 7px 23px; }
+.bFind-wrapper-top { border: 0pt none; width: 253px; position: relative; display: block; background-position: 100% -55px; margin: -4px 0pt 0pt -23px; }
+.bFind-placeholder { width: 100%; display: inline-block; position: relative; vertical-align: middle; padding-top: 6px; }
+a.bsSiteLink { text-decoration: none; color: rgb(102, 102, 102); }
+a.bshareDiv { height: 16px; line-height: 18px; font-size: 14px; color: rgb(51, 51, 51); padding-left: 0pt; }
+a.bshareDiv:hover { text-decoration: none; }
+a.bsSiteLink:hover { text-decoration: underline; }
+div.buzzButton { cursor: pointer; }
+div.bsRlogo, div.bsRlogoSel { width: 60px; float: left; margin: 0pt 4px; padding: 2px 0pt; }
+div.bsLogo, div.bsLogoSel { float: left; width: 111px; text-align: left; height: auto; padding: 2px 4px; margin: 2px 0pt; white-space: nowrap; overflow: hidden; }
+div.bsLogo, div.bsRlogo { border: 1px solid rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(255, 255, 255); }
+div.bsLogo a, div.bsLogoSel a { display: block; height: 16px; line-height: 16px; padding: 0pt 0pt 0pt 24px; text-decoration: none; }
+div.bsLogo a, div.bsRlogo a { color: rgb(102, 102, 102); border: medium none; }
+div.bsLogoLink { width: 121px; overflow: hidden; background: none repeat scroll 0% 0% rgb(255, 255, 255); float: left; margin: 3px 0pt; }
+#bsLogin { float: right; text-align: right; overflow: hidden; height: 100%; }
+#bsPanel { position: absolute; z-index: 100000000; font-size: 12px; width: 258px; background: url('background-opaque-dark.png') repeat scroll 0% 0% transparent; padding: 6px; border-radius: 5px 5px 5px 5px; }
+div.bsClear { clear: both; height: 0pt; line-height: 0; font-size: 0pt; overflow: hidden; }
+/* ::::: http://csdnimg.cn/pubnav/css/navtop_2011.css ::::: */
+
+.nav_top_2011 { width: auto; border-bottom: 1px solid rgb(204, 204, 204); height: 20px; line-height: 20px; font-size: 12px; font-family: simsun; margin-bottom: 4px; background: none repeat scroll 0% 0% rgb(255, 255, 255); }
+.nav_top_2011 p { margin: 0pt auto; }
+.nav_top_2011 ul, .nav_top_2011 ul li { padding: 0pt; margin: 0pt; list-style: none outside none; }
+.nav_top_2011 a:link, .nav_top_2011 a:visited, .nav_top_2011 a:active { color: rgb(0, 0, 202); text-decoration: underline; }
+.nav_top_2011 a:hover { color: rgb(255, 0, 0); text-decoration: underline; }
+.nav_top_2011 p { float: right; padding-right: 4px; text-align: right; }
+.nav_top_2011 p a, .nav_top_2011 p a:link, .nav_top_2011 p a:visited, .nav_top_2011 p a:active { color: rgb(68, 68, 68); text-decoration: none; padding: 0pt 6px; font-family: arial,sans-serif; }
+.nav_top_2011 p a:hover { text-decoration: underline; }
+.nav_top_2011 p em { font-style: normal; font-weight: bold; color: rgb(255, 0, 0); font-family: arial,sans-serif; padding: 0pt 10px; }
+.nav_top_2011 p a { padding-left: 10px; font-family: arial,sans-serif; }
+.nav_top_2011 p a.red { color: rgb(255, 0, 0); }
+.nav_top_2011 p a.red:link, .nav_top_2011 p a.red:visited, .nav_top_2011 p a.red:active { text-decoration: none; font-weight: normal; color: rgb(255, 0, 0); }
+.nav_top_2011 p a.red:hover { text-decoration: underline; color: rgb(255, 0, 0); }
+.nav_top_2011 ul { float: left; padding-left: 10px; text-align: left; height: 20px; line-height: 20px; }
+.nav_top_2011 ul li { float: left; padding-right: 10px; }
+.nav_top_2011 ul li.more { width: auto; text-align: left; font-weight: normal; }
+.nav_top_2011 ul li.more h2 { font-size: 12px; font-weight: normal; margin: 0pt; background: url('pic_arrow.gif') no-repeat scroll 30px 5px transparent; width: 40px; display: inline-block; cursor: pointer; }
+.nav_top_2011 ul li.more h2 a { font-weight: normal; }
+.nav_top_2011 ul li.more a:hover { color: rgb(0, 0, 202); font-weight: normal; text-decoration: underline; }
+.nav_top_2011 ul li.more ul { z-index: 500; position: absolute; border: 1px solid rgb(204, 204, 204); background: none repeat scroll 0% 0% rgb(255, 255, 255); padding: 2px 8px 5px; font-size: 12px; height: auto; display: none; }
+.nav_top_2011 ul li.more ul li { line-height: 24px; float: none; padding-right: 0pt; font-weight: normal; }
+.nav_top_2011 ul li.more ul li a { font-weight: normal; }
+.nav_top_2011 ul li.more ul li a:link, .nav_top_2011 ul li.more ul li a:visited, .nav_top_2011 ul li.more ul l a:active { color: rgb(0, 0, 202); text-decoration: underline; }
+.nav_top_2011 ul li.more ul li a:hover { color: rgb(255, 0, 0); font-weight: normal; text-decoration: underline; }
+@media not all {
+  .blkCont p { text-align: left; }
+}
+/* ::::: http://csdnimg.cn/pubfooter/css/pub_footerstyle.css ::::: */
+
+.pub_footerall { margin: 5px auto; width: auto; overflow: hidden; padding: 3px 6px; border-top: 1px solid rgb(204, 204, 204); font-size: 12px; text-align: center; clear: both; }
+.pub_footerall dl { padding: 3px 0pt; overflow: hidden; margin: 0pt; line-height: 1.5; font-family: simsun; }
+.pub_footerall dd a { padding: 0pt 5px; margin: 0pt; }
+.pub_footerall dd a:link, .pub_footerall dd a:visited, .pub_footerall dd a:active { color: rgb(0, 0, 0); text-decoration: none; }
+.pub_footerall dd a:hover { color: rgb(1, 95, 182); }
+.pub_footerall dd img { border: 0pt none; }
+.pub_footerall dt { text-align: center; padding-top: 5px; margin: 0pt; }
