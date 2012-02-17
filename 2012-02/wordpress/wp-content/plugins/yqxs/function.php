@@ -1,4 +1,10 @@
 <?php
+//add_action('the_title','urls_display');
+//function urls_display(){
+//        global $wp;
+//        var_dump($wp->query_vars);
+//        exit();
+//}
 require_once('Word2Py.class.php');
 
 add_action("admin_head", "yqxs_wp_head");
@@ -139,17 +145,19 @@ function yqxs_test() {
 
 //    $user_id = yqxs_get_user_id('陈不存在');
 //    var_dump($user_id);
-        $url = 'http://m.weather.com.cn/m/pn7/weather.htm';
-        $http=new WP_Http();
-        $header['yqxs-request-url']=get_bloginfo('wpurl');
-      
-        $response=$http->request($url,array(
-		"method"=>'POST',
-		"timeout"=>10,
-		"user-agent"=>'yqxs',
-		"headers"=>$header,
-	));
+//        $url = 'http://m.weather.com.cn/m/pn7/weather.htm';
+//        $http=new WP_Http();
+//        $header['yqxs-request-url']=get_bloginfo('wpurl');
+//
+//        $response=$http->request($url,array(
+//		"method"=>'POST',
+//		"timeout"=>10,
+//		"user-agent"=>'yqxs',
+//		"headers"=>$header,
+//	));
 
+    global $wpdb;
+    var_dump($wpdb->data);
 
 
 }
