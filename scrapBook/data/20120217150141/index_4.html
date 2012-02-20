@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head xmlns="http://www.w3.org/1999/xhtml">
+<meta content="application/xhtml+xml; charset=UTF-8" http-equiv="Content-Type" />
+
+    <title>页面载入出错</title>
+    <link rel="stylesheet" href="chrome://global/skin/netError.css" type="text/css" media="all" />
+    <!-- If the location of the favicon is changed here, the FAVICON_ERRORPAGE_URL symbol in
+         toolkit/components/places/src/nsFaviconService.h should be updated. -->
+    <link rel="icon" type="image/png" id="favicon" href="chrome://global/skin/icons/warning-16.png" />
+
+    
+  </head>
+<body xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+
+    <!-- ERROR ITEM CONTAINER (removed during loading to avoid bug 39098) -->
+    
+
+    <!-- PAGE CONTAINER (for styling purposes only) -->
+    <div id="errorPageContainer">
+    
+      <!-- Error Title -->
+      <div id="errorTitle">
+        <h1 id="errorTitleText">连接超时</h1>
+      </div>
+      
+      <!-- LONG CONTENT (the section most likely to require scrolling) -->
+      <div id="errorLongContent">
+      
+        <!-- Short Description -->
+        <div id="errorShortDesc">
+          <p id="errorShortDescText">位于 www.facebook.com 的服务器响应时间过长。</p>
+        </div>
+
+        <!-- Long Description (Note: See netError.dtd for used XHTML tags) -->
+        <div id="errorLongDesc">
+<ul>
+  <li>此站点暂时不可用或者太忙。请稍后重试。</li>
+  <li>如果您无法载入任何页面，请检查您计算机的网络连接。</li>
+  <li>如果您的计算机受到防火墙或代理服务器的保护，请确认 Firefox  被授权访问网页。</li>
+</ul>
+</div>
+
+        <!-- Override section - For ssl errors only.  Removed on init for other
+             error types.  -->
+        
+      </div>
+
+      <!-- Retry Button -->
+      <button id="errorTryAgain" onclick="retryThis(this);">重试</button>
+
+    </div>
+
+    <!--
+    - Note: It is important to run the script this way, instead of using
+    - an onload handler. This is because error pages are loaded as
+    - LOAD_BACKGROUND, which means that onload handlers will not be executed.
+    -->
+    
+
+  </body>
+</html>

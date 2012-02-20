@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="zh" xml:lang="zh" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    
+    <meta http-equiv="content-style-type" content="text/css">
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <meta name="version" content="neblog-1.0">
+    
+<title>[转]YouTube Architecture - zsulwj的日志 - 网易博客</title>
+<meta name="author" content="zsulwj,zsulwj">
+<meta name="keywords" content="[转]YouTube Architecture,日志,zsulwj,一座城堡,网易博客,网易,blog">
+<meta name="description" content="[转]YouTube Architecture,zsulwj的网易博客,蓝色,">
+  
+    
+    
+  <!--[if lte IE 6]>
+  <style type="text/css">
+    html,body,#blog-163-com-ie6body{height:100%;width:100%;overflow:hidden;}
+    #blog-163-com-ie6body{overflow:auto;overflow-y:scroll;}
+    #blog-163-com{background:none;}
+  </style>
+  <![endif]-->
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body id="blog-163-com" class="nb-body nb-inr nb-prv">
+  <!--[if lte IE 6]><div id="blog-163-com-ie6bodywrap" class=""><![endif]-->
+    <!--[if lte IE 6]><div id="blog-163-com-ie6body" class="nb-body"><![endif]-->
+
+<div class="nb-nbar clearfix" id="blog-163-com-topbar">
+  <div class="pl fl clearfix">
+  <div id="" "="" class="nbw-im fl im im0">
+    <a rel="nofollow" class="lbl bd ia noul " href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://www.163.com/" target="_top" hidefocus="true"><span class="tx">网易</span><span class="iblock icn0 icn0-421">&nbsp;</span></a><div class="nbw-tcd box-shadow bd">
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://news.163.com/">
+            新闻
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://t.163.com/">
+            微博
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://email.163.com/">
+            邮箱
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://photo.163.com/">
+            相册
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://yuedu.163.com/">
+            阅读
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://www.youdao.com/">
+            有道
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://photo.163.com/pp/square/">
+            摄影
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://aipai.163.com?from=163blog">
+            爱拍
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://note.youdao.com/?vendor=163blog">
+            云笔记
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://fm.163.com/?fmblogzx0628">
+            闪电邮
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://m.123.163.com/?frombkcp">
+            手机邮
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://yxp.163.com/">
+            印像派
+          </a>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://dream.163.com/?from=bkcp">
+            梦幻人生
+          </a>
+        <div class="sep bd space">&nbsp;</div>
+          <a rel="nofollow" class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://sitemap.163.com/">
+            更多
+          </a>
+        
+    </div>
+  </div>
+                               
+    <span style="margin-left: 0pt;" class="fl iblock space icn1 icn1-4">&nbsp;</span>
+    
+  <div id="" "="" class="nbw-im fl im im10">
+    <a class="lbl bd ia noul " href="http://blog.163.com/?frompersonalbloghome" target="_top" hidefocus="true"><span class="tx">博客</span><span class="iblock icn0 icn0-421">&nbsp;</span></a><div class="nbw-tcd box-shadow bd">
+          <a class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/services/wapblog.html?frompersonalbloghome">
+            手机博客
+          </a>
+          <a class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/clone/clone.html?frompersonalbloghome">
+            博客搬家
+          </a>
+          <a class="itm noul youcai " target="_top" hidefocus="true" href="http://blog.163.com/vip.do?frompersonalbloghome">
+            博客VIP服务
+          </a>
+        <div class="sep bd space">&nbsp;</div>
+          <a class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/blog_admin/blog/static/721279201082863728829/?frompersonalbloghome">
+            LiveWriter写博
+          </a>
+          <a class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/blog_admin/blog/static/721279201092713253500/?frompersonalbloghome">
+            word写博
+          </a>
+          <a class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/services/mailblog.html?frompersonalbloghome">
+            邮件写博
+          </a>
+          <a class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/services/emsblog.html?frompersonalbloghome">
+            短信写博
+          </a>
+        <div class="sep bd space">&nbsp;</div>
+          <a class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/showMultiUser.do?frompersonalbloghome">
+            群博客
+          </a>
+          <a class="itm noul youcai " target="_top" hidefocus="true" href="http://blog.163.com/BLOG_YOUCAI/">
+            博客油菜地
+          </a>
+          <a class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/ht/?frompersonalbloghome">
+            博客话题
+          </a>
+          <a class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/hot/history/?frompersonalbloghome">
+            博客热点
+          </a>
+          <a class="itm noul  " target="_top" hidefocus="true" href="http://q.163.com/#home?frompersonalbloghome">
+            博客圈子
+          </a>
+          <a class="itm noul  " target="_top" hidefocus="true" href="http://blog.163.com/findFriend.do?type=5?frompersonalbloghome">
+            找朋友
+          </a>
+        
+    </div>
+  </div>
+
+    
+    <div class="nbw-im fl im1 im explore"><a class="lbl bd ima spy" href="http://blog.163.com/public/explore/?frompersonalbloghome">发现</a></div>
+    <div class="nbw-im fl im1 im bloggroup"><a class="lbl bd ima spy" href="http://blog.163.com/g/?frompersonalbloghome">小组</a></div>
+    <div class="nbw-im fl im1 im customtheme"><a class="lbl bd ima spy" href="http://blog.163.com/public/theme/?frompersonalbloghome">风格</a></div>
+    <div class="nbw-im fl im1 im seebyway"><a rel="nofollow" title="随便看看" class="lbl bd ima spy" href="http://blog.163.com/randomUser.do">&nbsp;</a></div>
+    
+    <span class="fl iblock space icn1 icn1-4">&nbsp;</span>
+    <div id="topbar_randShowArea" class="fl">
+      <div class="nbw-im fl im1 im randtag"><a style="width: 110px;" target="_top" class="lbl bd ima moveblog randshow" href="http://www.lofter.com/reg?from=blog">网易轻博客LOFTER</a></div>
+    </div>
+  </div>
+  <div class="fr pr clearfix">
+    <div id="topbar_loginAndReg" class="fr">
+      <a rel="nofollow" style="margin-left: 10px; color: rgb(255, 119, 0);" class="iblock fr ima" href="http://reg.163.com/reg/reg.jsp?product=blog&amp;url=http://blog.163.com/ntesRegBlank.html&amp;loginurl=http://blog.163.com/" target="_top">创建博客</a>
+      <a rel="nofollow" class="iblock fr ima ztag" href="#">登录</a>
+      <span class="fr iblock space icn1 icn1-4 spx">&nbsp;</span>
+      <div id="topbar_followArea" class="nbw-im fr"><span class="lbl bd ima followit fl ztag"><span class="fl addicon">&nbsp;</span><span class="fl">关注</span></span></div>
+    </div>
+  </div>
+</div>
+
+<div class="blogtoptips phide" id="blog-163-com-toptips">
+ <div class="blogtoptipswrap">
+    <div id="newbulletinstip" class="newbulletinstip phide">
+    <a class="lnknews fc03 m2a tiptag phide" href="http://zsulwj.blog.163.com/blog/static/353269252008320344399/" target="_top"></a><span class="txtnews tiptag phide"></span>&nbsp;&nbsp;&nbsp;<a class="fc03 ul nextorprevnews tiptag phide" href="http://zsulwj.blog.163.com/blog/static/353269252008320344399/" hidefocus="true">显示下一条</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="fc03 ul close tiptag" href="http://zsulwj.blog.163.com/blog/static/353269252008320344399/" hidefocus="true">关闭</a>
+  </div>
+ </div>
+    <div id="$_faxiantip" class="faxiantip phide">
+      <div>
+	    <a class="m2a iblock" href="http://blog.163.com/public/explore/?fromblogbanner" target="_top"></a>
+	    <span class="faxiantag m2a"></span>
+      </div>
+    </div>
+    <div id="$_guanggaotip" class="guanggaotip phide">
+      <div>
+	    
+	    <span class="guanggaotag m2a"></span>
+      </div>
+    </div>
+    <div id="$_lofterInviteTip" class="lofterInviteTip phide">
+      <div>
+	    <a class="m2a iblock" href="http://www.lofter.com/invite/163blog/?email=" target="_top"></a>
+	    <span class="lofterInviteTag m2a"></span>
+      </div>
+    </div>
+</div>  <div class="nb-wrap wsy" id="blog-163-com-main"><div class="nb-are nb-top">
+  <div class="wkg h" id="blog-163-com-banner">
+    
+    <div class="t">
+      <h1 class="n c"><span class="ztag pre">一座城堡</span></h1>
+      <p class="d c"><span class="ztag pre">蓝色</span></p>
+    </div>
+    <div class="f h ztag">&nbsp;</div>
+    <a class="x" hidefocus="true" target="_top" href="#"><span class="xx ztag"></span></a>
+  </div>
+</div><div class="nb-are nb-nav">
+  <div class="wkg">
+    <div class="c h">
+      <h2>导航</h2>
+      <ul class="noul clearfix">
+                
+	        <li class="w w0">
+	          <a class="i i0 fc01 h" hidefocus="true" href="http://zsulwj.blog.163.com/">首页</a>
+	        </li>
+	        <li class="w w1 selected">
+	          <a class="i i1 fc01 h" hidefocus="true" href="http://zsulwj.blog.163.com/blog/">日志</a>
+	        </li>
+	        <li class="w w2">
+	          <a class="i i2 fc01 h" hidefocus="true" href="http://zsulwj.blog.163.com/album/">相册</a>
+	        </li>
+	        <li class="w w3">
+	          <a class="i i3 fc01 h" hidefocus="true" href="http://zsulwj.blog.163.com/music/">音乐</a>
+	        </li>
+	        <li class="w w4">
+	          <a class="i i4 fc01 h" hidefocus="true" href="http://zsulwj.blog.163.com/collection/">收藏</a>
+	        </li>
+	        <li class="w w5">
+	          <a class="i i5 fc01 h" hidefocus="true" href="http://zsulwj.blog.163.com/friends/">博友</a>
+	        </li>
+	        <li class="w w6">
+	          <a class="i i6 fc01 h" hidefocus="true" href="http://zsulwj.blog.163.com/profile/">关于我</a>
+	        </li>
+      </ul><!--
+ --></div>
+    <div class="l h">&nbsp;</div>
+    <div class="r h">&nbsp;</div>
+  </div>
+</div>  <div class="nb-are nb-smt"><div class="wkg h space"><div class="l h">&nbsp;</div><div class="r h">&nbsp;</div><div class="c h">&nbsp;</div></div></div>
+  <div class="nb-are nb-cnt">
+    <div class="wkg">
+      <div class="c wc h clearfix " id="blog-163-com-container">
+  <div class="nb-mdl lcr m-3 " id="-3">
+  <div class="nb-mt lcr th fc02">
+    <div class="c tc th lcr"><h2 class="thide nb-jsc mdl_t_t">日志</h2></div>
+    <div class="r tm th nb-jsc"></div>
+    <div class="l tl th">&nbsp;</div>
+    <div class="r tr th">&nbsp;</div>
+  </div>
+    <div class="nb-mc lcr">
+      <div class="c cc lcr nb-jsc">
+<div class="nbw-ryt ztag clearfix ">
+  <div class="right bdwl bds0 bdc0"><div class="cnt ztag"><div><div class="uinfo ztag">    <a target="_top" href="http://blog.163.com/zsulwj/"><img class="bdwa bdc0 pnt" onerror="this.src=location.f60" src="ava.s"></a>    <a target="_top" class="fc03 m2a" href="http://blog.163.com/zsulwj/">zsulwj</a>    <div class="intro fc05"></div>        <div class="acts ztag"><span> <span class="iblock icn0 icn0-41">&nbsp;</span> <span class="fc03 ul ztag" onclick="nb.p['m-3'].g.af(event);">加博友</span> </span><span> <span class="iblock icn0 icn0-016">&nbsp;</span> <span class="fc03 ul tofollow" onclick="nb.p['m-3'].g.sf(0);">关注他</span> </span></div>      <div class="mbga xtag">        <div class="mbgai">&nbsp;</div>        <a class="fc03 xtag m2a" href="http://t.163.com/3896234190?f=blogme" target="_top">他的网易微博</a>      </div>    </div>
+    <h4 class="fc07 fs0 ltt">最新日志</h4>
+    <ul class="ztag blst">        <li class="thide"><a target="_top" class="fc03 m2a" href="http://zsulwj.blog.163.com/blog/static/353269252011112611213893/?latestBlog">英特尔预测明年四大科技趋势</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://zsulwj.blog.163.com/blog/static/353269252011929102631123/?latestBlog">盘点Google在2011年的重要收</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://zsulwj.blog.163.com/blog/static/35326925201192811414063/?latestBlog">x64系统的判断和x64下文件和</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://zsulwj.blog.163.com/blog/static/35326925201192811385403/?latestBlog">x64系统的判断和x64下文件和</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://zsulwj.blog.163.com/blog/static/353269252011928113719694/?latestBlog">x64系统的判断和x64下文件和</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://zsulwj.blog.163.com/blog/static/35326925201192811356899/?latestBlog">Windows&nbsp;64位操作系统的重定</a></li>        </ul>
+    <h4 class="fc07 fs0 ltt phide ztag">该作者的其他文章</h4>
+    <ul class="ztag blst"></ul>
+    <h4 class="fc07 fs0 ltt phide ztag">博主推荐</h4>
+    <ul class="ztag blst"></ul>
+    <h4 class="fc07 fs0 ltt phide ztag">相关日志</h4>
+    <ul class="ztag blst"></ul>
+    <h4 class="fc07 fs0 ltt ztag">随机阅读</h4>
+    <ul class="ztag blst">        <li class="thide"><a target="_top" class="fc03 m2a" href="http://blog.163.com/alahaigui/blog/static/2639938820121112141971/?personalRecomBlog" title="韩寒成了《贫民窟的百万富翁》？">韩寒成了《贫民窟的百万富翁》？</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://blog.163.com/oscarg/blog/static/75998252201211211348519/?personalRecomBlog" title="可能海水也是有点甜味儿的">可能海水也是有点甜味儿的</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://blog.163.com/md1959/blog/static/1572900201211212126604/?personalRecomBlog" title="处固可喜，非处也欣然">处固可喜，非处也欣然</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://blog.163.com/sunny-9196271/blog/static/160299320121131531985/?personalRecomBlog" title="房价买点如何生成？">房价买点如何生成？</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://blog.163.com/xjq_mo/blog/static/584937182012115104634529/?personalRecomBlog" title="澳門筆匯四十三期出版&nbsp;(原創)">澳門筆匯四十三期出版&nbsp;(原創)</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://blog.163.com/haoyuehan/blog/static/707426720121149551378/?personalRecomBlog" title="时代热词：玻璃少年与跪拜猫">时代热词：玻璃少年与跪拜猫</a></li>        </ul>
+    <h4 class="fc07 fs0 ltt ztag">首页推荐</h4>
+    <ul class="ztag blst">        <li class="thide"><a target="_top" class="fc03 m2a" href="http://blog.163.com/lejia_vip/blog/static/16421468420121163170993/?recommendReader" title="一位渴望出轨的女性公关">一位渴望出轨的女性公关</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://imsuqin.blog.163.com/blog/static/30385414201211662416331/?recommendReader" title="酒后乱性能征服女人吗？">酒后乱性能征服女人吗？</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://longzheyl.blog.163.com/blog/static/169078844201211743844509/?recommendReader" title="史记中记载古代淫乱场面">史记中记载古代淫乱场面</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://mikesakai.blog.163.com/blog/static/135335489201211685433559/?recommendReader" title="日本的性教育堪比性虐待">日本的性教育堪比性虐待</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://sbpancaifu.blog.163.com/blog/static/13271615520121165260129/?recommendReader" title="潘采夫：录像厅的三级片">潘采夫：录像厅的三级片</a></li>                <li class="thide"><a target="_top" class="fc03 m2a" href="http://zhangmingbk.blog.163.com/blog/static/11195065220121166150598/?recommendReader" title="清末代皇太后退位后生活">清末代皇太后退位后生活</a></li>        </ul>
+    <div class="more"><a target="_top" class="fc03 m2a" href="http://blog.163.com/">更多&gt;&gt;</a></div>
+    <br><br>
+    <div id="yodaoad_r" style="display: none;"></div></div></div></div>
+  <div class="left">
+     <div class="lcnt bdwr bds0 bdc0 ">   
+      <div id="$_divTopLink" class="top fc03 bdwb bdc0 bds2 clearfix">
+        <span class="ilft iblock icn0 icn0-620">&nbsp;</span>
+        <div class="pleft thide"><a class="m2a" href="http://zsulwj.blog.163.com/blog/static/3532692520083203059401/">[转]Google Architecture</a></div>
+        <span class="irgt iblock icn0 icn0-619">&nbsp;</span>
+        <div class="pright thide"><a class="m2a" href="http://zsulwj.blog.163.com/blog/static/353269252008320378469/">[转]Scaling Twitter: Making Twitter 1000 Percent Faster</a></div>
+     </div> 
+     <div class="mcnt ztag"> 
+      <div class="nbw-bitm bdwb bds2 bdc0 ">
+        <div class="multicntwrap">
+	      <div class="multicnt">
+	      	<div>
+		      <h3 class="title pre fs1"><span class="tcnt">[转]YouTube Architecture</span>&nbsp;&nbsp;<span class="bgc0 fc07 fw0 fs0"></span></h3>
+		      <p class="tdep clearfix nbw-act fc06" style="line-height: 20px;">
+		        <span class="pleft">
+		          
+		          <span class="blogsep">2008-04-02 12:34:04</span><span class="blogsep">|&nbsp;&nbsp;分类：</span>
+		          <a class="fc03 m2a" href="http://zsulwj.blog.163.com/blog/#m=0&amp;t=1&amp;c=fks_095064081080085071093084074064081085083069093084083" title="大公司技术">大公司技术</a>
+		          <span class="blogsep phide" id="$_blogTagTitle">|&nbsp;&nbsp;标签：</span><span class="fc03 phide" id="$_blogTagInfo"></span>
+		        </span>
+		        <span class="pright fc07 ztag"><span class="blogsep">|</span><span class="zihao fc03" id="$_fontswitch">字号<span class="zihaoshow  phide" id="$_fontsTypes"><span class="zihaoc bdc0"><span class="stag"></span><span class="fc04 stag">大</span><span class="fc04 stag selected js-fcurrent fc05">中</span><span class="fc04 stag">小</span></span></span></span></span><span class="pright pnt fc03" id="$_blog_subscribe"><span class="iblock icn0 icn0-919">&nbsp;</span><a class="m2a">订阅</a></span>
+		      </p>
+		    </div>
+	      </div>
+        </div>
+        
+        <div>
+        
+        </div>
+        
+        <div class="nbw-blog-start"></div>
+        <div class="bct fc05 fc11 nbw-blog ztag js-fs2"><div>YouTube发展迅速，每天超过1亿的视频点击量，但只有很少人在维护站点和确保伸缩性。 <br><br><strong>平台</strong> <br>Apache <br>Python <br>Linux(SuSe) <br>MySQL <br>psyco，一个动态的Python到C的编译器 <br>lighttpd代替Apache做视频查看 <br><br><strong>状态</strong> <br>支持每天超过1亿的视频点击量 <br>成立于2005年2月 <br>于2006年3月达到每天3千万的视频点击量 <br>于2006年7月达到每天1亿的视频点击量 <br>2个系统管理员，2个伸缩性软件架构师 <br>2个软件开发工程师，2个网络工程师，1个DBA <br><br><strong>处理飞速增长的流量</strong> <br></div>  <div><pre>while (true)  {    identify_and_fix_bottlenecks();    drink();    sleep();    notice_new_bottleneck();  }</pre><br>每天运行该循环多次 <br><br><strong>Web服务器</strong> <br>1，NetScaler用于负载均衡和静态内容缓存 <br>2，使用mod_fast_cgi运行Apache <br>3，使用一个Python应用服务器来处理请求的路由 <br>4，应用服务器与多个数据库和其他信息源交互来获取数据和格式化html页面 <br>5，一般可以通过添加更多的机器来在Web层提高伸缩性 <br>6，Python的Web层代码通常不是性能瓶颈，大部分时间阻塞在RPC <br>7，Python允许快速而灵活的开发和部署 <br>8，通常每个页面服务少于100毫秒的时间 <br>9，使用psyco(一个类似于JIT编译器的动态的Python到C的编译器)来优化内部循环 <br>10，对于像加密等密集型CPU活动，使用C扩展 <br>11，对于一些开销昂贵的块使用预先生成并缓存的html <br>12，数据库里使用行级缓存 <br>13，缓存完整的Python对象 <br>14，有些数据被计算出来并发送给各个程序，所以这些值缓存在本地内存中。这是个使用不当的策略。应用服务器里最快的缓存将预先计算的值发送给所有服务器也花不了多少时间。只需弄一个代理来监听更改，预计算，然后发送。 <br><br><strong>视频服务</strong> <br>1，花费包括带宽，硬件和能源消耗 <br>2，每个视频由一个迷你集群来host，每个视频被超过一台机器持有 <br>3，使用一个集群意味着： <br>-更多的硬盘来持有内容意味着更快的速度 <br>-failover。如果一台机器出故障了，另外的机器可以继续服务 <br>-在线备份 <br>4，使用lighttpd作为Web服务器来提供视频服务： <br>-Apache开销太大 <br>-使用epoll来等待多个fds <br>-从单进程配置转变为多进程配置来处理更多的连接 <br>5，大部分流行的内容移到CDN： <br>-CDN在多个地方备份内容，这样内容离用户更近的机会就会更高 <br>-CDN机器经常内存不足，因为内容太流行以致很少有内容进出内存的颠簸 <br>6，不太流行的内容(每天1-20浏览次数)在许多colo站点使用YouTube服务器 <br>-长尾效应。一个视频可以有多个播放，但是许多视频正在播放。随机硬盘块被访问 <br>-在这种情况下缓存不会很好，所以花钱在更多的缓存上可能没太大意义。 <br>-调节RAID控制并注意其他低级问题 <br>-调节每台机器上的内存，不要太多也不要太少 <br><br><strong>视频服务关键点</strong> <br>1，保持简单和廉价 <br>2，保持简单网络路径，在内容和用户间不要有太多设备 <br>3，使用常用硬件，昂贵的硬件很难找到帮助文档 <br>4，使用简单而常见的工具，使用构建在Linux里或之上的大部分工具 <br>5，很好的处理随机查找(SATA，tweaks) <br><br><strong>缩略图服务</strong> <br>1，做到高效令人惊奇的难 <br>2，每个视频大概4张缩略图，所以缩略图比视频多很多 <br>3，缩略图仅仅host在几个机器上 <br>4，持有一些小东西所遇到的问题： <br>-OS级别的大量的硬盘查找和inode和页面缓存问题 <br>-单目录文件限制，特别是Ext3，后来移到多分层的结构。内核2.6的最近改进可能让Ext3允许大目录，但在一个文件系统里存储大量文件不是个好主意 <br>-每秒大量的请求，因为Web页面可能在页面上显示60个缩略图 <br>-在这种高负载下Apache表现的非常糟糕 <br>-在Apache前端使用squid，这种方式工作了一段时间，但是由于负载继续增加而以失败告终。它让每秒300个请求变为20个 <br>-尝试使用lighttpd但是由于使用单线程它陷于困境。遇到多进程的问题，因为它们各自保持自己单独的缓存 <br>-如此多的图片以致一台新机器只能接管24小时 <br>-重启机器需要6-10小时来缓存 <br>5，为了解决所有这些问题YouTube开始使用Google的BigTable，一个分布式数据存储： <br>-避免小文件问题，因为它将文件收集到一起 <br>-快，错误容忍 <br>-更低的延迟，因为它使用分布式多级缓存，该缓存与多个不同collocation站点工作 <br>-更多信息参考<a target="_top" rel="nofollow" href="http://highscalability.com/google-architecture">Google Architecture</a>，<a target="_top" rel="nofollow" href="http://highscalability.com/googletalk-architecture">GoogleTalk Architecture</a>和<a target="_top" rel="nofollow" href="http://highscalability.com/tags/bigtable">BigTable</a> <br><br><strong>数据库</strong> <br>1，早期 <br>-使用MySQL来存储元数据，如用户，tags和描述 <br>-使用一整个10硬盘的RAID 10来存储数据 <br>-依赖于信用卡所以YouTube租用硬件 <br>-YouTube经过一个常见的革命：单服务器，然后单master和多read slaves，然后数据库分区，然后sharding方式 <br>-痛苦与备份延迟。master数据库是多线程的并且运行在一个大机器上所以它可以处理许多工作，slaves是单线程的并且通常运行在小一些的服务器上并且备份是异步的，所以slaves会远远落后于master <br>-更新引起缓存失效，硬盘的慢I/O导致慢备份 <br>-使用备份架构需要花费大量的money来获得增加的写性能 <br>-YouTube的一个解决方案是通过把数据分成两个集群来将传输分出优先次序：一个视频查看池和一个一般的集群 <br>2，后期 <br>-数据库分区 <br>-分成shards，不同的用户指定到不同的shards <br>-扩散读写 <br>-更好的缓存位置意味着更少的IO <br>-导致硬件减少30% <br>-备份延迟降低到0 <br>-现在可以任意提升数据库的伸缩性 <br><br><strong>数据中心策略</strong> <br>1，依赖于信用卡，所以最初只能使用受管主机提供商 <br>2，受管主机提供商不能提供伸缩性，不能控制硬件或使用良好的网络协议 <br>3，YouTube改为使用colocation arrangement。现在YouTube可以自定义所有东西并且协定自己的契约 <br>4，使用5到6个数据中心加CDN <br>5，视频来自任意的数据中心，不是最近的匹配或其他什么。如果一个视频足够流行则移到CDN <br>6，依赖于视频带宽而不是真正的延迟。可以来自任何colo <br>7，图片延迟很严重，特别是当一个页面有60张图片时 <br>8，使用BigTable将图片备份到不同的数据中心，代码查看谁是最近的 <br><br><strong>学到的东西</strong> <br>1，Stall for time。创造性和风险性的技巧让你在短期内解决问题而同时你会发现长期的解决方案 <br>2，Proioritize。找出你的服务中核心的东西并对你的资源分出优先级别 <br>3，Pick your battles。别怕将你的核心服务分出去。YouTube使用CDN来分布它们最流行的内容。创建自己的网络将花费太多时间和太多money <br>4，Keep it simple！简单允许你更快的重新架构来回应问题 <br>5，Shard。Sharding帮助隔离存储，CPU，内存和IO，不仅仅是获得更多的写性能 <br>6，Constant iteration on bottlenecks： <br>-软件：DB，缓存 <br>-OS：硬盘I/O <br>-硬件：内存，RAID <br>7，You succeed as a team。拥有一个跨越条律的了解整个系统并知道系统内部是什么样的团队，如安装打印机，安装机器，安装网络等等的人。With a good team all things are possible。</div>  <div>&nbsp;</div>  <div>&nbsp;</div>  <div>转自： <a rel="nofollow" href="http://hi.baidu.com/sujun/blog/item/33d29c3dcbd45f04baa16745.html">http://hi.baidu.com/sujun/blog/item/33d29c3dcbd45f04baa16745.html</a></div>  <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a rel="nofollow" href="http://highscalability.com/youtube-architecture">http://highscalability.com/youtube-architecture</a></div></div>
+        <div class="nbw-blog-end"></div>
+
+        <div>
+		</div>
+		
+        <div>
+		</div>
+		
+		<div>
+      	  <div>
+		  	<div class="wumii-hook"></div>
+		  </div>
+		</div>
+		
+        <div class="ptc phide ztag">
+          <span class="ptcp">
+            <span class="iblock bcmimg">&nbsp;</span>
+            <span class="nbc-0 nbc-0-40 ptcmt ptcmt-2">评论这张</span>
+          </span>
+        </div>
+		<div class="ptc phide ztag">
+          <span class="ptcp">
+            <span class="nbc-0 nbc-0-40 ptcmi">
+              <img src="microblog.png">
+            </span>
+            <span class="nbc-0 nbc-0-40 ptcmt">转发至微博</span>
+          </span>
+        </div>
+        <div style="left: 316px; top: 91px;" class="ptc ztag phide">
+          <span class="ptcp">
+            <span class="nbc-0 nbc-0-40 ptcmi">
+              <img src="microblog.png">
+            </span>
+            <span class="nbc-0 nbc-0-40 ptcmt">转发至微博</span>
+          </span>
+        </div>
+        
+        
+        <div class="nbw-act tbar fc03 clearfix">
+         <div style="height: 24px; line-height: 24px;">
+          <div class="pleft rdif">
+	          <span class="pnt pleft" id="$_spanRecommend"><img class="pclass" src="tuijian.png"></span>
+	        <span id="$_spanShowRecommend" class="pleft rdct  phide">
+	          <span class="pleft ul fc03"><span id="$_spanRecommendCount">0</span>人</span><span class="pleft iblock icn0 icn0-722 nbw-tgl1 nas-icn0fix">&nbsp;</span><span class="pleft iblock icn0 icn0-621 nbw-tgl0 nas-icn0fix">&nbsp;</span><span class="fc07"></span>|&nbsp;
+	        </span>
+	         <span class="fc07 pleft nas-tofix">分享到：</span><span class="nas-wrap pleft"><span id="$_shareBtn_163weibo" title="分享到网易微博" class="nas-itm nas-itm0">&nbsp;</span><span id="$_shareBtn_sinaweibo" title="分享到新浪微博" class="nas-itm nas-itm6">&nbsp;</span><span id="$_shareBtn_qqweibo" title="分享到腾讯微博" class="nas-itm nas-itm9">&nbsp;</span><span class="nas-itm nas-itm7" title="分享到MSN" id="$_shareBtn_msn">&nbsp;</span><span class="nas-itm nas-itm3" title="分享到QQ空间" id="$_shareBtn_qq">&nbsp;</span><span class="nas-itm nas-itm1" title="分享到人人网" id="$_shareBtn_renren">&nbsp;</span><span class="nas-itm nas-itm2" title="分享到开心网" id="$_shareBtn_kaixin">&nbsp;</span><span class="nas-itm nas-itm4" title="分享到豆瓣" id="$_shareBtn_douban">&nbsp;</span><span class="nas-itm nas-itm8" title="分享到梦幻人生" id="$_shareBtn_dream">&nbsp;</span></span>
+          </div>
+          <div class="pright">
+              <span class="fc07">阅读(<span id="$_spaniReadCount">5</span>)</span><span class="sep fc07">|</span>
+              <span class="fc07">评论(<span id="$_spaniCommentCount">0</span>)</span><span class="sep fc07">|</span>
+              <span class="m2a" id="$_spanCite">引用</span> <span class="m2a" id="$_spanCiteCount">(0)</span>
+              <span class="sep fc07">|</span><span id="$_spanReport" class="m2a">举报</span>
+          </div>
+         </div>
+        </div>
+      </div>
+      <div class="snl">
+        <div class="phide bdwb bds2 bdc0 rdcnt" id="$_divRecommendContent"></div>
+        <div id="yodaoad" class="bdwb bds2 bdc0" style="display: none;">&nbsp;</div>
+        <div id="$_divTopLink" class="top fc03 clearfix">
+	        <span class="ilft iblock icn0 icn0-620">&nbsp;</span>
+	        <div class="pleft thide"><a class="m2a" href="http://zsulwj.blog.163.com/blog/static/3532692520083203059401/">[转]Google Architecture</a></div>
+	        <span class="irgt iblock icn0 icn0-619">&nbsp;</span>
+	        <div class="pright thide"><a class="m2a" href="http://zsulwj.blog.163.com/blog/static/353269252008320378469/">[转]Scaling Twitter: Making Twitter 1000 Percent Faster</a></div>
+	     </div> 
+	    <div class="relateblog phide">
+          <h4 class="bdwb bds2 bdc0 fc07 fs0">历史上的今天</h4>
+          <div class="cnt ztag clearfix"></div>
+        </div>
+	    <div class="relateblog phide">
+          <h4 class="bdwb bds2 bdc0 fc07 fs0">相关文章</h4>
+          <div class="cnt ztag clearfix"></div>
+        </div>
+	    <div class="author phide">
+	      <h4 class="bdwb bds2 bdc0 fc07 fs0">最近读者</h4>
+	      <div class="cnt ztag clearfix"><div class="pleft nlogif clearfix"> <div class="pleft nbw-f50 nbw-fce"><img class="cwd pnt" onerror="this.src=location.f60" src="face60.png"></div> <div class="m2a pright fc03"><span class="ul">登录</span>后，您可以在此留下足迹。</div> </div></div>
+	    </div>
+	    <div class="phide" id="yodaoad_1" style=""></div>
+	    <div class="comment">
+	      <h4 class="bdwb bds2 bdc0 fc07 fs0">评论</h4>
+	      <a name="blogComment" id="blogComment"></a>
+	      <div class="ztag"><div>    <div class="publish ztag"><div class="nbw-cdt edt-cmt"><div class="nbw-act tp"> <span class="m2a fc03 ztag">点击登录</span><span class="sep">|</span><span class="fc05">昵称：</span><input value="" maxlength="18" class="znick bdwa bds0 bdc0 ztag" type="text"> </div> <div class="edt ztag"><div class="ui-4141238179"><div class="zcnt ztag zbrd bdc0"><iframe src="index_1.html" frameborder="0"></iframe></div> <div class="zbtn"> <span class="zfce zbgp ztag space">&nbsp;</span> <input class="zbok zhnd ztag nbtn fc09 bdc1 bgc2" value="发表" type="button"> <span class="zbcc zhnd ztag fc04">取消</span> <div class="zvcd ztag" style="display: none;"> <label>验证码：</label><input value="" class="zbrd xtag bdc0" maxlength="4" type="text"><img src="empty.png" class="xtag" title="点击刷新验证码"><span class="xtag fc04">换一张</span> </div> </div> <div class="zmsg fc07" style="display: none;"><span class="zicn zbgp iblock">&nbsp;</span><span class="ztag"></span></div></div></div> <div style="display: none;" class="hnt thide ztag"></div></div></div>
+    <div class="bdwt bds2 bdc0 phide" id="yodaoad_2" style=""></div>
+    <div class="ztag bdwt bds2 bdc0">
+      <div class="case"></div>
+      <div style="display: none;" class="clearfix"><div style="display: none;" class="ui-6916610844 noselect js-zfrg-6540"><span class="pgi pgb iblock fc03 bgc9 bdc0 js-znpg-097">上一页</span> <span class="pgi zpg1 iblock fc03 bgc9 bdc0 js-zslt-987 fc05">1</span> <span class="frg fgp fc06">...</span> <span style="display: none;" class="pgi zpg2 iblock fc03 bgc9 bdc0">-1</span> <span style="display: none;" class="pgi zpg3 iblock fc03 bgc9 bdc0">-1</span> <span style="display: none;" class="pgi zpg4 iblock fc03 bgc9 bdc0">-1</span> <span style="display: none;" class="pgi zpg5 iblock fc03 bgc9 bdc0">-1</span> <span style="display: none;" class="pgi zpg6 iblock fc03 bgc9 bdc0">-1</span> <span style="display: none;" class="pgi zpg7 iblock fc03 bgc9 bdc0">-1</span> <span style="display: none;" class="pgi zpg8 iblock fc03 bgc9 bdc0">-1</span> <span class="frg fgn fc06">...</span> <span style="display: none;" class="pgi zpg9 iblock fc03 bgc9 bdc0">-1</span> <span class="pgi pgb iblock fc03 bgc9 bdc0 js-znpg-097">下一页</span></div></div>
+    </div>
+  </div></div>
+	    </div>
+	    <div class="phide" id="yodaoad_3" style=""></div>
+      </div>
+      <div class="cite ztag fc03 phide"></div>
+    </div>
+   </div>
+  </div>
+</div>
+
+
+
+</div>
+      <div class="l cl h100">&nbsp;</div>
+      <div class="r cr h100">&nbsp;</div>
+    </div>
+    <div class="nb-mb lcr bh space">
+      <div class="l bl bh">&nbsp;</div>
+      <div class="r br bh">&nbsp;</div>
+      <div class="c bc bh lcr">&nbsp;</div>
+    </div>
+  </div>
+
+</div>
+      <div class="l wl g lg h100">&nbsp;</div>
+      <div class="l wl t lt">&nbsp;</div>
+      <div class="l wl b lb">&nbsp;</div>
+      <div class="r wr g rg h100">&nbsp;</div>
+      <div class="r wr t rt">&nbsp;</div>
+      <div class="r wr b rb">&nbsp;</div>
+    </div>
+  </div>
+  <div class="nb-are nb-smb"><div class="wkg h space"><div class="l h">&nbsp;</div><div class="r h">&nbsp;</div><div class="c h">&nbsp;</div></div></div>
+<div class="nb-are nb-fot">
+  <div class="wkg h">
+    <h2>页脚</h2>
+    <div class="k">      <a rel="nofollow" class="m2a fc08" target="_top" href="http://corp.163.com/index_gb.html">公司简介</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_top" href="http://gb.corp.163.com/gb/contactus.html">联系方法</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_top" href="http://corp.163.com/gb/job/job.html">招聘信息</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_top" href="http://help.163.com/?b13abk1">客户服务</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_top" href="http://corp.163.com/gb/legal/legal.html">隐私政策</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_top" href="http://blog.163.com/public/theme/">博客风格</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_top" href="http://blog.163.com/services/wapblog.html">手机博客</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_top" href="http://blog.163.com/vip.do">VIP博客</a>
+      
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="http://zsulwj.blog.163.com/rss/">
+      <span class="p fc10">-</span><span class="fc08" id="$_foot_subscribe"><span class="iblock m2a icn0 icn0-919">&nbsp;</span><a class="m2a fc08">订阅此博客</a></span>
+    </div>
+    <p class="fc08">网易公司版权所有&nbsp;©1997-2012</p>
+  </div>
+</div></div>
+    <!--[if lte IE 6]></div><![endif]-->
+  <!--[if lte IE 6]></div><![endif]-->
+  <div class="nb-layer" id="blog-163-com-layer"><div style="bottom: -300px;" class="ui-5077610054 postadlayer nbw-win nbwindow nbwinautoheight"><div class="nbwinwrap"> <div class="zcls zflg" title="关闭"><div class="txtclose">×</div></div> <div class="ztbr noselect zflg"><div class="zttl thide zflg">信息提示</div></div> <div class="zcnt zflg"><div style="top: 100px; left: 200px;" class=""><div class="m-postadlayer" style=""><embed class=" zrmkhtfayqemvtkdtdql" style="width: 290px; height: 260px;" wmode="transparent" src="011194_290260_2.14.swf" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" allowfullscreen="true"><a class="adlink" href="http://g.163.com/a?CID=12495&amp;Values=731935891&amp;Redirect=http://e.cn.miaozhen.com/r.gif?%5Ek=1000797%5Ep=3xXKK0%5Evo=2bc22e3ac%5Evr=2%5Eo=http%3A%2F%2Fkfc6yuan.163.com" target="_top"></a><div class="ztag close"></div><div class="cnt" style="left: 19px; width: 260px;"><div class="sep" style="width: 255px;"><a style="margin-right: 4px; margin-top: 2px; display: block; width: 60px; overflow: hidden;" class="pleft" href="http://blog.163.com/" target="_top"><img style="height: 52px; margin-left: -8px;" src="20120217075911d2775.jpg"></a><ul class="pleft" style="margin-top: -3px; overflow: hidden; width: 190px;"><li><a style="letter-spacing: -0.5px;" href="http://blog.163.com/shizheng_de/blog/static/140886356201211511734815/" target="_top" title="对越反击战中惨烈的潜伏经历(图)"><b>对越反击战中惨烈的潜伏经历(图)</b></a></li><li><a href="http://blog.163.com/jinkaiping@yeah/blog/static/1314352772012117951111/" target="_top">金凯平&nbsp;&nbsp;160万澳人情人节与宠物过</a></li><li><a href="http://ssnly100.blog.163.com/blog/static/11563392012116112452498/" target="_top">宋石男&nbsp;&nbsp;北大宣传片沦为鬼片为哪般</a></li></ul></div><ul class="clearfix down"><li><a href="http://blog.163.com/zhaxiaoxin_vip/blog/static/16982782120121165463758/" target="_top">查小欣：锋芝吃团年饭有望复合？</a></li><li><a href="http://xubinism.blog.163.com/blog/static/1058607812012116112539600/" target="_top">徐斌：中国经济目前确实响起了警铃</a></li><li><a href="http://blog.163.com/fanglvshi@yeah/blog/static/1535363812012116113633492/" target="_top">律师：'黑哨'陆俊判5年半从轻发落?</a></li><li><a href="http://wushulianvip.blog.163.com/blog/static/167901482201211611550510/" target="_top">武书连：大学研究生导师性别排行榜</a></li><li><a href="http://blog.163.com/vip_lanenfa/blog/static/10761904120121161292114/" target="_top">邓建国再交90后新欢拿谁当猴耍(图)</a></li></ul></div></div></div></div> <div class="zbtnbar zflg"></div> <div style="left: 6px;" class="zext zext0">&nbsp;</div> <div style="left: 6px;" class="zext zext1">&nbsp;</div> <div style="height: 46px; top: 23px;" class="zext zext2">&nbsp;</div> <div style="height: 46px; top: 23px;" class="zext zext3">&nbsp;</div> <div class="zext zext4">&nbsp;</div> <div class="zext zext5">&nbsp;</div> <div class="zext zext6">&nbsp;</div> <div class="zext zext7">&nbsp;</div> </div></div></div>
+  
+
+     <div style="position: absolute; top: 0pt; right: 0pt; z-index: 999; width: 1px; height: 1px; overflow: hidden;"> <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="ntsstorage" codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab" width="1" height="1"> <param name="movie" value="/common/storage.swf?t=1329452459082"> <param name="AllowScriptAccess" value="sameDomain"> <embed src="storage.swf" name="ntsstorage" allowscriptaccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" width="1" height="1">  </object> </div><iframe src="index_2.html" id="api.blog.163.com" name="api.blog.163.com" style="display: none;" width="0" height="0"></iframe><iframe src="index_3.html" id="photo.163.com" name="photo.163.com" style="display: none;" width="0" height="0"></iframe><iframe src="index_4.html" id="ud.blog.163.com" name="ud.blog.163.com" style="display: none;" width="0" height="0"></iframe>
+    
+  
+  
+
+
+    
+
+
+<iframe style="display: none;" id="t.163.com" src="index_5.html" width="0" frameborder="0" height="0"></iframe></body>
+</html>

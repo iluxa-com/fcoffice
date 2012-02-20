@@ -1,0 +1,7 @@
+id	20120217150141
+type	
+title	High Scalability - High Scalability
+chars	UTF-8
+icon	favicon.png
+source	http://highscalability.com/
+comment	以下内容为Eric摘自一个新建的Group讨论组：称Youporn现在已经100%基于Redis构建。更多细节将很快会在稍候的ConFoo会议得以披露，虽然有些意外，但公布的数字并不让人吃惊。 __BR__ #每天1亿PV __BR__ #每秒Redis从服务器集群处理超过300000个查询。 __BR__ 其他 __BR__ #需要增加额外的Redis节点，因为网卡速度跟不上Redis。 __BR__ #Redis的性能表现非常优异 __BR__ #全部读取操作都使用Redis，继续维护MySQL的原因是，当需求改变时用以构建新的排序集合。 __BR__ #大部分数据能够从有序集合的哈希表中获取，而过去经常要知道要表现哪些数据。 __BR__     #一个典型的查询将会是像这样的一个zInterStore(Redis的一种存储类型) :videos:filters:released, Videos:filters:orientation:straight,Videos:filters:categories:{category_id}, Videos:ordering:rating __BR__     #然后执行一个zRange去取得我们想要的页面和视频id. __BR__     #然后启动一个管道，获取所有从哈希中获得所有的视频。 __BR__     #也会使用一些 键/值查询和列表，但主要的运作还是使用了上面的模式。 __BR__ 虽然还没有较多的细节，但是我们有望在他们的交谈中了解到更多。 __BR__  __BR__  __BR__  __BR__ 
