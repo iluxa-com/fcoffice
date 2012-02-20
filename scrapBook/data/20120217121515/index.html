@@ -1,0 +1,698 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+<title>Web服务器压力测试工具http_load、webbench、ab、Siege、autobench使用教程  - 技术 - 51CTO技术博客</title>
+<meta name="description" content="一、http_load程序非常小，解压后也不到100Khttp_load以并行复用的方式运行，用以测试web服务器的吞吐量与负载。但是它不同于大多数压力测试工具，它可以以一个单一的进程运行，一般不会把客户机搞死。还可以测试..">
+<meta name="keywords" content="Web服务器压力测试工具http_load、webbench、ab、Siege、autobench使用教程 ">
+<meta http-equiv="Cache-Control" content="private">
+
+
+
+
+
+
+
+<link rel="alternate" href="http://510512.blog.51cto.com/rss.php?uid=765270" type="application/rss+xml" title="RSS 2.0">
+<link rel="edituri" type="application/rsd+xml" title="rsd" href="http://510512.blog.51cto.com/xmlrpc.php?rsd=1">
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+
+<div id="home_top">
+<div class="top_nav" style="width: 990px;">
+<div class="left" style="margin-top: 10px; width: 470px;"><a href="http://blog.51cto.com/" target="_top"><img src="head_blog_sibebar_logo.gif" style="margin-top: -4px;" align="absmiddle"></a><a target="_top" href="http://www.51cto.com/">51CTO首页</a><img src="top_bg_xian.gif" style="margin-top: -4px;" align="absmiddle" width="16" height="25"><a href="http://blog.51cto.com/" target="_top">51CTO博客</a><img src="top_bg_xian.gif" style="margin-top: -4px;" align="absmiddle" width="16" height="25"><a href="http://4354877.blog.51cto.com/">我的博客</a><img src="top_bg_xian.gif" style="margin-top: -4px;" align="absmiddle" width="16" height="25">
+
+<a target="_top" href="http://blog.51cto.com/search.php">搜索</a>
+<a href="javascript:void(0);" style="color: rgb(255, 0, 0); text-decoration: underline;" id="showMessagerDim">每日博报</a>
+</div>
+
+<div class="right" style="width: 520px;">
+<div class="more"><img src="top_shequ.gif" align="absmiddle" width="27" height="16">社区：<a target="_top" href="http://bbs.51cto.com/">论坛</a><a target="_top" href="http://blog.51cto.com/">博客</a><a target="_top" href="http://down.51cto.com/">下载</a><a target="_top" href="http://book.51cto.com/">读书</a><a href="javascript:viod(0);">更多<img style="padding-left: 4px;" src="nav_ico1.gif" align="absmiddle"></a>            </div>            <span id="login_status"><div class="login2"><div style="float: right; padding-top: 8px;"><a href="http://home.51cto.com/index.php?s=/space/4344877" style="float: left; margin-top: -1px; text-decoration: none;" target="_self">falconchen</a><a href="http://home.51cto.com/index.php?s=/Home/index" target="_top" style="background: none repeat scroll 0% 0% transparent;"><img style="margin-top: -3px;" id="dia" title="领取2无忧币" src="dia.gif" align="absmiddle" width="20"></a><a href="http://home.51cto.com/index.php?s=/home" id="home_view" target="_top">去家园</a><a id="msg_top_num" href="http://home.51cto.com/index.php?s=/Notify/inbox" target="_top">短消息</a><span id="msg_view" style="display: none;" margin-left:5px;"=""><img src="top_newmsg.gif" align="absmiddle"><a id="msg_top_num" href="http://home.51cto.com/index.php?s=/Notify/inbox" style="color: rgb(204, 0, 0);" target="_top">新消息(0)</a></span><a href="http://home.51cto.com/index.php?s=/Index/logout/reback/http%253A%252F%252F510512.blog.51cto.com%252F765270%252F740219" target="_self" style="text-decoration: none;">[退出]</a></div><div style="float: right;">	<a href="http://home.51cto.com/index.php?s=/space/4344877" target="_self" style="text-decoration: none;">		<img src="avatar.php" style="border: 2px solid rgb(213, 213, 213); margin-top: 2px;" align="absmiddle" width="24" height="24">	</a></div></div></span>                </div>    </div></div>
+
+
+
+<div class="subMenu3" id="s3">
+<ul>
+<li><a href="http://home.51cto.com/" target="_top">家园</a></li>
+<li><a href="http://t.51cto.com/" target="_top">微博</a></li>
+<li><a href="http://blog.51cto.com/" target="_top">博客</a></li>
+<li><a href="http://bbs.51cto.com/" target="_top">论坛</a></li>
+<li><a href="http://down.51cto.com/" target="_top">下载</a></li>
+<li><a href="http://selftest.51cto.com/" target="_top">自测</a></li>
+<li><a href="http://doctor.51cto.com/" target="_top">门诊</a></li>
+<li><a href="http://blog.51cto.com/newsletter/" target="_top">周刊</a></li>
+<li><a href="http://book.51cto.com/" target="_top">读书</a></li>
+<li><a href="http://g.51cto.com/" target="_top">技术圈</a></li>
+<li><a href="http://zhidao.51cto.com/" target="_top">知道</a></li>
+</ul>
+</div>
+<!--简导航end-->
+
+
+
+<div class="headerBox">
+<div class="header">
+<div class="header_l">
+<div class="logo_blogname">
+
+
+
+<div class="blogName">
+<a href="http://510512.blog.51cto.com/"><h1>技术</h1></a>
+</div>
+</div><!--logo_blogname end-->
+<div class="blogLink">
+
+<a href="http://510512.blog.51cto.com/">http://510512.blog.51cto.com</a> <input id="txtUser" size="32" value="http://510512.blog.51cto.com" type="hidden">   <a href="javascript:void(0);" onclick="copy();">【复制】</a> <a href="http://510512.blog.51cto.com/rss.php?uid=765270" target="_top"></a><a href="http://510512.blog.51cto.com/rss.php?uid=765270" target="_top">【订阅】</a>
+
+</div>
+
+
+
+<div class="editBrowse">
+<a class="edit" href="http://4354877.blog.51cto.com/main.php">编辑</a><a class="browse" href="#">浏览</a>
+</div>
+
+<div id="mod_tg" class="newmb" style="width: 170px; height: 20px; padding: 15px 0pt 0pt 10px; text-align: left; font-size: 12px; background: url('long_msg.gif') no-repeat scroll 0% 0% transparent; color: rgb(102, 102, 102); position: absolute; top: -10px; left: 209px; z-index: 9999;">
+	<a href="http://4354877.blog.51cto.com/main.php" target="_top" style="color: rgb(102, 102, 102);">
+	<em style="background: none repeat scroll 0% 0% transparent; color: rgb(255, 0, 0);">新春体验龙腾贺岁新模版！</em></a>
+	<img onclick="mod_close();" style="position: absolute; top: 8px; left: 148px; cursor: pointer;" src="msgclose.gif" alt="关闭">
+</div>
+
+
+</div><!--header_l end-->
+<div class="header_r">
+<div class="blogInfo"><span><a href="http://510512.blog.51cto.com/765270/o" title="察看jack688所有原创文章">原创</a>:3</span><span><a href="http://510512.blog.51cto.com/765270/t" title="察看jack688所有翻译文章">翻译</a>:0</span><span><a href="http://510512.blog.51cto.com/765270/c" title="察看jack688所有转载文章">转载</a>:6</span></div>
+<div class="blogNav"><a href="http://510512.blog.51cto.com/">博 客</a>|<a href="http://510512.blog.51cto.com/pic/">图库</a>|<a href="http://510512.blog.51cto.com/addblog.php">写博文</a>|<a href="http://blog.51cto.com/user_index.php">管理博客</a>|<a href="http://51ctoblog.blog.51cto.com/all/26414/4" target="_top">帮 助</a></div>
+</div>
+</div>
+<!--header end-->
+</div><!--headerBox end-->
+<div class="mainNav">
+<span class="mainNavT"></span>
+<ul>
+<li><a href="#">首页</a></li>
+</ul>
+<span class="mainNavB"></span>
+</div>
+<!--mainNav end-->
+
+
+
+<!--[if IE 6]>
+  <script type="text/javascript" src="http://images.watchstor.com/newhomes/png.js"></script>
+  <script>
+    DD_belatedPNG.fix('img,input,ul,li, .get-box, div, .add, .sub, .ui-slider-handle, .footer-chopper');
+  </script>
+<![endif]-->
+
+
+
+<div id="add_sys_type_div" style="width: 600px; border: 1px solid rgb(88, 176, 221); background-color: rgb(255, 255, 255); position: absolute; left: 30%; top: 300px; display: none; z-index: 255;"></div>
+<div id="add_sys_type_divs" style="width: 550px; border: 1px solid rgb(88, 176, 221); background-color: rgb(255, 255, 255); position: absolute; left: 30%; top: 300px; display: none; z-index: 255;"></div>
+
+
+<div class="blogMain">
+<div class="blogLeft">
+
+
+<div class="box moduleUser">
+<div class="title">
+<h2><strong>jack688</strong> 的BLOG  </h2>
+</div>
+<div class="modCon">
+
+<div class="userImage"><img src="face.jpg" id="userface"></div>
+
+
+
+
+
+
+
+
+<div class="crumbs">
+<a href="http://home.51cto.com/index.php?s=/space/765270#message" class="writeMessage" target="_top">写留言</a><a href="http://g.51cto.com/addgroup.php?uid=4344877" class="inCircle" target="_top">邀请进圈子</a><a href="http://home.51cto.com/index.php?s=/Notify/write/uid/765270" class="message" target="_top">发消息</a> <a href="http://510512.blog.51cto.com/" onclick="add_flink(765270);return false" class="joinLinks">加友情链接</a><a href="http://home.51cto.com/index.php?s=/space/765270" class="joinFriends" target="_top">进家园 加好友</a>
+</div>
+
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="infoList box">
+<div class="title">
+<h2>博客统计信息</h2>
+</div>
+<div class="modCon">
+<p>
+<span class="infoListHead"></span>
+用户名：jack688<br>
+文章数：9<br>
+评论数：0<br>
+访问量：1520<br>
+无忧币：68<br>
+<a href="http://51ctoblog.blog.51cto.com/26414/5591" target="_top">博客积分</a>：54<br>
+<a href="http://51ctoblog.blog.51cto.com/26414/5591" target="_top">博客等级</a>：1<br>
+注册日期：2009-05-04<br>
+</p><div class="icon_01"><a href="http://blog.51cto.com/active/no1/ing.html" target="_top">距离博客No.1争夺赛结束还有 <span style="color: rgb(255, 0, 0);">4</span> 天 </a></div> 
+<p></p>
+</div>
+<span class="modBot"></span>
+</div>
+
+
+<div class="hotArt box">
+<div class="title">
+<h2>热门文章</h2>
+</div>
+<div class="modCon">
+<ul>
+<li><a href="http://510512.blog.51cto.com/765270/760143">联想Thinkpad E420笔记本..</a></li>
+<li><a href="http://510512.blog.51cto.com/765270/721595">计算机常识</a></li>
+<li><a href="http://510512.blog.51cto.com/765270/721604">SmartBits</a></li>
+<li><a href="http://510512.blog.51cto.com/765270/740219">Web服务器压力测试工具ht..</a></li>
+<li><a href="http://510512.blog.51cto.com/765270/731764">玩转web服务器</a></li>
+<li><a href="http://510512.blog.51cto.com/765270/739742">有关在linux 下跑asp.net..</a></li>
+<li><a href="http://510512.blog.51cto.com/765270/739656">磁盘阵列RAID技术大讲堂</a></li>
+<li><a href="http://510512.blog.51cto.com/765270/742787">windows server 2008 学习</a></li>
+
+</ul>
+</div>
+<span class="modBot"></span>
+</div>
+<div class="search box">
+<div class="title"><h2>搜索BLOG文章</h2></div>
+<div class="modCon">
+<form method="post" action="http://510512.blog.51cto.com/search.php?">
+<input name="step" value="2" type="hidden">
+<input name="authorid" value="765270" type="hidden">
+<input name="sch_area" value="S" type="hidden">
+<input value="" name="keyword" class="searchInput" type="text">
+<input value="搜 索" class="searchBtn" type="submit">
+</form></div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="myHome box">
+<div class="title"><h2 class="fl">我的技术圈(<a href="http://510512.blog.51cto.com/mygroup.php" target="_top"><b>1</b></a>)</h2>
+<a href="http://home.51cto.com/apps/group/index.php?s=/Index/index/" class="fr" target="_top">更多&gt;&gt;</a></div>
+<div class="modCon">
+<ul>
+
+<li><a href="http://g.51cto.com/netengineer" target="_top">网络工程师联盟</a>&nbsp;&nbsp;
+
+<img src="3.gif" alt="有新成员加入">
+
+</li>
+
+</ul>
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="box recentGuests">
+<div class="title">
+<h2>最近访客</h2>
+</div>
+<div class="modCon">
+<ul>
+
+<li><a href="http://4354877.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://4354877.blog.51cto.com/">falco..</a></p>
+
+</li><li><a href="http://chen3888015.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://chen3888015.blog.51cto.com/">chen3..</a></p>
+
+</li><li><a href="http://freewind.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://freewind.blog.51cto.com/">freew..</a></p>
+
+</li><li><a href="http://xqbaicai.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://xqbaicai.blog.51cto.com/">scps</a></p>
+
+</li><li><a href="http://4100996.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://4100996.blog.51cto.com/">yujia..</a></p>
+
+</li><li><a href="http://540850.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://540850.blog.51cto.com/">riskstar</a></p>
+
+</li><li><a href="http://baiying.blog.51cto.com/"><img src="1068039_1290509116.jpg"></a>
+<p><a href="http://baiying.blog.51cto.com/">baiying</a></p>
+
+</li><li><a href="http://80435.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://80435.blog.51cto.com/">guiwz</a></p>
+
+</li><li><a href="http://kernaling.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://kernaling.blog.51cto.com/">kerna..</a></p>
+
+</li><li><a href="http://693616.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://693616.blog.51cto.com/">orionsss</a></p>
+
+</li><li><a href="http://3213119.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://3213119.blog.51cto.com/">coders</a></p>
+
+</li><li><a href="http://maomao8.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://maomao8.blog.51cto.com/">maomao8</a></p>
+
+</li></ul>
+<span class="clear"></span>
+</div>
+<span class="modBot"></span>
+</div>
+
+
+<div class="newComments box">
+<div class="title">
+<h2>最新评论 
+
+</h2>
+
+
+
+</div>
+<div class="modCon">
+<ul>
+
+
+</ul>
+</div>
+<span class="modBot"></span>
+</div>
+
+
+<div class="hotBlogArt box">
+<div class="title">
+  <h2 class="fl">51CTO推荐博文</h2>
+  <a href="http://blog.51cto.com/artcommend" class="fr">更多&gt;&gt;</a></div>
+<div class="modCon">
+<ul>
+<li><a href="http://huangrs.blog.51cto.com/2677571/781312" title="利用shell脚本来监控linux系统的内存" target="_top">利用shell脚本来监控linux系统的内存</a></li>
+<li><a href="http://300second.blog.51cto.com/7582/780348" title="CentOS 5.5下搭建部署独立SVN服务器全程详解" target="_top">CentOS 5.5下搭建部署独立SVN服务..</a></li>
+<li><a href="http://reinember.blog.51cto.com/2919431/779699" title="Lync Server 2010所需媒体网络流量带宽详解和计算" target="_top">Lync Server 2010所需媒体网络流..</a></li>
+<li><a href="http://ucworld.blog.51cto.com/811917/780364" title="配置Lync 推送服务" target="_top">配置Lync 推送服务</a></li>
+<li><a href="http://virtualbus.blog.51cto.com/345374/780788" title="桌面虚拟化之存储加速功能" target="_top">桌面虚拟化之存储加速功能</a></li>
+<li><a href="http://virtualbus.blog.51cto.com/345374/779846" title="PCoIP远程访问协议的监控与分析" target="_top">PCoIP远程访问协议的监控与分析</a></li>
+<li><a href="http://19281928.blog.51cto.com/2327194/780299" title="邮件系统收发邮件报错汇总——错误代码550" target="_top">邮件系统收发邮件报错汇总——错..</a></li>
+<li><a href="http://netsword.blog.51cto.com/13993/779162" title=" 利用Unison实现双向同步镜像" target="_top"> 利用Unison实现双向同步镜像</a></li>
+<li><a href="http://tiancong.blog.51cto.com/783138/779366" title="学生机房虚拟化（八）客户系统安装" target="_top">学生机房虚拟化（八）客户系统安装</a></li>
+<li><a href="http://ribery.blog.51cto.com/469445/779452" title="配置Exchange UM与Lync Server语音集成" target="_top">配置Exchange UM与Lync Server语..</a></li>
+<li><a href="http://xiaosu.blog.51cto.com/2914416/778506" title="详解RHEV中安装win2003和VirtIO驱动" target="_top">详解RHEV中安装win2003和VirtIO驱动</a></li>
+
+</ul>
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="friendLink box">
+<div class="title">
+  <h2>友情链接</h2>
+</div>
+<div class="modCon">
+<ul>
+
+<li><a href="http://chenguang.blog.51cto.com/" title="李晨光原创技术博客" target="_top">李晨光原创技术博客</a> <img src="tubiao3.gif" alt="本周内更新"></li>
+
+<li><a href="http://823610799.blog.51cto.com/" title="冬天的雪" target="_top">冬天的雪</a></li>
+
+<li><a href="http://51ctoblog.blog.51cto.com/" title="51CTO博客开发" target="_top">51CTO博客开发</a> <img src="tubiao2.gif" alt="三日内更新"></li>
+
+</ul>
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+
+</div>
+<!--left end-->
+
+
+
+<div class="blogRight">
+	<div class="artShow box">
+   	  <div class="share" id="share">
+      <p class="shareGo">分享到：</p>
+
+    <div class="shareItem">
+        	<ul style="">
+            <li id="m01" onclick="javascript:showMsn();"><a href="javascript:void(0);">MSN/QQ</a>
+             <div class="shareBox" id="c01" style="display: none;">
+            分享本资源给：MSN  QQ好友
+           <input class="shareInput" value="http://510512.blog.51cto.com/765270/740219" name="shareText" id="shareTextQM" onclick="copyShareUrl('Web服务器压力测试工具http_load、webbench、ab、Siege、autobench使用教程 ');" type="text">
+              <input value="" class="copyBtn" onclick="copyShareUrl('Web服务器压力测试工具http_load、webbench、ab、Siege、autobench使用教程 ');" type="button">
+            </div><!--shareBox end-->
+            </li>
+            <li id="m02" onclick="javascript:showBBS();"><a href="javascript:void(0);">论坛</a>
+             <div class="shareBox" id="c02" style="display: none;">
+            分享本资源给：论坛好友(UBB代码)
+           <input class="shareInput" value="[url=http://510512.blog.51cto.com/765270/740219][u]fsdsdfsdfsdf[/u][/url]" name="shareText" id="shareTextBBS" onclick="copyShareUrl('Web服务器压力测试工具http_load、webbench、ab、Siege、autobench使用教程 ');" type="text">
+              <input value="" class="copyBtn" onclick="copyShareUrl('Web服务器压力测试工具http_load、webbench、ab、Siege、autobench使用教程 ');" type="button">
+            </div><!--shareBox end-->
+            </li>
+            <li id="m03"><a href="http://www.kaixin001.com/repaste/share.php?rurl=http://510512.blog.51cto.com/765270/740219&amp;rcontent=%3Cdiv+id%3D%22cnblogs_post_body%22%3E%3Cspan+class%3D%22Apple-style-span%22+style%3D%22color%3A+%23333333%3B+line-height%3A+22px%3B+font-family%3A+Verdana%2C+Helvetica%2C+Arial%2C+sans-serif%3B+border-collapse%3A+collapse%22%3E%D2%BB%A1%A2http_load%3Cbr+style&amp;rtitle=%D2%BB%C6%AA%BA%DC%B0%F4%B5%C4%B2%A9%CE%C4%B7%D6%CF%ED%B8%F8%B4%F3%BC%D2%A3%BA%A1%B6Web%B7%FE%CE%F1%C6%F7%D1%B9%C1%A6%B2%E2%CA%D4%B9%A4%BE%DFhttp_load%A1%A2webbench%A1%A2ab%A1%A2Siege%A1%A2autobench%CA%B9%D3%C3%BD%CC%B3%CC+%A1%B7" target="_top">开心</a></li>
+            <li id="m04"><a href="http://share.renren.com/share/buttonshare.do?link=http://510512.blog.51cto.com/765270/740219&amp;title=%D2%BB%C6%AA%BA%DC%B0%F4%B5%C4%B2%A9%CE%C4%B7%D6%CF%ED%B8%F8%B4%F3%BC%D2%A3%BA%A1%B6Web%B7%FE%CE%F1%C6%F7%D1%B9%C1%A6%B2%E2%CA%D4%B9%A4%BE%DFhttp_load%A1%A2webbench%A1%A2ab%A1%A2Siege%A1%A2autobench%CA%B9%D3%C3%BD%CC%B3%CC+%A1%B7" target="_top">人人</a></li>
+            <li id="m05"><a href="http://www.douban.com/recommend/?url=http://510512.blog.51cto.com/765270/740219&amp;title=%D2%BB%C6%AA%BA%DC%B0%F4%B5%C4%B2%A9%CE%C4%B7%D6%CF%ED%B8%F8%B4%F3%BC%D2%A3%BA%A1%B6Web%B7%FE%CE%F1%C6%F7%D1%B9%C1%A6%B2%E2%CA%D4%B9%A4%BE%DFhttp_load%A1%A2webbench%A1%A2ab%A1%A2Siege%A1%A2autobench%CA%B9%D3%C3%BD%CC%B3%CC+%A1%B7" target="_top">豆瓣</a></li>
+            <li id="m06"><a href="http://v.t.sina.com.cn/share/share.php?url=http://510512.blog.51cto.com/765270/740219&amp;title=%D2%BB%C6%AA%BA%DC%B0%F4%B5%C4%B2%A9%CE%C4%B7%D6%CF%ED%B8%F8%B4%F3%BC%D2%A3%BA%A1%B6Web%B7%FE%CE%F1%C6%F7%D1%B9%C1%A6%B2%E2%CA%D4%B9%A4%BE%DFhttp_load%A1%A2webbench%A1%A2ab%A1%A2Siege%A1%A2autobench%CA%B9%D3%C3%BD%CC%B3%CC+%A1%B7&amp;pic=http://blog.51cto.com/blogtj/images/logo.gif" target="_top">新浪微博</a></li>
+            <li id="m07">
+
+            <a href="http://t.51cto.com/index.php?m=share&amp;url=http://510512.blog.51cto.com/765270/740219&amp;type=l&amp;count=&amp;relateUid=&amp;appkey=3843950324&amp;title=">51CTO微博</a></li>
+            <li id="favor" style="margin-left: 30px;"><a href="javascript:favorBox('open');" title="一键收藏，随时查看，分享好友！"><img src="favorite_add_small.gif" alt="一键收藏，随时查看，分享好友！" border="0"></a></li>
+            </ul>
+            </div>
+            <p class="shareMore"><a href="http://510512.blog.51cto.com/all/765270">博主的更多文章&gt;&gt;</a></p>
+
+      </div>
+       <div class="modCon">
+   	  <div class="showBox">
+      <div class="line_hd_r"></div>
+      <div class="art_tj">
+
+      </div>
+    		<div class="showHead">
+    		  <div class="showTitleBOx" style="text-align: center;">
+              <div class="showTitle">
+
+	 		<img src="arttype02.jpg">
+
+
+    		    Web服务器压力测试工具http_load、webbench、ab、Siege、autobench使用教程 
+                </div>
+  		    </div>
+   		    <span class="artTime">2011-12-12 20:28:38</span></div><!--showHead end-->
+    <div class="showTags">标签：<a href="http://blog.51cto.com/tagindex.php?keyword=%B7%FE%CE%F1%C6%F7" target="_top" class="operlink">服务器</a> <a href="http://blog.51cto.com/tagindex.php?keyword=%B3%CC%D0%F2" target="_top" class="operlink">程序</a> <a href="http://blog.51cto.com/tagindex.php?keyword=%D1%B9%C1%A6%B2%E2%CA%D4" target="_top" class="operlink">压力测试</a>
+
+	</div>
+
+
+            <!--正文 begin-->
+    		<div class="showContent">
+    		  <div id="cnblogs_post_body"><span class="Apple-style-span" style="color: rgb(51, 51, 51); line-height: 22px; font-family: Verdana,Helvetica,Arial,sans-serif; border-collapse: collapse;"><span class="linemarker-marked-line" style="background-color: rgb(204, 255, 255); color: rgb(0, 0, 0); border: thin solid rgb(0, 153, 255);">一、http_load</span><br style="line-height: normal; word-wrap: break-word;">
+<br style="line-height: normal; word-wrap: break-word;">
+程序非常小，解压后也不到100K<br style="line-height: normal; word-wrap: break-word;">
+http_load以并行复用的方式运行，用以测试web<span class="t_tag" style="cursor: pointer; line-height: normal; border-bottom: 1px solid rgb(255, 0, 0); white-space: nowrap; word-wrap: break-word;" href="tag.php?name=%B7%FE%CE%F1%C6%F7">服务器</span>的吞吐量与负载。但是它不同于大多数压力测试工<br style="line-height: normal; word-wrap: break-word;">
+具，它可以以一个单一的进程运行，一般不会把客户机搞死。还可以测试HTTPS类的网站请求。<br style="line-height: normal; word-wrap: break-word;">
+下载地址：<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://soft.vpser.net/test/http_load/http_load-12mar2006.tar.gz" target="_top">http://soft.vpser.net/test/http_load/http_load-12mar2006.tar.gz</a><br style="line-height: normal; word-wrap: break-word;">
+安装很简单<br style="line-height: normal; word-wrap: break-word;">
+#tar zxvf http_load-12mar2006.tar.gz<br style="line-height: normal; word-wrap: break-word;">
+#cd http_load-12mar2006<br style="line-height: normal; word-wrap: break-word;">
+#make &amp;&amp; make install<br style="line-height: normal; word-wrap: break-word;">
+命令格式：http_load&nbsp;&nbsp;-p 并发访问进程数&nbsp;&nbsp;-s 访问时间&nbsp;&nbsp;需要访问的URL文件<br style="line-height: normal; word-wrap: break-word;">
+参数其实可以自由组合，参数之间的选择并没有什么限制。比如你写成http_load -parallel 5 -seconds<br style="line-height: normal; word-wrap: break-word;">
+300 urls.txt也是可以的。我们把参数给大家简单说明一下。<br style="line-height: normal; word-wrap: break-word;">
+-parallel 简写-p ：含义是并发的用户进程数。<br style="line-height: normal; word-wrap: break-word;">
+-fetches 简写-f ：含义是总计的访问次数<br style="line-height: normal; word-wrap: break-word;">
+-rate&nbsp; &nbsp; 简写-p ：含义是每秒的访问频率<br style="line-height: normal; word-wrap: break-word;">
+-seconds简写-s ：含义是总计的访问时间<br style="line-height: normal; word-wrap: break-word;">
+准备URL文件：urllist.txt，文件格式是每行一个URL，URL最好超过50－100个测试效果比较好.文件格式<br style="line-height: normal; word-wrap: break-word;">
+如下：<br style="line-height: normal; word-wrap: break-word;">
+<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://www.vpser.net/uncategorized/choose-vps.html" target="_top">http://www.vpser.net/uncategorized/choose-vps.html</a><br style="line-height: normal; word-wrap: break-word;">
+<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://www.vpser.net/vps-cp/hypervm-tutorial.html" target="_top">http://www.vpser.net/vps-cp/hypervm-tutorial.html</a><br style="line-height: normal; word-wrap: break-word;">
+<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://www.vpser.net/coupons/diavps-april-coupons.html" target="_top">http://www.vpser.net/coupons/diavps-april-coupons.html</a><br style="line-height: normal; word-wrap: break-word;">
+<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://www.vpser.net/security/vps-backup-web-mysql.html" target="_top">http://www.vpser.net/security/vps-backup-web-mysql.html</a><br style="line-height: normal; word-wrap: break-word;">
+例如：<br style="line-height: normal; word-wrap: break-word;">
+http_load -p 30 -s 60&nbsp;&nbsp;urllist.txt<br style="line-height: normal; word-wrap: break-word;">
+参数了解了，我们来看运行一条命令来看看它的返回结果<br style="line-height: normal; word-wrap: break-word;">
+命令：% ./http_load -rate 5 -seconds 10 urls说明执行了一个持续时间10秒的测试，每秒的频率为5。<br style="line-height: normal; word-wrap: break-word;">
+49 fetches, 2 max parallel, 289884 bytes, in 10.0148 seconds5916 mean bytes/connection4.89274<br style="line-height: normal; word-wrap: break-word;">
+fetches/sec, 28945.5 bytes/secmsecs/connect: 28.8932 mean, 44.243 max, 24.488 minmsecs/first<br style="line-height: normal; word-wrap: break-word;">
+-response: 63.5362 mean, 81.624 max, 57.803 minHTTP response codes: code 200 — 49&nbsp;<br style="line-height: normal; word-wrap: break-word;">
+结果分析：<br style="line-height: normal; word-wrap: break-word;">
+1．49 fetches, 2 max parallel, 289884 bytes, in 10.0148 seconds<br style="line-height: normal; word-wrap: break-word;">
+说明在上面的测试中运行了49个请求，最大的并发进程数是2，总计传输的数据是289884bytes，运行的时间是10.0148秒<br style="line-height: normal; word-wrap: break-word;">
+2．5916 mean bytes/connection说明每一连接平均传输的数据量289884/49=5916<br style="line-height: normal; word-wrap: break-word;">
+3．4.89274 fetches/sec, 28945.5 bytes/sec<br style="line-height: normal; word-wrap: break-word;">
+说明每秒的响应请求为4.89274，每秒传递的数据为28945.5 bytes/sec<br style="line-height: normal; word-wrap: break-word;">
+4．msecs/connect: 28.8932 mean, 44.243 max, 24.488 min说明每连接的平均响应时间是28.8932 msecs<br style="line-height: normal; word-wrap: break-word;">
+，最大的响应时间44.243 msecs，最小的响应时间24.488 msecs<br style="line-height: normal; word-wrap: break-word;">
+5．msecs/first-response: 63.5362 mean, 81.624 max, 57.803 min<br style="line-height: normal; word-wrap: break-word;">
+6、HTTP response codes: code 200 — 49&nbsp; &nbsp;&nbsp;&nbsp;说明打开响应页面的类型，如果403的类型过多，那可能<br style="line-height: normal; word-wrap: break-word;">
+要注意是否系统遇到了瓶颈。<br style="line-height: normal; word-wrap: break-word;">
+特殊说明：<br style="line-height: normal; word-wrap: break-word;">
+测试结果中主要的指标是 fetches/sec、msecs/connect 这个选项，即服务器每秒能够响应的查询次数，<br style="line-height: normal; word-wrap: break-word;">
+用这个指标来衡量性能。似乎比 apache的ab准确率要高一些，也更有说服力一些。<br style="line-height: normal; word-wrap: break-word;">
+Qpt-每秒响应用户数和response time，每连接响应用户时间。<br style="line-height: normal; word-wrap: break-word;">
+测试的结果主要也是看这两个值。当然仅有这两个指标并不能完成对性能的分析，我们还需要对服务器的<br style="line-height: normal; word-wrap: break-word;">
+cpu、men进行分析，才能得出结论<br style="line-height: normal; word-wrap: break-word;">
+<br style="line-height: normal; word-wrap: break-word;">
+二、webbench<br style="line-height: normal; word-wrap: break-word;">
+<br style="line-height: normal; word-wrap: break-word;">
+webbench是<span class="t_tag" style="cursor: pointer; line-height: normal; border-bottom: 1px solid rgb(255, 0, 0); white-space: nowrap; word-wrap: break-word;" href="tag.php?name=Linux">Linux</span>下的一个网站压力测试工具，最多可以模拟3万个并发连接去测试网站的负载能力。下载地址可以到google搜，我这里给出一个<br style="line-height: normal; word-wrap: break-word;">
+下载地址：<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://soft.vpser.net/test/webbench/webbench-1.5.tar.gz" target="_top">http://soft.vpser.net/test/webbench/webbench-1.5.tar.gz</a><br style="line-height: normal; word-wrap: break-word;">
+这个程序更小，解压后不到50K，呵呵<br style="line-height: normal; word-wrap: break-word;">
+安装非常简单<br style="line-height: normal; word-wrap: break-word;">
+#tar zxvf webbench-1.5.tar.gz<br style="line-height: normal; word-wrap: break-word;">
+#cd webbench-1.5<br style="line-height: normal; word-wrap: break-word;">
+#make &amp;&amp; make install<br style="line-height: normal; word-wrap: break-word;">
+会在当前目录生成webbench可执行文件，直接可以使用了<br style="line-height: normal; word-wrap: break-word;">
+用法：<br style="line-height: normal; word-wrap: break-word;">
+webbench -c 并发数 -t 运行测试时间 URL<br style="line-height: normal; word-wrap: break-word;">
+如：<br style="line-height: normal; word-wrap: break-word;">
+webbench -c 5000 -t 120&nbsp;<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://www.vpser.net/" target="_top">http://www.vpser.net</a><br style="line-height: normal; word-wrap: break-word;">
+<br style="line-height: normal; word-wrap: break-word;">
+三、ab<br style="line-height: normal; word-wrap: break-word;">
+<br style="line-height: normal; word-wrap: break-word;">
+ab是apache自带的一款功能强大的测试工具<br style="line-height: normal; word-wrap: break-word;">
+安装了apache一般就自带了，<br style="line-height: normal; word-wrap: break-word;">
+用法可以查看它的说明<br style="line-height: normal; word-wrap: break-word;">
+$ ./ab<br style="line-height: normal; word-wrap: break-word;">
+./ab: wrong number of arguments<br style="line-height: normal; word-wrap: break-word;">
+Usage: ./ab [options] [http://]hostname[:port]/path<br style="line-height: normal; word-wrap: break-word;">
+Options are:<br style="line-height: normal; word-wrap: break-word;">
+-n requests Number of requests to perform<br style="line-height: normal; word-wrap: break-word;">
+-c concurrency Number of multiple requests to make<br style="line-height: normal; word-wrap: break-word;">
+-t timelimit Seconds to max. wait for responses<br style="line-height: normal; word-wrap: break-word;">
+-p postfile File containing data to POST<br style="line-height: normal; word-wrap: break-word;">
+-T content-type Content-type header for POSTing<br style="line-height: normal; word-wrap: break-word;">
+-v verbosity How much troubleshooting info to print<br style="line-height: normal; word-wrap: break-word;">
+-w Print out results in HTML tables<br style="line-height: normal; word-wrap: break-word;">
+-i Use HEAD instead of GET<br style="line-height: normal; word-wrap: break-word;">
+-x attributes String to insert as table attributes<br style="line-height: normal; word-wrap: break-word;">
+-y attributes String to insert as tr attributes<br style="line-height: normal; word-wrap: break-word;">
+-z attributes String to insert as td or th attributes<br style="line-height: normal; word-wrap: break-word;">
+-C attribute Add cookie, eg. ‘Apache=1234. (repeatable)<br style="line-height: normal; word-wrap: break-word;">
+-H attribute Add Arbitrary header line, eg. ‘Accept-Encoding: gzip’<br style="line-height: normal; word-wrap: break-word;">
+Inserted after all normal header lines. (repeatable)<br style="line-height: normal; word-wrap: break-word;">
+-A attribute Add Basic WWW Authentication, the attributes<br style="line-height: normal; word-wrap: break-word;">
+are a colon separated username and password.<br style="line-height: normal; word-wrap: break-word;">
+-P attribute Add Basic Proxy Authentication, the attributes<br style="line-height: normal; word-wrap: break-word;">
+are a colon separated username and password.<br style="line-height: normal; word-wrap: break-word;">
+-X proxy:port Proxyserver and port number to use<br style="line-height: normal; word-wrap: break-word;">
+-V Print version number and exit<br style="line-height: normal; word-wrap: break-word;">
+-k Use HTTP KeepAlive feature<br style="line-height: normal; word-wrap: break-word;">
+-d Do not show percentiles served table.<br style="line-height: normal; word-wrap: break-word;">
+-S Do not show confidence estimators and warnings.<br style="line-height: normal; word-wrap: break-word;">
+-g filename Output collected data to gnuplot format file.<br style="line-height: normal; word-wrap: break-word;">
+-e filename Output CSV file with percentages served<br style="line-height: normal; word-wrap: break-word;">
+-h Display usage information (this message)<br style="line-height: normal; word-wrap: break-word;">
+参数众多，一般我们用到的是-n 和-c<br style="line-height: normal; word-wrap: break-word;">
+例如：<br style="line-height: normal; word-wrap: break-word;">
+./ab -c 1000 -n 100&nbsp;<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://www.vpser.net/index.php" target="_top">http://www.vpser.net/index.php</a><br style="line-height: normal; word-wrap: break-word;">
+这个表示同时处理1000个请求并运行100次index.php文件.<br style="line-height: normal; word-wrap: break-word;">
+<br style="line-height: normal; word-wrap: break-word;">
+四、Siege<br style="line-height: normal; word-wrap: break-word;">
+<br style="line-height: normal; word-wrap: break-word;">
+一款<span class="t_tag" style="cursor: pointer; line-height: normal; border-bottom: 1px solid rgb(255, 0, 0); white-space: nowrap; word-wrap: break-word;" href="tag.php?name=%BF%AA%D4%B4">开源</span>的压力测试工具，可以根据配置对一个WEB站点进行多用户的并发访问，记录每个用户所有请求过程的相应时间，并在一定数量的并发访问下重复进行。<br style="line-height: normal; word-wrap: break-word;">
+官方：<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://www.joedog.org/" target="_top">http://www.joedog.org/</a><br style="line-height: normal; word-wrap: break-word;">
+Siege下载：<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://soft.vpser.net/test/siege/siege-2.67.tar.gz" target="_top">http://soft.vpser.net/test/siege/siege-2.67.tar.gz</a><br style="line-height: normal; word-wrap: break-word;">
+解压：<br style="line-height: normal; word-wrap: break-word;">
+# tar -zxf siege-2.67.tar.gz<br style="line-height: normal; word-wrap: break-word;">
+进入解压目录：<br style="line-height: normal; word-wrap: break-word;">
+# cd siege-2.67/<br style="line-height: normal; word-wrap: break-word;">
+安装：<br style="line-height: normal; word-wrap: break-word;">
+#./configure ; make<br style="line-height: normal; word-wrap: break-word;">
+#make install<br style="line-height: normal; word-wrap: break-word;">
+使用<br style="line-height: normal; word-wrap: break-word;">
+siege -c 200 -r 10 -f example.url<br style="line-height: normal; word-wrap: break-word;">
+-c是并发量，-r是重复次数。 url文件就是一个文本，每行都是一个url，它会从里面随机访问的。<br style="line-height: normal; word-wrap: break-word;">
+example.url内容:<br style="line-height: normal; word-wrap: break-word;">
+<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://www.licess.cn/" target="_top">http://www.licess.cn</a><br style="line-height: normal; word-wrap: break-word;">
+<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://www.vpser.net/" target="_top">http://www.vpser.net</a><br style="line-height: normal; word-wrap: break-word;">
+<a style="color: rgb(0, 102, 153); line-height: normal; text-decoration: none; word-wrap: break-word;" href="http://soft.vpser.net/" target="_top">http://soft.vpser.net</a><br style="line-height: normal; word-wrap: break-word;">
+结果说明<br style="line-height: normal; word-wrap: break-word;">
+Lifting the server siege… done.<br style="line-height: normal; word-wrap: break-word;">
+Transactions: 3419263 hits //完成419263次处理<br style="line-height: normal; word-wrap: break-word;">
+Availability: 100.00 % //100.00 % 成功率<br style="line-height: normal; word-wrap: break-word;">
+Elapsed time: 5999.69 secs //总共用时<br style="line-height: normal; word-wrap: break-word;">
+Data transferred: 84273.91 MB //共数据传输84273.91 MB<br style="line-height: normal; word-wrap: break-word;">
+Response time: 0.37 secs //相应用时1.65秒：显示网络连接的速度<br style="line-height: normal; word-wrap: break-word;">
+Transaction rate: 569.91 trans/sec //均每秒完成 569.91 次处理：表示服务器后<br style="line-height: normal; word-wrap: break-word;">
+Throughput: 14.05 MB/sec //平均每秒传送数据<br style="line-height: normal; word-wrap: break-word;">
+Concurrency: 213.42 //实际最高并发数<br style="line-height: normal; word-wrap: break-word;">
+Successful transactions: 2564081 //成功处理次数<br style="line-height: normal; word-wrap: break-word;">
+Failed transactions: 11 //失败处理次数<br style="line-height: normal; word-wrap: break-word;">
+Longest transaction: 29.04 //每次传输所花最长时间<br style="line-height: normal; word-wrap: break-word;">
+Shortest transaction: 0.00 //每次传输所花最短时间</span></div>
+<p>五、利用autobench工具结合httperf命令对web服务器进行测试，得出该服务器可以承载的最大并发连接数与最佳并发数。</p>
+<p><span style="color: rgb(128, 0, 0);">1、测试工具</span><span style="color: rgb(128, 0, 0);">工具介绍</span><span style="color: rgb(128, 0, 0);">1、Httperf</span></p>
+<p><a href="http://code.google.com/p/httperf/">httperf</a> 是一款高性能的HTTP测试工具，使用它我们可以准确定位服务器的并发连接能力。下面介绍一下它的主要特征</p>
+<p>（1） 可以观察测试客户端（并非被测服务器）在发起压力测试时的负载情况。这样在测试高并发的情况下可以准确的分析问题。（被测服务器无法承载高并发还是测试客户端无法发起过多请求）<br>
+（2）支持HTTP/1.1和SSL<br>
+（3）可以生成可扩展的测试计划</p>
+<p><strong>下载</strong>：<a href="http://code.google.com/p/httperf/downloads/list">http://code.google.com/p/httperf/downloads/list</a></p>
+<p><strong>安装</strong>：<br>
+# tar xvzf httperf-0.9.0.tar.gz<br>
+# cd httperf-0.9.0<br>
+#./configure<br>
+# make &amp;&amp; make install</p>
+<p>更多的使用方法参见man page。</p>
+<p><span style="color: rgb(128, 0, 0);">2、autobench</span></p>
+<p><a href="http://www.xenoclast.org/autobench/">autobench</a> 是一款基于httperf的Perl脚本。它会在一次测试中调用多次httperf来对web服务器进行测试，每次会按照给定的参数增加并发连接数，将 httperf的测试结果保存为CSV格式的文件，该文件可以被Excel直接读取，方便生成测试报告。借助于autobench自带的 bench2graph工具可以生成漂亮的测试结果对比图</p>
+    		</div><!--正文 end-->
+    		<div class="showBottom">
+            <!--<div class="reviews"><span class="fl" style="cursor:pointer;"><a onclick="openFavoulist();" id="favourer">freewind_zk</a>
+
+            </span><div id="favourdiv" class="support01">1人</div>
+              <span class="fl">了这篇文章</span></div>-->
+              <table border="0" cellpadding="0" cellspacing="0" width="720">
+  <tbody><tr>
+    <td align="right"><img src="icon01.png" width="15" height="16"> <span style="cursor: pointer;"><a onclick="openFavoulist();" id="favourer">freewind_zk</a></span></td>
+    <td align="left" width="70"><div style="line-height: 28px;" id="favourdiv" class="support01">1人</div></td>
+    <td align="left" width="60">了这篇文章</td>
+  </tr>
+</tbody></table>
+
+
+
+
+            <div class="showType">类别：未分类┆<a class="operlink" onclick="javascript:joingroups(740219,'510512');return false;">技术圈</a>(0)┆阅读(17)┆评论(0)
+
+┆
+
+<a href="#" onclick="javascript:dfa(740219,4344877,'510512','http://home.51cto.com/index.php?reback=http%253A%252F%252F510512.blog.51cto.com%252F765270%252F740219');return false;" class="operlink">
+推送到技术圈</a>┆<a href="http://510512.blog.51cto.com/">返回首页</a></div>
+            <div class="prevNext">
+
+			上一篇 <a href="http://510512.blog.51cto.com/765270/739742" class="operlink" title="有关在linux 下跑asp.net文章博客">有关在linux 下跑asp.net文章博客</a>
+
+
+			下一篇 <a href="http://510512.blog.51cto.com/765270/742787" class="operlink" title="windows server 2008 学习">windows server 2008 学习</a>
+
+
+            </div>
+
+            </div>
+
+	  </div><!--showBottom end-->
+      </div><!--modCon-->
+    <span class="modBot"></span>
+    </div><!--artShow end-->
+    <span class="blank"></span>
+
+<div class="artComm box">
+    <div class="title"><a name="replay"></a><h2>文章评论</h2></div>
+    <div class="modCon" id="artcomment">
+		<div>  &nbsp;</div><div>  &nbsp;</div>
+    </div><!--modCon-->
+        <span class="modBot"></span>
+</div><!--commBox end-->
+
+
+<span class="blank1"></span>
+<div class="box writeComm">
+<a name="comment"></a>
+<input name="action" value="comment" type="hidden">
+<input id="commenttid" name="tid" value="740219" type="hidden">
+<input name="com_count_ajax" id="com_count_ajax" value="1" type="hidden">
+
+ <div class="title">
+	<h2 class="fl">发表评论&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+	<span class="fl"><a class="mred" target="_top" href="http://down.51cto.com/tj.php?type=605&amp;id=876" style="color: red;">［社区周刊］一个程序员的创业历程</a></span>
+	
+</div>
+ <div class="modCon">
+ <div class="commForm">
+<dl>
+<dt>昵&nbsp;&nbsp;称：</dt>
+<dd>
+
+<input id="commentusername" name="username" disabled="disabled" value="falconchen" class="commInput" type="text"><input class="fl anonCheckbox" id="commentniming" name="niming" value="ON" onclick="changename()" type="checkbox"><span>匿名发表</span>
+
+
+</dd>
+</dl>
+
+<dl id="indexhidden">
+<dt>主&nbsp;&nbsp;页：</dt>
+<dd><input value="http://4354877.blog.51cto.com" class="commInput" id="commentindex" name="index" disabled="disabled" type="text"></dd>
+</dl>
+
+
+
+<dl id="commentyanzheng">
+
+
+<dt>验证码：</dt>
+<dd><input class="code" value="" id="commentauthnum" name="authnum" onclick="displaysecunum();" type="text">
+
+  <img class="fl" id="secunum" onclick="refimg()" style="display: none;" width="78" height="29"><p class="fl"><span style="display: none;" id="spanfont">点击图片可刷新验证码</span><span style="display: inline;" id="clickfont">请点击后输入验证码</span><span class="pl5"><a href="http://51ctoblog.blog.51cto.com/26414/5591" target="_top" style="text-decoration: underline;">博客过2级，无需填写验证码</a></span></p></dd>
+</dl>
+<dl>
+<dt>内&nbsp;&nbsp;容：</dt>
+<dd>
+<textarea class="writeCommCon f12" id="commentcontent" name="content"></textarea>
+</dd>
+</dl>
+</div>
+<div class="writeCommBot">
+  <input class="commBtn fl" name="submit" id="commentsubmit" value="" onclick="commentSubmitend2()" type="button">
+
+  <p class="fl"><input class="fl" name="favour" id="favour" checked="checked" value="1" type="checkbox"><span class="fl">同时赞一个</span></p>
+
+</div>
+<span class="blank"></span>
+</div><!--modCon-->
+<span class="modBot"></span>
+</div>
+
+<iframe src="index_1.html" id="iframe1" name="iframe1" width="0" height="0"></iframe>
+<!--发表评论 end-->
+</div>
+</div>
+<h1></h1>
+
+
+
+
+
+
+
+
+
+
+
+<div class="clear"></div>
+
+<div id="footer">
+  <div id="innerFooter">
+	<center>
+		<small>
+			Copyright By 51CTO.COM 版权所有<br><br>
+			<a href="http://www.51cto.com/" target="_top"><img src="copyright.jpg"></a>
+	  </small>
+	</center>
+  </div>
+</div>
+
+<div style="display: none;">
+
+
+<iframe src="index_2.html" scrolling="no" width="0" frameborder="0" height="0"></iframe>
+</div>
+
+
+</body>
+</html>
