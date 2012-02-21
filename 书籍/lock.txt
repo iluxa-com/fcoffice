@@ -90,24 +90,25 @@ array(
             return;
         }
         foreach ($dataArr as $data) {
-            $tempArr = json_decode($data['content'], true);
-            $time = Common::getHorseTradeTime($tempArr['type']);
-            if ($tempArr['start_time'] + $time <= CURRENT_TIME) {//取最近一条完成贸易记录
-                unset($tempArr['type']);
-                $this->_data['trade_info'] = $tempArr;
-                $this->_ret = 0;
-                return;
-            }
+          $tempArr = json_decode($data['content'], true);
+          $time = Common::getHorseTradeTime($tempArr['type']);
+          if ($tempArr['start_time'] + $time <= CURRENT_TIME) {//取最近一条完成贸易记录
+              unset($tempArr['type']);
+              $this->_data['trade_info'] = $tempArr;
+              $this->_ret = 0;
+              return;
+          }
         }
         $this->_data['msg'] = "trade is going on"; //没有贸易完成记录
         return;
     }
 -------------------------------------------
-今天要走了，没交接什么的应该没有了吧，呵呵。
+今天要走了，应该没什么要交接的吧，呵呵。
 
 谢谢你一直以来指导和照顾，甚至手把手教了我很多东西，真的非常感谢。
 
 作为主程非常出色，代码写得很好，讲解和指导也很有耐心
 
-个人能力不够，这也是没办法的，还有很多东西要学。
+个人能力不够，这也是没办法的事，还有很多东西要学。
 
+挺不好意思的。
