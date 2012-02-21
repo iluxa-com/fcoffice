@@ -1,0 +1,17 @@
+说明：
+此目录下的文件为单元测试相关文件，以下为标准模板
+
+--TEST--
+Test file description
+--SKIPIF--
+<?php
+if (!extension_loaded("redis")) {
+    echo 'skip';
+}
+?>
+--FILE--
+<?php
+echo "redis extension is available";
+?>
+--EXPECT--
+redis extension is available

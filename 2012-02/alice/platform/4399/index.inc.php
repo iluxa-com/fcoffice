@@ -1,0 +1,1 @@
+<my:iframe src="<?php echo GATEWAY_URL; ?>index.php?tag=iframe" width="800" height="900" scrolling="no" frameborder="0" />

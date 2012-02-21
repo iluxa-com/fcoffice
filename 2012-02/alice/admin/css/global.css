@@ -1,0 +1,427 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* common start */
+* {
+	padding:0;
+	margin:0;
+}
+ol, ul, li {
+	list-style-type:none;
+}
+img {
+	border:none;
+}
+.clear {
+	clear:both;
+	line-height:0;
+}
+body {
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:13px;
+	min-width:960px;
+}
+a {
+	color:#05f;
+	text-decoration:none;
+}
+a:hover {
+	color:#f50;
+}
+fieldset {
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+}
+/* common end */
+
+/* header start */
+#header {
+	border-bottom:4px solid #ddd;
+	height:26px;
+	line-height:26px;
+	text-indent:6px;
+}
+/* header end */
+
+/* main start */
+#main {
+	position:relative;
+	padding-left:140px;
+}
+/* main end */
+
+/* sideBar start */
+#sideBar {
+	position:absolute;
+	left:0;
+	_left:-140px;
+	top:0;
+	width:140px;
+	border-right:4px solid #ddd;
+}
+#sideBar dt {
+	position:relative;
+	font-weight:bold;
+	height:24px;
+	line-height:24px;
+	text-indent:6px;
+	cursor:pointer;
+	clear:both;
+}
+#sideBar dt b {
+	position:absolute;
+	top:0;
+	right:4px;
+	z-index:1;
+}
+#sideBar dd {
+	line-height:22px;
+}
+#sideBar dd a {
+	width:100%;
+	display:block;
+	text-indent:10px;
+	margin-bottom:2px;
+}
+#sideBar dd a:hover, #sideBar dd a.hover {
+	background:#ddd;
+	color:#222;
+	font-weight:bold;
+}
+#sideBar dd span {
+	color:#f00;
+}
+/* sidebar end */
+
+/* ajaxContainer start */
+#ajaxContainer {
+	border-left:4px solid #ddd;
+}
+/* ajaxContainer end */
+
+/* gNav start*/
+.gNav {
+	clear:both;
+	font-weight:bold;
+	border-bottom:4px solid #ddd;
+	padding:6px 0;
+	text-indent:6px;
+}
+/* gNav end */
+
+/* gMain start */
+.gMain {
+	margin:6px;
+}
+/* gMain end */
+
+/* gTable start */
+.gTable {
+	background:#ccc;
+}
+.gTable tr {
+	height:28px;
+	line-height:28px;
+}
+.gTable th {
+	background:#eee;
+}
+.gTable td {
+	background:#fff;
+	text-align:center;
+}
+.gTable tr.hover td {
+	background:#f6f6f6;
+}
+/* gTable end */
+
+/* gFrm start */
+.gFrm {
+	width:760px;
+}
+.gFrm table .td1 {
+	width:80px;
+	text-align:right;
+}
+.gFrm table .td2 {
+	width:300px;
+	text-align:center;
+}
+.gFrm table .td2 input, .gFrm table .td2 textarea {
+	width:290px;
+}
+.gFrm table .td3 {
+	text-align:left;
+	text-indent:4px;
+}
+.gFrm button {
+	width:100px;
+	line-height:normal;
+}
+/* gFrm end */
+
+/* gFilterFrm start */
+.gFilterFrm button {
+	width:100px;
+}
+/* gFilterFrm end */
+
+/* gPageList start */
+.gPageList {
+	clear:both;
+	text-align:center;
+	margin-top:6px;
+}
+.gPageList .stat {
+	color:gray;
+	margin-bottom:6px;
+}
+.gPageList a {
+	display:inline-block;
+	width:26px;
+	height:26px;
+	line-height:26px;
+	border:1px solid #ccc;
+	margin:0 2px;
+	text-decoration:none;
+}
+.gPageList a.cur {
+	border-color:#f50;
+	color:#f50;
+}
+/* gPageList end */
+
+/* gSubmit start */
+.gSubmit {
+	clear:both;
+	margin:6px;
+}
+/* gSubmit end */
+
+/* taskList start */
+.taskList th {
+	cursor:pointer;
+}
+.taskList .task_id {
+	width:70px;
+}
+.taskList .zone_id {
+	width:70px;
+}
+.taskList .place_id {
+	width:70px;
+}
+.taskList .area_id {
+	width:70px;
+}
+.taskList .npc_id {
+	width:70px;
+}
+.taskList .target {
+	width:70px;
+}
+.taskList .type {
+	width:70px;
+}
+.taskList .grade {
+	width:70px;
+}
+.taskList .name {
+	width:120px;
+}
+.taskList .need {
+	width:240px;
+}
+.taskList .operation {
+	width:70px;
+}
+/* taskList end */
+
+/* itemList start */
+.itemList th {
+	cursor:pointer;
+}
+.itemList .item_id {
+	width:80px;
+}
+.itemList .link_name {
+	width:150px;
+}
+.itemList .buyable {
+	width:80px;
+}
+.itemList .useable {
+	width:80px;
+}
+.itemList .clickable {
+	width:80px;
+}
+.itemList .dbclickable {
+	width:80px;
+}
+.itemList .dragable {
+	width:80px;
+}
+.itemList .grade {
+	width:80px;
+}
+.itemList .silver {
+	width:80px;
+}
+.itemList .gold {
+	width:80px;
+}
+.itemList .operation {
+	width:80px;
+}
+/* itemList end */
+
+/* exchangeList start */
+.exchangeList .uid {
+	width:10%;
+}
+.exchangeList .item_ids {
+	width:25%;
+}
+.exchangeList .operation {
+	width:70px;
+}
+/* exchangeList end */
+
+/* bagItemList start */
+.bagItemList .checkbox {
+	width:100px;
+}
+.bagItemList .item_id {
+	width:220px;
+}
+.bagItemList .num {
+	width:220px;
+}
+.bagItemList input[type=text] {
+	text-align:center;
+	font-weight:bold;
+}
+/* bagItemList end */
+
+/* statReport start */
+.statReport th {
+	width:6.67%;
+}
+/* statReport end */
+
+/* stepStat start */
+.stepStat th {
+	width:5%;
+}
+/* stepStat end */
+
+/* adminUserList start */
+.adminUserList .email {
+	width: 180px;
+}
+.adminUserList .name {
+	width: 64px;
+}
+.adminUserList .roles {
+}
+.adminUserList .note {
+	width: 64px;
+}
+.adminUserList .last_login {
+	width: 120px;
+}
+.adminUserList .last_ip {
+	width: 106px;
+}
+.adminUserList .login_times {
+	width: 70px;
+}
+.adminUserList .create_time {
+	width: 90px;
+}
+.adminUserList .operation {
+	width: 80px;
+}
+/* adminUserList end */
+
+/* zoneList start */
+.zoneList th {
+	width:33.3%;
+}
+/* zoneList end */
+
+/* placeList start */
+.placeList th {
+	width:16.67%
+}
+/* placeList end */
+
+/* areaList start */
+.areaList  .zone_id  {
+	width:100px;
+}
+.areaList  .place_id  {
+	width:100px;
+}
+.areaList  .area_id  {
+	width:100px;
+}
+.areaList  .name  {
+	width:100px;
+}
+.areaList  .need_grade  {
+	width:100px;
+}
+.areaList  .is_open  {
+	width:100px;
+}
+.areaList  .operation  {
+	width:100px;
+}
+/* areaList end */
+
+/* logList start */
+.logList .log_type {
+	width: 240px;
+}
+.logList .user_id {
+	width: 100px;
+}
+.logList .log_data {
+}
+.logList .create_time {
+	width: 150px;
+}
+/* logList end */
+
+/* jsonMakerTemplate start */
+.jsonMakerTemplate {
+	width:480px;
+	margin:0 auto;
+}
+.jsonMakerTemplate {
+	width:480px;
+}
+.jsonMakerTemplate .td1 {
+	width:30px;
+	text-align:center;
+}
+.jsonMakerTemplate .td2 {
+	width:50px;
+	text-align:center;
+	font-weight:bold;
+}
+.jsonMakerTemplate .td3 {
+	width:320px;
+	text-align:left;
+	text-indent:6px;
+}
+.jsonMakerTemplate .td3 input {
+	text-align:center;
+	width:100px;
+}
+.jsonMakerTemplate .td4 {
+	text-align:center;
+}
+/* jsonMakerTemplate end */
