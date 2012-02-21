@@ -1,0 +1,14 @@
+安装注意事项
+
+快速安装源码
+---------------------------------------------------------------------------------------------------
+#cd /data/www
+#mkdir alice
+#svn checkout svn://www.fanhougame.com/php/alice/trunk/src . --username 用户名 --password 密码
+---------------------------------------------------------------------------------------------------
+
+１、编辑/data/www/alice/platform/[Platform]/config.php，修改redis、MySQL、Memcached等设置；
+２、设置用户ID初始值(#redis-cli>set counter:user_id 10000)，此操作非必需；
+３、mysql版本选择5.1.4+的版本；
+４、如果想使用多表技术，请将/data/www/alice/lib/framework/SQLModel.php文件中的$_enableMultiTable设为true；
+５、*.sh、*.sql、README、.svn等文件，同步的时候需要排除；

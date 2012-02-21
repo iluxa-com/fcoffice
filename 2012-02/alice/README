@@ -1,0 +1,80 @@
+运行环境：
+PHP				5.3.5(需要session,memcache/memcached,json,mysql/mysqli/pdo,curl,phpredis等模块)
+MySQL			5.1.4(此版本以上才支持分区)
+Memcached		1.4.5
+Redis			2.2.11
+phpredis		2.1.3
+
+
+相关链接：
+Memcached官网	http://memcached.org/
+Redis官网		http://redis.io/
+phpredis模块	https://github.com/nicolasff/phpredis/
+
+
+PHP相关代码规范：
+(1)编码：文件统一使用UTF-8(无BOM)编码保存；
+(2)换行：换行符使用Unix换行符"\n"；
+(3)Tab：宽度4，使用空格填充；
+(4)注释：PHPDoc；
+(5)标记统一使用标准的<?php ?>，不要使用短标记<? ?>或ASP风格标记<% %>；
+
+
+PHP相关命名规范：
+(1)类名：每个单词首字母大写，如：GameInitService，UserModel；
+(2)类方法/函数名：第一个单词首字母小写，其他单词首字母大写，如：getInitData；
+(3)类成员变量：同(2)，只是变量前面需带下划线(_)，如：$_configArr；
+(4)变量：同(2)，如：$dataArr，$userModel；尽量取有意义的变量名，如：$itemId、$configArr、$needGrade等；
+(5)常量：全大写，字母与字母之间用下划线(_)分隔，如：BASE_DIR；
+(6)实例名：除了首字母小写外，其他跟类名保持一致，如：$userModel = new UserModel();；
+
+
+PHP代码优化：
+(1)继承开销大，尽量少用继承；
+(2)能用单引号的地方，不要用双引号，如：$str = 'Hello world!';；
+(3)尽量避免使用魔术方法(__get/__set/__call等)；
+(4)包含文件时，尽可能使用绝对路径；
+(5)能用普通str函数能完成的操作，不要用正则表达式；
+(6)数据库等连接，当需要操作时才连接，不再需要操作时要及时释放；
+(7)for循环的条件语句中，最好不要出现函数；
+(8)使用++$i代替$i++，如果可能的话；
+(9)使用xdebug分析代码执行效率；
+
+
+redis已知问题：
+(1)类型键/值存储上限，一个hash类型大约可存储360000个键，一个set类型大约可存储600000个值，一个list类型大约可存储700000个值，应该跟配置有关。
+
+
+phpredis已知的问题：
+(1)部分函数未完全遵循redis官方的定义，如返回值类型等；
+(2)2.1.0版中，hMset函数存在一个Bug（其他版本请实测）；
+如：Redis->hMset($key, $members);，
+当$members中的部分元素为索引元素时，只有非索引元素会设置成功；
+当数组元素全为索引元素时，会返回false。
+$r = new Redis();
+$r->connect('127.0.0.1', 6379);
+$dataArr = array(
+	0 => 'A',
+	1 => 'B',
+);
+$r->hMset('foo', $dataArr); // 返回false
+
+$dataArr = array(
+	'a' => 'A',
+	1 => 'B',
+);
+$r->hMset('foo', $dataArr); // 只有第一个元素设置成功
+(3)2.1.0版中，renamenx函数始终返回false（其他版本请实测）;
+(4)2.1.0版中，当值为负数时，hIncrBy始终返回false（其他版本请实测）；
+
+
+并发互斥问题：
+服务引入了互斥机制，同一用户的同一服务在一定时间内互斥（即在一定时间之内，一个用户在瞬间连续call同一服务，仅有一次服务能被调用成功），但不同服务之间不互斥。
+
+
+Alice开发规范：
+(1)服务都必须继承Service抽象类，且类名必须以Service结尾，如FriendService；
+(2)服务类文件当中，凡以DataService.php结尾的文件，都是给PHP后台管理或者AS编辑器录入数据用的，里面不涉及任何游戏逻辑处理；
+(3)服务中的方法，非对外公开的方法访问属性都得定义为private，且以"__"开头，如：private function __buySilverItem()；
+(4)服务中的方法，通过设置$this->_ret和$this->_data来设置返回数据；
+(5)为了维护方便，RedisModel的派生类都必须设置$_structArr结构数组，并加上简要的字段说明；
