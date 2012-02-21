@@ -1,0 +1,47 @@
+/* ::::: http://cnc.i.gtimg.cn/qzone_v6/gb/skin/v6/1.css ::::: */
+
+a, .c_tx { color: rgb(37, 149, 183); }
+body, .c_tx2 { color: rgb(84, 84, 84); }
+.bor3, .bgr3, .tbor3, .bbor3, .lbor3, .rbor3 { border-color: rgb(219, 241, 249); }
+/* ::::: http://cnc.qzonestyle.gtimg.cn/open_proj/sns_icenter.css ::::: */
+
+html { font-size: 62.5%; font-family: Tahoma; }
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td, hr { margin: 0pt; padding: 0pt; }
+body { line-height: 1.333; font-size: 1.2rem; }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+li { list-style: none outside none; }
+fieldset, img, a img, iframe { border-width: 0pt; border-style: none; }
+img {  }
+a:link, a:visited { text-decoration: none; }
+.clearfix:before, .clearfix:after { content: "."; display: block; height: 0pt; visibility: hidden; }
+.clearfix:after { clear: both; }
+.clearfix {  }
+.clearfix:before, .clearfix:after { content: "."; display: block; height: 0pt; visibility: hidden; }
+.clearfix:after { clear: both; }
+.clearfix {  }
+.col_main_sidebar { padding: 20px 9px 9px 0pt; width: 220px; }
+.col_main_sidebar .collet_box { position: relative; }
+.col_main_sidebar .box_hd { height: 21px; margin-bottom: 5px; position: relative; z-index: 1; }
+.col_main_sidebar .box_hd h3 { display: inline-block; }
+.fn_authSpace .ico_authSpace { display: inline-block; height: 16px; width: 16px; background-image: url('sns_icenter.png'); background-position: 0pt 0pt; }
+.fn_authSpace .op i { float: left; margin-right: 3px; margin-top: -3px; cursor: pointer; }
+.fn_authSpace .ico_thumb { background-image: url('sns_icenter.png'); background-position: -17px 0pt; height: 16px; width: 16px; }
+.fn_authSpace .ui_ico { background-repeat: no-repeat; display: inline-block; font-size: 0pt; overflow: hidden; }
+.fn_authSpace .ui_avatar img { border-radius: 5px 5px 5px 5px; max-width: 144px; vertical-align: top; }
+.fn_authSpace .fs_like { padding-bottom: 10px; }
+.fn_authSpace .fs_more { padding-right: 10px; }
+.fn_authSpace .fs_like_loading { position: absolute; top: 40px; left: 50%; font-family: Arial; color: rgb(255, 255, 255); padding: 2px; width: 60px; text-align: center; margin-left: -32px; border-radius: 3px 3px 3px 3px; background-color: rgba(94, 94, 94, 0.75); }
+:root .fn_authSpace .fs_like_loading {  }
+.textoverflow { display: inline-block; max-width: 100%; overflow: hidden; vertical-align: -2px; white-space: nowrap; word-wrap: normal; }
+.box_bd {  }
+.box_list_avatar_h { margin-top: 1px; width: 220px; height: 198px; }
+.box_list_avatar_h li { width: 73px; float: left; height: 99px; }
+.box_list_avatar_h .ui_avatar { width: 50px; height: 50px; display: block; margin-bottom: 3px; }
+.box_list_avatar_h .ui_avatar img { width: 50px; height: 50px; }
+.box_list_avatar_h .textoverflow { margin-right: 5px; max-width: 49px; }
+.box_list_avatar_h .op { height: 14px; line-height: 14px; padding-top: 3px; }
+.box_list_avatar_h .op .ui_ico { float: left; margin: -1px 5px 0pt 0pt; }
+.box_list_avatar_h .li_hover .name { vertical-align: 1px; }
+html { overflow: hidden; }
+.col_main_sidebar { margin: 0pt; padding: 0pt; }
+.col_main_sidebar .collet_box { margin-bottom: 0pt; }

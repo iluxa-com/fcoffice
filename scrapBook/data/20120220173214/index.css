@@ -1,0 +1,61 @@
+/* ::::: http://wiki.woodpecker.org.cn/htdocs/gugiel/css/common.css ::::: */
+
+a { color: rgb(0, 68, 179); }
+a:visited { color: rgb(89, 123, 179); }
+li p { margin: 0.25em 0pt; }
+a, img, img.drawing { border: 0pt none; }
+pre { border: 1px solid rgb(170, 170, 121); background-color: rgb(255, 255, 204); padding: 5pt; white-space: pre-wrap; word-wrap: break-word; border-radius: 0.33em 0.33em 0.33em 0.33em; font-family: "dejavu sans mono","lucida console","consolas",monospace; }
+.table-of-contents { background: none repeat scroll 0% 0% rgb(199, 229, 95); border: 1px solid rgb(175, 199, 94); border-radius: 0.33em 0.33em 0.33em 0.33em; font-size: small; text-align: left; margin: 0.5em; padding: 0.25em 0.5em; float: right; max-width: 50%; clear: right; }
+.table-of-contents ol { margin: 0pt 0pt 0pt 2em; padding: 0pt; list-style-type: decimal; }
+.table-of-contents li { margin: 0pt; padding: 0pt; }
+.table-of-contents-heading { font-weight: bold; padding: 0pt; margin: 0pt; }
+.info { float: right; font-size: 0.7em; color: gray; }
+#pagebottom { clear: both; }
+hr { height: 1pt; background-color: rgb(156, 156, 156); border: 0pt none; }
+div.codearea { margin: 0.5em 0pt; padding: 0pt; border: 1px solid rgb(170, 170, 121); background-color: rgb(255, 255, 204); color: black; border-radius: 0.33em 0.33em 0.33em 0.33em; }
+div.codearea pre { margin: 0pt; padding: 10pt; border: medium none; background: none repeat scroll 0% 0% transparent; font-family: "dejavu sans mono","lucida console","consolas",monospace; }
+a.codenumbers { margin: 0pt 10pt; font-size: 0.85em; color: gray; }
+div.codearea pre span.LineNumber { color: gray; }
+div.codearea pre span.ID { color: rgb(0, 0, 0); }
+div.codearea pre span.Comment { color: rgb(0, 128, 0); }
+div.codearea pre span.Number { color: rgb(0, 128, 192); }
+div.codearea pre span.String { color: rgb(0, 64, 128); }
+div.codearea pre span.ResWord { color: rgb(160, 0, 0); }
+/* ::::: http://wiki.woodpecker.org.cn/htdocs/gugiel/css/screen.css ::::: */
+
+body { margin: 0pt 0.75em; font-size: 90%; font-family: sans-serif; line-height: 1.3; }
+a { color: rgb(63, 89, 186); text-decoration: underline; }
+a:visited { color: rgb(107, 28, 119); }
+a img { border: medium none; }
+a:hover { color: rgb(0, 0, 0); }
+a:active { color: rgb(204, 0, 0); }
+#utils { float: right; text-align: right; }
+#username { font-size: 90%; }
+#searchform { margin: 0.125em 0pt; font-size: 90%; }
+#searchform input { font-size: 100%; vertical-align: middle; }
+#logo { float: left; padding: 1em 0.5em 0pt 0pt; }
+#navibar { clear: both; display: block; margin: 0pt 0pt -1px; padding: 0pt; line-height: 1.25; float: left; position: relative; white-space: nowrap; border-bottom: 1px solid rgb(175, 199, 94); width: 90%; }
+#navibar li { display: block; float: left; margin: 0pt 0.5em 0pt 0pt; background: none repeat scroll 0% 0% rgb(220, 241, 169); border-width: 1px 1px medium; border-style: solid solid none; border-color: rgb(191, 212, 141) rgb(191, 212, 141) -moz-use-text-color; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; border-top-right-radius: 0.33em; border-top-left-radius: 0.33em; position: relative; }
+#navibar li.current { background: none repeat scroll 0% 0% rgb(199, 229, 95); border-width: 1px; border-style: solid; border-color: rgb(175, 199, 94) rgb(175, 199, 94) rgb(199, 229, 95); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; margin-bottom: -1px; }
+#navibar li a { color: rgb(0, 0, 0); text-decoration: none; font-size: 80%; font-weight: bold; background: none repeat scroll 0% 0% transparent; padding: 0.5em 0.75em 0.25em; display: block; }
+#pageline { clear: both; }
+#locationline { font-size: 110%; margin: 0pt; padding: 1em 0.25em 0pt 0.75em; font-weight: normal; line-height: 1.1; }
+#pagelocation { display: block; float: left; margin-bottom: 0.5em; }
+#pagelocation a.backlink { font-weight: bold; text-decoration: none; color: rgb(0, 0, 0); }
+.editbar { clear: both; display: block; padding: 0.25em 0.5em; margin: 0pt; background: none repeat scroll 0% 0% rgb(199, 229, 95); border: 1px solid rgb(175, 199, 94); font-size: 80%; }
+.editbar a { color: rgb(63, 89, 186); background: none repeat scroll 0% 0% transparent; }
+.editbar a:hover { color: rgb(0, 0, 0); }
+.editbar a:active { color: rgb(204, 0, 0); }
+#header .editbar { border-top-right-radius: 0.5em; }
+#footer .editbar { border-bottom-right-radius: 0.5em; border-bottom-left-radius: 0.5em; margin-top: 1em; }
+.editbar li { display: inline; margin: 0pt 1em 0pt 0pt; }
+.editbar form { display: inline; }
+.editbar form div { display: inline; }
+.editbar form select { width: 11em; font-size: 100%; vertical-align: baseline; }
+#credits { margin: 0.25em 0pt; padding: 0pt; text-align: center; font-size: 80%; }
+#credits li { margin: 0.25em; display: inline; }
+p.info { text-align: right; font-size: 80%; margin: 0pt; color: rgb(102, 102, 102); }
+#header { margin-bottom: 1.5em; }
+.editbar span.disabled { color: rgb(102, 102, 102); }
+#timings { list-style: none outside none; }
+#timings li { display: inline; font-size: 11px; font-family: monospace; }
