@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html><head>
+ <link rel="icon" type="image/vnd.microsoft.icon" href="http://www.gstatic.com/codesite/ph/images/phosting.ico">
+ 
+ 
+ <link rel="canonical" href="http://code.google.com/p/redis/wiki/TwitterAlikeExample">
+ 
+ <script src="TwitterAlikeExample_files/a"></script><script type="text/javascript">
+ 
+ 
+ 
+ 
+ var codesite_token = null;
+ 
+ 
+ var CS_env = {"profileUrl":null,"token":null,"assetHostPath":"http://www.gstatic.com/codesite/ph","domainName":null,"assetVersionPath":"http://www.gstatic.com/codesite/ph/10977552491916013749","projectHomeUrl":"/p/redis","relativeBaseUrl":"","projectName":"redis","loggedInUserEmail":null};
+ var _gaq = _gaq || [];
+ _gaq.push(
+ ['siteTracker._setAccount', 'UA-18071-1'],
+ ['siteTracker._trackPageview']);
+ 
+ _gaq.push(
+ ['projectTracker._setAccount', 'UA-174336-10'],
+ ['projectTracker._trackPageview']);
+ 
+ 
+ </script>
+ 
+ 
+ <title>TwitterAlikeExample - 
+ redis -
+ 
+ 
+ A persistent key-value database with built-in net interface written in ANSI-C for Posix systems - Google Project Hosting
+ </title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ 
+ <meta name="ROBOTS" content="NOARCHIVE">
+ 
+ <link type="text/css" rel="stylesheet" href="TwitterAlikeExample_files/core.css">
+ 
+ <link type="text/css" rel="stylesheet" href="TwitterAlikeExample_files/ph_detail.css">
+ 
+ 
+ 
+ <link type="application/atom+xml" rel="alternate" href="http://code.google.com/feeds/p/redis/svnchanges/basic?path=/wiki/TwitterAlikeExample.wiki">
+ 
+ 
+<!--[if IE]>
+ <link type="text/css" rel="stylesheet" href="http://www.gstatic.com/codesite/ph/10977552491916013749/css/d_ie.css" >
+<![endif]-->
+ <style type="text/css">
+ .menuIcon.off { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -42px }
+ .menuIcon.on { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 -28px }
+ .menuIcon.down { background: no-repeat url(http://www.gstatic.com/codesite/ph/images/dropdown_sprite.gif) 0 0; }
+ 
+ 
+ #maincol {
+ padding-top: 0;
+ padding-bottom: 0;
+ }
+
+ 
+ </style>
+<script src="TwitterAlikeExample_files/ga.js" async="" type="text/javascript"></script></head>
+<body class="t6">
+<script type="text/javascript">
+ (function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+ })();
+</script>
+<div class="headbg">
+
+ <div id="gaia">
+ 
+
+ <span>
+ 
+ <a href="#" id="projects-dropdown" onclick="return false;"><u>My favorites</u> <small>▼</small></a>
+ | <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=http%3A%2F%2Fcode.google.com%2Fp%2Fredis%2Fwiki%2FTwitterAlikeExample&amp;followup=http%3A%2F%2Fcode.google.com%2Fp%2Fredis%2Fwiki%2FTwitterAlikeExample" onclick="_CS_click('/gb/ph/signin');"><u>Sign in</u></a>
+ 
+ </span>
+
+ </div>
+
+ <div class="gbh" style="left: 0pt;"></div>
+ <div class="gbh" style="right: 0pt;"></div>
+ 
+ 
+ <div style="height: 1px"></div>
+<!--[if lte IE 7]>
+<div style="text-align:center;">
+Your version of Internet Explorer is not supported. Try a browser that
+contributes to open source, such as <a href="http://www.firefox.com">Firefox</a>,
+<a href="http://www.google.com/chrome">Google Chrome</a>, or
+<a href="http://code.google.com/chrome/chromeframe/">Google Chrome Frame</a>.
+</div>
+<![endif]-->
+
+
+
+
+ <table style="padding: 0px; margin: 0px 0px 10px; width: 100%;" itemscope="" itemtype="http://schema.org/CreativeWork" cellpadding="0" cellspacing="0">
+ <tbody><tr style="height: 58px;">
+ 
+ <td id="plogo">
+ <link itemprop="url" href="http://code.google.com/p/redis">
+ <a href="http://code.google.com/p/redis/">
+ 
+ 
+ <img src="TwitterAlikeExample_files/logo.png" alt="Logo" itemprop="image">
+ 
+ </a>
+ </td>
+ 
+ <td style="padding-left: 0.5em;">
+ 
+ <div id="pname">
+ <a href="http://code.google.com/p/redis/"><span itemprop="name">redis</span></a>
+ </div>
+ 
+ <div id="psum">
+ <a id="project_summary_link" href="http://code.google.com/p/redis/"><span itemprop="description">A persistent key-value database with built-in net interface written in ANSI-C for Posix systems</span></a>
+ 
+ </div>
+ 
+ 
+ </td>
+ <td style="white-space: nowrap; text-align: right; vertical-align: bottom;">
+ 
+ <form action="/hosting/search">
+ <input size="30" name="q" type="text">
+ 
+ <input name="projectsearch" value="Search projects" type="submit">
+ </form>
+ 
+ </td></tr>
+ </tbody></table>
+
+</div>
+
+ 
+<div id="mt" class="gtb"> 
+ <a href="http://code.google.com/p/redis/" class="tab ">Project&nbsp;Home</a>
+ 
+ 
+ 
+ 
+ <a href="http://code.google.com/p/redis/downloads/list" class="tab ">Downloads</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="http://code.google.com/p/redis/wiki/index?tm=6" class="tab active">Wiki</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="http://code.google.com/p/redis/issues/list" class="tab ">Issues</a>
+ 
+ 
+ 
+ 
+ 
+ <a href="http://code.google.com/p/redis/wiki/UnstableSource?tm=4" class="tab ">Source</a>
+ 
+ 
+ 
+ 
+ 
+ <div class="gtbc"></div>
+</div>
+<table class="st" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+ <tbody><tr>
+ 
+ 
+ 
+ <td class="subt">
+ <div class="issueDetail">
+<div class="isf">
+ 
+ <span class="inIssueList"> 
+ <span>Search</span>
+ <form action="/p/redis/w/list" method="GET" style="display:inline">
+ <select id="can" name="can">
+ <option disabled="disabled">Search within:</option>
+ 
+ <option value="1">&nbsp;All wiki pages</option>
+ <option value="3">&nbsp;Featured pages</option>
+ <option value="2" selected="selected">&nbsp;Current pages</option>
+ 
+ 
+ <option value="4">&nbsp;Deprecated pages</option>
+ 
+ </select>
+ <span>for</span>
+ <span id="qq"><input size="38" id="searchq" name="q" autocomplete="off" type="text"></span>
+ 
+ 
+ 
+ <input value="Search" type="submit">
+ </form>
+ </span>
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+</div>
+</div>
+
+ </td>
+ 
+ 
+ 
+ 
+ 
+ 
+ <td class="bevel-right" align="right" valign="top"></td>
+ </tr>
+</tbody></table>
+
+
+<script type="text/javascript">
+ var cancelBubble = false;
+ function _go(url) { document.location = url; }
+</script>
+<div id="maincol">
+
+ 
+<!-- IE -->
+
+
+
+
+
+
+
+ <style type="text/css">
+ .delcom { background: #e8e8e8 }
+ .commentcontent {
+ margin: 2em;
+ padding: 0px 10px;
+ width: 66em;
+ }
+ .artifactcomment {
+ border-top: 3px solid #c3d9ff;
+ }
+ #commentform {
+ border-top: 3px solid #c3d9ff;
+ }
+ </style>
+
+<div id="wikipage">
+<table>
+ <tbody><tr>
+ 
+ 
+ <td style="vertical-align: top; padding-left: 5px;">
+ 
+ <div id="wikiheader">
+ 
+ <span style="font-size:120%;font-weight:bold">TwitterAlikeExample</span>
+ &nbsp;
+ <div> 
+ 
+ 
+ 
+ <div id="wikiauthor" style="float:right">
+ Updated <span title="Tue Dec 21 07:50:02 2010">
+ Dec 21, 2010</span>
+ 
+ by <a style="white-space: nowrap;" href="http://code.google.com/u/116085733329177489569/">anti...@gmail.com</a>
+ 
+ </div>
+ </div>
+ </div>
+ 
+ <div id="wikicontent">
+ <div class="vt" id="wikimaincol">
+ <h1><a name="We_moved_to_Redis.io!"></a>We moved to Redis.io!<a href="#We_moved_to_Redis.io%21" class="section_anchor"></a></h1><p><strong>Redis home moved to <a href="http://redis.io/" rel="nofollow">http://redis.io</a>, please visit <a href="http://redis.io/" rel="nofollow">our new home</a>.</strong> </p>
+ </div>
+ </div>
+ </td></tr><tr>
+</tr></tbody></table>
+ </div>
+
+
+ 
+ <div id="wikicommentcol">
+ 
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+<div class="collapse">
+
+
+ 
+
+
+<div id="commentlist">
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/104839567404628064897/">mduaf...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Thu Mar 12 09:37:18 2009">Mar 12, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>Speaking to your last point about global:timeline, what you have 
+suggested is essentially 'lamport time'. Lamport time requires that each
+ node produce increasing time values (which is where it differs from 
+your suggestion), but I believe that adding this constraint could solve 
+the problem (though I'm not sure if it would be worth the effort). </p><p>Mathew Duafala </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by  project member 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/116085733329177489569/">anti...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Thu Mar 12 10:47:54 2009">Mar 12, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>thanks mduafala, I'll study better lamport time but I still can't 
+figure how it is possible to distribute the list stored in 
+global:timeline without the need of a merge operation later, even if I 
+got an idea from what you said about this issue. </p><p>That is, append 
+the element N to server 0, N+1 to server 1, N+2 to server 3, .. adn so 
+on, so you end with an interleaved list that you can merge in O(N). </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/102886383189895748158/">codeslin...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Thu Mar 12 17:17:29 2009">Mar 12, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>Yeah, antirez, that's how you'd have to do it. Once you split up a 
+list like that, its all scatter-gather to do stuff with it from then on.
+ </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/108783022327078932362/">dov.mu...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Mon Mar 16 03:12:31 2009">Mar 16, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>Typo at the end of 'Updates' section: I believe ORDER BY (and not SORT BY) is the correct keyword for sorting in SQL. </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by  project member 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/116085733329177489569/">anti...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Mon Mar 16 03:15:49 2009">Mar 16, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>@dov.murik: thanks fixed </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/107975269782714364890/">arjenrei...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Tue Mar 24 08:32:01 2009">Mar 24, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>You can also use an encrypted user_id and user_name stored in the cookie.  </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u//">smullen....@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Wed Mar 25 07:19:56 2009">Mar 25, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>Why was the choice made to concatenate UID, posting time, and post rather than using an array?  Is there a speed difference? </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by  project member 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/116085733329177489569/">anti...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Wed Mar 25 08:15:31 2009">Mar 25, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>@smullen.uclick when you don't need to access this fields separately,
+ it's better to use a separator: atomicity of get/set of the three 
+elements, memory saving, speed. </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/115538745150514938674/">videlalv...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Fri Mar 27 22:45:27 2009">Mar 27, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>Is there a reason why the PHP client library is written using PHP4? </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by  project member 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/116085733329177489569/">anti...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Sat Mar 28 02:14:08 2009">Mar 28, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>@videlalvaro backward compatibility and PHP5 features not needed. 
+There is a new PHP lib in development, written in C as PHP module, but 
+the pure-PHP lib will be maintained anyway. </p><p>Cheers, Salvatore </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/115538745150514938674/">videlalv...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Mon Mar 30 18:44:59 2009">Mar 30, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>@antirez Nice :-) Any release date for this PHP module?  </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/109682050459785994603/">stevedu...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Tue Apr  7 07:04:07 2009">Apr 7, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>@videlalvaro - <a href="http://code.google.com/p/phpredis/" rel="nofollow">http://code.google.com/p/phpredis/</a> </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/106015003706268600915/">seas...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Sun Apr 12 06:43:52 2009">Apr 12, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>@antirez Amazing example. Is there any Java API release? </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/108882674748981891687/">pole...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Sun May  3 23:15:48 2009">May 3, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>In this example: </p><pre class="prettyprint"><span class="pln">SADD uid</span><span class="pun">:</span><span class="lit">1000</span><span class="pun">:</span><span class="pln">following </span><span class="lit">1001</span><span class="pln"><br>SADD uid</span><span class="pun">:</span><span class="lit">1001</span><span class="pun">:</span><span class="pln">followers </span><span class="lit">1000</span></pre><p>How
+ would you atomically do both commands? What would happen if redis 
+crashed after doing the first operation but before doing the second 
+operation? </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by  project member 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/116085733329177489569/">anti...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Mon May  4 07:34:31 2009">May 4, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>@poleris in order to perform this operations atomically currently 
+there is no way. Also in the client crashes after the first operation 
+the effect will be to have just the first set modified. </p><p>After 
+Redis-1.0 stable will be released I'll start to work on 1) a LOCKing 
+primitive, that will allow the atomicity. 2) A way to send multiple 
+commands and tell Redis to only exec the commands when we can be sure 
+all can be processed without interruption. This is also a guarantee of 
+atomicity itself. Example: </p><pre class="prettyprint"><span class="pln">PREPARE<br>SADD foo </span><span class="lit">1</span><span class="pln"><br>SADD bar </span><span class="lit">1</span><span class="pln"><br>COMMIT</span></pre><p>What
+ will happen is that the two SADD will be executed only when you call 
+COMMIT, so either both or none will be executed. Also the commands are 
+guaranteed to be performed one after the other without any other command
+ executed in the middle, so atomically. </p><p>For now it's simply too 
+important to release 1.0-stable, so this features will be shifted after 
+1.0 stable. Please feel free to post your exact need in the Redis DB 
+google group, there is almost always a locking free way of doing a lot 
+of things. </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/117690525112839610530/">or.else....@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Sun Jun 21 17:16:48 2009">Jun 21, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>Isn't this auth cookie business susceptible to cookie hijacking?  If I
+ go to an Internet café of some kind, login to their Wi-Fi, and run a 
+packet sniffer, I'd perhaps find a stray <tt>Set-Cookie:</tt> line floating around.  I could then create the same cookie in my browser and just like that, I'm logged in as the other user. </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/113251369737896397030/">k...@freemail.hu</a>,
+ 
+ </span>
+ <span class="date" title="Tue Oct  6 12:48:38 2009">Oct 6, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>Posts or login names with Non-Latin1 charaters does not display at 
+all.  (I tried hungarian ones) My ugly workaround was: retwis.php </p><p>@@ -60,7 +60,7 @@ </p><blockquote>} 
+</blockquote>  <blockquote>function utf8entities($s) { 
+</blockquote>-    return htmlentities($s,ENT_COMPAT,'UTF-8'); +    return htmlspecialchars($s); <blockquote>} 
+</blockquote>  <blockquote>function goback($msg) { 
+</blockquote><p></p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/116787065813939756635/">nkch...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Sat Nov  7 05:41:33 2009">Nov 7, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>is it possible and meaningful to design a high level programming 
+language or system which generate redis instructions as low level code? 
+redis as a VM, a funny idea suddenly come out to me  </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by  project member 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/116085733329177489569/">anti...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Tue Nov 10 01:19:22 2009">Nov 10, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>@nkchenz: I guess not, Redis is not turing-complete ;) </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/113022221043835959122/">kwreczy...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Tue Nov 10 14:46:27 2009">Nov 10, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>Someting is wrong with <a href="http://retwis.antirez.com/" rel="nofollow">http://retwis.antirez.com/</a> application, I guess, redis server is off ;P </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/109929564237105391657/">lorenzki...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Tue Nov 24 08:07:46 2009">Nov 24, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>Hi! Great app and great help for anyone learning redis. I have a question though: </p><p>You
+ write "we don't need to lookup by time or user id in the example 
+application so it is better to compact everything inside the post 
+string."  </p><p>However in the ruby clone of this app ("retwis-rb"), 
+the author danlucraft took the opposite approach saving each individual 
+piece of information under its own key ("post:id:1:user_id" =&gt; "1", 
+"post:id:1:timestamp" =&gt; "Tue Nov 24 17:00:27 +0100 2009", 
+"post:id:1:content" =&gt; "Hello World!"). </p><p>You only save one item "post:1" =&gt; "1|Tue Nov 24 17:00:27 +0100 2009|Hello World!". </p><p>What
+ are the pros/cons of each approach? I'd say, his solution is more 
+general but requires three GETs per post. Yours is more specific and 
+requires custom serialization, but gets by with only one GET per post. </p><p>In general, would I rather want many GETs for individual values or fewer gets for serialized data? </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/109929564237105391657/">lorenzki...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Wed Nov 25 04:09:58 2009">Nov 25, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>Answer to my own question: This article describes both approaches (under "Attributes") <a href="http://www.paperplanes.de/2009/10/30/how_to_redis.html" rel="nofollow">http://www.paperplanes.de/2009/10/30/how_to_redis.html</a> and also favors the one-key-to-serialzed-values approach taken here. </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/109276514281401192946/">con...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Tue Dec 22 03:28:28 2009">Dec 22, 2009</span>
+ <div>
+<div class="commentcontent">
+<p>Now what happens if a user posts something that contains "|" ? Isn't that encoding somehow unsecure? </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/zerkmss/">zerkmss</a>,
+ 
+ </span>
+ <span class="date" title="Tue Jan 12 17:24:27 2010">Jan 12, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>@contag </p><p>the using of third argument of explode() will prevent all possible secure vulnerabilities </p><p>$aux = explode('|', $postdata, 3); </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/103664051798375160933/">timmy.b...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Fri Feb 26 10:58:14 2010">Feb 26, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>I wrote a Retwis clone in python, based on retwis-rb : <a href="http://github.com/pims/retwis-py" rel="nofollow">http://github.com/pims/retwis-py</a> if someone prefers python to php :) </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/113800459343135650799/">murtl...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Sun May 23 14:40:19 2010">May 23, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>There is one important thing missing. When you start to follow a 
+person on twitter you get his/hers old updates included in your 
+timeline. It seems to me that that would be impossible with a redis list
+ since your can only insert values from left or right or maybe at a 
+index-position but not at a date.  </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/112443358088611956315/">hema...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Fri Jun  4 01:47:01 2010">Jun 4, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>is it possible to simulate ORDER BY field1, field2 of SQL in redis? 
+Can u give some example patterns for GET option within SORT command (if i
+ want to search all the keys contains string 'abc')... </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/100926787139127742331/">yuanzhil...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Tue Jul  6 08:27:12 2010">Jul 6, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>ok,try </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/104206578538637954861/">twin...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Mon Aug  2 23:53:02 2010">Aug 2, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>The Redis Cluster project is going to be our next priority after the 
+release of Redis 2.0.0. Redis Cluster is an higher level layer 
+implemented as a different decoupled component using normal Redis 
+instances as "Data Nodes". Redis Cluster will support adding and 
+removing nodes while the system is running and fault tolerance. well, we
+ need Redis Cluster!  </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/106944112929290578971/">sanjiv....@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Wed Sep 15 03:40:37 2010">Sep 15, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>Two Questions. a) What was the optimal maximum record size per key 
+for the said benchmark where the 5ms  pageview was achieved. b) This 
+question is directed more at the design of the twitter clone rather than
+ the underlying redis architecture. How would this scale when a good 
+subset of users has 1000+ followers. Wouldn't that mean 1000 writes for 
+each post/tweet ? </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/101024612225273661916/">kannan.d...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Tue Sep 28 03:51:40 2010">Sep 28, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>can you explain some more (with a case) why we need two keys for auth   </p><pre class="prettyprint"><span class="pln">SET uid</span><span class="pun">:</span><span class="lit">1000</span><span class="pun">:</span><span class="pln">auth fea5e81ac8ca77622bed1c2132a021f9 <br>SET auth</span><span class="pun">:</span><span class="pln">fea5e81ac8ca77622bed1c2132a021f9 </span><span class="lit">1000</span><span class="pln"> </span></pre><p>why is "uid:1000:auth" not sufficient?  </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/101024612225273661916/">kannan.d...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Tue Sep 28 04:01:21 2010">Sep 28, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>this example is informative - tells how to think about a key-value app. </p><p>i
+ have one minor suggestion, in post update the $followers array is 
+modified but not persisted, it is more readable to set the user post 
+separately.    </p><p>old: </p><pre class="prettyprint"><span class="pln">$followers</span><span class="pun">[]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> $User</span><span class="pun">[</span><span class="str">'id'</span><span class="pun">];</span><span class="pln"> </span><span class="com">/* Add the post to our own posts too */</span><span class="pln"><br><br></span><span class="kwd">foreach</span><span class="pun">(</span><span class="pln">$followers </span><span class="kwd">as</span><span class="pln"> $fid</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; $r</span><span class="pun">-&gt;</span><span class="pln">push</span><span class="pun">(</span><span class="str">"uid:$fid:posts"</span><span class="pun">,</span><span class="pln">$postid</span><span class="pun">,</span><span class="kwd">false</span><span class="pun">);</span><span class="pln"><br></span><span class="pun">}</span></pre><p>new: </p><pre class="prettyprint"><span class="pln">$uid </span><span class="pun">=</span><span class="pln"> $User</span><span class="pun">[</span><span class="str">'id'</span><span class="pun">];</span><span class="pln"><br><br></span><span class="kwd">foreach</span><span class="pun">(</span><span class="pln">$followers </span><span class="kwd">as</span><span class="pln"> $fid</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; $r</span><span class="pun">-&gt;</span><span class="pln">push</span><span class="pun">(</span><span class="str">"uid:$fid:posts"</span><span class="pun">,</span><span class="pln">$postid</span><span class="pun">,</span><span class="kwd">false</span><span class="pun">);</span><span class="pln"><br></span><span class="pun">}</span><span class="pln"><br>$r</span><span class="pun">-&gt;</span><span class="pln">push</span><span class="pun">(</span><span class="str">"uid:$uid:posts"</span><span class="pun">,</span><span class="pln">$postid</span><span class="pun">,</span><span class="kwd">false</span><span class="pun">);</span><span class="pln"><br></span><span class="pun">}}</span></pre>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/111974890572430037191/">lookis...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Mon Dec  6 22:37:49 2010">Dec 6, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>how to move my old data to new redis server when i try making it horizontally scalable? </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/110165704959075890048/">vait...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Wed Dec  8 03:18:50 2010">Dec 8, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>Please, restart redis for your retwis demo. </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/117291179983508938813/">kaushal....@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Tue Dec 21 21:18:32 2010">Dec 21, 2010</span>
+ <div>
+<div class="commentcontent">
+<p>test </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u//">and...@andrewzeneski.com</a>,
+ 
+ </span>
+ <span class="date" title="Fri Jan 14 17:34:02 2011">Jan 14, 2011</span>
+ <div>
+<div class="commentcontent">
+<p>FYI I threw together a prototype, a clone of this PHP example, in Python using the Tornado framework. Its available on github (<a href="http://bit.ly/gYJhp6" rel="nofollow">http://bit.ly/gYJhp6</a>) </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u/100621232603474379868/">ZDWal...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Sat Apr 30 19:22:55 2011">Apr 30, 2011</span>
+ <div>
+<div class="commentcontent">
+<p>I am trying out redis, with node.js. Here is my code on github(<a href="https://github.com/zdwalter/retwis-js-node-express" rel="nofollow">https://github.com/zdwalter/retwis-js-node-express</a>) </p><p>still working on it. </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+ 
+ <div class="artifactcomment">
+ 
+ 
+ 
+ 
+ 
+ 
+ <span class="author">Comment
+ 
+ by 
+ 
+ <a style="white-space: nowrap;" href="http://code.google.com/u//">waseda1...@gmail.com</a>,
+ 
+ </span>
+ <span class="date" title="Sun Jun  5 10:44:55 2011">Jun 5, 2011</span>
+ <div>
+<div class="commentcontent">
+<p>great redis ! </p>
+</div>
+ 
+ 
+ </div>
+ </div>
+ 
+
+</div>
+</div>
+
+ 
+
+
+ <script type="text/javascript">
+ function delComment(sequence_num, create_time, delete_mode) {
+ var f = document.forms["delcom"];
+ f.sequence_num.value = sequence_num;
+ f.create_time.value = create_time;
+ f.mode.value = delete_mode;
+ f.submit();
+ return false;
+ }
+ </script>
+
+
+ </div>
+ 
+ 
+ 
+ 
+ <br>
+ <div class="artifactcomment">
+ <span class="indicator">►</span> <a href="https://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=http%3A%2F%2Fcode.google.com%2Fp%2Fredis%2Fwiki%2FTwitterAlikeExample&amp;followup=http%3A%2F%2Fcode.google.com%2Fp%2Fredis%2Fwiki%2FTwitterAlikeExample">Sign in</a> to add a comment
+ </div>
+ 
+ 
+ 
+ 
+ <form name="delcom" action="../w/delComment.do" method="POST">
+ <input name="sequence_num" value="" type="hidden">
+ <input name="create_time" value="" type="hidden">
+ <input name="mode" value="" type="hidden">
+ <input name="pagename" value="TwitterAlikeExample" type="hidden">
+ <input name="token" value="" type="hidden">
+ </form>
+
+
+
+ <script src="TwitterAlikeExample_files/prettify.js"></script>
+ <script type="text/javascript">
+ prettyPrint();
+ </script>
+
+<script type="text/javascript" src="TwitterAlikeExample_files/dit_scripts.js"></script>
+
+
+<script type="text/javascript" src="TwitterAlikeExample_files/plusone.js">
+</script>
+
+  
+ 
+ 
+ <script type="text/javascript" src="TwitterAlikeExample_files/ph_core.js"></script>
+ 
+ 
+ 
+ 
+ <script type="text/javascript" src="TwitterAlikeExample_files/codesite_product_dictionary_ph.js"></script>
+</div> 
+<div id="footer" dir="ltr">
+ <div class="text">
+ ©2011 Google -
+ <a href="http://code.google.com/projecthosting/terms.html">Terms</a> -
+ <a href="http://www.google.com/privacy.html">Privacy</a> -
+ <a href="http://code.google.com/p/support/">Project Hosting Help</a>
+ </div>
+</div>
+ <div class="hostedBy" style="margin-top: -20px;">
+ <span style="vertical-align: top;">Powered by <a href="http://code.google.com/projecthosting/">Google Project Hosting</a></span>
+ </div>
+ 
+ 
+
+
+ 
+ 
+
+
+
+<div style="display: none;" id="menuDiv-projects-dropdown" class="menuDiv instance0"><div class="menuCategory controls"><a href="http://www.google.com/accounts/ServiceLogin?service=code&amp;ltmpl=phosting&amp;continue=http%3A%2F%2Fcode.google.com%2Fp%2Fredis%2Fwiki%2FTwitterAlikeExample&amp;amp;followup=http%3A%2F%2Fcode.google.com%2Fp%2Fredis%2Fwiki%2FTwitterAlikeExample" style="display: block;" class="menuItem">Sign in to see your favorites</a><hr class="menuSeparator"><a href="http://code.google.com/more/" style="display: block;" class="menuItem">Find developer products...</a><a href="http://code.google.com/hosting/" style="display: block;" class="menuItem">Find open source projects...</a></div></div></body></html>
