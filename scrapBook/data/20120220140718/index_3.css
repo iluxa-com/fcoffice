@@ -1,0 +1,28 @@
+/* ::::: http://cnc.i.gtimg.cn/qzone_v6/gb/skin/v6/1.css ::::: */
+
+a, .c_tx { color: rgb(37, 149, 183); }
+body, .c_tx2 { color: rgb(84, 84, 84); }
+.bg, .bgr, .bg_hover:hover, .bg_deep_dom { background-color: rgb(255, 255, 255); }
+/* ::::: http://cnc.qzonestyle.gtimg.cn/open_proj/sns_icenter.css ::::: */
+
+html { font-size: 62.5%; font-family: Tahoma; }
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td, hr { margin: 0pt; padding: 0pt; }
+body { line-height: 1.333; font-size: 1.2rem; }
+fieldset, img, a img, iframe { border-width: 0pt; border-style: none; }
+img {  }
+a:link, a:visited { text-decoration: none; }
+.gg_main { width: 160px; overflow: hidden; }
+.gg_main .icon_zan { width: 12px; height: 12px; display: inline-block; background: url('gdt_ad_sprite.png') no-repeat scroll 0pt -46px transparent; vertical-align: top; }
+.gg_main .gg1 .gg_img, .gg_main .gg1 .gg_img .gg_img_big img { width: 160px; height: 210px; overflow: hidden; display: block; border: 0pt none; }
+.gg_main_v6 { width: 220px; }
+.gg_main_v6 .gg1 .gg_img { width: 220px; height: 120px; }
+.gg_main .gg_zan { padding-top: 8px; line-height: 18px; font-family: Tahoma; overflow: hidden; }
+.gg_main .gg_zan .gg_zan_bt { width: 40px; margin-right: 10px; float: left; height: 18px; }
+.gg_main .gg_zan .gg_zan_bt .icon_zan { margin-right: 5px; position: relative; top: 3px; }
+.gg_main .gg_zan a { text-decoration: none; }
+.gg_main .gg1 .gg_img { position: relative; }
+.gg_main .gg1 .gg_loading { position: absolute; top: 10px; left: 50%; font-family: Arial; background: none repeat scroll 0% 0% rgba(100, 0, 0, 0.8); color: rgb(255, 255, 255); padding: 2px; width: 60px; text-align: center; margin-left: -32px; border-radius: 3px 3px 3px 3px; }
+.gg_change { position: absolute; width: 25px; height: 20px; top: 100px; left: 195px; }
+.gg_change a { width: 25px; height: 20px; display: block; background-color: rgb(201, 201, 201); border-radius: 2px 0pt 0pt 0pt; }
+.gg_change a:hover { background-color: rgb(213, 213, 213); }
+.gg_change a span { background: url('gg_change.png') no-repeat scroll 0% 0% transparent; line-height: 54px; font-size: 0pt; display: block; overflow: hidden; position: absolute; top: 5px; left: 10px; width: 8px; height: 11px; }

@@ -1,0 +1,39 @@
+/* ::::: http://cnc.qzonestyle.gtimg.cn/qzone_v6/gift_app_dialog.css ::::: */
+
+body { font-size: 12px; background-color: rgb(255, 255, 255); }
+.gift_dialog { width: 210px; height: 110px; padding: 10px; }
+.gift_dialog .gift_title a, .gift_dialog .more { color: rgb(81, 129, 180); }
+.gift_dialog .gift_list { height: 65px; margin-left: -16px; }
+.gift_dialog .gift_list li { margin-left: 16px; float: left; position: relative; overflow: hidden; }
+.gift_dialog .gift_list a { display: block; }
+.gift_dialog .gift_list img { width: 40px; height: 40px; display: block; }
+.gift_title { margin-bottom: 10px; }
+.gift_dialog .gift_wrap, .gift_dialog .gift_list, .gift_dialog .footer { overflow: hidden; }
+.gift_dialog .send_gift { background-color: rgb(137, 188, 228); color: rgb(255, 255, 255); text-align: center; position: absolute; top: 42px; left: 0pt; width: 40px; }
+.ico_cake { background-image: url('gift_app_dialog.png'); background-position: -120px 0pt; width: 16px; height: 16px; display: inline-block; margin-right: 5px; }
+.gift_dialog .ico_cake { vertical-align: bottom; }
+.gift_dialog .gift_list li { position: relative; height: 60px; }
+.gift_dialog .gift_cwrap .more { position: relative; left: 160px; bottom: -10px; }
+.gift_dialog .send_gift { display: block; }
+.i_tips span { font-size: 14px; font-weight: 700; position: relative; top: 7px; }
+/* ::::: http://cnc.qzonestyle.gtimg.cn/qzone_v6/icenter_lite.css ::::: */
+
+html { font-size: 62.5%; font-family: Tahoma; }
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, input, button, textarea, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0pt; padding: 0pt; }
+body { line-height: 1.333; font-size: 1.2rem; }
+li { list-style: none outside none; }
+fieldset, img, a img, iframe { border-width: 0pt; border-style: none; }
+img {  }
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+@media not all {
+  .textoverflow { vertical-align: 0pt; }
+}
+.ui_ico { display: inline-block; background-repeat: no-repeat; font-size: 0pt; overflow: hidden; }
+.gb_bt, .gb_bt2, .bt_tx1, .bt_tx2, .bt_tx4, .bt_tx5, .bt_tx6, .bt_tx7 { border-width: 1px; border-style: solid; text-align: center; height: 20px; line-height: 18px; display: inline-block; padding-bottom: 2px; overflow: hidden; }
+a.gb_bt, a.gb_bt2, a.bt_tx1, a.bt_tx2, a.bt_tx4, a.bt_tx5, a.bt_tx6, a.bt_tx7 { font-family: "Simsun"; display: inline-block; height: 18px; padding-bottom: 0pt; }
+.gb_bt:hover, .gb_bt2:hover, .bt_tx1:hover, .bt_tx2:hover, .bt_tx4:hover, .bt_tx5:hover, .bt_tx6:hover, .bt_tx7:hover { text-decoration: none; cursor: pointer; }
+.bt_tx2 { width: 48px; }
+a.bt_tx2 { width: 46px; }
+.bt_tx2 { background-position: 0pt 0pt ! important; }
+html { overflow-y: scroll; overflow-x: hidden; }
