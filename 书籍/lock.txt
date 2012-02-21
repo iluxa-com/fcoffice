@@ -1,0 +1,104 @@
+item: 100
+
+
+key -> expire time
+
+---------------- add lock ---------------- 0.1
+down
+
+0.05
+
+
+
+get money  X  = 100
+
+
+
+if (money >= 100) {
+	decr money 100
+	bag item +1
+}
+
+-----------------remove lock -----------------
+
+
+openid=xxx(SNS Uid)
+openkey=yyy(session id)
+user_id
+
+
+openid => user_id
+
+
+
+hash
+
+item_id => num
+
+
+U:1001
+
+
+ID:1000 => array(
+	'item_id' => 1000,
+	'name' => 'xxx',
+	'gold' => 50,
+);
+
+
+$userId % 360
+
+[0,359]
+
+[0,119]		s1
+[120,239]	s2
+[240,359]	s3
+
+		s4 <= 1000W
+
+
+ID:1000:CACHE
+
+array(
+		'1001' => 1,
+		'2001' => 20,
+		'7901' => 1000,
+);
+-------------------------------------------
+
+    /**
+     *  按角色获取贸易日志,只取最近一条完成记录
+     * @param string $role  角色，guest: 贸易方, host:被贸易方
+     */
+    public function getHorseTradeLogAs($role='guest') {
+        if ($role === 'guest') {
+            $log_type = 8;
+        } elseif ($role === 'host') {
+            $log_type = 9;
+        } else {
+            $this->_data['msg'] = 'invalid  role';
+            return;
+        }
+        $newsLogSQLModel = new NewsLogSQLModel();
+        $whereArr = array(
+            'user_id' => App::get('user_id'),
+            'log_type' => $log_type,
+        );
+        $dataArr = $newsLogSQLModel->SH()->find($whereArr)->fields('content')->orderBy(array('create_time' => 'DESC'))->getAll();
+        if (count($dataArr) === 0) {//没有贸易记录
+            $this->_data['msg'] = 'no trade log';
+            return;
+        }
+        foreach ($dataArr as $data) {
+            $tempArr = json_decode($data['content'], true);
+            $time = Common::getHorseTradeTime($tempArr['type']);
+            if ($tempArr['start_time'] + $time <= CURRENT_TIME) {//取最近一条完成贸易记录
+                unset($tempArr['type']);
+                $this->_data['trade_info'] = $tempArr;
+                $this->_ret = 0;
+                return;
+            }
+        }
+        $this->_data['msg'] = "trade is going on"; //没有贸易完成记录
+        return;
+    }
