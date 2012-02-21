@@ -1,0 +1,14 @@
+{"id":"1","host":"services.addons.mozilla.org","type":"sts/use","permission":"1"}
+{"id":"2","host":"addons.mozilla.org","type":"sts/use","permission":"1"}
+{"id":"3","host":"c2.grandcloud.cn","type":"popup","permission":"1"}
+{"id":"5","host":"accounts.google.com","type":"sts/use","permission":"1"}
+{"id":"6","host":"accounts.google.com","type":"sts/subd","permission":"1"}
+{"id":"7","host":"dede1.com","type":"popup","permission":"1"}
+{"id":"9","host":"github.com","type":"sts/use","permission":"1"}
+{"id":"10","host":"oa.fanhougame.com","type":"popup","permission":"1"}
+{"id":"14","host":"rc.qzone.qq.com","type":"popup","permission":"1"}
+{"id":"18","host":"twitter.com","type":"sts/use","permission":"1"}
+{"id":"19","host":"192.168.0.245","type":"popup","permission":"1"}
+{"id":"20","host":"user.qzone.qq.com","type":"popup","permission":"1"}
+{"id":"21","host":"static-ssl-cdn.addons.mozilla.net","type":"sts/use","permission":"1"}
+{"id":"23","host":"static.addons.mozilla.net","type":"sts/use","permission":"1"}
