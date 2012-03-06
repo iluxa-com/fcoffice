@@ -1,0 +1,181 @@
+/* ::::: http://blog.10jqka.com.cn/zcss/blog_css/champions/default.css ::::: */
+
+#container { width: 970px; text-align: left; margin-right: auto; margin-left: auto; padding-bottom: 10px; }
+.menu { color: rgb(51, 51, 51); display: block; background-color: rgb(0, 0, 0); height: 30px; clear: both; overflow: hidden; line-height: 30px; padding-left: 20px; background-image: url('bg_menu.gif'); background-repeat: repeat-x; background-position: left top; }
+.menu .nametitle { background-image: none; font-size: 12px; font-weight: 400; color: rgb(0, 0, 0); }
+.menu li { float: left; display: block; font-size: 14px; color: rgb(0, 0, 0); background-image: url('line_menur.gif'); background-repeat: no-repeat; background-position: left center; }
+.menu li a { padding-left: 25px; padding-right: 25px; font-size: 14px; color: rgb(0, 0, 0); text-decoration: none; }
+.menu li a:hover { color: rgb(204, 0, 0); }
+.menu li.over { height: 30px; line-height: 30px; width: 80px; text-align: center; margin-left: 5px; font-weight: 700; background-image: url('bg_menuover.gif'); background-repeat: no-repeat; background-position: center center; }
+#sidebar1 { float: left; width: 200px; background-color: rgb(255, 255, 255); text-align: left; margin-top: 10px; margin-left: 5px; border-width: 1px; border-right: 1px solid rgb(204, 204, 204); border-bottom: 1px solid rgb(204, 204, 204); border-left: 1px solid rgb(204, 204, 204); border-color: rgb(204, 204, 204); }
+#sidebar1 .master h2, #mainContent h2 { font-size: 12px; line-height: 25px; margin-bottom: 5px; padding-left: 15px; color: rgb(0, 0, 0); text-align: left; background-image: url('bg-bozhu.gif'); background-repeat: no-repeat; background-position: right top; }
+#sidebar1 .master { text-align: left; }
+#sidebar1 .master .name { font-size: 14px; border-bottom: 1px dashed rgb(221, 224, 240); margin-right: 15px; margin-left: 15px; line-height: 30px; text-align: center; }
+#sidebar1 .master .images { border: 1px solid rgb(204, 204, 204); margin-top: 15px; margin-right: auto; margin-left: auto; text-align: center; padding: 5px; height: 108px; width: 108px; overflow: hidden; }
+#sidebar1 .master .number { line-height: 25px; text-align: center; }
+#sidebar1 .master li { margin-right: 10px; margin-left: 10px; }
+#sidebar1 .master li a { background: url('icon9.gif') no-repeat scroll 5px center transparent; border-bottom: 1px dashed rgb(243, 245, 248); display: block; padding-left: 18px; }
+#sidebar1 .master li a:hover { background-color: rgb(249, 249, 249); }
+#mainContent { max-width: 740px; overflow: hidden; margin-top: 10px; width: 740px; float: right; background-color: rgb(254, 254, 252); text-align: left; margin-right: 5px; border-width: 1px; border-right: 1px solid rgb(204, 204, 204); border-bottom: 1px solid rgb(204, 204, 204); border-left: 1px solid rgb(204, 204, 204); border-color: rgb(204, 204, 204); }
+#mainContent .textlist table { clear: both; }
+#mainContent .textlist { margin-right: 20px; margin-left: 20px; margin-bottom: 10px; border-bottom: 1px dashed rgb(231, 231, 231); padding-top: 15px; padding-bottom: 15px; }
+#mainContent .textlist li { color: rgb(153, 153, 153); float: left; padding-right: 5px; }
+#mainContent .textlist .title li { color: rgb(153, 153, 153); float: left; padding-right: 5px; }
+#mainContent .textlist .title em { font-size: 12px; float: right; }
+#mainContent .textlist .title em a { padding-left: 13px; padding-right: 8px; }
+#mainContent .textlist .title em a.add { background: url('icon_add_001.gif') no-repeat scroll left center transparent; }
+#mainContent .textlist .title em a.delete { background: url('icon_sc.gif') no-repeat scroll left center transparent; }
+#mainContent .textlist .title em a.edit { background: url('icon_edit.gif') no-repeat scroll left center transparent; }
+#mainContent .textlist .summary { font-size: 14px; padding-top: 10px; padding-bottom: 10px; color: rgb(51, 51, 51); line-height: 25px; }
+#mainContent .textlist h3 { font-size: 14px; color: rgb(0, 0, 0); }
+#mainContent .textlist h3 a { color: rgb(0, 0, 0); text-decoration: underline; }
+#mainContent .textlist h3 a:hover { color: rgb(204, 0, 0); text-decoration: none; }
+#mainContent .textlist h4 { font-size: 12px; border-bottom: 1px solid rgb(204, 204, 204); color: rgb(204, 0, 0); background-color: rgb(231, 231, 231); line-height: 32px; padding-left: 38px; margin-bottom: 15px; background-image: url('bg_iconpl.gif'); background-repeat: no-repeat; background-position: left center; text-align: left; }
+.opinion { text-align: center; }
+#sidebar1 .master .number strong, #mainContent .textlist li a, #mainContent .textlist .reply_list strong, .submenu a:hover, .flgl .fllist li a { color: rgb(204, 0, 0); }
+.jlmenu { text-align: right; padding-right: 15px; }
+.pllist { border: 1px solid rgb(219, 219, 219); padding-bottom: 10px; background-color: rgb(255, 255, 255); margin: 15px; }
+.pllist dt { font-size: 12px; font-weight: bold; background-color: rgb(242, 242, 242); line-height: 25px; padding-left: 15px; color: rgb(204, 0, 0); border-bottom: 1px solid rgb(204, 204, 204); }
+.pllist dd { height: 25px; margin-right: 15px; margin-left: 15px; border-bottom: 1px dashed rgb(219, 219, 219); }
+.pllist dd strong { margin-right: 10px; font-size: 12px; font-weight: bold; color: rgb(51, 51, 51); }
+.pllist dd b { font-weight: normal; color: rgb(204, 51, 0); margin-right: 10px; }
+.pllist dd em { float: right; color: rgb(102, 102, 102); }
+/* ::::: http://blog.10jqka.com.cn/zcss/blog_css/champions/base.css ::::: */
+
+* { margin: 0pt; padding: 0pt; }
+body { text-align: center; color: rgb(51, 51, 51); font-family: Verdana,"宋体"; font-size: 12px; line-height: 23px; margin: 0pt; padding: 0pt; background-image: url('bg-olympics.jpg'); background-repeat: no-repeat; background-position: center top; background-color: rgb(255, 255, 255); }
+li { list-style-type: none; }
+a { color: rgb(51, 51, 51); text-decoration: none; }
+a:hover { color: rgb(204, 0, 0); text-decoration: underline; }
+.clear { clear: both; }
+.mb10 { margin-bottom: 10px; }
+.fr { float: right; }
+.fl { float: left; }
+em { font-style: normal; font-weight: 400; font-family: "宋体"; }
+.input1 { background-color: rgb(255, 255, 255); border: 1px solid rgb(221, 224, 240); line-height: 25px; padding-right: 3px; padding-left: 3px; }
+input { font-size: 12px; }
+.tal_c { text-align: center; }
+img, .page .nob, .nob td { border: medium none; }
+/* ::::: http://blog.10jqka.com.cn/zcss/blog_css/champions/headerfooter.css ::::: */
+
+#header { height: 290px; padding: 0pt 10px 0pt 20px; overflow: hidden; width: 940px; text-align: left; margin-left: auto; margin-right: auto; background-repeat: repeat-x; }
+#header h1 { font-size: 28px; color: rgb(204, 0, 0); font-family: "微软雅黑","黑体",Verdana,"宋体"; padding-top: 25px; margin: 0pt; padding-bottom: 10px; font-weight: normal; }
+#header p { font-size: 12px; color: rgb(204, 0, 0); }
+#header em { font-size: 12px; padding: 3px; margin-left: 25px; color: rgb(153, 0, 0); border-style: none; }
+#header em a { text-decoration: none; color: rgb(153, 0, 0); }
+#header em a:hover { text-decoration: underline; color: rgb(255, 255, 153); }
+.top_blog { border-bottom: 2px solid rgb(204, 204, 204); text-align: left; background: url('bg_blog.jpg') repeat-x scroll left center rgb(255, 255, 255); padding-bottom: 5px; clear: both; }
+.top_blog .indexlink { float: left; margin-top: 7px; line-height: 18px; }
+.top_blog .indexlink a { color: rgb(117, 120, 129); }
+.top_blog .top_cont { width: 970px; margin-right: auto; margin-left: auto; height: auto; }
+.top_blog .top_cont .menu_r { display: block; float: right; padding-top: 3px; }
+.top_blog .top_cont .menu_r a { padding-right: 5px; padding-left: 5px; color: rgb(51, 51, 51); }
+.top_blog .top_cont .menu_r a:hover { color: rgb(255, 51, 0); }
+.top_blog .top_cont .menu_r .icon_login { background: url('icon_login.gif') no-repeat scroll left bottom transparent; padding-left: 15px; }
+.top_blog .indexlink { float: left; margin-top: 7px; line-height: 18px; }
+.top_blog .indexlink a { color: rgb(117, 120, 129); }
+#footer { clear: both; width: 972px; margin-right: auto; margin-left: auto; background-color: rgb(255, 255, 255); border-top: 2px solid rgb(204, 204, 204); margin-bottom: 15px; color: rgb(102, 102, 102); }
+#footer a { color: rgb(204, 0, 0); }
+#footer a:hover { color: rgb(255, 255, 0); text-decoration: underline; }
+/* ::::: http://blog.10jqka.com.cn/zcss/thickbox.css ::::: */
+
+* { padding: 0pt; margin: 0pt; }
+/* ::::: http://blog.10jqka.com.cn/zcss/blog_css/pub.css ::::: */
+
+#sidebar1 .mylist { margin: 5px; background: url('bg_my.gif') repeat-x scroll center top rgb(255, 255, 255); }
+#sidebar1 .mylist li { margin-bottom: 3px; border-bottom: 1px dashed rgb(225, 225, 225); padding-left: 18px; color: rgb(102, 102, 102); display: block; }
+#sidebar1 .mylist li span { color: rgb(0, 0, 0); }
+#sidebar1 .mylist li.fatie { background: url('icon_fatie.gif') no-repeat scroll left center transparent; }
+#sidebar1 .mylist li.huifu { background: url('icon_huifu.gif') no-repeat scroll left center transparent; }
+#sidebar1 .mylist li.tongban { background: url('icon_tongban.gif') no-repeat scroll left center transparent; }
+#sidebar1 .mylist li.ziliao a { background: url('icon_ziliao.gif') no-repeat scroll left center transparent; color: rgb(51, 51, 51); }
+#sidebar1 .mylist li.ziliao a:hover { color: rgb(0, 0, 0); text-decoration: underline; }
+#sidebar1 .mylist li.ziliao { position: relative; }
+.input1 { width: 130px; border: 1px solid rgb(207, 71, 0); background-color: rgb(255, 250, 230); padding: 4px; margin-right: 1px; line-height: 12px; }
+.menus1 { background: url('menus1.gif') repeat-x scroll 0% 0% transparent; border: 1px solid rgb(207, 71, 0); color: rgb(255, 255, 255); font-weight: bold; font-size: 12px; cursor: pointer; width: 50px; height: 25px; line-height: 25px; }
+.search_rj { text-align: center; position: relative; }
+.search_rj #baohan { position: absolute; left: 5px; top: 25px; text-align: left; }
+.search_rj #baohan .stock_selector { border: 1px solid rgb(204, 204, 204); width: 134px; }
+#mainContent .textlist .title em { font-size: 12px; float: right; }
+#mainContent .textlist .title em a { padding-left: 13px; padding-right: 8px; }
+#mainContent .textlist .title em a.add { background: url('icon_add2.gif') no-repeat scroll left center transparent; }
+#mainContent .textlist .title em a.delete { background: url('icon_sc_001.gif') no-repeat scroll left center transparent; }
+#mainContent .textlist .title em a.edit { background: url('icon_edit_001.gif') no-repeat scroll left center transparent; }
+#mainContent .textlist .title em a.zhuanzai { color: rgb(255, 51, 0); background: url('icon_zz.png') no-repeat scroll left center transparent; }
+#mainContent .textlist .title em a.add_favorites { background: url('icon_favorites.gif') no-repeat scroll left center transparent; }
+.menu em { float: right; margin-right: 10px; }
+.input2 { width: 150px; border: 1px solid rgb(204, 204, 204); background-color: rgb(255, 255, 255); padding: 1px 2px; height: 18px; vertical-align: middle; }
+.menus2 { font-weight: bold; font-size: 12px; cursor: pointer; width: 50px; height: 22px; color: rgb(0, 0, 0); background: url('menus1.gif') repeat-x scroll left center rgb(255, 255, 255); border: 1px solid rgb(204, 102, 0); vertical-align: middle; }
+.blogbanner { float: right; height: 50px; width: 550px; overflow: hidden; }
+/* ::::: http://blog.10jqka.com.cn/jifen/css/jifen.css ::::: */
+
+.msg-tishi, .msg-tishi2, .msg-tishi3 { position: relative; border: 1px solid rgb(106, 197, 245); background: none repeat scroll 0% 0% rgb(245, 252, 255); overflow: hidden; z-index: 1020; }
+.msg-tishi, .msg-tishi2, .msg-tishi3 { height: 23px; background: none repeat scroll 0% 0% rgb(255, 255, 210); border: 1px solid rgb(255, 219, 100); padding: 5px 10px; }
+.msg-tishi { position: absolute; top: 40%; left: 47%; height: 30px; overflow: hidden; z-index: 1020; text-align: left; font-family: "宋体"; }
+.msg-p, .msg-p2 { position: relative; color: rgb(13, 138, 194); text-align: center; margin-top: 5px; z-index: 1020; }
+.msg-p, .msg-p2 { font: bold 14px/24px 宋体; color: rgb(51, 51, 51); }
+.f-jf, .f-jf2 { position: relative; font: bold 14px arial; margin-left: 5px; z-index: 1001; }
+.f-jf, .f-jf3 { overflow: hidden; color: rgb(244, 36, 2); }
+/* ::::: http://blog.10jqka.com.cn/zcss/float.css ::::: */
+
+.showbox { width: 400px; overflow: hidden; text-align: left; font-family: "宋体"; position: fixed; left: 35%; top: 29%; z-index: 999; }
+.showbox_top { width: 400px; height: 29px; overflow: hidden; background: url('lightbox.gif') no-repeat scroll 0pt 0pt transparent; line-height: 30px; }
+.showbox_top strong { padding: 0px 10px; }
+.showbox_top .but_close { width: 17px; height: 16px; overflow: hidden; cursor: pointer; background: url('button.gif') no-repeat scroll 0pt -704px transparent; margin: 6px 10px 0px 0px; }
+.fl { float: left; font-size: 12px; }
+.fr { float: right; }
+.showbox_conts { background: none repeat scroll 0% 0% rgb(241, 250, 255); padding: 25px 40px 20px; border-top: 1px solid rgb(214, 231, 241); }
+.showbox_foot { width: 400px; height: 5px; overflow: hidden; background: url('lightbox.gif') no-repeat scroll -400px -24px transparent; }
+.out-part { font: bold 14px/24px 宋体; color: rgb(51, 51, 51); background: url('gt.gif') no-repeat scroll left top transparent; padding: 2px 0pt 0pt 40px; }
+.qok { width: 59px; height: 22px; overflow: hidden; display: block; background: url('button.gif') no-repeat scroll left -390px transparent; margin: 30px 0pt 0pt 275px; }
+.qok:hover { background: url('button.gif') no-repeat scroll left -415px transparent; }
+.lightbox { background: none repeat scroll 0% 0% black; left: 0px; line-height: 0; opacity: 0.3; overflow: hidden; position: fixed; text-align: center; top: 0px; width: 100%; height: 100%; z-index: 9; }
+/* ::::: http://blog.10jqka.com.cn/public/ke/skins/default.css ::::: */
+
+.ke-icon-emoticons { background-position: 0px -608px; width: 16px; height: 16px; }
+.ke-container { border: 1px solid rgb(204, 204, 204); background-color: rgb(240, 240, 238); table-layout: fixed; overflow: hidden; border-collapse: separate; padding: 0pt; margin: 0pt; }
+.ke-toolbar-outer { border: 0pt none; padding: 0pt; margin: 0pt; }
+.ke-toolbar { width: 100%; padding: 0pt; margin: 0pt; border-collapse: separate; }
+.ke-toolbar td { border: 0pt none; padding: 2px 5px; margin: 0pt; }
+.ke-toolbar-table { font-size: 0pt; float: left; clear: both; padding: 0pt; margin: 0pt; border-collapse: separate; }
+.ke-toolbar-table td { border: 0pt none; padding: 0pt; margin: 0pt; }
+.ke-bottom-outer { border: 0pt none; padding: 0pt; margin: 0pt; }
+.ke-bottom { width: 100%; font-size: 0pt; padding: 0pt; margin: 0pt; border-collapse: separate; }
+.ke-bottom-left { width: 100%; cursor: s-resize; border: 0pt none; margin: 0pt; padding: 0pt; }
+.ke-bottom-right { cursor: se-resize; border: 0pt none; margin: 0pt; padding: 0pt; }
+.ke-bottom-right-img { display: block; background-position: -4px -740px; width: 12px; height: 12px; background-image: url('default.gif'); }
+.ke-textarea-outer { border: 0pt none; padding: 0pt 5px; margin: 0pt; }
+.ke-textarea-table { width: 100%; padding: 0pt; margin: 0pt; border: 1px solid rgb(204, 204, 204); background-color: rgb(255, 255, 255); border-collapse: separate; }
+.ke-textarea-table td { border: 0pt none; padding: 0pt 0pt 0pt 5px; }
+.ke-textarea { width: 100%; margin: 0pt; padding: 0pt; border: 0pt none; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; font-family: "Consolas","Monaco","Bitstream Vera Sans Mono","Courier New",Courier,monospace ! important; line-height: 18px; overflow: auto; }
+.ke-iframe { width: 100%; margin: 0pt; padding: 0pt; border: 0pt none; background-color: rgb(255, 255, 255); }
+.ke-common-icon { display: block; background-repeat: no-repeat; overflow: hidden; }
+.ke-common-icon-url { background-image: url('default.gif'); }
+.ke-icon { display: block; border: 1px solid rgb(240, 240, 238); padding: 1px 2px; margin: 1px; cursor: pointer; }
+.ke-mask { position: absolute; z-index: 19811212; top: 0pt; left: 0pt; display: none; background-color: rgb(255, 255, 255); }
+/* ::::: http://blog.10jqka.com.cn/zimages/xx/blogxx.css ::::: */
+
+.box_blogxx_m { background: url('blogxx_midbg.gif') repeat-x scroll left bottom transparent; width: 312px; color: rgb(62, 40, 40); font-family: "宋体"; font-size: 12px; }
+.box_blogxx_l { background: url('blogxx_leftbg.gif') no-repeat scroll left bottom transparent; }
+.box_blogxx_r { height: 219px; background: url('blogxx_rightbg.gif') no-repeat scroll right bottom transparent; }
+.box_blogxx_m a { color: rgb(62, 40, 40); text-decoration: none; }
+.box_blogxx_m a:hover { color: rgb(204, 51, 0); text-decoration: underline; }
+.box_blogxx_m ul, .box_blogxx_m li { list-style: none outside none; padding: 0pt; margin: 0pt; }
+.blogxx_topbg { height: 34px; background-image: url('blogxx_topbg.gif'); background-repeat: no-repeat; }
+.blogxx_menu { float: right; padding-right: 5px; padding-top: 7px; }
+.blogxx_menu img { border: medium none; cursor: pointer; }
+.blogxx_con { margin-right: 7px; margin-left: 7px; height: 180px; clear: both; text-align: left; }
+.picnews { width: 138px; float: left; }
+.picnews span { display: block; height: 65px; width: 133px; border: 1px solid rgb(204, 204, 204); overflow: hidden; }
+.picnews h3 { font-size: 12px; font-weight: normal; text-align: center; border-right: 1px solid rgb(204, 204, 204); border-width: 0pt 1px 1px; border-style: none solid solid; border-color: -moz-use-text-color rgb(204, 204, 204) rgb(204, 204, 204); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; width: 133px; line-height: 16px; background-color: rgb(255, 255, 255); height: 16px; overflow: hidden; padding: 0pt; margin: 0pt; }
+.picnews h3 a { color: rgb(62, 40, 40); text-decoration: none; }
+.blogxx_lists1 { float: left; width: 160px; }
+.blogxx_lists1 li { line-height: 20px; height: 20px; overflow: hidden; }
+.blogxx_lists1 li.topone { font-size: 14px; line-height: 27px; height: 27px; overflow: hidden; font-weight: bold; text-align: center; }
+.blogxx_lists1 li.topone a { color: rgb(204, 51, 0); }
+.blogxx_line { background-image: url('blogxx_line.gif'); background-repeat: repeat-x; height: 10px; clear: both; background-position: left center; float: none; }
+.blogxx_lists2 { float: left; width: 138px; }
+.blogxx_lists2 li { line-height: 20px; height: 20px; overflow: hidden; }
+.ft_red a { color: rgb(204, 51, 0); }
+.ft_red a:hover { color: rgb(0, 0, 0); }
+.ft_strong { font-weight: 700; }
