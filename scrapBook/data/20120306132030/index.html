@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="window-size" content="width=1000&amp;height=650">
+<title>AJAX中同时发送多个请求(并发)对象处理方法 - ofeng的博客 - 同花顺博客</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+<div class="msg-tishi" id="scoretishi" style="display: none;">
+<p class="msg-p">发布成功，积分<font class="f-jf"> +3</font></p>
+</div>
+<!--headerbar start-->
+<div class="top_blog">
+  <div class="top_cont">
+
+
+<div class="menu_r"><a href="http://pass.10jqka.com.cn/login?redir=HTTP_REFERER&amp;sign=f1d004e384e03bf484209a1e2064795e" class="icon_login">会员登录</a></div>
+	<div class="logo_blog fl"><img src="logo_blog1.jpg" width="152" height="25"> </div>
+	<div class="indexlink"><a href="http://www.10jqka.com.cn/" target="_top">同花顺首页</a>| <a href="http://blog.10jqka.com.cn/" target="_top">博客首页</a></div>
+	<br class="clear">
+	</div>
+</div>
+<!--headerbar end-->
+<div id="header">
+  <h1>ofeng的博客<em>   <img src="icon_add.gif" onclick="addBookmark(document.title, location.href);" title="添加到收藏夹"> <img src="icon_copy.gif" onclick="setCopy(location.href);" title="复制链接地址"> <a href="http://blog.10jqka.com.cn/ofengofeng">http://blog.10jqka.com.cn/ofengofeng</a></em></h1>
+<p>佛祖曰：武功再高，也怕菜刀；功夫再好，一砖撂倒～～</p>
+  </div><!-- end #header -->
+  <div id="container">
+  <div class="menu">
+  <em>
+  <form action="http://search.10jqka.com.cn/10jqka/" method="get" target="_blank" style="display: inline;">
+   <input name="t" value="2" checked="checked" type="radio">博客
+   <input name="t" value="3" type="radio">论坛
+   <input name="t" value="1" type="radio">资讯 
+   <input value="" name="w" class="input2" type="text"> <input value="搜索" class="menus2" type="submit">
+   </form>
+ </em>
+  <ul>
+	<li class="nametitle">ofengofeng的：</li>
+	<li class="over"><a href="http://blog.10jqka.com.cn/ofengofeng">博客</a></li>
+		<li><a href="http://forum.10jqka.com.cn/user/3838/31253838/index.html" target="_top">论坛</a></li>
+  </ul>
+  </div><!--导航结束-->
+  <div id="sidebar1">
+
+<div class="master">
+<!--博主信息开始-->
+<h2>博主</h2>
+<div class="images"><img src="31253838.gif" width="108"></div>
+<!--<div class="rank_setp"><em><img src="http://forum.10jqka.com.cn/images/rank/10.png" id = "user_rank_1" /><img src="http://forum.10jqka.com.cn/images/rank/20.png" id = "user_rank_2" /><img src="http://forum.10jqka.com.cn/images/rank/30.png" id = "user_rank_3" /><img src="http://forum.10jqka.com.cn/images/rank/40.png" id = "user_rank_4" /></em><b><img src="http://forum.10jqka.com.cn/images/rank/r2.png" id = "user_rank_r" /></b></div>-->
+<div class="name"><a href="http://blog.10jqka.com.cn/ofengofeng">ofengofeng</a></div>
+<div class="number">博客访问次数：<strong id="user_click_31253838">14201</strong></div>
+
+<div class="mylist">
+	<div class="tal_c pt5">
+		<a href="http://pass.10jqka.com.cn/center/index.php?a_active=requestGuYou&amp;fuid=31253838&amp;funame=ofengofeng&amp;TB_iframe=true&amp;height=155&amp;width=315&amp;modal=true" class="addguyou thickbox"><img src="add_guyou.gif" width="71" height="16"></a>
+		<a href="glt://41370028"><img src="chat_online_b.gif" id="glt_img" width="71" height="16"></a>
+	</div>
+	<ul class="clear">
+<li class="ziliao" style="padding-left: 0pt;"><a href="http://pass.10jqka.com.cn/center/index.php?account=ofengofeng" target="_top">查看个人资料</a></li> 
+  <li class="fatie">发帖：<span id="user_total_thread">16</span></li>
+  <li class="huifu">回复：<span id="user_total_reply">3</span></li>
+  <li class="tongban">积分：<span id="user_total_score">38</span></li>
+ <!-- <li class="weiwang">威望：<span id="user_total_prestige">0</span></li>
+  <li class="tongban">铜板：<span id="user_total_money">0</span></li>-->
+	</ul>
+</div>
+<!--博主信息结束-->
+
+
+<!-- 博客荣誉-->
+<!--end 博客荣誉-->
+
+<!--日记搜索开始-->
+
+ 
+ 
+
+<h2>日记搜索</h2>
+<div class="search_rj mb10">
+
+<input name="code" id="code" onfocus="on_focus();" onblur="lost_focus();" onclick="c_select(this);" onkeydown="keydown(event);" onkeyup="ifselect(event);" autocomplete="off" class="input1" value="股票的代码、简拼或简称" type="text"><input name="searchob" value="sn" id="searchob" type="hidden"><input name="button2" id="button" value="搜日记" class="menus1" onclick="javascript:step_gegu(document.getElementById('searchob').value);" type="button">
+<div id="baohan">
+<div id="selectdiv" style="display: none;" onkeyup="div_select(event)">
+<select name="select2" size="10" class="stock_selector" id="select"></select>
+</div>
+</div>
+</div>
+<!--日记搜索结束-->
+
+<!--博文分类-->
+<div class="mb10">
+<h2>博文分类</h2>
+<ul>
+<li><a href="http://blog.10jqka.com.cn/account/3838/31253838/lists/1.shtml">所有分类:<span id="user_total_thread2">16</span></a></li><li><a href="http://blog.10jqka.com.cn/account/3838/31253838/pcate/-1/1.shtml">股市日志:0</a></li><li><a href="http://blog.10jqka.com.cn/account/3838/31253838/pcate/11072/1.shtml">Flex:2</a></li></ul>
+</div>
+<!--博文分类-->
+<!--最新回复-->
+<div class="mb10">
+<h2>最新回复</h2>
+<ul>
+<li><a href="http://blog.10jqka.com.cn/account/3838/31253838/posts/930086.shtml" title="电子钢琴">电子钢琴</a></li><li><a href="http://blog.10jqka.com.cn/account/3838/31253838/posts/736836.shtml" title="第一次看到google的这个页面">第一次看到google的这个页</a></li><li><a href="http://blog.10jqka.com.cn/account/3838/31253838/posts/743941.shtml" title="开心一笑0712">开心一笑0712</a></li><li><a href="http://blog.10jqka.com.cn/account/3838/31253838/posts/674397.shtml" title="Flex中的事件机制">Flex中的事件机制</a></li><li><a href="http://blog.10jqka.com.cn/account/3838/31253838/posts/557372.shtml" title="开心一笑0704">开心一笑0704</a></li><li><a href="http://blog.10jqka.com.cn/account/3838/31253838/posts/551661.shtml" title="99%的人看完后当场含笑而死.....">99%的人看完后当场含笑而</a></li><li><a href="http://blog.10jqka.com.cn/account/3838/31253838/posts/548163.shtml" title="开过大奔吗 ">开过大奔吗 </a></li></ul>
+</div>
+
+<!--
+-->
+<!--最新回复-->
+<!--相关博文start-->
+<div class="mb10">
+<h2>相关博文</h2>
+<ul>
+<li><a href="http://blog.10jqka.com.cn/account/6498/78686498/posts/7376472.shtml" id="dpfx0" target="_top" title="大盘回踩5周线附近时买进时机！">大盘回踩5周线附近时买进</a></li>
+<li><a href="http://blog.10jqka.com.cn/account/3409/81013409/posts/7376454.shtml" id="dpfx1" target="_top" title="这才是未来趋势的真正王道">这才是未来趋势的真正王道</a></li>
+<li><a href="http://blog.10jqka.com.cn/account/9980/78859980/posts/7376450.shtml" id="dpfx2" target="_top" title="这一生，还能见妈妈几次">这一生，还能见妈妈几次</a></li>
+<li><a href="http://blog.10jqka.com.cn/account/3914/77823914/posts/7376446.shtml" id="dpfx3" target="_top" title="切勿盲目看空 此点此股可以买！">切勿盲目看空 此点此股可</a></li>
+<li><a href="http://blog.10jqka.com.cn/account/9663/77539663/posts/7376425.shtml" id="dpfx4" target="_top" title="午后大盘最关键的一点">午后大盘最关键的一点</a></li>
+<li><a href="http://blog.10jqka.com.cn/account/8146/80878146/posts/7376423.shtml" id="dpfx5" target="_top" title="下午重点就看多方的表现">下午重点就看多方的表现</a></li>
+<li><a href="http://blog.10jqka.com.cn/account/9980/78859980/posts/7376422.shtml" id="dpfx6" target="_top" title="午评：短线的两种运行方式">午评：短线的两种运行方式</a></li>
+<li><a href="http://blog.10jqka.com.cn/account/9361/849361/posts/7376420.shtml" id="dpfx7" target="_top" title="盘面很弱不得不谨慎（6日午评）">盘面很弱不得不谨慎（6日</a></li>
+<li><a href="http://blog.10jqka.com.cn/account/1792/101171792/posts/7376414.shtml" id="dpfx8" target="_top" title="坚持信念之震荡行情股民操作应注意此4点">坚持信念之震荡行情股民操</a></li>
+<li><a href="http://blog.10jqka.com.cn/account/4404/112744404/posts/7376398.shtml" id="dpfx9" target="_top" title="回调基本到位，短线将有反弹">回调基本到位，短线将有反</a></li>
+</ul>
+</div>
+<!--相关博文end-->
+<!--最近浏览start-->
+<div class="mb10">
+<h2>浏览过的用户</h2>
+<ul id="zjll"><li><a href="http://blog.10jqka.com.cn/YXh1bG9ta2U=" id="zxll0" target="_top" title="">YXh1bG9ta2U=</a></li><li><a href="http://blog.10jqka.com.cn/cnJycmNuamlhb2xvbmc5MTE=" id="zxll1" target="_top" title="">cnJycmNuamlhb2xvbmc5MTE=</a></li></ul>
+</div>
+<!--最近浏览end-->
+<!--友情链接-->
+<!--友情链接-->
+<!--自定义板块-->
+<!--自定义板块-->
+<!--广告-->
+<!--广告-->
+</div>
+</div><!-- end #sidebar1 -->
+
+<div id="mainContent">
+<h2 class="bg2">博文</h2>
+<div class="textlist">
+		<div class="title">
+      <h3><em id="owner_option" style="display: none;"><a href="http://blog.10jqka.com.cn/zmanage/index.php?op=add" class="add">添加</a><a href="http://blog.10jqka.com.cn/zmanage/index.php?op=edit&amp;id=746877" class="edit">修改</a><a href="http://blog.10jqka.com.cn/zmanage/index.php?op=del&amp;id=746877" onclick="return confirm('确定要删除吗?');" class="delete">删除</a></em><em style="display: inline;" id="zhuanzai_option"><a href="http://blog.10jqka.com.cn/zpsif_new/fakeps/copy.php?id=746877&amp;TB_iframe=true&amp;height=155&amp;width=315&amp;modal=true" class="zhuanzai thickbox">收入股市日志</a> <a href="http://pass.10jqka.com.cn/center/index_test.php?obj=10&amp;f=2&amp;title_blog=QUpBWC0M9tEBGir3Qih20Sn5YQQGudUgLSBvZmVuZ4RaoiAtIAyxelqi&amp;url_blog=aHR0cDovL2Jsb2cuMTBqcWthLmNvbS5jbi9hY2NvdW50LzM4MzgvMzEyNTM4MzgvcG9zdHMvNzQ2ODc3LnNodG1s&amp;TB_iframe=true&amp;height=155&amp;width=315&amp;modal=true" class="add_favorites thickbox" id="set_inshoucang">加入我的收藏</a></em>AJAX中同时发送多个请求(并发)对象处理方法</h3>
+			
+			
+      ofengofeng | 更新时间:2008-07-15 09:38:50 | 点击数:<span id="stat_fixed_31253838_746877">455</span><br>
+            <ul>
+        <li>标签：</li>
+                  <li><a href="http://blog.10jqka.com.cn/ztags/2830/1.shtml" target="_top">ajax</a></li>
+                  <li><a href="http://blog.10jqka.com.cn/ztags/2831/1.shtml" target="_top">并发</a></li>
+              </ul>
+            <br class="clear">
+    </div>
+    <div class="summary" id="post_content">
+	    <p><font color="#ff8000">*&nbsp;XMLHttpRequest&nbsp;Object&nbsp;Pool<br>
+&nbsp;*<br>
+&nbsp;*&nbsp;@author&nbsp;&nbsp;&nbsp;&nbsp;legend&nbsp;&lt;legendsky@hotmail.com&gt;<br>
+&nbsp;*&nbsp;@link&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.ugia.cn/?p=85<br>
+&nbsp;*&nbsp;@Copyright&nbsp;www.ugia.cn<br>
+&nbsp;*/&nbsp;<br>
+</font><span class="php_007700"><font color="#007700">var&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">XMLHttp&nbsp;</font></span><span class="php_007700"><font color="#007700">=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">_objPool</font></span><span class="php_007700"><font color="#007700">:&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">_getInstance</font></span><span class="php_007700"><font color="#007700">:&nbsp;function&nbsp;()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(var&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">i&nbsp;</font></span><span class="php_007700"><font color="#007700">=&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">0</font></span><span class="php_007700"><font color="#007700">;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">i&nbsp;</font></span><span class="php_007700"><font color="#007700">&lt;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">this</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">_objPool</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">length</font></span><span class="php_007700"><font color="#007700">;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">i&nbsp;</font></span><span class="php_007700"><font color="#007700">++)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</font></span><span class="php_0000BB"><font color="#0000bb">this</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">_objPool</font></span><span class="php_007700"><font color="#007700">[</font></span><span class="php_0000BB"><font color="#0000bb">i</font></span><span class="php_007700"><font color="#007700">].</font></span><span class="php_0000BB"><font color="#0000bb">readyState&nbsp;</font></span><span class="php_007700"><font color="#007700">==&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">0&nbsp;</font></span><span class="php_007700"><font color="#007700">||&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">this</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">_objPool</font></span><span class="php_007700"><font color="#007700">[</font></span><span class="php_0000BB"><font color="#0000bb">i</font></span><span class="php_007700"><font color="#007700">].</font></span><span class="php_0000BB"><font color="#0000bb">readyState&nbsp;</font></span><span class="php_007700"><font color="#007700">==&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">4</font></span><span class="php_007700"><font color="#007700">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">this</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">_objPool</font></span><span class="php_007700"><font color="#007700">[</font></span><span class="php_0000BB"><font color="#0000bb">i</font></span><span class="php_007700"><font color="#007700">];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_FF8000"><font color="#ff8000">//&nbsp;IE5中不支持push方法<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">this</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">_objPool</font></span><span class="php_007700"><font color="#007700">[</font></span><span class="php_0000BB"><font color="#0000bb">this</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">_objPool</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">length</font></span><span class="php_007700"><font color="#007700">]&nbsp;=&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">this</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">_createObj</font></span><span class="php_007700"><font color="#007700">();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">this</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">_objPool</font></span><span class="php_007700"><font color="#007700">[</font></span><span class="php_0000BB"><font color="#0000bb">this</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">_objPool</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">length&nbsp;</font></span><span class="php_007700"><font color="#007700">-&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">1</font></span><span class="php_007700"><font color="#007700">];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">_createObj</font></span><span class="php_007700"><font color="#007700">:&nbsp;function&nbsp;()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</font></span><span class="php_0000BB"><font color="#0000bb">window</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">XMLHttpRequest</font></span><span class="php_007700"><font color="#007700">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp&nbsp;</font></span><span class="php_007700"><font color="#007700">=&nbsp;new&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">XMLHttpRequest</font></span><span class="php_007700"><font color="#007700">();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">MSXML&nbsp;</font></span><span class="php_007700"><font color="#007700">=&nbsp;[</font></span><span class="php_DD0000"><font color="#dd0000">'MSXML2.XMLHTTP.5.0'</font></span><span class="php_007700"><font color="#007700">,&nbsp;</font></span><span class="php_DD0000"><font color="#dd0000">'MSXML2.XMLHTTP.4.0'</font></span><span class="php_007700"><font color="#007700">,&nbsp;</font></span><span class="php_DD0000"><font color="#dd0000">'MSXML2.XMLHTTP.3.0'</font></span><span class="php_007700"><font color="#007700">,&nbsp;</font></span><span class="php_DD0000"><font color="#dd0000">'MSXML2.XMLHTTP'</font></span><span class="php_007700"><font color="#007700">,&nbsp;</font></span><span class="php_DD0000"><font color="#dd0000">'Microsoft.XMLHTTP'</font></span><span class="php_007700"><font color="#007700">];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(var&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">n&nbsp;</font></span><span class="php_007700"><font color="#007700">=&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">0</font></span><span class="php_007700"><font color="#007700">;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">n&nbsp;</font></span><span class="php_007700"><font color="#007700">&lt;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">MSXML</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">length</font></span><span class="php_007700"><font color="#007700">;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">n&nbsp;</font></span><span class="php_007700"><font color="#007700">++)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">try<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_007700"><font color="#007700">{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp&nbsp;</font></span><span class="php_007700"><font color="#007700">=&nbsp;new&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">ActiveXObject</font></span><span class="php_007700"><font color="#007700">(</font></span><span class="php_0000BB"><font color="#0000bb">MSXML</font></span><span class="php_007700"><font color="#007700">[</font></span><span class="php_0000BB"><font color="#0000bb">n</font></span><span class="php_007700"><font color="#007700">]);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">catch</font></span><span class="php_007700"><font color="#007700">(</font></span><span class="php_0000BB"><font color="#0000bb">e</font></span><span class="php_007700"><font color="#007700">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_FF8000"><font color="#ff8000">//&nbsp;mozilla某些版本没有readyState属性<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_007700"><font color="#007700">if&nbsp;(</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">readyState&nbsp;</font></span><span class="php_007700"><font color="#007700">==&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">null</font></span><span class="php_007700"><font color="#007700">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">readyState&nbsp;</font></span><span class="php_007700"><font color="#007700">=&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">0</font></span><span class="php_007700"><font color="#007700">;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">addEventListener</font></span><span class="php_007700"><font color="#007700">(</font></span><span class="php_DD0000"><font color="#dd0000">"load"</font></span><span class="php_007700"><font color="#007700">,&nbsp;function&nbsp;()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">readyState&nbsp;</font></span><span class="php_007700"><font color="#007700">=&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">4</font></span><span class="php_007700"><font color="#007700">;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</font></span><span class="php_0000BB"><font color="#0000bb">typeof&nbsp;objXMLHttp</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">onreadystatechange&nbsp;</font></span><span class="php_007700"><font color="#007700">==&nbsp;</font></span><span class="php_DD0000"><font color="#dd0000">"function"</font></span><span class="php_007700"><font color="#007700">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">onreadystatechange</font></span><span class="php_007700"><font color="#007700">();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">false</font></span><span class="php_007700"><font color="#007700">);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp</font></span><span class="php_007700"><font color="#007700">;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_FF8000"><font color="#ff8000">//&nbsp;发送请求(方法[post,get],&nbsp;地址,&nbsp;数据,&nbsp;回调函数)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">sendReq</font></span><span class="php_007700"><font color="#007700">:&nbsp;function&nbsp;(</font></span><span class="php_0000BB"><font color="#0000bb">method</font></span><span class="php_007700"><font color="#007700">,&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">url</font></span><span class="php_007700"><font color="#007700">,&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">data</font></span><span class="php_007700"><font color="#007700">,&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">callback</font></span><span class="php_007700"><font color="#007700">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp&nbsp;</font></span><span class="php_007700"><font color="#007700">=&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">this</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">_getInstance</font></span><span class="php_007700"><font color="#007700">();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">with</font></span><span class="php_007700"><font color="#007700">(</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp</font></span><span class="php_007700"><font color="#007700">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">try<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_007700"><font color="#007700">{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_FF8000"><font color="#ff8000">//&nbsp;加随机数防止缓存<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_007700"><font color="#007700">if&nbsp;(</font></span><span class="php_0000BB"><font color="#0000bb">url</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">indexOf</font></span><span class="php_007700"><font color="#007700">(</font></span><span class="php_DD0000"><font color="#dd0000">"?"</font></span><span class="php_007700"><font color="#007700">)&nbsp;&gt;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">0</font></span><span class="php_007700"><font color="#007700">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">url&nbsp;</font></span><span class="php_007700"><font color="#007700">+=&nbsp;</font></span><span class="php_DD0000"><font color="#dd0000">"&amp;randnum="&nbsp;</font></span><span class="php_007700"><font color="#007700">+&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">Math</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">random</font></span><span class="php_007700"><font color="#007700">();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">url&nbsp;</font></span><span class="php_007700"><font color="#007700">+=&nbsp;</font></span><span class="php_DD0000"><font color="#dd0000">"?randnum="&nbsp;</font></span><span class="php_007700"><font color="#007700">+&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">Math</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">random</font></span><span class="php_007700"><font color="#007700">();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">open</font></span><span class="php_007700"><font color="#007700">(</font></span><span class="php_0000BB"><font color="#0000bb">method</font></span><span class="php_007700"><font color="#007700">,&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">url</font></span><span class="php_007700"><font color="#007700">,&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">true</font></span><span class="php_007700"><font color="#007700">);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_FF8000"><font color="#ff8000">//&nbsp;设定请求编码方式<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">setRequestHeader</font></span><span class="php_007700"><font color="#007700">(</font></span><span class="php_DD0000"><font color="#dd0000">'Content-Type'</font></span><span class="php_007700"><font color="#007700">,&nbsp;</font></span><span class="php_DD0000"><font color="#dd0000">'application/x-www-form-urlencoded;&nbsp;charset=UTF-8'</font></span><span class="php_007700"><font color="#007700">);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">send</font></span><span class="php_007700"><font color="#007700">(</font></span><span class="php_0000BB"><font color="#0000bb">data</font></span><span class="php_007700"><font color="#007700">);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">onreadystatechange&nbsp;</font></span><span class="php_007700"><font color="#007700">=&nbsp;function&nbsp;()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">readyState&nbsp;</font></span><span class="php_007700"><font color="#007700">==&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">4&nbsp;</font></span><span class="php_007700"><font color="#007700">&amp;&amp;&nbsp;(</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">status&nbsp;</font></span><span class="php_007700"><font color="#007700">==&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">200&nbsp;</font></span><span class="php_007700"><font color="#007700">||&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp</font></span><span class="php_007700"><font color="#007700">.</font></span><span class="php_0000BB"><font color="#0000bb">status&nbsp;</font></span><span class="php_007700"><font color="#007700">==&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">304</font></span><span class="php_007700"><font color="#007700">))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">callback</font></span><span class="php_007700"><font color="#007700">(</font></span><span class="php_0000BB"><font color="#0000bb">objXMLHttp</font></span><span class="php_007700"><font color="#007700">);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">catch</font></span><span class="php_007700"><font color="#007700">(</font></span><span class="php_0000BB"><font color="#0000bb">e</font></span><span class="php_007700"><font color="#007700">)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">alert</font></span><span class="php_007700"><font color="#007700">(</font></span><span class="php_0000BB"><font color="#0000bb">e</font></span><span class="php_007700"><font color="#007700">);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+};&nbsp;</font><br>
+</span></p>
+<p>示例：</p>
+<span class="php_000000"><span class="php_007700"><font color="#007700">&lt;</font></span><span class="php_0000BB"><font color="#0000bb">script&nbsp;type</font></span><span class="php_007700"><font color="#007700">=</font></span><span class="php_DD0000"><font color="#dd0000">"text/javascript"&nbsp;</font></span><span class="php_0000BB"><font color="#0000bb">src</font></span><span class="php_007700"><font color="#007700">=</font></span><span class="php_DD0000"><font color="#dd0000">"xmlhttp.js"</font></span><span class="php_007700"><font color="#007700">&gt;</font></span><span class="php_0000BB"><font color="#0000bb">&lt;/script&gt;<br>
+</font></span>&lt;script&nbsp;type="text/javascript"&gt;<br>
+function&nbsp;test(obj)<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;alert(obj.statusText);<br>
+}<br>
+XMLHttp.sendReq('GET',&nbsp;'http://www.ugia.cn/wp-data/test.htm',&nbsp;'',&nbsp;test);<br>
+XMLHttp.sendReq('GET',&nbsp;'http://www.ugia.cn/wp-data/test.htm',&nbsp;'',&nbsp;test);<br>
+XMLHttp.sendReq('GET',&nbsp;'http://www.ugia.cn/wp-data/test.htm',&nbsp;'',&nbsp;test);<br>
+XMLHttp.sendReq('GET',&nbsp;'http://www.ugia.cn/wp-data/test.htm',&nbsp;'',&nbsp;test);<br>
+alert('Pool&nbsp;length:'&nbsp;+&nbsp;XMLHttp._objPool.length);<br>
+&lt;/script&gt; <br>
+</span>
+	<br><br><div class="blogbanner" style="z-index: 888; display: none;"><!--<iframe scrolling="no" height="50" frameborder="0" width="550" hspace="0" marginwidth="0" src="http://news.10jqka.com.cn/public/gg/blog_content_adv.html"></iframe>--></div>
+
+		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="vote" codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab" width="110" height="55">
+		<param name="movie" value="http://vote.10jqka.com.cn/dz/dz.swf">
+		<param name="quality" value="high">
+		<param name="bgcolor" value="#ffffff">
+		<param name="allowScriptAccess" value="always">
+		<param name="flashvars" value="vid=0_0_746877">
+		<param name="wmode" value="Opaque"> 
+		<embed wmode="Opaque" src="dz.swf" quality="high" bgcolor="#ffffff" name="vote" play="true" loop="false" allowscriptaccess="sameDomain" flashvars="vid=0_0_746877" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" align="middle" width="110" height="55">
+		</object>
+    </div>
+	<div style="float: right; margin-top: -30px;">
+    
+<iframe allowtransparency="true" src="index_1.html" scrolling="no" width="24" frameborder="0" height="24"></iframe>
+
+    </div>
+    提醒：以上博文和评论只代表网友个人观点，不代表同花顺博客立场。如果与博主产生任何经济纠纷，与同花顺博客无关。（如有任何问题请访问：<a style="text-decoration: underline;" href="http://blog.10jqka.com.cn/account/9333/84049333/posts/7293098.shtml" target="_top">同花顺博客用户帮助中心</a>）
+		<div class="jlmenu"><!--<a href="/zz.php?type=post&id=746877&TB_iframe=true&height=155&width=315&modal=true" class="thickbox zz" >赞助博主</a><a href="#" class="ck" onclick="show_commend('commend_record_post'); return false;">赞助人数:1 收获铜板:1 [查看]</a>--></div>
+<div class="pllist" id="commend_record_post" style="display: block;">
+  <dl><dt>最近奖励记录</dt>
+		<dd><em>2008-07-17 12:05:33</em><strong><a href="http://blog.10jqka.com.cn/zjnch" target="_top">zjnch</a></strong><b>+1铜板 </b>写得不错，鼓励一下。</dd>
+	  </dl>
+	<div class="clear"></div>
+</div>
+
+        <!--评论列表开始 edit by yz-->
+	    <!--评论列表结束-->	
+
+	
+    <div class="opinion">
+  	<h4>发表评论<a name="pl" id="pl"></a></h4>
+		<form name="reply" action="http://blog.10jqka.com.cn/znotify/replyif.php" method="post" id="reply0" onsubmit="return validate_reply(0)">
+    <input name="redir" value="http://blog.10jqka.com.cn/account/3838/31253838/posts/746877.shtml" type="hidden">
+		<input name="pid" value="746877" type="hidden">
+		<table style="width: 95%; height: 165px;" class="ke-container" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="ke-toolbar-outer"><table class="ke-toolbar" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><table class="ke-toolbar-table" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><a title="插入表情" href="javascript:;" class="ke-icon"><span class="ke-common-icon ke-common-icon-url ke-icon-emoticons"></span></a></td></tr><tr><td></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td class="ke-textarea-outer"><table style="height: 127px;" class="ke-textarea-table" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><iframe src="index_2.html" style="height: 127px;" class="ke-iframe" frameborder="0"></iframe><textarea style="display: none; height: 127px;" class="ke-textarea"></textarea></td></tr></tbody></table></td></tr><tr><td class="ke-bottom-outer"><table class="ke-bottom" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="ke-bottom-left"></td><td class="ke-bottom-right" align="right" valign="bottom"><span class="ke-bottom-right-img"></span></td></tr></tbody></table></td></tr></tbody></table><textarea id="content" name="content" rows="8" style="width: 95%; display: none;"></textarea>
+		<br><br>
+		<input name="submit" value="发表" type="submit">&nbsp;
+		<!--<input type="reset" name="reset" value="重置" />-->
+		<input name="reset" value="重置" onclick="javascript: clearEditor('content');" type="button">
+		</form>
+  	</div>
+	  	<!-- end .textlist --></div>
+
+<!-- end #mainContent --></div>
+
+<br class="clear">
+</div><!-- end #container -->
+
+<!--lightbox-->
+<div class="showbox" id="lightbox2" style="display: none;">
+  <div class="showbox_top"><strong class="fl" id="showboxtitle">提示</strong>
+  	<span class="but_close fr" title="关闭" id="close" onclick="hids()"></span>
+  </div>
+  
+  <!--版主留言-->
+  <div class="showbox_conts" id="wait_reg">
+   <p class="out-part" id="info">评论内容不能为空</p>
+   <a href="http://blog.10jqka.com.cn/account/3838/31253838/posts/746877.shtml" class="qok" onclick="hids();return false;"></a>
+  </div>
+  <!--版主留言-->
+  <div class="showbox_foot"></div>
+</div>
+<div class="lightbox" style="display: none;" id="hidbox2"></div>
+<!--lightbox-->
+
+
+<div id="footer">
+<p><a href="http://www.10jqka.com.cn/" target="_top">同花顺金融服务网</a> 版权所有Hexin Software Technology Co., Ltd. All rights reserved</p>
+
+  <!-- end #footer --></div>
+<div id="blogxx_min" style="display: none;" class="blogxx_topbg"><div class="blogxx_menu"><a style="display: none;" href="javascript:void(0);" id="xx_max"><img src="blogxx_menu_big.gif" border="0"></a> <a href="javascript:void(0);" class="xx_close"><img src="blogxx_menu_close.gif" border="0"></a></div></div>
+
+
+ 
+<!--统计-->
+
+
+
+<img src="q" id="__ths_stat__" width="0" height="0">
+<!--<script src="http://www.10jqka.com.cn/stat.js"></script>-->
+<!--统计-->
+
+
+<!--<script src="http://forum.10jqka.com.cn/js/rank.js" type="text/javascript"></script>-->
+
+
+
+
+
+
+<div style="display: none;"></div><div style="opacity: 0.5;" class="ke-mask"></div><div id="blogxx_max" style="display: none;" class="box_blogxx_m"><div class="box_blogxx_l"><div class="box_blogxx_r">
+<div class="blogxx_topbg"><div class="blogxx_menu"><a href="javascript:void(0);" id="xx_min"><img src="blogxx_menu_small.gif"></a> <a href="javascript:void(0);" class="xx_close"><img src="blogxx_menu_close.gif" border="0"></a></div></div>
+<div class="blogxx_con">
+  <div class="picnews"><span><a href="http://blog.10jqka.com.cn/account/9980/78859980/posts/7375115.shtml" target="_top" id="j10"><img src="75031329_1330992540_979696160_309a48271fbc3954.jpg" border="0"></a></span>
+  <h3><a href="http://blog.10jqka.com.cn/account/9980/78859980/posts/7375115.shtml" id="j11" target="_top">绝不唱空三月桃花行情</a></h3>
+  </div>
+  <ul class="blogxx_lists1">
+	<li class="topone"><a href="http://blog.10jqka.com.cn/account/9980/78859980/posts/7376422.shtml" target="_top" id="j2">短线的两种运行方式</a></li>
+	<li class=" ">·<a id="j3" href="http://blog.10jqka.com.cn/account/3216/44323216/lists/1.shtml" target="_top">老沙：或将一直涨到三月底</a></li>
+	<li class=" ">·<a id="j4" href="http://blog.10jqka.com.cn/account/3409/81013409/lists/1.shtml" target="_top">这才是未来趋势的真正王道</a></li>
+	<li class="ft_red ">·<a id="j5" href="http://blog.10jqka.com.cn/account/1827/79171827/lists/1.shtml" target="_top">抄底就看这个指标了[图解]</a></li>
+  </ul>
+  <div class="blogxx_line"></div>
+  <ul class="blogxx_lists2">
+	<li class="ft_red ft_strong">·<a id="j61" href="http://blog.10jqka.com.cn/account/6175/105046175/posts/7376426.shtml" target="_top">本博今后的发展思路</a></li>
+	<li class=" ">·<a id="j71" href="http://blog.10jqka.com.cn/account/5708/106595708/lists/1.shtml" target="_top">短期压力注意2432点</a></li>
+	<li class=" ">·<a id="j81" href="http://blog.10jqka.com.cn/account/9733/719733/lists/1.shtml" target="_top">回调到什么点位？[图]</a></li>
+	<li class="ft_red ">·<a id="j91" href="http://blog.10jqka.com.cn/account/7635/76787635/lists/1.shtml" target="_top">指数与市场的矛盾[图]</a></li>
+  </ul>
+  <ul class="blogxx_lists1">
+	<li class=" ">·<a id="j62" href="http://blog.10jqka.com.cn/account/8470/10198470/lists/1.shtml" target="_top">大盘转牛的信号如何确定？</a></li>
+	<li class=" ">·<a id="j72" href="http://blog.10jqka.com.cn/account/8501/106918501/lists/1.shtml" target="_top">调整回补缺口，进场接货吧</a></li>
+	<li class="ft_red ft_strong">·<a id="j82" href="http://blog.10jqka.com.cn/account/8146/80878146/lists/1.shtml" target="_top">下午重点就看多方的表现</a></li>
+	<li class=" ">·<a id="j92" href="http://blog.10jqka.com.cn/account/7635/76787635/lists/1.shtml" target="_top">矛盾的指数怎么协调[图解]</a></li>
+  </ul>
+</div>
+</div></div></div></body>
+</html>

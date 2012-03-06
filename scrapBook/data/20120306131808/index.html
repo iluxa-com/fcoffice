@@ -1,0 +1,387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh-CN" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=8">
+
+
+<title>解决多个Ajax并发导致返回数据不同步的问题 »  Webin.Us</title>
+
+
+<!--[if IE 6]>
+<link rel="stylesheet" href="http://www.webin.us/webin/wordpress/wp-content/themes/cordobo-green-park-2/ie6.css" type="text/css" />
+<![endif]-->
+
+<meta name="robots" content="index,follow">
+<link rel="alternate" type="application/rss+xml" title="Webin.Us RSS Feed" href="http://webin.us/feed">
+<link rel="alternate" type="application/atom+xml" title="Webin.Us Atom Feed" href="http://webin.us/feed/atom">
+<link rel="pingback" href="http://www.webin.us/webin/wordpress/xmlrpc.php">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+
+<link rel="alternate" type="application/rss+xml" title="Webin.Us » 解决多个Ajax并发导致返回数据不同步的问题 评论 Feed" href="http://webin.us/chunterg/78/feed">
+
+
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.webin.us/webin/wordpress/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.webin.us/webin/wordpress/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="Webin.Us" href="http://webin.us/">
+<link rel="start" title="推荐几个HTML5 Canvas的教程和网站" href="http://webin.us/chunterg/41">
+<link rel="prev" title="推荐几个HTML5 Canvas的教程和网站" href="http://webin.us/chunterg/41">
+<link rel="next" title="腾讯你奈我何" href="http://webin.us/daaaawon/132">
+<meta name="generator" content="WordPress 3.2.1">
+<link rel="canonical" href="http://webin.us/chunterg/78">
+<link rel="shortlink" href="http://webin.us/?p=78">
+			
+	
+
+<!-- WP-GeSHi-Highlight plugin by Jan-Philip Gehrcke: http://gehrcke.de -->
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body id="home">
+
+
+<div id="header" class="clearfix">
+
+	<ul id="accessibility">
+		<li><a href="http://webin.us/" title="返回首页">首页</a></li>
+		<li><a href="#content" title="Skip to content">内容</a></li>
+		<li><a href="http://webin.us/feed">RSS</a></li>
+				<li class="last-item"><a href="http://www.webin.us/webin/wordpress/wp-login.php">登录</a></li>
+	</ul>
+
+	<div id="branding">
+		<h1 id="logo"><a href="http://webin.us/" title="Webin.Us">Webin.Us</a></h1>
+		<div class="description">
+		  专注于web软设计    </div>
+	</div>
+	
+	<div id="nav" class="clearfix">
+		<div id="nav-search">
+			<form role="search" method="get" id="searchform" action="http://webin.us/">
+	<div><label class="screen-reader-text" for="s">搜索：</label>
+	<input value="" name="s" id="s" type="text">
+	<input id="searchsubmit" value="搜索" type="submit">
+	</div>
+	</form>		</div>
+		<ul id="menu">
+                <div class="menu-%e9%bb%98%e8%ae%a4%e8%8f%9c%e5%8d%95-container"><ul id="menu-%e9%bb%98%e8%ae%a4%e8%8f%9c%e5%8d%95" class="menu"><li id="menu-item-71" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-71"><a href="http://webin.us/">首页</a></li>
+<li id="menu-item-223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-223"><a title="用心观察互联网" href="http://webin.us/category/%e4%ba%92%e8%81%94%e7%bd%91%e8%a7%82">互联网观</a></li>
+<li id="menu-item-123" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-123"><a href="http://webin.us/category/product-design">产品设计</a></li>
+<li id="menu-item-121" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-121"><a title="代码如诗般美丽" href="http://webin.us/category/front-end">前端技术</a></li>
+<li id="menu-item-122" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-122"><a title="以用户为中心的设计" href="http://webin.us/category/interaction-design">交互设计</a></li>
+<li id="menu-item-127" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-127"><a href="http://webin.us/category/user-experience">用户体验</a></li>
+<li id="menu-item-69" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-69"><a href="http://webin.us/about">关于我们</a></li>
+</ul></div>		</ul>
+    <div id="submenu-bg">    
+          </div>
+	</div>
+
+</div>
+
+
+<div id="main" class="clearfix">
+	<div id="container">
+		<div id="content">
+
+	
+		<div class="post-78 post type-post status-publish format-standard hentry category-javascript category-front-end tag-ajax tag-javascript-2 tag-14" id="post-78">
+			<h1>解决多个Ajax并发导致返回数据不同步的问题</h1>
+			<small class="meta">
+  			<span class="alignleft">
+          2011年3月4日 由 chunterg            			</span>
+        <a href="#comments" class="alignright button-style" rel="nofollow">留言 »</a>
+      </small>
+
+			<div class="entry">
+				<p>最近在做项目中做到同时向Twitter(T),Flickr(F),Youtube(Y)请求数据，并需要将三者数据同时通过showResult()显示出来的功能。</p>
+<p>由于向T,F,Y请求的方式不一样，返回数据的速度自然是不同的，如图：</p>
+<p><a href="http://www.webin.us/webin/wordpress/wp-content/uploads/2011/03/ajax1.jpg"><img class="alignnone size-full wp-image-95" title="ajax1" src="ajax1.jpg" alt="" width="558"></a></p>
+<p>所以需要在Ajax的回调方法里加上判断三者数据是否都成功返回的方法，然后再继续下面的showResult()。</p>
+<p>我们都知道javascript是单线程的，且没有sleep(暂停)功能，网上普通采用的方法是用setTimeout加setInterval进行回调，不过这种方法对定时的估计没法做到很精确.<br>
+于是我尝试了直接用status(状态)判断加递归做。</p>
+<p>流程图：</p>
+<p><a href="http://www.webin.us/webin/wordpress/wp-content/uploads/2011/03/ajax2.jpg"><img class="alignnone size-full wp-image-108" title="ajax2" src="ajax2.jpg" alt="" width="560" height="491"></a></p>
+<p>不多说，看代码：</p>
+<p><span id="more-78"></span></p>
+
+
+<div class="wp-geshi-highlight-wrap5"><div class="wp-geshi-highlight-wrap4"><div class="wp-geshi-highlight-wrap3"><div class="wp-geshi-highlight-wrap2"><div class="wp-geshi-highlight-wrap"><div class="wp-geshi-highlight"><div class="javascript"><pre class="de1"><span class="kw2">var</span> T<span class="sy0">=</span><span class="kw2">new</span> Object<span class="br0">(</span><span class="br0">)</span><span class="sy0">,</span><span class="co1">//Twitter对象</span>
+	F<span class="sy0">=</span><span class="kw2">new</span> Object<span class="br0">(</span><span class="br0">)</span><span class="sy0">,</span><span class="co1">//Flickr对象</span>
+	Y<span class="sy0">=</span><span class="kw2">new</span> Object<span class="br0">(</span><span class="br0">)</span><span class="sy0">,</span><span class="co1">//Youtube对象</span>
+	needRecursion<span class="sy0">=</span><span class="st0">""</span><span class="sy0">;</span><span class="co1">//用于判断是否需要回调方法的变量</span>
+	<span class="co1">//将三者的初始状态设为wait，表示需要发送请求</span>
+	T.<span class="kw3">status</span><span class="sy0">=</span><span class="st0">"wait"</span><span class="sy0">,</span>F.<span class="kw3">status</span><span class="sy0">=</span><span class="st0">"wait"</span><span class="sy0">,</span>Y.<span class="kw3">status</span><span class="sy0">=</span><span class="st0">"wait"</span><span class="sy0">;</span>
+<span class="kw2">function</span> requestTFY<span class="br0">(</span><span class="br0">)</span><span class="br0">{</span>
+	<span class="coMULTI">/*
+	 * 请求Twitter数据
+	 */</span>
+	<span class="kw1">if</span><span class="br0">(</span>T.<span class="kw3">status</span><span class="sy0">==</span><span class="st0">'wait'</span><span class="br0">)</span><span class="br0">{</span>
+&nbsp;
+		T.<span class="kw3">status</span><span class="sy0">=</span><span class="st0">"ready"</span><span class="sy0">;</span><span class="co1">//将状态设为ready避免回调时重新发送请求</span>
+&nbsp;
+		$.<span class="me1">getJSON</span><span class="br0">(</span><span class="st0">'http://search.twitter.com/search.json?rpp=30&amp;amp;'</span><span class="sy0">+</span>
+		<span class="st0">'q=web&amp;amp;lang=all&amp;amp;callback=?'</span><span class="sy0">,</span>
+		<span class="kw2">function</span><span class="br0">(</span>data<span class="br0">)</span><span class="br0">{</span>
+			<span class="kw1">if</span><span class="br0">(</span>data.<span class="me1">results</span>.<span class="me1">length</span><span class="sy0">&amp;</span>gt<span class="sy0">;</span><span class="nu0">0</span><span class="br0">)</span><span class="br0">{</span>
+				T.<span class="kw3">status</span><span class="sy0">=</span><span class="st0">"done"</span><span class="sy0">;</span><span class="co1">//将状态设为done表示数据返回成功</span>
+				T.<span class="me1">text</span> <span class="sy0">=</span> data.<span class="me1">results</span><span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span>.<span class="me1">id</span><span class="sy0">;</span>
+&nbsp;
+				<span class="co1">//判断是否需要递归</span>
+				<span class="kw1">if</span><span class="br0">(</span>needRecursion<span class="br0">)</span><span class="br0">{</span>
+					 requestTFY<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+				<span class="br0">}</span>
+			<span class="br0">}</span>
+		<span class="br0">}</span><span class="br0">)</span>
+	<span class="br0">}</span>
+<span class="coMULTI">/*
+ * 请求Flickr数据
+ */</span>
+<span class="kw1">if</span><span class="br0">(</span>F.<span class="kw3">status</span><span class="sy0">==</span><span class="st0">'wait'</span><span class="br0">)</span><span class="br0">{</span>
+	F.<span class="kw3">status</span><span class="sy0">=</span><span class="st0">"ready"</span><span class="sy0">;</span>
+	$.<span class="me1">getJSON</span><span class="br0">(</span><span class="st0">'http://api.flickr.com/services/rest/?_=1299205020298&amp;amp;method'</span><span class="sy0">+</span>
+	<span class="st0">'=flickr.photos.search&amp;amp;api_key=f0393c432fbbbaa26b30369b43b8f547&amp;amp;'</span><span class="sy0">+</span>
+	<span class="st0">'text=web&amp;amp;safe_search=1&amp;amp;sort=date-posted-desc&amp;amp;per_page=10&amp;amp;'</span><span class="sy0">+</span>
+	<span class="st0">'page=1&amp;amp;format=json&amp;amp;jsoncallback=?'</span><span class="sy0">,</span><span class="kw2">function</span><span class="br0">(</span>data<span class="br0">)</span><span class="br0">{</span>
+		<span class="kw1">if</span><span class="br0">(</span>data.<span class="me1">photos</span>.<span class="me1">photo</span>.<span class="me1">length</span><span class="sy0">&amp;</span>gt<span class="sy0">;</span><span class="nu0">0</span><span class="br0">)</span><span class="br0">{</span>
+			F.<span class="kw3">status</span><span class="sy0">=</span><span class="st0">"done"</span><span class="sy0">;</span>
+			F.<span class="me1">text</span> <span class="sy0">=</span> data.<span class="me1">photos</span>.<span class="me1">photo</span><span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span>.<span class="me1">id</span><span class="sy0">;</span>
+			<span class="kw1">if</span><span class="br0">(</span>needRecursion<span class="br0">)</span><span class="br0">{</span>
+				 requestTFY<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+			<span class="br0">}</span>
+		<span class="br0">}</span>
+	<span class="br0">}</span><span class="br0">)</span>
+<span class="br0">}</span>
+<span class="coMULTI">/*
+ * 请求Youtube数据
+ */</span>
+<span class="kw1">if</span><span class="br0">(</span>Y.<span class="kw3">status</span><span class="sy0">==</span><span class="st0">'wait'</span><span class="br0">)</span><span class="br0">{</span>
+	Y.<span class="kw3">status</span><span class="sy0">=</span><span class="st0">"ready"</span><span class="sy0">;</span>
+	$.<span class="me1">getJSON</span><span class="br0">(</span><span class="st0">'http://gdata.youtube.com/feeds/api/videos?_=1299205004713&amp;amp;'</span><span class="sy0">+</span>
+	<span class="st0">'q=web&amp;amp;format=5&amp;amp;orderby=published&amp;amp;max-results=30&amp;amp;v=2&amp;amp;start-index=1'</span><span class="sy0">+</span>
+	<span class="st0">'&amp;amp;alt=jsonc&amp;amp;callback=?'</span><span class="sy0">,</span><span class="kw2">function</span><span class="br0">(</span>data<span class="br0">)</span><span class="br0">{</span>
+		<span class="kw1">if</span><span class="br0">(</span>data.<span class="me1">data</span>.<span class="me1">items</span>.<span class="me1">length</span><span class="sy0">&amp;</span>gt<span class="sy0">;</span><span class="nu0">0</span><span class="br0">)</span><span class="br0">{</span>
+			Y.<span class="kw3">status</span><span class="sy0">=</span><span class="st0">"done"</span><span class="sy0">;</span>
+			Y.<span class="me1">text</span> <span class="sy0">=</span> data.<span class="me1">data</span>.<span class="me1">items</span><span class="br0">[</span><span class="nu0">0</span><span class="br0">]</span>.<span class="me1">id</span><span class="sy0">;</span>
+			<span class="kw1">if</span><span class="br0">(</span>needRecursion<span class="br0">)</span><span class="br0">{</span>
+				 requestTFY<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span>
+			<span class="br0">}</span>
+		<span class="br0">}</span>
+	<span class="br0">}</span><span class="br0">)</span>
+<span class="br0">}</span>
+	<span class="coMULTI">/*
+	 *判断是否需要显示结果，并设置回调变量
+	 */</span>
+   <span class="kw1">if</span><span class="br0">(</span>T.<span class="kw3">status</span><span class="sy0">==</span><span class="st0">"done"</span><span class="sy0">&amp;</span>amp<span class="sy0">;&amp;</span>amp<span class="sy0">;</span>F.<span class="kw3">status</span><span class="sy0">==</span><span class="st0">"done"</span><span class="sy0">&amp;</span>amp<span class="sy0">;&amp;</span>amp<span class="sy0">;</span>Y.<span class="kw3">status</span><span class="sy0">==</span><span class="st0">"done"</span><span class="br0">)</span><span class="br0">{</span>
+			showResult<span class="br0">(</span><span class="br0">)</span><span class="sy0">;</span><span class="co1">//显示结果</span>
+			needRecursion <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+	<span class="br0">}</span><span class="kw1">else</span><span class="br0">{</span>
+		needRecursion <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+	<span class="br0">}</span>
+<span class="br0">}</span></pre></div></div></div></div></div></div></div>
+
+
+<p><a href="http://webin.us/wordpress/test/test-ajax-recursion.html" target="_top">点此页面测试</a>,要翻墙才能看结果哦,<a href="http://cid-bcd6ee307177b1fd.office.live.com/self.aspx/WIU/fg707p.rar">点此下载</a></p>
+				
+      	<ul class="previousnext clearfix">
+      		<li class="previous_post"><a href="http://webin.us/chunterg/41" rel="prev"><span>上一篇:</span> 推荐几个HTML5 Canvas的教程和网站</a></li>      		<li class="next_post"><a href="http://webin.us/daaaawon/132" rel="next"><span>下一篇:</span> 腾讯你奈我何</a></li>      	</ul>
+			</div>
+			
+			<div class="postmetadata">
+			  <p class="categories">
+			    发表在<a href="http://webin.us/category/front-end/javascript" title="查看 Javascript 中的全部文章" rel="category tag">Javascript</a>, <a href="http://webin.us/category/front-end" title="查看 前端技术 中的全部文章" rel="category tag">前端技术</a>        </p>
+  			<p class="tags">Tags: <a href="http://webin.us/tag/ajax" rel="tag">Ajax</a> <a href="http://webin.us/tag/javascript-2" rel="tag">javascript</a> <a href="http://webin.us/tag/%e5%b0%8f%e7%bb%8f%e9%aa%8c" rel="tag">小经验</a></p>        <p class="infos">
+						若要跟踪这篇文章的任何更新，你可以使用 <a href="http://webin.us/chunterg/78/feed" rel="nofollow">RSS 2.0 Feed</a>. 
+
+													你可以直接转到文章底部进行评论，Pinging目前已关闭
+											</p>
+				</div>
+
+       <div style="margin-top: 10px;"><a rel="nofollow" style="margin: 0pt 10px; position: relative;" class="share_item" href="javascript:shareToSNS('sina',0)"><img src="sina.png" style="display: inline;" width="32px"><div style="position: absolute; left: -30px; top: -70px; font-size: 13px; font-weight: normal; width: 80px; padding: 10px 6px 23px; background: url('hover.png') no-repeat scroll center bottom transparent; color: rgb(255, 255, 255); display: none; text-align: center;">新浪微博</div></a><a rel="nofollow" style="margin: 0pt 10px; position: relative;" class="share_item" href="javascript:shareToSNS('tqq',0)"><img src="tqq.png" style="display: inline;" width="32px"><div style="position: absolute; left: -30px; top: -70px; font-size: 13px; font-weight: normal; width: 80px; padding: 10px 6px 23px; background: url('hover.png') no-repeat scroll center bottom transparent; color: rgb(255, 255, 255); display: none; text-align: center;">腾讯微博</div></a><a rel="nofollow" style="margin: 0pt 10px; position: relative;" class="share_item" href="javascript:shareToSNS('douban',0)"><img src="douban.png" style="display: inline;" width="32px"><div style="position: absolute; left: -30px; top: -70px; font-size: 13px; font-weight: normal; width: 80px; padding: 10px 6px 23px; background: url('hover.png') no-repeat scroll center bottom transparent; color: rgb(255, 255, 255); display: none; text-align: center;">豆瓣</div></a><a rel="nofollow" style="margin: 0pt 10px; position: relative;" class="share_item" href="javascript:shareToSNS('baidu',0)"><img src="baidu.png" style="display: inline;" width="32px"><div style="position: absolute; left: -30px; top: -70px; font-size: 13px; font-weight: normal; width: 80px; padding: 10px 6px 23px; background: url('hover.png') no-repeat scroll center bottom transparent; color: rgb(255, 255, 255); display: none; text-align: center;">百度空间</div></a><a rel="nofollow" style="margin: 0pt 10px; position: relative;" class="share_item" href="javascript:shareToSNS('renren',0)"><img src="renren.png" style="display: inline;" width="32px"><div style="position: absolute; left: -30px; top: -70px; font-size: 13px; font-weight: normal; width: 80px; padding: 10px 6px 23px; background: url('hover.png') no-repeat scroll center bottom transparent; color: rgb(255, 255, 255); display: none; text-align: center;">人人网</div></a><a rel="nofollow" style="margin: 0pt 10px; position: relative;" class="share_item" href="javascript:shareToSNS('gmark',0)"><img src="gmark.png" style="display: inline;" width="32px"><div style="position: absolute; left: -30px; top: -70px; font-size: 13px; font-weight: normal; width: 80px; padding: 10px 6px 23px; background: url('hover.png') no-repeat scroll center bottom transparent; color: rgb(255, 255, 255); display: none; text-align: center;">Google书签</div></a><a rel="nofollow" style="margin: 0pt 10px; position: relative;" class="share_item" href="javascript:shareToSNS('facebook',0)"><img src="facebook.png" style="display: inline;" width="32px"><div style="position: absolute; left: -30px; top: -70px; font-size: 13px; font-weight: normal; width: 80px; padding: 10px 6px 23px; background: url('hover.png') no-repeat scroll center bottom transparent; color: rgb(255, 255, 255); display: none; text-align: center;">facebook</div></a><a rel="nofollow" style="margin: 0pt 10px; position: relative;" class="share_item" href="javascript:shareToSNS('twitter',0)"><img src="twitter.png" style="display: inline;" width="32px"><div style="position: absolute; left: -30px; top: -70px; font-size: 13px; font-weight: normal; width: 80px; padding: 10px 6px 23px; background: url('hover.png') no-repeat scroll center bottom transparent; color: rgb(255, 255, 255); display: none; text-align: center;">twitter</div></a><a rel="nofollow" style="margin: 0pt 10px; position: relative;" class="share_item" href="javascript:shareToSNS('t163',0)"><img src="t163.png" style="display: inline;" width="32px"><div style="position: absolute; left: -30px; top: -70px; font-size: 13px; font-weight: normal; width: 80px; padding: 10px 6px 23px; background: url('hover.png') no-repeat scroll center bottom transparent; color: rgb(255, 255, 255); display: none; text-align: center;">网易微博</div></a></div> 
+		</div>
+
+  	
+<!-- You can start editing here. -->
+
+
+			<!-- If comments are open, but there are no comments. -->
+
+	 
+
+
+  <div id="respond">
+    <h3>发表评论</h3>
+    <div class="cancel-comment-reply">
+    	    	<a rel="nofollow" id="cancel-comment-reply-link" href="http://webin.us/chunterg/78#respond" style="display: none;">点击这里取消回复。</a>    	
+    </div>
+  
+    
+  <form action="http://www.webin.us/webin/wordpress/wp-comments-post.php" method="post" id="commentform">
+  
+    
+  <div class="respond-left">
+    <p><input name="author" id="author" value="" size="22" tabindex="1" aria-required="true" type="text">
+    <label for="author">姓名 (required)</label></p>
+    
+    <p><input name="email" id="email" value="" size="22" tabindex="2" aria-required="true" type="text">
+    <label for="email">电子邮件 (不会被公开) (required)</label></p>
+    
+    <p><input name="url" id="url" value="" size="22" tabindex="3" type="text">
+    <label for="url">站点</label></p>
+  </div>
+  
+    
+  <!--<p><small><strong>XHTML:</strong> 你可以使用这些标签: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; &lt;pre lang=&quot;&quot; line=&quot;&quot; escaped=&quot;&quot; cssfile=&quot;&quot;&gt; </code></small></p>-->
+  
+  <div class="respond-right">
+    <textarea name="comment" id="comment" cols="100" rows="10" tabindex="4"></textarea>
+    <p><input name="submit" id="submit" tabindex="5" value="发表评论" type="submit">
+    <input name="comment_post_ID" value="78" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+    </p>
+    <p><input name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked" style="width: auto;" type="checkbox"><label for="comment_mail_notify">有人回复时邮件通知我</label></p>  </div>
+  
+  </form>
+  
+    </div>
+
+  	 
+
+	
+		</div><!-- #content -->
+	</div><!-- #container -->
+
+<div id="sidebar">
+	<ul class="sb-list clearfix">
+
+
+
+
+<li>
+	<ul class="sb-tools clearfix">
+		<li class="rss-icon">
+			<a href="http://webin.us/feed" title="订阅我的博客-你肯定会感到惊喜！">
+				<span>订阅</span>
+				订阅本博客的Feed			</a>
+		</li>
+	</ul>
+</li>
+<li id="simpletags-4" class="widget widget-simpletags"><div class="sb-title widgettitle">标签云</div>
+<!-- Generated by Simple Tags 2.0-beta9 - http://wordpress.org/extend/plugins/simple-tags -->
+	<div class="st-tag-cloud">
+	<a href="http://webin.us/tag/%e4%ba%a7%e5%93%81%e8%ae%be%e8%ae%a1" id="tag-link-28" class="st-tags t7" title="5 topics" rel="tag" style="font-size: 17.33pt; color: rgb(67, 67, 67);">产品设计</a>
+<a href="http://webin.us/tag/css-2" id="tag-link-65" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">css</a>
+<a href="http://webin.us/tag/%e4%ba%a7%e5%93%81%e7%bb%8f%e7%90%86" id="tag-link-29" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">产品经理</a>
+<a href="http://webin.us/tag/%e4%ba%ba%e6%80%a7" id="tag-link-43" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">人性</a>
+<a href="http://webin.us/tag/%e8%85%be%e8%ae%af" id="tag-link-26" class="st-tags t4" title="3 topics" rel="tag" style="font-size: 12.67pt; color: rgb(136, 136, 136);">腾讯</a>
+<a href="http://webin.us/tag/hash" id="tag-link-55" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">hash</a>
+<a href="http://webin.us/tag/%e6%80%9d%e8%b7%af" id="tag-link-30" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">思路</a>
+<a href="http://webin.us/tag/%e4%ba%92%e8%81%94%e7%bd%91" id="tag-link-27" class="st-tags t4" title="3 topics" rel="tag" style="font-size: 12.67pt; color: rgb(136, 136, 136);">互联网</a>
+<a href="http://webin.us/tag/html5" id="tag-link-5" class="st-tags t4" title="3 topics" rel="tag" style="font-size: 12.67pt; color: rgb(136, 136, 136);">HTML5</a>
+<a href="http://webin.us/tag/%e5%b0%8f%e5%81%b7" id="tag-link-52" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">小偷</a>
+<a href="http://webin.us/tag/%e6%b7%98%e5%ae%9d" id="tag-link-53" class="st-tags t2" title="2 topics" rel="tag" style="font-size: 9.56pt; color: rgb(181, 181, 181);">淘宝</a>
+<a href="http://webin.us/tag/jquery" id="tag-link-31" class="st-tags t4" title="3 topics" rel="tag" style="font-size: 12.67pt; color: rgb(136, 136, 136);">jQuery</a>
+<a href="http://webin.us/tag/%e7%a4%be%e4%bc%9a%e5%ad%a6" id="tag-link-42" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">社会学</a>
+<a href="http://webin.us/tag/deferred" id="tag-link-32" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">Deferred</a>
+<a href="http://webin.us/tag/%e7%82%b9%e7%82%b9" id="tag-link-23" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">点点</a>
+<a href="http://webin.us/tag/canvas" id="tag-link-7" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">canvas</a>
+<a href="http://webin.us/tag/%e5%8d%b1%e6%9c%ba" id="tag-link-40" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">危机</a>
+<a href="http://webin.us/tag/ios" id="tag-link-58" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">iOS</a>
+<a href="http://webin.us/tag/%e6%8e%a8%e8%8d%90" id="tag-link-16" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">推荐</a>
+<a href="http://webin.us/tag/sencha-touch" id="tag-link-60" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">sencha touch</a>
+<a href="http://webin.us/tag/%e5%be%ae%e5%9b%a2" id="tag-link-49" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">微团</a>
+<a href="http://webin.us/tag/android" id="tag-link-59" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">Android</a>
+<a href="http://webin.us/tag/%e8%af%91%e6%96%87" id="tag-link-33" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">译文</a>
+<a href="http://webin.us/tag/javascript-2" id="tag-link-12" class="st-tags t10" title="7 topics" rel="tag" style="font-size: 22pt; color: rgb(0, 0, 0);">javascript</a>
+<a href="http://webin.us/tag/%e5%a4%a7%e5%92%aa%e5%92%aa" id="tag-link-36" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">大咪咪</a>
+<a href="http://webin.us/tag/tumblr" id="tag-link-22" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">Tumblr</a>
+<a href="http://webin.us/tag/%e6%9c%ac%e8%b4%a8" id="tag-link-45" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">本质</a>
+<a href="http://webin.us/tag/%e6%9f%90%e6%9f%90%e6%9f%90" id="tag-link-38" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">某某某</a>
+<a href="http://webin.us/tag/%e7%bf%bb%e8%af%91" id="tag-link-57" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">翻译</a>
+<a href="http://webin.us/tag/%e7%94%a8%e6%88%b7%e4%bd%93%e9%aa%8c" id="tag-link-41" class="st-tags t8" title="6 topics" rel="tag" style="font-size: 18.89pt; color: rgb(45, 45, 45);">用户体验</a>
+<a href="http://webin.us/tag/mobile" id="tag-link-56" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">mobile</a>
+<a href="http://webin.us/tag/%e5%be%ae%e5%8d%9a" id="tag-link-63" class="st-tags t7" title="5 topics" rel="tag" style="font-size: 17.33pt; color: rgb(67, 67, 67);">微博</a>
+<a href="http://webin.us/tag/lbs" id="tag-link-51" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">LBS</a>
+<a href="http://webin.us/tag/%e8%bd%bb%e5%8d%9a%e5%ae%a2" id="tag-link-24" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">轻博客</a>
+<a href="http://webin.us/tag/%e6%96%b0%e6%b5%aa" id="tag-link-47" class="st-tags t4" title="3 topics" rel="tag" style="font-size: 12.67pt; color: rgb(136, 136, 136);">新浪</a>
+<a href="http://webin.us/tag/%e5%b0%8f%e7%bb%8f%e9%aa%8c" id="tag-link-14" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">小经验</a>
+<a href="http://webin.us/tag/javascipt" id="tag-link-61" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">javascipt</a>
+<a href="http://webin.us/tag/%e6%96%b0%e6%80%9d%e8%b7%af" id="tag-link-44" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">新思路</a>
+<a href="http://webin.us/tag/%e5%9b%a2%e8%b4%ad" id="tag-link-50" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">团购</a>
+<a href="http://webin.us/tag/%e6%96%b0%e6%b5%aa%e5%be%ae%e5%8d%9a" id="tag-link-48" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">新浪微博</a>
+<a href="http://webin.us/tag/ajax" id="tag-link-13" class="st-tags t2" title="2 topics" rel="tag" style="font-size: 9.56pt; color: rgb(181, 181, 181);">Ajax</a>
+<a href="http://webin.us/tag/%e6%95%99%e7%a8%8b" id="tag-link-15" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">教程</a>
+<a href="http://webin.us/tag/31%e7%a7%92" id="tag-link-37" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">31秒</a>
+<a href="http://webin.us/tag/extjs" id="tag-link-62" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">Extjs</a>
+<a href="http://webin.us/tag/%e8%85%be%e8%ae%af%e8%a7%86%e9%a2%91" id="tag-link-39" class="st-tags t1" title="1 topics" rel="tag" style="font-size: 8pt; color: rgb(204, 204, 204);">腾讯视频</a></div>
+
+</li>		<li id="recent-posts-3" class="widget widget_recent_entries">		<div class="sb-title widgettitle">近期文章</div>		<ul>
+				<li><a href="http://webin.us/daaaawon/405" title="小谈电话客服">小谈电话客服</a></li>
+				<li><a href="http://webin.us/daaaawon/400" title="Let Me Touch Touch">Let Me Touch Touch</a></li>
+				<li><a href="http://webin.us/daaaawon/375" title="给用户一个负责任的交代">给用户一个负责任的交代</a></li>
+				<li><a href="http://webin.us/daaaawon/371" title="评微博自净系统">评微博自净系统</a></li>
+				<li><a href="http://webin.us/daaaawon/366" title="荤语调反思，行文风格在用户体验">荤语调反思，行文风格在用户体验</a></li>
+				<li><a href="http://webin.us/daaaawon/363" title="何止是糟糕【和移动i8】">何止是糟糕【和移动i8】</a></li>
+				<li><a href="http://webin.us/daaaawon/360" title="做死微博">做死微博</a></li>
+				<li><a href="http://webin.us/chunterg/353" title="CSS3+javascript 实现3D产品展示动画">CSS3+javascript 实现3D产品展示动画</a></li>
+				<li><a href="http://webin.us/chunterg/346" title="小试Google translate API">小试Google translate API</a></li>
+				<li><a href="http://webin.us/daaaawon/340" title="庞大的互联网">庞大的互联网</a></li>
+				</ul>
+		</li><li id="recent-comments-4" class="widget widget_recent_comments"><div class="sb-title widgettitle">近期评论</div><ul id="recentcomments"><li class="recentcomments"><a href="http://www.smallbear.net/" rel="external nofollow" class="url">lucker</a> 发表在《<a href="http://webin.us/chunterg/291#comment-70">jQuery实现iframe高度自适应（兼容IE6,7,8）</a>》</li><li class="recentcomments"><a href="http://www.briefsay.com/2011/04/15/%e5%bb%ba%e7%ab%8b%e6%97%a0%e5%ae%9a%e5%bd%a2%e7%94%a8%e6%88%b7/" rel="external nofollow" class="url">建立无定形用户 | 简言 |BriefSay</a> 发表在《<a href="http://webin.us/tenione/310#comment-21">建立无定形用户</a>》</li><li class="recentcomments"><a href="http://www.briefsay.com/2011/03/10/%e6%89%a9%e5%bc%a0%e7%9a%84%e6%96%b0%e6%b5%aa%ef%bc%8c%e5%a5%bd%e8%bf%90/" rel="external nofollow" class="url">扩张的新浪，好运 | 简言 |BriefSay</a> 发表在《<a href="http://webin.us/tenione/221#comment-20">扩张的新浪，好运</a>》</li><li class="recentcomments">WebInUs消灭错别字特别委员会 发表在《<a href="http://webin.us/tenione/221#comment-12">扩张的新浪，好运</a>》</li><li class="recentcomments">chunterg 发表在《<a href="http://webin.us/daaaawon/207#comment-11">UE回娘家-妇女节供稿</a>》</li><li class="recentcomments"><a href="http://www.briefsay.com/2011/03/07/light-blogging/" rel="external nofollow" class="url">轻博客的生存夹缝 | 简言 |BriefSay</a> 发表在《<a href="http://webin.us/tenione/146#comment-10">轻博客的生存夹缝</a>》</li><li class="recentcomments">WebInUs消灭错别字特别委员会 发表在《<a href="http://webin.us/tenione/146#comment-5">轻博客的生存夹缝</a>》</li></ul></li>
+
+<li>
+	<ul class="sb-tools clearfix">
+		<li class="previous-post"><a href="http://webin.us/chunterg/41" rel="prev"><span>上一篇</span> 推荐几个HTML5 Canvas的教程和网站</a></li>		<li class="next-post"><a href="http://webin.us/daaaawon/132" rel="next"><span>下一篇</span> 腾讯你奈我何</a></li>	</ul>	
+</li>
+
+
+<li id="about" class="clearfix">
+  <div class="sb-title">Webin.US</div>
+  <ul>
+  	<li>
+  		专注于web软设计		</li>
+	</ul>
+</li>
+
+
+
+	
+</ul>
+
+
+</div> <!-- #sidebar --></div> <!-- #main -->
+
+
+<div id="footer" class="clearfix">
+<p class="alignright">
+  <a href="#home" class="top-link">返回顶端</a>
+</p>
+
+<p>
+	© 2012 Webin.Us  · Proudly powered by  <a href="http://wordpress.org/" title="由Wordpress提供的优秀博客程序">WordPress</a>
+	<span class="amp">&amp;</span>
+  <a href="http://cordobo.com/green-park-2/" title="Cordobo Green Park 2 Beta 5">Green Park 2</a>
+  由  <a href="http://cordobo.com/" title="Webdesign by Cordobo">Cordobo</a>.
+</p>
+
+<p class="signet">
+  XHTML 1.0验证通过 | CSS3验证通过  <br><br>
+	<img src="logo-cgp2.png" alt="Cordobo Green Park 2 logo" title="Cordobo Green Park 2" width="75" height="12">
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
