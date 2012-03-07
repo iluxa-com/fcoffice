@@ -1,0 +1,440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>IE和Firefox对同一域名进行请求的并发连接数限制 - wlm的博客 - 博客频道 - CSDN.NET</title>
+
+<meta name="description" content="IE8的并发连接数限制为10；Firefox 3.6.8和chrome 5.0的并发连接数都为6。">
+
+
+
+
+<link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://blog.csdn.net/xiaobai251206725/rss/list">
+<link rel="shortcut icon" href="favicon.ico">
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+
+<div class="nav_top_2011">
+<p><span style="color: red;">您还未登录！</span>|<a href="http://passport.csdn.net/UserLogin.aspx">登录</a>|<a href="http://passport.csdn.net/CSDNUserRegister.aspx">注册</a>|<a href="http://passport.csdn.net/help/faq">帮助</a></p><ul>
+<li><a href="http://www.csdn.net/" target="_top">CSDN首页</a></li>
+<li><a href="http://news.csdn.net/" target="_top">资讯</a></li>
+<li><a href="http://bbs.csdn.net/" target="_top">论坛</a></li>
+<li><a href="http://blog.csdn.net/" target="_top">博客</a></li>
+<li><a href="http://download.csdn.net/" target="_top">下载</a></li>
+<li><a href="http://so.csdn.net/" target="_top">搜索</a></li>
+<li class="more"><h2 id="topnav_btnmore"><a href="javascript:void(0);">更多</a></h2>
+<ul style="display: none;" id="topnav_hidlist">
+<li><a href="http://cto.csdn.net/" target="_top">CTO俱乐部</a></li>
+<li><a href="http://student.csdn.net/" target="_top">学生大本营</a></li>
+<li><a href="http://edu.csdn.net/" target="_top">培训充电</a></li>
+<li><a href="http://mobile.csdn.net/" target="_top">移动开发</a></li>
+<li><a href="http://sd.csdn.net/" target="_top">软件研发</a></li>
+<li><a href="http://cloud.csdn.net/" target="_top">云计算</a></li>
+<li><a href="http://www.programmer.com.cn/" target="_top">程序员</a></li>
+<li><a href="http://tup.csdn.net/" target="_top">TUP</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+<div id="container">
+<div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h1>
+                <a href="http://blog.csdn.net/xiaobai251206725">wlm的博客</a></h1>
+            <h2></h2>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>
+            <!--<li id="btnHome"><a href="/xiaobai251206725"><span><img src="http://static.blog.csdn.net/images/ico_home.gif">我的首页</span></a></li>-->
+            <li id="btnContents"><a href="http://blog.csdn.net/xiaobai251206725?viewmode=contents"><span><img src="ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="http://blog.csdn.net/xiaobai251206725?viewmode=list"><span><img src="ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="http://blog.csdn.net/xiaobai251206725/rss/list"><span><img src="ico_rss.gif">订阅</span></a></li>
+</ul>
+    </div>
+</div>
+
+        
+<div id="body">
+<div id="main">
+<div class="main">
+<div class="notice"> 
+<a href="http://blog.csdn.net/csdnproduct/article/details/7324973" target="_top"><font color="red">CSDN新版个人空间介绍之三——代码与收藏 </font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://ad-apac.doubleclick.net/clk;253093956;76972838;f?http://www.ibm.com/systems/cn/ads/2012q1_bcfc.shtml?crs=apch_cit1_20120206_1328527126975&amp;cm=b&amp;cr=csdn&amp;ct=CN2DG13W&amp;ck=csdn&amp;cmp=CN2DG" target="_top"><font color="blue">免费下载《SKC易云解决方案》</font></a><br>
+
+
+
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/7288092" target="_top"><font color="red">HTML5群组诚募管理员，“活跃之星”活动火热进行中</font></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://blog.csdn.net/blogdevteam/article/details/7305684" target="_top"><font color="red">【免费申请】中国软件全球营销论坛门票——上海2012 </font></a>
+</div>
+
+<div id="article_details" class="details">
+    <div class="article_title">
+    <span class="ico ico_type_Repost"></span>
+    <h3>
+        <span class="link_title"><a href="http://blog.csdn.net/xiaobai251206725/article/details/6178436">
+        IE和Firefox对同一域名进行请求的并发连接数限制
+        </a></span>
+    </h3>
+</div>
+
+        
+    <div class="article_manage">
+        <span class="link_categories">
+        分类：
+            <a href="http://blog.csdn.net/xiaobai251206725/article/category/734966">js</a> 
+            <a href="http://blog.csdn.net/xiaobai251206725/article/category/742562">ajax</a> 
+        </span>
+    <span class="link_postdate">2011-02-11 11:12</span>
+    <span class="link_view" title="阅读次数">485人阅读</span>
+    <span class="link_comments" title="评论次数"><a href="#comments">评论</a>(0)</span>
+    <span class="link_collect"><a href="javascript:void(0);" onclick="javascript:collectArticle('IE和Firefox对同一域名进行请求的并发连接数限制','6178436');return false;" title="收藏">收藏</a></span>
+    <span class="link_report"><a href="#report" onclick="javascript:report(6178436,2);return false;" title="举报">举报</a></span>
+    
+</div>
+
+    
+<div id="article_content" class="article_content">
+    <p>从<strong>Yahoo!</strong>
+关于网站优化的经典14条建议，</p>
+<p>在V2版中，已经更新到35条了，</p>
+<p>参见网址：</p>
+<p><a href="http://developer.yahoo.com/performance/rules.html"><span style="color: rgb(0, 0, 255);">http://developer.yahoo.com/performance/rules.html</span>
+</a>
+</p>
+<p>具体规范见“<strong>All</strong>
+”部分。</p>
+<p>其中有需要减少请求连接数和减少DNS解析次数，</p>
+<p>由于在<strong>http协议</strong>
+中有对浏览器并发请求连接数的限制，<strong>1.1版本</strong>
+中规定了是2个，</p>
+<p>参见：<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4"><span style="color: rgb(0, 0, 255);">http://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.4</span>
+</a>
+</p>
+<p>Practical Considerations部分最后一段：</p>
+<p>Clients that use persistent connections SHOULD limit the number of 
+simultaneous connections that they maintain to a given server. A <strong>single-user client</strong>
+ SHOULD <strong>NOT</strong>
+ maintain <strong>more than 2 connections</strong>
+ with any server or proxy. A proxy SHOULD use up to 2*N connections to 
+another server or proxy, where N is the number of simultaneously active 
+users. These guidelines are intended to improve HTTP response times and 
+avoid congestion.</p>
+<p>于是<strong>通常</strong>
+的优化网站加载速度的方法是<strong>采用多个域名</strong>
+增加浏览器对<strong>同一网页</strong>
+的请求<strong>并发连接数</strong>
+，</p>
+<p>如淘宝网的图片会出现在如下<strong>众多域名</strong>
+下：</p>
+<p><strong>img01</strong>
+.taobaocdn.com，<strong>img02</strong>
+.taobaocdn.com，<strong>img03</strong>
+.taobaocdn.com 。。。</p>
+<p>ping一下上述地址，就会发现img01,img03,img04的IP都是：<strong>121.14.63.250</strong>
+，说明它们其实都指向了同一台服务器或同一路由服务器。</p>
+<p>显然这样的做法与<strong>Yahoo!</strong>
+14条或者22条或者35条中的<strong>Reduce DNS lookups</strong>
+规则是相违背的，</p>
+<p>这需要在提高并发连接数和减少DNS解析之前寻求到一个平衡点，以达到适合自己网站的最快速度。</p>
+<p>--------------------------------------------------------------------------------------------</p>
+<p>然而随着家庭宽带带宽的增加，普通用户上网速度的增加，</p>
+<p><strong>Yahoo!</strong>
+的<strong>14条</strong>
+也变成了新的22条或者35条，</p>
+<p>说明在带宽不一样的今天，网站优化的原则也有所改变，</p>
+<p>那么各个浏览器包括IE和Firefox是不是仍然严格地遵循着Http协议中关于<strong>2个</strong>
+并发连接数的限制呢？</p>
+<p>下面就来验证一下看看。</p>
+<p><strong>首先</strong>
+来看看Windows XP英文版IE8的并发连接数，</p>
+<p>在开始菜单中的运行对话框中输入<strong>regedit</strong>
+打开注册表编辑器，</p>
+<p>依次打开注册表项：[<strong>HKEY_CURRRENT_USER/Software/Microsoft/Windows/CurrentVersion/Internet Settings</strong>
+]，</p>
+<p>可以看到<strong>MaxConnectionsPerServer</strong>
+和<strong>MaxConnectionsPer1_0Server</strong>
+两个选项的值<strong>都是10</strong>
+，而不是Http协议中规定的2个！</p>
+<p>如图所示：</p>
+<p><span><img class="blogimg" src="053ce828d76d807a5343c187.jpg" alt="" border="0">
+<br>
+</span>
+</p>
+<p><strong>再看看</strong>
+Firefox的相关配置：</p>
+<p>在Firefox地址栏中输入：<strong>about:config</strong>
+</p>
+<p>然后在配置页面中搜索：max，可以看到network.http.max-connections的值是30，</p>
+<p>network.http.<strong>max-persistent-connections-per-server</strong>
+的值是<strong>6</strong>
+，</p>
+<p>也都不是协议所规定的2。</p>
+<p>如图所示：</p>
+<p>&nbsp;</p>
+<p><span><img class="blogimg" src="90b550122d4fa943203f2e3c.jpg" alt="" border="0">
+<br>
+</span>
+</p>
+<p>最后我们可以动手来写一个简单的JS函数来验证一下浏览器对同一域名(Server)的并发连接数的限制，</p>
+<p>写一个发送Ajax请求的函数，其请求的后台页面做延迟响应，如php中用sleep(3)。</p>
+<p>然后写16个调用语句，再写一个发送Ajax请求的语句，这个请求地址的后台页面收到请求后立即返回响应数据，</p>
+<p>Demo地址如：<a href="http://developer.oncecode.com/comet/"><span style="color: rgb(0, 0, 255);">http://developer.oncecode.com/comet/</span>
+</a>
+</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>分别测试IE8、Firefox 3.6.8和chrome 5.0，</p>
+<p>不难<strong>得出结论</strong>
+：</p>
+<p><strong>IE8</strong>
+的并发连接数<strong>限制为10</strong>
+；</p>
+<p><strong>Firefox</strong>
+ 3.6.8和<strong>chrome</strong>
+ 5.0的并发连接数<strong>都为6</strong>
+。</p>
+</div>
+<div class="share_buttons" id="sharePanel"><span>分享到：</span> <a name="sina" class="share_sina" title="分享到新浪微博"></a><a name="qq" class="share_qq" title="分享到腾讯微博"></a></div>
+
+<div class="article_next_prev">
+        <li class="prev_article">
+            <span>上一篇：</span><a href="http://blog.csdn.net/xiaobai251206725/article/details/6175497">try finally 妙用,防止内存泄漏</a></li>
+        <li class="next_article">
+            <span>下一篇：</span><a href="http://blog.csdn.net/xiaobai251206725/article/details/6234810">IE6不能用gzip压缩脚本，一个流毒甚广的谣言</a></li>
+</div>
+
+
+</div>
+<div id="ad_cen"></div>
+
+<div id="comment_title" class="panel_head">查看评论<a name="comments"></a></div>
+<div id="comment_list"><br>&nbsp;&nbsp;暂无评论<br><br><div class="clear"></div></div>
+<div id="comment_bar"></div>
+<div id="comment_form"><div class="guest_link">您还没有登录,请<a href="http://passport.csdn.net/account/login?from=http%3A%2F%2Fblog.csdn.net%2Fxiaobai251206725%2Farticle%2Fdetails%2F6178436">[登录]</a>或<a href="http://passport.csdn.net/account/register?from=http%3A%2F%2Fblog.csdn.net%2Fxiaobai251206725%2Farticle%2Fdetails%2F6178436">[注册]</a></div></div>
+<div class="announce">* 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+
+
+<div id="ad_bot"></div>
+
+<div id="report_dialog"></div>
+
+
+
+<div class="clear"></div>
+</div>
+</div>
+<div id="side">
+    <div class="side">
+<div id="panel_Profile" class="panel">
+    <ul class="panel_head"><span>个人资料</span></ul>
+    <ul class="panel_body profile">
+        <div id="blog_userface">
+            <a href="http://blog.csdn.net/xiaobai251206725" title="我的博客主页">
+            <img src="1_xiaobai251206725.jpg" style="max-width: 90%;">
+            </a>
+            <br>
+            <span>xiaobai251206725</span>
+        </div>
+        <div id="blog_medal">
+        <div id="bms_box"></div></div>
+        <ul id="blog_rank">
+            <li>访问：<span>6701次</span></li>
+            <li>积分：<span>361分</span></li>
+            <li>排名：<span>千里之外</span></li>
+        </ul>
+        <ul id="blog_statistics">
+            <li>原创：<span>21篇</span></li>
+            <li>转载：<span>53篇</span></li>
+            <li>译文：<span>0篇</span></li>
+            <li>评论：<span>0条</span></li>
+        </ul>
+    </ul>
+</div><div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input value="" id="inputSearch" class="blogsearch" title="请输入关键字" type="text"></span>
+        <input id="btnSubmit" value="搜索" title="search in blog" type="submit">
+        <input name="q" id="inputQ" type="hidden">
+        <input name="t" value="blog" type="hidden">
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>文章分类</span></ul>
+    <ul class="panel_body">
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/742562">ajax</a><span>(5)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/762725">Comet</a><span>(2)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/734967">css</a><span>(6)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/734968">html</a><span>(7)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/748362">html5</a><span>(1)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/734965">http协议</a><span>(1)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/767618">JavaEE</a><span>(1)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/734966">js</a><span>(50)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/774047">js安全</a><span>(1)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/767172">php</a><span>(1)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/734982">seo</a><span>(3)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/762863">互联网杂谈</a><span>(1)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/xiaobai251206725/article/category/778857">前端优化</a><span>(1)</span>
+        
+        </li>
+    </ul>
+</div><div id="panel_Archive" class="panel">
+    <ul class="panel_head"><span>文章存档</span></ul>
+    <ul class="panel_body">
+        <div id="archive_list"><li><a href="http://blog.csdn.net/xiaobai251206725/article/month/2011/03">2011年03月</a>(1)</li><li><a href="http://blog.csdn.net/xiaobai251206725/article/month/2011/02">2011年02月</a>(2)</li><li><a href="http://blog.csdn.net/xiaobai251206725/article/month/2011/01">2011年01月</a>(3)</li><li><a href="http://blog.csdn.net/xiaobai251206725/article/month/2010/12">2010年12月</a>(9)</li><li><a href="http://blog.csdn.net/xiaobai251206725/article/month/2010/11">2010年11月</a>(17)</li><span class="hidelist" style="display: none;"><li><a href="http://blog.csdn.net/xiaobai251206725/article/month/2010/10">2010年10月</a>(21)</li><li><a href="http://blog.csdn.net/xiaobai251206725/article/month/2010/09">2010年09月</a>(21)</li></span><div id="archive_list_button" class="list_closed">展开</div></div>
+    </ul>
+</div>
+<div id="hotarticls" class="panel">
+    <ul class="panel_head"><span>阅读排行</span></ul>
+    <ul class="panel_body">
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/6074950" title="Unsafe JavaScript attempt to access frame with URL(window.open  子窗体得不到父窗体的句柄)">Unsafe JavaScript at...</a> (1586)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/6178436" title="IE和Firefox对同一域名进行请求的并发连接数限制">IE和Firefox对同一域名进行请求的...</a> (484)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5923963" title="css的效率是怎么样的呢，浏览器渲染的速度又如何呢（css,html渲染效率）">css的效率是怎么样的呢，浏览器渲染的速...</a> (414)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5944059" title="setTimeout和setInterval的一些区别(浏览器之间参数的差别,函数本身的一些差别)(1)">setTimeout和setInterv...</a> (263)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5891929" title="HTML中样式分哪几种？CSS样式定义有哪些？ ">HTML中样式分哪几种？CSS样式定义有...</a> (225)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5922987" title="js截取中文字符串">js截取中文字符串</a> (194)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5941675" title="IE与FF处理Attribute的几点差异">IE与FF处理Attribute的几点差...</a> (194)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5891967" title="JS判断浏览器是否是关闭 ">JS判断浏览器是否是关闭 </a> (125)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5957577" title="js创建自定义标签">js创建自定义标签</a> (114)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/6047709" title="javascript Node nodeType">javascript Node node...</a> (108)
+        </li>
+    </ul>
+</div>
+<div id="hotarticls" class="panel">
+    <ul class="panel_head"><span>评论排行</span></ul>
+    <ul class="panel_body">
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/6234810" title="IE6不能用gzip压缩脚本，一个流毒甚广的谣言">IE6不能用gzip压缩脚本，一个流毒甚...</a> (0)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5999957" title="学习jquery的简单方法">学习jquery的简单方法</a> (0)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5999942" title="Concat string using join without push">Concat string using ...</a> (0)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5999940" title="parseInt 小陷阱">parseInt 小陷阱</a> (0)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5995532" title="为什么不压缩 HTML">为什么不压缩 HTML</a> (0)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5995522" title="ajax基本知识">ajax基本知识</a> (0)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5995468" title="eval和window.eval的区别">eval和window.eval的区别</a> (0)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5983938" title="JavaScript中运算符的优先级">JavaScript中运算符的优先级</a> (0)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5983287" title="可能被你忽略的 JavaScript 代码陷阱">可能被你忽略的 JavaScript 代...</a> (0)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/xiaobai251206725/article/details/5983214" title="关于函数声明表达式的一道题目">关于函数声明表达式的一道题目</a> (0)
+        </li>
+    </ul>
+</div>
+<div id="homepageArticles" class="panel">
+    <ul class="panel_head"><span>推荐文章</span></ul>
+    <ul class="panel_body" id="ad_commend">
+    </ul>
+</div>
+
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="clear"></div>
+</div>
+
+
+
+
+
+
+<img class=" kxjcjgishpebvdpssdrv" src="pv.aspx" border="0" width="0" height="0">
+<img src="visitlog.php" alt="" border="0" width="1" height="1">
+<div class="pub_footerall"><dl><dt></dt> <dd><a href="http://www.csdn.net/company/about.html" target="_top">公司简介</a>|<a href="http://www.csdn.net/company/recruit.html" target="_top">招贤纳士</a>|<a href="http://www.csdn.net/company/marketing.html" target="_top">广告服务</a>|<a href="http://www.csdn.net/company/account.html" target="_top">银行汇款帐号</a>|<a href="http://www.csdn.net/company/contact.html" target="_top">联系方式</a>|<a href="http://www.csdn.net/company/statement.html" target="_top">版权声明</a>|<a href="http://www.csdn.net/company/layer.html" target="_top">法律顾问</a>|<a href="mailto:webmaster@csdn.net">问题报告</a></dd><dd>北京创新乐知信息技术有限公司 版权所有,&nbsp;京&nbsp;ICP&nbsp;证&nbsp;070598&nbsp;号</dd><dd>世纪乐知(北京)网络技术有限公司 提供技术支持</dd><dd>江苏乐知网络技术有限公司 提供商务支持</dd><dd><img src="pic_email.gif" alt="" title=""> Email:webmaster@csdn.net</dd><dd>Copyright © 1999-2012, CSDN.NET, All Rights Reserved</dd><dd><a href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202001032100010" target="_top"><img src="gongshang_logos.gif" alt="GongshangLogo" title=""></a></dd></dl></div>
+
+
+</div>
+
+</body>
+</html>

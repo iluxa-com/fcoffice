@@ -1,0 +1,455 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="zh-CN" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta charset="UTF-8">
+	
+	
+<title>Wordpress meta_key的合理利用 _ 维普设计</title>
+<meta name="keywords" content="meta_key,WordPress,Wordpress meta_key">
+<meta name="description" content="meta_key,WordPress,Wordpress meta_key,WordPress meta_key是个非常实用的东西，不知道大家有没有合理利用呢，本站的uedcms主题中就使用了大量的meta_key，例如左侧栏的推荐文章，这个效果就是靠自定义meta_key来实现的，发布文章是键入一个新的meta_key，如featured_post，然后在右侧的输入框内输...">
+    
+    
+<link rel="shortcut icon" href="favicon.ico">
+	   
+ 
+
+<!--[if IE 6]>
+<script type="text/javascript">
+document.execCommand("BackgroundImageCache", false, true);
+</script>
+	<link href="http://www.wpued.com/wp-content/themes/wpubiz/css/style_ie.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="http://www.wpued.com/wp-content/themes/wpubiz/js/pngfix.js"></script>
+	<script type="text/javascript" src="http://www.wpued.com/wp-content/themes/wpubiz/js/minmax.js"></script>
+	<script type="text/javascript">DD_belatedPNG.fix('img,.arrow, .avatar, .logo,.slider_top,.slider,.slider_bot,.alipay,.order,support,#prev_rel,#next_rel,#prev,#next,#sliderNav');</script>
+<![endif]-->
+
+<!-- Logo position  -->
+
+        
+
+    <!-- Theme Hook -->
+	<link rel="alternate" type="application/rss+xml" title="维普设计 » WordPress meta_key的合理利用 评论 Feed" href="http://www.wpued.com/3605.html/feed">
+
+
+
+
+
+<link rel="prev" title="网站优化方案策略" href="http://www.wpued.com/3603.html">
+<link rel="next" title="给力的三栏wordpress cms主题 NewsMedia" href="http://www.wpued.com/3608.html">
+<link rel="canonical" href="http://www.wpued.com/3605.html">
+<link rel="shortlink" href="http://www.wpued.com/?p=3605">
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+<div class="topbar">
+	<div class="container">	
+		<div class="welcome">
+			<div class="logo">
+									<a href="http://www.wpued.com/" title="维普设计"><img src="logo.png" alt="维普设计"><span>维普设计</span></a>
+						
+			</div>	
+			<span class="top_login">
+			您好，欢迎来到维普设计！ 		
+				
+				<a href="http://www.wpued.com/login" title="登录">[请登录]</a>
+				<a href="http://www.wpued.com/register" title="免费注册">[免费注册]</a>
+						
+			
+			</span>
+		</div>
+		<div class="top_menu">
+			<a class="red" href="http://www.wpued.com/dingzhi" title="Wordpress主题定制"><b>Wordpress主题定制</b></a> | <a class="green" href="http://www.wpued.com/affiliate" title="推广返利"><b>推广返利</b></a> | <a href="http://www.wpued.com/about" target="_top" title="关于维普">关于我们</a> | <a href="http://www.wpued.com/contact" target="_top" title="联系我们">联系我们</a> | <a rel="external nofollow" target="_top" href="http://feed.wpued.com/" title="订阅WordPress UED">订阅更新</a>		
+		</div>
+	</div>
+</div>		
+
+<div class="header">
+	<div class="container">
+		<div class="main_menu">
+			<div id="wpuslidemenu" class="slidemenu"><ul id="menu-header_menu" class="menu"><li id="menu-item-2508" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-2508"><a title="current_menu_item" href="http://www.wpued.com/">首页</a></li>
+<li id="menu-item-7251" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7251"><a href="http://www.wpued.com/sales_themes/biz-theme">企业主题</a></li>
+<li id="menu-item-7250" class="bold menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7250"><a href="http://www.wpued.com/sales_themes/seo-theme">SEO主题</a></li>
+<li id="menu-item-7249" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7249"><a href="http://www.wpued.com/sales_themes/cms-theme">CMS主题</a></li>
+<li id="menu-item-7252" class="bold menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7252"><a href="http://www.wpued.com/sales_themes/tabaoke-theme">淘宝客主题</a></li>
+<li id="menu-item-7259" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7259"><a href="http://www.wpued.com/sales_themes/video-theme">视频主题</a></li>
+<li id="menu-item-7293" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7293"><a href="http://www.wpued.com/sales_themes">定制主题</a></li>
+<li id="menu-item-2348" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-2348"><a href="http://www.wpued.com/design">使用教程</a></li>
+<li id="menu-item-7323" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7323"><a href="http://www.wpued.com/seo-youhua">SEO优化</a></li>
+</ul></div>		</div>
+	</div>
+</div>
+
+<div class="top_shadow"></div>	
+
+	
+<div class="breads">
+	<p class="breadcrumb"><a href="http://www.wpued.com/">首页</a><a href="http://www.wpued.com/design" title="查看 Wordpress教程 中的全部文章">Wordpress教程</a><span class="current_crumb">WordPress meta_key的合理利用</span></p>	
+	<span class="top_search"> 
+<form id="search" method="get" action="http://www.wpued.com/"> 
+	<input name="s" id="s" class="keyword" value="请输入关键字..." onclick="this.value=''" onblur="if (this.value == '') {this.value = '请输入关键字...';}" onfocus="if (this.value == '请输入关键字...') {this.value = '';}" type="text">
+	<input class="btn_search" value="搜索" type="submit">
+</form></span>
+</div>
+
+
+<div class="container vline">	
+
+<div class="content">  
+
+
+<div class="entry">	       
+
+							
+				<div class="post_title">
+					<h1>WordPress meta_key的合理利用</h1>			
+				</div>
+				
+				<div class="metas_top center">			
+					<span>编辑：<a href="http://www.wpued.com/author/steve" title="由 老金 发布" rel="author">老金</a></span>
+					<span>																					日期：<a href="http://www.wpued.com/date/2011/01/10">2011-01-10</a></span>
+					<span>分类：<a href="http://www.wpued.com/design" title="查看 Wordpress教程 中的全部文章" rel="category tag">Wordpress教程</a></span>
+					<span></span>		
+					<span>留言：<a href="#respond"></a><a href="http://www.wpued.com/3605.html#comments" title="《WordPress meta_key的合理利用》上的评论">1条留言</a></span>
+					<span id="votes">0次</span><span id="voteup"><a onclick="sj_vote(this, 'http://www.wpued.com',3605, 1);" href="javascript:void(0);" title="推荐">推荐</a></span> 
+									</div>
+				
+				<div class="desc">
+					<div class="desc_inner">
+					<b>简介：</b>WordPress meta_key是个非常实用的东西，不知道大家有没有合理利用呢，本站的uedcms主题中就使用了大量的meta_key，例如左侧栏的推荐文章，这个效果就是靠自定义meta_key来实现的，发布文章是键入一个新的meta_key，如featured_post，然后在右侧的输入框内输...		
+					</div>
+				</div>	
+				<div class="clear"></div>	
+					
+				
+				<div class="post_ad"></div>
+				
+				<div class="clear"></div>	
+								<div class="post_content">
+				
+					<p><a title="wordpress meta_key" href="http://www.wpued.com/tag/wordpress-meta_key" target="_self"><strong>WordPress meta_key</strong></a>是个非常实用的东西，不知道大家有没有合理利用呢，本站的uedcms主题中就使用了大量的meta_key，例如左侧栏的推荐文章，这个效果就是靠自定义meta_key来实现的，发布文章是键入一个新的meta_key，如featured_post，然后在右侧的输入框内输入你想要的值，我的是调用特色图片，所以就填写了图片地址，这样就可以调用图片，实际效果如下：</p>
+<div id="attachment_2573" class="wp-caption aligncenter" style="width: 226px;"><a href="http://www.wpued.com/"><img class="size-full wp-image-2573" title="tuijianlanmu" src="tuijianlanmu.gif" alt="wordpress meta_key" width="216" height="290"></a>
+<p class="wp-caption-text">wordpress meta_key</p>
+</div>
+<p>wordpress meta_key调用方法也很简单，代码如下：</p>
+<pre>&lt;?php if (have_posts()) : $recent=new WP_Query("meta_key=featured&amp;showposts=5"); while($recent-&gt;have_posts()) : $recent-&gt;the_post();?&gt;
+&lt;li&gt;
+&lt;a href="&lt;?php the_permalink(); ?&gt;"&gt;
+&lt;?php $featured = get_post_meta($post-&gt;ID, 'featured', true)&nbsp; ;?&gt;
+&lt;div&gt;
+&lt;img src="&lt;?php echo $featured; ?&gt;" alt="&lt;?php the_title();?&gt;"/&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;?php the_title(); ?&gt;&lt;/div&gt;
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;?php endwhile; endif; ?&gt;</pre>
+<p>如果你想更省事的话，那就要强化一下发后台布文章页面了，将以下代码放入wordpress主题 function.php文件内即可轻松实现这个效果了，详细代码：</p>
+<pre>&lt;?php
+add_action('admin_menu', 'featured_meta_box');
+add_action('save_post', 'save_featureddata');
+$featured_meta_boxes =
+array(
+"featured" =&gt; array(
+"name" =&gt; "featured",
+"std" =&gt; "",
+"title" =&gt; "推荐文章图标地址",
+"description" =&gt; "请在输入框内输入图标地址.")
+);
+function featured_meta_boxes() {
+global $post, $featured_meta_boxes;
+foreach($featured_meta_boxes as $meta_box) {
+$meta_box_value = get_post_meta($post-&gt;ID, $meta_box['name'], true);
+if($meta_box_value == "")
+$meta_box_value = $meta_box['std'];
+echo'&lt;input type="hidden" name="'.$meta_box['name'].'_noncename" id="'.$meta_box['name'].'_noncename" value="'.wp_create_nonce( plugin_basename(__FILE__) ).'" /&gt;';
+echo'&lt;input type="text" name="'.$meta_box['name'].'" value="'.$meta_box_value.'" size="100" /&gt;&lt;br /&gt;';
+echo'&lt;p&gt;&lt;label for="'.$meta_box['name'].'"&gt;'.$meta_box['description'].'&lt;/label&gt;&lt;/p&gt;';
+}
+}
+function featured_meta_box() {
+global $theme_name;
+if ( function_exists('add_meta_box') ) {
+add_meta_box( 'featured-meta-boxes', '推荐文章图标地址', 'featured_meta_boxes', 'post', 'normal', 'high' );
+}
+}
+function save_featureddata( $post_id ) {
+global $post, $featured_meta_boxes;
+foreach($featured_meta_boxes as $meta_box) {
+// Verify
+if ( !wp_verify_nonce( $_POST[$meta_box['name'].'_noncename'], plugin_basename(__FILE__) )) {
+return $post_id;
+}
+
+if ( 'page' == $_POST['post_type'] ) {
+if ( !current_user_can( 'edit_page', $post_id ))
+return $post_id;
+} else {
+if ( !current_user_can( 'edit_post', $post_id ))
+return $post_id;
+}
+$data = $_POST[$meta_box['name']];
+if(get_post_meta($post_id, $meta_box['name']) == "")
+add_post_meta($post_id, $meta_box['name'], $data, true);
+elseif($data != get_post_meta($post_id, $meta_box['name'], true))
+update_post_meta($post_id, $meta_box['name'], $data);
+elseif($data == "")
+delete_post_meta($post_id, $meta_box['name'], get_post_meta($post_id, $meta_box['name'], true));
+}
+}
+?&gt;</pre>
+					
+										
+									</div>	
+				
+				
+				<div class="metas">
+				<div class="post_tags">文章标签：<a href="http://www.wpued.com/tag/meta_key" rel="tag">meta_key</a> , <a href="http://www.wpued.com/tag/wordpress" rel="tag">WordPress</a> , <a href="http://www.wpued.com/tag/wordpress-meta_key" rel="tag">Wordpress meta_key</a></div>				<h3>本文链接：<a href="http://www.wpued.com/3605.html" title="WordPress meta_key的合理利用">WordPress meta_key的合理利用</a></h3>
+				<h4>版权所有：<a href="http://www.wpued.com/" title="维普设计">维普设计</a> - 转载请注明出处</h4>
+			
+									
+
+						
+				
+				
+				</div>
+				<!--BEGIN .navigation .single-page-navigation -->
+				<div class="recent_posts_navigation">
+					<div class="nav-previous loading"><a href="http://www.wpued.com/3521.html" rel="prev">让 WordPress 回复评论自动加上@符号（代码版）</a></div>
+					<div class="nav-next loading"><a href="http://www.wpued.com/3522.html" rel="next">用 JQuery 实现新窗口打开 WordPress 评论者链接</a></div>
+					<div class="clear"></div>
+				<!--END .navigation .single-page-navigation -->
+				</div>
+				
+				<div class="clear"></div>
+				
+				
+				
+					<div class="related_post">
+		<div class="related_title"><span>相关文章</span></div>
+		<ul>
+					<li><a href="http://www.wpued.com/7440.html" rel="bookmark" target="_self" title="美国大学开设WordPress课程">美国大学开设WordPress课程</a></li>
+					<li><a href="http://www.wpued.com/7416.html" rel="bookmark" target="_self" title="WordPress企业网站模板：Sellos">WordPress企业网站模板：Sellos</a></li>
+					<li><a href="http://www.wpued.com/7396.html" rel="bookmark" target="_self" title="Win主机去掉WordPress链接中的index.php">Win主机去掉WordPress链接中的index.php</a></li>
+					<li><a href="http://www.wpued.com/7391.html" rel="bookmark" target="_self" title="WordPress 3.3的新功能">WordPress 3.3的新功能</a></li>
+					<li><a href="http://www.wpued.com/7358.html" rel="bookmark" target="_self" title="WordPress企业模板：辟谷养生">WordPress企业模板：辟谷养生</a></li>
+					<li><a href="http://www.wpued.com/7311.html" rel="bookmark" target="_self" title="将WordPress seo优化进行到底">将WordPress seo优化进行到底</a></li>
+					<li><a href="http://www.wpued.com/7282.html" rel="bookmark" target="_self" title="WordPress CMS主题: UCheme">WordPress CMS主题: UCheme</a></li>
+					<li><a href="http://www.wpued.com/7276.html" rel="bookmark" target="_self" title="WordPress 企业主题 : Viatheme">WordPress 企业主题 : Viatheme</a></li>
+					<li><a href="http://www.wpued.com/7261.html" rel="bookmark" target="_self" title="WordPress 企业主题 : QCHY">WordPress 企业主题 : QCHY</a></li>
+					<li><a href="http://www.wpued.com/7110.html" rel="bookmark" target="_self" title="WordPress 自定义导航菜单操作使用方法">WordPress 自定义导航菜单操作使用方法</a></li>
+				</ul>
+	</div>
+	
+   
+<div class="clear"></div>
+	
+				
+						
+		
+<div class="clear"></div>
+<div class="comment_header">
+	<span class="comment_header_text">客户留言</span>
+	<span class="comment_header_text"><a target="_top" href="http://www.wpued.com/1504.html" title="Wordpress头像">设置头像</a></span>
+	<span class="comment_num">1条</span>
+</div>
+
+
+<div id="pinglun">
+
+	<div id="respond">
+
+	
+	<form action="http://www.wpued.com/wp-comments-post.php" method="post" id="commentform">
+
+		
+			<div class="userinfo">
+				<input name="author" class="author-input" value="" size="22" tabindex="1" type="text">
+				<label class="author-label" for="author">姓名</label>
+			</div>
+
+			<div class="userinfo">
+				<input name="email" class="email-input" value="" size="22" tabindex="2" type="text">
+				<label class="email-label" for="email">邮箱</label>
+			</div>
+
+			<div class="userinfo">
+				<input name="url" class="url-input" value="" size="22" tabindex="3" type="text">
+				<label class="web-label" for="url">网址</label>
+			</div>
+
+		
+		<!--<div><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></small></div>-->
+		<div class="msg">
+			<textarea name="comment" cols="100" rows="4" tabindex="4"></textarea>
+		</div>
+
+		<div class="tijiao">
+						<div class="yanzhengma">
+				<label>请输入验证码:</label>
+				<input value="" name="subpcodes" id="subpcodes" size="4" 5″="" type="text"><span class="pcodes">8326</span>
+				<input name="pcodes" value="8326" type="hidden">
+			</div>
+
+			<div class="submit-commnt">
+				<input name="submit" class="comment-submit" tabindex="5" value="发送留言" type="submit">
+			</div>
+			
+			<fieldset><input name="comment_post_ID" value="3605" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+				<p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="62e2c279e5" type="hidden"></p>			</fieldset>
+			
+			<div class="cancel-comment-reply">
+				<a rel="nofollow" id="cancel-comment-reply-link" href="http://www.wpued.com/3605.html#respond" style="display: none;">取消回复</a>			</div>
+
+		</div>
+
+	</form>
+
+		</div>
+</div>
+
+    
+
+<!-- You can start editing here. -->
+
+<div id="comments">
+
+		
+			<ul>
+				                 
+		<li class="comment even thread-even depth-1">
+	    
+	    	<a name="comment-1334"></a>
+	      	
+	      	<div id="li-comment-1334" class="comment-container">
+	
+		      	<div class="comment-head">
+		      	    
+		      	    	                <div class="avatar"><img alt="" src="39e15fb57dceeaf6b13d33b10bd74c2f" class="photo avatar avatar-35 photo" width="35" height="35"></div>
+	            	        
+	       					
+					<div class="reply">
+	                    <a class="comment-reply-link" href="http://www.wpued.com/3605.html?replytocom=1334#respond" onclick='return addComment.moveForm("comment-1334", "1334", "respond", "3605")'>回复</a>	                </div><!-- /.reply -->    	                
+		        		          	
+				</div><!-- /.comment-head -->
+		      
+		   		<div class="comment-entry" id="comment-1334">
+		   		
+		   		<span class="arrow"></span>
+		   		
+		   		<div class="comment-info">
+		   		
+			   		<div class="left"><span class="name">color</span></div>
+			   		<div class="right">        
+		                <span class="date">2011年01月16日 at 1:10 下午</span>
+		                <span class="perma"><a href="http://www.wpued.com/3605.html/comment-page-1#comment-1334" title="Direct link to this comment">1楼</a></span>
+		                 <span class="edit"></span>
+					</div>
+				  
+				  	<div class="clear"></div>
+				  
+				</div>
+							
+				<p>很不错啊，不过一般分类调用就已经足够了</p>
+		            
+													
+				</div><!-- /comment-entry -->
+	
+			</div><!-- /.comment-container -->
+			
+	</li>
+		
+		</ul>
+				
+	
+    	
+
+</div><!-- /#comments_wrap -->
+
+
+	</div>
+</div>
+
+<div class="sidebar">
+<div id="text-5" class="widget  widget_text"><div class="widget_title"><span>特别推荐</span></div>			<div class="textwidget"></div>
+		</div><div id="vote-widget-5" class="widget  widget_vote"><div class="widget_title"><span>推荐排行</span></div><div class="widget_vote_list"><div class="widget_vote_post"><a href="http://www.wpued.com/6764.html" title="Wordpress SEO 主题： Jintu主题升级（1.11） 被推荐99次"><span class="widget_vote_count">99</span>Wordpress SEO 主题： Jintu主题升级（1.11）</a></div><div class="widget_vote_post"><a href="http://www.wpued.com/7261.html" title="Wordpress 企业主题 : QCHY 被推荐69次"><span class="widget_vote_count">69</span>Wordpress 企业主题 : QCHY</a></div><div class="widget_vote_post"><a href="http://www.wpued.com/7421.html" title="Wordpress视频网站模板 被推荐62次"><span class="widget_vote_count">62</span>Wordpress视频网站模板</a></div><div class="widget_vote_post"><a href="http://www.wpued.com/6216.html" title="SCOOL SEO主题升级通知：最新版本1.2 被推荐51次"><span class="widget_vote_count">51</span>SCOOL SEO主题升级通知：最新版本1.2</a></div><div class="widget_vote_post"><a href="http://www.wpued.com/7276.html" title="Wordpress 企业主题 : Viatheme 被推荐38次"><span class="widget_vote_count">38</span>Wordpress 企业主题 : Viatheme</a></div><div class="widget_vote_post"><a href="http://www.wpued.com/6257.html" title="Wordpress 淘宝客主题：淘宝单品推荐主题 被推荐38次"><span class="widget_vote_count">38</span>Wordpress 淘宝客主题：淘宝单品推荐主题</a></div><div class="widget_vote_post"><a href="http://www.wpued.com/7101.html" title="Wordpress企业网站主题: TOTRON 被推荐34次"><span class="widget_vote_count">34</span>Wordpress企业网站主题: TOTRON</a></div><div class="widget_vote_post"><a href="http://www.wpued.com/1504.html" title="wordpress设置Gravatar个性头像 被推荐31次"><span class="widget_vote_count">31</span>wordpress设置Gravatar个性头像</a></div><div class="widget_vote_post"><a href="http://www.wpued.com/6437.html" title="Wordpress同步插件推荐：WP Connect 被推荐28次"><span class="widget_vote_count">28</span>Wordpress同步插件推荐：WP Connect</a></div><div class="widget_vote_post"><a href="http://www.wpued.com/7282.html" title="Wordpress CMS主题: UCheme 被推荐25次"><span class="widget_vote_count">25</span>Wordpress CMS主题: UCheme</a></div></div>
+		</div><div id="latest-posts-widget-16" class="widget  widget_latest_posts"><div class="widget_title"><span>最新文章</span></div>			<ul>
+				<li><a href="http://www.wpued.com/7445.html" title="Look 只允许Wordpress作者本人编辑文章">只允许Wordpress作者本人编辑文章</a> </li> <li><a href="http://www.wpued.com/7442.html" title="Look Wordpress用户登录后跳转到指定页面">Wordpress用户登录后跳转到指定页面</a> </li> <li><a href="http://www.wpued.com/7440.html" title="Look 美国大学开设Wordpress课程">美国大学开设Wordpress课程</a> </li> <li><a href="http://www.wpued.com/402.html" title="Look 修改Wordpress登录地址的方法">修改Wordpress登录地址的方法</a> </li> <li><a href="http://www.wpued.com/7421.html" title="Look Wordpress视频网站模板">Wordpress视频网站模板</a> </li> <li><a href="http://www.wpued.com/7416.html" title="Look Wordpress企业网站模板：Sellos">Wordpress企业网站模板：Sellos</a> </li> <li><a href="http://www.wpued.com/7406.html" title="Look Wordpress统计搜索结果数量">Wordpress统计搜索结果数量</a> </li> <li><a href="http://www.wpued.com/7396.html" title="Look Win主机去掉WordPress链接中的index.php">Win主机去掉WordPress链接中的index.php</a> </li> <li><a href="http://www.wpued.com/7391.html" title="Look WordPress 3.3的新功能">WordPress 3.3的新功能</a> </li> <li><a href="http://www.wpued.com/7385.html" title="Look Wordpress主题：淘宝店铺导航">Wordpress主题：淘宝店铺导航</a> </li> 			</ul>
+		</div><div id="custom-recent-comments-4" class="widget  widget_comment"><div class="widget_title"><span>最新评论</span></div>    <ul><li>
+<a href="http://www.wpued.com/6764.html#comment-3960" title="Wordpress SEO 主题： Jintu主题升级（1.11） » 收费的就是漂亮">书评网 » 收费的就是漂亮</a>
+</li>
+
+<li>
+<a href="http://www.wpued.com/7282.html#comment-3959" title="Wordpress CMS主题: UCheme » 很漂亮的一个主题">书评网 » 很漂亮的一个主题</a>
+</li>
+
+<li>
+<a href="http://www.wpued.com/6257.html#comment-3956" title="Wordpress 淘宝客主题：淘宝单品推荐主题 » 是主题管理后台界面">老金 » 是主题管理后台界面</a>
+</li>
+
+<li>
+<a href="http://www.wpued.com/6257.html#comment-3955" title="Wordpress 淘宝客主题：淘宝单品推荐主题 » 这个图片是后台吗？和wordpress不太一样哦">情侣装 » 这个图片是后台吗？和wordpress不太一样哦</a>
+</li>
+
+<li>
+<a href="http://www.wpued.com/6408.html#comment-3948" title="Wordpress主题汉化新方法 » 非常不错的方法,试一下看看，谢谢分享">yandi » 非常不错的方法,试一下看看，谢谢分享</a>
+</li>
+
+<li>
+<a href="http://www.wpued.com/6257.html#comment-3946" title="Wordpress 淘宝客主题：淘宝单品推荐主题 » 好的模板，推广单品更给力了。">朱子家训 » 好的模板，推广单品更给力了。</a>
+</li>
+
+<li>
+<a href="http://www.wpued.com/6198.html#comment-3945" title="Wordpress教程：taxonomy别名中文问题解决方法 » 别名中文有利于seo吗">朱子家训 » 别名中文有利于seo吗</a>
+</li>
+
+<li>
+<a href="http://www.wpued.com/7442.html#comment-3944" title="Wordpress用户登录后跳转到指定页面 » 很好功能，不过自己网站不开注册...">南宁搬家 » 很好功能，不过自己网站不开注册...</a>
+</li>
+
+<li>
+<a href="http://www.wpued.com/7442.html#comment-3943" title="Wordpress用户登录后跳转到指定页面 » 这个不错，给自己网站加个">硝化抑制 » 这个不错，给自己网站加个</a>
+</li>
+
+<li>
+<a href="http://www.wpued.com/7311.html#comment-3942" title="将Wordpress seo优化进行到底 » 学习到不一样的东西！也不错了！！！">无觅购 » 学习到不一样的东西！也不错了！！！</a>
+</li>
+
+		</ul>
+        
+		</div></div>
+<div class="clear"></div>
+</div> <!-- End of container -->
+
+
+<div class="clear"></div>
+
+<div class="sub_footer">
+	<div class="footer_menu">
+		<ul>
+			<li><b class="red">Wordpress主题定制类型</b></li> ： <li><a href="http://www.wpued.com/sales_themes/biz-theme" title="Wordpress企业主题">Wordpress企业主题</a></li> | <li><a href="http://www.wpued.com/sales_themes/cms-theme" title="Wordpress cms主题">Wordpress CMS主题</a></li> | <li><a href="http://www.wpued.com/6764.html" title="Wordpress seo主题">Wordpress SEO主题</a></li> | <li><a href="http://www.wpued.com/6257.html" title="Wordpress 淘宝客主题">Wordpress淘宝客主题</a></li> | <li><a href="http://www.wpued.com/6090.html" title="Wordpress 视频主题">Wordpress视频主题</a></li>		</ul>
+	</div>
+  
+    <p>沪ICP备10030763号 Copyright ©2012 <a href="http://www.wpued.com/" title="Wordpress主题定制">wpued.com</a> All rights reserved.<br>
+维普设计版权所有 专业Wordpress主题定制团队</p>
+ </div>
+
+
+
+
+		
+
+<a style="display: block;" id="goTopButton" class="gotop_btn" href="javascript:void(0);">&nbsp;</a>
+
+
+<div class="feedback">
+    <a class="support" target="_top" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2426228128&amp;site=qq&amp;menu=yes" title="QQ在线客服">联系我们</a>
+</div>	
+
+
+
+</body>
+</html>
