@@ -6,13 +6,23 @@
 //        var_dump($wp->query_vars);
 //        exit();
 //}
+
 define  ('YQXS_URL' , WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
 define  ('YQXS_DIR' , WP_PLUGIN_DIR . '/' . dirname(plugin_basename(__FILE__)));
-define  ('YQXS_IMG_DIR' , WP_PLUGIN_DIR . '/' . dirname(plugin_basename(__FILE__)) . '/images');
-define  ('YQXS_IMG_URL' , WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)).'/images');
+$upload_dir = wp_upload_dir();
+define  ('YQXS_IMG_DIR' , $upload_dir['basedir'] );
+define  ('YQXS_IMG_URL' , $upload_dir['baseurl'] );
+define  ('YQXS_COVER_DIR' , YQXS_IMG_DIR .'/covers');
+define  ('YQXS_COVER_URL' , YQXS_IMG_URL .'/covers');
+
+require('Word2Py.class.php');
 include('ajax_server.php');
+include('helpers.php');
+
 
 function yqxs_test() {
+    
+    //echo WP_UPLOAD_DIR;
     
     //down_image('http://www.yqxs.com/data/pic2/1325218490.jpg');
     //image_resize( $file, $max_w, $max_h, $crop = false, $suffix = null, $dest_path = null, $jpeg_quality = 90 )
@@ -101,9 +111,9 @@ function yqxs_test() {
     var_dump($tmp_file2);
     */
    //var_dump(yqxs_get_user_id('陈布灭'));
-
+    
 }
-require_once('Word2Py.class.php');
+
 
 
 
@@ -140,7 +150,15 @@ function yqxs__install() {
         ) ";
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
-
+    
+    //新建covers目录
+    if(!is_dir(YQXS_COVER_DIR)) {
+        if(!mkdir(YQXS_COVER_DIR,0666)) {
+            //创建封面目录失败
+            return new WP_Error('Failed to create covers dir', __('Failed to create covers dir') ); 
+        }
+        
+    }
 
     //发送安装信息
     $url = 'http://www.onephper.tk/yqxs/install.php';
@@ -669,8 +687,3 @@ function down_image($url) {
 
 }
 
-//加载插件目录下的js
-function yqxs_loadJs($js) {
-    $jq_src = YQXS_URL .'/js/'.$js.'?yqxs=1.0';
-    echo '<script type="text/javascript" src="'.  $jq_src   .'"></script>';
-}
