@@ -18,6 +18,7 @@ class Word2Py{
 		'guan'=>'莞',
 		'chong'=>'重',
         'yu'=>'毓',
+        '-'=>'-',
 	);
 
     public function Pinyin($_String, $_Code='gb2312') 

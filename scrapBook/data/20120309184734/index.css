@@ -1,0 +1,98 @@
+/* ::::: http://benis.me/wp-content/themes/note-b/style.css ::::: */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0pt; padding: 0pt; border: 0pt none; font: inherit; vertical-align: baseline; }
+body { background-color: rgb(246, 246, 246); font: 14px/24px Tahoma,Helvetica,SimSun,sans-serif,Hei; color: rgb(51, 51, 51); }
+a { color: rgb(0, 160, 198); text-decoration: none; outline: 0pt none; -moz-transition-duration: 0.15s; -moz-transition-timing-function: ease-out; }
+a:hover { color: rgb(76, 83, 87); }
+h1, h2, h3, h4, h5 { font-size: 14px; font-weight: 700; }
+h1 { font-size: 24px; line-height: 30px; }
+h2 { font-size: 20px; line-height: 26px; }
+strong { font-weight: 700; }
+input, textarea { outline: medium none; }
+#container { position: relative; }
+#header { height: 96px; background: url('pattern.png') repeat scroll 0% 0% rgb(0, 160, 198); }
+#header-inner { width: 900px; margin: 0pt auto; background: url('top-bg.gif') no-repeat scroll right 3px transparent; height: 96px; }
+#logo a { display: block; background: url('logo.gif') no-repeat scroll 0pt 23px transparent; height: 96px; width: 160px; text-indent: -999em; overflow: hidden; }
+#search-toggle { -moz-transition: all 0.2s ease-in-out 0s ; background: url('search-icon.png') no-repeat scroll 50% 50% rgb(0, 105, 132); cursor: pointer; font-weight: 700; height: 96px; position: absolute; left: 0px; top: 0px; width: 55px; }
+#search-toggle:hover { opacity: 0.8; }
+#searchform { border: 1px solid rgb(239, 239, 239); display: none; position: absolute; left: 0pt; top: 96px; z-index: 9999; }
+.screen-reader-text { display: none; }
+#s { width: 140px; height: 30px; line-height: 30px; padding: 0px 10px; color: rgb(153, 153, 153); background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 0pt none; -moz-transition: all 0.2s ease-in-out 0s ; outline: medium none; }
+#searchsubmit { background: none repeat scroll 0% 0% rgb(247, 247, 247); color: rgb(102, 102, 102); border-width: 0pt 0pt 0pt 1px; border-style: none none none solid; border-color: -moz-use-text-color -moz-use-text-color -moz-use-text-color rgb(239, 239, 239); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; height: 30px; margin-left: -8px; }
+#main { width: 900px; margin: 10px auto 0pt; }
+#entry .post { margin-bottom: 80px; clear: both; }
+.entry-title { font-size: 16px; line-height: 28px; }
+.entry-title a { font-size: 16px; font-weight: 700; line-height: 16px; }
+.entry-meta, .entry-meta a { color: rgb(170, 170, 170); font-size: 11px; line-height: 14px; }
+.comments-link { float: right; font-size: 35px; padding: 0px 10px 2px 22px; line-height: 40px; background: url('comment.png') no-repeat scroll 0pt 0pt transparent; }
+.comments-link:hover, .comments-link-g:hover { color: rgb(0, 160, 198); }
+.entry-tags a, .more-link, #pagenavi2 a, #pagenavi2 .current, .blogroll li a, #comment_pages_link a, #comment_pages_link .current, .sidemenu li a { font-size: 11px; padding: 3px 7px; background: none repeat scroll 0% 0% rgb(237, 238, 240); color: rgb(141, 151, 156); margin: 0pt 3px 3px 0pt; border-radius: 10px 10px 10px 10px; }
+.entry-tags a:hover, .more-link:hover, #pagenavi2 a:hover, #pagenavi2 .current, .blogroll li a:hover, #comment_pages_link a:hover, #comment_pages_link .current, .sidemenu li a:hover, .sidemenu li.current_page_item a { background: none repeat scroll 0% 0% rgb(0, 160, 198); color: rgb(255, 255, 255); }
+.entry-content { margin: 15px 0pt 10px; font-size: 13px; }
+.entry-content p { margin-bottom: 1em; line-height: 24px; }
+.entry-content h3 { background: url('dotted.png') repeat-x scroll 0px 100% transparent; color: rgb(170, 170, 170); text-align: center; font-size: 16px; line-height: 165%; margin-bottom: 10px; padding: 10px 0pt 5px; }
+.entry-content a[rel~="nofollow"] { background: url('external.png') no-repeat scroll 100% 50% transparent; margin-right: 5px; padding-right: 10px; }
+.entry-content ul, .entry-content ol { margin: 0pt 0pt 1.625em 2.5em; }
+.entry-content ul { list-style: square outside none; }
+img.wp-smiley, img.border-img, img.border-img:hover, img.wp-smiley:hover { border: 0pt none; padding: 0pt; box-shadow: none; }
+#footer { clear: both; height: 40px; border-top: 1px solid rgb(221, 221, 221); border-bottom: 10px solid rgb(119, 119, 119); width: 900px; margin: 15px auto 0pt; padding-bottom: 40px; padding-top: 40px; }
+#footer { color: rgb(170, 170, 170); font-size: 12px; }
+#footer a { color: rgb(103, 103, 103); }
+#footer p { margin-bottom: 0px; line-height: 18px; }
+#footer ul { margin-top: 15px; }
+#footer ul li { display: inline; margin-left: 10px; }
+.sidemenu { list-style: none outside none; }
+.sidemenu li { display: inline-block; font-weight: 400; font-size: 11px; margin-right: 10px; }
+.left { float: left; }
+.right { float: right; }
+#sidebar { width: 900px; margin: 10px auto 0pt; padding-bottom: 10px; border-bottom: 1px dashed rgb(221, 221, 221); }
+#comments { padding-bottom: 10px; }
+#respond { margin-top: 20px; }
+#comment-info { height: 30px; padding: 3px 0pt 2px; font-size: 12px; }
+#profile-input span { font-size: 12px; line-height: 24px; margin: 3px 0pt 3px 10px; display: inline-block; width: 265px; }
+#profile-input span.comment-form-author { border-right: 1px dotted rgb(170, 170, 170); }
+#profile-input span.comment-form-email { border-right: 1px dotted rgb(170, 170, 170); }
+#profile-input input { -moz-transition-duration: 0.15s; -moz-transition-timing-function: ease-out; background: none repeat scroll 0% 0% rgb(246, 246, 246); width: 185px; border: 0pt none; color: rgb(106, 106, 106); padding: 3px 10px; height: 16px; font-family: Tahoma,Helvetica,SimSun,sans-serif,Hei; }
+#profile-input input:hover { background-color: rgb(0, 160, 198); color: rgb(255, 255, 255); }
+#comment-info .avatar { float: left; padding: 4px; border-right: 1px dotted rgb(170, 170, 170); }
+#submit { font-family: Tahoma,Geneva,sans-serif; width: 100%; padding: 4px 0pt; margin-bottom: 7px; box-shadow: 0pt 0pt 3px rgba(0, 0, 0, 0.1); border-radius: 3px 3px 3px 3px; color: rgb(105, 105, 105); font-size: 10px; text-decoration: none; text-transform: uppercase; background: none repeat scroll 0% 0% rgb(245, 245, 245); border: 1px solid rgb(255, 255, 255); cursor: pointer; }
+#submit:hover { color: rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(103, 103, 103); border: 1px solid rgb(153, 153, 153); }
+#comment { margin-bottom: 10px; height: 120px; line-height: 19px; width: 880px; padding: 10px; border-right: 0pt none; border-width: 1px 0pt 0pt; border-style: solid none none; border-color: rgb(221, 221, 221) -moz-use-text-color -moz-use-text-color; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; }
+.comments-title, .heading-link, #reply-title { background: url('bg-light.gif') repeat-x scroll center 7px transparent; width: 100%; margin-bottom: 10px; padding-bottom: 10px; text-align: center; font-size: 14px; text-transform: uppercase; color: rgb(103, 103, 103); }
+.comments-title { margin-bottom: 0pt; }
+.comments-title strong, .heading-link strong, #reply-title strong { padding: 0pt 10px; background-color: rgb(246, 246, 246); display: inline; font-weight: 400; }
+.comments-title a, .heading-link a, #reply-title a { color: rgb(170, 170, 170); }
+.comments-title a:hover, .heading-link a:hover, #reply-title a:hover { color: rgb(0, 160, 198); }
+.commentlist li { list-style: none outside none; clear: both; }
+.comment-meta { float: left; padding-right: 20px; text-align: right; width: 160px; }
+.comment-avatar { background-color: rgb(229, 229, 229); border-radius: 2px 2px 2px 2px; float: left; padding: 6px; position: relative; }
+.commentnumber { line-height: 15px; background-color: rgb(229, 229, 229); bottom: -16px; font-size: 11px; font-weight: 700; padding: 3px 5px; position: absolute; right: 0px; }
+.comment-avatar img { display: block; }
+.commentlist li { border-top: 1px dotted rgb(221, 221, 221); margin-bottom: 20px; padding-top: 20px; position: relative; }
+.commentlist li:last-child { margin-bottom: 0px; }
+.commentlist li:first-child { border-top: medium none; }
+.commentlist li:first-child ul li { border-top: 1px dotted rgb(221, 221, 221); }
+.commentlist .children { margin: 0px; padding-left: 107px; padding-top: 20px; }
+.commentlist .comment-content { border-left: 1px dotted rgb(221, 221, 221); margin-left: 180px; padding-left: 20px; font-size: 12px; }
+.commentlist .children .comment-content { margin-left: 73px; }
+.commentlist .children .comment-meta { margin-bottom: 10px; text-align: left; width: 100%; }
+.commentlist .date { line-height: 14px; color: rgb(170, 170, 170); display: block; font-size: 11px; }
+.commentlist .comment-author, .commentlist .comment-author a { line-height: 14px; color: rgb(112, 112, 112); font-size: 10px; font-weight: 700; text-decoration: none; }
+.commentlist .reply a { color: rgb(170, 170, 170); font-size: 10px; font-weight: 700; text-decoration: none; text-transform: uppercase; }
+.commentlist .reply a:hover { color: rgb(0, 160, 198); }
+.commentlist .reply { display: block; }
+#sns { position: absolute; right: 16px; top: 10px; }
+#sns a { display: block; width: 24px; height: 22px; text-indent: -999em; overflow: hidden; }
+#sns .feed { background: url('feed.gif') no-repeat scroll 0% 0% transparent; }
+#sns .tencent { background: url('feed.gif') no-repeat scroll 0pt -24px transparent; margin-top: 10px; height: 30px; }
+#sns a:hover { -moz-transform: rotate(-60deg); }
+#loading, #error { margin-bottom: 10px; color: rgb(0, 160, 198); }
+.wp_syntax { border-bottom: 1px dashed rgb(221, 221, 221); background: url('pre-bg.png') repeat scroll 0pt -9px rgb(255, 255, 255); clear: both; position: relative; margin: 0pt 0pt 1.5em; line-height: 19px; font-size: 11px; overflow: auto; z-index: 999; }
+.wp_syntax table { border-collapse: collapse; }
+.wp_syntax div, .wp_syntax td { vertical-align: top; }
+.wp_syntax .line_numbers { text-align: right; background-color: rgb(239, 239, 239); color: rgb(153, 153, 153); border-right: 1px solid rgb(220, 220, 220); overflow: visible; padding: 10px 5px; width: 16px; }
+.wp_syntax .code pre { padding: 10px; margin: 0pt; width: auto; float: none; clear: none; overflow: hidden; white-space: pre; font-family: "Consolas","Lucida Sans Unicode","Monaco","Courier New",Courier,mono,serif; }
+.wp-smiley { vertical-align: middle; }
+.browser-icon, .os-icon { vertical-align: middle; }
+.smilies { margin: 5px 0pt; }
+img.wp-smiley-select { cursor: pointer; }

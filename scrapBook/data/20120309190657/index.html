@@ -1,0 +1,368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html lang="zh-CN" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+	<title>wordpress原生相册调用方法 | 特意集</title>
+	
+	<!-- descripton and keywords start -->
+		<meta name="description" content="菜鸟就是菜鸟，虽然早就知道wordpress已经有了原生相册，但不知道如何使用，可能是由于太过于简单了，几乎寥寥几笔就带过了。今天总算是成功调用了wordpress的原生相册。
+调用方法是这样的：登陆后台，撰写日志。在正文上边有一行“添加媒">
+	<meta name="keywords" content="wordpress, ">
+	<!-- description and keywords end -->
+	
+	<!-- robots start -->
+		<meta name="robots" content="index,follow">
+		<!-- robots end -->
+	
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0 - 所有文章" href="http://feed.feedsky.com/teyi">
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0 - 所有评论" href="http://www.teyi.org/comments/feed">
+	
+	
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="pingback" href="http://www.teyi.org/xmlrpc.php">
+	<!--[if IE 6]>
+	<script src="http://www.teyi.org/wp-content/themes/mya2-ac/js/DD_belatedPNG.js"></script>
+	<script>DD_belatedPNG.fix('*');</script>
+	<![endif]-->
+	
+	<!--[if IE]>
+	<link rel="stylesheet" media="screen" href="http://www.teyi.org/wp-content/themes/mya2-ac/ie.css" />
+	<![endif]-->
+	
+		<link rel="alternate" type="application/rss+xml" title="特意集 » wordpress原生相册调用方法 评论 feed" href="http://www.teyi.org/articles/wordpress-gallery.html/feed">
+
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.teyi.org/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.teyi.org/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="特意集" href="http://www.teyi.org/">
+<link rel="start" title="BSP的盈利模式" href="http://www.teyi.org/articles/bsp-how-profit.html">
+<link rel="prev" title="博客如何盈利？" href="http://www.teyi.org/articles/how-to-make-money-with-your-blog.html">
+<link rel="next" title="word中如何取消域" href="http://www.teyi.org/articles/word-yu.html">
+<meta name="generator" content="WordPress 3.1.3">
+<link rel="canonical" href="http://www.teyi.org/articles/wordpress-gallery.html">
+<link rel="shortlink" href="http://www.teyi.org/?p=60">
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+	<!-- wrapper start -->
+	<div id="wrapper">
+	
+		<!-- header start -->
+		<div id="header">
+			<div class="content">
+				<div id="logo">{ <a href="http://www.teyi.org/" title="特意集">特意集</a> }</div>
+				<div id="nav">
+					<ul id="menus">
+						<li class="home current_page_item"><a href="http://www.teyi.org/" title="首页">首页</a></li>
+						<li class="page_item page-item-2"><a href="http://www.teyi.org/about" title="关于">关于</a></li>
+<li class="page_item page-item-458"><a href="http://www.teyi.org/files" title="资料">资料</a></li>
+<li class="page_item page-item-186"><a href="http://www.teyi.org/idc" title="主机">主机</a></li>
+<li class="page_item page-item-240"><a href="http://www.teyi.org/collection" title="资源">资源</a></li>
+<li class="page_item page-item-244"><a href="http://www.teyi.org/bbs" title="论坛">论坛</a></li>
+					</ul>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<!-- header end -->
+		
+		<!-- topbox start -->
+		<div id="topbox" class="box">
+			<div class="welcome left">
+				嗨，新朋友，很高兴认识你，欢迎来到我的博客。			</div>
+			<div class="subscribe right">
+				<ul>
+					<li class="rssfeed"><span><a href="http://feed.feedsky.com/teyi" title="订阅 RSS Feed">订阅 RSS Feed</a></span></li>
+									</ul>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<!-- topbox end -->
+		
+		<!-- container start -->
+		<div id="container">
+			<!-- content start -->
+			<div id="content">
+								
+				<div class="posthead box">
+					<a href="http://www.teyi.org/" title="回到首页">首页</a> » <a href="http://www.teyi.org/articles/category/it-and-blog" title="查看 挨踢剥壳 的全部文章" rel="category tag">挨踢剥壳</a> » wordpress原生相册调用方法				</div>
+				
+								<div class="post box" id="post-60">
+					<h1 class="post-title"><a href="http://www.teyi.org/articles/wordpress-gallery.html" title="wordpress原生相册调用方法" rel="bookmark">wordpress原生相册调用方法</a></h1>
+					<div class="postmeta">
+						<ul>
+							<li class="meta-author"><a href="http://www.teyi.org/articles/author/admin" title="由 锄禾夕阳 发表">锄禾夕阳</a></li>							<li class="meta-date">2008年9月19日</li>
+														<li class="meta-cat"><a href="http://www.teyi.org/articles/category/it-and-blog" title="查看 挨踢剥壳 的全部文章" rel="category tag">挨踢剥壳</a></li>							<li class="meta-comments"><a href="http://www.teyi.org/articles/wordpress-gallery.html#respond" title="wordpress原生相册调用方法 上的评论">没有评论</a></li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+					<div class="post-content">
+						<p style="float: left; margin: 4px;">
+</p> <p style="text-indent: 2em;">菜鸟就是菜鸟，虽然早就知道wordpress已经有了原生相册，但不知道如何使用，可能是由于太过于简单了，几乎寥寥几笔就带过了。今天总算是成功调用了wordpress的原生相册。</p>
+<p style="text-indent: 2em;">调用方法是这样的：登陆后台，撰写日志。在正文上边有一行“添加媒体”点击紧挨着它的“添加图片”图标，把先要发布的图像上传。上传后，可以在下面添加标题标题和描述。若是添加内容了则点击“保存全部修改”，之后点击“图片库”（此时旁边的数字代表刚才所传图片的数量）点击“在文章中添加图片”（注：若是只上传一张图片，那么只有保存全部修改选项）</p>
+<p style="text-indent: 2em;">此时日志编辑框中就会显示“[%gallery]”大功告成！注意：%是特意添加的，因为有演示所以才这样。%是多余的。</p>
+<p style="text-indent: 2em;">当然，也可以修改这个[%gallery]的，以下来源于<a href="http://www.wopus.org/wordpress25-gallery.html" onclick="javascript:pageTracker._trackPageview('/outbound/article/www.wopus.org');">Wopus中文平台</a>：</p>
+<blockquote><p>[%gallery columns="x"]－默认值为3,用于确定相册的列数</p>
+<p>[%gallery id="xxx"]－相册编号，选择已经发表过的相册id以引用之</p>
+<p>（我在试验时发现想调用第一个相册，ID必须写成001才可以。特意注）</p>
+<p>[%gallery size="medium"]－相册缩略图大小控制，默认值为”medium”，我们可以选用”thumbnail”，”medium”和”full”三种样式</p></blockquote>
+<p style="text-indent: 2em;">效果如下：</p>
+
+<p style="text-indent: 2em;">若是下一篇文章还想调用相册，那就如法炮制。</p>
+						<div class="clear"></div>
+					</div>
+					
+					<!-- article-page start -->
+										<!-- article-page end -->
+					
+					<p class="post-tags"><a href="http://www.teyi.org/articles/tag/wordpress" rel="tag">wordpress</a></p>
+				</div>
+				
+				<!-- related-posts start -->
+								<!-- related-posts end -->
+								
+				<!-- postnavi start -->
+				<div class="postnavi box">
+					<p class="prev right"><a href="http://www.teyi.org/articles/word-yu.html" rel="next">word中如何取消域</a></p>
+					<p class="next left"><a href="http://www.teyi.org/articles/how-to-make-money-with-your-blog.html" rel="prev">博客如何盈利？</a></p>
+					<div class="clear"></div>
+				</div>
+				<!-- postnavi end -->
+				
+				
+<!-- You can start editing here. -->
+<div id="commentblock">
+
+
+		
+	
+
+
+<div id="respond" class="box">
+
+	<div id="cancel-comment-reply" class="right"><a rel="nofollow" id="cancel-comment-reply-link" href="http://www.teyi.org/articles/wordpress-gallery.html#respond" style="display: none;">取消回复</a></div>
+	
+		
+	<form action="http://www.teyi.org/wp-comments-post.php" method="post" id="commentform">
+	
+		<p class="comment-form-title">Leave A Reply</p>
+	
+				
+		<div id="comment-personaldetails">
+			<p>
+				<input name="author" id="author" value="" size="22" tabindex="1" type="text">
+				<label for="author">姓名</label>
+			</p>
+			
+			<p>
+				<input name="email" id="email" value="" size="22" tabindex="2" type="text">
+				<label for="email">电邮地址（不会公开你的电邮地址）</label>
+			</p>
+			
+			<p>
+				<input name="url" id="url" value="" size="22" tabindex="3" type="text">
+				<label for="url">网站</label>
+			</p>
+		</div>
+		
+				
+		<!--<p><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>-->
+		
+		<div id="re-use"><textarea name="comment" id="comment" cols="55" rows="6" tabindex="4"></textarea></div>
+		<p>
+			<input class="formbutton" name="submit" id="submit" tabindex="5" value="发布评论" type="submit">
+			<input name="comment_post_ID" value="60" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+		</p>
+		
+		<div id="commentload" style="display: none;">评论正在提交...</div>
+	
+	</form>
+	
+	<div id="commenterror"></div>
+	
+	
+</div>
+
+
+
+</div>			</div>
+			<!-- content end -->
+
+			
+			<!-- sidebar start -->
+			<div id="left-sidebar" class="sidebar">
+				<div id="text-287232344" class="widget widget_text"><h3 class="widget-title">GoogleAD</h3>			<div class="textwidget">
+</div>
+		</div><div id="categories-3" class="widget widget_categories"><h3 class="widget-title">按图索骥</h3>		<ul>
+	<li class="cat-item cat-item-132"><a href="http://www.teyi.org/articles/category/cms%e7%9b%b8%e5%85%b3" title="查看 CMS相关 下的所有文章">CMS相关</a>
+</li>
+	<li class="cat-item cat-item-171"><a href="http://www.teyi.org/articles/category/godaddy%e5%9f%9f%e5%90%8d" title="查看 Godaddy域名 下的所有文章">Godaddy域名</a>
+</li>
+	<li class="cat-item cat-item-175"><a href="http://www.teyi.org/articles/category/%e4%b8%bb%e9%a2%98%e6%a8%a1%e7%89%88/typecho" title="查看 typecho 下的所有文章">typecho</a>
+</li>
+	<li class="cat-item cat-item-62"><a href="http://www.teyi.org/articles/category/%e4%b8%bb%e9%a2%98%e6%a8%a1%e7%89%88/wordpress" title="查看 wordpress 下的所有文章">wordpress</a>
+</li>
+	<li class="cat-item cat-item-174"><a href="http://www.teyi.org/articles/category/%e4%b8%bb%e9%a2%98%e6%a8%a1%e7%89%88" title="查看 主题模版 下的所有文章">主题模版</a>
+</li>
+	<li class="cat-item cat-item-81"><a href="http://www.teyi.org/articles/category/office-software" title="办公软件word、excel、powerpoint等教程">办公软件</a>
+</li>
+	<li class="cat-item cat-item-75"><a href="http://www.teyi.org/articles/category/blog-helper" title="收集和blog相关的一切东东。">博客助手</a>
+</li>
+	<li class="cat-item cat-item-120"><a href="http://www.teyi.org/articles/category/koubei-huati" title="介绍一些博客口碑话题的消息，有钱大家赚！">口碑话题</a>
+</li>
+	<li class="cat-item cat-item-76"><a href="http://www.teyi.org/articles/category/it-and-blog" title="关于IT，blog，web2.0等">挨踢剥壳</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="http://www.teyi.org/articles/category/news" title="新闻不联播">新闻联播</a>
+</li>
+	<li class="cat-item cat-item-79"><a href="http://www.teyi.org/articles/category/recommendation" title="值得推荐">特意推荐</a>
+</li>
+	<li class="cat-item cat-item-80"><a href="http://www.teyi.org/articles/category/collection" title="值得收集">特意收集</a>
+</li>
+	<li class="cat-item cat-item-82"><a href="http://www.teyi.org/articles/category/speech" title="白日梦话">痴人呓语</a>
+</li>
+	<li class="cat-item cat-item-31"><a href="http://www.teyi.org/articles/category/website" title="新手站长的纸上谈兵">网站运营</a>
+</li>
+	<li class="cat-item cat-item-156"><a href="http://www.teyi.org/articles/category/making-money-online" title="查看 网络赚钱 下的所有文章">网络赚钱</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://www.teyi.org/articles/category/virtual-hosting" title="虚拟主机">虚拟主机</a>
+</li>
+	<li class="cat-item cat-item-42"><a href="http://www.teyi.org/articles/category/%e9%98%bf%e9%87%8c%e5%a6%88%e5%a6%88" title="查看 阿里妈妈 下的所有文章">阿里妈妈</a>
+</li>
+		</ul>
+</div><div id="meta-3" class="widget widget_meta"><h3 class="widget-title">功能</h3>			<ul>
+						<li><a href="http://www.teyi.org/wp-login.php">登录</a></li>
+			<li><a href="http://www.teyi.org/feed" title="使用 RSS 2.0 同步站点内容">文章 <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://www.teyi.org/comments/feed" title="使用 RSS 同步站点的近期评论">评论 <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://wordpress.org/" title="基于 WordPress，优美的个人信息发布平台。">WordPress.org</a></li>
+						</ul>
+</div><div id="linkcat-2" class="widget widget_links"><h3 class="widget-title">Blogroll</h3>
+	<ul class="xoxo blogroll">
+<li><a href="http://www.lvcms.com/" rel="me&quot; onclick=&quot;javascript:pageTracker._trackPageview('/outbound/blogroll/www.lvcms.com');">LVCMS</a></li>
+<li><a href="http://www.oioq.cn/" rel="me&quot; onclick=&quot;javascript:pageTracker._trackPageview('/outbound/blogroll/www.oioq.cn');">偶爱偶妻</a></li>
+<li><a href="http://www.bokezhuanqian.com/" rel="&quot; onclick=&quot;javascript:pageTracker._trackPageview('/outbound/blogroll/www.bokezhuanqian.com');">博客赚钱</a></li>
+<li><a href="http://www.y9tm.com/" rel="me&quot; onclick=&quot;javascript:pageTracker._trackPageview('/outbound/blogroll/www.y9tm.com');">永久脱毛方法大全</a></li>
+<li><a href="http://www.aiqige.com/" rel="&quot; onclick=&quot;javascript:pageTracker._trackPageview('/outbound/blogroll/www.aiqige.com');">爱妻阁</a></li>
+<li><a href="http://imutong.com/wordpress/" rel="&quot; onclick=&quot;javascript:pageTracker._trackPageview('/outbound/blogroll/imutong.com');">牧童的琐事</a></li>
+
+	</ul>
+</div>
+			</div>
+
+			<div id="right-sidebar" class="sidebar">
+				<!-- searchform start -->
+<div id="searchbox" class="box">
+	
+		
+	<form action="http://www.teyi.org/" method="get">
+		<input class="searchfield" name="s" size="24" value="" type="text">
+		<input name="button" id="searchsubmit" value="搜寻" class="searchbutton" type="submit">
+	</form>
+	
+		
+</div>
+<!-- searchform end -->								
+										<div class="widget">
+						<h3 class="widget-title">最新文章</h3>
+						<ul>
+														<li><a href="http://www.teyi.org/articles/how-to-get-cnrdn-short-url.html" title="如何获得cnrdn的短网址">如何获得cnrdn的短网址</a></li>
+														<li><a href="http://www.teyi.org/articles/godaddy-214-winter199.html" title="Godaddy情人节1.99刀优惠码">Godaddy情人节1.99刀优惠码</a></li>
+														<li><a href="http://www.teyi.org/articles/%e6%b7%98%e5%ae%a2%e6%96%b0%e6%89%8b%e5%bf%85%e7%9c%8b%e7%9a%84%e6%96%b0%e6%89%8b%e6%b7%98%e5%ae%a2%e5%bf%83%e5%be%97.html" title="淘客新手必看的新手淘客心得">淘客新手必看的新手淘客心得</a></li>
+														<li><a href="http://www.teyi.org/articles/cufon-reason.html" title="WordPress主题标题中不显示中文汉字">WordPress主题标题中不显示中文汉字</a></li>
+														<li><a href="http://www.teyi.org/articles/taoke-jy.html" title="淘宝客经验分享">淘宝客经验分享</a></li>
+														<li><a href="http://www.teyi.org/articles/weibo-daren.html" title="如何快速成为新浪微博达人？新浪微博如何快速加星？">如何快速成为新浪微博达人？新浪微博如何快速加星？</a></li>
+														<li><a href="http://www.teyi.org/articles/alipay-shang.html" title="类似威客的支付宝担保悬赏">类似威客的支付宝担保悬赏</a></li>
+														<li><a href="http://www.teyi.org/articles/wz-collection.html" title="一些国外网赚的东东">一些国外网赚的东东</a></li>
+														<li><a href="http://www.teyi.org/articles/yige-taoke.html" title="辛劳的淘客">辛劳的淘客</a></li>
+														<li><a href="http://www.teyi.org/articles/domain-for-sell.html" title="卖几个域名">卖几个域名</a></li>
+													</ul>
+					</div>
+										
+										
+					<div class="widget">
+						<h3 class="widget-title">标签云</h3>
+						<a href="http://www.teyi.org/articles/tag/adsense" class="tag-link-12" title="7 个话题" style="font-size: 12pt;">Adsense</a>
+<a href="http://www.teyi.org/articles/tag/baidu" class="tag-link-154" title="2 个话题" style="font-size: 8pt;">baidu</a>
+<a href="http://www.teyi.org/articles/tag/blog" class="tag-link-21" title="18 个话题" style="font-size: 15.619pt;">blog</a>
+<a href="http://www.teyi.org/articles/tag/bsp" class="tag-link-23" title="3 个话题" style="font-size: 9.14286pt;">BSP</a>
+<a href="http://www.teyi.org/articles/tag/cms" class="tag-link-25" title="7 个话题" style="font-size: 12pt;">CMS</a>
+<a href="http://www.teyi.org/articles/tag/dreamhost" class="tag-link-36" title="3 个话题" style="font-size: 9.14286pt;">Dreamhost</a>
+<a href="http://www.teyi.org/articles/tag/drupal" class="tag-link-37" title="5 个话题" style="font-size: 10.8571pt;">drupal</a>
+<a href="http://www.teyi.org/articles/tag/firefox" class="tag-link-46" title="2 个话题" style="font-size: 8pt;">firefox</a>
+<a href="http://www.teyi.org/articles/tag/godaddy" class="tag-link-50" title="13 个话题" style="font-size: 14.381pt;">godaddy</a>
+<a href="http://www.teyi.org/articles/tag/google" class="tag-link-51" title="6 个话题" style="font-size: 11.5238pt;">Google</a>
+<a href="http://www.teyi.org/articles/tag/pagerank" class="tag-link-110" title="3 个话题" style="font-size: 9.14286pt;">pagerank</a>
+<a href="http://www.teyi.org/articles/tag/paypal" class="tag-link-52" title="2 个话题" style="font-size: 8pt;">paypal</a>
+<a href="http://www.teyi.org/articles/tag/picasa" class="tag-link-104" title="3 个话题" style="font-size: 9.14286pt;">Picasa</a>
+<a href="http://www.teyi.org/articles/tag/seo" class="tag-link-54" title="7 个话题" style="font-size: 12pt;">SEO</a>
+<a href="http://www.teyi.org/articles/tag/theme" class="tag-link-58" title="7 个话题" style="font-size: 12pt;">theme</a>
+<a href="http://www.teyi.org/articles/tag/web20" class="tag-link-59" title="4 个话题" style="font-size: 10.0952pt;">web2.0</a>
+<a href="http://www.teyi.org/articles/tag/windows" class="tag-link-117" title="2 个话题" style="font-size: 8pt;">windows</a>
+<a href="http://www.teyi.org/articles/tag/word" class="tag-link-61" title="3 个话题" style="font-size: 9.14286pt;">word</a>
+<a href="http://www.teyi.org/articles/tag/wordpress" class="tag-link-62" title="20 个话题" style="font-size: 16pt;">wordpress</a>
+<a href="http://www.teyi.org/articles/tag/%e5%8d%8e%e7%a1%95" class="tag-link-122" title="2 个话题" style="font-size: 8pt;">华硕</a>
+<a href="http://www.teyi.org/articles/tag/%e5%8d%9a%e5%ae%a2" class="tag-link-15" title="4 个话题" style="font-size: 10.0952pt;">博客</a>
+<a href="http://www.teyi.org/articles/tag/%e5%8f%a3%e7%a2%91%e8%af%9d%e9%a2%98" class="tag-link-126" title="3 个话题" style="font-size: 9.14286pt;">口碑话题</a>
+<a href="http://www.teyi.org/articles/tag/%e5%9b%be%e7%89%87" class="tag-link-105" title="2 个话题" style="font-size: 8pt;">图片</a>
+<a href="http://www.teyi.org/articles/tag/%e5%9f%9f%e5%90%8d" class="tag-link-14" title="17 个话题" style="font-size: 15.4286pt;">域名</a>
+<a href="http://www.teyi.org/articles/tag/%e5%a4%96%e9%93%be" class="tag-link-166" title="4 个话题" style="font-size: 10.0952pt;">外链</a>
+<a href="http://www.teyi.org/articles/tag/%e6%8f%92%e4%bb%b6" class="tag-link-67" title="2 个话题" style="font-size: 8pt;">插件</a>
+<a href="http://www.teyi.org/articles/tag/%e6%94%af%e4%bb%98%e5%ae%9d" class="tag-link-74" title="4 个话题" style="font-size: 10.0952pt;">支付宝</a>
+<a href="http://www.teyi.org/articles/tag/%e6%95%b0%e7%a0%81" class="tag-link-130" title="2 个话题" style="font-size: 8pt;">数码</a>
+<a href="http://www.teyi.org/articles/tag/%e6%b5%8f%e8%a7%88%e5%99%a8" class="tag-link-101" title="3 个话题" style="font-size: 9.14286pt;">浏览器</a>
+<a href="http://www.teyi.org/articles/tag/%e6%b7%98%e5%ae%9d" class="tag-link-70" title="2 个话题" style="font-size: 8pt;">淘宝</a>
+<a href="http://www.teyi.org/articles/tag/%e6%b7%98%e5%ae%9d%e5%ae%a2" class="tag-link-140" title="7 个话题" style="font-size: 12pt;">淘宝客</a>
+<a href="http://www.teyi.org/articles/tag/%e6%b7%98%e5%ae%a2" class="tag-link-71" title="10 个话题" style="font-size: 13.3333pt;">淘客</a>
+<a href="http://www.teyi.org/articles/tag/%e6%b7%98%e5%ae%a2%e6%8e%a8%e5%b9%bf" class="tag-link-72" title="3 个话题" style="font-size: 9.14286pt;">淘客推广</a>
+<a href="http://www.teyi.org/articles/tag/%e6%b8%b8%e6%88%8f" class="tag-link-108" title="3 个话题" style="font-size: 9.14286pt;">游戏</a>
+<a href="http://www.teyi.org/articles/tag/%e7%94%b5%e8%84%91" class="tag-link-34" title="5 个话题" style="font-size: 10.8571pt;">电脑</a>
+<a href="http://www.teyi.org/articles/tag/%e7%ab%99%e9%95%bf" class="tag-link-26" title="2 个话题" style="font-size: 8pt;">站长</a>
+<a href="http://www.teyi.org/articles/tag/%e7%ab%99%e9%95%bf%e5%b7%a5%e5%85%b7" class="tag-link-27" title="2 个话题" style="font-size: 8pt;">站长工具</a>
+<a href="http://www.teyi.org/articles/tag/%e7%bd%91%e5%9d%80%e5%af%bc%e8%88%aa" class="tag-link-141" title="2 个话题" style="font-size: 8pt;">网址导航</a>
+<a href="http://www.teyi.org/articles/tag/%e7%bd%91%e7%ab%99" class="tag-link-29" title="4 个话题" style="font-size: 10.0952pt;">网站</a>
+<a href="http://www.teyi.org/articles/tag/website" class="tag-link-31" title="3 个话题" style="font-size: 9.14286pt;">网站运营</a>
+<a href="http://www.teyi.org/articles/tag/making-money-online" class="tag-link-156" title="4 个话题" style="font-size: 10.0952pt;">网络赚钱</a>
+<a href="http://www.teyi.org/articles/tag/%e7%bd%91%e8%b5%9a" class="tag-link-32" title="6 个话题" style="font-size: 11.5238pt;">网赚</a>
+<a href="http://www.teyi.org/articles/tag/%e8%99%9a%e6%8b%9f%e4%b8%bb%e6%9c%ba" class="tag-link-78" title="8 个话题" style="font-size: 12.4762pt;">虚拟主机</a>
+<a href="http://www.teyi.org/articles/tag/%e8%b5%9a%e9%92%b1" class="tag-link-43" title="2 个话题" style="font-size: 8pt;">赚钱</a>
+<a href="http://www.teyi.org/articles/tag/%e9%98%bf%e9%87%8c%e5%a6%88%e5%a6%88" class="tag-link-42" title="2 个话题" style="font-size: 8pt;">阿里妈妈</a>					</div>
+				
+							</div>
+			<!-- sidebar end -->		</div>
+		<div class="clear"></div>
+		<!-- container end -->
+		
+		<!-- footer start -->
+				<div id="footer">
+			<div class="content">
+				<p>
+					Copyright ©2008-2012 特意集. All Rights Reserved.				</p>
+				<p><a href="http://www.miibeian.gov.cn/" rel="nofollow">鄂ICP备07000431号</a>. Theme designed by <a href="http://welee.me/" title="weleeTime" rel="external">weleeTime</a>.</p>
+				<div class="gotop"><a href="#" title="回到页顶">回到页顶</a></div>
+			</div>
+		</div>
+		<!-- footer end -->
+	
+	</div>
+	<!-- wrapper end -->
+
+<!-- javascript start -->
+
+
+
+<!-- javascript end -->
+	
+
+<!-- Google Analytics for WordPress | http://yoast.com/wordpress/google-analytics/ -->
+
+
+<!-- End of Google Analytics code -->
+		
+	
+</body>
+</html>

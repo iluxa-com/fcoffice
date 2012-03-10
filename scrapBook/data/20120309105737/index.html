@@ -1,0 +1,847 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<title>使用jQuery实现WordPress博客图片延迟加载 | 乾坤 Blog</title> 
+<meta name="description" content="当我们浏览图片比较多的博客时，如果发现下拉滚动条图片才加载（图片延迟加载），这应该是一个很酷的用户体验。这一效果是通过jQuery插件实现的。所谓的jQuery插件就是用JavaScript编写的一段Js文件。通过加载这一插件，我们能够实现长页面中图片延迟加载的效果，也就是在浏览器可视区域外的图片不会被载入，直至将页面滚动到可视区域才加载相应图片。 使用这个插件可以加速载入包含有很多图片的文章。浏览器将会在加载可见图片之后进入就绪状态。">
+<meta name="keywords" content="jQuery,WordPress">
+
+<link rel="alternate" type="application/rss+xml" title="乾坤 Blog RSS Feed" href="http://www.qiankuns.com/feed">
+<link rel="alternate" type="application/atom+xml" title="乾坤 Blog Atom Feed" href="http://www.qiankuns.com/feed/atom">
+<link rel="pingback" href="http://www.qiankuns.com/xmlrpc.php">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+<link rel="alternate" type="application/rss+xml" title="乾坤 Blog » 使用jQuery实现WordPress博客图片延迟加载 评论 Feed" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html/feed">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.qiankuns.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.qiankuns.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="博客折腾手记" href="http://www.qiankuns.com/2010/04/blog-zhe-teng.html">
+<link rel="next" title="我有腾讯微博了！" href="http://www.qiankuns.com/2010/04/i-have-qq-microblog.html">
+<meta name="generator" content="WordPress 3.3.1">
+<link rel="canonical" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html">
+<link rel="shortlink" href="http://www.qiankuns.com/?p=726">
+
+
+
+
+	
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+<div id="page">
+<div id="header">
+<div id="top">
+<div id="top_logo">
+			<div class="clear"></div>
+            	<div id="blogname"><a href="http://www.qiankuns.com/">乾坤 Blog</a>
+    <div id="blogtitle">博，因为自己还活着</div></div></div>
+		<div class="search">		
+			<form id="searchform" method="get" action="http://www.qiankuns.com/">
+				<input value="" name="s" id="s" size="30" type="text">
+				<button type="submit">搜索</button>
+			</form>
+		</div><div class="clear"></div>
+
+<div class="topnav">
+<div class="page_menu">
+<ul id="menu-pages-menu" class="navi">
+<li class="page_item page-item-0"><a href="http://www.qiankuns.com/" title="首页">Home</a></li>
+<li class="page_item page-item-187"><a href="http://www.qiankuns.com/about">关于</a></li>
+<li class="page_item page-item-1100"><a href="http://www.qiankuns.com/changelog">博客志</a></li>
+<li class="page_item page-item-247"><a href="http://www.qiankuns.com/archives">存档</a></li>
+<li class="page_item page-item-506"><a href="http://www.qiankuns.com/guestbook">留言</a></li>
+<li class="page_item page-item-2505"><a href="http://www.qiankuns.com/links">链接</a></li>
+</ul></div></div>
+<div id="rss"><ul>
+<li class="rssfeed"><a style="text-indent: 0pt;" href="http://www.qiankuns.com/feed" target="_top" class="icon1" title="欢迎订阅乾坤 Blog"><span style="opacity: 0;" class="hover"></span></a></li>
+</ul></div>
+<div class="clear"></div>
+</div>
+</div><div id="roll"><div title="回到顶部" id="roll_top"></div><div title="查看评论" id="ct"></div><div title="转到底部" id="fall"></div></div>
+<div id="content">
+<div id="crumbs"><a href="http://www.qiankuns.com/">Home</a> » <a href="http://www.qiankuns.com/category/myblog" title="查看 折腾博客 中的全部文章">折腾博客</a> » <span>使用jQuery实现WordPress博客图片延迟加载</span></div><div class="main"><div class="left">
+<div class="post_date"><span class="date_m">Apr</span><span class="date_d">12</span><span class="date_y">2010</span></div>
+<div class="article">
+<h2>使用jQuery实现WordPress博客图片延迟加载</h2>
+<div class="article_info">作者：QianKun &nbsp; 发布：2010-04-12 10:32 &nbsp; 分类：<a href="http://www.qiankuns.com/category/myblog" title="查看 折腾博客 中的全部文章" rel="category tag">折腾博客</a> &nbsp; 阅读：7,918 次 &nbsp; <a href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html#comments" title="《使用jQuery实现WordPress博客图片延迟加载》上的评论">43条评论</a> &nbsp; </div><div class="clear"></div>
+        <div class="context">
+        <p>当我们浏览图片比较多的博客时，如果发现下拉滚动条图片才加载（图片延迟加载），这应该是一个很酷的用户体验。这一效果是通过jQuery插件实现的。所谓的jQuery插件就是用JavaScript编写的一段Js文件。通过加载这一插件，我们能够实现长页面中图片延迟加载的效果，也就是在浏览器可视区域外的图片不会被载入，直至将页面滚动到可视区域才加载相应图片。 使用这个插件可以加速载入包含有很多图片的文章。浏览器将会在加载可见图片之后进入就绪状态。在某些情况下还可以降低服务器负担. </p>
+<p>实现这一效果的jQuery插件叫做：lazyload （<a href="http://cid-829f53e915e34c4a.skydrive.live.com/self.aspx/useful-softwares/20100412%5E_jquery.lazyload.zip" target="_top">下载地址</a>）</p>
+<p>由于我的博客经常有大量的图片，所以我折腾了一下，成功的实现了这个效果，感觉确实加快了访问多图片文章的载入速度。</p>
+<p>我的具体实现如下：</p>
+<p>1.下载lazyload.js并上传到主题相应的目录中</p>
+<p>2.在header.php文件&lt;/head&gt;标签前（最好在&lt;?php wp_head(); ?&gt;语句前）添加如下代码：</p>
+<blockquote>
+<p><font color="#000080">&lt;script type=”text/javascript” src=”</font><a href="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js%22"><font color="#000080">http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js”</font></a><font color="#000080">&gt;&lt;/script&gt;<br>&lt;script type=”text/javascript” src=”&lt;?php bloginfo(‘template_directory’);?&gt;/js/jquery.lazyload.js”&gt;&lt;/script&gt;<br>&lt;script type=”text/javascript”&gt;<br>$(function() {<br>$(“img”).lazyload({<br>placeholder : “&lt;?php bloginfo(‘template_directory’);?&gt;/images/grey.gif”,<br>effect : “fadeIn”<br>});<br>});<br>&lt;/script&gt;</font></p>
+</blockquote>
+<p>第1行市说明调用jQuery库</p>
+<p>第2行是说明lazyload.js文件的载入位置，&lt;?php bloginfo(‘template_directory’);?&gt;是调用相应主题路径的语句。</p>
+<p>第5行img是延迟加载所有图片，可根据实际情况更改，有时候我们并不想将侧边栏的留言者的头像延迟加载，而只是要实现文章中的图片使用该效果，则根据实际情况修改相应的img语句即可，比如#post img</p>
+<p>第6行语句是在图片加载前先用一个透明的灰色1×1像素的图片进行占位。</p>
+<p>第7行是实现图片“淡入”的效果</p>
+<p>当然上述只是我目前网页中的实现效果，它其他可用的效果还有很多，我就简略说一下：</p>
+<p>1.当图片没有看到之前先把图片载入200像素（不设置的话，默认载入像素是零）</p>
+<blockquote>
+<p><font color="#000080">$(“img”).lazyload({ threshold : 200 });</font></p>
+</blockquote>
+<p>2.在图片加载前先用一个透明的灰色1×1像素的图片进行占位</p>
+<blockquote>
+<p><font color="#000080">$(“img”).lazyload({ placeholder : “img/grey.gif” });</font></p>
+</blockquote>
+<p>3.自定义触发事件进行载入：比如“click”（鼠标点击）和”mouseover”(鼠标滑过)等事件触发加载图片，使用自定义的事件, 如: sporty 和 foobar；默认情况下处于等待状态, 直到用户滚动到窗口上图片所在位置。 在灰色占位图片被点击之前阻止加载图片：</p>
+<blockquote>
+<p><font color="#000080">$(“img”).lazyload({ <br>&nbsp;&nbsp;&nbsp; placeholder : “img/grey.gif”,<br>&nbsp;&nbsp;&nbsp; event : “click”<br>});</font></p>
+</blockquote>
+<p>4.通过定义effect 参数来定义一些图片显示效果，比如fadeIn</p>
+<blockquote>
+<p><font color="#000080">$(“img”).lazyload({ <br>&nbsp;&nbsp;&nbsp; placeholder : “img/grey.gif”,<br>&nbsp;&nbsp;&nbsp; effect : “fadeIn”<br>});</font></p>
+</blockquote>
+<p>5.图片在容器内显示：可以将插件用在可滚动容器的图片上, 例如带滚动条的 DIV 元素. 你要做的只是将容器定义为 jQuery 对象.</p>
+<p>CSS文件中：</p>
+<blockquote>
+<p><font color="#000080">#container {<br>&nbsp;&nbsp;&nbsp; height: 600px;<br>&nbsp;&nbsp;&nbsp; overflow: scroll;<br>}</font></p>
+</blockquote>
+<p>JavaScript 代码：</p>
+<blockquote>
+<p><font color="#000080">$(“img”).lazyload({&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp;&nbsp; placeholder : “img/grey.gif”,<br>&nbsp;&nbsp;&nbsp;&nbsp; container: $(“#container”)<br>});</font></p>
+</blockquote>
+<p>6.当图片不连续时：当图片不是连续排列，我们滚动页面的时候，lazy load会循环加载图片。在循环加载中，它会检查图片是否在可见区域内，默认情况是在找到第一张不在可视区域内的图片后，会停止循环。图片被认为是流式分布的, 图片在页面中的次序和 HTML 代码中次序相同. 但是在一些布局中, 这样的假设是不成立的. 不过你可以通过 failurelimit 选项来控制加载行为.</p>
+<blockquote>
+<p><font color="#000080">$(“img”).lazyload({ <br>&nbsp;&nbsp;&nbsp; failurelimit : 10<br>});</font></p>
+</blockquote>
+<p>设定failurelimint参数为10，它会当载入10张照片之后，停止寻找图片载入；</p>
+<p>7.延迟载入图片：Lazy Load 插件的一个不完整的功能, 但是这也能用来实现图片的延迟加载. 下面的代码实现了页面加载完成后再加载. 页面加载完成 5 秒后, 指定区域内的图片会自动进行加载.</p>
+<blockquote>
+<p><font color="#000080">$(function() {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; $(“img:below-the-fold”).lazyload({<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; placeholder : “img/grey.gif”, <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; event : “sporty”<br>&nbsp;&nbsp;&nbsp; });<br>});<br>$(window).bind(“load”, function() { <br>&nbsp;&nbsp;&nbsp; var timeout = setTimeout(function() {$(“img”).trigger(“sporty”)}, 5000);<br>});</font> </p>
+</blockquote>
+<p>具体文章参见《<a href="http://www.appelsiini.net/projects/lazyload">Lazy Load Plugin for jQuery</a>》 </p>
+<div class="wumii-hook"><div id="wumiiBtnDiv" style="clear: both; overflow: hidden; margin: 0pt; padding: 10px 0pt 0pt; text-shadow: none; text-indent: 0pt;">
+    <div id="wumiiLikeBtnDiv" style="position: static; float: left; display: inline; width: 89px; height: 28px; margin: 0pt 0pt 0pt 223px; padding: 0pt; background: url('widget_buttons_deepblue.png') no-repeat scroll 0pt 0pt transparent; text-indent: 0pt;">
+        <span id="wumiiNumLikes" style="float: left; width: 45px; height: 19px; line-height: 21px; margin: 4px 0pt 0pt; padding: 0pt; color: rgb(56, 92, 128); letter-spacing: 0pt; text-align: center; text-indent: 0pt; font-size: 12px;">6</span>
+        <span style="float: left; width: 40px; height: 29px; margin: 0pt; padding: 0pt; outline: medium none; cursor: pointer;" id="wumiiLikeBtn" hidefocus="true"></span>
+    </div>
+    <div id="wumiiRecommendBtnDiv" style="position: static; clear: none; float: left; display: inline; height: 28px; margin: 0pt; padding: 0pt 5px; text-indent: 0pt;">
+        <span id="wumiiRecommendBtn" hidefocus="true" style="float: left; display: inline; width: 60px; height: 28px; margin: 0pt 0pt 0pt 5px; padding: 0pt; background: url('widget_buttons_deepblue.png') no-repeat scroll -267px 0pt transparent; cursor: pointer; outline: medium none;"></span>
+        <img src="loading.gif" id="wumiiLoading" style="clear: none; display: none; height: 15px; margin: 7px 0pt 0pt 8px; padding: 0pt; border: 0pt none; background: none repeat scroll 0% 0% transparent; cursor: default;" alt="正在加载推荐文章">
+    </div>
+</div>
+<div class="wumii-related-items-div" style="margin: 0pt; border: medium none; padding: 0pt; clear: both; overflow: hidden;">
+    <div class="wumii-internal" style="padding: 0pt; margin: 0pt; border: medium none; clear: both; display: block;">
+        <div class="wumii-widget-title" style="margin: 0pt; border: medium none; padding: 20px 0pt 5px; text-indent: 0pt; text-align: left; font-weight: bold;">你可能也喜欢：</div>
+            <div class="wumii-image-row" style="clear: both; border: medium none; margin: 0pt 0pt 0pt -1px; padding: 0pt; overflow: hidden;">
+                    <a class="wumii-image-block" hidefocus="true" title="WordPress 博客中文文章摘要的实现" style="display: block; float: left; text-decoration: none; border-bottom: medium none; cursor: pointer; position: relative; margin: 5px 0pt; padding: 5px; width: 112px; text-align: left; outline: medium none; background-image: none; border-left: 1px solid rgb(255, 253, 227) ! important;" href="http://www.qiankuns.com/2010/01/wordpress-blog-chinese-articles-summary.html" onmousedown="this.href='http://app.wumii.com/ext/redirect?url=http%3A%2F%2Fwww.qiankuns.com%2F2010%2F01%2Fwordpress-blog-chinese-articles-summary.html&amp;ts=' + (new Date()).getTime() + '&amp;from=http%3A%2F%2Fwww.qiankuns.com%2F2010%2F04%2Fwordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html' + '&amp;ref=relatedItems'; return true;" onmouseup="t=this; setTimeout(function() {t.href='http://www.qiankuns.com/2010/01/wordpress-blog-chinese-articles-summary.html';}, 50); return true;">
+                        <div class="wumii-image-border" style="margin: 0pt; padding: 0pt; width: auto; height: 110px; border: 1px solid rgb(255, 253, 227);"></div>
+                        <img class="wumii-image" onerror="wumiiImageError(this);" src="5189646.jpg" style="position: absolute; border: medium none; background: none repeat scroll 0% 0% transparent; visibility: visible; padding: 0pt; margin: 0pt; width: 106px; height: 106px; clip: rect(0px, 106px, 106px, 0px); left: 8px; top: 8px;">
+                        <div class="wumii-image-title" style="height: 45px; width: 100%; margin: 3px 0pt 0pt; padding: 0pt; text-indent: 0pt; border: medium none; font: 12px/15px arial; overflow: hidden;">WordPress 博客中文文章摘要的实现</div>
+                    </a>
+                    <a class="wumii-image-block" hidefocus="true" title="缓存WordPress评论者的Gravatar头像" style="display: block; float: left; text-decoration: none; border-bottom: medium none; cursor: pointer; position: relative; margin: 5px 0pt; padding: 5px; width: 112px; text-align: left; outline: medium none; background-image: none; border-left: 1px solid rgb(255, 253, 227) ! important;" href="http://www.qiankuns.com/2010/09/cache-wordpress-comments-gravatar-avatar.html" onmousedown="this.href='http://app.wumii.com/ext/redirect?url=http%3A%2F%2Fwww.qiankuns.com%2F2010%2F09%2Fcache-wordpress-comments-gravatar-avatar.html&amp;ts=' + (new Date()).getTime() + '&amp;from=http%3A%2F%2Fwww.qiankuns.com%2F2010%2F04%2Fwordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html' + '&amp;ref=relatedItems'; return true;" onmouseup="t=this; setTimeout(function() {t.href='http://www.qiankuns.com/2010/09/cache-wordpress-comments-gravatar-avatar.html';}, 50); return true;">
+                        <div class="wumii-image-border" style="margin: 0pt; padding: 0pt; width: auto; height: 110px; border: 1px solid rgb(255, 253, 227);"></div>
+                        <img class="wumii-image" onerror="wumiiImageError(this);" src="5188301.png" style="position: absolute; border: medium none; background: none repeat scroll 0% 0% transparent; visibility: visible; padding: 0pt; margin: 0pt; width: 106px; height: 106px; clip: rect(0px, 106px, 106px, 0px); left: 8px; top: 8px;">
+                        <div class="wumii-image-title" style="height: 45px; width: 100%; margin: 3px 0pt 0pt; padding: 0pt; text-indent: 0pt; border: medium none; font: 12px/15px arial; overflow: hidden;">缓存WordPress评论者的Gravatar头像</div>
+                    </a>
+                    <a class="wumii-image-block" hidefocus="true" title="手动添加WordPress的description和keywords" style="display: block; float: left; text-decoration: none; border-bottom: medium none; cursor: pointer; position: relative; margin: 5px 0pt; padding: 5px; width: 112px; text-align: left; outline: medium none; background-image: none; border-left: 1px solid rgb(255, 253, 227) ! important;" href="http://www.qiankuns.com/2010/09/add-description-and-keywords-wordpress.html" onmousedown="this.href='http://app.wumii.com/ext/redirect?url=http%3A%2F%2Fwww.qiankuns.com%2F2010%2F09%2Fadd-description-and-keywords-wordpress.html&amp;ts=' + (new Date()).getTime() + '&amp;from=http%3A%2F%2Fwww.qiankuns.com%2F2010%2F04%2Fwordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html' + '&amp;ref=relatedItems'; return true;" onmouseup="t=this; setTimeout(function() {t.href='http://www.qiankuns.com/2010/09/add-description-and-keywords-wordpress.html';}, 50); return true;">
+                        <div class="wumii-image-border" style="margin: 0pt; padding: 0pt; width: auto; height: 110px; border: 1px solid rgb(255, 253, 227);"></div>
+                        <img class="wumii-image" onerror="wumiiImageError(this);" src="5194281.png" style="position: absolute; border: medium none; background: none repeat scroll 0% 0% transparent; visibility: visible; padding: 0pt; margin: 0pt; width: 106px; height: 106px; clip: rect(0px, 106px, 106px, 0px); left: 8px; top: 8px;">
+                        <div class="wumii-image-title" style="height: 45px; width: 100%; margin: 3px 0pt 0pt; padding: 0pt; text-indent: 0pt; border: medium none; font: 12px/15px arial; overflow: hidden;">手动添加WordPress的description和keywords</div>
+                    </a>
+                    <a class="wumii-image-block" hidefocus="true" title="WordPress网站启用Gzip压缩网页、CSS和JS" style="display: block; float: left; text-decoration: none; border-bottom: medium none; cursor: pointer; position: relative; margin: 5px 0pt; padding: 5px; width: 112px; text-align: left; outline: medium none; background-image: none; border-left: 1px solid rgb(255, 253, 227) ! important;" href="http://www.qiankuns.com/2010/04/wordpress-gzip-compression-web-css-js.html" onmousedown="this.href='http://app.wumii.com/ext/redirect?url=http%3A%2F%2Fwww.qiankuns.com%2F2010%2F04%2Fwordpress-gzip-compression-web-css-js.html&amp;ts=' + (new Date()).getTime() + '&amp;from=http%3A%2F%2Fwww.qiankuns.com%2F2010%2F04%2Fwordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html' + '&amp;ref=relatedItems'; return true;" onmouseup="t=this; setTimeout(function() {t.href='http://www.qiankuns.com/2010/04/wordpress-gzip-compression-web-css-js.html';}, 50); return true;">
+                        <div class="wumii-image-border" style="margin: 0pt; padding: 0pt; width: auto; height: 110px; border: 1px solid rgb(255, 253, 227);"></div>
+                        <img class="wumii-image" onerror="wumiiImageError(this);" src="5195358.png" style="position: absolute; border: medium none; background: none repeat scroll 0% 0% transparent; visibility: visible; padding: 0pt; margin: 0pt; width: 106px; height: 106px; clip: rect(0px, 106px, 106px, 0px); left: 8px; top: 8px;">
+                        <div class="wumii-image-title" style="height: 45px; width: 100%; margin: 3px 0pt 0pt; padding: 0pt; text-indent: 0pt; border: medium none; font: 12px/15px arial; overflow: hidden;">WordPress网站启用Gzip压缩网页、CSS和JS</div>
+                    </a>
+                    <a class="wumii-image-block" hidefocus="true" title="为wordpress分页页面标题加上“第几页”" style="display: block; float: left; text-decoration: none; border-bottom: medium none; cursor: pointer; position: relative; margin: 5px 0pt; padding: 5px; width: 112px; text-align: left; outline: medium none; background-image: none; border-left: 1px solid rgb(255, 253, 227) ! important;" href="http://www.qiankuns.com/2010/09/wordpress-page-title-with-page-number.html" onmousedown="this.href='http://app.wumii.com/ext/redirect?url=http%3A%2F%2Fwww.qiankuns.com%2F2010%2F09%2Fwordpress-page-title-with-page-number.html&amp;ts=' + (new Date()).getTime() + '&amp;from=http%3A%2F%2Fwww.qiankuns.com%2F2010%2F04%2Fwordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html' + '&amp;ref=relatedItems'; return true;" onmouseup="t=this; setTimeout(function() {t.href='http://www.qiankuns.com/2010/09/wordpress-page-title-with-page-number.html';}, 50); return true;">
+                        <div class="wumii-image-border" style="margin: 0pt; padding: 0pt; width: auto; height: 110px; border: 1px solid rgb(255, 253, 227);"></div>
+                        <img class="wumii-image" onerror="wumiiImageError(this);" src="5186844.png" style="position: absolute; border: medium none; background: none repeat scroll 0% 0% transparent; visibility: visible; padding: 0pt; margin: 0pt; width: 106px; height: 106px; clip: rect(0px, 106px, 106px, 0px); left: 8px; top: 8px;">
+                        <div class="wumii-image-title" style="height: 45px; width: 100%; margin: 3px 0pt 0pt; padding: 0pt; text-indent: 0pt; border: medium none; font: 12px/15px arial; overflow: hidden;">为wordpress分页页面标题加上“第几页”</div>
+                    </a>
+            </div>
+    </div>
+        <div style="margin: 0pt; border: medium none; padding: 5px 0pt; clear: both; text-align: right;">
+            <a href="http://www.wumii.com/widget/relatedItems" target="_top" title="无觅相关文章插件" style="font: 12px arial; color: rgb(187, 187, 187); border-bottom: medium none; word-wrap: normal; display: none;">无觅</a>
+            <img class=" uvywebnyjbvixhfwnjbh" style="display: none;" src="pixel.png">
+        </div>
+</div>
+
+</div>
+</div>
+        </div>
+</div>
+<div class="articles">
+<div class="author_pic">
+					<a href="#" title=""><img original="http://1.gravatar.com/avatar/fd63905eb72d55b9488ba46e41cd3175?s=48&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D48&amp;r=G" alt="" src="image-pending.gif" class="avatar avatar-48 photo" width="48" height="48"></a>
+				</div>
+<div class="author_text">
+			<span class="spostinfo">
+				该日志由 QianKun 于2010年04月12日发表在 <a href="http://www.qiankuns.com/category/myblog" title="查看 折腾博客 中的全部文章" rel="category tag">折腾博客</a> 分类下，
+								你可以<a href="#respond">发表评论</a>，并在保留<a href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html" rel="bookmark">原文地址</a>及作者的情况下<a href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html/trackback" rel="trackback">引用</a>到你的网站或博客。
+				<br>
+				原创文章转载请注明: <a href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html" rel="bookmark" title="本文固定链接 http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html">使用jQuery实现WordPress博客图片延迟加载 | 乾坤 Blog</a><br>
+				本文固定链接: <a href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html" rel="bookmark" title="使用jQuery实现WordPress博客图片延迟加载">http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html</a><br>
+				关键字: <a href="http://www.qiankuns.com/tag/jquery" rel="tag">jQuery</a>, <a href="http://www.qiankuns.com/tag/wordpress" rel="tag">WordPress</a>			</span>
+				</div>
+</div>
+
+<div class="articles">
+【上一篇】<a href="http://www.qiankuns.com/2010/04/blog-zhe-teng.html" rel="prev">博客折腾手记</a><br>【下一篇】<a href="http://www.qiankuns.com/2010/04/i-have-qq-microblog.html" rel="next">我有腾讯微博了！</a></div>
+
+<div class="articles">
+<div class="relatedposts">
+	<h3>您可能还会对这些文章感兴趣！</h3><ol>			<li><a href="http://www.qiankuns.com/2011/08/add-back-to-the-top-navigation.html" rel="bookmark" title="为网站添加“返回顶部”导航">为网站添加“返回顶部”导航(17)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/05/blog-today-in-history.html" rel="bookmark" title="为博客添加“当年今日”功能">为博客添加“当年今日”功能(12)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/04/add-copyright-announce-article-feed.html" rel="bookmark" title="重新给文章及feed加了版权声明">重新给文章及feed加了版权声明(3)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/04/avoid-self-pingback-and-remove-upgrade-notice.html" rel="bookmark" title="避免WordPress内链pingback及去除后台升级提示">避免WordPress内链pingback及去除后台升级提示(4)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/04/mail-to-commenter-style-lost.html" rel="bookmark" title="WordPress插件Mail to Commenter样式丢失">WordPress插件Mail to Commenter样式丢失(7)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/04/use-wumii-related-posts.html" rel="bookmark" title="启用无觅相关文章插件">启用无觅相关文章插件 </a></li>
+						<li><a href="http://www.qiankuns.com/2011/03/comment-mail-notify-problem.html" rel="bookmark" title="Comment Mail Notify邮件回复代码的一个问题">Comment Mail Notify邮件回复代码的一个问题 </a></li>
+						<li><a href="http://www.qiankuns.com/2011/03/comment-mail-notify-and-wp-anti-spam.html" rel="bookmark" title="使用Comment Mail Notify 和 WP Anti Spam 小墙">使用Comment Mail Notify 和 WP Anti Spam(13)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/03/some-problems-of-mail-to-commenter.html" rel="bookmark" title="关于WordPress插件Mail To Commenter使用的几个问题">关于WordPress插件Mail To Commenter使用的几(11)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/03/mail-to-commenter-style.html" rel="bookmark" title="WordPress中Mail To Commenter插件的回复邮件样式">WordPress中Mail To Commenter插件的回复邮件(7)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/03/wp-commentmeta-table-clean-up.html" rel="bookmark" title="WordPress数据库wp_commentmeta表清理">WordPress数据库wp_commentmeta表清理(8)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/02/problems-after-upgrade-wordpress-3-1.html" rel="bookmark" title="博客升级至WordPress3.1版本后遇到的问题">博客升级至WordPress3.1版本后遇到的问题(21)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/02/wordpress-3-1-tool-bar.html" rel="bookmark" title="WordPress 3.1多了个工具条">WordPress 3.1多了个工具条(6)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/02/blog-sidebar-last-updated-time.html" rel="bookmark" title="给博客侧边栏添加最后更新时间和网站运行时间等">给博客侧边栏添加最后更新时间和网站运行时间等(8)</a></li>
+						<li><a href="http://www.qiankuns.com/2011/01/wordpress-change-domain-same-hosting.html" rel="bookmark" title="WordPress博客同一主机更换域名的方法">WordPress博客同一主机更换域名的方法(2)</a></li>
+						<li><a href="http://www.qiankuns.com/2010/12/modify-wordpress-achieves-date-display-format.html" rel="bookmark" title="修改WordPress 文章存档（Achieves）列表的日期显示格式">修改WordPress 文章存档（Achieves）列表的日期(6)</a></li>
+			</ol></div><div class="clear"></div>
+</div>
+
+<div class="articles">
+<!-- You can start editing here. -->
+	<h3 id="comments">使用jQuery实现WordPress博客图片延迟加载：目前有43 条留言</h3>
+	<ol class="commentlist">
+	<li class="comment even thread-even depth-1" id="comment-860">
+   <div id="div-comment-860" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/7ba1fd5a0ca82777d4b6cf6711587db0.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">沙发         </div><strong><a href="http://nfplayer.com/" rel="external nofollow" class="url">NFPlayEr</a></strong>:</div>
+				<p> <img original="http://www.qiankuns.com/wp-includes/images/smilies/icon_cool.gif" src="image-pending.gif" alt=":cool:" class="wp-smiley">  强大！收下了！</p>
+        
+		<div class="clear"></div><span class="datetime">2010-07-19 16:57 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=860#respond" onclick='return addComment.moveForm("div-comment-860", "860", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="comment-887">
+   <div id="div-comment-887" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/3aa6e93148987fd8208a71b288591627.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankun.org.ru/" rel="external nofollow" class="url">Qiankun</a></strong>:</div>
+				<p><a href="#comment-860" rel="nofollow">@NFPlayEr </a>确实很强大！</p>
+        
+		<div class="clear"></div><span class="datetime">2010-07-19 22:49 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=887#respond" onclick='return addComment.moveForm("div-comment-887", "887", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment even thread-odd thread-alt depth-1" id="comment-1196">
+   <div id="div-comment-1196" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/adbe990c92551fea9e8c2c76ad7347ae.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">板凳         </div><strong><a href="http://www.netmosey.com/" rel="external nofollow" class="url">sunyixiang</a></strong>:</div>
+				<p> <img original="http://www.qiankuns.com/wp-includes/images/smilies/icon_sad.gif" src="image-pending.gif" alt=":sad:" class="wp-smiley">  比较复杂。。。</p>
+        
+		<div class="clear"></div><span class="datetime">2010-08-29 18:14 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1196#respond" onclick='return addComment.moveForm("div-comment-1196", "1196", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="comment-1197">
+   <div id="div-comment-1197" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/3aa6e93148987fd8208a71b288591627.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankun.org.ru/" rel="external nofollow" class="url">Qiankun</a></strong>:</div>
+				<p><a href="#comment-1196" rel="nofollow">@sunyixiang </a>其实就是上传个文件，修改一下代码就OK了</p>
+        
+		<div class="clear"></div><span class="datetime">2010-08-29 18:36 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1197#respond" onclick='return addComment.moveForm("div-comment-1197", "1197", "respond", "726")'>[回复]</a></span>
+  </div>
+</li><li class="comment even depth-2" id="comment-1199">
+   <div id="div-comment-1199" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/adbe990c92551fea9e8c2c76ad7347ae.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.netmosey.com/" rel="external nofollow" class="url">sunyixiang</a></strong>:</div>
+				<p><a href="#comment-1197" rel="nofollow">@Qiankun </a>修改一下代码？我看你写的要修改好多，而且我不知道应该把那些代码加在哪里？</p>
+        
+		<div class="clear"></div><span class="datetime">2010-08-29 19:42 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1199#respond" onclick='return addComment.moveForm("div-comment-1199", "1199", "respond", "726")'>[回复]</a></span>
+  </div>
+</li><li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="comment-1201">
+   <div id="div-comment-1201" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/3aa6e93148987fd8208a71b288591627.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankun.org.ru/" rel="external nofollow" class="url">Qiankun</a></strong>:</div>
+				<p><a href="#comment-1199" rel="nofollow">@sunyixiang </a>下载lazyload，将里面的js文件和gif文件上传WordPress空间主题内，然后参照我最开始的说明步骤将代码加在header.php或footer.php中就行了。</p>
+        
+		<div class="clear"></div><span class="datetime">2010-08-29 19:55 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1201#respond" onclick='return addComment.moveForm("div-comment-1201", "1201", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment even thread-even depth-1" id="comment-1200">
+   <div id="div-comment-1200" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/adbe990c92551fea9e8c2c76ad7347ae.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">地板         </div><strong><a href="http://www.netmosey.com/" rel="external nofollow" class="url">sunyixiang</a></strong>:</div>
+				<p>顺便说下，我博客的图片全部是外链的，这个管用么？</p>
+        
+		<div class="clear"></div><span class="datetime">2010-08-29 19:49 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1200#respond" onclick='return addComment.moveForm("div-comment-1200", "1200", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="comment-1202">
+   <div id="div-comment-1202" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/3aa6e93148987fd8208a71b288591627.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankun.org.ru/" rel="external nofollow" class="url">Qiankun</a></strong>:</div>
+				<p><a href="#comment-1200" rel="nofollow">@sunyixiang </a>同样可以使用，只要引用路径是以图片格式结尾的即可。</p>
+        
+		<div class="clear"></div><span class="datetime">2010-08-29 19:57 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1202#respond" onclick='return addComment.moveForm("div-comment-1202", "1202", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment even thread-odd thread-alt depth-1" id="comment-1203">
+   <div id="div-comment-1203" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/adbe990c92551fea9e8c2c76ad7347ae.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">4楼         </div><strong><a href="http://www.netmosey.com/" rel="external nofollow" class="url">sunyixiang</a></strong>:</div>
+				<p>不是图片格式结尾的<br>
+<a href="http://app.onlinephotofiler.com/images/A_1/4/1/5/135141/4894a79e14834ec591034d8a8e3deb83.1600x1200.jpg" rel="nofollow">http://app.onlinephotofiler.com/images/A_1/4/1/5/135141/4894a79e14834ec591034d8a8e3deb83.1600×1200.jpg</a></p>
+        
+		<div class="clear"></div><span class="datetime">2010-08-29 20:00 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1203#respond" onclick='return addComment.moveForm("div-comment-1203", "1203", "respond", "726")'>[回复]</a></span>
+  </div>
+</li><li class="comment odd alt thread-even depth-1" id="comment-1204">
+   <div id="div-comment-1204" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/adbe990c92551fea9e8c2c76ad7347ae.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">5楼         </div><strong><a href="http://www.netmosey.com/" rel="external nofollow" class="url">sunyixiang</a></strong>:</div>
+				<p>错了，应该是这个<br>
+<a href="http://app.onlinephotofiler.com/Img1/A_1/4/1/5/135141/07f02aa4dc424278b6860bdb1287469a.jpg?uid=206e6c06-7da6-49d2-ad0c-c800cfcf873e" rel="nofollow">http://app.onlinephotofiler.com/Img1/A_1/4/1/5/135141/07f02aa4dc424278b6860bdb1287469a.jpg?uid=206e6c06-7da6-49d2-ad0c-c800cfcf873e</a></p>
+        
+		<div class="clear"></div><span class="datetime">2010-08-29 20:01 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1204#respond" onclick='return addComment.moveForm("div-comment-1204", "1204", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor even depth-2" id="comment-1206">
+   <div id="div-comment-1206" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/3aa6e93148987fd8208a71b288591627.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankun.org.ru/" rel="external nofollow" class="url">Qiankun</a></strong>:</div>
+				<p><a href="#comment-1204" rel="nofollow">@sunyixiang </a>针对这种格式，你把jpg后面？的那一串去掉，就可以正常延迟加载了</p>
+        
+		<div class="clear"></div><span class="datetime">2010-08-29 20:07 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1206#respond" onclick='return addComment.moveForm("div-comment-1206", "1206", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment odd alt thread-odd thread-alt depth-1" id="comment-1205">
+   <div id="div-comment-1205" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/adbe990c92551fea9e8c2c76ad7347ae.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">6楼         </div><strong><a href="http://www.netmosey.com/" rel="external nofollow" class="url">sunyixiang</a></strong>:</div>
+				<p>有的是，有的不是 <img original="http://www.qiankuns.com/wp-includes/images/smilies/icon_sad.gif" src="image-pending.gif" alt=":sad:" class="wp-smiley"> </p>
+        
+		<div class="clear"></div><span class="datetime">2010-08-29 20:01 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1205#respond" onclick='return addComment.moveForm("div-comment-1205", "1205", "respond", "726")'>[回复]</a></span>
+  </div>
+</li><li class="comment even thread-even depth-1" id="comment-1207">
+   <div id="div-comment-1207" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/adbe990c92551fea9e8c2c76ad7347ae.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">7楼         </div><strong><a href="http://www.netmosey.com/" rel="external nofollow" class="url">sunyixiang</a></strong>:</div>
+				<p>我QQ 491852803 热线求助 <img original="http://www.qiankuns.com/wp-includes/images/smilies/icon_lol.gif" src="image-pending.gif" alt=":lol:" class="wp-smiley"> </p>
+        
+		<div class="clear"></div><span class="datetime">2010-08-29 20:09 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1207#respond" onclick='return addComment.moveForm("div-comment-1207", "1207", "respond", "726")'>[回复]</a></span>
+  </div>
+</li><li class="comment odd alt thread-odd thread-alt depth-1" id="comment-1938">
+   <div id="div-comment-1938" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/59d9fbb358db34ed1eed10a1ed47e0c3.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">8楼         </div><strong><a href="http://ireimu.net/" rel="external nofollow" class="url">玻璃柠檬</a></strong>:</div>
+				<p>我正好在折腾这玩意，没想到Google大神带我来你这了，用插见太傻，侧栏如果不划下去就不出图，怎样只加载评论和文章里的图片啊？</p>
+        
+		<div class="clear"></div><span class="datetime">2010-10-12 14:44 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1938#respond" onclick='return addComment.moveForm("div-comment-1938", "1938", "respond", "726")'>[回复]</a></span>
+  </div>
+</li><li class="comment even thread-even depth-1" id="comment-1942">
+   <div id="div-comment-1942" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/59d9fbb358db34ed1eed10a1ed47e0c3.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">9楼         </div><strong><a href="http://ireimu.net/" rel="external nofollow" class="url">玻璃柠檬</a></strong>:</div>
+				<p>哈哈自己搞定了··</p>
+        
+		<div class="clear"></div><span class="datetime">2010-10-12 17:05 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1942#respond" onclick='return addComment.moveForm("div-comment-1942", "1942", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="comment-1943">
+   <div id="div-comment-1943" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/3aa6e93148987fd8208a71b288591627.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankun.org.ru/" rel="external nofollow" class="url">Qiankun</a></strong>:</div>
+				<p><a href="#comment-1942" rel="nofollow">@玻璃柠檬 </a>看了一下你刚发的文章，http://ireimu.net/362.html，觉得你可以将插件去除了，直接在源代码里面调用就行了</p>
+        
+		<div class="clear"></div><span class="datetime">2010-10-12 17:10 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1943#respond" onclick='return addComment.moveForm("div-comment-1943", "1943", "respond", "726")'>[回复]</a></span>
+  </div>
+</li><li class="comment even depth-2" id="comment-1985">
+   <div id="div-comment-1985" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/59d9fbb358db34ed1eed10a1ed47e0c3.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://ireimu.net/" rel="external nofollow" class="url">玻璃柠檬</a></strong>:</div>
+				<p><a href="#comment-1943" rel="nofollow">@Qiankun </a>恩，回家就Ban掉他。</p>
+        
+		<div class="clear"></div><span class="datetime">2010-10-14 08:34 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=1985#respond" onclick='return addComment.moveForm("div-comment-1985", "1985", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment odd alt thread-odd thread-alt depth-1" id="comment-2362">
+   <div id="div-comment-2362" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/86dfe185fd9b7d2e89cc838a8f862558.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">10楼         </div><strong>逍遥</strong>:</div>
+				<p>为什么我把img改成#post img 之后还是无法实现文章部分的图片延迟加载?  只有代码是img的情况下才会出现延迟效果. 不过我想实现侧边栏不进行延迟显示.. 可是加了#post img就彻底没有延迟了… 求助.</p>
+        
+		<div class="clear"></div><span class="datetime">2010-10-30 04:36 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=2362#respond" onclick='return addComment.moveForm("div-comment-2362", "2362", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor even depth-2" id="comment-2368">
+   <div id="div-comment-2368" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/3aa6e93148987fd8208a71b288591627.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankun.org.ru/" rel="external nofollow" class="url">Qiankun</a></strong>:</div>
+				<p><a href="#comment-2362" rel="nofollow">@逍遥 </a><br>
+上面我举得#post img 只是一个例子，具体怎么设置还要要根据你博客源代码图片调用进行设置的。<br>
+同时这个延迟的代码，只是针对屏幕不可见区域的图片载入有延迟效果，如果你进入博客后，侧边栏的头像就在屏幕的可见区域，图片不会延迟加载的。</p>
+        
+		<div class="clear"></div><span class="datetime">2010-10-30 12:52 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=2368#respond" onclick='return addComment.moveForm("div-comment-2368", "2368", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment odd alt thread-even depth-1" id="comment-3479">
+   <div id="div-comment-3479" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/6360566d5fa0b2f997a9489ec8205d64.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">11楼         </div><strong>edwin</strong>:</div>
+				<p>感谢,按照乾坤的教程已经安装完毕,只是测试看不出效果….可能是浏览器已经有本地缓存了吧</p>
+        
+		<div class="clear"></div><span class="datetime">2011-01-30 09:53 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=3479#respond" onclick='return addComment.moveForm("div-comment-3479", "3479", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor even depth-2" id="comment-3489">
+   <div id="div-comment-3489" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/fd63905eb72d55b9488ba46e41cd3175.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankun.org.ru/" rel="external nofollow" class="url">Qiankun</a></strong>:</div>
+				<p><a href="#comment-3479" rel="nofollow">@edwin </a>是不是用了缓存插件，或者你强制刷新本地缓存试试~</p>
+        
+		<div class="clear"></div><span class="datetime">2011-01-30 13:51 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=3489#respond" onclick='return addComment.moveForm("div-comment-3489", "3489", "respond", "726")'>[回复]</a></span>
+  </div>
+</li><li class="comment odd alt depth-2" id="comment-3495">
+   <div id="div-comment-3495" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/6360566d5fa0b2f997a9489ec8205d64.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://edorz.com/" rel="external nofollow" class="url">edwin</a></strong>:</div>
+				<p><a href="#comment-3489" rel="nofollow">@Qiankun </a></p>
+<p>测试成功,感谢分享,JS文件放到了主题里的JS文件夹,图片放到了主题里的images文件夹.</p>
+        
+		<div class="clear"></div><span class="datetime">2011-01-30 16:19 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=3495#respond" onclick='return addComment.moveForm("div-comment-3495", "3495", "respond", "726")'>[回复]</a></span>
+  </div>
+</li><li class="comment byuser comment-author-admin bypostauthor even depth-2" id="comment-3529">
+   <div id="div-comment-3529" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/fd63905eb72d55b9488ba46e41cd3175.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankun.org.ru/" rel="external nofollow" class="url">Qiankun</a></strong>:</div>
+				<p><a href="#comment-3495" rel="nofollow">@edwin </a>恭喜了~</p>
+        
+		<div class="clear"></div><span class="datetime">2011-01-31 11:13 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=3529#respond" onclick='return addComment.moveForm("div-comment-3529", "3529", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment odd alt thread-odd thread-alt depth-1" id="comment-4110">
+   <div id="div-comment-4110" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/cc4cb23ed3dfb6abce1d31f9665c9ba2.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">12楼         </div><strong><a href="http://www.jauia.com/" rel="external nofollow" class="url">Jauia</a></strong>:</div>
+				<p>写的很详细，对小白很有用..</p>
+        
+		<div class="clear"></div><span class="datetime">2011-02-15 01:13 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=4110#respond" onclick='return addComment.moveForm("div-comment-4110", "4110", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor even depth-2" id="comment-4115">
+   <div id="div-comment-4115" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/fd63905eb72d55b9488ba46e41cd3175.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankun.org.ru/" rel="external nofollow" class="url">Qiankun</a></strong>:</div>
+				<p><a href="#comment-4110" rel="nofollow">@Jauia </a>大家都是从小白过来的！</p>
+        
+		<div class="clear"></div><span class="datetime">2011-02-15 01:56 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=4115#respond" onclick='return addComment.moveForm("div-comment-4115", "4115", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment odd alt thread-even depth-1" id="comment-4758">
+   <div id="div-comment-4758" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/3bb7ab06854b38ffdd4ef870f21fdc5e.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">13楼         </div><strong><a href="http://www.v5china.com/" rel="external nofollow" class="url">威武中国</a></strong>:</div>
+				<p>我想问一下，我只想一张图片不被延迟加载要怎么坐呢？<br>
+比如我想让http://img.baidu.com/guanggao.gif这张图片不被延迟加载！要怎样实现？</p>
+        
+		<div class="clear"></div><span class="datetime">2011-04-11 12:32 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=4758#respond" onclick='return addComment.moveForm("div-comment-4758", "4758", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor even depth-2" id="comment-4782">
+   <div id="div-comment-4782" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/fd63905eb72d55b9488ba46e41cd3175.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankuns.com/" rel="external nofollow" class="url">QianKun</a></strong>:</div>
+				<p><a href="#comment-4758" rel="nofollow">@威武中国 </a>俺也是Copy党，具体如何实现也是爱莫能助了！</p>
+        
+		<div class="clear"></div><span class="datetime">2011-04-13 15:19 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=4782#respond" onclick='return addComment.moveForm("div-comment-4782", "4782", "respond", "726")'>[回复]</a></span>
+  </div>
+</li><li class="comment odd alt depth-2" id="comment-4796">
+   <div id="div-comment-4796" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/3bb7ab06854b38ffdd4ef870f21fdc5e.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.v5china.com/" rel="external nofollow" class="url">威武中国</a></strong>:</div>
+				<p><a href="#comment-4782" rel="nofollow">@QianKun </a> <img original="http://www.qiankuns.com/wp-includes/images/smilies/icon_cry.gif" src="image-pending.gif" alt=":cry:" class="wp-smiley">  看来我还得想办法啊~不过还是谢谢你啊！</p>
+        
+		<div class="clear"></div><span class="datetime">2011-04-14 10:25 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=4796#respond" onclick='return addComment.moveForm("div-comment-4796", "4796", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment even thread-odd thread-alt depth-1" id="comment-4876">
+   <div id="div-comment-4876" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/228e2a91b95e05febdb39b8d462d902b.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">14楼         </div><strong><a href="http://gnrsu.com/" rel="external nofollow" class="url">G字头老大</a></strong>:</div>
+				<p>在这里推荐插件jQuery Image Lazy Load WP</p>
+        
+		<div class="clear"></div><span class="datetime">2011-04-24 21:35 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=4876#respond" onclick='return addComment.moveForm("div-comment-4876", "4876", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="comment-4878">
+   <div id="div-comment-4878" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/fd63905eb72d55b9488ba46e41cd3175.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankuns.com/" rel="external nofollow" class="url">QianKun</a></strong>:</div>
+				<p><a href="#comment-4876" rel="nofollow">@G字头老大 </a>插件也不错，更简单~少了好多麻烦！</p>
+        
+		<div class="clear"></div><span class="datetime">2011-04-25 00:46 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=4878#respond" onclick='return addComment.moveForm("div-comment-4878", "4878", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment even thread-even depth-1" id="comment-5322">
+   <div id="div-comment-5322" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/66dcabbe76143c1c2f4483c033bd3cf5.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">15楼         </div><strong><a href="http://www.lianyue.org/" rel="external nofollow" class="url">恋月</a></strong>:</div>
+				<p> <img original="http://www.qiankuns.com/wp-includes/images/smilies/icon_redface.gif" src="image-pending.gif" alt=":oops:" class="wp-smiley">   <img original="http://www.qiankuns.com/wp-includes/images/smilies/icon_redface.gif" src="image-pending.gif" alt=":oops:" class="wp-smiley">   多谢了我也用上了</p>
+        
+		<div class="clear"></div><span class="datetime">2011-08-11 08:55 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=5322#respond" onclick='return addComment.moveForm("div-comment-5322", "5322", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="comment-5327">
+   <div id="div-comment-5327" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/fd63905eb72d55b9488ba46e41cd3175.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankuns.com/" rel="external nofollow" class="url">QianKun</a></strong>:</div>
+				<p><a href="#comment-5322" rel="nofollow">@恋月 </a>有用就好～</p>
+        
+		<div class="clear"></div><span class="datetime">2011-08-11 15:46 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=5327#respond" onclick='return addComment.moveForm("div-comment-5327", "5327", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment even thread-odd thread-alt depth-1" id="comment-5753">
+   <div id="div-comment-5753" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/066486244fbedc35e442731121ac2c83.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">16楼         </div><strong><a href="http://www.imyxiao.com/" rel="external nofollow" class="url">仰肖</a></strong>:</div>
+				<p>非常感谢，很有用。刚加了这个效果。</p>
+        
+		<div class="clear"></div><span class="datetime">2011-10-03 00:51 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=5753#respond" onclick='return addComment.moveForm("div-comment-5753", "5753", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="comment-5797">
+   <div id="div-comment-5797" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/fd63905eb72d55b9488ba46e41cd3175.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankuns.com/" rel="external nofollow" class="url">QianKun</a></strong>:</div>
+				<p><a href="#comment-5753" rel="nofollow">@仰肖 </a>对网页来说，效果还是不错的 ~</p>
+        
+		<div class="clear"></div><span class="datetime">2011-10-15 10:39 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=5797#respond" onclick='return addComment.moveForm("div-comment-5797", "5797", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment even thread-even depth-1" id="comment-6037">
+   <div id="div-comment-6037" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/05147e21dab0ef8bd7fa33168489a6ca.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">17楼         </div><strong><a href="http://www.imhechang.com/" rel="external nofollow" class="url">贺昌</a></strong>:</div>
+				<p>很详细，拿走了~</p>
+        
+		<div class="clear"></div><span class="datetime">2011-11-08 10:33 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=6037#respond" onclick='return addComment.moveForm("div-comment-6037", "6037", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="comment-6043">
+   <div id="div-comment-6043" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/fd63905eb72d55b9488ba46e41cd3175.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankuns.com/" rel="external nofollow" class="url">QianKun</a></strong>:</div>
+				<p><a href="#comment-6037" rel="nofollow">@贺昌 </a>对图片多的网站，这东东还是有点儿用的~ <img original="http://www.qiankuns.com/wp-includes/images/smilies/icon_smile.gif" src="image-pending.gif" alt=":smile:" class="wp-smiley"> </p>
+        
+		<div class="clear"></div><span class="datetime">2011-11-09 19:45 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=6043#respond" onclick='return addComment.moveForm("div-comment-6043", "6043", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment even thread-odd thread-alt depth-1" id="comment-6070">
+   <div id="div-comment-6070" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/ce191eaf0803ed04dabedacd815d965c.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">18楼         </div><strong><a href="http://www.xzymoe.com/" rel="external nofollow" class="url">xzymoe</a></strong>:</div>
+				<p>貌似我的还是有点问题 可否帮忙一下啊</p>
+        
+		<div class="clear"></div><span class="datetime">2011-11-28 19:56 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=6070#respond" onclick='return addComment.moveForm("div-comment-6070", "6070", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="comment-6108">
+   <div id="div-comment-6108" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/fd63905eb72d55b9488ba46e41cd3175.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankuns.com/" rel="external nofollow" class="url">QianKun</a></strong>:</div>
+				<p><a href="#comment-6070" rel="nofollow">@xzymoe </a>不知是什么问题呢～很抱歉，现在才回～</p>
+        
+		<div class="clear"></div><span class="datetime">2011-12-24 14:20 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=6108#respond" onclick='return addComment.moveForm("div-comment-6108", "6108", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li><li class="comment even thread-even depth-1" id="comment-6084">
+   <div id="div-comment-6084" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/fa9ef99255743c9e4828acdd7077be8a.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">19楼         </div><strong><a href="http://www.seosower.com/" rel="external nofollow" class="url">太原SEO</a></strong>:</div>
+				<p>博主，我按你的方法操作了，但是火狐下面不支持，其他浏览器都支持，怎么回事呢？能给解决一下吗？</p>
+        
+		<div class="clear"></div><span class="datetime">2011-12-02 18:29 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=6084#respond" onclick='return addComment.moveForm("div-comment-6084", "6084", "respond", "726")'>[回复]</a></span>
+  </div>
+<ul class="children">
+<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="comment-6107">
+   <div id="div-comment-6107" class="comment-body">
+      		<div class="comment-author vcard">						<img original="http://www.qiankuns.com/avatar/fd63905eb72d55b9488ba46e41cd3175.jpg" src="image-pending.gif" alt="" class="avatar">
+                								<div class="floor">         </div><strong><a href="http://www.qiankuns.com/" rel="external nofollow" class="url">QianKun</a></strong>:</div>
+				<p><a href="#comment-6084" rel="nofollow">@太原SEO </a>我用的就是FireFox，一切正常啊！是不是Firefox的什么插件把js过滤了？</p>
+        
+		<div class="clear"></div><span class="datetime">2011-12-24 14:20 </span> <span class="reply"><a class="comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html?replytocom=6107#respond" onclick='return addComment.moveForm("div-comment-6107", "6107", "respond", "726")'>[回复]</a></span>
+  </div>
+</li></ul>
+</li>	</ol>
+	<div class="navigation">
+		<div class="pagination"></div>
+	</div>
+
+ 		<div id="respond_box">
+	<div id="respond">
+		<h3>发表评论</h3>	
+		<div class="cancel-comment-reply">
+		<div id="real-avatar">
+			<img alt="" src="ad516503a11cd5ca435acc9bb6523536" class="avatar avatar-40 photo avatar-default" width="40" height="40">	</div>	
+			<small><a rel="nofollow" id="cancel-comment-reply-link" href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html#respond" style="display: none;">点击这里取消回复。</a></small>
+		</div>
+		    <form action="http://www.qiankuns.com/wp-comments-post.php" method="post" id="commentform">
+      		<div id="comment-author-info">
+		<p>
+			<input name="author" id="author" class="commenttext" value="" size="22" tabindex="1" type="text">
+			<label for="author">昵称 *</label>
+		</p>
+		<p>
+			<input name="email" id="email" class="commenttext" value="" size="22" tabindex="2" type="text">
+			<label for="email">邮箱 * <a id="Get_Gravatar" title="查看如何申请一个自己的Gravatar全球通用头像" target="_top" href="http://www.weisay.com/blog/apply-gravatar.html">（教你设置自己的个性头像）</a></label>
+		</p>
+		<p>
+			<input name="url" id="url" class="commenttext" value="" size="22" tabindex="3" type="text">
+			<label for="url">网址</label>
+		</p>
+	</div>
+      		<!--<p><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>-->
+      <div class="clear"></div>
+      <p>
+<a href="javascript:grin(':?:')"><img src="icon_question.gif" alt=""></a>
+<a href="javascript:grin(':razz:')"><img src="icon_razz.gif" alt=""></a>
+<a href="javascript:grin(':sad:')"><img src="icon_sad.gif" alt=""></a>
+<a href="javascript:grin(':evil:')"><img src="icon_evil.gif" alt=""></a>
+<a href="javascript:grin(':!:')"><img src="icon_exclaim.gif" alt=""></a>
+<a href="javascript:grin(':smile:')"><img src="icon_smile.gif" alt=""></a>
+<a href="javascript:grin(':oops:')"><img src="icon_redface.gif" alt=""></a>
+<a href="javascript:grin(':grin:')"><img src="icon_biggrin.gif" alt=""></a>
+<a href="javascript:grin(':eek:')"><img src="icon_surprised.gif" alt=""></a>
+<a href="javascript:grin(':shock:')"><img src="icon_eek.gif" alt=""></a>
+<a href="javascript:grin(':???:')"><img src="icon_confused.gif" alt=""></a>
+<a href="javascript:grin(':cool:')"><img src="icon_cool.gif" alt=""></a>
+<a href="javascript:grin(':lol:')"><img src="icon_lol.gif" alt=""></a>
+<a href="javascript:grin(':mad:')"><img src="icon_mad.gif" alt=""></a>
+<a href="javascript:grin(':twisted:')"><img src="icon_twisted.gif" alt=""></a>
+<a href="javascript:grin(':roll:')"><img src="icon_rolleyes.gif" alt=""></a>
+<a href="javascript:grin(':wink:')"><img src="icon_wink.gif" alt=""></a>
+<a href="javascript:grin(':idea:')"><img src="icon_idea.gif" alt=""></a>
+<a href="javascript:grin(':arrow:')"><img src="icon_arrow.gif" alt=""></a>
+<a href="javascript:grin(':neutral:')"><img src="icon_neutral.gif" alt=""></a>
+<a href="javascript:grin(':cry:')"><img src="icon_cry.gif" alt=""></a>
+<a href="javascript:grin(':mrgreen:')"><img src="icon_mrgreen.gif" alt=""></a>
+<br>
+</p>
+		<p><textarea name="comment" id="comment" tabindex="4"></textarea><div style="display: none;" id="loading"> 正在提交, 请稍候...</div><div style="display: none;" id="error">#</div></p>
+		<p>
+			<input class="submit" name="submit" id="submit" tabindex="5" value="提交留言" type="submit">
+			<input class="reset" name="reset" id="reset" tabindex="6" value="重写" type="reset">
+			<input name="comment_post_ID" value="726" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+		</p>
+		
+		<p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="1a4ba63341" type="hidden"></p>		<span style="padding: 0pt 0pt 2px 8px;">快捷键：Ctrl+Enter</span>
+    </form><strong>NOTICE:</strong> You should type some Chinese word (like “你好”) in your comment to pass the spam-check, thanks for your patience!
+
+	<div class="clear"></div>
+      </div>
+  </div>
+  </div>
+
+	</div>
+
+<div id="sidebar">
+
+<div class="widget">
+		</div>
+
+<div class="widget"><div id="tab-title"><h3><span>最新日志</span><span class="selected">热读日志</span><span>随机日志</span></h3>
+	<div id="tab-content">
+		<ul class="hide">					<li><a href="http://www.qiankuns.com/2011/10/steve-jobs-passed.html" rel="bookmark" title="详细阅读 乔帮主走好">乔帮主走好</a></li>
+										<li><a href="http://www.qiankuns.com/2011/08/no-girls-in-nanling.html" rel="bookmark" title="详细阅读 南岭无妹纸">南岭无妹纸</a></li>
+										<li><a href="http://www.qiankuns.com/2011/08/blog-black-link.html" rel="bookmark" title="详细阅读 博客发现暗链">博客发现暗链</a></li>
+										<li><a href="http://www.qiankuns.com/2011/08/this-is-spam.html" rel="bookmark" title="详细阅读 这垃圾评论…">这垃圾评论...</a></li>
+										<li><a href="http://www.qiankuns.com/2011/08/uncomfortable-unicom-bandwidth.html" rel="bookmark" title="详细阅读 不爽的联通宽带">不爽的联通宽带</a></li>
+										<li><a href="http://www.qiankuns.com/2011/08/add-back-to-the-top-navigation.html" rel="bookmark" title="详细阅读 为网站添加“返回顶部”导航">为网站添加“返回顶部”导航</a></li>
+										<li><a href="http://www.qiankuns.com/2011/08/godaddy-domain-name-to-renew.html" rel="bookmark" title="详细阅读 给自己的Godaddy域名续费">给自己的Godaddy域名续费</a></li>
+										<li><a href="http://www.qiankuns.com/2011/07/disappeared-for-a-month.html" rel="bookmark" title="详细阅读 消失了一个月">消失了一个月</a></li>
+										<li><a href="http://www.qiankuns.com/2011/06/glass-lunch.html" rel="bookmark" title="详细阅读 更加坑爹的玻璃午餐">更加坑爹的玻璃午餐</a></li>
+										<li><a href="http://www.qiankuns.com/2011/06/buy-swiss-army-knife.html" rel="bookmark" title="详细阅读 入手瑞士军刀一把">入手瑞士军刀一把</a></li>
+					</ul>
+		<ul><li><a href="http://www.qiankuns.com/2010/02/blackberry-bold-9000-brush-diagram-5-0-system.html" title="黑莓BlackBerry Bold 9000 刷机图解 （5.0最新系统）">黑莓BlackBerry Bold 9000 刷机图解 （5.0最新系统）</a> - 79,521 </li><li><a href="http://www.qiankuns.com/2011/01/wired-wireless-router-connect.html" title="成功实现有线路由器和无线路由器连接上网">成功实现有线路由器和无线路由器连接上网</a> - 18,289 </li><li><a href="http://www.qiankuns.com/2010/05/blackberry-bold9000-brush-again-to-5-0-0-681.html" title="再次将黑莓Bold9000刷机至5.0.0.681">再次将黑莓Bold9000刷机至5.0.0.681</a> - 12,045 </li><li><a href="http://www.qiankuns.com/2010/03/how-to-make-a-transparent-background-favicon-ico.html" title="如何制作透明背景的favicon.ico图标？">如何制作透明背景的favicon.ico图标？</a> - 9,943 </li><li><a href="http://www.qiankuns.com/2010/03/something-about-000webhost.html" title="关于000Webhost的二三事">关于000Webhost的二三事</a> - 9,823 </li><li><a href="http://www.qiankuns.com/2010/01/share-notebook-wireless-line-by-connectify.html" title="通过Connectify利用笔记本无线网络实现手机wifi上网">通过Connectify利用笔记本无线网络实现手机wifi上网</a> - 9,688 </li><li><a href="http://www.qiankuns.com/2009/08/i-am-currently-commonly-used-method-of-twitter-log.html" title="我目前常用的Twitter登录方法">我目前常用的Twitter登录方法</a> - 8,357 </li><li><a href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html" title="使用jQuery实现WordPress博客图片延迟加载">使用jQuery实现WordPress博客图片延迟加载</a> - 7,918 </li><li><a href="http://www.qiankuns.com/2010/02/use-gae-to-synchronize-twitter-and-other-microblog.html" title="利用Google App Engine实现twitter与其他微博客同步">利用Google App Engine实现twitter与其他微博客同步</a> - 7,040 </li><li><a href="http://www.qiankuns.com/2010/04/solve-blackberry-brush-unable-to-connect.html" title="黑莓BlackBerry刷机遇到“无法连接”问题之解决">黑莓BlackBerry刷机遇到“无法连接”问题之解决</a> - 6,840 </li></ul>
+		<ul class="hide">					<li><a href="http://www.qiankuns.com/2010/04/second-shanghai-trip-busy-day.html" rel="bookmark" title="详细阅读 第二次上海出差–繁忙的一天">第二次上海出差--繁忙的一天</a></li>
+										<li><a href="http://www.qiankuns.com/2007/03/kaoyan-diary-march-6-2007.html" rel="bookmark" title="详细阅读 考研日记 [2007年03月06日]">考研日记 [2007年03月06日]</a></li>
+										<li><a href="http://www.qiankuns.com/2010/12/modify-wordpress-achieves-date-display-format.html" rel="bookmark" title="详细阅读 修改WordPress 文章存档（Achieves）列表的日期显示格式">修改WordPress 文章存档（Achieves）</a></li>
+										<li><a href="http://www.qiankuns.com/2010/02/my-blog-history.html" rel="bookmark" title="详细阅读 我的博客史">我的博客史</a></li>
+										<li><a href="http://www.qiankuns.com/2010/10/register-my-first-com-domain.html" rel="bookmark" title="详细阅读 注册自己的第一个.COM域名">注册自己的第一个.COM域名</a></li>
+										<li><a href="http://www.qiankuns.com/2010/04/using-gmail-to-manage-multiple-posting.html" rel="bookmark" title="详细阅读 用Gmail管理多个邮箱的邮件">用Gmail管理多个邮箱的邮件</a></li>
+										<li><a href="http://www.qiankuns.com/2010/10/hong-kong-last-day-leave-hong-kong-1.html" rel="bookmark" title="详细阅读 香港行–第三日–归程（上）">香港行--第三日--归程（上）</a></li>
+										<li><a href="http://www.qiankuns.com/2011/01/why-i-choose-wordpress-com.html" rel="bookmark" title="详细阅读 转移Windows Live Spaces ,我为什么选择WordPress.com">转移Windows Live Spaces ,我为什么选</a></li>
+										<li><a href="http://www.qiankuns.com/2010/12/see-the-old-boy-trailer-i-cried.html" rel="bookmark" title="详细阅读 看到《老男孩》片尾，我哭了">看到《老男孩》片尾，我哭了</a></li>
+										<li><a href="http://www.qiankuns.com/2010/06/mr-mao-is-away.html" rel="bookmark" title="详细阅读 毛总走了……">毛总走了……</a></li>
+					</ul>
+					</div></div></div>
+
+<div class="widget"><h3>大家赞助</h3>
+</div>
+<div class="widget">
+		</div>
+
+<div class="widget"><div class="top_comment">
+	<h3>最活跃的读者</h3>
+<ul>
+<li class="mostactive"><a href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html" title="yyaigeng (留下2个脚印)" target="_top" rel="external nofollow"><img src="74e800d92055ae55393961bfa9dc4273.jpg" alt="yyaigeng (留下2个脚印)" class="avatar"></a></li><li class="mostactive"><a href="http://www.lonelyu.com/" title="小于 (留下1个脚印)" target="_top" rel="external nofollow"><img src="fdfacb45cd42142224451dc140666633.jpg" alt="小于 (留下1个脚印)" class="avatar"></a></li><li class="mostactive"><a href="http://www.umimall.com/" title="优米猫 (留下1个脚印)" target="_top" rel="external nofollow"><img src="5eb9a4e2593de631bbee48795b00aa61.jpg" alt="优米猫 (留下1个脚印)" class="avatar"></a></li></ul>
+    			</div>
+</div>
+
+<div class="widget">
+		</div>
+
+<div class="widget"><h3>最新评论</h3>
+<div class="r_comment">
+<ul>
+
+<li><img src="5eb9a4e2593de631bbee48795b00aa61.jpg" class="avatar">优米猫:<br><a href="http://www.qiankuns.com/2010/01/use-windows-live-writer-released-to-wordpress-blog.html#comment-6184" title="查看 使用Windows Live Writer发布日志到WordPress">本想傻瓜式安装直接成功呢？没有先</a></li>
+<li><img src="fdfacb45cd42142224451dc140666633.jpg" class="avatar">小于:<br><a href="http://www.qiankuns.com/2011/10/steve-jobs-passed.html#comment-6183" title="查看 乔帮主走好">当激情慢慢褪却，我们的博客还剩下</a></li>
+<li><img src="74e800d92055ae55393961bfa9dc4273.jpg" class="avatar">yyaigeng:<br><a href="http://www.qiankuns.com/2011/01/wired-wireless-router-connect.html#comment-6182" title="查看 成功实现有线路由器和无线路由器连接上网">呜呜  现在又不好使了啊！  怎</a></li>
+<li><img src="74e800d92055ae55393961bfa9dc4273.jpg" class="avatar">yyaigeng:<br><a href="http://www.qiankuns.com/2011/01/wired-wireless-router-connect.html#comment-6181" title="查看 成功实现有线路由器和无线路由器连接上网">我用第二种方法设置 为什么路由器</a></li>
+<li><img src="ab99b1b2df97eddb655a63e80d2c72cb.jpg" class="avatar">小虎:<br><a href="http://www.qiankuns.com/2011/01/wired-wireless-router-connect.html#comment-6120" title="查看 成功实现有线路由器和无线路由器连接上网">今天参考了你的第二种方法设置，很</a></li>
+<li><img src="5168ff5d2cf482036cf774fd39d63f38.jpg" class="avatar">末路花未央:<br><a href="http://www.qiankuns.com/guestbook#comment-6118" title="查看 留言">有段时间没更新了。
+我也是。
+不</a></li>
+<li><img src="2503fb5cd6766f8664611b62e05ac7d0.jpg" class="avatar">Kayo:<br><a href="http://www.qiankuns.com/guestbook#comment-6117" title="查看 留言">新主题很好看呢！淡淡优雅感觉！</a></li>
+<li><img src="6fb54491357ec7d705c01b4f778ce915.jpg" class="avatar">woniuren:<br><a href="http://www.qiankuns.com/2010/07/several-applications-of-google-analytics.html#comment-6116" title="查看 关于Google Analytics的几点应用">感谢，成功应用了，可以少个插件了</a></li>
+<li><img src="fa9ef99255743c9e4828acdd7077be8a.jpg" class="avatar">太原网站优化:<br><a href="http://www.qiankuns.com/2011/10/steve-jobs-passed.html#comment-6114" title="查看 乔帮主走好">来看看，提前祝你元旦快乐。</a></li>
+<li><img src="2503fb5cd6766f8664611b62e05ac7d0.jpg" class="avatar">Kayo:<br><a href="http://www.qiankuns.com/guestbook#comment-6112" title="查看 留言"></a></li> 
+</ul>
+</div>
+			</div>
+
+<div class="widget"><h3>标签云集</h3>	
+<a href="http://www.qiankuns.com/tag/diary" class="tag-link-127" title="7 个话题" style="color: rgb(216, 15, 59); font-size: 12.7547px;">日记</a>
+<a href="http://www.qiankuns.com/tag/mobile" class="tag-link-65" title="5 个话题" style="color: rgb(126, 150, 247); font-size: 12.3019px;">Mobile</a>
+<a href="http://www.qiankuns.com/tag/train" class="tag-link-93" title="6 个话题" style="color: rgb(70, 143, 212); font-size: 12.566px;">火车</a>
+<a href="http://www.qiankuns.com/tag/software" class="tag-link-136" title="6 个话题" style="color: rgb(184, 224, 244); font-size: 12.566px;">软件</a>
+<a href="http://www.qiankuns.com/tag/office" class="tag-link-72" title="4 个话题" style="color: rgb(70, 54, 197); font-size: 12px;">Office</a>
+<a href="http://www.qiankuns.com/tag/job" class="tag-link-90" title="33 个话题" style="color: rgb(42, 210, 145); font-size: 15.1321px;">工作</a>
+<a href="http://www.qiankuns.com/tag/china" class="tag-link-96" title="26 个话题" style="color: rgb(225, 248, 127); font-size: 14.7547px;">中国</a>
+<a href="http://www.qiankuns.com/tag/notebook" class="tag-link-18" title="4 个话题" style="color: rgb(12, 88, 195); font-size: 12px;">笔记本</a>
+<a href="http://www.qiankuns.com/tag/freehost" class="tag-link-113" title="9 个话题" style="color: rgb(199, 202, 139); font-size: 13.1321px;">免费空间</a>
+<a href="http://www.qiankuns.com/tag/qufu" class="tag-link-62" title="10 个话题" style="color: rgb(253, 19, 78); font-size: 13.283px;">曲阜</a>
+<a href="http://www.qiankuns.com/tag/india" class="tag-link-139" title="7 个话题" style="color: rgb(134, 149, 147); font-size: 12.7547px;">印度</a>
+<a href="http://www.qiankuns.com/tag/tweets" class="tag-link-22" title="13 个话题" style="color: rgb(104, 70, 12); font-size: 13.6981px;">Tweets</a>
+<a href="http://www.qiankuns.com/tag/microblog" class="tag-link-60" title="9 个话题" style="color: rgb(96, 156, 133); font-size: 13.1321px;">微博</a>
+<a href="http://www.qiankuns.com/tag/proxy" class="tag-link-75" title="4 个话题" style="color: rgb(245, 219, 5); font-size: 12px;">代理</a>
+<a href="http://www.qiankuns.com/tag/taishan" class="tag-link-61" title="10 个话题" style="color: rgb(112, 57, 55); font-size: 13.283px;">泰山</a>
+<a href="http://www.qiankuns.com/tag/visa" class="tag-link-140" title="4 个话题" style="color: rgb(139, 209, 23); font-size: 12px;">签证</a>
+<a href="http://www.qiankuns.com/tag/knowledge" class="tag-link-14" title="20 个话题" style="color: rgb(71, 249, 239); font-size: 14.3396px;">知识</a>
+<a href="http://www.qiankuns.com/tag/photos" class="tag-link-95" title="5 个话题" style="color: rgb(84, 14, 8); font-size: 12.3019px;">Photos</a>
+<a href="http://www.qiankuns.com/tag/windowsxp" class="tag-link-129" title="4 个话题" style="color: rgb(63, 224, 190); font-size: 12px;">WindowsXP</a>
+<a href="http://www.qiankuns.com/tag/changwon" class="tag-link-70" title="6 个话题" style="color: rgb(99, 233, 194); font-size: 12.566px;">昌原</a>
+<a href="http://www.qiankuns.com/tag/qq" class="tag-link-84" title="10 个话题" style="color: rgb(20, 223, 110); font-size: 13.283px;">QQ</a>
+<a href="http://www.qiankuns.com/tag/money" class="tag-link-76" title="5 个话题" style="color: rgb(106, 101, 52); font-size: 12.3019px;">Money</a>
+<a href="http://www.qiankuns.com/tag/syn" class="tag-link-49" title="4 个话题" style="color: rgb(88, 133, 121); font-size: 12px;">同步</a>
+<a href="http://www.qiankuns.com/tag/blackberry" class="tag-link-8" title="9 个话题" style="color: rgb(235, 157, 180); font-size: 13.1321px;">Blackberry</a>
+<a href="http://www.qiankuns.com/tag/english" class="tag-link-88" title="13 个话题" style="color: rgb(178, 138, 180); font-size: 13.6981px;">英语</a>
+<a href="http://www.qiankuns.com/tag/movie" class="tag-link-35" title="15 个话题" style="color: rgb(205, 153, 207); font-size: 13.8868px;">电影</a>
+<a href="http://www.qiankuns.com/tag/education" class="tag-link-97" title="11 个话题" style="color: rgb(130, 174, 141); font-size: 13.434px;">教育</a>
+<a href="http://www.qiankuns.com/tag/windows-live-spaces" class="tag-link-164" title="5 个话题" style="color: rgb(62, 108, 77); font-size: 12.3019px;">WLS</a>
+<a href="http://www.qiankuns.com/tag/korea" class="tag-link-15" title="38 个话题" style="color: rgb(82, 142, 244); font-size: 15.3585px;">韩国</a>
+<a href="http://www.qiankuns.com/tag/book" class="tag-link-73" title="4 个话题" style="color: rgb(59, 107, 82); font-size: 12px;">阅读</a>
+<a href="http://www.qiankuns.com/tag/google" class="tag-link-42" title="17 个话题" style="color: rgb(2, 250, 204); font-size: 14.1132px;">Google</a>
+<a href="http://www.qiankuns.com/tag/ripn" class="tag-link-151" title="4 个话题" style="color: rgb(148, 227, 54); font-size: 12px;">RIPN</a>
+<a href="http://www.qiankuns.com/tag/football" class="tag-link-66" title="4 个话题" style="color: rgb(23, 87, 57); font-size: 12px;">足球</a>
+<a href="http://www.qiankuns.com/tag/fml" class="tag-link-12" title="30 个话题" style="color: rgb(88, 190, 123); font-size: 14.9811px;">FML</a>
+<a href="http://www.qiankuns.com/tag/kaifulee" class="tag-link-132" title="7 个话题" style="color: rgb(42, 121, 92); font-size: 12.7547px;">李开复</a>
+<a href="http://www.qiankuns.com/tag/dinner" class="tag-link-11" title="8 个话题" style="color: rgb(198, 252, 11); font-size: 12.9434px;">晚餐</a>
+<a href="http://www.qiankuns.com/tag/twitter" class="tag-link-23" title="12 个话题" style="color: rgb(138, 247, 227); font-size: 13.5472px;">Twitter</a>
+<a href="http://www.qiankuns.com/tag/wordpress" class="tag-link-25" title="43 个话题" style="color: rgb(239, 163, 110); font-size: 15.5472px;">WordPress</a>
+<a href="http://www.qiankuns.com/tag/food" class="tag-link-86" title="6 个话题" style="color: rgb(204, 104, 173); font-size: 12.566px;">Food</a>
+<a href="http://www.qiankuns.com/tag/love" class="tag-link-17" title="8 个话题" style="color: rgb(60, 139, 110); font-size: 12.9434px;">Love</a>
+<a href="http://www.qiankuns.com/tag/000webhost" class="tag-link-31" title="9 个话题" style="color: rgb(131, 71, 245); font-size: 13.1321px;">000webhost</a>
+<a href="http://www.qiankuns.com/tag/creditcard" class="tag-link-63" title="4 个话题" style="color: rgb(40, 242, 253); font-size: 12px;">信用卡</a>
+<a href="http://www.qiankuns.com/tag/study" class="tag-link-81" title="7 个话题" style="color: rgb(109, 208, 4); font-size: 12.7547px;">学习</a>
+<a href="http://www.qiankuns.com/tag/comment" class="tag-link-180" title="5 个话题" style="color: rgb(236, 5, 74); font-size: 12.3019px;">评论</a>
+<a href="http://www.qiankuns.com/tag/adsense" class="tag-link-117" title="6 个话题" style="color: rgb(56, 123, 61); font-size: 12.566px;">AdSense</a>
+<a href="http://www.qiankuns.com/tag/windows-live-writer" class="tag-link-52" title="8 个话题" style="color: rgb(171, 14, 48); font-size: 12.9434px;">WLW</a>
+<a href="http://www.qiankuns.com/tag/travel" class="tag-link-21" title="37 个话题" style="color: rgb(69, 131, 135); font-size: 15.3208px;">旅行</a>
+<a href="http://www.qiankuns.com/tag/joke" class="tag-link-85" title="7 个话题" style="color: rgb(30, 78, 228); font-size: 12.7547px;">笑话</a>
+<a href="http://www.qiankuns.com/tag/article" class="tag-link-98" title="31 个话题" style="color: rgb(45, 18, 53); font-size: 15.0566px;">文萃</a>
+<a href="http://www.qiankuns.com/tag/domain" class="tag-link-45" title="14 个话题" style="color: rgb(214, 228, 34); font-size: 13.8113px;">域名</a>
+<a href="http://www.qiankuns.com/tag/blog" class="tag-link-9" title="55 个话题" style="color: rgb(44, 227, 177); font-size: 15.9623px;">Blog</a>
+<a href="http://www.qiankuns.com/tag/life" class="tag-link-16" title="56 个话题" style="color: rgb(63, 123, 63); font-size: 16px;">生活</a>
+<a href="http://www.qiankuns.com/tag/windows" class="tag-link-40" title="10 个话题" style="color: rgb(52, 216, 60); font-size: 13.283px;">Windows</a>
+<a href="http://www.qiankuns.com/tag/hongkong" class="tag-link-106" title="10 个话题" style="color: rgb(198, 158, 156); font-size: 13.283px;">香港</a>
+<a href="http://www.qiankuns.com/tag/shanghai" class="tag-link-38" title="22 个话题" style="color: rgb(70, 50, 165); font-size: 14.4906px;">上海</a>
+<a href="http://www.qiankuns.com/tag/show" class="tag-link-125" title="5 个话题" style="color: rgb(77, 34, 13); font-size: 12.3019px;">Show</a>
+<a href="http://www.qiankuns.com/tag/college" class="tag-link-55" title="10 个话题" style="color: rgb(51, 218, 240); font-size: 13.283px;">大学</a>
+<a href="http://www.qiankuns.com/tag/ru" class="tag-link-44" title="10 个话题" style="color: rgb(163, 87, 184); font-size: 13.283px;">RU</a>
+<a href="http://www.qiankuns.com/tag/plugins" class="tag-link-168" title="11 个话题" style="color: rgb(56, 237, 103); font-size: 13.434px;">插件</a>
+<a href="http://www.qiankuns.com/tag/jlu" class="tag-link-131" title="7 个话题" style="color: rgb(170, 237, 201); font-size: 12.7547px;">吉林大学</a>
+<a href="http://www.qiankuns.com/tag/lecture" class="tag-link-89" title="6 个话题" style="color: rgb(49, 101, 70); font-size: 12.566px;">演讲</a>
+<a href="http://www.qiankuns.com/tag/business-trip" class="tag-link-172" title="22 个话题" style="color: rgb(55, 160, 42); font-size: 14.4906px;">出差</a>
+<a href="http://www.qiankuns.com/tag/xiaowei" class="tag-link-47" title="8 个话题" style="color: rgb(28, 230, 73); font-size: 12.9434px;">小为</a>
+<a href="http://www.qiankuns.com/tag/nanjing" class="tag-link-102" title="6 个话题" style="color: rgb(247, 29, 88); font-size: 12.566px;">南京</a>
+<a href="http://www.qiankuns.com/tag/busan" class="tag-link-69" title="5 个话题" style="color: rgb(95, 35, 223); font-size: 12.3019px;">釜山</a></div>
+
+<div class="widget"><h3>博客统计</h3>
+   <ul>
+<li>日志总数：523 篇</li>
+<li>评论总数：913 篇</li>
+<li>标签数量：148 个</li>
+<li>链接总数：17 个</li>
+<li>建站日期：2010-01-02<br>
+</li><li>运行天数：797 天</li>
+<li>最后更新：2012-2-25</li>
+   </ul></div>
+
+<div class="widget">
+<h3>友情链接</h3>
+<div class="v-links"><li><a href="http://zhaox.net/" title="为梦想拼搏的日子" target="_top">Zhaox</a></li>
+<li><a href="http://www.bzlba.com/" title="分享网络赚钱,免费资源,SEO等精品资源" target="_top">Bzlba</a></li>
+<li><a href="http://www.ilucong.net/" title="lulu的博客" target="_top">Ilucong</a></li>
+<li><a href="http://www.lonelyu.com/" title="寂寞◎语 | 一个普通广电兵的那些无聊寂寞事儿～" target="_top">Lonelyu</a></li>
+<li><a href="http://junan.name/" title="Junan博客 | 记录生活点滴，分享你我乐趣。" target="_top">Junan</a></li>
+<li><a href="http://www.sunbloger.com/" title="这里是一个研究技术,分享经验和记录站长生活的个人主页" target="_top">Sunbloger</a></li>
+<li><a href="http://www.jauia.com/" title="生命在于蛋疼，博客在于折腾.." target="_top">Jauia</a></li>
+<li><a href="http://www.chinapeng.com/" title="创意新奇，搞笑雷人！有趣的博客！" target="_top">Chinapeng</a></li>
+<li><a href="http://shine8.com/" title="分享生活每一天" target="_top">Shine8</a></li>
+<li><a href="http://www.delay7.com/" title="Delay Zone | 数字生活从零开始" target="_top">Delay7</a></li>
+<li><a href="http://kayosite.com/" title="Kayo’s Melody | 抛开统计，享受wordpress" target="_top">Kayosite</a></li>
+<li><a href="http://xlolix.com/" title="濕漉漉的童萌會" target="_top">Xlolix</a></li>
+<li><a href="http://www.skylong.info/" title="skylong的个人博客，抒写生活，埋藏苦涩，关注网络，分享音乐" target="_top">Skylong</a></li>
+</div></div><div class="clear"></div>
+
+<div class="widget">
+<form id="loginform" action="http://www.qiankuns.com/wp-login.php" method="post"><h3>用户登录</h3>
+<p>
+<label>用户名：<input class="login" name="log" id="log" value="" size="12" type="text"></label>
+</p>
+<p>
+<label>密　码：<input class="login" name="pwd" id="pwd" value="" size="12" type="password"></label>
+</p>
+<p>
+<input class="denglu" name="submit" value="登陆" type="submit"> <label>记住我 <input id="comment_mail_notify" name="rememberme" value="forever" type="checkbox"></label>
+</p>
+<p>
+<input name="redirect_to" value="/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html" type="hidden">
+</p>
+</form>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">Copyright © 2005-2011 <a href="http://www.qiankuns.com/2010/04/wordpress-blog-using-jquery-to-achieve-delyed-loading-picture.html" title="乾坤 Blog - 博，因为自己还活着">乾坤 Blog</a>. Powered by <a href="http://www.wordpress.org/" rel="external">WordPress</a>.
+ Theme by <a href="http://www.weisay.com/" rel="external">Weisay</a>.
+  <!---qiankuns.com google-analytics tongji analytics ---->
+
+
+<!---qiankuns.com Baidu tongji analytics ---->
+
+
+<!---qiankuns.com 51la tongji analytics ---->
+<a href="http://www.51.la/?4400807" target="_top" title="51.la 专业、免费、强健的访问统计">网站统计</a>
+<img style="width: 0px; height: 0px;" src="go.asp">
+.	 </div>
+
+
+    
+</div>
+
+<div style="padding: 0pt; border: medium none; margin: 0pt; position: absolute; left: 0pt; top: 0pt; width: 100%; z-index: 1001;"><a style="position: absolute; top: -9999px; opacity: 0.75; z-index: 1;" href="javascript:;" title="Click to cancel" class="highslide-loading">Loading...</a><div style="display: none;"></div><table style="padding: 0pt; border: medium none; margin: 0pt; visibility: hidden; position: absolute; border-collapse: collapse;" cellspacing="0"><tbody style="padding: 0pt; border: medium none; margin: 0pt;"><tr style="padding: 0pt; border: medium none; margin: 0pt; height: auto;"><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url('rounded-white.png') repeat scroll 0px 0px transparent; height: 20px; width: 20px;"></td><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url('rounded-white.png') repeat scroll 0px -40px transparent; height: 20px; width: 20px;"></td><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url('rounded-white.png') repeat scroll -20px 0px transparent; height: 20px; width: 20px;"></td></tr><tr style="padding: 0pt; border: medium none; margin: 0pt; height: auto;"><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url('rounded-white.png') repeat scroll 0px -80px transparent; height: 20px; width: 20px;"></td><td class="rounded-white" style="padding: 0pt; border: medium none; margin: 0pt; position: relative;"></td><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url('rounded-white.png') repeat scroll -20px -80px transparent; height: 20px; width: 20px;"></td></tr><tr style="padding: 0pt; border: medium none; margin: 0pt; height: auto;"><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url('rounded-white.png') repeat scroll 0px -20px transparent; height: 20px; width: 20px;"></td><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url('rounded-white.png') repeat scroll 0px -60px transparent; height: 20px; width: 20px;"></td><td style="padding: 0pt; border: medium none; margin: 0pt; line-height: 0; font-size: 0pt; background: url('rounded-white.png') repeat scroll -20px -20px transparent; height: 20px; width: 20px;"></td></tr></tbody></table></div></body>
+</html>

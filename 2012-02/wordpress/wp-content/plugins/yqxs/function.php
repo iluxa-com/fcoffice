@@ -7,23 +7,62 @@
 //        exit();
 //}
 
-define  ('YQXS_URL' , WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
-define  ('YQXS_DIR' , WP_PLUGIN_DIR . '/' . dirname(plugin_basename(__FILE__)));
+define('YQXS_URL', WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
+define('YQXS_DIR', WP_PLUGIN_DIR . '/' . dirname(plugin_basename(__FILE__)));
 $upload_dir = wp_upload_dir();
-define  ('YQXS_IMG_DIR' , $upload_dir['basedir'] );
-define  ('YQXS_IMG_URL' , $upload_dir['baseurl'] );
-define  ('YQXS_COVER_DIR' , YQXS_IMG_DIR .'/covers');
-define  ('YQXS_COVER_URL' , YQXS_IMG_URL .'/covers');
+define('YQXS_IMG_DIR', $upload_dir['basedir']);
+define('YQXS_IMG_URL', $upload_dir['baseurl']);
+define('YQXS_COVER_DIR', YQXS_IMG_DIR . '/covers');
+define('YQXS_COVER_URL', YQXS_IMG_URL . '/covers');
 
 require('Word2Py.class.php');
 include('ajax_server.php');
 include('helpers.php');
 
-
 function yqxs_test() {
-    
+    $post_id = 1;
+    $post = get_post($post_id);
+    var_dump($post);
+
+    /*
+      var_dump($imagesize);
+      echo "\n<br>---------------------------------------<br/>\n";
+      var_dump($metadata);
+     *
+     */
+
+
+    /*
+      $filename = 'th2dt1.jpg';
+      $path = YQXS_COVER_DIR .'/' .$filename;
+      $url = YQXS_COVER_URL .'/'.$filename;
+
+      $image_type = wp_check_filetype_and_ext( $path,$filename, null );
+      $attachment = array(
+      'post_mime_type' =>$image_type['type'],
+      'guid' =>$url,
+      'post_parent' =>1,
+      'post_title' =>'测试图像附件',
+      'post_content'=>'',
+      );
+      $id = wp_insert_attachment($attachment, $path, 1);
+
+      if ( !is_wp_error($id) ) {
+      wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $path ) );
+      }
+      //设置特色图像
+      set_post_thumbnail(1, $id);
+      var_dump($id);
+     *
+     */
+    /*
+      $result = yqxs_set_cover('30.jpg',94);
+      var_dump($result);
+     */
+    //$s = get_intermediate_image_sizes();
+    //var_dump($s);
+    //echo sanitize_title('war3 ROC时代');
     //echo WP_UPLOAD_DIR;
-    
     //down_image('http://www.yqxs.com/data/pic2/1325218490.jpg');
     //image_resize( $file, $max_w, $max_h, $crop = false, $suffix = null, $dest_path = null, $jpeg_quality = 90 )
     /*
@@ -95,28 +134,22 @@ function yqxs_test() {
 //		"user-agent"=>'yqxs',
 //		"headers"=>$header,
 //	));
-
     //global $wpdb;
     //var_dump($wpdb->data);
-    /**resize图像
-    $time = current_time('mysql');
-    $uploads = wp_upload_dir($time) ;
-    $tmp_file = $uploads['path']. '/test.jpg';
+    /*     * resize图像
+      $time = current_time('mysql');
+      $uploads = wp_upload_dir($time) ;
+      $tmp_file = $uploads['path']. '/test.jpg';
 
-    $tmp_file2 = image_resize( $tmp_file, (int) get_option('large_size_w'), (int) get_option('large_size_h'), 0, 'resized');
+      $tmp_file2 = image_resize( $tmp_file, (int) get_option('large_size_w'), (int) get_option('large_size_h'), 0, 'resized');
 
-    //$tmp_file2 = image_resize($tmp_file,80,125,true);
-    //$tmp_file2 = image_resize($tmp_file,230,320,true);
-    $tmp_file2 = image_resize($tmp_file,150,240,true);
-    var_dump($tmp_file2);
-    */
-   //var_dump(yqxs_get_user_id('陈布灭'));
-    
+      //$tmp_file2 = image_resize($tmp_file,80,125,true);
+      //$tmp_file2 = image_resize($tmp_file,230,320,true);
+      $tmp_file2 = image_resize($tmp_file,150,240,true);
+      var_dump($tmp_file2);
+     */
+    //var_dump(yqxs_get_user_id('陈布灭'));
 }
-
-
-
-
 
 add_action("admin_head", "yqxs_wp_head");
 
@@ -125,13 +158,18 @@ function yqxs_wp_head() {
     echo "#post_excerpt { font-weight: normal;height: 280px;width: 360px;}";
     echo "#cover {    background: none repeat scroll 0 0 #FFEECC;border: 1px solid;float: left;margin: 25px 20px 5px 5px;padding: 15px;}";
     echo "#sbutton {margin:10px 650px 0 10px;   text-align: right;}";
+    echo ".ch_item{display:none;}";
     echo"</style>";
-    
+
     yqxs_loadjs('jquery-1.6.2.min.js');
     yqxs_loadjs('yqxs_admin.js');
-    
-
 }
+
+add_action('admin_head','yqxs_ajax_content');
+function yqxs_ajax_content() {
+    yqxs_loadjs('yqxs_ajax_content.js');
+}
+
 
 function yqxs__install() {
     //创建小说章节表
@@ -140,24 +178,25 @@ function yqxs__install() {
 
     $sql = "
         CREATE TABLE IF NOT EXISTS `{$table_name}` (
-          `id` bigint(9) NOT NULL AUTO_INCREMENT,
-          `post_id` bigint(9) NOT NULL,
-          `chapter_id` int(9) NOT NULL,
-          `chapter_title` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-          `content` text CHARACTER SET utf8,
-          `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-          PRIMARY KEY (`id`)
+              `id` bigint(9) NOT NULL AUTO_INCREMENT,
+              `post_id` bigint(9) NOT NULL,
+              `chapter_order` int(11) NOT NULL,
+              `chapter_title` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+              `content_url` varchar(100) CHARACTER SET utf8 NOT NULL,
+              `content` text CHARACTER SET utf8,
+              `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+              PRIMARY KEY (`id`),
+              KEY `content_url` (`content_url`)
         ) ";
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
-    
+
     //新建covers目录
-    if(!is_dir(YQXS_COVER_DIR)) {
-        if(!mkdir(YQXS_COVER_DIR,0666)) {
+    if (!is_dir(YQXS_COVER_DIR)) {
+        if (!mkdir(YQXS_COVER_DIR, 0666)) {
             //创建封面目录失败
-            return new WP_Error('Failed to create covers dir', __('Failed to create covers dir') ); 
+            return new WP_Error('Failed to create covers dir', __('Failed to create covers dir'));
         }
-        
     }
 
     //发送安装信息
@@ -222,7 +261,6 @@ HEREDOC;
     }
 }
 
-
 /**
  * 对wordpress get_cat_ID函数进行了扩展，在分类不存在时自动创建，nicename使用拼音
  * @param $cat_name string 分类名
@@ -253,7 +291,7 @@ function yqxs_get_cat_ID($cat_name, $description='') {
  */
 function word2pinyin($word, $ucfirst=False, $split='') {
 
-
+    $word = strtolower($word);
     $py = new Word2Py($word);
     return $py->convert($word, 'utf-8', $ucfirst, $split);
 }
@@ -305,11 +343,11 @@ function yqxs_bind_single() {
             $yqxs['img'] = $matches[1];
             //下载图像
             $img_file = down_image($yqxs['img']);
-            if(FALSE !== $img_file) {
-               
-                $img1 = image_resize( $img_file['path'], 150, 240, true, null,null, $jpeg_quality = 90 );
-                $img2 = image_resize( $img_file['path'], 80, 125, true, null, null, $jpeg_quality = 90 );
-                 $yqxs['img'] = str_replace($img_file['base_name'],basename($img1),$img_file['url']);
+            if (FALSE !== $img_file) {
+                //生成两种缩略图
+                $img1 = image_resize($img_file['path'], 150, 240, true, null, null, $jpeg_quality = 90);
+                //$img2 = image_resize($img_file['path'], 80, 125, true, null, null, $jpeg_quality = 90);
+                $yqxs['img'] = str_replace($img_file['base_name'], basename($img1), $img_file['url']);
             }
         }
         echo <<<HEREDOC
@@ -319,11 +357,12 @@ function yqxs_bind_single() {
             
         <div id="cover" style="float:left"><!--h4 style="padding-left:5px">封面图片</h4--><img  src="{$yqxs['img']}"></div>
            <form id="info-form" name="file-form" method="POST" action="" enctype="multipart/form-data" style="diaplay:block;margin-right:10px">
-
+        <input type ="hidden" name = "old_url" value="{$yqxs['url']}" />
 HEREDOC;
+
 //构造表单
-        if(FALSE !== $img_file) {
-                echo "<input type='hidden' value='{$img_file['base_name']}' name='img_file'>\n";
+        if (FALSE !== $img_file) {
+            echo "<input type='hidden' value='{$img_file['base_name']}' name='img_file'>";
         }
         //页面标题 等到午夜 > 爱曼达·奎克 >
         if (preg_match('#<title>(.*?)</title>#iUs', $content, $matches)) {
@@ -351,7 +390,7 @@ HEREDOC;
 
         //章节地址
         if (preg_match("#<a href='(.*?)'>在线阅读</a>#", $content, $matches)) {
-            $yqxs['chapters_url'] = rtrim($yqxs['url'],'/'). '/' . $matches[1];
+            $yqxs['chapters_url'] = rtrim($yqxs['url'], '/') . '/' . $matches[1];
 
             //echo "<label class=\"yqxs_items\">章节URL:<input style='width: 550px;' type=\"text\" name=\"chapters_url\" value=\"{$yqxs['chapters_url']}\"/></label>";
             echo input_label('章节URL', 'chapters_url', $yqxs['chapters_url'], true);
@@ -401,11 +440,11 @@ HEREDOC;
 
         echo "<div id='sbutton'>";
         if (!isset($yqxs['chapters_url'])) {
-            
+
             echo "<h3 style=\"color:red;display:inline;\">本书暂无全文，仅可采集小说基本信息入库</h3>";
         }
         echo '<input type="submit" name="base_insert" class="button-primary" value="开始采集" />';
-        echo '<input type="submit" name="backward" class="button-primary" value="点击返回" />';
+        echo '<input type="button" name="backward" class="button-primary" value="点击返回" onclick="history.go(-1)" />';
         echo "</div>";
         echo "</form>";
 
@@ -415,12 +454,10 @@ HEREDOC;
         //var_dump($yqxs);
         // wp_insert_post( $yqxs );
     } elseif (isset($_POST['post_title'])) {
-        
+
         //var_dump($_POST);
         $post_slug = word2pinyin($_POST['post_title']) . '-' . word2pinyin($_POST['post_author_name']);
         //$_POST['post_author_name']
-
-
         //分类检查，不存在新建
         $cat_arr = explode(',', $_POST['categories']);
         foreach ($cat_arr as $k => $cat) {
@@ -429,46 +466,133 @@ HEREDOC;
 
         //作者检查，不存在新建
         $author_id = yqxs_get_user_id($_POST['post_author_name']);
-        
-        //小说基本信息入库
-     $post = array(
-       
-      'comment_status' => 'open',
-      'ping_status' =>  'open',
-      'post_author' => $author_id,
-      'post_category' => array_values($cat_arr), //Add some categories.
-      'post_content' => '', //The full text of the post.
-      'post_excerpt' =>$_POST['post_excerpt'],//For all your post excerpt needs.
-      'post_name' => $post_slug, // The name (slug) for your post
-      'post_status' =>'publish',
-      'post_title' => $_POST['post_title'], //The title of your post.
-      //'post_type' => [ 'post' | 'page' | 'link' | 'nav_menu_item' | custom post type ] //You may want to insert a regular post, page, link, a menu item or some custom post type
-      //'tags_input' => [ '<tag>, <tag>, <...>' ] //For tags.
-      'tags_input' =>'test,测试,文章',   //tag 处理
-      //'to_ping' => [ ? ] //?
-      //'tax_input' =>  array( 'xname' => array( 'term', 'term2', 'term3' ) ),  // support for custom taxonomies.
-      //'tax_input' =>  array( 'taxonomy_name' => array( 'term11', 'term12', 'term13' ) ),
-      );
-     if(isset($_POST['ID'])) {
-         $post['ID'] =$_POST['ID']; //更新文章
-         $post_id = wp_update_post($post);
-     }else {
-        $post_id = wp_insert_post( $post, 0 );
-     }
-      echo $permalink = get_permalink($post_id);
 
+        $metas = array();
+        $tags = array();
+        if (isset($_POST['publisher']) && !empty($_POST['publisher'])) {
+            $metas['publisher'] = $_POST['publisher'];
+        }
+        if (isset($_POST['site']) && !empty($_POST['site'])) {
+            $metas['site'] = $_POST['site'];
+        }
+        //原链接
+        if (isset($_POST['old_url']) && !empty($_POST['old_url'])) {
+            $metas['old_url'] = $_POST['old_url'];
+        }
+
+        if (isset($_POST['nov_series']) && !empty($_POST['nov_series'])) {
+            $metas['nov_series'] = $_POST['nov_series'];
+        }
+
+        if (isset($_POST['series']) && !empty($_POST['series'])) {
+            $metas['series'] = split_words($_POST['series']);
+        }
+        if (isset($_POST['pub_date']) && !empty($_POST['pub_date'])) {
+            $metas['pub_date'] = $_POST['pub_date'];
+        }
+        if (isset($_POST['male']) && !empty($_POST['male'])) {
+            $metas['male'] = explode(',', $_POST['male']);
+        }
+        if (isset($_POST['female']) && !empty($_POST['female'])) {
+            $metas['female'] = explode(',', $_POST['female']);
+        }
+        if (isset($_POST['others']) && !empty($_POST['others'])) {
+            $metas['others'] = explode(',', $_POST['others']);
+        }
+        if (isset($_POST['background']) && !empty($_POST['background'])) {
+            $metas['background'] = $_POST['background'];
+        }
+        if (isset($_POST['place']) && !empty($_POST['place'])) {
+            $metas['place'] = explode(',', $_POST['place']);
+        }
+        if (isset($_POST['stars']) && !empty($_POST['stars'])) {
+
+            $metas['stars'] = $_POST['stars'];
+        }
+        //无章节可采时设置的内容
+        if (isset($_POST['chapters_url']) && !empty($_POST['chapters_url'])) {
+            $post_content = '[cai-ji]';
+        } else {
+            $post_content = '[no-content]';
+        }
+        //meta转tag
+        foreach ($metas as $meta) {
+            if (is_array($meta))
+                $meta = implode(',', $meta);
+            $tags[] = $meta;
+        }
+        $tags_input = implode(',', $tags);
+
+
+        //小说基本信息入库
+        $post = array(
+            'comment_status' => 'open',
+            'ping_status' => 'open',
+            'post_author' => $author_id,
+            'post_category' => array_values($cat_arr), //Add some categories.
+            'post_content' => $post_content, //The full text of the post.
+            'post_excerpt' => $_POST['post_excerpt'], //For all your post excerpt needs.
+            'post_name' => $post_slug, // The name (slug) for your post
+            'post_status' => 'publish',
+            'post_title' => $_POST['post_title'], //The title of your post.
+            //'post_type' => [ 'post' | 'page' | 'link' | 'nav_menu_item' | custom post type ]
+            'tags_input' => $tags_input, //tag 处理
+        );
+
+
+        if ($ID = yqxs_post_exists($_POST['post_title'])) {
+            $post['ID'] = $ID; //更新文章 ，不依赖客户端提交的ID
+            $post_id = wp_update_post($post);
+        } else {
+            $post_id = wp_insert_post($post, 0);
+        }
+        
+        
+        //meta插入
+        foreach ($metas as $key => $value) {
+            yqxs_set_post_meta($post_id, $key, $value);
+        }
+
+        //图片操作
+        //$image_meta = wp_read_image_metadata($file);
+        $cover_result = yqxs_set_cover($_POST['img_file'], $post_id, $_POST['post_title']);
+
+                
+        echo '<div class="wrap" style="-webkit-text-size-adjust:none;"><div class="icon32" id="icon-options-general"><br></div>';        
+			
+                        
+    
+
+
+        //章节信息入库
+        $permalink = get_permalink($post_id);
+        
+        if ($post_content === '[cai-ji]') {
+             echo '<h2>采集章节内容开始，请稍等</h2><hr/>';
+            $ch_arr = yqxs_ch2db($post_id, $_POST['chapters_url']);
       
-        //meta处理
-        
-      
-        
-        //章节入库
-        
-        
-        
-        
-        
-        
+            
+            // echo "<pre>";
+            // var_dump($ch_arr);
+
+            // echo"</pre>";
+            //die();
+           // $wpurl =get_bloginfo('wpurl');
+            echo '<div id="ch_list">';
+           
+           foreach($ch_arr as $k=>$ch)  {
+                
+                echo "<div class='ch_item' id='no_{$ch['id']}' rel='{$ch['content_url']}' title='{$ch['id']}'>{$ch['chapter_title']}</div>\n";
+            }
+            echo '<div  id="finish_mes" style="color:red;display:none">完成，发布URL:<a href="' . $permalink . '" target="_blank">' . $permalink . '</a></div>';
+            
+
+        }else {
+             echo '<h2>采集章节内容暂无，仅采集文章信息</h2><hr/>';
+            echo '<div id="permalink"><a href="' . $permalink . '" target="_blank">发布URL:' . $permalink . '</a></div>';
+        }
+        echo '</div>';
+
     } else {
 
         $menu_page_url = yqxs_menu_page_url('yqxs_bind_single');
@@ -509,83 +633,77 @@ function input_label($display_text, $name, $value, $readonly=False) {
  * 根据用户名display_name取用户id,返回用户id
 
  */
-
 function yqxs_get_user_id($display_name) {
     $display_name2 = "'" . $display_name . "'";
     global $wpdb;
     $user_id = $wpdb->get_var("SELECT ID FROM $wpdb->users WHERE display_name = $display_name2 ORDER BY ID");
     //return (NULL == $user_id) ? False : $user_id;
-    if(is_numeric($user_id))
+    if (is_numeric($user_id))
         return $user_id;
     else {
         //不存在时插入
-        
+
         $py_name = word2pinyin($display_name);
         $py_name2 = "'" . $py_name . "'";
-        if ( $wpdb->get_var("SELECT ID FROM $wpdb->users WHERE user_login = $py_name2 ORDER BY ID")) {
-            $py_name = $py_name .'_'. time();
+        if ($wpdb->get_var("SELECT ID FROM $wpdb->users WHERE user_login = $py_name2 ORDER BY ID")) {
+            $py_name = $py_name . '_' . time();
         }
 
         $userdata = array(
-            'user_pass'=>md5(uniqid('yqxs', true)),
-            'user_login'=>$py_name,
-            'user_nicename'=>$py_name,
-            'display_name'=>$display_name,
-            'role'=>'author',
-            'user_url'=>'http://falcon.sinaapp.com',
-            'last_name' =>mb_substr($display_name, 0, 1,'utf-8'),
-            'first_name' =>mb_substr($display_name, 1,50,'utf-8'),
-            
+            'user_pass' => md5(uniqid('yqxs', true)),
+            'user_login' => $py_name,
+            'user_nicename' => $py_name,
+            'display_name' => $display_name,
+            'role' => 'author',
+            'user_url' => 'http://falcon.sinaapp.com',
+            'last_name' => mb_substr($display_name, 0, 1, 'utf-8'),
+            'first_name' => mb_substr($display_name, 1, 50, 'utf-8'),
         );
         return wp_insert_user($userdata);
-
-
     }
-    
 }
 
-add_action('init', 'add_chapters_tb');
+add_action('init', 'add_chapters_tb',null,0);
+
 function add_chapters_tb() {
 
-        global $wpdb;
-        $wpdb->tables[] = 'chapters';
-        $wpdb->chapters = $wpdb->prefix . 'chapters';
-        
-        if (isset($_REQUEST['yq_ajax']) && !empty($_REQUEST['yq_ajax'])) {
-            
-            var_dump(get_query_var('yq_ajax'));
-            die();
-        }
+    global $wpdb;
+    $wpdb->tables[] = 'chapters';
+    $wpdb->chapters = $wpdb->prefix . 'chapters';
+
+    if (isset($_REQUEST['yq_ajax']) && !empty($_REQUEST['yq_ajax'])) {
+
+        var_dump(get_query_var('yq_ajax'));
+        die();
+    }
 }
-
-
 
 /* * ajax方式 */
 
 
 
-add_action('wp_loaded','fetch_nov');
+add_action('wp_loaded', 'fetch_nov');
+
 function fetch_nov() {
     global $wpdb;
     //var_dump($wp_query);
-    $rewrite_rules =  get_option('rewrite_rules');
-    
+    $rewrite_rules = get_option('rewrite_rules');
+
     /*
-    $rewrite_rules =  get_option('rewrite_rules');
-    echo "<pre>";
-    print_r($rewrite_rules);
-    */
+      $rewrite_rules =  get_option('rewrite_rules');
+      echo "<pre>";
+      print_r($rewrite_rules);
+     */
     //var_dump(get_query_var('name'));
-    
     //die();
     if (isset($_GET['down']) && !empty($_GET['down'])) {
-    
-            var_dump(get_query_var('down'));
+
+        var_dump(get_query_var('down'));
         /*
-        header('Content-type: text/json');
-        $array = array('name' => 'falcon', 'age' => 2722);
-        echo json_encode($array);
-        */
+          header('Content-type: text/json');
+          $array = array('name' => 'falcon', 'age' => 2722);
+          echo json_encode($array);
+         */
         die();
     }
     //echo "what happen";
@@ -593,97 +711,250 @@ function fetch_nov() {
 
 //如果下载链接要使用url重写，估计要放这里了。
 /*
-add_action('wp_head','after_parse');
-function after_parse() {
-    global $wp_rewrite;
-    
-    //    ["([^/]+?)(-[0-9]{1,})?\.html$"]=>"index.php?name=$matches[1]&page=$matches[2]"
-    $wp_rewrite->rules ['down/(\d+)/?$'] = "index.php?n=$matches[1]";
-    $wp_rewrite->flush_rules();
-    var_dump($wp_rewrite);
-    //var_dump(get_query_var('name'));
-    
-}
-*/
+  add_action('wp_head','after_parse');
+  function after_parse() {
+  global $wp_rewrite;
+
+  //    ["([^/]+?)(-[0-9]{1,})?\.html$"]=>"index.php?name=$matches[1]&page=$matches[2]"
+  $wp_rewrite->rules ['down/(\d+)/?$'] = "index.php?n=$matches[1]";
+  $wp_rewrite->flush_rules();
+  var_dump($wp_rewrite);
+  //var_dump(get_query_var('name'));
+
+  }
+ */
 
 /* url运行时重写
-add_filter( 'rewrite_rules_array','my_insert_rewrite_rules' );
-add_filter( 'query_vars','my_insert_query_vars' );
-add_action( 'wp_loaded','my_flush_rules' );
+  add_filter( 'rewrite_rules_array','my_insert_rewrite_rules' );
+  add_filter( 'query_vars','my_insert_query_vars' );
+  add_action( 'wp_loaded','my_flush_rules' );
 
-// flush_rules() if our rules are not yet included
-function my_flush_rules(){
-	$rules = get_option( 'rewrite_rules' );
-    		global $wp_rewrite;
-	   	$wp_rewrite->flush_rules();
-}
+  // flush_rules() if our rules are not yet included
+  function my_flush_rules(){
+  $rules = get_option( 'rewrite_rules' );
+  global $wp_rewrite;
+  $wp_rewrite->flush_rules();
+  }
 
-// Adding a new rule
-function my_insert_rewrite_rules( $rules )
-{
-	$newrules = array();
-	$newrules['([^/]+?)(-[0-9]{1,})?\.html$'] = 'index.php?name=$matches[1]&page=$matches[2]';
-        $newrules['down/([^/]+?)/?$'] = 'index.php?did=$matches[1]';
-	return $newrules + $rules;
-}
-// Adding the id var so that WP recognizes it
-function my_insert_query_vars( $vars )
-{
-    array_push($vars, 'did');
-    return $vars;
-}
-*/
+  // Adding a new rule
+  function my_insert_rewrite_rules( $rules )
+  {
+  $newrules = array();
+  $newrules['([^/]+?)(-[0-9]{1,})?\.html$'] = 'index.php?name=$matches[1]&page=$matches[2]';
+  $newrules['down/([^/]+?)/?$'] = 'index.php?did=$matches[1]';
+  return $newrules + $rules;
+  }
+  // Adding the id var so that WP recognizes it
+  function my_insert_query_vars( $vars )
+  {
+  array_push($vars, 'did');
+  return $vars;
+  }
+ */
 
-add_action('wp_head',go_download) ;
+add_action('wp_head', go_download);
+
 function go_download() {
-    if($did = get_query_var('did')) {
-        echo "down:". $did;
+    if ($did = get_query_var('did')) {
+        echo "down:" . $did;
         die();
     }
 }
 
 //根据用户表的display_name返回用户id，如果用户不存在则添加
 /*
-function yqxs_get_user_id($display_name) {
-    global $wpdb;
-    $display_name = trim($display_name);
-    $user_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->users;" ) );
-    var_dump($user_id);
-}
- * 
+  function yqxs_get_user_id($display_name) {
+  global $wpdb;
+  $display_name = trim($display_name);
+  $user_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->users;" ) );
+  var_dump($user_id);
+  }
+ *
  */
 
 /**
- *下载指定url地址
+ * 下载指定url地址
  */
 function down_image($url) {
-        //$url = 'http://m.weather.com.cn/m/pn7/weather.htm';
-        $http=new WP_Http();
-        $header['yqxs-request-url']=get_bloginfo('wpurl');
+    //$url = 'http://m.weather.com.cn/m/pn7/weather.htm';
+    $http = new WP_Http();
+    $header['yqxs-request-url'] = get_bloginfo('wpurl');
 
-        $response=$http->request($url,array(
-            "method"=>'GET',
-            "timeout"=>10,
-            "user-agent"=>'yqxs',
-            "headers"=>$header,
-        ));
+    $response = $http->request($url, array(
+                "method" => 'GET',
+                "timeout" => 10,
+                "user-agent" => 'yqxs',
+                "headers" => $header,
+            ));
 
-        if(!$response) return new WP_Error('Fail to download the image', __('Fail to download the image') ); //图像取失败
-        
+    if (!$response)
+        return new WP_Error('Fail to download the image', __('Fail to download the image')); //图像取失败
+
         $store_dir = YQXS_IMG_DIR;
-        $file_name = array_pop(explode('/',$url));
-        $base_name = $file_name;
-        $path = $store_dir .'/covers/'.$base_name;
-        $url =YQXS_IMG_URL .'/covers/'.$base_name;
-        file_put_contents($path,$response['body']);
+    $file_name = array_pop(explode('/', $url));
+    $base_name = $file_name;
+    $path = $store_dir . '/covers/' . $base_name;
+    $url = YQXS_IMG_URL . '/covers/' . $base_name;
+    file_put_contents($path, $response['body']);
 
-        return array(
-            'path' =>$path,
-            'base_name'=>$base_name,
-            'url'=>$url,
-        );
-
-        
-
+    return array(
+        'path' => $path,
+        'base_name' => $base_name,
+        'url' => $url,
+    );
 }
 
+//	$title = apply_filters('sanitize_title', $title, $raw_title, $context);
+//$title = apply_filters('sanitize_title', $title, $raw_title, $context);
+//拼音化标题，其实是为了插入tag时的slug自动拼音化，因为用wp_insert_post时tag的slug不能指定，于是从过滤函数着手
+add_filter('sanitize_title', 'py_title', 10, 3);
+
+function py_title($title, $raw_title, $context) {
+    return word2pinyin($raw_title);
+}
+
+//缩略图尺寸自定义
+add_filter('intermediate_image_sizes_advanced', 'yqxs_image_sizes', 10, 1);
+
+function yqxs_image_sizes($sizes) {
+    $sizes['thumbnail'] = array(
+        'width' => 80,
+        'height' => 125,
+        'crop' => true,
+    );
+    $sizes['medium'] = array(
+        'width' => 150,
+        'height' => 240,
+        'crop' => true,
+    );
+    $sizes['large'] = array(
+        'width' => 390,
+        'height' => 475,
+        'crop' => false,
+    );
+    $sizes['post-thumbnail'] = array(
+        'width' => 120,
+        'height' => 160,
+        'crop' => true,
+    );
+    return $sizes;
+}
+
+//删除post时同时把章节删除
+add_action('after_delete_post','delete_post_chapters');
+function delete_post_chapters($post_id) {
+    global $wpdb;
+    $wpdb->query( 
+        $wpdb->prepare("DELETE FROM $wpdb->chapters WHERE post_id =%d",$post_id) 
+     );
+    
+}
+
+add_filter('the_content','yqxs_the_content',1,1);
+function yqxs_the_content($content) {
+    if(strpos($content,'[cai-ji]') !==FALSE)  {
+        
+        global $post;
+        global $wpdb;
+        $content ='';
+        
+        if(is_single()) {
+            $page = get_query_var('page');
+            $permalink = get_permalink($post->ID);
+            if($page==0) {
+                //显示内容简介
+               $content .= "<div id='yqxs_excerpt' >" .$post->post_excerpt ."<hr/></div>";
+                
+                $result_arr = $wpdb->get_results(
+                    $wpdb->prepare(
+                        "SELECT chapter_order,chapter_title FROM $wpdb->chapters WHERE `post_id` =%d ORDER BY `chapter_order` ASC",
+                        $post->ID,
+                        ARRAY_A 
+                    )
+                );
+                
+                $chapter_arr =array();
+                foreach ($result_arr as $result) {
+                    
+                     $chapter_url = str_replace(
+                         $post->post_name,
+                         $post->post_name.'-'.$result->chapter_order,
+                         $permalink
+                     );
+                     $chapter_title = $result->chapter_title;
+                     $chapter = '<li class="yqxs_ch_item"><a href=' . $chapter_url . '>';
+                     $chapter .= $chapter_title . '</a></li>';
+                     $chapter_arr[] = $chapter;
+                }
+                //章节链接
+                $chapter_str = '<ul class="yqxs_ch_list">' .implode("\n",$chapter_arr) .'</ul>';
+                $content .= $chapter_str;
+                
+                
+            }else {
+                //显示指定章节数的内容
+                    
+                 $result_arr = $wpdb->get_row(
+                    $wpdb->prepare(
+                        "SELECT * FROM $wpdb->chapters WHERE `post_id` = %d AND `chapter_order`=%d",
+                        $post->ID,
+                        $page
+                    ), ARRAY_A
+                 );
+                 //取下页链接，注意要检查是否存在，即是否超过最后章节
+                 $next_page = $page+1;
+                 $next_res = $wpdb->get_var(
+                    $wpdb->prepare(
+                        "SELECT id FROM $wpdb->chapters WHERE `post_id`=%d AND `chapter_order` = %d",
+                        $post->ID,
+                        $next_page
+                    )
+                 );
+                 $next_link = '';
+                 if($next_res !==NULL) {
+                    //$next_page = () ? $next_page : '';
+                    $next_link = str_replace($post->post_name,$post->post_name .'-'.$next_page, $permalink);
+                 }
+                 
+                 //取上页链接，当为0时要处理为小说首页
+                 $prev_link = '';
+                 $prev_page = $page -1;
+                 if($prev_page>0) {
+                    $prev_link = str_replace($post->post_name,$post->post_name .'-'.$prev_page, $permalink);
+                 }
+                    
+                 
+                 $content .='<h2 class="yqxs_ch_title">'.$result_arr['chapter_title'].'</h2>';
+                 $content .='<div id="yqxs_ch_content">'.$result_arr['content'] .'</div>';
+                 $content .='<div class="yqxs_dir_nav">';
+                 $prev_link && $content .='<a href="'.$prev_link.'">前一章</a>|' ;
+                 $content .= '<a href="'.$permalink.'">小说首页</a>|' ;
+                 $next_link && $content .='<a href="'.$next_link.'">后一章</a>' ;
+                 $content .='</div>';
+                 
+              
+                
+              
+                
+            }
+            
+        }
+        
+         return $content;
+    }
+    
+    return $content;
+    
+   
+}
+
+//载入css新方法 ,参考：http://codex.wordpress.org/Function_Reference/wp_enqueue_style
+   add_action('wp_enqueue_scripts', 'add_yqxs_stylesheet');
+    function add_yqxs_stylesheet() {
+        $myStyleUrl = plugins_url('css/front.css', __FILE__); // Respects SSL, Style.css is relative to the current file
+        $myStyleFile = WP_PLUGIN_DIR . '/yqxs/css/front.css';
+        if ( file_exists($myStyleFile) ) {
+            wp_register_style('myStyleSheets', $myStyleUrl);
+            wp_enqueue_style( 'myStyleSheets');
+        }
+    }
