@@ -1,0 +1,644 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh-CN" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta name="generator" content="WordPress 3.2.1"> <!-- leave this for stats please -->
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=7">
+	<meta name="verify-v1" content="UjiCMIMsgM0cRLmbI56O6TO4059eeiAKQ4+wMG38/Vg=">
+	<meta name="baidu_union_verify" content="9a3867629f12065b21fa24546f9c5335">
+    <link rel="shortcut icon" href="favicon.ico"> 
+	<title>  无插件让 Wordpress 原生相册支持 lightbox »  網生@誌 | zEUS.'Blog</title>    
+
+	    <meta name="keywords" content="JavaScript, jquery, wordpress, ">
+    <meta name="description" content="不提倡使用过多的 WordPress 插件，因为很多插件都会在 head 标签内增加大量的 JS，无疑这会影响到页面载入的速度，因而我就想能整合到主题里的效果尽量整合进来“统一管理”，这样自己也好让 JS 出现在它们需要......">
+
+    
+    <!--[if IE]>
+    <link rel="stylesheet" href="http://zeuscn.net/wp-content/themes/zeuscn.net/ie.css" type="text/css" />
+    <![endif]-->
+
+	
+    
+    
+    
+        
+    
+     	<link rel="alternate" type="application/rss+xml" title="網生@誌 | zEUS.'Blog » 无插件让 WordPress 原生相册支持 lightbox 评论 Feed" href="http://zeuscn.net/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html/feed">
+
+
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://zeuscn.net/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://zeuscn.net/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="網生@誌 | zEUS.'Blog" href="http://zeuscn.net/">
+<link rel="start" title="开篇" href="http://zeuscn.net/archives/2006/11/21/firstarticle.html">
+<link rel="prev" title="一组很喜欢的照片" href="http://zeuscn.net/archives/2009/10/31/cool-photos.html">
+<link rel="next" title="无插件实现 WordPress Lightbox 特效" href="http://zeuscn.net/archives/2009/11/01/lightbox-for-wordpress-without-plugins-2.html">
+<meta name="generator" content="WordPress 3.2.1">
+<link rel="canonical" href="http://zeuscn.net/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html">
+<link rel="shortlink" href="http://zeuscn.net/?p=644">
+
+
+
+
+
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://zeuscn.net/feed">
+	<link rel="alternate" type="text/xml" title="RSS .92" href="http://zeuscn.net/feed/rss">
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://zeuscn.net/feed/atom">
+	<link rel="pingback" href="http://zeuscn.net/xmlrpc.php">
+    
+	
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+<a name="top"></a>
+  <div class="header">
+  	<div class="center">
+    <h1><a href="http://zeuscn.net/" title="網生@誌 | zEUS.'Blog">網生@誌 | zEUS.'Blog</a></h1>
+	<div class="nav">
+        <ul id="nav">
+            <li class="page_item "><a href="http://zeuscn.net/" title="HOME">网站首页</a></li>
+            <li><a href="#">关于本站</a></li>
+            <li><a href="#">主题模板</a></li>
+            <li><a href="#">分类目录</a></li>
+            <li><a href="http://zeuscn.net/messageboard/">给我留言</a></li>
+            <li><a href="#">订阅本站</a></li>
+                    </ul>
+	</div>
+    </div>
+  </div><!-- /header -->
+  <div id="wrapper_s">
+  	<div id="wrapper">
+    <div class="s_t_single">
+        <div class="search"><form method="get" class="searchform" action="http://zeuscn.net/search">
+<input name="cx" value="012316757526287753200:595_iqfdr6q" type="hidden">
+<input name="cof" value="FORID:11" type="hidden">
+<input name="ie" value="UTF-8" type="hidden">
+<input value="Search..." name="q" class="s" onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" type="text">
+<input class="submit" name="sa" value="GO" type="submit">
+</form>
+</div>
+        <div class="twitter"></div>
+	</div>
+    <div class="content">
+                    <div class="post" id="post-644">
+        <div class="guide">
+            <a href="http://zeuscn.net/">首页</a> » <a href="http://zeuscn.net/archives/category/wordpress-research" title="查看 Wordpress研究 中的全部文章" rel="category tag">Wordpress研究</a> » 2009-10-31 » 
+        </div>
+            <div class="title">
+                <h2>无插件让 WordPress 原生相册支持 lightbox</h2>
+                <span>Tag: <a href="http://zeuscn.net/archives/tag/javascript" rel="tag">JavaScript</a> , <a href="http://zeuscn.net/archives/tag/jquery" rel="tag">jquery</a> , <a href="http://zeuscn.net/archives/tag/wordpress" rel="tag">wordpress</a> </span>
+            </div><!--/title -->
+            <div class="entry">
+                <p>不提倡使用过多的 <a href="http://zeuscn.net/archives/tag/wordpress" class="st_tag internal_tag" rel="tag" title="标签 wordpress 下的日志">WordPress</a> 插件，因为很多插件都会在 head 标签内增加大量的 JS，无疑这会影响到页面载入的速度，因而我就想能整合到主题里的效果尽量整合进来“统一管理”，这样自己也好让 JS 出现在它们需要的地方，避免不必要的加载。这里简单介绍一下给主题加入 <a href="http://zeuscn.net/archives/tag/jquery" class="st_tag internal_tag" rel="tag" title="标签 jquery 下的日志">jQuery</a> 的 lightbox 特效后如何让它能够支持 <a href="http://zeuscn.net/archives/tag/wordpress" class="st_tag internal_tag" rel="tag" title="标签 wordpress 下的日志">WordPress</a> 原生的图片相册功能。</p>
+<p>我在<a href="http://zeuscn.net/archives/2009/10/31/cool-photos.html" target="_top">上一篇日志</a>里第一次使用了 WordPress 原生相册功能，给我感觉挺不错的——方便快捷，但是它的图片链接会重新打开图片，这着实不是很爽。另外，由于 <a href="http://zeuscn.net/archives/2009/06/19/dz-theme-pro-cp-released.html" target="_top">D&amp;Z Theme Pro CP</a> 主题已经内嵌了 jQuery 的 lightbox 特效，于是我就想能否将两者结合起来，不试不知道，一试还真成功了 <img src="icon_biggrin.gif" alt=":-D" class="wp-smiley">  而且还只是仅仅只是在 header.php 中加入了一句代码：</p>
+
+<div class="wp_syntax"><div class="code"><pre class="javascript" style="font-family: monospace;">$<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'.gallery a'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">lightBox</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></pre></div></div>
+
+<p>D&amp;Z Theme Pro CP 的用户只需在 header.php 文件中搜索一下“lightbox”这个关键词，然后将上面那句代码添加成如下形式即可：</p>
+
+<div class="wp_syntax"><div class="code"><pre class="javascript" style="font-family: monospace;">$<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 51, 102); font-weight: bold;">function</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span> <span style="color: rgb(0, 153, 0);">{</span>
+    $<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'a[@rel*=lightbox]'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">lightBox</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 102, 0); font-style: italic;">// Select all links that contains lightbox in the attribute rel</span>
+    $<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'.gallery a'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">lightBox</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span>
+<span style="color: rgb(0, 153, 0);">}</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></pre></div></div>
+
+<p>这里简单解释一下：<br>
+jQuery lightbox 的官方介绍（<a href="http://leandrovieira.com/projects/jquery/lightbox/">http://leandrovieira.com/projects/jquery/lightbox/</a>）中可以得知调用 lightbox 特效的方法有如下几种：</p>
+
+<div class="wp_syntax"><div class="code"><pre class="javascript" style="font-family: monospace;">$<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 51, 102); font-weight: bold;">function</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span> <span style="color: rgb(0, 153, 0);">{</span>
+	<span style="color: rgb(0, 102, 0); font-style: italic;">// Use this example, or...</span>
+	$<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'a[@rel*=lightbox]'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">lightBox</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 102, 0); font-style: italic;">// Select all links that contains lightbox in the attribute rel</span>
+	<span style="color: rgb(0, 102, 0); font-style: italic;">// This, or...</span>
+	$<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'#gallery a'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">lightBox</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 102, 0); font-style: italic;">// Select all links in object with gallery ID</span>
+	<span style="color: rgb(0, 102, 0); font-style: italic;">// This, or...</span>
+	$<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'a.lightbox'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">lightBox</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 102, 0); font-style: italic;">// Select all links with lightbox class</span>
+	<span style="color: rgb(0, 102, 0); font-style: italic;">// This, or...</span>
+	$<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'a'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">lightBox</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 102, 0); font-style: italic;">// Select all links in the page</span>
+	<span style="color: rgb(0, 102, 0); font-style: italic;">// ... The possibility are many. Use your creative or choose one in the examples above</span>
+<span style="color: rgb(0, 153, 0);">}</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span></pre></div></div>
+
+<p>当我们在 WordPress 中插入原生相册的时候，系统会自动在调用相册的源代码中加入 gallery 这个 class：<br>
+<img class="aligncenter size-full wp-image-645" title="自动添加 gallery class" src="0011.jpg" alt="自动添加 gallery class" width="527" height="413"></p>
+<p>然后我根据 lightbox 的调用方法，将其中的</p>
+
+<div class="wp_syntax"><div class="code"><pre class="javascript" style="font-family: monospace;">$<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'#gallery a'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">lightBox</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 102, 0); font-style: italic;">// 凡是带有 gallery ID 的对象都会启用 lightbox 特效</span></pre></div></div>
+
+<p>改为了</p>
+
+<div class="wp_syntax"><div class="code"><pre class="javascript" style="font-family: monospace;">$<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'.gallery a'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">lightBox</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span><span style="color: rgb(0, 102, 0); font-style: italic;">// 凡是带有 gallery Class 的对象都会启用 lightbox 特效</span></pre></div></div>
+
+<p>即可，相当 Easy 吧～ 这样 <a href="http://zeuscn.net/archives/2009/06/19/dz-theme-pro-cp-released.html" target="_top">D&amp;Z Theme Pro CP</a> 主题就能良好的支持 WordPress 原生相册的功能了！<br>
+<strong><br>
+那么在一个不支持 lightbox 的 wordpress 主题里我们要如何做呢？</strong><br>
+先去官方网站下载一套 jQuery 的 lightbox plugin ，解压压缩包之后分别在 js 目录和 css 目录下找到如下3个文件：<br>
+<strong>jquery.js</strong><br>
+<strong>jquery.lightbox-0.5.min.js</strong><br>
+<strong>jquery.lightbox-0.5.css</strong><br>
+将以上三个文件通过 FTP 上传到你所使用的 wordpress 主题目录下<br>
+打开主题的 header.php ，将如下代码加入到 &lt;head&gt;&lt;/head&gt; 标签内：</p>
+
+<div class="wp_syntax"><div class="code"><pre class="php" style="font-family: monospace;">&lt;script src="<span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;?php</span> bloginfo<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 0, 255);">'template_directory'</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 0, 0); font-weight: bold;">?&gt;</span>/jquery.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="<span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;?php</span> bloginfo<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 0, 255);">'template_directory'</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 0, 0); font-weight: bold;">?&gt;</span>/jquery.lightbox-0.5.min.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="<span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;?php</span> bloginfo<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 0, 255);">'template_directory'</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 0, 0); font-weight: bold;">?&gt;</span>/jquery.lightbox-0.5.css" type="text/css"&gt;&lt;/script&gt;</pre></div></div>
+
+<p>然后再加入上文介绍的：</p>
+
+<div class="wp_syntax"><div class="code"><pre class="javascript" style="font-family: monospace;"><span style="color: rgb(51, 153, 51);">&lt;</span>script type<span style="color: rgb(51, 153, 51);">=</span><span style="color: rgb(51, 102, 204);">"text/javascript"</span><span style="color: rgb(51, 153, 51);">&gt;</span>
+$<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'#gallery a'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">lightBox</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span>
+$<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'.gallery a'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">lightBox</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span>
+<span style="color: rgb(51, 153, 51);">&lt;/</span>script<span style="color: rgb(51, 153, 51);">&gt;</span></pre></div></div>
+
+<p>就大功告成了～ 但是一般来说我们只会在文章页或者页面页调用相册功能，所以我们可以使用一个判断语句让它们只在这两类页面中加载：</p>
+
+<div class="wp_syntax"><div class="code"><pre class="php" style="font-family: monospace;"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;?php</span> <span style="color: rgb(177, 177, 0);">if</span> <span style="color: rgb(0, 153, 0);">(</span>is_single<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span> or is_archive or is_page<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(0, 153, 0);">)</span> <span style="color: rgb(0, 153, 0);">{</span> <span style="color: rgb(0, 0, 0); font-weight: bold;">?&gt;</span>
+    &lt;script src="<span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;?php</span> bloginfo<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 0, 255);">'template_directory'</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 0, 0); font-weight: bold;">?&gt;</span>/jquery.js" type="text/javascript"&gt;&lt;/script&gt;
+    &lt;script src="<span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;?php</span> bloginfo<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 0, 255);">'template_directory'</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 0, 0); font-weight: bold;">?&gt;</span>/jquery.lightbox-0.5.min.js" type="text/javascript"&gt;&lt;/script&gt;
+    &lt;script src="<span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;?php</span> bloginfo<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 0, 255);">'template_directory'</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span> <span style="color: rgb(0, 0, 0); font-weight: bold;">?&gt;</span>/jquery.lightbox-0.5.css" type="text/css"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript"&gt;
+    $('#gallery a').lightBox();
+    $('.gallery a').lightBox();
+    &lt;/script&gt;
+<span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;?php</span> <span style="color: rgb(0, 153, 0);">}</span> <span style="color: rgb(0, 0, 0); font-weight: bold;">?&gt;</span></pre></div></div>
+
+<p>That’s all~<br>
+使用以上方法我相信原生的 WordPress 相册就能满足大部分用户的需求了，用它来代替功能强大但略显臃肿的 NextGEN Gallery 相册插件基本没啥问题～</p>
+<p>看过以上介绍还不赶紧给自己的主题加上这么酷的效果？<br>
+
+</p><div class="gallery"><dl class="gallery-item">
+			<dt class="gallery-icon">
+				<a href="http://zeuscn.net/wp-content/uploads/2009/10/0051.jpg" title="005"><img src="0051-150x150.jpg" class="attachment-thumbnail" alt="005" title="005" width="150" height="150"></a>
+			</dt></dl><dl class="gallery-item">
+			<dt class="gallery-icon">
+				<a href="http://zeuscn.net/wp-content/uploads/2009/10/0041.jpg" title="004"><img src="0041-150x150.jpg" class="attachment-thumbnail" alt="004" title="004" width="150" height="150"></a>
+			</dt></dl><dl class="gallery-item">
+			<dt class="gallery-icon">
+				<a href="http://zeuscn.net/wp-content/uploads/2009/10/0031.jpg" title="003"><img src="0031-150x150.jpg" class="attachment-thumbnail" alt="003" title="003" width="150" height="150"></a>
+			</dt></dl><br style="clear: both;"><dl class="gallery-item">
+			<dt class="gallery-icon">
+				<a href="http://zeuscn.net/wp-content/uploads/2009/10/0071.jpg" title="007"><img src="0071-150x150.jpg" class="attachment-thumbnail" alt="007" title="007" width="150" height="150"></a>
+			</dt></dl><dl class="gallery-item">
+			<dt class="gallery-icon">
+				<a href="http://zeuscn.net/wp-content/uploads/2009/10/0091.jpg" title="009"><img src="0091-150x150.jpg" class="attachment-thumbnail" alt="009" title="009" width="150" height="150"></a>
+			</dt></dl><dl class="gallery-item">
+			<dt class="gallery-icon">
+				<a href="http://zeuscn.net/wp-content/uploads/2009/10/0061.jpg" title="006"><img src="0061-150x150.jpg" class="attachment-thumbnail" alt="006" title="006" width="150" height="150"></a>
+			</dt></dl><br style="clear: both;">
+			<br style="clear: both;">
+		</div>
+<p></p>
+<p align="right">zEUS.</p>
+
+
+<!-- wp-sns-share part begin -->
+<div class="WPSNS_main" style="margin: 20px 0pt;">
+<input id="wp-sns-share-desc" value="不提倡使用过多的 WordPress 插件，因为很多插件都会在 head 标签内增加大量的 JS，无疑这会影响到页面载入的速度，因而我就想能整合到主题里的效果尽量整合进来“统一管理”，这样自己也好让 JS 出现..." type="hidden"><input id="wp-sns-share-blog" value="網生@誌 | zEUS.'Blog" type="hidden"><div width="95%" style="border-top: 1px dotted rgb(212, 208, 200); height: 1px;"></div>
+<div style="margin: 15px 0pt; height: 27px;">
+<ul class="WPSNS_ul" style="list-style: none outside none; margin: 0pt; padding: 0pt;">
+<span style="margin: 3px 10px 0pt 0pt; height: 27px; display: block; float: left; font-size: 16px;">分享到：</span>
+<li class="WPSNS_item" style="position: relative; float: left; display: inline; width: 30px; margin: 0pt; padding: 0pt;">
+<a href="javascript:void(0)" title="分享到人人网" onclick="shareToSNS('renren',0)" style="z-index: 2; width: 16px; height: 16px; margin: 6px 0pt; padding: 0pt; border: medium none; text-decoration: none; float: left; position: relative; background: url('icons.png') no-repeat scroll 0pt -312px transparent;"></a><em style="width: 26px; height: 26px; top: 2px; left: -5px; display: none; position: absolute; background: url('icons.png') no-repeat scroll 0pt -468px transparent;"></em>
+</li>
+<li class="WPSNS_item" style="position: relative; float: left; display: inline; width: 30px; margin: 0pt; padding: 0pt;">
+<a href="javascript:void(0)" title="分享到豆瓣" onclick="shareToSNS('douban',0)" style="z-index: 2; width: 16px; height: 16px; margin: 6px 0pt; padding: 0pt; border: medium none; text-decoration: none; float: left; position: relative; background: url('icons.png') no-repeat scroll 0pt -52px transparent;"></a><em style="width: 26px; height: 26px; top: 2px; left: -5px; display: none; position: absolute; background: url('icons.png') no-repeat scroll 0pt -468px transparent;"></em>
+</li>
+<li class="WPSNS_item" style="position: relative; float: left; display: inline; width: 30px; margin: 0pt; padding: 0pt;">
+<a href="javascript:void(0)" title="分享到QQ空间" onclick="shareToSNS('qqzone',0)" style="z-index: 2; width: 16px; height: 16px; margin: 6px 0pt; padding: 0pt; border: medium none; text-decoration: none; float: left; position: relative; background: url('icons.png') no-repeat scroll 0pt -260px transparent;"></a><em style="width: 26px; height: 26px; top: 2px; left: -5px; display: none; position: absolute; background: url('icons.png') no-repeat scroll 0pt -468px transparent;"></em>
+</li>
+<li class="WPSNS_item" style="position: relative; float: left; display: inline; width: 30px; margin: 0pt; padding: 0pt;">
+<a href="javascript:void(0)" title="分享到开心网" onclick="shareToSNS('kaixin',0)" style="z-index: 2; width: 16px; height: 16px; margin: 6px 0pt; padding: 0pt; border: medium none; text-decoration: none; float: left; position: relative; background: url('icons.png') no-repeat scroll 0pt -208px transparent;"></a><em style="width: 26px; height: 26px; top: 2px; left: -5px; display: none; position: absolute; background: url('icons.png') no-repeat scroll 0pt -468px transparent;"></em>
+</li>
+<li class="WPSNS_item" style="position: relative; float: left; display: inline; width: 30px; margin: 0pt; padding: 0pt;">
+<a href="javascript:void(0)" title="分享到百度空间" onclick="shareToSNS('baidu',0)" style="z-index: 2; width: 16px; height: 16px; margin: 6px 0pt; padding: 0pt; border: medium none; text-decoration: none; float: left; position: relative; background: url('icons.png') no-repeat scroll 0pt 0px transparent;"></a><em style="width: 26px; height: 26px; top: 2px; left: -5px; display: none; position: absolute; background: url('icons.png') no-repeat scroll 0pt -468px transparent;"></em>
+</li>
+<li class="WPSNS_item" style="position: relative; float: left; display: inline; width: 30px; margin: 0pt; padding: 0pt;">
+<a href="javascript:void(0)" title="分享到新浪微博" onclick="shareToSNS('sina',0)" style="z-index: 2; width: 16px; height: 16px; margin: 6px 0pt; padding: 0pt; border: medium none; text-decoration: none; float: left; position: relative; background: url('icons.png') no-repeat scroll 0pt -338px transparent;"></a><em style="width: 26px; height: 26px; top: 2px; left: -5px; display: none; position: absolute; background: url('icons.png') no-repeat scroll 0pt -468px transparent;"></em>
+</li>
+<li class="WPSNS_item" style="position: relative; float: left; display: inline; width: 30px; margin: 0pt; padding: 0pt;">
+<a href="javascript:void(0)" title="分享到腾讯微博" onclick="shareToSNS('tqq',0)" style="z-index: 2; width: 16px; height: 16px; margin: 6px 0pt; padding: 0pt; border: medium none; text-decoration: none; float: left; position: relative; background: url('icons.png') no-repeat scroll 0pt -390px transparent;"></a><em style="width: 26px; height: 26px; top: 2px; left: -5px; display: none; position: absolute; background: url('icons.png') no-repeat scroll 0pt -468px transparent;"></em>
+</li>
+<li class="WPSNS_item" style="position: relative; float: left; display: inline; width: 30px; margin: 0pt; padding: 0pt;">
+<a href="javascript:void(0)" title="分享到网易微博" onclick="shareToSNS('t163',0)" style="z-index: 2; width: 16px; height: 16px; margin: 6px 0pt; padding: 0pt; border: medium none; text-decoration: none; float: left; position: relative; background: url('icons.png') no-repeat scroll 0pt -364px transparent;"></a><em style="width: 26px; height: 26px; top: 2px; left: -5px; display: none; position: absolute; background: url('icons.png') no-repeat scroll 0pt -468px transparent;"></em>
+</li>
+<li class="WPSNS_item" style="position: relative; float: left; display: inline; width: 30px; margin: 0pt; padding: 0pt;">
+<a href="javascript:void(0)" title="分享到搜狐微博" onclick="shareToSNS('tsohu',0)" style="z-index: 2; width: 16px; height: 16px; margin: 6px 0pt; padding: 0pt; border: medium none; text-decoration: none; float: left; position: relative; background: url('icons.png') no-repeat scroll 0pt -416px transparent;"></a><em style="width: 26px; height: 26px; top: 2px; left: -5px; display: none; position: absolute; background: url('icons.png') no-repeat scroll 0pt -468px transparent;"></em>
+</li>
+<li class="WPSNS_item" style="position: relative; float: left; display: inline; width: 30px; margin: 0pt; padding: 0pt;">
+<a href="javascript:void(0)" title="分享到饭否" onclick="shareToSNS('fanfou',0)" style="z-index: 2; width: 16px; height: 16px; margin: 6px 0pt; padding: 0pt; border: medium none; text-decoration: none; float: left; position: relative; background: url('icons.png') no-repeat scroll 0pt -104px transparent;"></a><em style="width: 26px; height: 26px; top: 2px; left: -5px; display: none; position: absolute; background: url('icons.png') no-repeat scroll 0pt -468px transparent;"></em>
+</li>
+<li class="WPSNS_item" style="position: relative; float: left; display: inline; width: 30px; margin: 0pt; padding: 0pt;">
+<a href="javascript:void(0)" title="分享到Google书签" onclick="shareToSNS('gmark',0)" style="z-index: 2; width: 16px; height: 16px; margin: 6px 0pt; padding: 0pt; border: medium none; text-decoration: none; float: left; position: relative; background: url('icons.png') no-repeat scroll 0pt -156px transparent;"></a><em style="width: 26px; height: 26px; top: 2px; left: -5px; display: none; position: absolute; background: url('icons.png') no-repeat scroll 0pt -468px transparent;"></em>
+</li>
+
+</ul>
+</div>
+<div width="95%" style="border-top: 1px dotted rgb(212, 208, 200); height: 1px;"></div>
+</div>
+<!-- wp-sns-share part end -->
+
+            </div><!--/entry -->
+            <div class="post-nav"> 
+                <span class="previous">«<a href="http://zeuscn.net/archives/2009/10/31/cool-photos.html" rel="prev">一组很喜欢的照片</a></span>
+                <span class="next"><a href="http://zeuscn.net/archives/2009/11/01/lightbox-for-wordpress-without-plugins-2.html" rel="next">无插件实现 WordPress Lightbox 特效</a>»</span>
+            </div>
+            <div class="afterpost">
+            	<h3>相关文章</h3>
+            	<div class="ggad">
+					
+                    
+                </div>
+            	<div class="st-related-posts">
+				
+<!-- Generated by Simple Tags 2.0-beta9 - http://wordpress.org/extend/plugins/simple-tags -->
+	<ul class="st-related-posts">
+	<li><a href="http://zeuscn.net/archives/2009/11/01/lightbox-for-wordpress-without-plugins-2.html" title="无插件实现 WordPress Lightbox 特效 (2009年, 十一月 1日)">无插件实现 WordPress Lightbox 特效</a> (95)</li>
+	<li><a href="http://zeuscn.net/archives/2009/10/27/dz-theme-pro-cp-green-released.html" title="D&amp;Z Theme Pro Green CP 版发布 (2009年, 十月 27日)">D&amp;Z Theme Pro Green CP 版发布</a> (9)</li>
+	<li><a href="http://zeuscn.net/archives/2009/06/19/dz-theme-pro-cp-released.html" title="D&amp;Z Theme Pro CP 版正式（付费）发布 (2009年, 六月 19日)">D&amp;Z Theme Pro CP 版正式（付费）发布</a> (135)</li>
+	<li><a href="http://zeuscn.net/archives/2008/11/26/html-a.html" title="锚点冲突，导致博客评论分页失效 (2008年, 十一月 26日)">锚点冲突，导致博客评论分页失效</a> (79)</li>
+	<li><a href="http://zeuscn.net/archives/2008/12/18/single-level-dropdowns-for-wordpress.html" title="针对 WordPress 模板导航栏2级悬浮菜单的一个很好的解决方案 (2008年, 十二月 18日)">针对 WordPress 模板导航栏2级悬浮菜单的一个很好的解决方案</a> (21)</li>
+	<li><a href="http://zeuscn.net/archives/2009/11/08/ajax-load-for-dztheme-pro.html" title="给博客首页增加了一个 Ajax 效果 (2009年, 十一月 8日)">给博客首页增加了一个 Ajax 效果</a> (26)</li>
+	<li><a href="http://zeuscn.net/archives/2008/11/26/javascript-drop-down-menu-for-dz-theme.html" title="给 D&amp;Z Theme 增加一个额外的悬浮菜单 (2008年, 十一月 26日)">给 D&amp;Z Theme 增加一个额外的悬浮菜单</a> (26)</li>
+	<li><a href="http://zeuscn.net/archives/2008/10/04/go-to-top-js.html" title="滚动返回页面顶部的JS特效 (2008年, 十月 4日)">滚动返回页面顶部的JS特效</a> (20)</li>
+	<li><a href="http://zeuscn.net/archives/2008/12/21/affiche-of-dz-theme.html" title="关于 D&amp;Z Theme 的升级公告 (2008年, 十二月 21日)">关于 D&amp;Z Theme 的升级公告</a> (38)</li>
+	<li><a href="http://zeuscn.net/archives/2009/07/22/optimize-the-header-for-wordpress.html" title="优化 header.php 加速 WordPress (2009年, 七月 22日)">优化 header.php 加速 WordPress</a> (178)</li>
+</ul>
+
+                </div>
+            </div>
+            
+<!-- You can start editing here. -->
+
+<div class="comments-template" id="comments">
+
+		<h2>已经有11人发表了评论</h2>
+        
+	<ol class="commentlist">
+       <li class="comment even thread-even depth-1" id="li-comment-9523">
+     <div id="comment-9523">
+      <div class="comment-author vcard">
+         <img alt="" src="83be08c72bda41940ec74a9e87c75325" class="avatar avatar-36 photo" width="36" height="36">      </div>
+      
+      <div class="comment-area curve">
+	  <p>老大，请问如何在header.php中加载wordpress自身的jquery.js库文件？？？</p>
+      <div class="reply">
+         <a class="comment-reply-link" href="http://zeuscn.net/index.php/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html?replytocom=9523#respond" onclick='return addComment.moveForm("comment-9523", "9523", "respond", "644")'>回复</a>      </div>
+      </div>
+      
+	  <div class="comment-meta commentmetadata"><span class="fn"><a href="http://limy.tk/" rel="external nofollow" class="url">limory</a></span> <span class="says">@</span> <a href="http://zeuscn.net/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html/comment-page-1#comment-9523">2010年, 四月 11日 10:51 下午</a></div>
+      
+     </div>
+   </li>
+
+   <li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-8886">
+     <div id="comment-8886">
+      <div class="comment-author vcard">
+         <img alt="" src="758e560a8ef96a6d3abe2cb64d3e0e9c" class="avatar avatar-36 photo" width="36" height="36">      </div>
+      
+      <div class="comment-area curve">
+	  <p>我靠，林子你的变形金刚真多……</p>
+      <div class="reply">
+         <a class="comment-reply-link" href="http://zeuscn.net/index.php/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html?replytocom=8886#respond" onclick='return addComment.moveForm("comment-8886", "8886", "respond", "644")'>回复</a>      </div>
+      </div>
+      
+	  <div class="comment-meta commentmetadata"><span class="fn"><a href="http://zhang3.net/" rel="external nofollow" class="url">张三</a></span> <span class="says">@</span> <a href="http://zeuscn.net/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html/comment-page-1#comment-8886">2009年, 十一月 3日 7:37 下午</a></div>
+      
+     </div>
+   </li>
+<ul class="children">
+   <li class="comment byuser comment-author-zeus bypostauthor even depth-2" id="li-comment-8893">
+     <div id="comment-8893">
+      <div class="comment-author vcard">
+         <img alt="" src="9e3acc075e8768074c32e6b8b48fa9ed" class="avatar avatar-36 photo" width="36" height="36">      </div>
+      
+      <div class="comment-area curve">
+	  <p>哈哈，我就好这口…</p>
+      <div class="reply">
+         <a class="comment-reply-link" href="http://zeuscn.net/index.php/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html?replytocom=8893#respond" onclick='return addComment.moveForm("comment-8893", "8893", "respond", "644")'>回复</a>      </div>
+      </div>
+      
+	  <div class="comment-meta commentmetadata"><span class="fn"><a href="http://zeuscn.net/" rel="external nofollow" class="url">zEUS.</a></span> <span class="says">@</span> <a href="http://zeuscn.net/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html/comment-page-1#comment-8893">2009年, 十一月 3日 11:31 下午</a></div>
+      
+     </div>
+   </li>
+
+</ul>
+
+   <li class="comment odd alt thread-even depth-1" id="li-comment-8834">
+     <div id="comment-8834">
+      <div class="comment-author vcard">
+         <img alt="" src="53bfb9c3e2130d42b5624273dce9bf47" class="avatar avatar-36 photo" width="36" height="36">      </div>
+      
+      <div class="comment-area curve">
+	  <p>不错，收藏了！</p>
+      <div class="reply">
+         <a class="comment-reply-link" href="http://zeuscn.net/index.php/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html?replytocom=8834#respond" onclick='return addComment.moveForm("comment-8834", "8834", "respond", "644")'>回复</a>      </div>
+      </div>
+      
+	  <div class="comment-meta commentmetadata"><span class="fn"><a href="http://www.x-idea.cn/" rel="external nofollow" class="url">创意无限</a></span> <span class="says">@</span> <a href="http://zeuscn.net/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html/comment-page-1#comment-8834">2009年, 十一月 1日 12:42 上午</a></div>
+      
+     </div>
+   </li>
+
+   <li class="comment even thread-odd thread-alt depth-1" id="li-comment-8822">
+     <div id="comment-8822">
+      <div class="comment-author vcard">
+         <img alt="" src="7c82d84d9eee60093bda5a2d361010ac" class="avatar avatar-36 photo" width="36" height="36">      </div>
+      
+      <div class="comment-area curve">
+	  <p>没抢到沙发。现在用的picasa相册没用本地存图所以暂时使不上。</p>
+      <div class="reply">
+         <a class="comment-reply-link" href="http://zeuscn.net/index.php/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html?replytocom=8822#respond" onclick='return addComment.moveForm("comment-8822", "8822", "respond", "644")'>回复</a>      </div>
+      </div>
+      
+	  <div class="comment-meta commentmetadata"><span class="fn"><a href="http://sivan.in/blog/" rel="external nofollow" class="url">Sivan</a></span> <span class="says">@</span> <a href="http://zeuscn.net/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html/comment-page-1#comment-8822">2009年, 十月 31日 2:20 下午</a></div>
+      
+     </div>
+   </li>
+<ul class="children">
+   <li class="comment byuser comment-author-zeus bypostauthor odd alt depth-2" id="li-comment-8823">
+     <div id="comment-8823">
+      <div class="comment-author vcard">
+         <img alt="" src="9e3acc075e8768074c32e6b8b48fa9ed" class="avatar avatar-36 photo" width="36" height="36">      </div>
+      
+      <div class="comment-area curve">
+	  <p>呵呵，一直担心 GFW 哪天发威把 picasa 也给墙掉，所以没敢用国外的相册…</p>
+      <div class="reply">
+         <a class="comment-reply-link" href="http://zeuscn.net/index.php/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html?replytocom=8823#respond" onclick='return addComment.moveForm("comment-8823", "8823", "respond", "644")'>回复</a>      </div>
+      </div>
+      
+	  <div class="comment-meta commentmetadata"><span class="fn"><a href="http://zeuscn.net/" rel="external nofollow" class="url">zEUS.</a></span> <span class="says">@</span> <a href="http://zeuscn.net/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html/comment-page-1#comment-8823">2009年, 十月 31日 3:57 下午</a></div>
+      
+     </div>
+   </li>
+
+</ul>
+
+   <li class="comment even thread-even depth-1" id="li-comment-8821">
+     <div id="comment-8821">
+      <div class="comment-author vcard">
+         <img alt="" src="bdb8b1b5ce2de2b8d0c1f6e89049ce28" class="avatar avatar-36 photo" width="36" height="36">      </div>
+      
+      <div class="comment-area curve">
+	  <p>我等了很久了!!</p>
+      <div class="reply">
+         <a class="comment-reply-link" href="http://zeuscn.net/index.php/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html?replytocom=8821#respond" onclick='return addComment.moveForm("comment-8821", "8821", "respond", "644")'>回复</a>      </div>
+      </div>
+      
+	  <div class="comment-meta commentmetadata"><span class="fn"><a href="http://imcat.in/" rel="external nofollow" class="url">Cat.</a></span> <span class="says">@</span> <a href="http://zeuscn.net/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html/comment-page-1#comment-8821">2009年, 十月 31日 1:20 下午</a></div>
+      
+     </div>
+   </li>
+
+   <li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-8819">
+     <div id="comment-8819">
+      <div class="comment-author vcard">
+         <img alt="" src="cf2a51d1073cf5a78821a947b9b2ed0e" class="avatar avatar-36 photo" width="36" height="36">      </div>
+      
+      <div class="comment-area curve">
+	  <p>好像和我的主题无缘了。。。</p>
+      <div class="reply">
+         <a class="comment-reply-link" href="http://zeuscn.net/index.php/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html?replytocom=8819#respond" onclick='return addComment.moveForm("comment-8819", "8819", "respond", "644")'>回复</a>      </div>
+      </div>
+      
+	  <div class="comment-meta commentmetadata"><span class="fn"><a href="http://www.life-studio.cn/" rel="external nofollow" class="url">万戈</a></span> <span class="says">@</span> <a href="http://zeuscn.net/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html/comment-page-1#comment-8819">2009年, 十月 31日 12:41 下午</a></div>
+      
+     </div>
+   </li>
+<ul class="children">
+   <li class="comment byuser comment-author-zeus bypostauthor even depth-2" id="li-comment-8824">
+     <div id="comment-8824">
+      <div class="comment-author vcard">
+         <img alt="" src="9e3acc075e8768074c32e6b8b48fa9ed" class="avatar avatar-36 photo" width="36" height="36">      </div>
+      
+      <div class="comment-area curve">
+	  <p>文章后半部分介绍了非 D&amp;Z Theme Pro CP 的使用方法呀～</p>
+      <div class="reply">
+         <a class="comment-reply-link" href="http://zeuscn.net/index.php/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html?replytocom=8824#respond" onclick='return addComment.moveForm("comment-8824", "8824", "respond", "644")'>回复</a>      </div>
+      </div>
+      
+	  <div class="comment-meta commentmetadata"><span class="fn"><a href="http://zeuscn.net/" rel="external nofollow" class="url">zEUS.</a></span> <span class="says">@</span> <a href="http://zeuscn.net/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html/comment-page-1#comment-8824">2009年, 十月 31日 3:58 下午</a></div>
+      
+     </div>
+   </li>
+
+</ul>
+
+	</ol>
+        <div class="comments-navi">
+        <div class="alignleft"></div>
+        <div class="alignright"></div>
+	</div>
+		<h2>文章反相链接 Pingback/Trackback</h2>
+    <ol class="commentpings">
+            <li class="curve" id="comment-9378"><a href="http://www.sixi.info/20100221/jquery-lightbox.html" rel="external nofollow" class="url">无插件让Wordpress支持jquery lightbox » 四夕小罗</a></li>
+        <li class="curve" id="comment-8830"><a href="http://zeuscn.net/archives/2009/11/01/lightbox-for-wordpress-without-plugins-2.html" rel="external nofollow" class="url">无插件实现 Wordpress Lightbox 特效 » 網生@誌 | zEUS.’Blog</a></li>
+    </ol>
+    
+
+
+
+</div><!-- end comments-template. -->
+
+
+<div id="respond">
+<h3>发表您的看法</h3>
+        
+
+<form action="http://zeuscn.net/wp-comments-post.php" method="post" id="commentform">
+
+<p><input name="author" id="author" value="" size="40" tabindex="1" type="text">
+<label for="author"><span class="reply-tip">昵称 (必填)</span></label></p>
+
+<p><input name="email" id="email" value="" size="40" tabindex="2" type="text">
+<label for="email"><span class="reply-tip">电子邮箱 (必填/我们为您保密)</span></label></p>
+
+<p><input name="url" id="url" value="" size="40" tabindex="3" type="text">
+<label for="url"><span class="reply-tip">网址</span></label></p>
+
+ 	
+<p><input name="mcspvalue" id="mcspvalue" value="" size="22" tabindex="4" type="text">
+	<label for="mcspvalue"><span class="reply-tip">3 + 9=? (必填)</span></label>
+	<input name="mcspinfo" value="be822" type="hidden">
+</p>
+
+
+<!--<p><strong>XHTML:</strong> You can use these tags&#58; &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; &lt;pre lang=&quot;&quot; line=&quot;&quot; escaped=&quot;&quot; highlight=&quot;&quot;&gt; </p>-->
+
+<p><textarea name="comment" id="comment" cols="105" rows="10" tabindex="4"></textarea></p>
+
+<input name="submit" id="submit" tabindex="5" value="好了, 发表" type="submit">
+<input name="comment_post_ID" value="644" type="hidden">
+<div id="cancel_reply"> 
+	<a rel="nofollow" id="cancel-comment-reply-link" href="http://zeuscn.net/index.php/archives/2009/10/31/lightbox-for-wordpress-without-plugins.html#respond" style="display: none;">点击这里取消回复。</a></div>
+<input name="comment_post_ID" value="644" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+ 
+
+
+</form>
+</div>
+        </div><!--/post -->
+				<div class="sidebar_s">
+    <div class="ggad_s">
+        <h3>About</h3>
+        <div class="about_s">
+            <img src="logo.jpg" align="right">
+            <p>Hey, welcome~</p>
+            <p>这里是 zEUS. 的个人博客，你在这里可以找到一些关于 Wordpress 的相关文章和博客模板，不过这些文章/作品基本都是在2006-2009年所写，由于年代久远，本站现不提供任何形式的技术支持，望各位朋友见谅。</p>
+            <p>本人近一年多来在玩网店、摄影和模型玩具，今后的文章大多会跟这些内容相关，希望新老朋友继续保持关注。</p>
+        </div>
+        
+		
+        
+
+    </div><!--/关于和广告 -->
+    
+    <ul>
+    <h3>Posts of The Category</h3>    <li><a href="http://zeuscn.net/archives/2011/08/09/windows2003-iis6-wordpress-and-discuz-static-permalink.html" rel="bookmark" title="Windows2003 IIS6.0 下 WordPress 和 DiscuzX2 的伪静态实现方法">Windows2003 IIS6.0 下 WordPress 和 DiscuzX2 的伪静态实现方法</a></li>
+        <li><a href="http://zeuscn.net/archives/2011/08/05/sae-wordpress.html" rel="bookmark" title="国内免费高速图床——SAE 免费搭建 WordPress">国内免费高速图床——SAE 免费搭建 WordPress</a></li>
+        <li><a href="http://zeuscn.net/archives/2009/12/01/wordpress-title-width-defined.html" rel="bookmark" title="如何控制 WordPress 文章标题的长度（顺带测试一下超长的标题输出）">如何控制 WordPress 文章标题的长度（顺带测试一下超长的标题输出）</a></li>
+        <li><a href="http://zeuscn.net/archives/2009/11/08/ajax-load-for-dztheme-pro.html" rel="bookmark" title="给博客首页增加了一个 Ajax 效果">给博客首页增加了一个 Ajax 效果</a></li>
+        <li><a href="http://zeuscn.net/archives/2009/11/01/lightbox-for-wordpress-without-plugins-2.html" rel="bookmark" title="无插件实现 WordPress Lightbox 特效">无插件实现 WordPress Lightbox 特效</a></li>
+        <li><a href="http://zeuscn.net/archives/2009/07/22/optimize-the-header-for-wordpress.html" rel="bookmark" title="优化 header.php 加速 WordPress">优化 header.php 加速 WordPress</a></li>
+        <li><a href="http://zeuscn.net/archives/2009/06/16/1st-trade-of-09-wordpress-tshirt.html" rel="bookmark" title="09’夏季 WordPress 文化衫第一批团购结束">09’夏季 WordPress 文化衫第一批团购结束</a></li>
+        <li><a href="http://zeuscn.net/archives/2009/06/14/09-wordpress-tshirt-more.html" rel="bookmark" title="团购 WordPress T恤进展">团购 WordPress T恤进展</a></li>
+        <li><a href="http://zeuscn.net/archives/2009/06/02/d-z-theme-post-type.html" rel="bookmark" title="剔除 D&amp;Z Theme 主题“热评日志”列表中的页面">剔除 D&amp;Z Theme 主题“热评日志”列表中的页面</a></li>
+        <li><a href="http://zeuscn.net/archives/2009/06/01/about-09-wordpress-tshirt.html" rel="bookmark" title="09夏季WordPress文化衫意见征集">09夏季WordPress文化衫意见征集</a></li>
+        </ul><!--/相同分类下的文章 -->
+    
+    <ul>
+    <h3>Micro Blog</h3>    
+    <iframe id="sina_widget_1689492163" style="width: 234px; height: 500px; padding: 0pt 8px 3px;" src="index_1.html" scrolling="no" frameborder="0"></iframe>    
+    </ul><!--/新浪微博 -->      
+    
+    <ul class="recentcomments">
+    <h3>Recent Comments</h3>
+    <li><img alt="" src="1e88c19de5db720a23112ef0fa42b2ce" class="avatar avatar-32 photo" width="32" height="32">粉红大布娃娃 : <a href="http://zeuscn.net/archives/2011/02/13/wfc_bumblebee.html#comment-48166" title="粉红大布娃娃 | 赛博坦之战大黄蜂小拍">http://dabuwawa.blogcn.com 不错哦~！...</a></li><li><img alt="" src="b4868a1b9b2b424ca76b8754d2ca9d16" class="avatar avatar-32 photo" width="32" height="32">手游之家 : <a href="http://zeuscn.net/archives/2011/08/05/one-piece-comics-634.html#comment-48165" title="手游之家 | 海贼王 634 话：10万 VS 10">喜欢bano出得海贼王鞋子！！！！！...</a></li><li><img alt="" src="b4868a1b9b2b424ca76b8754d2ca9d16" class="avatar avatar-32 photo" width="32" height="32">帝王三国官网 : <a href="http://zeuscn.net/archives/2011/07/20/optimus-prime-and-i.html#comment-48164" title="帝王三国官网 | 和擎天柱大哥的一次亲密接触">哗！！...</a></li><li><img alt="" src="e49754459373e23bc6a4946928655697" class="avatar avatar-32 photo" width="32" height="32">乐融融 : <a href="http://zeuscn.net/messageboard#comment-48163" title="乐融融 | 给我留言">很漂亮的网站，支持一下...</a></li><li><img alt="" src="e49754459373e23bc6a4946928655697" class="avatar avatar-32 photo" width="32" height="32">乐融融 : <a href="http://zeuscn.net/archives/2011/07/19/wedding-photos.html#comment-48162" title="乐融融 | 婚纱照">确实漂亮啊~~~花的值...</a></li><li><img alt="" src="15b4fc4b86ca0df6d04d5fbddc33f225" class="avatar avatar-32 photo" width="32" height="32">小站长论坛 : <a href="http://zeuscn.net/archives/2011/07/19/wedding-photos.html#comment-48161" title="小站长论坛 | 婚纱照">郎才女貌啊!...</a></li><li><img alt="" src="f40107ce7206023784dfe5fe9c6a70c7" class="avatar avatar-32 photo" width="32" height="32">草流孰氓 : <a href="http://zeuscn.net/archives/2011/10/06/steve-jobs.html#comment-48160" title="草流孰氓 | 乔帮主一路走好！">有意思的说法。...</a></li><li><img alt="" src="603d2bf0df214cd2f506c90aeb09b55e" class="avatar avatar-32 photo" width="32" height="32">微传播世界 : <a href="http://zeuscn.net/archives/2008/08/26/diablo-iii-theme-released.html#comment-10538" title="微传播世界 | WordPress 主题模板：大菠萝3 Diablo III">强人 ，能不能仿一个这样的模版，地址：  http:/...</a></li><li><img alt="" src="043c33e2bfedd919adcdaee8da598718" class="avatar avatar-32 photo" width="32" height="32">ankeyli : <a href="http://zeuscn.net/archives/2011/07/19/wedding-photos.html#comment-10534" title="ankeyli | 婚纱照">哈哈 恭喜啊 好兄弟~...</a></li><li><img alt="" src="eaed7b25d360e5bb4329b985d8b6d93c" class="avatar avatar-32 photo" width="32" height="32">糖醋排骨 : <a href="http://zeuscn.net/archives/2011/10/06/zeuscn-net-dns-hijacking.html#comment-10533" title="糖醋排骨 | ZEUSCN.NET 域名解析 DNS 被劫持？！">呵呵，用国内的服务就是这么烦了。...</a></li>    </ul><!--/最新评论 -->
+
+    <ul>
+    <h3>Tag Cloud</h3>
+    <div class="tag-area"><a href="http://zeuscn.net/archives/tag/%e4%b8%8e%e6%88%91%e6%9c%89%e5%85%b3" class="tag-link-157" title="50 个话题" style="font-size: 16.8491pt;">与我有关</a>
+<a href="http://zeuscn.net/archives/tag/%e4%b8%bb%e9%a2%98%e6%a8%a1%e6%9d%bf" class="tag-link-122" title="33 个话题" style="font-size: 14.4717pt;">主题模板</a>
+<a href="http://zeuscn.net/archives/tag/%e5%8a%a8%e7%94%bb" class="tag-link-195" title="20 个话题" style="font-size: 11.6981pt;">动画</a>
+<a href="http://zeuscn.net/archives/tag/%e5%8e%9f%e6%9d%a5%e5%a6%82%e6%ad%a4" class="tag-link-125" title="13 个话题" style="font-size: 9.45283pt;">原来如此</a>
+<a href="http://zeuscn.net/archives/tag/tf" class="tag-link-56" title="35 个话题" style="font-size: 14.8679pt;">变形金刚</a>
+<a href="http://zeuscn.net/archives/tag/%e5%b9%bf%e5%91%8a" class="tag-link-128" title="14 个话题" style="font-size: 9.84906pt;">广告</a>
+<a href="http://zeuscn.net/archives/tag/%e6%bc%ab%e7%94%bb" class="tag-link-189" title="15 个话题" style="font-size: 10.1132pt;">漫画</a>
+<a href="http://zeuscn.net/archives/tag/%e7%88%b1%e6%83%85" class="tag-link-154" title="15 个话题" style="font-size: 10.1132pt;">爱情</a>
+<a href="http://zeuscn.net/archives/tag/%e7%8e%a9%e5%85%b7" class="tag-link-197" title="11 个话题" style="font-size: 8.5283pt;">玩具</a>
+<a href="http://zeuscn.net/archives/tag/%e7%94%9f%e6%b4%bb" class="tag-link-35" title="85 个话题" style="font-size: 19.7547pt;">生活</a>
+<a href="http://zeuscn.net/archives/tag/%e7%94%b5%e5%bd%b1" class="tag-link-394" title="17 个话题" style="font-size: 10.9057pt;">电影</a>
+<a href="http://zeuscn.net/archives/tag/%e9%ad%94%e5%85%bd%e4%b8%96%e7%95%8c" class="tag-link-229" title="31 个话题" style="font-size: 14.2075pt;">魔兽世界</a>
+<a href="http://zeuscn.net/archives/tag/2008" class="tag-link-240" title="31 个话题" style="font-size: 14.2075pt;">2008</a>
+<a href="http://zeuscn.net/archives/tag/2009" class="tag-link-242" title="16 个话题" style="font-size: 10.5094pt;">2009</a>
+<a href="http://zeuscn.net/archives/tag/cg" class="tag-link-48" title="11 个话题" style="font-size: 8.5283pt;">CG</a>
+<a href="http://zeuscn.net/archives/tag/css" class="tag-link-149" title="15 个话题" style="font-size: 10.1132pt;">css</a>
+<a href="http://zeuscn.net/archives/tag/dz-theme" class="tag-link-342" title="23 个话题" style="font-size: 12.4906pt;">D&amp;Z Theme</a>
+<a href="http://zeuscn.net/archives/tag/feedsky" class="tag-link-180" title="11 个话题" style="font-size: 8.5283pt;">feedsky</a>
+<a href="http://zeuscn.net/archives/tag/gfw" class="tag-link-38" title="13 个话题" style="font-size: 9.45283pt;">GFW</a>
+<a href="http://zeuscn.net/archives/tag/movie" class="tag-link-32" title="57 个话题" style="font-size: 17.5094pt;">movie</a>
+<a href="http://zeuscn.net/archives/tag/one-piece" class="tag-link-77" title="13 个话题" style="font-size: 9.45283pt;">One-Piece</a>
+<a href="http://zeuscn.net/archives/tag/qq" class="tag-link-141" title="11 个话题" style="font-size: 8.5283pt;">QQ</a>
+<a href="http://zeuscn.net/archives/tag/seo" class="tag-link-112" title="10 个话题" style="font-size: 8pt;">SEO</a>
+<a href="http://zeuscn.net/archives/tag/system" class="tag-link-50" title="10 个话题" style="font-size: 8pt;">system</a>
+<a href="http://zeuscn.net/archives/tag/transformers" class="tag-link-190" title="21 个话题" style="font-size: 11.9623pt;">Transformers</a>
+<a href="http://zeuscn.net/archives/tag/transformersmovie" class="tag-link-463" title="12 个话题" style="font-size: 8.92453pt;">TransformersMovie</a>
+<a href="http://zeuscn.net/archives/tag/warcraft" class="tag-link-59" title="16 个话题" style="font-size: 10.5094pt;">Warcraft</a>
+<a href="http://zeuscn.net/archives/tag/web-20" class="tag-link-40" title="22 个话题" style="font-size: 12.2264pt;">web-2.0</a>
+<a href="http://zeuscn.net/archives/tag/windows-xp" class="tag-link-46" title="13 个话题" style="font-size: 9.45283pt;">windows-xp</a>
+<a href="http://zeuscn.net/archives/tag/wordpress" class="tag-link-34" title="124 个话题" style="font-size: 22pt;">wordpress</a><!-- 修改数字即可改变输标签云中标签个数 --></div>
+    </ul><!--/标签云 -->
+
+    <ul>
+            <h3>Categoris</h3>
+            	<li class="cat-item cat-item-7"><a href="http://zeuscn.net/archives/category/wordpressplugins" title="查看 Wordpress插件 下的所有文章">Wordpress插件</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="http://zeuscn.net/archives/category/wordpressthemes" title="主题模板也精彩">Wordpress模板</a>
+</li>
+	<li class="cat-item cat-item-219"><a href="http://zeuscn.net/archives/category/wordpress-research" title="绝不拘于简单的运用">Wordpress研究</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://zeuscn.net/archives/category/onepiece" title="查看 《海贼王》 下的所有文章">《海贼王》</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://zeuscn.net/archives/category/sth-about-me" title="生命在于折腾">与我有关</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://zeuscn.net/archives/category/health" title="你输掉健康了吗">健康无价</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="http://zeuscn.net/archives/category/comics" title="少年漫画是我的最爱">动漫动画</a>
+</li>
+	<li class="cat-item cat-item-231"><a href="http://zeuscn.net/archives/category/our-duty" title="查看 匹夫有责 下的所有文章">匹夫有责</a>
+</li>
+	<li class="cat-item cat-item-500"><a href="http://zeuscn.net/archives/category/original-themes" title="查看 原创主题 下的所有文章">原创主题</a>
+</li>
+	<li class="cat-item cat-item-56"><a href="http://zeuscn.net/archives/category/tf" title="查看 变形金刚 下的所有文章">变形金刚</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="http://zeuscn.net/archives/category/space" title="查看 太空幻想 下的所有文章">太空幻想</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://zeuscn.net/archives/category/entertainment" title="电影音乐一网打尽">娱人娱己</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="http://zeuscn.net/archives/category/winning-eleven" title="查看 实况足球 下的所有文章">实况足球</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://zeuscn.net/archives/category/do-my-pc" title="我的电脑我做主">干掉电脑</a>
+</li>
+	<li class="cat-item cat-item-520"><a href="http://zeuscn.net/archives/category/photo" title="查看 摄影自拍 下的所有文章">摄影自拍</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="http://zeuscn.net/archives/category/copy" title="分享快乐的文字">摘文拾趣</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://zeuscn.net/archives/category/uncategorized" title="查看 无类可分 下的所有文章">无类可分</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="http://zeuscn.net/archives/category/stars" title="查看 星星月亮 下的所有文章">星星月亮</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="http://zeuscn.net/archives/category/starcraft" title="查看 星际争霸 下的所有文章">星际争霸</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://zeuscn.net/archives/category/need-for-speed" title="查看 极品飞车 下的所有文章">极品飞车</a>
+</li>
+	<li class="cat-item cat-item-545"><a href="http://zeuscn.net/archives/category/one-piece-comics" title="查看 海贼王漫画 下的所有文章">海贼王漫画</a>
+</li>
+	<li class="cat-item cat-item-280"><a href="http://zeuscn.net/archives/category/food" title="查看 特色饮食 下的所有文章">特色饮食</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="http://zeuscn.net/archives/category/biohazard" title="查看 生化危机 下的所有文章">生化危机</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://zeuscn.net/archives/category/pc-games" title="今天你玩游戏了吗">电脑游戏</a>
+</li>
+	<li class="cat-item cat-item-28"><a href="http://zeuscn.net/archives/category/bullshit" title="其实我很喜欢扯淡的">纯属扯淡</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://zeuscn.net/archives/category/internet" title="互联网应用与拾趣">网络相关</a>
+</li>
+	<li class="cat-item cat-item-31"><a href="http://zeuscn.net/archives/category/webpages" title="查看 网页美化 下的所有文章">网页美化</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="http://zeuscn.net/archives/category/festival" title="查看 节日民俗 下的所有文章">节日民俗</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="http://zeuscn.net/archives/category/flowers" title="查看 花花草草 下的所有文章">花花草草</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="http://zeuscn.net/archives/category/ads" title="查看 话题广告 下的所有文章">话题广告</a>
+</li>
+	<li class="cat-item cat-item-260"><a href="http://zeuscn.net/archives/category/stock" title="查看 谈股论经 下的所有文章">谈股论经</a>
+</li>
+	<li class="cat-item cat-item-515"><a href="http://zeuscn.net/archives/category/about-shoes" title="查看 酷鞋推荐 下的所有文章">酷鞋推荐</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="http://zeuscn.net/archives/category/world-of-warcraft" title="查看 魔兽世界 下的所有文章">魔兽世界</a>
+</li>
+	<li class="cat-item cat-item-27"><a href="http://zeuscn.net/archives/category/history-of-warcraft" title="魔兽历史知多少">魔兽正史</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="http://zeuscn.net/archives/category/black-friday" title="侦探悬疑动画在线看">黑色星期五</a>
+</li>
+            </ul><!--/分类目录 -->    
+</div><!-- 侧栏 -->    </div><!--/content -->      
+       </div><!--/wrapper -->
+   </div><!--/wrapper_s -->
+   
+   <div class="footerbg" style="float: left;">
+    <div class="footer">
+        <div class="left">
+            <div class="top">Home | About | Contact | Download | Guestbook | Subscribe | Site Map</div>
+            <div class="btm">Copyright © 2006 - 2010 ZEUSCN.NET. All Rights Reserved. 鄂ICP备07011793号. <img src="counter.php" alt="ZEUS" title="总访问量">
+</div>
+        </div>
+        <div class="right">
+            <a href="http://zeuscn.net/"></a>
+        </div>
+    </div>
+   </div>
+
+    </body>
+</html>

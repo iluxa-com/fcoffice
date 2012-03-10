@@ -7,7 +7,7 @@ $(document).ready(function(){
         var  send = {'ajax_post_title':ajax_post_title};
         $.post(
             '/',send,function(id) {
-                console.log(id);
+                //console.log(id);
                 if(id>0) {
                      if(confirm('文章已存在，是否继续采集？')) {
                             $("#info-form").append("<input name='ID' type='hidden' value='" + id +"'>");
@@ -17,6 +17,7 @@ $(document).ready(function(){
                      
                 }else {
                     if_cj = true;
+                    $('#info-form').submit();
                 }
                 
             },'text'

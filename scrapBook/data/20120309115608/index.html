@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" dir="ltr" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta http-equiv="Content-Style-Type" content="text/css">
+		<meta name="generator" content="MediaWiki 1.15.5">
+		<meta name="keywords" content="Class Reference,Class Reference/WP Ajax Response,Class Reference/WP Error,Class Reference/WP List Table,Class Reference/WP Object Cache,Class Reference/WP Query,Class Reference/WP Rewrite,Class Reference/WP Screen,Class Reference/WP User,Class Reference/WP User Query,Class Reference/wpdb">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="search" type="application/opensearchdescription+xml" href="http://codex.wordpress.org/opensearch_desc.php" title="Codex (en)">
+		<link rel="alternate" type="application/rss+xml" title="Codex RSS feed" href="http://codex.wordpress.org/index.php?title=Special:RecentChanges&amp;feed=rss">
+		<link rel="alternate" type="application/atom+xml" title="Codex Atom feed" href="http://codex.wordpress.org/index.php?title=Special:RecentChanges&amp;feed=atom">
+<title>Class Reference « WordPress Codex</title>
+
+
+<!--[if IE]>
+<style type="text/css">
+@import url("http://wordpress.org/style/ie.css?9");
+</style>
+<![endif]-->
+<link rel="shortcut icon" href="favicon_001.ico" type="image/x-icon">
+
+
+
+
+<!--[if IE]>
+    <script type="text/javascript" src="/skins/common/IEFixes.js"></script>
+    <meta http-equiv="imagetoolbar" content="no" />
+<![endif]-->
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body id="wordpress-org">
+
+<div id="header">
+	<div class="wrapper">
+		<h1><a href="http://wordpress.org/" title="WordPress">WordPress.org</a></h1>
+
+		<form action="http://wordpress.org/search/do-search.php" method="get" id="head-search">
+			<input class="text" name="search" value="Search the Codex" maxlength="150" onfocus="this.value=(this.value=='Search the Codex') ? '' : this.value;" onblur="this.value=(this.value=='') ? 'Search the Codex' : this.value;" type="text"> <input class="button" value="Go" type="submit">
+		</form>
+
+		<ul>
+			<li><a href="http://wordpress.org/" title="Home is where the heart is.">Home</a></li>
+			<li><a href="http://wordpress.org/showcase/" title="See some of the sites built on WordPress.">Showcase</a></li>
+			<li><a href="http://wordpress.org/extend/" title="Taking WordPress beyond your wildest imagination">Extend</a>
+			<ul class="nav-submenu">
+				<li><a href="http://wordpress.org/extend/plugins/" title="Plugins can extend WordPress to do almost anything you can imagine.">Plugins</a></li>
+				<li><a href="http://wordpress.org/extend/themes/" title="Find just the right look for your website.">Themes</a></li>
+			</ul></li>
+			<li><a href="http://wordpress.org/about/" title="About the WordPress Organization, and where we're going.">About</a></li>
+			<li><a class="current" href="http://codex.wordpress.org/Main_Page" title="Documentation, tutorials, best practices.">Docs</a></li>
+			<li><a href="http://wordpress.org/development/" title="Come here for the latest scoop.">Blog</a></li>
+			<li><a href="http://wordpress.org/support/" title="Support and discussion forums.">Forums</a></li>
+			<li><a href="http://wordpress.org/hosting/" title="Find a home for your blog">Hosting</a></li>
+			<li id="download"><a href="http://wordpress.org/download/" title="Get it. Got it? Good.">Download</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="headline">
+	<div class="wrapper">
+		<h2>Codex</h2>
+		
+		<div class="portlet" id="p-personal">
+		  <p class="login">Codex tools:
+		     <a href="http://codex.wordpress.org/index.php?title=Special:UserLogin&amp;returnto=Class_Reference">Log in</a> 		  </p>
+		</div>
+	</div>
+</div>
+
+<div id="pagebody">
+	<div class="wrapper">	
+		<div class="col-10" id="bodyContent">
+						<h2 class="pagetitle">Class Reference</h2>
+									<!-- start content -->
+				<p class="LanguageLinks" style="border: 1px solid rgb(204, 204, 204); line-height: 1.5; text-align: left; color: rgb(51, 51, 51); font-size: 90%; padding: 10px;"><span style="white-space: nowrap;"><a href="http://codex.wordpress.org/Multilingual_Codex" title="Multilingual Codex" class="mw-redirect">Languages</a>:</span> 
+<strong class="selflink">English</strong> • 
+ <small>(<a href="http://codex.wordpress.org/Multilingual_Codex#Language_Cross_Reference" title="Multilingual Codex" class="mw-redirect">Add your language</a>)</small>
+</p>
+<table id="toc" class="toc" summary="Contents"><tbody><tr><td><div id="toctitle"><h2>Contents</h2> <span class="toctoggle">[<a href="javascript:toggleToc()" class="internal" id="togglelink">hide</a>]</span></div>
+<ul>
+<li class="toclevel-1"><a href="#Classes"><span class="tocnumber">1</span> <span class="toctext">Classes</span></a></li>
+<li class="toclevel-1"><a href="#External_Classes"><span class="tocnumber">2</span> <span class="toctext">External Classes</span></a></li>
+<li class="toclevel-1"><a href="#Resources"><span class="tocnumber">3</span> <span class="toctext">Resources</span></a></li>
+<li class="toclevel-1"><a href="#Related"><span class="tocnumber">4</span> <span class="toctext">Related</span></a></li>
+</ul>
+</td></tr></tbody></table>
+<p>The files of WordPress define many useful PHP Classes. This article will try to list all/most of the core classes.
+</p>
+<a name="Classes" id="Classes"></a><h2> <span class="mw-headline">Classes</span></h2>
+<p>The following classes were created by WordPress developers:
+</p>
+<ul><li> atomentry
+</li><li> atomfeed
+</li><li> atomparser
+</li><li> atomserver
+</li><li> custom_background
+</li><li> custom_image_header
+</li><li> definition
+</li><li> enchantspell
+</li><li> file_upload_upgrader
+</li><li> ftp
+</li><li> ftp_base
+</li><li> gettext_translations
+</li><li> googlespell
+</li><li> ixr_base64
+</li><li> ixr_client
+</li><li> ixr_clientmulticall
+</li><li> ixr_date
+</li><li> ixr_error
+</li><li> ixr_introspectionserver
+</li><li> ixr_message
+</li><li> ixr_request
+</li><li> ixr_server
+</li><li> ixr_value
+</li><li> magpierss
+</li><li> mo
+</li><li> moxiecode_json
+</li><li> moxiecode_jsonreader
+</li><li> moxiecode_logger
+</li><li> noop_translations
+</li><li> passwordhash
+</li><li> pclzip
+</li><li> phpmailer
+</li><li> po
+</li><li> pomo_cachedfilereader
+</li><li> pomo_cachedintfilereader
+</li><li> pomo_filereader
+</li><li> pomo_reader
+</li><li> pomo_stringreader
+</li><li> pop3
+</li><li> pspell
+</li><li> pspellshell
+</li><li> rsscache
+</li><li> services_json
+</li><li> services_json_error
+</li><li> simplepie
+</li><li> simplepie_author
+</li><li> simplepie_cache
+</li><li> simplepie_cache_db
+</li><li> simplepie_cache_file
+</li><li> simplepie_cache_mysql
+</li><li> simplepie_caption
+</li><li> simplepie_category
+</li><li> simplepie_content_type_sniffer
+</li><li> simplepie_copyright
+</li><li> simplepie_credit
+</li><li> simplepie_decode_html_entities
+</li><li> simplepie_enclosure
+</li><li> simplepie_file
+</li><li> simplepie_gzdecode
+</li><li> simplepie_http_parser
+</li><li> simplepie_iri
+</li><li> simplepie_item
+</li><li> simplepie_locator
+</li><li> simplepie_misc
+</li><li> simplepie_net_ipv6
+</li><li> simplepie_parse_date
+</li><li> simplepie_parser
+</li><li> simplepie_rating
+</li><li> simplepie_restriction
+</li><li> simplepie_sanitize
+</li><li> simplepie_source
+</li><li> simplepie_xml_declaration_parser
+</li><li> smtp
+</li><li> snoopy
+</li><li> spellchecker
+</li><li> text_diff
+</li><li> text_diff_engine_native
+</li><li> text_diff_engine_shell
+</li><li> text_diff_engine_string
+</li><li> text_diff_engine_xdiff
+</li><li> text_diff_op
+</li><li> text_diff_op_add
+</li><li> text_diff_op_change
+</li><li> text_diff_op_copy
+</li><li> text_diff_op_delete
+</li><li> text_diff_renderer
+</li><li> text_diff_renderer_inline
+</li><li> text_mappeddiff
+</li><li> translation_entry
+</li><li> translations
+</li><li> Walker
+<ul><li> Walker_Category
+</li><li> Walker_Category_Checklist
+</li><li> Walker_CategoryDropdown
+</li><li> Walker_Comment
+</li><li> Walker_Nav_Menu
+<ul><li> Walker_Nav_Menu_Checklist
+</li><li> Walker_Nav_Menu_Edit
+</li></ul>
+</li><li> Walker_Page
+</li><li> Walker_PageDropdown
+</li></ul>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP (page does not exist)"> WP</a> - General request handling.
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Admin_Bar&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Admin Bar (page does not exist)"> WP_Admin_Bar</a> - Controls display and creation of Admin bar.
+</li><li> <a href="http://codex.wordpress.org/Class_Reference/WP_Ajax_Response" title="Class Reference/WP Ajax Response"> WP_Ajax_Response</a> - Handles XML responses to AJAX requests.
+</li><li> WP_Dependencies
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Embed&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Embed (page does not exist)"> WP_Embed</a>
+</li><li> <a href="http://codex.wordpress.org/Class_Reference/WP_Error" title="Class Reference/WP Error"> WP_Error</a> - Error handling.
+</li><li> WP_Feed_Cache
+</li><li> WP_Feed_Cache_Transient
+</li><li> WP_Filesystem_Base
+<ul><li> WP_Filesystem_Direct
+</li><li> WP_Filesystem_Ftpext
+</li><li> WP_Filesystem_ftpsockets
+</li><li> WP_Filesystem_SSH2
+</li></ul>
+</li><li> WP_http
+</li><li> WP_http_cookie
+</li><li> WP_http_curl
+</li><li> WP_http_encoding
+</li><li> WP_http_exthttp
+</li><li> WP_http_fopen
+</li><li> WP_http_fsockopen
+</li><li> WP_http_proxy
+</li><li> WP_http_streams
+</li><li> WP_importer
+</li><li> <a href="http://codex.wordpress.org/Class_Reference/WP_List_Table" title="Class Reference/WP List Table"> WP_List_Table</a> - Renders admin list tables.
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Locale&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Locale (page does not exist)"> WP_Locale</a> - Handles date and time locales.
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_matchesmapregex&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP matchesmapregex (page does not exist)"> WP_matchesmapregex</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_nav_menu_widget&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP nav menu widget (page does not exist)"> WP_nav_menu_widget</a>
+</li><li> <a href="http://codex.wordpress.org/Class_Reference/WP_Object_Cache" title="Class Reference/WP Object Cache"> WP_Object_Cache </a> - Cache and regenerate data.
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Oembed&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Oembed (page does not exist)"> WP_Oembed</a>
+</li><li> <a href="http://codex.wordpress.org/Class_Reference/WP_Query" title="Class Reference/WP Query"> WP_Query </a> - Request parsing and manipulation, posts fetching.
+</li><li> <a href="http://codex.wordpress.org/Class_Reference/WP_Rewrite" title="Class Reference/WP Rewrite"> WP_Rewrite </a> - Rewrite rules.
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Role&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Role (page does not exist)"> WP_Role</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Roles&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Roles (page does not exist)"> WP_Roles</a>
+</li><li> <a href="http://codex.wordpress.org/Class_Reference/WP_Screen" title="Class Reference/WP Screen"> WP_Screen</a> - Controls admin screens
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Scripts&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Scripts (page does not exist)"> WP_Scripts</a> - JavaScript loading.
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Simplepie_File&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Simplepie File (page does not exist)"> WP_Simplepie_File</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Styles&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Styles (page does not exist)"> WP_Styles</a> - CSS stylesheet loading.
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Text_diff_renderer_inline&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Text diff renderer inline (page does not exist)"> WP_Text_diff_renderer_inline</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Text_diff_renderer_table&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Text diff renderer table (page does not exist)"> WP_Text_diff_renderer_table</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Upgrader&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Upgrader (page does not exist)"> WP_Upgrader</a>
+<ul><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/Core_Upgrader&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/Core Upgrader (page does not exist)"> Core_Upgrader</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/Plugin_Upgrader&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/Plugin Upgrader (page does not exist)"> Plugin_Upgrader</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/Theme_Upgrader&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/Theme Upgrader (page does not exist)"> Theme_Upgrader</a>
+</li></ul>
+</li><li> WP_Upgrader_Skin
+<ul><li> Bulk_Upgrader_Skin
+<ul><li> Bulk_Plugin_Upgrader_Skin
+</li><li> Bulk_Theme_Upgrader_Skin
+</li></ul>
+</li><li> Plugin_Installer_Skin
+</li><li> Plugin_Upgrader_Skin
+</li><li> Theme_Installer_Skin
+</li><li> Theme_Upgrader_Skin
+</li></ul>
+</li><li> <a href="http://codex.wordpress.org/Class_Reference/WP_User" title="Class Reference/WP User"> WP_User</a>
+</li><li> <a href="http://codex.wordpress.org/Class_Reference/WP_User_Query" title="Class Reference/WP User Query"> WP_User_Query</a> - Queries for users in the database.
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget (page does not exist)"> WP_Widget</a>
+<ul><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Archives&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Archives (page does not exist)"> WP_Widget_Archives</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Calendar&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Calendar (page does not exist)"> WP_Widget_Calendar</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Categories&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Categories (page does not exist)"> WP_Widget_Categories</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Links&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Links (page does not exist)"> WP_Widget_Links</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Meta&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Meta (page does not exist)"> WP_Widget_Meta</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Pages&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Pages (page does not exist)"> WP_Widget_Pages</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Recent_comments&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Recent comments (page does not exist)"> WP_Widget_Recent_comments</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Recent_posts&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Recent posts (page does not exist)"> WP_Widget_Recent_posts</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_RSS&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget RSS (page does not exist)"> WP_Widget_RSS</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Search&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Search (page does not exist)"> WP_Widget_Search</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Tag_cloud&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Tag cloud (page does not exist)"> WP_Widget_Tag_cloud</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Text&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Text (page does not exist)"> WP_Widget_Text</a>
+</li></ul>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_Widget_Factory&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Factory (page does not exist)"> WP_Widget_Factory</a>
+</li><li> <a href="http://codex.wordpress.org/index.php?title=Class_Reference/WP_XMLRPC_Server&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP XMLRPC Server (page does not exist)"> WP_XMLRPC_Server</a>
+</li><li> <a href="http://codex.wordpress.org/Class_Reference/wpdb" title="Class Reference/wpdb"> wpdb</a> - Database interface.
+</li></ul>
+<a name="External_Classes" id="External_Classes"></a><h2> <span class="mw-headline"> External Classes </span></h2>
+<p>The following classes were created by non-wordpress developers:
+</p>
+<ul><li> <a href="http://scripts.incutio.com/xmlrpc/" class="external text" title="http://scripts.incutio.com/xmlrpc/">IXR</a> - XML-RPC Classes
+</li><li> <a href="http://sourceforge.net/projects/snoopy/" class="external text" title="http://sourceforge.net/projects/snoopy/">Snoopy</a> - HTTP client
+</li><li> <a href="http://savannah.nongnu.org/projects/php-gettext/" class="external text" title="http://savannah.nongnu.org/projects/php-gettext/">gettext_reader</a> (part of PHP-gettext) - Localization Class
+</li><li> <a href="http://magpierss.sourceforge.net/" class="external text" title="http://magpierss.sourceforge.net/">RSS Classes (MagpieRSS and RSSCache)</a>
+</li><li> <tt>POP3</tt> - SquirrelMail wrapper
+</li><li> <tt>StreamReader, StringReader, FileReader, CachedFileReader</tt>
+</li></ul>
+<a name="Resources" id="Resources"></a><h2> <span class="mw-headline"> Resources </span></h2>
+<ul><li> <a href="http://phpxref.com/xref/wordpress/_classes/index.html" class="external text" title="http://phpxref.com/xref/wordpress/_classes/index.html">PHPXref for WordPress Classes</a>
+</li><li> <a href="http://phpdoc.wordpress.org/trunk/classtrees_WordPress.html" class="external text" title="http://phpdoc.wordpress.org/trunk/classtrees_WordPress.html">WordPress PHPdoc Class trees</a>
+</li></ul>
+<a name="Related" id="Related"></a><h2> <span class="mw-headline">Related</span></h2>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 17/1000000
+Post-expand include size: 366/2097152 bytes
+Template argument size: 49/2097152 bytes
+Expensive parser function count: 0/100
+-->
+<div class="printfooter">
+Retrieved from "<a href="http://codex.wordpress.org/Class_Reference">http://codex.wordpress.org/Class_Reference</a>"</div>
+				<div id="catlinks"><div id="catlinks" class="catlinks"><div id="mw-normal-catlinks"><a href="http://codex.wordpress.org/Special:Categories" title="Special:Categories">Categories</a>: <span dir="ltr"><a href="http://codex.wordpress.org/Category:Classes" title="Category:Classes">Classes</a></span> | <span dir="ltr"><a href="http://codex.wordpress.org/Category:Advanced_Topics" title="Category:Advanced Topics">Advanced Topics</a></span> | <span dir="ltr"><a href="http://codex.wordpress.org/Category:WordPress_Development" title="Category:WordPress Development">WordPress Development</a></span></div></div></div>			<!-- end content -->
+		</div>
+		<div class="col-2">
+			
+						
+			<ul class="submenu">
+				<li id="n-mainpage"><a href="http://codex.wordpress.org/Main_Page">Home Page</a></li>	
+				<li><a href="http://codex.wordpress.org/WordPress_Lessons">WordPress Lessons</a></li>
+				<li><a href="http://codex.wordpress.org/Getting_Started_with_WordPress">Getting Started</a></li>
+				<li><a href="http://codex.wordpress.org/Working_with_WordPress">Working with WordPress</a></li>
+				<li><a href="http://codex.wordpress.org/Blog_Design_and_Layout">Design and Layout</a></li>
+				<li><a href="http://codex.wordpress.org/Advanced_Topics">Advanced Topics</a></li>
+				<li><a href="http://codex.wordpress.org/Troubleshooting">Troubleshooting</a></li>
+				<li><a href="http://codex.wordpress.org/Developer_Documentation">Developer Docs</a></li>
+				<li><a href="http://codex.wordpress.org/About_WordPress">About WordPress</a></li>
+			</ul>
+
+			<h3>Codex Resources</h3>
+			<ul class="submenu">
+				<li id="n-portal"><a href="http://codex.wordpress.org/Codex:Community_Portal">Community portal</a></li>	      
+				<li id="n-currentevents"><a href="http://codex.wordpress.org/Current_events">Current events</a></li>	      
+				<li id="n-recentchanges"><a href="http://codex.wordpress.org/Special:RecentChanges">Recent changes</a></li>	      
+				<li id="n-randompage"><a href="http://codex.wordpress.org/Special:Random">Random page</a></li>	      
+				<li id="n-help"><a href="http://codex.wordpress.org/Help:Contents">Help</a></li>	
+			</ul>
+			
+		</div>
+	</div>
+</div>
+
+
+<div id="footer">
+	<div class="wrapper">
+		<p> 
+			<a href="http://wordpress.org/about/privacy/">Privacy</a> | 
+			<a href="http://wordpress.org/about/license/">License / GPLv2</a>
+            &nbsp; &nbsp; See also: 
+            <a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WP hosting">WordPress.com</a> |
+			<a href="http://wordpress.tv/" title="Videos, tutorials, WordCamps">WordPress.TV</a> |
+			<a href="http://central.wordcamp.org/" title="Find a WordPress event near your home">WordCamp</a> |
+			<a href="http://jobs.wordpress.net/" title="Find or post WordPress jobs">WP Jobs</a> | 
+            <a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a> |
+			<a href="http://wordpress.org/news/feed/" class="rsslink">Blog RSS</a>
+		</p>
+<br>
+<iframe src="index_1.html" style="border: medium none; overflow: hidden; width: 150px; height: 21px;" allowtransparency="true" scrolling="no" frameborder="0"></iframe>
+<div style="height: 20px; width: 90px; display: inline-block; text-indent: 0pt; margin: 0pt; padding: 0pt; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;" id="___plusone_0"><iframe allowtransparency="true" hspace="0" id="I1_1331265317922" marginheight="0" marginwidth="0" name="I1_1331265317922" src="index_2.html" style="position: absolute; left: -10000px; top: -10000px; width: 90px; margin: 0px; border-style: none;" tabindex="0" vspace="0" title="+1" scrolling="no" width="100%" frameborder="0"></iframe></div>
+<iframe allowtransparency="true" src="index_3.html" style="width: 150px; height: 20px;" scrolling="no" frameborder="0"></iframe>
+
+		<h6>Code is Poetry</h6>
+	</div>
+</div>
+
+
+
+
+
+<!--  -->
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

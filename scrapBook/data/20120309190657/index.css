@@ -1,0 +1,88 @@
+/* ::::: http://www.teyi.org/wp-content/themes/mya2-ac/style.css ::::: */
+
+/* ::::: http://www.teyi.org/wp-content/themes/mya2-ac/reset.css ::::: */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0pt; padding: 0pt; border: 0pt none; outline: 0pt none; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; background: none repeat scroll 0% 0% transparent; }
+body { line-height: 1; }
+ol, ul { list-style: none outside none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ""; }
+:focus { outline: 0pt none; }
+body { background: none repeat scroll 0% 0% rgb(241, 241, 241); font: 13px/1.5 lucida sans unicode,lucida grande,lucida,arial,sans-serif; color: rgb(34, 34, 34); text-align: center; }
+a:link, a:visited, a:active { color: rgb(33, 117, 155); text-decoration: none; }
+a:hover { color: rgb(213, 78, 33); }
+abbr[title], acronym[title] { border-bottom: thin dotted; cursor: help; }
+h1 { font-size: 200%; }
+h3 { font-size: 150%; }
+blockquote { background: url('blockquote.gif') no-repeat scroll 3px 10px rgb(244, 245, 247); border-left: 2px solid rgb(33, 117, 155); padding: 15px 15px 1px 36px; margin: 0pt 20px 20px; color: rgb(85, 85, 85); font-size: 12px; }
+.left { float: left; margin-right: 10px; }
+.right { float: right; margin-left: 10px; }
+.box { background: none repeat scroll 0% 0% rgb(249, 249, 249); border: 1px solid rgb(223, 223, 223); margin-bottom: 10px; }
+.clear { clear: both; }
+#wrapper { width: 100%; text-align: left; }
+#header { width: 100%; background: none repeat scroll 0% 0% rgb(70, 70, 70); }
+#header .content { width: 1000px; margin: 0pt auto; height: 40px; position: relative; }
+#header .content #logo { font: 23px/1 georgia,times new roman,times,serif; color: rgb(153, 153, 153); position: absolute; top: 8px; left: 0pt; }
+#header .content #logo a { color: rgb(255, 255, 255); text-decoration: none; }
+#header .content #logo a:hover { color: rgb(153, 153, 153); }
+#header .content #nav { font: 13px/1 georgia,times new roman,times,serif; position: absolute; top: 11px; right: 0pt; }
+#header .content #nav #menus li { display: inline; float: left; }
+#header .content #nav #menus li a { display: block; padding: 8px 10px; color: rgb(153, 153, 153); text-decoration: none; }
+#header .content #nav #menus li a:hover { background: none repeat scroll 0% 0% rgb(85, 85, 85); color: rgb(255, 255, 255); }
+#header .content #nav #menus li.current_page_item a, #header .content #nav #menus li.current_page_item a:hover, #header .content #nav #menus li.current-cat a, #header .content #nav #menus li.current-cat a:hover { background: none repeat scroll 0% 0% rgb(241, 241, 241); color: rgb(34, 34, 34); }
+#topbox { font-size: 12px; padding: 6px 15px; width: 970px; margin-top: 30px; margin-left: auto; margin-right: auto; }
+#topbox .welcome { background: url('xiao16.png') no-repeat scroll 0pt 1px transparent; padding-left: 20px; }
+#topbox .subscribe ul li { display: inline; margin-left: 15px; }
+#topbox .subscribe ul li span { padding-left: 20px; }
+#topbox .subscribe ul li.rssfeed { background: url('feed.png') no-repeat scroll 0pt 0pt transparent; }
+#container { width: 1000px; margin: 0pt auto; }
+#content { width: 632px; float: left; }
+#content .notice, #content .posthead { font-size: 12px; padding: 6px 15px; }
+#content .post { padding: 15px; position: relative; }
+#content .post .post-title { font-size: 16px; font-weight: bold; margin-bottom: 10px; line-height: 1; text-shadow: 1px 1px 2px rgb(204, 204, 204); }
+#content .post .post-title a { color: rgb(84, 84, 84); text-decoration: none; }
+#content .post .post-title a:hover { color: rgb(213, 78, 33); }
+#content .post .postmeta { margin-bottom: 20px; color: rgb(170, 170, 170); height: 16px; }
+#content .post .postmeta ul li { display: inline; float: left; padding: 0pt 10px 0pt 20px; font: 12px arial,sans-serif; height: 16px; }
+#content .post .postmeta ul li a { color: rgb(170, 170, 170); text-decoration: none; }
+#content .post .postmeta ul li a:hover { color: rgb(213, 78, 33); }
+#content .post .postmeta ul li.meta-author { background: url('author.png') no-repeat scroll 0pt 0pt transparent; }
+#content .post .postmeta ul li.meta-date { background: url('date.png') no-repeat scroll 0pt 0pt transparent; }
+#content .post .postmeta ul li.meta-cat { background: url('cat.png') no-repeat scroll 0pt 0pt transparent; }
+#content .post .postmeta ul li.meta-comments { background: url('comment.png') no-repeat scroll 0pt 1px transparent; }
+#content .post .post-content { overflow: hidden; width: 600px; font: 13px/1.65 georgia,times new roman,times,serif; }
+#content .post .post-content p { margin-bottom: 20px; }
+#content .post .post-tags { width: 550px; background: url('tags.png') no-repeat scroll 0pt 2px transparent; padding-left: 20px; font-size: 12px; color: rgb(170, 170, 170); }
+#content .post .post-tags a { color: rgb(170, 170, 170); text-decoration: none; }
+#content .post .post-tags a:hover { color: rgb(213, 78, 33); }
+#content .postnavi { padding: 6px 15px; font-size: 12px; }
+#content .postnavi .prev { background: url('post-nav-next.gif') no-repeat scroll right 1px transparent; padding-right: 20px; }
+#content .postnavi .next { background: url('post-nav-previous.gif') no-repeat scroll 0pt 1px transparent; padding-left: 20px; }
+#respond { padding: 15px; }
+#cancel-comment-reply a { background: url('cross.png') no-repeat scroll 0pt 0pt transparent; display: block; text-indent: -999em; width: 16px; height: 16px; }
+#commentform .comment-form-title { font: 21px/1.5 georgia,times new roman,times,serif; color: rgb(153, 153, 153); margin-bottom: 10px; }
+#comment { background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); font: 13px/1.5 lucida sans unicode,lucida grande,lucida,arial,sans-serif; padding: 3px; margin-bottom: 10px; width: 95%; height: 150px; overflow: auto; }
+input#submit { background: none repeat scroll 0% 0% rgb(54, 47, 45); border: 0pt none; color: rgb(255, 255, 255); cursor: pointer; font: bold 12px arial,sans-serif; letter-spacing: 1px; padding: 5px 10px; text-shadow: 0pt 1px 0pt rgb(0, 0, 0); box-shadow: 0pt 0pt 2px rgb(14, 32, 59); }
+input#submit:hover { background: none repeat scroll 0% 0% rgb(213, 78, 33); color: rgb(255, 255, 255); }
+input#author, input#email, input#url, input#contactName, input#siteurl, input#c-email { background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); font: 13px/1.5 lucida sans unicode,lucida grande,lucida,arial,sans-serif; margin: 0pt 5px 5px 0pt; padding: 3px; width: 40%; }
+#comment-personaldetails p label { color: rgb(153, 153, 153); font-size: 12px; }
+#commentload { background: url('ajax-loader.gif') no-repeat scroll 10px 7px rgb(238, 238, 238); border: 1px solid rgb(221, 221, 221); color: rgb(33, 117, 155); margin-top: 15px; padding: 5px 10px 5px 35px; }
+#left-sidebar, #right-sidebar { float: left; margin-left: 10px; }
+#left-sidebar { width: 148px; }
+#right-sidebar { width: 200px; }
+.sidebar { font-size: 12px; }
+.sidebar .widget { background: none repeat scroll 0% 0% rgb(249, 249, 249); border: 1px solid rgb(223, 223, 223); padding: 10px; margin-bottom: 10px; }
+.sidebar .widget .widget-title { margin-bottom: 5px; font: bold 12px verdana,arial,sans-serif; color: rgb(84, 84, 84); }
+.sidebar .widget ul li { background: url('bullet.png') no-repeat scroll 0pt 8px transparent; padding-left: 10px; line-height: 1.85; }
+#searchbox { padding: 10px; }
+#searchbox .searchfield { border: 1px solid rgb(204, 204, 204); width: 115px; font: 12px/1 lucida sans unicode,lucida grande,lucida,arial,sans-serif; padding: 3px; }
+#searchbox .searchbutton { border: 1px solid rgb(204, 204, 204); font: 12px/1 arial,sans-serif; padding: 3px 3px 2px; margin-left: -5px; background: none repeat scroll 0% 0% rgb(238, 238, 238); cursor: pointer; }
+#searchbox .searchbutton:hover { background: none repeat scroll 0% 0% rgb(70, 70, 70); color: rgb(255, 255, 255); border: 1px solid rgb(70, 70, 70); }
+#footer { background: none repeat scroll 0% 0% rgb(70, 70, 70); margin-top: 30px; color: rgb(153, 153, 153); width: 100%; }
+#footer a { color: rgb(255, 255, 255); text-decoration: none; }
+#footer a:hover { color: rgb(204, 204, 204); }
+#footer .content { width: 1000px; margin: 0pt auto; padding: 15px 0pt; position: relative; }
+#footer .content .gotop { position: absolute; top: 0pt; right: 0pt; }
+#footer .content .gotop a { display: block; background: none repeat scroll 0% 0% rgb(241, 241, 241); padding: 3px 8px; font-size: 12px; text-transform: uppercase; text-shadow: 0pt 1px 0pt rgb(255, 255, 255); color: rgb(85, 85, 85); text-decoration: none; }
+#footer .content .gotop a:hover { color: rgb(17, 17, 17); }
+/* ::::: http://www.teyi.org/wp-content/themes/mya2-ac/plugins.css ::::: */
+

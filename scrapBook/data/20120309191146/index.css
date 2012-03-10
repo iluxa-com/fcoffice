@@ -1,0 +1,128 @@
+/* ::::: http://zeuscn.net/wp-content/themes/zeuscn.net/style.css ::::: */
+
+body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre dl, dt, dd, form, a, fieldset, input, th, td, ul, li, ol { border: 0pt none; outline: medium none; margin: 0pt; padding: 0pt; }
+body { background: none repeat scroll 0% 0% rgb(241, 241, 241); font-family: Verdana,trebuchet ms,helvetica; color: rgb(119, 119, 119); line-height: 18px; }
+a { color: rgb(110, 110, 110); text-decoration: none; }
+h1 { text-indent: -9999em; float: left; width: 364px; height: 35px; padding-top: 24px; }
+h1 a, h1 a:visited { background: url('h1.png') no-repeat scroll 0% 0% transparent; width: 441px; height: 36px; display: block; }
+h1 a:hover { text-decoration: none; }
+h2 { font-size: 14px; font-family: 微软雅黑,黑体,Arial; font-weight: 400; padding: 0pt; }
+.header { height: 97px; width: 100%; background: url('header_bg.png') repeat-x scroll center top transparent; }
+.header .center { width: 980px; height: 66px; margin: 0pt auto; }
+.nav { float: right; padding-top: 45px; font-size: 14px; }
+.nav ul li { float: left; width: 78px; text-align: right; list-style: none outside none; font-weight: 700; position: relative; margin: 0pt; }
+.nav ul li a { color: rgb(255, 255, 255); height: 30px; display: block; }
+.nav ul li a:hover { background: url('navli.png') no-repeat scroll 45px 18px transparent; }
+.s_t, .s_t_single { width: 980px; height: 30px; margin: 15px auto; }
+.s_t_single { margin: 0pt auto 30px; }
+.twitter { float: right; height: 28px; line-height: 28px; border: 1px solid rgb(204, 204, 204); font-size: 14px; background: url('twitter_bg.png') no-repeat scroll 10px top rgb(255, 255, 255); overflow: hidden; padding-right: 10px; width: 468px; }
+.search { float: left; width: 480px; height: 30px; background: none repeat scroll 0% 0% rgb(204, 204, 204); }
+.searchform { height: 30px; width: 460px; margin: 0pt; padding: 0pt 0pt 0pt 20px; }
+.searchform input { color: rgb(255, 255, 255); font: 16px 微软雅黑,黑体,"Arial Black"; border: medium none; }
+.searchform .s { background: none repeat scroll 0% 0% transparent; border: medium none; float: left; height: 22px; width: 400px; font-weight: 700; padding: 4px 0pt; }
+.searchform .submit { background: none repeat scroll 0% 0% rgb(92, 92, 92); border: medium none; display: inline; float: right; font-weight: 700; font-size: 14px; width: 40px; height: 30px; line-height: 30px; }
+#wrapper { width: 980px; margin: 0pt auto; }
+.guide { float: left; height: 20px; line-height: 20px; width: 640px; background: url('guide.png') no-repeat scroll 0pt 15px transparent; padding: 12px 0pt 15px 35px; }
+.guide a:hover { color: rgb(51, 51, 51); text-decoration: underline; }
+.b_content .right .about img, .about_s img { border: 1px solid rgb(204, 204, 204); background: none repeat scroll 0% 0% rgb(255, 255, 255); margin: 13px 5px 10px; padding: 1px; }
+.content { background: url('content_bg.png') repeat-y scroll 0% 0% transparent; border-top: 2px solid rgb(51, 51, 51); border-bottom: 2px solid rgb(51, 51, 51); width: 980px; font-size: 12px; float: left; padding-bottom: 20px; margin-bottom: 20px; }
+.post { float: left; width: 675px; padding: 0pt 20px 0pt 30px; }
+.post .title { float: left; height: auto; text-align: left; width: 100%; }
+.post .title h2 { font-size: 20px; color: rgb(51, 51, 51); line-height: 24px; }
+.post .title span { border-bottom: 1px dotted rgb(153, 153, 153); border-top: 1px dotted rgb(153, 153, 153); color: rgb(153, 153, 153); float: left; font-size: 12px; line-height: 22px; width: 100%; margin: 10px 0pt 0pt; }
+.post .title span a { color: rgb(153, 153, 153); text-decoration: underline; }
+.entry { color: rgb(74, 74, 74); float: left; width: 100%; font-size: 13px; line-height: 20px; padding: 10px 0pt; }
+.entry ul, .entry ol { color: rgb(104, 104, 104); margin: 0pt 0pt 20px 15px; }
+.entry ul li { list-style: square inside none; padding: 1px 0pt 2px; }
+.entry pre { border: 1px solid rgb(221, 221, 221); overflow: hidden; width: 80%; margin: 5px 0pt; padding: 10px; }
+.entry a:hover .img_border, .entry a:hover .attachment-thumbnail { border: 1px solid rgb(136, 136, 140); background: none repeat scroll 0% 0% rgb(204, 204, 204); }
+.entry a { color: rgb(110, 110, 110); text-decoration: none; border-bottom: 1px dashed rgb(110, 110, 110); }
+.aligncenter { display: block; margin-left: auto; margin-right: auto; }
+.post-nav { clear: both; width: 100%; font-size: 12px; margin: 0pt auto; }
+.post-nav a, .post-nav a:visited { color: rgb(150, 150, 150); text-decoration: none; }
+.post-nav .previous a { padding-left: 5px; padding-top: 2px; }
+.post-nav .next a { padding-right: 5px; padding-top: 2px; }
+.sidebar_s { float: right; width: 252px; }
+.sidebar_s a:hover { color: rgb(110, 110, 110); text-decoration: underline; }
+.sidebar_s h3 { background: none repeat scroll 0pt 0pt rgb(51, 51, 51); font-weight: 400; color: rgb(255, 255, 255); font-size: 14px; height: 30px; line-height: 30px; margin-bottom: 5px; padding-left: 10px; width: 240px; }
+.sidebar_s ul { float: left; color: rgb(51, 51, 51); margin-bottom: 20px; padding: 0pt; }
+.sidebar_s ul li, .tag-area { list-style: square inside none; width: 234px; float: left; padding: 2px 8px 3px; }
+.sidebar_s ul li.cat-item, .sidebar_s ul li.archive-item { list-style: square inside none; width: 110px; }
+.sidebar_s .recentcomments li { list-style: none outside none; margin-bottom: 2px; }
+.tag-area a { padding: 3px; }
+.comments-template { float: left; width: 100%; margin: 0pt 0pt 20px; padding: 15px 0pt 20px; }
+.comments-template ol, .comments-template ul { list-style: none outside none; width: 635px; float: left; margin: 0pt; padding: 15px 20px 5px; }
+.comments-template ol.children, .comments-template ul.children { float: right; width: 100%; padding: 0pt; }
+.comments-template ol li, .comments-template ul li { font-weight: 400; width: 635px; float: left; list-style: none outside none; padding: 15px 0pt 0pt; }
+.comments-template h2 { background: url('guide.png') no-repeat scroll left 15px transparent; float: left; height: 20px; line-height: 20px; padding: 12px 0pt 0pt 35px; }
+.comment-area { color: rgb(12, 62, 83); font-size: 12px; width: 555px; float: left; background: none repeat scroll 0% 0% rgb(234, 234, 234); padding: 10px; }
+.comment-author { padding-left: 20px; height: 40px; width: 40px; float: right; }
+.commentmetadata { text-align: left; float: left; font-size: 12px; width: 80%; padding: 5px 3px; }
+.children .depth-2 .commentmetadata { width: 535px; padding: 5px 0pt 5px 46px; }
+.commentmetadata a { color: rgb(180, 180, 180); }
+.odd .comment-area { background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 1px solid rgb(234, 234, 234); width: 553px; }
+.says { font-size: 12px; }
+.avatar { background: none repeat scroll 0pt 0pt rgb(204, 204, 204); display: inline; float: left; margin: 0pt 5px 0pt 0pt; padding: 2px; }
+.reply { text-align: right; padding: 5px 0pt 0pt 5px; }
+.reply a { color: rgb(245, 0, 85); }
+.bypostauthor .comment-area { background: none repeat scroll 0% 0% rgb(255, 255, 204); }
+.depth-2 .comment-area { width: 515px; float: right; }
+.odd.depth-2 .comment-area { width: 513px; float: right; }
+.children .depth-2 { background: url('depth_bg.png') no-repeat scroll 25px top transparent; float: right; width: 640px; }
+.comments-template .alignleft, .comments-template .alignright { font-size: 12px; margin: 10px 0pt 0pt; padding: 0pt; }
+#cancel_reply { text-align: right; float: right; margin: 5px 0pt; padding: 5px 0pt 10px; }
+#cancel_reply a { color: rgb(245, 0, 85); }
+.comments-template ol.commentpings li { list-style: square inside none; padding: 0pt 0pt 3px; }
+.comments-template ol.commentpings { font-size: 12px; width: 655px; float: left; padding: 10px; }
+#respond { display: inline; padding-left: 24px; width: 98%; color: rgb(70, 70, 70); float: left; }
+#respond a { border-bottom: 1px dashed rgb(110, 110, 110); }
+#respond a:hover { border-bottom: medium none; }
+#respond h3 { background: url('comment.png') no-repeat scroll left center transparent; font-size: 14px; padding-left: 0pt; height: 24px; line-height: 20px; margin: 10px 0pt; }
+#commentform { width: 75%; float: left; font-size: 12px; margin: 0pt auto; }
+#commentform a { border: medium none; }
+#author, #email, #url, #submit, #mcspvalue { border: 1px solid rgb(189, 199, 216); width: 148px; padding: 2px 5px; }
+#submit { border: 1px solid rgb(189, 199, 216); width: 178px; height: 28px; line-height: 28px; float: left; background: none repeat scroll 0% 0% transparent; margin: 5px 15px 5px 0pt; padding: 0pt; }
+.reply-tip { color: rgb(85, 85, 85); font-family: "Trebuchet MS",Arial; font-size: 13px; }
+#commentform textarea { width: 95%; height: 140px; font-size: 1em; border: 1px solid rgb(189, 199, 216); overflow: hidden; padding: 3px 5px; }
+.footerbg { border-top: 1px solid rgb(216, 216, 216); margin-top: 15px; background: none repeat scroll 0% 0% rgb(51, 51, 51); width: 100%; height: 60px; }
+.footer { color: rgb(255, 255, 255); font-size: 11px; width: 980px; margin: 0pt auto; padding: 0pt; }
+.footer a { color: rgb(255, 255, 255); }
+.footer .left { float: left; width: 606px; height: 60px; }
+.footer .left .top { border-bottom: 1px solid rgb(255, 255, 255); height: 29px; line-height: 35px; width: 100%; }
+.footer .left .btm { height: 30px; line-height: 25px; }
+.footer .right { float: right; width: 365px; height: 60px; }
+.footer .right a { background: url('btm_logo.png') no-repeat scroll left top transparent; width: 365px; height: 60px; display: block; }
+.footer .right a:hover { background: url('btm_logo.png') no-repeat scroll left bottom transparent; height: 60px; }
+.entry .img_border, .entry .attachment-thumbnail, .textwidget .img_border, .textwidget .img_border a, .newpost .entry-content .img_border, .aligncenter { border: 1px solid rgb(204, 204, 204); background: none repeat scroll 0% 0% rgb(255, 255, 255); padding: 3px; }
+.entry a:hover, .entry-content a:hover { border: medium none; color: rgb(51, 51, 51); }
+.comments-template ol li p, .newpost .entry-content p { margin: 0pt; padding: 0pt 5px; }
+.gallery { background: url('tt.gif') repeat scroll 0% 0% rgb(234, 234, 234); border: 1px solid rgb(204, 204, 204); border-radius: 3px 3px 3px 3px; width: 90%; padding: 10px 0pt 5px 5px; margin: auto auto 20px; }
+.gallery-item { float: left; margin-top: 10px; text-align: center; width: 33%; }
+.gallery img { border: 2px solid rgb(207, 207, 207); margin: 0pt auto; }
+.gallery-icon { text-align: center; }
+.gallery-icon a img { display: block; opacity: 0.8; }
+.gallery-icon a:hover img { opacity: 1; }
+.fn a { color: rgb(255, 85, 0); font-size: 12px; }
+p, #commentform p { display: block; margin: 0pt 0pt 10px; }
+.nav ul, .single, .post-nav .previous, .comments-template .alignleft, .entry .alignleft { float: left; }
+.twitter a, .sidebar_s a, .comments-template .alignleft a:hover, .comments-template .alignright a:hover, .ul_change_a2 h2 a { color: rgb(51, 51, 51); }
+#wrapper_s, .comments-navi { width: 100%; float: left; }
+.guide a, #links li a { color: rgb(102, 102, 102); }
+.post .title span a:hover, .post-nav a:hover, a:hover, h2 a { color: rgb(51, 51, 51); text-decoration: none; }
+.title h2, .fn, #lightbox-image-details-caption { font-weight: 700; }
+.post-nav .next, .comments-template .alignright, .entry .alignright { float: right; }
+.ggad_s { padding: 0pt 2px 0pt 0pt; margin-bottom: 20px; }
+.ggad_s h3 { margin-bottom: 0pt; }
+.afterpost { float: left; margin: 20px 0pt 10px; width: 100%; }
+.afterpost .ggad { float: left; width: 300px; padding-left: 20px; }
+.afterpost .st-related-posts { float: right; width: 350px; }
+.afterpost h3 { background: url('guide.png') no-repeat scroll left 15px transparent; float: left; height: 20px; line-height: 20px; padding: 12px 0pt 10px 35px; width: 640px; }
+.afterpost .st-related-posts ul { float: left; padding-left: 5px; }
+.afterpost .st-related-posts ul li { list-style: square inside none; padding: 2px 8px 3px; }
+.about_s { padding: 10px 13px; color: rgb(239, 239, 239); background: none repeat scroll 0% 0% rgb(51, 51, 51); border-top: 1px solid rgb(204, 204, 204); }
+/* ::::: http://zeuscn.net/wp-content/plugins/wp-syntax/wp-syntax.css ::::: */
+
+.wp_syntax { color: rgb(17, 0, 0); background-color: rgb(249, 249, 249); border: 1px solid silver; margin: 0pt 0pt 1.5em; overflow: auto; }
+.wp_syntax { overflow-x: auto; overflow-y: hidden; width: 100%; }
+.wp_syntax div, .wp_syntax td { vertical-align: top; padding: 2px 4px; }
+.wp_syntax pre { margin: 0pt; width: auto; float: none; clear: none; overflow: visible; font-size: 12px; line-height: 1.333; white-space: pre; }

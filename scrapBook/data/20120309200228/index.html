@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<!--
+<meta property="fb:page_id" content="6427302910" />
+-->
+<link href="https://plus.google.com/107188080561309681193" rel="publisher">
+<meta name="google-site-verification" content="7VWES_-rcHBcmaQis9mSYamPfNwE03f4vyTj4pfuAw0">
+<title>WordPress › Support » How to clean post data before inserting in db</title>
+
+
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="t" href="http://wordpress.org/support/rss/topic/how-to-clean-datas-before-insertiong-in-db">
+
+
+
+<!--[if lt IE 8]>
+<style type="text/css">
+@import url("http://s.wordpress.org/style/ie.css");
+</style>
+<![endif]-->
+
+
+<!--[if IE 7]>
+<style type="text/css">
+@import url("http://s.wordpress.org/style/forum-ie7.css?9");
+</style>
+<![endif]-->
+<meta name="generator" content="bbPress 1.1">
+
+
+	
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body id="wordpress-org">
+<div id="header">
+	<div class="wrapper">
+		<h1><a href="http://wordpress.org/">WordPress.org</a></h1>
+
+		<form action="http://wordpress.org/search/do-search.php" method="get" id="head-search">
+			<input class="text" name="search" value="Search WordPress.org" maxlength="150" onfocus="this.value=(this.value=='Search WordPress.org') ? '' : this.value;" onblur="this.value=(this.value=='') ? 'Search WordPress.org' : this.value;" type="text"> <input class="button" value="Go" type="submit">
+		</form>
+		
+<ul>
+<li><a href="http://wordpress.org/" title="Home is where the heart is.">Home</a></li>
+<li><a href="http://wordpress.org/showcase/" title="See some of the sites built on WordPress.">Showcase</a></li>
+<li><a href="http://wordpress.org/extend/themes/" title="Find just the right look for your website.">Themes</a></li>
+<li><a href="http://wordpress.org/extend/plugins/" title="Plugins can extend WordPress to do almost anything you can imagine.">Plugins</a></li>
+<li><a href="http://wordpress.org/extend/mobile/" title="Take your website on the go!">Mobile</a></li>
+<li><a href="http://wordpress.org/about/" title="About the WordPress Organization, and where we're going.">About</a></li>
+<li><a href="http://codex.wordpress.org/Main_Page" title="Documentation, tutorials, best practices.">Docs</a></li>
+<li><a href="http://wordpress.org/news/" title="Come here for the latest scoop.">Blog</a></li>
+<li><a href="http://wordpress.org/support/" title="Support and discussion forums." class="current">Forums</a></li>
+<li><a href="http://wordpress.org/hosting/" title="Find a home for your blog.">Hosting</a></li>
+<li id="download"><a href="http://wordpress.org/download/" title="Get it. Got it? Good.">Download</a></li>
+</ul>
+	</div>
+</div>
+
+<div id="headline">
+	<div class="wrapper">
+		<h2>Forums</h2>
+		<form class="login" method="post" action="http://wordpress.org/support/bb-login.php">
+<p><label><span style="display: none;" class="hide-if-placeholder">Username</span>
+		<input class="text" name="user_login" id="user_login" placeholder="username" size="13" maxlength="40" value="" type="text">
+  </label>
+	<label><span style="display: none;" class="hide-if-placeholder">Password</span>
+		<input class="text" name="password" id="password" placeholder="password" size="13" maxlength="40" type="password">
+	</label>
+	<input name="remember" id="remember" title="Remember me" value="1" tabindex="3" type="checkbox">
+	<input name="re" value="" type="hidden">
+	<input class="button-secondary" name="Submit" id="submit" value="Log in" type="submit">
+	(<a href="http://wordpress.org/support/bb-login.php">forgot?</a>)	<a class="button" href="http://wordpress.org/support/register.php">Register</a></p>
+</form>
+
+	
+	</div>
+</div>
+
+<div id="pagebody">
+	<div class="wrapper topicnav">
+		<div class="col-8">
+			<p class="bbcrumb"><a href="http://wordpress.org/support/">WordPress › Support</a> » <a href="http://wordpress.org/support/forum/how-to-and-troubleshooting">How-To and Troubleshooting</a></p>
+						
+			<div id="ajax-response"></div>
+		</div>
+		<div class="col-4">
+			<p id="pages"></p>
+		</div>
+	</div>
+	
+	<div class="wrapper topictitle">
+		<div class="col-12">
+		<h2> How to clean post data before inserting in db <small>(6 posts)</small></h2>
+		</div>
+	</div>
+		
+	<div class="wrapper">
+		<div class="col-10">
+			<ol id="thread" start="1">
+
+							<li id="post-1349570" class="postitem ">
+							<div class="threadauthor col-3">
+			<p><img alt="" src="52b3156a71aa9792e9caf29c60db7bb5" class="photo avatar avatar-48" style="height: 48px; width: 48px;"><strong>freeriders</strong><br>
+				<small><span class="authortitle"><a href="http://wordpress.org/support/profile/freeriders">Member</a></span><br>
+				Posted 2 years ago <a href="#post-1349570">#</a> </small>
+			</p>
+		</div>
+		
+		<div class="threadpost col-7">
+			<div class="post"><p>Greetins</p>
+<p>I wish to insert posts coming from a CSV file</p>
+<p>I have no problem to extract from the CSB</p>
+<p>to insert datas in the DB I use</p>
+<p>wp_insert_post( $my_post )</p>
+<p>where $my_post is an array of the data I got from my CSV</p>
+<p>I have some problme to "clean" my data before inserting, specially if they includes special characters </p>
+<p>so far I use</p>
+<p>$my_post['post_content']= funky_javascript_fix( $my_post['post_content'] );<br>
+$my_post['post_content']= wp_specialchars( stripslashes( $my_post['post_content'] ));<br>
+$my_post['post_content']= apply_filters( 'default_content', $my_post['post_content']);</p>
+<p>but this does not solve my problme with datas containing for example</p>
+<p>"&amp;é'(-è_çà)"</p>
+<p>this send me back an empty file when the post in inserted</p>
+<p>I believe I need to sanitize those data before inserting, but honestly I'm quite lost on which functions I need to use to achieve that</p>
+<p>so far I would like to sanitize datas for</p>
+<p>--  post title<br>
+-- post content<br>
+-- categories<br>
+-- tags<br>
+-- metas</p>
+<p>Thank you VERY much in advance</p>
+<p>Steffy
+</p></div>
+		</div>
+				</li>
+							<li id="post-1349803" class="postitem ">
+							<div class="threadauthor col-3">
+			<p><img alt="" src="5c81858208e43b1441482afec75821f2" class="photo avatar avatar-48" style="height: 48px; width: 48px;"><strong><a href="http://codex.wordpress.org/User:MichaelH">MichaelH</a></strong><br>
+				<small><span class="authortitle"><a href="http://wordpress.org/support/profile/michaelh">Volunteer</a></span><br>
+				Posted 2 years ago <a href="#post-1349803">#</a> </small>
+			</p>
+		</div>
+		
+		<div class="threadpost col-7">
+			<div class="post"><p>The function <a href="http://codex.wordpress.org/Function_Reference/wp_insert_post">wp_insert_post</a> does call the function sanitize_post.
+</p></div>
+		</div>
+				</li>
+							<li id="post-1352740" class="postitem ">
+							<div class="threadauthor col-3">
+			<p><img alt="" src="52b3156a71aa9792e9caf29c60db7bb5" class="photo avatar avatar-48" style="height: 48px; width: 48px;"><strong>freeriders</strong><br>
+				<small><span class="authortitle"><a href="http://wordpress.org/support/profile/freeriders">Member</a></span><br>
+				Posted 2 years ago <a href="#post-1352740">#</a> </small>
+			</p>
+		</div>
+		
+		<div class="threadpost col-7">
+			<div class="post"><p>thank you MichaelH</p>
+<p>1° if I understand well, there is no need for me to use<br>
+$my_post['post_content']= funky_javascript_fix( $my_post['post_content'] );<br>
+$my_post['post_content']= wp_specialchars( stripslashes( $my_post['post_content'] ));<br>
+$my_post['post_content']= apply_filters( 'default_content', $my_post['post_content']);</p>
+<p>right? they are already called in function sanitize_post</p>
+<p>2° how comes that if in my value </p>
+<p>$my_post['post_content']</p>
+<p>there is characters like :</p>
+<p>$my_post['post_content']="&amp;é'(-è_çà)";</p>
+<p>when I do wp_insert_post( $my_post )</p>
+<p>then the field post_content is empty</p>
+<p>if I use no problem character like </p>
+<p>$my_post['post_content']="toto is here";</p>
+<p>then it works perfectly, the field post_content is correctly filled</p>
+<p>any idea on what I should do that the caractere transformed in something that would be well inserted?</p>
+<p>thank you very much in advance</p>
+<p>Steffy
+</p></div>
+		</div>
+				</li>
+							<li id="post-1352744" class="postitem ">
+							<div class="threadauthor col-3">
+			<p><img alt="" src="5c81858208e43b1441482afec75821f2" class="photo avatar avatar-48" style="height: 48px; width: 48px;"><strong><a href="http://codex.wordpress.org/User:MichaelH">MichaelH</a></strong><br>
+				<small><span class="authortitle"><a href="http://wordpress.org/support/profile/michaelh">Volunteer</a></span><br>
+				Posted 2 years ago <a href="#post-1352744">#</a> </small>
+			</p>
+		</div>
+		
+		<div class="threadpost col-7">
+			<div class="post"><p>That I can't answer so maybe someone else can add their comments.
+</p></div>
+		</div>
+				</li>
+							<li id="post-1353950" class="postitem ">
+							<div class="threadauthor col-3">
+			<p><img alt="" src="52b3156a71aa9792e9caf29c60db7bb5" class="photo avatar avatar-48" style="height: 48px; width: 48px;"><strong>freeriders</strong><br>
+				<small><span class="authortitle"><a href="http://wordpress.org/support/profile/freeriders">Member</a></span><br>
+				Posted 2 years ago <a href="#post-1353950">#</a> </small>
+			</p>
+		</div>
+		
+		<div class="threadpost col-7">
+			<div class="post"><p>ok MichealH, at least thank you very much for your time, hopefully someone will be able to help to clean the datas</p>
+<p>cheers</p>
+<p>Steffy
+</p></div>
+		</div>
+				</li>
+							<li id="post-1584301" class="postitem ">
+							<div class="threadauthor col-3">
+			<p><img alt="" src="dd53490a4a27b954cd3f43edca4d41ad" class="photo avatar avatar-48" style="height: 48px; width: 48px;"><strong>shafizaman</strong><br>
+				<small><span class="authortitle"><a href="http://wordpress.org/support/profile/shafizaman">Member</a></span><br>
+				Posted 1 year ago <a href="#post-1584301">#</a> </small>
+			</p>
+		</div>
+		
+		<div class="threadpost col-7">
+			<div class="post"><p>A simple php function can solve this problem utf8_encode();</p>
+<p>$my_post['post_content']= utf8_encode( $my_post['post_content'] );
+</p></div>
+		</div>
+				</li>
+			
+			</ol>			
+			
+			<div id="topic-paging" class="col-3">
+				<p id="pages"></p>
+			</div>
+			
+						<h2 class="post-form">Topic Closed</h2>
+			<p>This topic has been closed to new replies.</p>
+								</div>
+		<div class="col-2 topicmeta">
+			<h4>About this Topic</h4>
+			<ul>
+				<li><a class="rsslink" href="http://wordpress.org/support/rss/topic/how-to-clean-datas-before-insertiong-in-db">RSS feed for this topic</a></li>
+				<li>Started 2 years ago by freeriders</li>
+							<li><a href="http://wordpress.org/support/topic/how-to-clean-datas-before-insertiong-in-db#post-1584301">Latest reply</a> from shafizaman</li>
+
+			
+			<li id="resolution-flipper">This topic is not resolved</li>
+	<li>WordPress version: 2.9.1</li>			</ul>
+			
+			<div class="tags">
+				<h4>Tags</h4>			
+				<ul id="yourtaglist" class="tags-list list:tag">
+	<li id="tag-99687_303315"><a href="http://wordpress.org/tags/before-insert" rel="tag">before insert</a> </li>
+	<li id="tag-949_303315" class="alt"><a href="http://wordpress.org/tags/sanitize" rel="tag">sanitize</a> </li>
+</ul>			</div>
+		</div>
+	</div>
+</div>
+
+<br class="clear">
+
+
+
+
+
+
+<div id="footer">
+	<div class="wrapper">
+		<p> 
+			<a href="http://wordpress.org/about/privacy/">Privacy</a> | 
+			<a href="http://wordpress.org/about/license/">License / GPLv2</a>
+            &nbsp; &nbsp; See also: 
+            <a href="http://wordpress.com/?ref=wporg-footer" title="Hassle-free WP hosting">WordPress.com</a> |
+			<a href="http://wordpress.tv/" title="Videos, tutorials, WordCamps">WordPress.TV</a> |
+			<a href="http://central.wordcamp.org/" title="Find a WordPress event near your home">WordCamp</a> |
+			<a href="http://jobs.wordpress.net/" title="Find or post WordPress jobs">WP Jobs</a> | 
+            <a href="http://ma.tt/" title="Co-founder of WordPress, an example of what WordPress can do">Matt</a> |
+			<a href="http://wordpress.org/news/feed/" class="rsslink">Blog RSS</a>
+		</p>
+<br>
+<iframe src="index_1.html" style="border: medium none; overflow: hidden; width: 150px; height: 21px;" allowtransparency="true" scrolling="no" frameborder="0"></iframe>
+<div style="height: 20px; width: 90px; display: inline-block; text-indent: 0pt; margin: 0pt; padding: 0pt; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;" id="___plusone_0"><iframe allowtransparency="true" hspace="0" id="I1_1331294436282" marginheight="0" marginwidth="0" name="I1_1331294436282" src="index_2.html" style="position: absolute; left: -10000px; top: -10000px; width: 90px; margin: 0px; border-style: none;" tabindex="0" vspace="0" title="+1" scrolling="no" width="100%" frameborder="0"></iframe></div>
+<iframe allowtransparency="true" src="index_3.html" style="width: 150px; height: 20px;" scrolling="no" frameborder="0"></iframe>
+
+		<h6>Code is Poetry</h6>
+	</div>
+</div>
+
+
+
+
+
+<!-- 8 queries, 0.149 seconds -->
+
+
+
+
+
+</body>
+</html>

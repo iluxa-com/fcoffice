@@ -1,0 +1,79 @@
+<html>
+<head>
+<style>
+#finish_mes {
+    display:none;
+}
+</style>
+<script type="text/javascript" src="jquery-1.6.2.min.js"></script>
+<script>
+
+$(document).ready(function(){
+    var  i = 0;
+    $(".sender").hide();
+    setTimeout(
+      
+        get_json1,100
+      
+        
+    );
+   
+});
+
+
+get_json1 = function() {
+           $(".sender").each(function(i){
+                //console.log(this.style.display='block');
+                //console.log($(this).attr('rel'));
+                $_this= $(this);
+                console.log($_this);
+                $.getJSON($_this.attr('rel'),function(data){
+                    //alert(data.value);
+                    console.log($('#no_'+data.id).show());
+                    //console.log($_this);
+                    i++;
+                    if(i==$(".sender").length) {
+                        $('#finish_mes').show();
+                    }
+                });
+            });
+       }
+ 
+ get_json2 = function () {
+    $(".sender").each(function(i){
+                //console.log(this.style.display='block');
+                //console.log($(this).attr('rel'));
+                $_this= $(this);
+                console.log($_this);
+                $.ajax({
+                  url: $_this.attr('rel'),
+                  cache: false,
+                  async:false,
+                  dataType:'json',
+                  success: function(data){
+                    //alert(data.value);
+                    $_this.show();
+                    i++;
+                    if(i==$(".sender").length) {
+                        $('#finish_mes').show();
+                    }
+                  }
+                });
+            });
+
+ 
+ }
+
+</script>
+
+<title> 连续多个ajax请求测试</title>
+
+</head>
+<body>
+<div class='sender' id='no_1' rel="http://test.com/auto_ajax/server.php?id=1" >第1个</div>
+<div class='sender' id='no_2' rel="http://test.com/auto_ajax/server.php?id=2" >第2个</div>
+<div class='sender' id='no_3' rel="http://test.com/auto_ajax/server.php?id=3" >第3个</div>
+<div class='sender' id='no_4' rel="http://test.com/auto_ajax/server.php?id=4" >第4个</div>
+<div id='finish_mes'><a href = '#'>完成</a></div>
+</body>
+</html>
