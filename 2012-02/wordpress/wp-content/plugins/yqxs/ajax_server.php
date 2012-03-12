@@ -1,4 +1,16 @@
 <?php
+//列表采集中的单篇文章入库
+add_action('init','ajax_list_single');
+function ajax_list_single(){
+    if(isset($_REQUEST['yqxs0']) && !empty($_REQUESt['yqxs0'])) {
+        
+    }
+    
+    
+    
+}
+
+
 add_action('init', 'check_post_exists');
 function check_post_exists() {
 
@@ -34,8 +46,7 @@ function cj_contents(){
             if(NULL === $url) {
                 $json_data = array(
                     'error' =>-3,
-                    'mesg'=>'invalid id',
-               
+                    'mesg'=>'invalid id',               
                     'id' =>(int)$_REQUEST['id'],
                 );
             }
@@ -50,7 +61,6 @@ function cj_contents(){
              $id = $_REQUEST['id'];
              //获取内容页
              $page = yqxs_file_get_contents($url);
-
              if($page == False) {
                 $json_data  = array(
                     'error' =>-4,
@@ -124,5 +134,4 @@ function cj_contents(){
      die();
     
     }
-
 }

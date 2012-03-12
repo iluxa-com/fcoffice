@@ -1,7 +1,7 @@
 <?php
     function yqxs_bind_list() {
         wp_enqueue_style( 'yqxs_admin_css' );
-        
+        wp_enqueue_script( 'yqxs_plugin_script' );
         echo <<<HEREDOC
 <div class="wrap" style="-webkit-text-size-adjust:none;">
 <div class="icon32" id="icon-options-general"><br></div>
@@ -32,7 +32,7 @@ HEREDOC;
                 echo '<ul class="list_info" id="list_info">';
                 foreach($list_info as $key => $info){
                     $key++;
-                    echo "<li class='list_item' id='no_{$key}' rel='{$info[2]}'> {$key}.  {$info[2]} : <a href='{$info[1]}' target='_blank' >{$info[1]}</a></li>";
+                    echo "<li class='list_item' id='no_{$key}' rel='{$info[1]}'> {$key}.  {$info[2]} : <a href='{$info[1]}' target='_blank' >{$info[1]}</a></li>";
                 }
                 echo '</ul>' ;
                
