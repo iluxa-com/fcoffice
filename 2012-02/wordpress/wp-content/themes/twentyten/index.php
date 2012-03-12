@@ -14,6 +14,7 @@
  */
 
 get_header(); ?>
+<?php echo '当前文章分页'.get_query_var('did');?>
 
 		<div id="container">
 			<div id="content" role="main">
