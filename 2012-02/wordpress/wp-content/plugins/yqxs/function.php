@@ -15,15 +15,43 @@ define('YQXS_IMG_URL', $upload_dir['baseurl']);
 define('YQXS_COVER_DIR', YQXS_IMG_DIR . '/covers');
 define('YQXS_COVER_URL', YQXS_IMG_URL . '/covers');
 
+require('yqxs_admin_init.php');
+require('yqxs_bind.php');
 require('Word2Py.class.php');
 include('ajax_server.php');
 include('helpers.php');
+include('yqxs_rewrite.php');
+
+
+
+
 
 function yqxs_test() {
+    
+    echo esc_url('http://www.baidu.com');
+    echo "\n<br>---------------------------------------<br/>\n";
+    echo esc_url('http://www.baidu.com/baidu?wd=草尼马刺&tn=monline_dg');
+
+    //$user_id = 1;
+    
+
+    // $res = add_post_meta($user_id, 'test', 'aaa', true) ;
+    //yqxs_set_user_meta($user_id);
+    //$res = add_user_meta($user_id, 'test', 'fuck', true) ;
+    //var_dump($res);
+    //set_name_starts($user_id);
+    
+    
+    /*
+    $asw = get_userdata($user_id,  'user_login',true);
+    
+    var_dump($asw);
+    */
+    /*
     $post_id = 1;
     $post = get_post($post_id);
     var_dump($post);
-
+     */
     /*
       var_dump($imagesize);
       echo "\n<br>---------------------------------------<br/>\n";
@@ -152,6 +180,7 @@ function yqxs_test() {
 }
 
 add_action("admin_head", "yqxs_wp_head");
+
 
 function yqxs_wp_head() {
     echo "<style>.yqxs_items {display:block;}";
@@ -296,7 +325,8 @@ function word2pinyin($word, $ucfirst=False, $split='') {
     return $py->convert($word, 'utf-8', $ucfirst, $split);
 }
 
-function yqxs_bind_list() {
+
+function yqxs_bind_list_bak() {
 
     if (isset($_REQUEST['option_save']) && !empty($_REQUEST['option_save'])) {
 
@@ -330,7 +360,7 @@ HEREDOC;
 
 //单篇小说采集
 function yqxs_bind_single() {
-
+    wp_enqueue_style( 'yqxs_admin_css' );
     if (isset($_POST['yqxs_url']) && !empty($_POST['yqxs_url'])) {
         //显示基本采集信息
         $yqxs = array();
@@ -342,7 +372,7 @@ function yqxs_bind_single() {
         if (preg_match('|<td.*?class="pic01"><img src=["\'](.*?)["\'].*?>|is', $content, $matches)) {
             $yqxs['img'] = $matches[1];
             //下载图像
-            $img_file = down_image($yqxs['img']);
+            $img_file = yqxs_down_image($yqxs['img']);
             if (FALSE !== $img_file) {
                 //生成两种缩略图
                 $img1 = image_resize($img_file['path'], 150, 240, true, null, null, $jpeg_quality = 90);
@@ -509,6 +539,7 @@ HEREDOC;
 
             $metas['stars'] = $_POST['stars'];
         }
+         $metas['psw'] = strtoupper($post_slug{0});
         //无章节可采时设置的内容
         if (isset($_POST['chapters_url']) && !empty($_POST['chapters_url'])) {
             $post_content = '[cai-ji]';
@@ -542,20 +573,28 @@ HEREDOC;
 
         if ($ID = yqxs_post_exists($_POST['post_title'])) {
             $post['ID'] = $ID; //更新文章 ，不依赖客户端提交的ID
-            $post_id = wp_update_post($post);
+             $post_id = wp_update_post($post);
+             
         } else {
             $post_id = wp_insert_post($post, 0);
         }
+        
+
+
+        //图片操作,如果缩略图不存在，则新增
+        //$image_meta = wp_read_image_metadata($file);
+        //wp_die(var_dump(has_post_thumbnail(22)));
+        
+        if(!has_post_thumbnail($post_id)) {   
+            $cover_result = yqxs_set_cover($_POST['img_file'], $post_id, $_POST['post_title']);
+        }
+        
         
         
         //meta插入
         foreach ($metas as $key => $value) {
             yqxs_set_post_meta($post_id, $key, $value);
         }
-
-        //图片操作
-        //$image_meta = wp_read_image_metadata($file);
-        $cover_result = yqxs_set_cover($_POST['img_file'], $post_id, $_POST['post_title']);
 
                 
         echo '<div class="wrap" style="-webkit-text-size-adjust:none;"><div class="icon32" id="icon-options-general"><br></div>';        
@@ -602,7 +641,7 @@ HEREDOC;
                             <h2>采集单页设置</h2>
 
         <form action="{$menu_page_url}" enctype="multipart/form-data" method="post">
-            输入你要采集的url : <input name="yqxs_url" style="width:292px"type="text" value="http://www.yqxs.com/data/book2/B3U8L34357">
+            输入你要采集的url : <input name="yqxs_url" style="width:400px"type="text" value="http://www.yqxs.com/data/book2/B3U8L34357">
             <input type="submit" name="option_save" class="button-primary" value="确定" />
         </form>
         </div>
@@ -662,6 +701,18 @@ function yqxs_get_user_id($display_name) {
         return wp_insert_user($userdata);
     }
 }
+
+/*加入作者开头字母标识*/
+add_action('profile_update','set_name_starts',10,2);
+add_action('user_register','set_name_starts',10,1);
+function set_name_starts($user_id,$data='') {
+    $user_obj = get_userdata($user_id);
+    $asw = $user_obj->user_login;
+    $asw = strtoupper($asw{0});
+
+    yqxs_set_user_meta($user_id,'asw',$asw);
+}
+
 
 add_action('init', 'add_chapters_tb',null,0);
 
@@ -752,14 +803,6 @@ function fetch_nov() {
   }
  */
 
-add_action('wp_head', go_download);
-
-function go_download() {
-    if ($did = get_query_var('did')) {
-        echo "down:" . $did;
-        die();
-    }
-}
 
 //根据用户表的display_name返回用户id，如果用户不存在则添加
 /*
@@ -958,3 +1001,4 @@ function yqxs_the_content($content) {
             wp_enqueue_style( 'myStyleSheets');
         }
     }
+

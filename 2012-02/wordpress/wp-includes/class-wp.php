@@ -503,6 +503,8 @@ class WP {
 	function main($query_args = '') {
 		$this->init();
 		$this->parse_request($query_args);
+       // var_dump($this);
+        //die();
 		$this->send_headers();
 		$this->query_posts();
 		$this->handle_404();

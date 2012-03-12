@@ -21,6 +21,10 @@ function yqxs_set_post_meta($post_id, $key, $value) {
     add_post_meta($post_id, $key, $value, true) or update_post_meta($post_id, $key, $value);
 }
 
+function yqxs_set_user_meta($user_id,$key,$value) {
+    add_user_meta($user_id, $key, $value, true) or update_user_meta($user_id, $key, $value);
+}
+
 //忽略不用
 function yqxs_insert_cover($post_id, $filename) {
 
@@ -69,7 +73,20 @@ function yqxs_generate_attachment_metadata($filename) {
 
 //设置文章附件图片
 function yqxs_set_cover($filename, $post_id, $img_title='本文图片', $also_thumbnail=true) {
+    /*
+    global $wpdb;
+    $sql = $wpdb->prepare(
+               "SELECT ID FROM $wpdb->posts WHERE post_parent=%d AND post_type='attachment' ORDER BY ID DESC",
+               $post_id
+    );
 
+    $cover_id = $wpdb->get_var($sql);
+    
+    if($cover_id !==NULL) {
+        return $cover_id;
+    }
+    */
+    
     $path = YQXS_COVER_DIR . '/' . $filename;
     $url = YQXS_COVER_URL . '/' . $filename;
 
@@ -90,12 +107,14 @@ function yqxs_set_cover($filename, $post_id, $img_title='本文图片', $also_th
 
     if (true === $also_thumbnail) {
         if (false === set_post_thumbnail($post_id, $id))
+   
             return false;
     }
 
     return $id;
 }
 
+//采集专用 ，可改写或封装，如使用WP_Http类或curl
 function yqxs_file_get_contents($url) {
     $content = file_get_contents($url);
     if (strpos($content, 'charset=gb2312') !== FALSE) {
@@ -163,3 +182,46 @@ function yqxs_post_exists($post_title) {
      return ($id===null) ? false : (int)$id;
 
 }
+
+//获取列表页上的文章信息
+function yqxs_get_list_info($url) {
+        $content = yqxs_file_get_contents($url);
+        $res = preg_match_all(
+        '#<a href=["\']?(http://www.yqxs.com/data/book.+?)["\']?>([^<]+?)</a>#',
+        $content,$matches,
+        2);
+        return (!$res) ? FALSE : $matches;
+            
+        }
+
+        
+ //新版下载图像
+function yqxs_down_image($url) {
+
+    $store_dir = YQXS_IMG_DIR;
+    $base_name = array_pop(explode('/', parse_url($url, PHP_URL_PATH)));
+    $path = $store_dir . '/covers/' . $base_name;
+    $cover_url = YQXS_IMG_URL . '/covers/' . $base_name;
+    if(!file_exists($path)) {
+        $http = new WP_Http();
+        $header['yqxs-request-url'] = get_bloginfo('wpurl');
+        $response = $http->request($url, array(
+                    "method" => 'GET',
+                    "timeout" => 10,
+                    "user-agent" => 'yqxs',
+                    "headers" => $header,
+                ));
+        
+        if (@$response['response']['code'] >=400)
+            return False;
+        file_put_contents($path, $response['body']);
+    }else{
+        //echo '不采集';
+    }
+    
+    return array(
+        'path' => $path,
+        'base_name' => $base_name,
+        'url' => $cover_url,
+    );
+} 
