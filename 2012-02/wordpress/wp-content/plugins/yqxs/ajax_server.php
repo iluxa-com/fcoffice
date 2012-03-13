@@ -2,9 +2,28 @@
 //列表采集中的单篇文章入库
 add_action('init','ajax_list_single');
 function ajax_list_single(){
-    if(isset($_REQUEST['yqxs0']) && !empty($_REQUESt['yqxs0'])) {
+    if(isset($_REQUEST['yqxs0']) && !empty($_REQUEST['yqxs0']) && isset($_REQUEST['url']) && !empty($_REQUEST['url'])) {
+        $jData=array();
         
+        if(!wp_verify_nonce($_REQUEST['yqxs_token'],'yqxs_list_action')){
+            $jData = array(
+                'error'=>-1,
+                'mess'=>'bad request', 
+            );
+            
+            die(json_encode($jData));
+        }
+        
+        /*
+        if(isset($_REQUEST['list_id'])){
+            //$jData[list_id] = (int)$_REQUEST['list_id'];
+                die(json_encode($_REQUEST));
+        }
+        */
+        die(json_encode($_REQUEST));
+
     }
+    
     
     
     

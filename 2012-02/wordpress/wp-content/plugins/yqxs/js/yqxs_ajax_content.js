@@ -28,3 +28,4 @@ get_content_json = function() {
                 });
             });
        }
+  

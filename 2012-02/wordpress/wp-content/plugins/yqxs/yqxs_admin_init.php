@@ -11,6 +11,6 @@
        
        /* 注册js脚本 */
        /*在插件函数中使用wp_enqueue_script( 'yqxs_plugin_script' );调用*/
-       wp_register_script( 'yqxs_plugin_script', plugins_url('/js/yqxs_list.js', __FILE__) );
+       wp_register_script( 'yqxs_plugin_script', plugins_url('/js/yqxs_ajax_list.js', __FILE__) );
        
  }
