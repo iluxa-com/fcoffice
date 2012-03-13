@@ -3,23 +3,43 @@
 add_action('init','ajax_list_single');
 function ajax_list_single(){
     if(isset($_REQUEST['yqxs0']) && !empty($_REQUEST['yqxs0']) && isset($_REQUEST['url']) && !empty($_REQUEST['url'])) {
+        //header('HTTP/1.0 401 Unauthorized');
         $jData=array();
-        
+        if(isset($_REQUEST['list_id'])){$jData[list_id] = $_REQUEST['list_id'];} //原样返回给js调用
         if(!wp_verify_nonce($_REQUEST['yqxs_token'],'yqxs_list_action')){
-            $jData = array(
+            header('HTTP/1.0 401 Unauthorized');
+            $jData += array(
                 'error'=>-1,
-                'mess'=>'bad request', 
+                'info'=>'bad request', 
             );
             
             die(json_encode($jData));
         }
+        //判断是否已经入库
+        global $wpdb;
+        $old_url = rtrim($_REQUEST['url'],'/'); #为兼容以前的不带/后缀的网址
+        $sql = $wpdb->prepare(
+            "SELECT post_id FROM $wpdb->postmeta WHERE meta_key='old_url' AND meta_value LIKE %s",
+            $old_url.'%'
+        ); 
         
-        /*
-        if(isset($_REQUEST['list_id'])){
-            //$jData[list_id] = (int)$_REQUEST['list_id'];
-                die(json_encode($_REQUEST));
-        }
-        */
+        $check = $wpdb->get_var($sql);
+        if(NULL !== $check) {
+            $jData +=array(
+                'error'=>-2,
+                'mess'=>'文章已存在,不采集.',
+         );
+        die(json_encode($jData));        
+        //文章基本信息入库开始
+        //获取文章页
+        
+        //提取信息
+        //图片下载
+        //文章信息入库
+        //如暂无全文返回
+        //获取章节所在页
+        //章节信息入库
+        
         die(json_encode($_REQUEST));
 
     }

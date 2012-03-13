@@ -189,7 +189,8 @@ function yqxs_wp_head() {
     echo "#sbutton {margin:10px 650px 0 10px;   text-align: right;}";
     echo ".ch_item{display:none;}";
     echo"</style>";
-
+    $menu_page_url = yqxs_menu_page_url('yqxs_bind_single');
+    echo '<script type="text/javascript"> var single_url ="' .$menu_page_url .'";</script>';
     yqxs_loadjs('jquery-1.6.2.min.js');
     yqxs_loadjs('yqxs_admin.js');
 }
@@ -361,11 +362,11 @@ HEREDOC;
 //单篇小说采集
 function yqxs_bind_single() {
     wp_enqueue_style( 'yqxs_admin_css' );
-    if (isset($_POST['yqxs_url']) && !empty($_POST['yqxs_url'])) {
+    if (isset($_REQUEST['yqxs_url']) && !empty($_REQUEST['yqxs_url'])) {
         //显示基本采集信息
         $yqxs = array();
-        $yqxs['url'] = $_POST['yqxs_url'];
-        $content = file_get_contents($_POST['yqxs_url']);
+        $yqxs['url'] = $_REQUEST['yqxs_url'];
+        $content = file_get_contents($_REQUEST['yqxs_url']);
         if (strpos($content, 'charset=gb2312') !== FALSE) {
             $content = iconv('gbk', 'utf-8', $content);
         }
@@ -380,13 +381,14 @@ function yqxs_bind_single() {
                 $yqxs['img'] = str_replace($img_file['base_name'], basename($img1), $img_file['url']);
             }
         }
+        $single_url = yqxs_menu_page_url('yqxs_bind_single');
         echo <<<HEREDOC
             <div class="wrap" style="-webkit-text-size-adjust:none;">
 		<div class="icon32" id="icon-options-general"><br></div>
                 <h2>小说信息</h2>
             
         <div id="cover" style="float:left"><!--h4 style="padding-left:5px">封面图片</h4--><img  src="{$yqxs['img']}"></div>
-           <form id="info-form" name="file-form" method="POST" action="" enctype="multipart/form-data" style="diaplay:block;margin-right:10px">
+           <form id="info-form" name="file-form" method="POST" action="{$single_url}" enctype="multipart/form-data" style="diaplay:block;margin-right:10px">
         <input type ="hidden" name = "old_url" value="{$yqxs['url']}" />
 HEREDOC;
 
@@ -485,7 +487,7 @@ HEREDOC;
         // wp_insert_post( $yqxs );
     } elseif (isset($_POST['post_title'])) {
 
-        //var_dump($_POST);
+       
         $post_slug = word2pinyin($_POST['post_title']) . '-' . word2pinyin($_POST['post_author_name']);
         //$_POST['post_author_name']
         //分类检查，不存在新建
@@ -505,9 +507,9 @@ HEREDOC;
         if (isset($_POST['site']) && !empty($_POST['site'])) {
             $metas['site'] = $_POST['site'];
         }
-        //原链接
+        //原链接,加/
         if (isset($_POST['old_url']) && !empty($_POST['old_url'])) {
-            $metas['old_url'] = $_POST['old_url'];
+            $metas['old_url'] = rtrim($_POST['old_url'],'/').'/';
         }
 
         if (isset($_POST['nov_series']) && !empty($_POST['nov_series'])) {
@@ -537,7 +539,7 @@ HEREDOC;
         }
         if (isset($_POST['stars']) && !empty($_POST['stars'])) {
 
-            $metas['stars'] = $_POST['stars'];
+            $metas['stars'] = is_numeric($_POST['stars'])?$_POST['stars']:0;
         }
          $metas['psw'] = strtoupper($post_slug{0});
         //无章节可采时设置的内容
