@@ -2,28 +2,43 @@
     function yqxs_bind_list() {
         wp_enqueue_style( 'yqxs_admin_css' );
         wp_enqueue_script( 'yqxs_plugin_script' );
+        
+        
         echo <<<HEREDOC
 <div class="wrap" style="-webkit-text-size-adjust:none;">
 <div class="icon32" id="icon-options-general"><br></div>
     <h2>列表采集设置</h2><hr />
 HEREDOC;
-   
-    if(!isset($_POST['yqxs_list_url']) OR empty($_POST['yqxs_list_url']))    {
-        //http://www.yqxs.com/data/writer/writer223.html
+   //http://www.yqxs.com/data/writer/writer223.html
         echo <<<HEREDOC
         <form action="" enctype="multipart/form-data" method="post">
-                输入你要采集的列表url : <input name="yqxs_list_url" style="width:400px"type="text" value="http://www.yqxs.com/data/writer/writer3775.html">
+                输入你要采集的列表url : <input name="yqxs_list_url" style="width:400px"type="text" value="http://www.yqxs.com/data/writer/writer3775.html" />
                 
                 <input type="submit" name="list_save" class="button-primary" value="确定" />
 HEREDOC;
             wp_nonce_field( 'yqxs_list_action', 'yqxs_token', true, true );
         
             echo '</form>';
+            
+    if(!isset($_REQUEST['yqxs_list_url']) OR empty($_REQUEST['yqxs_list_url']))    {
+        //http://www.yqxs.com/data/writer/writer223.html
+        /*
+        echo <<<HEREDOC
+        <form action="" enctype="multipart/form-data" method="post">
+                输入你要采集的列表url : <input name="yqxs_list_url" style="width:400px"type="text" value="http://www.yqxs.com/data/writer/writer3775.html" />
+                
+                <input type="submit" name="list_save" class="button-primary" value="确定" />
+HEREDOC;
+            wp_nonce_field( 'yqxs_list_action', 'yqxs_token', true, true );
+        
+            echo '</form>';
+            */
     }else {
-        if(!wp_verify_nonce($_POST['yqxs_token'],'yqxs_list_action')) {
+        //测试时暂时关掉这个检测
+        if( !wp_verify_nonce($_REQUEST['yqxs_token'],'yqxs_list_action')) {
             wp_die('非法操作');
         } else {
-            $url = esc_url ($_POST['yqxs_list_url']);
+            $url = esc_url ($_REQUEST['yqxs_list_url']);
             echo "<div id='current_url' >指定列表链接: <a href='{$url}' target='_blank'>{$url}</a>";
             echo '<form action="" enctype="multipart/form-data" method="post">';
             wp_nonce_field( 'yqxs_list_action', 'yqxs_token', true, true );
@@ -34,8 +49,8 @@ HEREDOC;
                 echo '
                 <div id="yqxs_list_buttons">
                 <input style="margin-left: 10px;" type="button" name="multi_thread" class="button-primary" value="当前多线程状态:关闭" />
-                <input style="margin-left: 10px;" type="button" name="list_caiji" class="button-primary" value="采集以下文章('.$total.'篇)" />
-                <input style="margin-left: 30px;" type="button" name="content_caiji" class="button-primary" value="内容入库采集" />
+                <input style="margin-left: 10px;" type="button" name="list_caiji" class="button-primary" value="开始采集('.$total.'篇)" />
+                <input style="margin-left: 30px;" type="button" name="content_caiji" class="button-primary" value="返回上页" onclick="history.go(-1)" />
                 </div>
                 <hr />
                 </div>';

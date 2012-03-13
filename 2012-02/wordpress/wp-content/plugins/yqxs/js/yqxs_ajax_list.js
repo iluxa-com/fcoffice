@@ -5,23 +5,25 @@ $(document).ready(function(){
         function() {muti_thread = false; $(this).val('当前多线程状态: 关闭');}
     );
     
-    
+    //alert(single_url); //单篇采集页地址
     $('input[name=list_caiji]').click(
         function() {
             //采集开始后线程选择不可用
             $('input[name=multi_thread]').removeClass('button-primary').addClass('muti_thread_stop ').unbind('click').click(
                 function() {alert('采集开始后无法再更改线程状态');}
              );
-             $(this).val('正在采集...');
+             $(this).val('正在采集...').removeClass('button-primary').addClass('muti_thread_stop ').unbind('click');
             $('.yqxs_load_str').empty();
             var $nounce = $("form").serialize() ;
+            var  p=0;
+            var count = $('.yqxs_list_item').length;
             $('.yqxs_list_item').each(
                 function() {
                     //$sdata +='list_id='+
                     var  url = $(this).attr('rel');
                     var list_id = $(this).get(0).id;
                     var $sdata = 'yqxs0=1'+ '&'+'list_id='+ list_id + '&' +'url=' + url +'&'+$nounce;
-
+                    
                     
                     $.ajax({
                           url: '/',
@@ -34,22 +36,33 @@ $(document).ready(function(){
                           beforeSend:function(xhr) {
                             $("#"+list_id).append("<span class='yqxs_load_str' id='load_"+list_id+"' style=' margin-left:20px;color:blue'>Loading</span>");
                           },
-                          success: function(data){
-                            $("#load_"+list_id).remove();
-                            $("#"+list_id).append("<span class='yqxs_load_str' style=' margin-left:20px;color:red'>OK</span>")
-                          
-                            //alert(data.value);
-                            /*
-                            $_this.show();
-                            i++;
-                            if(i==$(".sender").length) {
-                                alert('finish');
-                                //$('#finish_mes').show();
+                          complete: function() {
+                                $("#load_"+list_id).remove();
+                                p++;
+                                if(p==count) {
+                                    alert('完成');
+                                    $('input[name=list_caiji]').val('共采集'+p+'篇小说').css({'color':'blue'});
+                                    //采集自动化,网址id号自增
+                                    //location.href= 'http://www.yqxscaiji.tk/wp-admin/admin.php?page=yqxs/function.php&yqxs_list_url=http://www.yqxs.com/data/writer/writer75.html';
+                                }
+                           },
+                          success: function(data,textStatus){
+                            
+                            $("#"+list_id).append("<span class='yqxs_load_str' style=' margin-left:20px;color:green;font-style :italic'>OK</span>")
+
+                            },
+                            error : function(xhr,textStatus,errorThrown) {
+                                console.log(this);
+                                if(null != textStatus) {
+                                    var err = textStatus;
+                                }else {
+                                    var err = 'Error'
+                                }
+                                $("#"+list_id).append("<span class='yqxs_load_str' style=' font-style:italic;margin:10px;20px;color:red'>"+err+"</span>").append('<a href="'+single_url+'&yqxs_url=' +url+'" target="_blank">点击使用单篇采集-></a>');
+                                
+                                
                             }
-                            */
-                            console.log(list_id);
-                             //$("#"+list_id).
-                            }
+                            
                     });
                    
                 }
@@ -57,9 +70,10 @@ $(document).ready(function(){
         }
         
     );
-    if($('#ch_list').length >0) {
-            setTimeout(get_content_json,100);
-    }
+    
+    //5秒后自动点击按钮以采集自动化
+     setTimeout(function() {$('input[name=list_caiji]').trigger('click');},5000);
+  
 }
 );
      
