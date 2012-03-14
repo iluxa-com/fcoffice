@@ -1,5 +1,6 @@
 $(document).ready(function(){
     var multi_thread=false;
+    var insert_count=0;
     $('input[name=multi_thread]').toggle(
         function() {multi_thread=true;$(this).val('当前多线程状态: 开启')},
         function() {muti_thread = false; $(this).val('当前多线程状态: 关闭');}
@@ -41,14 +42,19 @@ $(document).ready(function(){
                                 p++;
                                 if(p==count) {
                                     alert('完成');
-                                    $('input[name=list_caiji]').val('共采集'+p+'篇小说').css({'color':'blue'});
+                                    $('input[name=list_caiji]').val('共入库'+insert_count+'篇新小说').css({'color':'blue'});
                                     //采集自动化,网址id号自增
                                     //location.href= 'http://www.yqxscaiji.tk/wp-admin/admin.php?page=yqxs/function.php&yqxs_list_url=http://www.yqxs.com/data/writer/writer75.html';
                                 }
                            },
                           success: function(data,textStatus){
-                            
-                            $("#"+list_id).append("<span class='yqxs_load_str' style=' margin-left:20px;color:green;font-style :italic'>OK</span>")
+                            if(data.error<0) {
+                                $("#"+list_id).append("<span class='yqxs_load_str' style=' margin-left:20px;color:red;font-style :italic'>"+data.mess+"<a href="+data.permalink+" target='_blank'>查看</a>"+"</span>");
+                            }else {
+                                $("#"+list_id).append("<span class='yqxs_load_str' style=' margin-left:20px;color:green;font-style :italic'>"+data.mess+"</span>");
+                                insert_count++;
+                            }
+
 
                             },
                             error : function(xhr,textStatus,errorThrown) {
