@@ -47,7 +47,7 @@ function wp_initial_constants( ) {
 
 	// Add define('WP_DEBUG', true); to wp-config.php to enable display of notices during development.
 	if ( !defined('WP_DEBUG') )
-		define( 'WP_DEBUG', false );
+		define( 'WP_DEBUG', true );
 
 	// Add define('WP_DEBUG_DISPLAY', null); to wp-config.php use the globally configured setting for
 	// display_errors and not force errors to be displayed. Use false to force display_errors off.

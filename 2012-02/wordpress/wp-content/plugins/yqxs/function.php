@@ -306,6 +306,7 @@ function yqxs_get_cat_ID($cat_name, $description='') {
             'category_nicename' => word2pinyin($cat_name),
         );
         $category_id = wp_insert_category($cat_info);
+        //wp_insert_term($cat_name,'category' , $args);
     }
 
     return $category_id;
@@ -366,10 +367,10 @@ function yqxs_bind_single() {
         //显示基本采集信息
         $yqxs = array();
         $yqxs['url'] = $_REQUEST['yqxs_url'];
-        $content = file_get_contents($_REQUEST['yqxs_url']);
-        if (strpos($content, 'charset=gb2312') !== FALSE) {
-            $content = iconv('gbk', 'utf-8', $content);
-        }
+        
+        $content = yqxs_file_get_contents($yqxs['url']);
+        if($content===FALSE) wp_die('获取网址出错');
+        
         if (preg_match('|<td.*?class="pic01"><img src=["\'](.*?)["\'].*?>|is', $content, $matches)) {
             $yqxs['img'] = $matches[1];
             //下载图像
@@ -544,7 +545,7 @@ HEREDOC;
          $metas['psw'] = strtoupper($post_slug{0});
         //无章节可采时设置的内容
         if (isset($_POST['chapters_url']) && !empty($_POST['chapters_url'])) {
-            $post_content = '[cai-ji]';
+            $post_content = '[cai-ji-ready]';
         } else {
             $post_content = '[no-content]';
         }
