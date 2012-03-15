@@ -35,7 +35,7 @@ $(document).ready(function(){
                           data:$sdata,
                           dataType:'json',
                           beforeSend:function(xhr) {
-                            $("#"+list_id).append("<span class='yqxs_load_str' id='load_"+list_id+"' style=' margin-left:20px;color:blue'>Loading</span>");
+                            $("#"+list_id).append("<span class='yqxs_load_str' id='load_"+list_id+"' style=' margin-left:20px;color:blue'>Loading...</span>");
                           },
                           complete: function() {
                                 $("#load_"+list_id).remove();
@@ -48,7 +48,8 @@ $(document).ready(function(){
                                 }
                            },
                           success: function(data,textStatus){
-                            if(data.error<0) {
+                            //console.log(data.permalink);
+                            if(typeof  data.permalink != undefined) {
                                 $("#"+list_id).append("<span class='yqxs_load_str' style=' margin-left:20px;color:red;font-style :italic'>"+data.mess+"<a href="+data.permalink+" target='_blank'>查看</a>"+"</span>");
                             }else {
                                 $("#"+list_id).append("<span class='yqxs_load_str' style=' margin-left:20px;color:green;font-style :italic'>"+data.mess+"</span>");
@@ -58,7 +59,7 @@ $(document).ready(function(){
 
                             },
                             error : function(xhr,textStatus,errorThrown) {
-                                console.log(this);
+                               // console.log(this);
                                 if(null != textStatus) {
                                     var err = textStatus;
                                 }else {
@@ -77,8 +78,8 @@ $(document).ready(function(){
         
     );
     
-    //5秒后自动点击按钮以采集自动化
-     setTimeout(function() {$('input[name=list_caiji]').trigger('click');},5000);
+    //如果不点击，20秒后自动开始
+     setTimeout(function() {$('input[name=list_caiji]').trigger('click');},20000);
   
 }
 );

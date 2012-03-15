@@ -264,7 +264,9 @@ add_action('admin_menu', 'yqxs_options_add_page');
 function yqxs_options_add_page() {
     add_menu_page('小说采集器设置', '小说采集', 'manage_options', __FILE__, 'yqxs_bind_list', (WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__))) . '/images/favicon.png', 15);
     add_submenu_page(__FILE__, '列表采集', '列表采集', 'manage_options', __FILE__, 'yqxs_bind_list');
+         add_submenu_page(__FILE__, '将列表内采到的章节内容补全入库', '章节入库', 'manage_options', 'yqxs_chapter2db', 'yqxs_chapter2db');
     add_submenu_page(__FILE__, '单篇采集', '单篇采集', 'manage_options', 'yqxs_bind_single', 'yqxs_bind_single');
+
     //wp_cache_add('global_option',$SMC,'smc');
     add_submenu_page(__FILE__, '测试', '测试页面', 'manage_options', 'yqxs_test', 'yqxs_test');
     add_submenu_page(__FILE__, '测试', '上传页面', 'manage_options', 'yqxs_upload', 'yqxs_upload');
@@ -347,7 +349,7 @@ function yqxs_bind_list_bak() {
         echo <<<HEREDOC
     <div class="wrap" style="-webkit-text-size-adjust:none;">
 		<div class="icon32" id="icon-options-general"><br></div>
-			<h2>采集规则设置</h2>
+			<h2>采集规则设置</h2><hr/>
                         <form action="" enctype="multipart/form-data" method="POST">
                          <input name="page" type="hidden" value={$menu_page_url} />
                         <label>标题 : <input name="yqxs_rule_title" style="width:292px"type="text" value="<title>(.*?)</title>"></label><br/>
@@ -609,8 +611,8 @@ HEREDOC;
         //章节信息入库
         $permalink = get_permalink($post_id);
         
-        if ($post_content === '[cai-ji]') {
-             echo '<h2>采集章节内容开始，请稍等</h2><hr/>';
+        if ($post_content === '[cai-ji-ready]') {
+             echo '<h2>采集章节内容正在进行，请稍等...</h2><hr/>';
             $ch_arr = yqxs_ch2db($post_id, $_POST['chapters_url']);
       
             
@@ -898,7 +900,7 @@ function delete_post_chapters($post_id) {
 
 add_filter('the_content','yqxs_the_content',1,1);
 function yqxs_the_content($content) {
-    if(strpos($content,'[cai-ji]') !==FALSE)  {
+    if(strpos($content,'[cai-ji-ok]') !==FALSE)  {
         
         global $post;
         global $wpdb;
@@ -1005,3 +1007,58 @@ function yqxs_the_content($content) {
         }
     }
 
+function yqxs_chapter2db() {
+        wp_enqueue_style( 'yqxs_admin_css' );
+        echo $loading_tag = "<img class='yqxs_loading' src= '" . YQXS_URL .'/images/loading.gif' ."'/>";
+        
+        echo <<<HEREDOC
+        <div class="wrap" style="-webkit-text-size-adjust:none;">
+                    <div class="icon32" id="icon-options-general"><br></div>
+                     <h2 class="yqxs_header">章节自动入库</h2><hr/>       
+HEREDOC;
+                            
+    $role = current_user_can('administrator'); //权限控制
+    if(!$role) wp_die('权限不足');
+    global $wpdb;
+    $chapters_arr = $wpdb->get_results(        
+        "SELECT * FROM $wpdb->chapters WHERE content='' OR content IS NULL ORDER BY id ASC LIMIT 0,30"   
+        //  "SELECT * FROM $wpdb->chapters WHERE content='abc'"
+    );
+    //var_dump($chapters_arr);
+    
+    
+    if(count($chapters_arr)>0) {
+        
+        
+        wp_enqueue_script( 'yqxs_ajax_content_2' );
+        echo '<div id="ch_list2">';
+        foreach($chapters_arr as $ch) {
+            $post = get_post($ch->post_id);
+            
+            echo "<div class='ch_item' id='no_{$ch->id}' rel='{$ch->content_url}' title='{$ch->id}'>《{$post->post_title} 》{$ch->chapter_title}</div>\n";        
+        }
+        echo '</div>';
+    }else {
+        echo '<script>alert("全部章节入库完成!");</script>';
+        echo '<h4>全部章节入库完成!</h4>';
+    }
+    echo '</div>';
+    //var_dump($chapters_arr);
+    
+    /*
+                echo '<div id="ch_list">';
+           
+           foreach($ch_arr as $k=>$ch)  {
+                
+                echo "<div class='ch_item' id='no_{$ch['id']}' rel='{$ch['content_url']}' title='{$ch['id']}'>{$ch['chapter_title']}</div>\n";
+            }
+            echo '<div  id="finish_mes" style="color:red;display:none">完成，发布URL:<a href="' . $permalink . '" target="_blank">' . $permalink . '</a></div>';
+            
+
+        }else {
+             echo '<h2>采集章节内容暂无，仅采集文章信息</h2><hr/>';
+            echo '<div id="permalink"><a href="' . $permalink . '" target="_blank">发布URL:' . $permalink . '</a></div>';
+        }
+        echo '</div>';
+        */
+}

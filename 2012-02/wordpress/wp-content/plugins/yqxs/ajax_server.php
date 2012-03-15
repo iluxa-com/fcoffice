@@ -1,10 +1,12 @@
 <?php
-    require_once(ABSPATH .'wp-admin/includes/taxonomy.php');
-    require_once(ABSPATH .'wp-admin/includes/image.php');
+    //ABWZAAABafDPsfkY
+
 //列表采集中的单篇文章入库
 add_action('init','ajax_list_single');
 function ajax_list_single(){
     if(isset($_REQUEST['yqxs0']) && !empty($_REQUEST['yqxs0']) && isset($_REQUEST['url']) && !empty($_REQUEST['url'])) {
+        require_once(ABSPATH .'wp-admin/includes/taxonomy.php');
+        require_once(ABSPATH .'wp-admin/includes/image.php');
         //header('HTTP/1.0 401 Unauthorized');
         $jData=array();
         if(isset($_REQUEST['list_id'])){$jData[list_id] = $_REQUEST['list_id'];} //原样返回给js调用
@@ -12,7 +14,7 @@ function ajax_list_single(){
             header('HTTP/1.0 401 Unauthorized');
             $jData += array(
                 'error'=>-1,
-                'info'=>'bad request', 
+                'mess'=>'bad request', 
             );
             
             die(json_encode($jData));
@@ -27,9 +29,11 @@ function ajax_list_single(){
         
         $check = $wpdb->get_var($sql);
         if(NULL !== $check) {
+            $permalink = get_permalink($check);
             $jData +=array(
                 'error'=>-2,
                 'mess'=>'文章已存在,忽略.',
+                'permalink' =>$permalink,
          );
         die(json_encode($jData));  
         }
@@ -85,7 +89,7 @@ function ajax_list_single(){
    }
     //章节地址
     if (preg_match("#<a href='(.*?)'>在线阅读</a>#", $content, $matches)) {
-            $yqxs['chapters_url'] = rtrim($yqxs['url'], '/') . '/' . $matches[1];
+            $yqxs['chapters_url'] = rtrim($old_url, '/') . '/' . $matches[1];
             $yqxs['post_content'] = '[cai-ji-ready]';
         } elseif (strpos($content, '本书暂无全文') !== FALSE) {
             //$yqxs['unavailbe'] = True;
@@ -156,9 +160,14 @@ function ajax_list_single(){
     
     $jData += array(
         'error' =>0,
-        'mess'=>(isset($yqxs['chapters_url'] )) ? '可采全文' : '暂无全文',
+        'mess'=>(isset($yqxs['chapters_url'] )) ? '可采全文.' : '暂无全文.',
         'permalink'=>get_permalink($post_id),
     );
+    $ch2Db =yqxs_ch2db($post_id, $yqxs['chapters_url']);
+    if(!is_array($ch2Db)) {
+        $jData['error'] = -8;
+        $jData['mess'].='章节信息入库失败';
+    }
     //var_dump($jData);
     die(json_encode($jData));
 
@@ -265,14 +274,16 @@ function cj_contents(){
                         )
                     );
                     
-                    $sql = $wpdb->prepare(
-                        "SELECT id FROM $wpdb->chapters WHERE `post_id` = %d AND (`content` IS NULL OR `content` = '')",$id
-                    );
+                    $check_finish = $wpdb->get_var($wpdb->prepare(
+                        "SELECT id FROM $wpdb->chapters WHERE `post_id` = %d AND (`content` IS NULL OR `content` = '')",$post_id)
+                     );
                     
+                    //$finish_post_bool = $check_finish ===NULL ? 'true' : 'false';
+
                     $json_data = array(
                         'error' =>0,
                         'mesg' =>'OK', 
-                      
+                        'finish' =>($check_finish ===NULL) ? TRUE : FALSE,
                         'id' =>(int)$_REQUEST['id'],
                         
                     );
@@ -280,7 +291,20 @@ function cj_contents(){
                     $post = get_post($post_id);
                     $json_data['post_title'] = $post->post_title;
                     $json_data['permalink'] =  get_permalink($post_id);
-                
+                    //更新文章表
+                    $json_data['debug'] =array(
+                        'finish' =>$json_data['finish'],
+                        'ID' => $post_id,
+                    );
+                    if($json_data['finish'] === TRUE) {
+                        $json_data['update'] = $wpdb->update(
+                                $wpdb->posts,
+                                array('post_content'=>'[cai-ji-ok]'),
+                                array('ID' => $post_id),
+                                array('%s',),
+                                array('%d')
+                        );
+                    }
                         
                
                }
