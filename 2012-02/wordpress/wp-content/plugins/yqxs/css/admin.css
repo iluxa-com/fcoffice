@@ -16,3 +16,6 @@ a:hover {color: #be3b5a; text-decoration: underline}
 #yqxs_list_buttons {
     margin-top:10px;
 }
+.yqxs_loading {
+    display:none;
+}

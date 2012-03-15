@@ -14,7 +14,7 @@ HEREDOC;
         <form action="" enctype="multipart/form-data" method="post">
                 输入你要采集的列表url : <input name="yqxs_list_url" style="width:400px"type="text" value="http://www.yqxs.com/data/writer/writer3775.html" />
                 
-                <input type="submit" name="list_save" class="button-primary" value="确定" />
+                <input type="submit" name="list_save" class="button-primary" value="确定" /><hr/>
 HEREDOC;
             wp_nonce_field( 'yqxs_list_action', 'yqxs_token', true, true );
         
@@ -45,6 +45,7 @@ HEREDOC;
             $list_info = yqxs_get_list_info($url);
             if(!is_array($list_info)) echo '<h2>没有找到匹配的小说</h2><hr /></div>';
             else {
+                $list_info =array_reverse($list_info);
                 $total = count($list_info);
                 echo '
                 <div id="yqxs_list_buttons">

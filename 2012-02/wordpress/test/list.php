@@ -1,13 +1,14 @@
 <?php
         require('../wp-load.php');
-        /*
-        $page = 'http://www.yqxs.com/data/writer/writer223.html';//单作者
-        $page = 'http://www.yqxs.com/data/book2/Gdjqq35006/'; //单页
-        $page = 'http://www.yqxs.com/data/top/new.html'; //最新列表
-        $page = 'http://www.yqxs.com/data/top/top.html' ;//总排行 
-        $page = 'http://www.yqxs.com/data/xz/list1_2.html' ;//列表次页
+        $wpdb->show_errors(); 
+        $wpdb->print_error(); 
         
-        var_dump($m);
-        */
-        $res = yqxs_down_image('http://www.yqxs.com/data/images/notimg.gif');
+        $post_id = 543;
+        $wpdb->update(
+                $wpdb->posts,
+                array('post_content'=>'[cai-ji-ok]'),
+                array('ID' => $post_id),
+                array('%s',),
+                array('%d')
+        );
         var_dump($res);
