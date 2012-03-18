@@ -10,6 +10,7 @@ Version: 1.0
 define('YQXS_VERSION', '1.0');
 define('PLUGIN_AUTHOR_EMAIL', 'falcon_chen@qq.com');
 require_once(dirname(__FILE__).'/function.php');
+require_once(dirname(__FILE__).'/reading_cookie.php');
 require_once(dirname(__FILE__).'/widgets.php');
 register_activation_hook( __FILE__, 'yqxs__install');
 register_deactivation_hook( __FILE__, 'yqxs__deactivation');
