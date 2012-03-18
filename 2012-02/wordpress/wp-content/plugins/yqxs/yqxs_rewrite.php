@@ -24,6 +24,9 @@ add_action( 'wp_loaded','yqxs_flush_rules' );
   function yqxs_insert_rewrite_rules( $rules )
   {
       $newrules = array();
+      
+      //$newrules['index\.html'] ='index.php?pagename=tag&page=1';
+      //$newrules['index\.html'] = 'index.php';
       $newrules['psw/([A-Za-z])(-[0-9]{1,})?$'] = 'index.php?psw=$matches[1]&page=$matches[2]';
       $newrules['asw/([A-Za-z])$'] = 'index.php?asw=$matches[1]';
       $newrules['down/([^/]+?)/?$'] = 'index.php?dd=$matches[1]';

@@ -4,6 +4,7 @@
 //列表采集中的单篇文章入库
 add_action('init','ajax_list_single');
 function ajax_list_single(){
+   
     if(isset($_REQUEST['yqxs0']) && !empty($_REQUEST['yqxs0']) && isset($_REQUEST['url']) && !empty($_REQUEST['url'])) {
         require_once(ABSPATH .'wp-admin/includes/taxonomy.php');
         require_once(ABSPATH .'wp-admin/includes/image.php');
@@ -28,14 +29,58 @@ function ajax_list_single(){
         ); 
         
         $check = $wpdb->get_var($sql);
+        
         if(NULL !== $check) {
+            //这个判断文章信息同时存在，章节也要存在
             $permalink = get_permalink($check);
-            $jData +=array(
-                'error'=>-2,
-                'mess'=>'文章已存在,忽略.',
-                'permalink' =>$permalink,
-         );
-        die(json_encode($jData));  
+                        $post_id = $check;
+            $check2 = $wpdb->get_var(
+                $wpdb->prepare(
+                "SELECT id FROM $wpdb->chapters WHERE post_id =%d",$post_id
+                )
+            );
+            //如果 存在章节则不采集
+
+            if($check2 !==NULL) {
+                
+                $jData +=array(
+                    'error'=>-2,
+                    'mess'=>'文章已存在,忽略.',
+                    'permalink' =>$permalink,
+             );
+                die(json_encode($jData));  
+            }else{
+                //如果文章是暂无全文的,忽略
+                $check3 = $wpdb->get_var(
+                    $wpdb->prepare(
+                        "SELECT post_content FROM $wpdb->posts WHERE ID=%d",$post_id
+                    )
+                );
+                if($check3 === '[no-content]') {
+                        $jData +=array(
+                            'error'=>-2,
+                            'mess'=>'基本信息已入库,出处暂无全文.',
+                            'permalink' =>$permalink,
+                     );                    
+                     die(json_encode($jData));  
+                }
+                
+                //如果基本信息存在，则仅入库章节
+                $content = yqxs_file_get_contents($old_url);
+                 if (preg_match("#<a href='(.*?)'>在线阅读</a>#", $content, $matches)) {
+                $yqxs['chapters_url'] = $old_url . '/' . $matches[1];
+                 $ch2Db =yqxs_ch2db($post_id, $yqxs['chapters_url']);
+                 $jData +=array(
+                    'error'=>0,
+                    'mess'=>'仅更新章节',
+                    'permalink' =>$permalink,
+                  );                 
+                 
+                 }
+                 die(json_encode($jData));  
+            }
+        
+        
         }
         //文章基本信息入库开始
         //获取文章页
@@ -144,8 +189,14 @@ function ajax_list_single(){
         //'post_type' => [ 'post' | 'page' | 'link' | 'nav_menu_item' | custom post type ]
         'tags_input' => $tags_input, //tag 处理
     );
-    $post_id = wp_insert_post($post, 0);
-    
+    $post_id = yqxs_post_exists($yqxs['post_title']);
+    if(FALSE !== $post_id) {
+        $post['ID'] = $post_id;
+        wp_update_post($post);
+    }else {
+        $post_id = wp_insert_post($post, 0);
+    }
+
     if(!is_numeric($post_id)) {
         $jData+=array(
             'error'=>-7,
@@ -163,10 +214,12 @@ function ajax_list_single(){
         'mess'=>(isset($yqxs['chapters_url'] )) ? '可采全文.' : '暂无全文.',
         'permalink'=>get_permalink($post_id),
     );
-    $ch2Db =yqxs_ch2db($post_id, $yqxs['chapters_url']);
-    if(!is_array($ch2Db)) {
-        $jData['error'] = -8;
-        $jData['mess'].='章节信息入库失败';
+    if(isset($yqxs['chapters_url'])) { //仅当存在全文时进行章节信息入库
+        $ch2Db =yqxs_ch2db($post_id, $yqxs['chapters_url']);
+        if(!is_array($ch2Db)) {
+            $jData['error'] = -8;
+            $jData['mess'].='章节信息入库失败';
+        }
     }
     //var_dump($jData);
     die(json_encode($jData));
@@ -229,6 +282,26 @@ function cj_contents(){
         
         if(NULL !== $url) {
              $id = $_REQUEST['id'];
+             //检查内容是否非空,已存在时不采集
+             
+                $need = $wpdb->get_var(
+                $wpdb->prepare(
+                    "SELECT id FROM $wpdb->chapters WHERE id=%d AND (content='' OR content IS NULL)",$id
+                )
+             );
+            
+             if($need === NULL) {
+                $json_data  = array(
+                    'error' =>-3,
+                    'mesg'=>'page content has been fetched ',
+                    'id' =>(int)$_REQUEST['id'],
+                    'url' => $url,
+                );
+                echo json_encode($json_data);
+                die();
+             }
+          
+            
              //获取内容页
              $page = yqxs_file_get_contents($url);
              if($page == False) {
@@ -289,6 +362,7 @@ function cj_contents(){
                     );
                     
                     $post = get_post($post_id);
+                    $json_data['post_id'] = $post_id;
                     $json_data['post_title'] = $post->post_title;
                     $json_data['permalink'] =  get_permalink($post_id);
                     //更新文章表
@@ -314,6 +388,7 @@ function cj_contents(){
         }
      $json_data['url'] = $url;
      header('Content-type: text/json');
+
      header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
      echo json_encode($json_data);
      die();

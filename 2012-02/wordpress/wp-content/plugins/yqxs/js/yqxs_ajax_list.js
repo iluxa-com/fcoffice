@@ -1,9 +1,13 @@
 $(document).ready(function(){
     var multi_thread=false;
     var insert_count=0;
-    $('input[name=multi_thread]').toggle(
-        function() {multi_thread=true;$(this).val('当前多线程状态: 开启')},
-        function() {muti_thread = false; $(this).val('当前多线程状态: 关闭');}
+    
+    $('input[name=multi_thread]').click(
+        function() {
+            multi_thread = !multi_thread;
+            if(multi_thread==true) $(this).val('当前多线程状态: 开启');
+            else $(this).val('当前多线程状态: 关闭');
+        }
     );
     
     //alert(single_url); //单篇采集页地址
@@ -50,7 +54,7 @@ $(document).ready(function(){
                           success: function(data,textStatus){
                             //console.log(data.permalink);
                             if(typeof  data.permalink != undefined) {
-                                $("#"+list_id).append("<span class='yqxs_load_str' style=' margin-left:20px;color:red;font-style :italic'>"+data.mess+"<a href="+data.permalink+" target='_blank'>查看</a>"+"</span>");
+                                $("#"+list_id).append("<span class='yqxs_load_str' style=' margin-left:20px;color:green;font-style :italic'>"+data.mess+"<a href="+data.permalink+" target='_blank'>查看</a>"+"</span>");
                             }else {
                                 $("#"+list_id).append("<span class='yqxs_load_str' style=' margin-left:20px;color:green;font-style :italic'>"+data.mess+"</span>");
                                 insert_count++;
@@ -89,7 +93,7 @@ $(document).ready(function(){
                 //console.log(this.style.display='block');
                 //console.log($(this).attr('rel'));
                 $_this= $(this);
-                console.log($_this);
+                //console.log($_this);
                 $.ajax({
                   url: $_this.attr('rel'),
                   cache: false,

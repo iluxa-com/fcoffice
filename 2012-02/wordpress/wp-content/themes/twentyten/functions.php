@@ -1,5 +1,6 @@
 <?php
 add_theme_support( 'post-thumbnails' );
+//define('YQURI',get_template_directory_uri());
 /*
 if ( function_exists( 'add_theme_support' ) ) {
 	add_theme_support( 'post-thumbnails' );
