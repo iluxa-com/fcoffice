@@ -327,6 +327,7 @@ function word2pinyin($word, $ucfirst=False, $split='') {
     $word = strtolower($word);
     $py = new Word2Py($word);
     return $py->convert($word, 'utf-8', $ucfirst, $split);
+   
 }
 
 
@@ -855,10 +856,12 @@ function down_image($url) {
 //	$title = apply_filters('sanitize_title', $title, $raw_title, $context);
 //$title = apply_filters('sanitize_title', $title, $raw_title, $context);
 //拼音化标题，其实是为了插入tag时的slug自动拼音化，因为用wp_insert_post时tag的slug不能指定，于是从过滤函数着手
-add_filter('sanitize_title', 'py_title', 10, 3);
+add_filter('sanitize_title', 'py_title', 99, 3);
 
 function py_title($title, $raw_title, $context) {
-    return word2pinyin($raw_title);
+    $str = word2pinyin($raw_title);
+    
+    return $str;
 }
 
 //缩略图尺寸自定义
@@ -1009,7 +1012,7 @@ function yqxs_the_content($content) {
 
 function yqxs_chapter2db() {
         wp_enqueue_style( 'yqxs_admin_css' );
-        echo $loading_tag = "<img class='yqxs_loading' src= '" . YQXS_URL .'/images/loading.gif' ."'/>";
+        echo $loading_tag = "<img style='display:none' class='yqxs_loading' src= '" . YQXS_URL .'/images/loading.gif' ."'/>";
         
         echo <<<HEREDOC
         <div class="wrap" style="-webkit-text-size-adjust:none;">
@@ -1020,8 +1023,14 @@ HEREDOC;
     $role = current_user_can('administrator'); //权限控制
     if(!$role) wp_die('权限不足');
     global $wpdb;
+    
+    $total = $wpdb->get_var(
+        "SELECT count(id) FROM $wpdb->chapters WHERE content IS NULL ORDER BY id ASC"
+    );
+    echo '<div id="ch_count">总剩余章节数: '.$total.'</div>';
+    
     $chapters_arr = $wpdb->get_results(        
-        "SELECT * FROM $wpdb->chapters WHERE content='' OR content IS NULL ORDER BY id ASC LIMIT 0,30"   
+        "SELECT * FROM $wpdb->chapters WHERE content='' OR content IS NULL ORDER BY id ASC LIMIT 0,100"   
         //  "SELECT * FROM $wpdb->chapters WHERE content='abc'"
     );
     //var_dump($chapters_arr);
@@ -1035,10 +1044,15 @@ HEREDOC;
         foreach($chapters_arr as $ch) {
             $post = get_post($ch->post_id);
             
-            echo "<div class='ch_item' id='no_{$ch->id}' rel='{$ch->content_url}' title='{$ch->id}'>《{$post->post_title} 》{$ch->chapter_title}</div>\n";        
+            echo "<div class='ch_item' id='no_{$ch->id}' rel='{$ch->content_url}' title='{$ch->id}'>《{$post->post_title}》{$ch->chapter_title}</div>\n";        
         }
         echo '</div>';
     }else {
+        //此为修正
+        $wpdb->query(
+            "UPDATE $wpdb->posts SET post_content='[cai-ji-ok]' WHERE post_content='[cai-ji-ready]'"
+        );
+        
         echo '<script>alert("全部章节入库完成!");</script>';
         echo '<h4>全部章节入库完成!</h4>';
     }

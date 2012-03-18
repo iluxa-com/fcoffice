@@ -12,7 +12,7 @@ HEREDOC;
    //http://www.yqxs.com/data/writer/writer223.html
         echo <<<HEREDOC
         <form action="" enctype="multipart/form-data" method="post">
-                输入你要采集的列表url : <input name="yqxs_list_url" style="width:400px"type="text" value="http://www.yqxs.com/data/writer/writer3775.html" />
+                输入你要采集的列表url : <input name="yqxs_list_url" style="width:400px"type="text" value="http://www.yqxs.com/data/top/new.html" />
                 
                 <input type="submit" name="list_save" class="button-primary" value="确定" /><hr/>
 HEREDOC;
@@ -38,6 +38,7 @@ HEREDOC;
         if( !wp_verify_nonce($_REQUEST['yqxs_token'],'yqxs_list_action')) {
             wp_die('非法操作');
         } else {
+            $menu_page_url2 = yqxs_menu_page_url('yqxs_chapter2db');
             $url = esc_url ($_REQUEST['yqxs_list_url']);
             echo "<div id='current_url' >指定列表链接: <a href='{$url}' target='_blank'>{$url}</a>";
             echo '<form action="" enctype="multipart/form-data" method="post">';
@@ -51,7 +52,7 @@ HEREDOC;
                 <div id="yqxs_list_buttons">
                 <input style="margin-left: 10px;" type="button" name="multi_thread" class="button-primary" value="当前多线程状态:关闭" />
                 <input style="margin-left: 10px;" type="button" name="list_caiji" class="button-primary" value="开始采集('.$total.'篇)" />
-                <input style="margin-left: 30px;" type="button" name="content_caiji" class="button-primary" value="返回上页" onclick="history.go(-1)" />
+                <input style="margin-left: 30px;" type="button" name="content_caiji" class="button-primary" value="进入章节采集" onclick="location.href={$menu_page_url2}" />
                 </div>
                 <hr />
                 </div>';

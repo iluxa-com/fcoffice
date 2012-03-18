@@ -1,0 +1,1 @@
+document.writeln("<IFRAME MARGINHEIGHT=0 MARGINWIDTH=0 frameBorder=0 width=960 scrolling=no height=150 SRC=\"/gg\/al1.htm\"><\/IFRAME>");

@@ -176,7 +176,7 @@ function yqxs_ch2db($post_id, $ch_url) {
 //检查指定的文章名在posts表中是否存在,存在返回id号，否则返回false
 function yqxs_post_exists($post_title) {
     global $wpdb;
-    $sql = $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_status = 'publish' AND post_title=%s ORDER BY ID DESC", $post_title ) ;
+    $sql = $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_status = 'publish' AND post_title=%s ORDER BY ID ASC LIMIT 0,1", $post_title ) ;
      
      $id = $wpdb->get_var($sql);
      return ($id===null) ? false : (int)$id;
@@ -190,9 +190,19 @@ function yqxs_get_list_info($url) {
         '#<a href=["\']?(http://www.yqxs.com/data/book.+?)["\']?>([^<]+?)</a>#',
         $content,$matches,
         2);
-        return (!$res) ? FALSE : $matches;
-            
+        if($res) {
+            foreach($matches as $k=>$v) {
+                if($n = strpos($v[1],' ')){
+                    $matches[$k][1] = trim(substr($v[1],0,$n),"'\"");
+                }
+            }
+            return $matches;
+        }else {
+            return FALSE;
         }
+        
+            
+}
 
         
  //新版下载图像
