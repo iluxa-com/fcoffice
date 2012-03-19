@@ -1,6 +1,223 @@
 <?php
 add_theme_support( 'post-thumbnails' );
+
+
+function yqxs_get_all_users($num=100) {
+    global $wpdb;
+     
+    $sql =$wpdb->prepare(
+"SELECT $wpdb->users.ID, $wpdb->users.display_name, count( $wpdb->posts.ID ) 
+ AS total
+FROM $wpdb->posts
+INNER JOIN $wpdb->users ON $wpdb->posts.post_author = $wpdb->users.ID
+WHERE `post_status` = 'publish'
+GROUP BY $wpdb->posts.post_author
+ORDER BY total DESC
+LIMIT 0 , %d", $num
+    );
+    $results = $wpdb->get_results(
+        $sql
+    );
+    return $results;
+}
+
+function yqxs_get_all_posts($num=100) {
+    global $wpdb;
+    
+}
+//<li><em><font size=2  color="red"   ><span>03-16</span></font></em><a href="/view/2012/3_16/3283.html" target="_blank" title="爱杀宝贝第11集下载">爱杀宝贝第11集更新</a>
+function yqxs_get_recent_posts($no_posts = 100, $show_pass_post = false, $skip_posts = 0) {
+    global $wpdb, $tableposts;
+    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' ";
+        if(!$show_pass_post) { $request .= "AND post_password ='' "; }
+    $request .= "ORDER BY post_date DESC LIMIT $skip_posts, $no_posts";
+    $posts = $wpdb->get_results($request);
+    $output = '';
+    $today =date('m-d');
+    foreach ($posts as $post) {
+        $post_title = stripslashes($post->post_title);
+        //$post_date = mysql2date('j.m.Y', $post->post_date);
+        $post_date = date('m-d',strtotime($post->post_date));
+        $permalink = get_permalink($post->ID);
+        $color =($post_date===$today) ?'red':'grey';
+        $output .= '<li><em><font size=2  color="'.$color.'"   ><span>'.$post_date.'</span></font></em>' . '<a href="' . $permalink . '" rel="bookmark" title="Permanent Link: ' . $post_title . '">' . $post_title . "</a></li>\n";
+    }
+    return $output;
+} 
+
+function yqxs_get_recent_posts2($no_posts = 100, $show_pass_post = false, $skip_posts = 0) {
+    global $wpdb, $tableposts;
+    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' ";
+        if(!$show_pass_post) { $request .= "AND post_password ='' "; }
+    $request .= "ORDER BY post_date DESC LIMIT $skip_posts, $no_posts";
+    $posts = $wpdb->get_results($request);
+    $output = '';
+    $today =date('m-d');
+    foreach ($posts as $post) {
+        $post_title = stripslashes($post->post_title);
+        //$post_date = mysql2date('j.m.Y', $post->post_date);
+        //<li class="line"><a href="/view/2012/3_15/3189.html" title="花牌情缘">　花牌情缘</a><span>03-15</span></li>
+        $post_date = date('m-d',strtotime($post->post_date));
+        $permalink = get_permalink($post->ID);
+        $color =($post_date===$today) ?'red':'grey';
+        $output .= '<li class="line"><a href="' . $permalink . '" rel="bookmark" title="Permanent Link: ' . $post_title . '">' . $post_title . "</a><span>$post_date</span></li>\n";
+    }
+    return $output;
+} 
+
+//摘自网上
+function get_recent_posts($no_posts = 100, $before = '<li>', $after = '</li>', $show_pass_post = false, $skip_posts = 0) {
+    global $wpdb, $tableposts;
+    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' ";
+        if(!$show_pass_post) { $request .= "AND post_password ='' "; }
+    $request .= "ORDER BY post_date DESC LIMIT $skip_posts, $no_posts";
+    $posts = $wpdb->get_results($request);
+    $output = '';
+    foreach ($posts as $post) {
+        $post_title = stripslashes($post->post_title);
+//         $post_date = mysql2date('j.m.Y', $post->post_date);
+        $permalink = get_permalink($post->ID);
+        $output .= $before . '<a href="' . $permalink . '" rel="bookmark" title="Permanent Link: ' . $post_title . '">' . $post_title . '</a>'. $after;
+    }
+    return $output;
+} 
+
+function yqxs_get_reacent_posts_and_thumbnails($no_posts = 100, $show_pass_post = false, $skip_posts = 0){
+global $wpdb, $tableposts;
+    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' ";
+        if(!$show_pass_post) { $request .= "AND post_password ='' "; }
+    $request .= "ORDER BY post_date DESC LIMIT $skip_posts, $no_posts";
+    $posts = $wpdb->get_results($request);
+    $output = '';
+    $today =date('m-d');
+    foreach ($posts as $post) {
+        $post_title = stripslashes($post->post_title);
+        //$post_date = mysql2date('j.m.Y', $post->post_date);
+        $post_date = date('m-d',strtotime($post->post_date));
+        $permalink = get_permalink($post->ID);
+        $img = get_the_post_thumbnail($post->ID, array(120,160), array('class' => 'yqxs_tab'));
+        $output .="<li><a href='{$permalink}' target='_blank' title='{$post_title}'>{$img}</a><a href='{$permalink}' target='_blank' title='{$post_title}'>{$post_title}</a></li>\n";
+       
+    }
+    return $output;
+
+}
+
+//取特定分类名的文章和缩略图
+function yqxs_get_cat_posts_and_thumbnails($no_posts = 100,$term_name ,$show_pass_post = false, $skip_posts = 0){
+global $wpdb;
+    
+
+    $request = "SELECT * FROM $wpdb->posts WHERE ID IN(
+SELECT object_id AS ID
+FROM $wpdb->term_relationships
+WHERE term_taxonomy_id = (
+SELECT term_taxonomy_id
+FROM $wpdb->terms
+INNER JOIN $wpdb->term_taxonomy ON $wpdb->terms.term_id = $wpdb->term_taxonomy.term_id
+WHERE $wpdb->terms.name = '$term_name' LIMIT 0,1)
+ORDER BY ID DESC
+) AND post_status = 'publish' ";
+
+        if(!$show_pass_post) { $request .= "AND post_password ='' "; }
+    $request .= "ORDER BY post_date DESC LIMIT $skip_posts, $no_posts";
+    $posts = $wpdb->get_results($request);
+
+    $output = '';
+
+
+    foreach ($posts as $post) {
+        $post_title = stripslashes($post->post_title);
+        //$post_date = mysql2date('j.m.Y', $post->post_date);
+        
+        $permalink = get_permalink($post->ID);
+        $img = get_the_post_thumbnail($post->ID, array(120,160), array('class' => 'yqxs_tab'));
+        $output .="<li><a href='{$permalink}' target='_blank' title='{$post_title}'>{$img}</a><a href='{$permalink}' target='_blank' title='{$post_title}'>{$post_title}</a></li>\n";
+       
+    }
+    //var_dump($output);
+    return $output;
+
+}
+
+//按字母
+function yqxs_get_posts_by_chars($no_posts=100,$chars=array(),$show_pass_post = false, $skip_posts = 0) {
+    if(!is_array($chars) OR count($chars)<1) return FALSE;
+    $char_str ='';
+    foreach($chars as $k=>$char) {
+        $char =strtoupper($char);
+        $char ="'$char',";
+        $char_str .=$char;
+    }
+    $char_str = rtrim($char_str,',');
+    global $wpdb;
+    $request = "SELECT *
+FROM yqxs_posts
+INNER JOIN yqxs_postmeta ON yqxs_posts.ID = yqxs_postmeta.post_id
+WHERE `meta_key` = 'psw'
+AND `meta_value`
+IN (
+$char_str
+)
+ AND post_status='publish' ";
+
+     if(!$show_pass_post) { $request .= "AND post_password ='' "; }
+    $request .= "ORDER BY meta_value ASC , ID DESC  LIMIT $skip_posts, $no_posts";
+    
+ 
+    
+    $posts = $wpdb->get_results($request);
+    //<li><a href="/view/2011/2_19/1214.html" target="_blank" title="暗夜魔法使">暗夜魔法使</a></li>
+    
+    $output = '';
+
+
+    foreach ($posts as $post) {
+        $post_title = stripslashes($post->post_title);
+        //$post_date = mysql2date('j.m.Y', $post->post_date);
+        $permalink = get_permalink($post->ID);
+        
+        $output .="<li><a href='{$permalink}' target='_blank' title='{$post_title}'>{$post_title}</a></li>\n";
+       
+    }
+    //var_dump($output);
+    return $output;    
+
+}
+
+
+
+function yqxs_get_categories_list($number=18) {
+
+    $args = array(
+	'type'                     => 'post',
+	'child_of'                 => 0,
+	'parent'                   => '',
+	'orderby'                  => 'count',
+	'order'                    => 'DESC',
+	'hide_empty'               => 1,
+	'hierarchical'             => 1,
+	'exclude'                  => '1',
+	'include'                  => '',
+	'number'                   => $number,
+	'taxonomy'                 => 'category',
+	'pad_counts'               => false );
+     $categories = get_categories( $args ); 
+     $output ='';
+     foreach ($categories as $k=>$cat) {
+        $id = $k+1;
+        $link= get_category_link($cat->cat_ID);        
+        $output .="<li class='line'><a href='{$link}' title='{$cat->name}' target='_blank' ><span class='t6'><em>{$id}.</em></span>{$cat->name}</a></li>\n";
+
+      }
+     return $output;
+    
+    
+
+}
+
 //define('YQURI',get_template_directory_uri());
+
 /*
 if ( function_exists( 'add_theme_support' ) ) {
 	add_theme_support( 'post-thumbnails' );
