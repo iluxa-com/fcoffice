@@ -1,0 +1,150 @@
+@charset "gb2312";
+/* CSS Document */
+
+body{font-size:12px;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote{padding:0; margin:0;}  
+ul,li{list-style:none; list-style-type:none;}
+h1,h2,h3,h4,h5,h6 {font-size:12px; font-weight:normal;} 
+em{font-style:normal;}
+
+a{color:#333333; text-decoration:none;}
+
+a.red{color:#FF0000;}
+a.blue{color:#0000FF;}
+a.green{color:#006600;}
+
+span.green{color:#006600;}
+
+.left{float:left;}
+.right{float:right;}
+
+.main{width:980px; margin:0 auto; padding:0;}
+.indexLeft{ width:746px; float:left;}
+.indexRight{width:225px; float:right;}
+
+.blank0{font-size:0px; height:0px;clear:both; display:block;}
+.blank1{font-size:1px; height:1px;clear:both; display:block;}
+.blank2{font-size:1px; height:2px;clear:both; display:block;}
+.blank4{font-size:1px; height:4px;clear:both; display:block;}
+.blank5{font-size:1px; height:5px;clear:both;display:block;}
+.blank6{font-size:1px; height:6px;clear:both;display:block;}
+.blank8{font-size:1px; height:8px;clear:both;display:block;}
+
+.dot{background:url(images/dot-1.gif) center repeat-x;}
+
+.lr1px{margin:0 1px; background-color:#FFFFFF;}
+
+.lineGray{border-bottom:1px solid #999999; border-top:1px solid #999999; background-color:#FFFFFF;}
+.lineGray1{border-top:1px solid #999999; background-color:#FFFFFF;}
+
+.border1{border:1px solid #999999;}
+
+
+
+h2.bar{font-size:14px; line-height:2.0em; border-bottom:#999; padding:1px; border-bottom:1px solid #999;}
+h2.bar strong{ background:url(images/sprites_bg.gif) 0 0 repeat-x; display:block; padding-left:10px;}
+h2.bar span{float:right; font-size:12px; margin-right:4px; color:#FF0000;}
+
+h2.sbar{font-size:12px; line-height:2.0em; border-bottom:#999; padding:1px 2px; color:#FF0000;}
+h2.sbar strong{ background:url(images/sprites_bg.gif) 0 -50px repeat-x; display:block; padding-left:10px;}
+h2.sbar span{float:right; font-size:12px; margin-right:4px; color:#FF0000;}
+h2.sbar span a{display:inline-block; width:51px; height:15px; background:url(images/sprites.gif) 0 -282px no-repeat; margin-top:4px;}
+h2.sbar span a em{display:none;}
+
+
+
+.comicList {width:730px; padding-left:10px; overflow:hidden; }
+.comicList ul{display:none;}
+.comicList li{float:left; background:url(images/cover_bg.gif) center 0 no-repeat; width:144px; height:194px; text-align:center; line-height:2.0em;overflow:hidden;}
+.comicList li a img{border:0; width:120px; height:160px; display:block; background:url(images/sloading.gif) center no-repeat; margin:1px auto 8px; margin-right:15px;}
+
+
+
+.tabList{ width:744px; }
+.tabList li{width:184px; float:left; text-align:center; background-color:#CCCCCC; line-height:2.0em; font-size:14px; background-color:#F0F0F0; border-left:1px solid #FFFFFF; border-right:1px solid #999; border-bottom:1px solid #999;}
+.tabList li strong{ border-top:1px solid #FFFFFF; border-bottom:1px solid #FFFFFF; display:block; cursor:pointer; height:28px;}
+.tabList li.on{ background-color:#FFFFFF; border-bottom:1px solid #FFFFFF; color:#FF0000;}
+.tabList li.on strong{ background:url(images/sprites_bg.gif) 0 -50px repeat-x;}
+.tabList li.end{border-right:none; width:184px;}
+#hk{position:relative;}
+#hk em{position:absolute; background:url(images/icos.gif) 0 0 no-repeat; width:21px; height:21px; display:block; top:-8px; left:100px;}
+
+
+
+.index_bg1{ background:#d9d9d9 url(images/index_bg.gif) 0 bottom no-repeat}
+.index_bg2{ background:#d9d9d9 url(images/index_bg.gif) -980px 0 repeat-y;}
+.index_bg3{ background:#d9d9d9 url(images/index_bg.gif) -3452px top no-repeat}
+.index_bg4{ background:#d9d9d9 url(images/index_bg.gif) -1960px bottom no-repeat}
+.index_bg5{ background:#d9d9d9 url(images/index_bg.gif) -2706px 0 repeat-y;}
+
+.bookBG{ background:url(images/book_bg.gif) 0 bottom no-repeat}
+.bookBG1{background:url(images/book_bg.gif) -980px 0 repeat-y}
+.bookBG2{ background:url(images/book_bg.gif) 0 top no-repeat}
+
+.position{ }
+.position em{font-style:normal; font-weight:normal;}
+.position a{color:#0066CC; text-decoration:underline;}
+.position a:hover{color:#FF0000;}
+
+.newUpdate{width:92%; margin:0 auto; padding:0.2em 0 0.5em 0;}
+.newUpdate li{  padding:5px 0; padding-left:1.5em; background:url(images/sprites.gif) -188px -148px no-repeat; border-bottom:1px dashed #CCCCCC;line-height:22px; height:17px; overflow:hidden}
+
+.newUpdate li em{float:right; font-size:10px; color:#666; font-family:Tahoma, Verdana;}
+.newUpdate li em.red{color:#FF0000;}
+.newUpdate li em.orange{color:#FF6600; color:#FF0000;}
+
+.Advices{width:92%; margin:0 auto; padding:0.2em 0 0.5em 0;}
+.Advices li{line-height:31px;  padding-left:1.8em; background:url(images/sprites.gif) -150px -188px no-repeat; border-bottom:1px dashed #CCCCCC; height:31px; overflow:hidden}
+.Advices a{color:#0000FF;}
+.Advices li.dm{background:url(images/sprites.gif) -185px -86px no-repeat;}
+
+.topHits{width:92%; margin:0 auto; padding:0.2em 0 0.5em 0;}
+.topHits h1{font-size:14px; padding-bottom:.2em;}
+.topHits li{ line-height:20px; padding:4px 0;  border-bottom:1px dashed #CCCCCC; overflow:hidden; height:17px;}
+.topHits li span{float:left; display:block; background:url(images/sprites.gif) -177px -279px no-repeat; width:25px; margin-right:4px; font-size:9px;  color:#fff; font-family:Tahoma, Verdana; text-align:center;}
+.topHits li span.t1,.topHits li span.t2,.topHits li span.t3,.topHits li span.t4,.topHits li span.t5{background:url(images/sprites.gif) -177px -245px no-repeat;}
+
+.chrComicList{width:98%; margin:0 auto;}
+.chrComicList li{float:left; width:90px; margin:0 4px; line-height:2.0em; height:2.0em; background:url(images/sprites.gif) -188px -214px no-repeat; padding-left:15px; border-bottom:1px dashed #CCCCCC; white-space:nowrap; overflow:hidden;}
+
+.friendLink{width:960px; margin:0 auto;}
+.friendLink li{float:left;  padding:0 4px; white-space:nowrap; word-break:break-all; line-height:19px; height:19px; margin:1px;}
+
+.top{ height:70px; background:url(images/top_bg.gif) 80% bottom no-repeat;}
+
+.top_right{float:right; width:640px;}
+.hotListText{height:30px; text-align:right; line-height:30px;}
+.hotListText a{color:#FF0000; text-decoration:underline;}
+.hotListText a:hover{text-decoration:none;}
+
+.main_nav{width:100%; height:34px; background:url(images/sprites_bg.gif) 0 -195px repeat-x;}
+
+.navList{margin:0 auto; width:980px;}
+.navList li{float:left; font-size:14px; height:30px;width:65px; background:url(images/sprites_bg.gif) 0 -240px no-repeat; padding-left:9px; text-align:center; padding-top:2px;}
+.navList li.first{width:78px; text-align:center; background:none; padding-left:0px;}
+.navList li.nav-middle{width:10px; background:url(images/nav-middle.gif) center no-repeat;}
+.navList li.mini{width:38px;}
+.navList li.other{width:60px;}
+.navList li a{ color:#FFFFFF; display:block; width:100%; height:29px; line-height:30px; filter:dropshadow(Color=#000000,OffX=1, OffY=1);}
+.navList li a:hover{color:#FFFF00; text-decoration:none;}
+
+.subNav{ position:relative; height:60px; width:980px; margin:0 auto; }
+.subNavList{position:absolute; top:-2px;  border:1px solid #999; border-top:none;  background:#FFFFFF url(images/sprites_bg.gif) 0 -116px repeat-x; height:58px;}
+.charNav{line-height:1.6em; padding-top:4px; width:970px; margin:0 auto; font-size:12px; font-family:Georgia, "Times New Roman", Times, serif;font-weight:bold; color:#333333; background:url(images/dot-1.gif) bottom repeat-x; height:28px;}
+.charNav strong{float:left; width:100px; text-align:center;}
+.charNav a{ display:block; float:left; color:#006699; border:1px solid #81C2F3; background:url(images/sprites_bg.gif) 0 -319px repeat-x; width:25px; text-align:center; margin:0 3px;}
+.charNav a:hover{ text-decoration:none; color:#FF0000; background-position:0 -339px;}
+.orderNav em{color:#333333; font-weight:bold;}
+.orderNav a.on{font-weight:bold; color:#0033FF; text-decoration:none;}
+.orderNav a{color:#FF3300; text-decoration:underline;}
+.footer{ text-align:center; border-top:1px solid #999999; color:#333333; background:#FFFFFF url(images/sprites_bg.gif) 0 -48px repeat-x; padding:8px 0; line-height:1.5em;}
+.otherNav{line-height:23px; width:970px; padding:0 4px; border-bottom:1px solid #FFFFFF; height:23px; padding-top:2px;}
+.otherNav span{float:right; }
+.otherNav span a{display:block; float:left; background:url(images/sprites.gif) 0 -251px no-repeat; height:21px; width:84px; color:#FFFFFF; font-weight:bold; padding-left:14px; line-height:21px; margin-right:4px;}
+.otherNav span a:hover{color:#FFFF00; text-decoration:none;}
+.otherNav a{background:url(images/sprites.gif) -184px -126px no-repeat; padding-left:20px; color:#0066CC;}
+.otherNav a.red{color:#FF0000; font-weight:bold;}
+.otherNav a:hover{ color:#000000}
+.otherNav span a.addFav{ width:80px; padding-left:18px;}
+/*my add*/
+#searchbar {cursor:pointer;}
