@@ -24,13 +24,18 @@ add_action( 'wp_loaded','yqxs_flush_rules' );
   function yqxs_insert_rewrite_rules( $rules )
   {
       $newrules = array();
-      
+      // [page/?([0-9]{1,})/?$] => index.php?&paged=$matches[1]
+      http://www.yqxscaiji.tk/recent/paged/2
       //$newrules['index\.html'] ='index.php?pagename=tag&page=1';
       //$newrules['index\.html'] = 'index.php';
+      //[page/?([0-9]{1,})/?$] => index.php?&paged=$matches[1]
+      
+      $newrules['/?([0-9]{1,})/?$'] = 'index.php?pagename=recent&page=$matches[1]';
       $newrules['psw/([A-Za-z])(-[0-9]{1,})?$'] = 'index.php?psw=$matches[1]&page=$matches[2]';
       $newrules['asw/([A-Za-z])$'] = 'index.php?asw=$matches[1]';
       $newrules['down/([^/]+?)/?$'] = 'index.php?dd=$matches[1]';
       $newrules['([^/]+?)(-[0-9]{1,})?\.html$'] = 'index.php?name=$matches[1]&page=$matches[2]';
+      //unset($rules['page/?([0-9]{1,})/?$']);
       return $newrules + $rules;
   }
   
@@ -39,6 +44,7 @@ add_action( 'wp_loaded','yqxs_flush_rules' );
       array_unshift($vars, 'psw');
       array_push($vars, 'asw');
       array_push($vars, 'dd');
+      array_push($vars, 'paged');
       return $vars;
   }
 

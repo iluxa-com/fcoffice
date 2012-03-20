@@ -32,7 +32,7 @@
           $read_list = array_reverse($read_list);
           if(count($read_list)>5) $read_list = array_slice($read_list,0,5);
           setcookie('read_list',http_build_query($read_list),time()+60*60*24*30 );
-            
+
         }
         
 

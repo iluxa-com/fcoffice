@@ -18,6 +18,7 @@
     $py = sanitize_title($str);
     var_dump($py);
     */
+    /*
     $res = $wpdb->get_results(
         "SELECT term_id ,name,slug FROM $wpdb->terms WHERE slug LIKE 'Unknown%'"
      );
@@ -32,4 +33,7 @@
      }
      
     var_dump($res);
+    */
+    var_dump(get_tag_link(1)); 
+    ?>
     
