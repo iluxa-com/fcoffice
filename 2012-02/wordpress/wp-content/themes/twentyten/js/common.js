@@ -15,7 +15,9 @@ function $(objID) {
             }
         }
     );
-    
+     $("img").lazyload({
+        effect       : "fadeIn"
+    });
     
 }
   

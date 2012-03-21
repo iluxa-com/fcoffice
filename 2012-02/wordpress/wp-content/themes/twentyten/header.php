@@ -8,7 +8,7 @@
  * @subpackage Twenty_Ten
  * @since Twenty Ten 1.0
  */
- define('YQURI',get_template_directory_uri());
+
 ?>
 <?php
 /* $data = yqxs_get_all_users(64);
@@ -16,6 +16,7 @@ var_dump($data);
 die(); */
 
 ?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -53,9 +54,10 @@ die(); */
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <script type="text/javascript" src="/wp-content/plugins/yqxs/js/jquery-1.6.2.min.js?yqxs=1.0"></script>
-
+<script type="text/javascript" src="<?php echo YQURI;?>/js/jquery.lazyload.js?yqxs=1.0"></script>
 <script type="text/javascript" src="<?php echo YQURI;?>/js/common.js?yqxs=1.0"></script>
 <script type="text/javascript" src="<?php echo YQURI;?>/js/Ajax_Search.js?yqxs=1.0"></script>
+
 
 
 
@@ -80,14 +82,16 @@ die(); */
 
 
 <center><div class="logo">
+<h1 id="blog_name"><?php bloginfo( 'name' );?></h1>
+<h2 id="blog_url"><?php bloginfo( 'url' ); ?></h2>
 <span style="float:right">
 </span>
 <span id="myads" style="float:right; margin-right:0px;"></span>
 </div></center>
 <div class="channel-nav">
 	<ul>
-		<li class="ye"><a href="/index.html">首页</a></li>
-    <li><a href="/list/7.html">最近更新</a></li>    
+		<li class="ye"><a href="<?php echo home_url('/')?>">首页</a></li>
+    <li><a href="/recent">最近更新</a></li>    
     <li><a href="/list/18.html" >作家列表</a></li>
     <li><a href="/list/18.html" >情节分类</a></li>
     <li><a href="http://bbs.hltm.cc/forum-55-1.html" target='_blank' >推荐作品</a></li>
@@ -98,8 +102,8 @@ die(); */
      <li><a href="http://bbs.hltm.cc/" target='_blank'>关于本站</a></li>
 	</ul>
 
-<form action="/test/search.xml" method="post" class="search"  name="formsearch" id="formsearch">
-    <input type="text" size="25" autocomplete="off" id="searchword" name="searchword" onkeyup="searchSuggest();" >
+<form action="<?php bloginfo('home'); ?>" method="get" class="search"  name="formsearch" id="formsearch">
+    <input type="text" size="25" autocomplete="off" id="searchword" name="s" value="<?php the_search_query(); ?>" onkeyup="searchSuggest();" >
     <button id="searchbar" type="submit" name="submit">搜索</button>
 </form>
 </div>
@@ -137,30 +141,45 @@ window.frames["frame_content"].getWeek();
 */
  </script>
 <center>
+<?php if(!is_page() AND !is_single() AND !is_404())  :?>
 <div id="1" class="ad960">
 <?php
-    global $wpdb;
-    $post_arr = $wpdb->get_col("SELECT post_parent FROM $wpdb->posts WHERE post_parent>0 ORDER BY RAND() LIMIT 0,8");
-    //var_dump($attachment);
-    /*
-        $default_attr = array(
-			'src'	=> '-',
-			'class'	=> "attachment-",
-			'alt'	=> trim(strip_tags( $attachment->post_excerpt )),
-			'title'	=> trim(strip_tags( $attachment->post_title )),
-		);
-       */
-    foreach($post_arr as $post_id) {
-            $size = array(120,160);
-            $thumb = get_the_post_thumbnail( $post_id, $size);
-            if($thumb==null) $thumb ="<img src='/wp-content/uploads/covers/notimg-120x160.gif' />";
-            echo '<a href="'.get_permalink($post_id). '">'. $thumb .'</a>';
-     }
-     
+    
+        global $wpdb;
+        
+        //$post_arr = $wpdb->get_col("SELECT post_parent FROM $wpdb->posts WHERE post_parent>0 ORDER BY RAND() LIMIT 0,8");
+        //var_dump($attachment);
+        /*
+            $default_attr = array(
+                'src'	=> '-',
+                'class'	=> "attachment-",
+                'alt'	=> trim(strip_tags( $attachment->post_excerpt )),
+                'title'	=> trim(strip_tags( $attachment->post_title )),
+            );
+           */
+         $post_arr = $wpdb->get_col(
+                 "SELECT post_id
+            FROM $wpdb->postmeta
+            WHERE `meta_key` = '_thumbnail_id'
+            AND meta_value NOT
+            IN (
+            SELECT post_id
+            FROM $wpdb->postmeta
+            WHERE meta_value = 'covers/notimg.gif'
+            ) ORDER BY RAND() LIMIT 0,8"
+         )  ;
+        foreach($post_arr as $post_id) {
+                $size = array(120,160);
+                $thumb = get_the_post_thumbnail( $post_id, $size);
+                if($thumb==null) $thumb ="<img src='/wp-content/uploads/covers/notimg-120x160.gif' />";
+                echo '<a href="'.get_permalink($post_id). '">'. $thumb .'</a>';
+         }
+
 
   
  ?>
 
 </div>
+<?php endif?>
 </center>
 
