@@ -11,11 +11,12 @@
             $url = $_SERVER['REQUEST_URI'];
             
             if(isset($_COOKIE['read_list'])) {                
-
+                
                  parse_str($_COOKIE['read_list'],$read_list);   
-                 echo '<pre>';
-                 var_dump($read_list);
-                echo '</pre>';
+                 // echo '<pre>';
+                 // var_dump($read_list);
+                // echo '</pre>';
+                
             }
             
           if(!isset($read_list[$title]) || $read_list[$title]['order']<=$order) {
