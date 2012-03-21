@@ -1,7 +1,195 @@
 <?php
+define('YQURI',get_template_directory_uri());
 add_theme_support( 'post-thumbnails' );
 
+//高亮当前分类
+add_action('wp_head','high_light_term');
+function high_light_term() {
+    if(is_category()){
+        $category_name = get_query_var('category_name');
+        $cat_obj = get_category_by_slug($category_name); 
+        if(!is_object($cat_obj)) return;
+        echo "<style>a.yqxs_cat_{$cat_obj->term_id}";
+        echo '{border: 1px solid;color: #FF0000;padding: 0.2em;background-color:#fe0}</style>';
+    }elseif(is_tag()) {
+        $slug = get_query_var('tag');        
+        $tag_obj =get_term_by( 'slug', $slug,'post_tag');
+         if(!is_object($tag_obj)) return;
+        echo "<style>a.yqxs_tag_{$tag_obj->term_id}";
+        echo '{border: 1px solid;color: #FF0000;padding: 0.2em;background-color:#fe0}</style>';
+    }elseif(is_author()) {
+        echo "<style>a.yqxs_author";
+        echo '{border: 1px solid;color: #FF0000;padding: 0.2em;background-color:#fe0}</style>';
+    }
+}
+//高亮当前tag页
 
+
+//改写原来的get_the_category_list，用于高亮当前分类
+function yqxs_get_the_category_list( $current_cat_ID, $separator = '', $parents='', $post_id = false ) {
+	global $wp_rewrite;
+	$categories = get_the_category( $post_id );
+	if ( !is_object_in_taxonomy( get_post_type( $post_id ), 'category' ) )
+		return apply_filters( 'the_category', '', $separator, $parents );
+
+	if ( empty( $categories ) )
+		return apply_filters( 'the_category', __( 'Uncategorized' ), $separator, $parents );
+
+	$rel = ( is_object( $wp_rewrite ) && $wp_rewrite->using_permalinks() ) ? 'rel="category tag"' : 'rel="category"';
+       
+
+	$thelist = '';
+	if ( '' == $separator ) {
+		$thelist .= '<ul class="post-categories">';
+		foreach ( $categories as $category ) {
+                    $current_class = ($current_cat_ID == $category->term_id) ? ' class="current_cat"' : '';
+                    $rel .=$current_class;
+			$thelist .= "\n\t<li>";
+			switch ( strtolower( $parents ) ) {
+				case 'multiple':
+					if ( $category->parent )
+						$thelist .= get_category_parents( $category->parent, true, $separator );
+					$thelist .= '<a href="' . get_category_link( $category->term_id ) . '" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '" ' . $rel . '>' . $category->name.'</a></li>';
+					break;
+				case 'single':
+					$thelist .= '<a href="' . get_category_link( $category->term_id ) . '" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '" ' . $rel . '>';
+					if ( $category->parent )
+						$thelist .= get_category_parents( $category->parent, false, $separator );
+					$thelist .= $category->name.'</a></li>';
+					break;
+				case '':
+				default:
+					$thelist .= '<a href="' . get_category_link( $category->term_id ) . '" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '" ' . $rel . '>' . $category->name.'</a></li>';
+			}
+		}
+		$thelist .= '</ul>';
+	} else {
+		$i = 0;
+        
+		foreach ( $categories as $category ) {
+                    
+        
+                    //$current_class = ($current_cat_ID ==$category->term_id) ? ' class="current_cat"' : '';
+                    /*
+                    var_dump($category);
+                    var_dump($current_cat_ID);
+                    var_dump($current_class);
+                    */
+                    $rel .=$current_class;        
+			if ( 0 < $i )
+				$thelist .= $separator;
+			switch ( strtolower( $parents ) ) {
+				case 'multiple':
+					if ( $category->parent )
+						$thelist .= get_category_parents( $category->parent, true, $separator );
+					$thelist .= '<a href="' . get_category_link( $category->term_id ) . '" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '" ' . $rel ." class='yqxs_cat_{$category->term_id}'". '>' . $category->name.'</a>';
+					break;
+				case 'single':
+					$thelist .= '<a href="' . get_category_link( $category->term_id ) . '" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '" ' . $rel ." class='yqxs_cat_{$category->term_id}'". '>';
+					if ( $category->parent )
+						$thelist .= get_category_parents( $category->parent, false, $separator );
+					$thelist .= "$category->name</a>";
+					break;
+				case '':
+				default:
+					$thelist .= '<a href="' . get_category_link( $category->term_id ) . '" title="' . esc_attr( sprintf( __( "View all posts in %s" ), $category->name ) ) . '" ' . $rel ." class='yqxs_cat_{$category->term_id}'". '>' . $category->name.'</a>';
+			}
+			++$i;
+		}
+	}
+	//return apply_filters( 'the_category', $thelist, $separator, $parents );
+    return $thelist;
+}
+
+
+
+//设置图片懒加载
+add_filter('wp_get_attachment_image_attributes','set_for_laze_load',10,2);
+function set_for_laze_load ($attr, $attachment) {
+    if(isset($attr['src']) && defined('LAZY_LOAD')) {
+        $attr ['data-original'] = $attr['src'];
+        $attr['src'] = YQURI .'/images/grey.gif';
+     }
+    return $attr;
+}
+
+function the_chapter_title($post_id='',$chapter_order='') {
+
+    if(empty($post_id)) {
+        global $post;
+        $post_id = $post->ID;
+    }
+    if(empty($chapter_order)) {
+        $chapter_order = get_query_var('page');
+        if($chapter_order<1) return ;
+    }        
+    static $store;
+    if(empty ($store)) {        
+        $store = array();
+    } 
+
+    if(!isset($store[$post_id][$chapter_order])) {
+        $store[$post_id][$chapter_order] = get_chapter_title($post_id,$chapter_order);
+    }   else {
+        //echo '不用查库';
+        
+    }
+    
+    echo $store[$post_id][$chapter_order];
+
+
+}
+function get_chapter_title($post_id,$chapter_order) {
+    //	chapter_title
+    global $wpdb;        
+    $title = $wpdb->get_var(
+        $wpdb->prepare(
+        "SELECT chapter_title FROM $wpdb->chapters WHERE post_id=%d AND chapter_order=%d",
+        $post_id,
+        $chapter_order
+        )
+    );
+
+    return $title;
+
+}
+
+
+//meta_key
+  
+function yqxs_get_meta_links($post_id,$meta_key,$class='yqxs_tag_link') {
+    $meta_values = get_post_meta($post_id, $meta_key, true);
+
+   if($meta_values == '') {
+    return ;
+   }elseif(is_array($meta_values)){    
+           $links = array();
+        foreach($meta_values as $v) {
+            $name = trim($v,',');
+            $tag_id = get_term_id_by_name($name);
+            if($tag_id !=NULL)
+                $links[] = '<a class="'. $class .' yqxs_tag_'.$tag_id .' yqxs_' . $meta_key.'" href="'.get_tag_link($tag_id) .'" title="' . $name.'">' .$name .'</a>';
+        }
+        
+        return (count($links)>0)  ? $links : NULL;
+   } else {
+        $links =NULL;
+        $name = trim($meta_values,',');
+        $tag_id = get_term_id_by_name($name);
+        if($tag_id !=NULL)
+            $links =  '<a class="'. $class .' yqxs_tag_'.$tag_id .' yqxs_' . $meta_key.'" href="'.get_tag_link($tag_id) .'" title="' . $name.'">' .$name .'</a>';
+         return $links;
+   }
+   
+ }
+ function get_term_id_by_name($name) {
+        global $wpdb;
+        $term_id = $wpdb->get_var(
+            $wpdb->prepare("SELECT term_id FROM $wpdb->terms WHERE name=%s",$name)
+        );
+        return $term_id;
+    }
+ 
 function yqxs_get_all_users($num=100) {
     global $wpdb;
      
@@ -10,7 +198,7 @@ function yqxs_get_all_users($num=100) {
  AS total
 FROM $wpdb->posts
 INNER JOIN $wpdb->users ON $wpdb->posts.post_author = $wpdb->users.ID
-WHERE `post_status` = 'publish'
+WHERE `post_status` = 'publish' AND post_type='post' 
 GROUP BY $wpdb->posts.post_author
 ORDER BY total DESC
 LIMIT 0 , %d", $num
@@ -28,7 +216,7 @@ function yqxs_get_all_posts($num=100) {
 //<li><em><font size=2  color="red"   ><span>03-16</span></font></em><a href="/view/2012/3_16/3283.html" target="_blank" title="爱杀宝贝第11集下载">爱杀宝贝第11集更新</a>
 function yqxs_get_recent_posts($no_posts = 100, $show_pass_post = false, $skip_posts = 0) {
     global $wpdb, $tableposts;
-    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' ";
+    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' AND post_type='post' ";
         if(!$show_pass_post) { $request .= "AND post_password ='' "; }
     $request .= "ORDER BY post_date DESC LIMIT $skip_posts, $no_posts";
     $posts = $wpdb->get_results($request);
@@ -47,9 +235,9 @@ function yqxs_get_recent_posts($no_posts = 100, $show_pass_post = false, $skip_p
 
 function yqxs_get_recent_posts2($no_posts = 100, $show_pass_post = false, $skip_posts = 0) {
     global $wpdb, $tableposts;
-    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' ";
+    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' AND post_type='post' ";
         if(!$show_pass_post) { $request .= "AND post_password ='' "; }
-    $request .= "ORDER BY post_date DESC LIMIT $skip_posts, $no_posts";
+    $request .= "ORDER BY `post_modified` DESC LIMIT $skip_posts, $no_posts";
     $posts = $wpdb->get_results($request);
     $output = '';
     $today =date('m-d');
@@ -68,7 +256,7 @@ function yqxs_get_recent_posts2($no_posts = 100, $show_pass_post = false, $skip_
 //摘自网上
 function get_recent_posts($no_posts = 100, $before = '<li>', $after = '</li>', $show_pass_post = false, $skip_posts = 0) {
     global $wpdb, $tableposts;
-    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' ";
+    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' AND post_type='post'";
         if(!$show_pass_post) { $request .= "AND post_password ='' "; }
     $request .= "ORDER BY post_date DESC LIMIT $skip_posts, $no_posts";
     $posts = $wpdb->get_results($request);
@@ -84,7 +272,7 @@ function get_recent_posts($no_posts = 100, $before = '<li>', $after = '</li>', $
 
 function yqxs_get_reacent_posts_and_thumbnails($no_posts = 100, $show_pass_post = false, $skip_posts = 0){
 global $wpdb, $tableposts;
-    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' ";
+    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' AND post_type='post'";
         if(!$show_pass_post) { $request .= "AND post_password ='' "; }
     $request .= "ORDER BY post_date DESC LIMIT $skip_posts, $no_posts";
     $posts = $wpdb->get_results($request);
@@ -117,7 +305,7 @@ FROM $wpdb->terms
 INNER JOIN $wpdb->term_taxonomy ON $wpdb->terms.term_id = $wpdb->term_taxonomy.term_id
 WHERE $wpdb->terms.name = '$term_name' LIMIT 0,1)
 ORDER BY ID DESC
-) AND post_status = 'publish' ";
+) AND post_status = 'publish' AND post_type='post' ";
 
         if(!$show_pass_post) { $request .= "AND post_password ='' "; }
     $request .= "ORDER BY post_date DESC LIMIT $skip_posts, $no_posts";
@@ -159,7 +347,7 @@ AND `meta_value`
 IN (
 $char_str
 )
- AND post_status='publish' ";
+ AND post_status='publish' AND post_type='post' ";
 
      if(!$show_pass_post) { $request .= "AND post_password ='' "; }
     $request .= "ORDER BY meta_value ASC , ID DESC  LIMIT $skip_posts, $no_posts";
@@ -732,3 +920,128 @@ function twentyten_posted_in() {
 	);
 }
 endif;
+
+
+
+
+//内容控制
+add_filter('the_content','yqxs_the_content',1,1);
+function yqxs_the_content($content) {
+    if(strpos($content,'[cai-ji-ok]') !==FALSE)  {
+        
+        global $post;
+        global $wpdb;
+        $content ='';
+        
+        if(is_single()) {
+            $page = get_query_var('page');
+            $permalink = get_permalink($post->ID);
+            if($page==0) {
+                //显示内容简介
+              // $content .= "<div id='yqxs_excerpt' >" .$post->post_excerpt ."<hr/></div>";
+                
+                $result_arr = $wpdb->get_results(
+                    $wpdb->prepare(
+                        "SELECT chapter_order,chapter_title FROM $wpdb->chapters WHERE `post_id` =%d ORDER BY `chapter_order` ASC",
+                        $post->ID,
+                        ARRAY_A 
+                    )
+                );
+                
+                $chapter_arr =array();
+                foreach ($result_arr as $result) {
+                    
+                     $chapter_url = str_replace(
+                         $post->post_name,
+                         $post->post_name.'-'.$result->chapter_order,
+                         $permalink
+                     );
+                     $chapter_title = $result->chapter_title;
+                     $chapter = '<li class="yqxs_ch_item"><a href=' . $chapter_url . '>';
+                     $chapter .= $chapter_title . '</a></li>';
+                     $chapter_arr[] = $chapter;
+                }
+                //章节链接
+                $chapter_str = '<ul class="yqxs_ch_list">' .implode("\n",$chapter_arr) .'</ul>';
+                $content .= $chapter_str;
+                
+                
+            }else {
+                //显示指定章节数的内容
+                    
+                 $result_arr = $wpdb->get_row(
+                    $wpdb->prepare(
+                        "SELECT * FROM $wpdb->chapters WHERE `post_id` = %d AND `chapter_order`=%d",
+                        $post->ID,
+                        $page
+                    ), ARRAY_A
+                 );
+                 //取下页链接，注意要检查是否存在，即是否超过最后章节
+                 $next_page = $page+1;
+                 $next_res = $wpdb->get_var(
+                    $wpdb->prepare(
+                        "SELECT id FROM $wpdb->chapters WHERE `post_id`=%d AND `chapter_order` = %d",
+                        $post->ID,
+                        $next_page
+                    )
+                 );
+                 $next_link = '';
+                 if($next_res !==NULL) {
+                    //$next_page = () ? $next_page : '';
+                    $next_link = str_replace($post->post_name,$post->post_name .'-'.$next_page, $permalink);
+                 }
+                 
+                 //取上页链接，当为0时要处理为小说首页
+                 $prev_link = '';
+                 $prev_page = $page -1;
+                 if($prev_page>0) {
+                    $prev_link = str_replace($post->post_name,$post->post_name .'-'.$prev_page, $permalink);
+                 }
+                    
+                 
+                 $content .='<h2 class="yqxs_ch_title">'.$result_arr['chapter_title'].'</h2>';
+                 $content .='<div id="yqxs_ch_content">'.$result_arr['content'] .'</div>';
+                 $content .='<div class="yqxs_dir_nav">';
+                 $prev_link && $content .='<a href="'.$prev_link.'">【上一章】</a>' ;
+                 $content .= '<a href="'.$permalink.'"> 【目录页】 </a>' ;
+                 $next_link && $content .='<a href="'.$next_link.'">【下一章】</a>' ;
+                 $content .='</div>';
+                 
+              
+                
+              
+                
+            }
+            
+        }
+        
+         return $content;
+    }elseif(strpos($content,'[cai-ji-ready]') !==FALSE) {
+        $content = "章节正在整理";
+    }elseif(strpos($content,'[no-content]') !==FALSE) {
+         $content = "本书暂无全文,";
+    }
+    
+    return $content;
+    
+   
+}
+
+//搜索结果高亮关键字
+add_filter('the_title','high_search_title',999);
+function high_search_title($title){
+    if(!is_search()) return $title;
+    global $s;
+    $keys = explode(" ",$s);
+    $title = preg_replace('/('.implode('|', $keys) .')/iu','<h2 class="search_high">\0</h2>',$title);
+    return $title;
+}
+
+//不使用钩子，直接在搜索页调用
+function high_search_excerpt($excerpt) {
+    if(!is_search()) return $excerpt;
+    global $s;
+    $keys = explode(" ",$s);
+    $excerpt = preg_replace('/('.implode('|', $keys) .')/iu','<b class="search_me">\0</b>',$excerpt);
+    return $excerpt;
+}

@@ -1,61 +1,160 @@
 <?php
 /**
- * The template for displaying Archive pages.
+ * Template Name: index00
  *
- * Used to display archive-type pages if nothing more specific matches a query.
- * For example, puts together date-based pages if no date.php file exists.
+ * A custom page use to display the recently posts 
  *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
+ * The "Template Name:" bit above allows this to be selectable
+ * from a dropdown menu on the edit page screen.
  *
  * @package WordPress
  * @subpackage Twenty_Ten
  * @since Twenty Ten 1.0
  */
 
-get_header(); ?>
 
-		<div id="container">
-			<div id="content" role="main">
+get_header(); 
+define('LAZY_LOAD',TRUE); //使用图片懒加载
 
-<?php
-	/* Queue the first post, that way we know
-	 * what date we're dealing with (if that is the case).
-	 *
-	 * We reset this later so we can run the loop
-	 * properly with a call to rewind_posts().
-	 */
-	if ( have_posts() )
-		the_post();
+
+/*
+$cat_obj = get_category_by_slug($tag_name); 
+if(!is_object($cat_obj)) $cat_obj =new stdClass;
+*/
 ?>
 
-			<h1 class="page-title">
-<?php if ( is_day() ) : ?>
-				<?php printf( __( 'Daily Archives: <span>%s</span>', 'twentyten' ), get_the_date() ); ?>
-<?php elseif ( is_month() ) : ?>
-				<?php printf( __( 'Monthly Archives: <span>%s</span>', 'twentyten' ), get_the_date( _x( 'F Y', 'monthly archives date format', 'twentyten' ) ) ); ?>
-<?php elseif ( is_year() ) : ?>
-				<?php printf( __( 'Yearly Archives: <span>%s</span>', 'twentyten' ), get_the_date( _x( 'Y', 'yearly archives date format', 'twentyten' ) ) ); ?>
-<?php else : ?>
-				<?php _e( 'Blog Archives', 'twentyten' ); ?>
-<?php endif; ?>
-			</h1>
+<div id="main">
+	<div class="left">
+		<div class="index_hot">
+			<h1><b>Archive</b> <a href=""<?php echo home_url('/')?>">首页</a>&nbsp;&nbsp;&raquo;&nbsp;&nbsp;<span style="color:#B90103;">
+             <?php if (have_posts()) :?>
+             			    <?php if ( is_day() ) : ?>
+							<?php printf(  get_the_date('Y年m月日') . ' 全部文章' ); ?>
+						<?php elseif ( is_month() ) : ?>
+                        <?php printf(  get_the_date('Y年m月') . ' 全部文章' ); ?>
+						<?php elseif ( is_year() ) : ?>
+                        <?php printf(  get_the_date('Y年') . ' 全部文章' ); ?>
+						<?php else : ?>
+						<?php echo '日期归档'?>
+						<?php endif; ?>
+              </span></h1>
 
-<?php
-	/* Since we called the_post() above, we need to
-	 * rewind the loop back to the beginning that way
-	 * we can run the loop properly, in full.
-	 */
-	rewind_posts();
+      <div class="listBox">
 
-	/* Run the loop for the archives page to output the posts.
-	 * If you want to overload this in a child theme then include a file
-	 * called loop-archive.php and that will be used instead.
-	 */
-	 get_template_part( 'loop', 'archive' );
+        <ul>
+ 
+            <?php while (have_posts()) : the_post(); ?>
+
+            
+            <li class='novel_news_style_form'>
+            <div class="novel_news_style_img">
+                <a target="_blank" href="<?php the_permalink() ?>">
+                    <?php if ( has_post_thumbnail() ):?>
+                    <?php 
+                                    //<img src="img/grey.gif" data-original="img/bmw_m1_hood.jpg" width="765" height="574" alt="BMW M1 Hood">
+                                    
+                                        echo get_the_post_thumbnail($post->ID, array(120,160), array('class' => 'yqxs_tab')); 
+                                     ?>
+                    <?php endif?>                                                     
+                </a>
+            </div>
+            <div class="novel_news_style_text">
+                        <h3><a class='title_link' target="_blank" href="<?php the_permalink()?>"><?php the_title()?></a></h3>
+                         <ul class='list_info_1'><li class='terms'>作 者：<a class="yqxs_author" target="_blank" title="点击查看<?php the_author()?>作品集" href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author()?></a></li>
+                        <li class='terms'>分类:<?php echo yqxs_get_the_category_list($cat_obj->term_id,', ');?></li>
+
+                        <li class='terms'>发布日期:<?php the_time('Y-m-d')?></li>
+                        </ul>
+                        
+                        <p>   
+                        <?php 
+                                            if ( !empty( $post->post_excerpt ) ){
+                                                $excerpt = $post->post_excerpt;
+                                            }elseif(!empty($post->content)) {
+                                                $excerpt = $post->content;
+                                            }else{
+                                                $excerpt = '暂无描述';
+                                            }
+                                            $excerpt = str_replace(array('　　',"&nbsp;"),'',$excerpt);
+                                            echo str_repeat("&nbsp",8) . mb_substr(strip_tags(trim($excerpt)),0,200).'......';
+                        
+                                            ?>
+                        
+                          
+                        
+                        
+                        <?php
+                        //$str =
+    //echo mb_substr($str,0,200).'......';
 ?>
+                        <a class='read_icon' target="_blank" href="<?php the_permalink()?>">立即阅读</a></p>
+                        <ul class='list_info'>
+                        <li class='terms'>背景:
+                            <?php $meta_link = yqxs_get_meta_links($post->ID,'background');?>
+                            <?php if ($meta_link !==NULL):?>                            
+                            <?php echo $meta_link;?>
+                            <?php endif?>
+                       </li>                        
+                        <li class='terms'>出版社:
+                            <?php $meta_link = yqxs_get_meta_links($post->ID,'publisher');?>
+                            <?php if ($meta_link !==NULL):?>                            
+                            <?php echo $meta_link;?>
+                            <?php endif?>
+                       </li>
+                        <li class='terms'>出版日期:
+                            <?php $meta_link = yqxs_get_meta_links($post->ID,'pub_date');?>
+                            <?php if ($meta_link !==NULL):?>                            
+                            <?php echo $meta_link;?>
+                            <?php endif?>
+                        </li>
+                        <li class='terms'>阅读指数:                            
+                            <?php $meta_link = yqxs_get_meta_links($post->ID,'stars');?>
+                            <?php if ($meta_link !==NULL):?>                            
+                            <?php echo $meta_link;?>
+                            <?php endif?></li>
+                         <li class='terms'>下载次数:500</li>
+                        </ul>
+                    </div>
+                    
+        </li>
+            
+            
+            
+        <?php endwhile?>
+        <?php else : ?>
+        <?php get_search_form(); ?>
+        <?php endif ?>
+        
+        
+          
+        </ul>
+        <?php yqxs_page_numbers();?>
+        
+        <div class="blank_4px"></div>
+       
+		</div></div>
+         
+		<div class="line_l_bon"></div>
+	</div>
+	<div class="right">
+	<div class="index_rank">
+	<h1><b>Time</b> 最新小说</h1>
+	<ul>
+	
+    <?php echo yqxs_get_recent_posts2(50);?>
+    
+		</ul>
+	</div>
+	
+	<div class="line_r_bon"></div>
+	</div>
+	<div class="clear"></div>
 
-			</div><!-- #content -->
-		</div><!-- #container -->
 
-<?php get_sidebar(); ?>
+
+ 
+
+
+</div>
+
 <?php get_footer(); ?>
