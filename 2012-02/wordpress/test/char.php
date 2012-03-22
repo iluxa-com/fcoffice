@@ -1,7 +1,7 @@
 <?php 
     require('../wp-load.php');
     //$result = yqxs_get_posts_by_char(45,array('a','B','C','D'));
-    
+    /*
     $args = array(
 	'type'                     => 'post',
 	'child_of'                 => 0,
@@ -25,4 +25,6 @@
      
       var_dump($categories);
     
-    
+    */
+    query_posts('meta_key=psw&meta_value=A');
+    var_dump($wp_query);
