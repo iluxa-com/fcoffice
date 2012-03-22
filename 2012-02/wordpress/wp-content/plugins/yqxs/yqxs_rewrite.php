@@ -9,9 +9,9 @@
 
   //$newrules['down/([^/]+?)/?$'] = 'index.php?did=$matches[1]';
 
-add_filter( 'rewrite_rules_array','yqxs_insert_rewrite_rules' );
+//add_filter( 'rewrite_rules_array','yqxs_insert_rewrite_rules' );
 add_filter( 'query_vars','yqxs_insert_query_vars' );
-add_action( 'wp_loaded','yqxs_flush_rules' );
+//add_action( 'wp_loaded','yqxs_flush_rules' );
 
   // flush_rules() if our rules are not yet included
   function yqxs_flush_rules(){
@@ -31,16 +31,26 @@ add_action( 'wp_loaded','yqxs_flush_rules' );
       //[page/?([0-9]{1,})/?$] => index.php?&paged=$matches[1]
       
       //$newrules['/?([0-9]{1,})/?$'] = 'index.php?pagename=recent&page=$matches[1]';
+
+      $newrules['akey/([A-Za-z])?$'] = 'index.php?pagename=akey&akey=$matches[1]';
+      $newrules['akey/([A-Za-z])/page/([0-9]{1,})$'] = 'index.php?pagename=akey&akey=$matches[1]&page=$matches[2]';
+      $newrules['pkey/([A-Za-z])?$'] = 'index.php?pagename=pkey&pkey=$matches[1]';
+      $newrules['pkey/([A-Za-z])/page/([0-9]{1,})$'] = 'index.php?pagename=pkey&pkey=$matches[1]&page=$matches[2]';
+      //$newrules['pkey/([A-Za-z])(-[0-9]{1,})?$'] = 'index.php?pagename=pkey&pkey=$matches[1]&page=$matches[2]';
       $newrules['psw/([A-Za-z])(-[0-9]{1,})?$'] = 'index.php?psw=$matches[1]&page=$matches[2]';
       $newrules['asw/([A-Za-z])$'] = 'index.php?asw=$matches[1]';
       $newrules['down/([^/]+?)/?$'] = 'index.php?dd=$matches[1]';
       $newrules['([^/]+?)(-[0-9]{1,})?\.html$'] = 'index.php?name=$matches[1]&page=$matches[2]';
       unset($rules['page/?([0-9]{1,})/?$']);
+      //unset($rules['pkey/([A-Za-z])(-[0-9]{1,})?$']);
+     // unset($rulesrules['pkey/([A-Za-z])?$']);
       return $newrules + $rules;
   }
   
   function yqxs_insert_query_vars( $vars )
   {
+      array_unshift($vars,'akey');
+      array_unshift($vars,'pkey');
       array_unshift($vars, 'psw');
       array_push($vars, 'asw');
       array_push($vars, 'dd');
