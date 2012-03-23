@@ -18,3 +18,59 @@ http://www.yqxs.com/data/book2/fHC7x35507/
 yqxs_data
 
 post_id,block_id,block_title,content
+
+
+SELECT *
+FROM yqxs_postmeta
+INNER JOIN yqxs_posts ON yqxs_postmeta.post_id = yqxs_posts.ID
+WHERE meta_key='_wp_attachment_metadata'
+ORDER BY yqxs_posts.ID DESC 
+LIMIT 0 , 10
+
+-------------------------------------------
+按文章发布数取作者信息
+SELECT yqxs_users.ID, yqxs_posts.post_author, yqxs_users.display_name, count( yqxs_posts.ID ) AS total
+FROM yqxs_posts
+INNER JOIN yqxs_users ON yqxs_posts.post_author = yqxs_users.ID
+WHERE `post_status` = 'publish'
+GROUP BY yqxs_posts.post_author
+ORDER BY total DESC
+LIMIT 0 , 30
+-------------------------------------------
+取热门分类
+SELECT *
+FROM `yqxs_term_taxonomy`
+INNER JOIN yqxs_terms ON yqxs_terms.term_id = yqxs_term_taxonomy.term_id
+WHERE yqxs_term_taxonomy.taxonomy = 'category'
+ORDER BY yqxs_term_taxonomy.count DESC
+-------------------------------------------
+按分类名取文章
+SELECT * FROM yqxs_posts WHERE ID IN(
+SELECT object_id AS ID
+FROM yqxs_term_relationships
+WHERE term_taxonomy_id = (
+SELECT term_taxonomy_id
+FROM yqxs_terms
+INNER JOIN yqxs_term_taxonomy ON yqxs_terms.term_id = yqxs_term_taxonomy.term_id
+WHERE yqxs_terms.name = '一见钟情' LIMIT 0,1)
+ORDER BY ID DESC
+) WHERE post_status = 'publish'
+-------------------------------------------
+按字母取文章
+SELECT post_id
+FROM yqxs_postmeta
+WHERE `meta_key` = 'psw'
+AND `meta_value`
+IN (
+'A', 'B', 'C', 'D'
+)
+ORDER BY meta_value ASC
+-------------------------------------------
+SELECT post_id
+FROM yqxs_postmeta
+WHERE `meta_key` = 'psw'
+AND `meta_value`
+IN (
+'A', 'B', 'C', 'D'
+)
+ORDER BY meta_value ASC
