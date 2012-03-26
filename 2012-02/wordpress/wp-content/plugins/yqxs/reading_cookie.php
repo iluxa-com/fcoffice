@@ -1,6 +1,6 @@
 <?php
     
-    add_action('wp_head', 'reading_cookie',null,0);
+    //add_action('wp_head', 'reading_cookie',null,0);
     function reading_cookie(){
         
         if(is_single()) {

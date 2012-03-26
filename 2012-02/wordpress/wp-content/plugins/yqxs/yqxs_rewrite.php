@@ -84,8 +84,8 @@ function go_download($obj) {
        //如果必须分享才能下载的
        if(get_option('yqxs_must_share') == 'yes') {
             //检查相应cookie是否存在,不存在转向分享
-            if(auth_share_cookie($dd)===FALSE)
-                wp_redirect(home_url('/share/'.$post->ID));
+            if(auth_share_cookie($dd) === FALSE)
+                wp_redirect(share_link($post->ID));
             
        }
 
@@ -112,20 +112,15 @@ function go_download($obj) {
        $txt = str_replace('<br /><br />',"\r\n",$txt);
        //$txt = str_replace('　　','',$txt);
        $txt = strip_tags($txt);
-              
+       $txt = htmlspecialchars_decode($txt);       
        $txt = iconv('UTF-8','GBK//IGNORE',$txt); //转成gbk编码，可选用
-
+        
        header("Content-type: application/octet-stream");
+       //header("Content-type: application/text");
        header('Content-Disposition: attachment; filename="' . iconv('UTF-8','GBK//IGNORE',$post->post_title).'.txt"');
         
        echo $txt;
-       
-       
-       //var_dump($result);
-       
-       
-       
-       
+
         die();
     }
 }
@@ -155,7 +150,7 @@ function dd($obj){
  
  */
 
-//生成该分享COOKIE名
+//生成该分享COOKIE值
 function share_cookie_name($platform,$slug) {
     if(!defined('AUTH_SALT')) return FALSE;
     switch($platform) {
