@@ -1,0 +1,289 @@
+
+
+
+设置404
+			$wp_query->set_404();
+			status_header( 404 );
+-------------------------------------------
+如果没错的话，重写下载链接可以放这里
+do_action_ref_array('parse_request', array(&$this));
+-------------------------------------------
+重定向
+wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+-------------------------------------------
+WP处理错误
+wp_die( $message, $title, array( 'response' => 404,'back_link'=>true ) );
+-------------------------------------------
+		$message = sprintf( __( 'ERROR: %s is not a valid feed template.' ), esc_html($feed));
+wp_die( $message, $title, array( 'response' => 404,'back_link'=>true ) );
+-------------------------------------------
+	这是关闭吧
+	wp_cache_close();
+-------------------------------------------
+这个是处理缓存的吗？
+wp_cache_add_global_groups( array( 'users', 'userlogins', 'usermeta', 'user_meta', 'site-transient', 'site-options', 'site-lookup', 'blog-lookup', 'blog-details', 'rss', 'global-posts' ) );
+		wp_cache_add_non_persistent_groups( array( 'comment', 'counts', 'plugins' ) );
+-------------------------------------------
+wp_redirect( $link );估计是重定向的
+
+
+取得当前主题的uri
+get_template_directory_uri()
+-------------------------------------------
+
+$wpdb->get_var没有查找到时返回NULL
+
+-------------------------------------------
+1.使用wp_enqueue_style加载样式表
+http://codex.wordpress.org/Function_Reference/wp_enqueue_style
+
+2.使用wp_enqueue_scripts加载js
+http://codex.wordpress.org/Function_Reference/wp_enqueue_script
+
+3.WP_CONTENT_DIR 内容目录路径常量
+
+4.wp_die()
+
+5.用is_object判断$wpdb->get_row()取得的数据
+用法：
+$row = $wpdb->get_row( $sql);
+if ( is_object( $row ) ) ....
+
+6.get_option 会加入缓存的。除了notoptions的数据外
+
+7.$wpdb这个方法是用来处理错误的吗？
+$suppress = $wpdb->suppress_errors();
+
+8.反序列化 maybe_unserialize，能识别并自动处理序列化与非序列化数据
+$option->meta_value = maybe_unserialize( $option->meta_value );
+
+9.可设置全局的	$debug; 为1时打开，用于debug，如：
+debug_fopen/debug_fwrite进行操作日志文件
+用法:
+global $debug = 1;
+$log = debug_fopen( ABSPATH . 'enclosures.log', 'a' );
+//写入debug内容
+debug_fwrite( $log, 'BEGIN ' . date( 'YmdHis', time() ) . "\n" );
+
+
+10.WP执行HEAD 或者 GET的http请求
+其中$red是跟踪跳转的次数，不要设置成大于5的数字，否则直接返回失败
+function wp_get_http( $url, $file_path = false, $red = 1 )
+
+11.	时间的全局常量
+ $currentday, $previousday
+
+12.
+ * Retrieve a modified URL query string.
+ *
+ * You can rebuild the URL and append a new query variable to the URL query by
+ * using this function. You can also retrieve the full URL with query data.
+ 
+ 使用了func_get_arg和func_num_args,支持多个参数
+function add_query_arg () 
+可以支持参数形式：
+	array('key'=>'value') , $uri
+	或者 $key,$value,$uri,
+
+其中$url处为空时会使用$_SERVER['REQUEST_URI];	
+
+
+13.wordpress编辑器：
+ <?php wp_editor($post->post_content, 'content', array('dfw' => true, 'tabindex' => 1) ); ?>
+ 
+ 见：F:\fcoffice\2012-02\wordpress\wp-admin\edit-form-advanced.php
+ 
+ 
+
+
+-------------------------------------------
+<?php
+function my_enqueue_scripts_frontpage() { // 前台加载的脚本与样式表
+    // 取消加载 jquery 脚本
+    wp_dequeue_script( 'jquery' );
+    // 注册并加载 jquery 脚本
+    wp_enqueue_script( 'jquery', 'http://code.jquery.com/jquery.min.js', array(), 'lastest', false );
+    // 注册并加载 jquery-easing 脚本
+    wp_enqueue_script( 'jquery-easing', get_template_directory_uri() . '/js/jquery.easing.js', array( 'jquery' ), '1.2', false );
+}
+function my_enqueue_scripts_dashboard() { // 后台加载的脚本与样式表
+    // 取消加载 jquery 脚本
+    wp_dequeue_script( 'jquery' );
+    // 注册并加载 jquery 脚本
+    wp_enqueue_script( 'jquery', 'http://code.jquery.com/jquery.min.js', array(), 'lastest', false );
+}
+// 添加回调函数到 wp_enqueue_scripts 和 admin_enqueue_scripts 动作上
+add_action( 'wp_enqueue_scripts', 'my_enqueue_scripts_frontpage' );
+add_action( 'admin_enqueue_scripts', 'my_enqueue_scripts_dashboard' );
+?>
+-------------------------------------------
+1 设置缩略图
+set_post_thumbnail( $post_ID, $thumbnail_id ) )
+
+
+2 保存图像，实际可以缩放图像等处理：需要设置发送请求参数
+wp_save_image($post_id) 
+
+3 取附件meta数据？
+$meta = wp_get_attachment_metadata($post_id);
+$imagedata = wp_get_attachment_metadata( $post_id )
+
+
+4 这个是取post附件的路径吗？
+$path = get_attached_file($post_id);
+
+5.处理上传的，个人认为进行了缩略图的生成和数据库的操作
+
+$id = media_handle_upload('async-upload', $_REQUEST['post_id']);
+if ( is_wp_error($id) ) {
+	echo '<div class="error-div">
+	<a class="dismiss" href="#" onclick="jQuery(this).parents(\'div.media-item\').slideUp(200, function(){jQuery(this).remove();});">' . __('Dismiss') . '</a>
+	<strong>' . sprintf(__('&#8220;%s&#8221; has failed to upload due to an error'), esc_html($_FILES['async-upload']['name']) ) . '</strong><br />' .
+	esc_html($id->get_error_message()) . '</div>';
+	exit;
+	
+	
+}
+
+跟踪到的上传
+$file = wp_handle_upload($_FILES[$file_id], $overrides, $time);
+
+读取指定图像的元信息，返回一个数组
+wp_read_image_metadata( $file ) 
+
+-------------------------------------------
+这个确实可以改写，但并没有生成缩略图啊！
+function media_handle_upload($file_id, $post_id, $post_data = array(), $overrides = array( 'test_form' => false )) {
+
+	$time = current_time('mysql');
+	if ( $post = get_post($post_id) ) {
+		if ( substr( $post->post_date, 0, 4 ) > 0 )
+			$time = $post->post_date;
+	}
+
+	$name = $_FILES[$file_id]['name'];
+	$file = wp_handle_upload($_FILES[$file_id], $overrides, $time);
+
+	if ( isset($file['error']) )
+		return new WP_Error( 'upload_error', $file['error'] );
+
+	$name_parts = pathinfo($name);
+	$name = trim( substr( $name, 0, -(1 + strlen($name_parts['extension'])) ) );
+
+	$url = $file['url'];
+	$type = $file['type'];
+	$file = $file['file'];
+	$title = $name;
+	$content = '';
+
+	// use image exif/iptc data for title and caption defaults if possible
+	if ( $image_meta = @wp_read_image_metadata($file) ) {
+		if ( trim( $image_meta['title'] ) && ! is_numeric( sanitize_title( $image_meta['title'] ) ) )
+			$title = $image_meta['title'];
+		if ( trim( $image_meta['caption'] ) )
+			$content = $image_meta['caption'];
+	}
+
+	// Construct the attachment array
+	$attachment = array_merge( array(
+		'post_mime_type' => $type,
+		'guid' => $url,
+		'post_parent' => $post_id,
+		'post_title' => $title,
+		'post_content' => $content,
+	), $post_data );
+
+	// This should never be set as it would then overwrite an existing attachment.
+	if ( isset( $attachment['ID'] ) )
+		unset( $attachment['ID'] );
+
+	// Save the data
+	$id = wp_insert_attachment($attachment, $file, $post_id);
+	if ( !is_wp_error($id) ) {
+		wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $file ) );
+	}
+
+	return $id;
+
+}
+-------------------------------------------
+制造拼音slug
+erm_order = 0;
+		$final_tt_ids = wp_get_object_terms($object_id, $taxonomy, array('fields' => 'tt_ids'));
+		foreach ( $tt_ids as $tt_id )
+			if ( in_array($tt_id, $final_tt_ids) )
+				$values[] = $wpdb->prepare( "(%d, %d, %d)", $object_id, $tt_id, ++$term_order);
+		if ( $values )
+			$wpdb->query("INSERT INTO $wpdb->term_relationships (object_id, term_taxonomy_id, term_order) VALUES " . join(',', $values) . " ON DUPLICATE KEY UPDATE term_order = VALUES(term_order)");
+	}
+
+	do_action('set_object_terms', $object_id, $terms, $tt_ids, $taxonomy, $append, $old_tt_ids);
+	return $tt_ids;
+}
+
+/**
+ * Will make slug unique, if it isn't already.
+ *
+ * The $slug has to be unique global to every taxonomy, meaning that one
+ * taxonomy term can't have a matching slug with another taxonomy term. Each
+ * slug has to be globally unique for every taxonomy.
+ *
+ * The way this works is that if the taxonomy that the term belongs to is
+ * hierarchical and has a parent, it will append that parent to the $slug.
+ *
+ * If that still doesn't return an unique slug, then it try to append a number
+ * until it finds a number that is truly unique.
+ *
+ * The only purpose for $term is for appending a parent, if one exists.
+ *
+ * @package WordPress
+ * @subpackage Taxonomy
+ * @since 2.3.0
+ * @uses $wpdb
+ *
+ * @param string $slug The string that will be tried for a unique slug
+ * @param object $term The term object that the $slug will belong too
+ * @return string Will return a true unique slug.
+ */
+function wp_unique_term_slug($slug, $term) {
+	global $wpdb;
+
+	if ( ! term_exists( $slug ) )
+		return $slug;
+
+	// If the taxonomy supports hierarchy and the term has a parent, make the slug unique
+	// by incorporating parent slugs.
+	if ( is_taxonomy_hierarchical($term->taxonomy) && !empty($term->parent) ) {
+		$the_parent = $term->parent;
+		while ( ! empty($the_parent) ) {
+			$parent_term = get_term($the_parent, $term->taxonomy);
+			if ( is_wp_error($parent_term) || empty($parent_term) )
+				break;
+			$slug .= '-' . $parent_term->slug;
+			if ( ! term_exists( $slug ) )
+				return $slug;
+
+			if ( empty($parent_term->parent) )
+				break;
+			$the_parent = $parent_term->parent;
+		}
+	}
+
+	// If we didn't get a unique slug, try appending a number to make it unique.
+	if ( !empty($args['term_id']) )
+		$query = $wpdb->prepare( "SELECT slug FROM $wpdb->terms WHERE slug = %s AND term_id != %d", $slug, $args['term_id'] );
+	else
+		$query = $wpdb->prepare( "SELECT slug FROM $wpdb->terms WHERE slug = %s", $slug );
+
+	if ( $wpdb->get_var( $query ) ) {
+		$num = 2;
+		do {
+			$alt_slug = $slug . "-$num";
+			$num++;
+			$slug_check = $wpdb->get_var( $wpdb->prepare( "SELECT slug FROM $wpdb->terms WHERE slug = %s", $alt_slug ) );
+		} while ( $slug_check );
+		$slug = $alt_slug;
+	}
+
+	return $slug;
+}
