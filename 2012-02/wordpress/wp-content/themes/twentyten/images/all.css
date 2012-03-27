@@ -1,4 +1,4 @@
-body{margin:0 auto;padding:0;font-size:12px;color:#666;height:100%;font-family:Arial,Helvetica,sans-serif,"ÀŒÃÂ";background:#fff;}
+body{margin:0 auto;padding:0;font-size:12px;color:#666;height:100%;font-family:Arial,Helvetica,sans-serif,"ÔøΩÔøΩÔøΩÔøΩ";background:#fff;}
 div,form,img,ul,ol,li,dl,dd,dt,p,span,label,table,tr,td,th,em,h1,h2,h3{border:0 none;margin:0;padding:0;list-style:none;}
 a:link{color:#333;text-decoration:none;}
 a:visited{color:#333;text-decoration:none;}
@@ -224,7 +224,7 @@ a.red:hover{color:#333;}
 .cmtList li a img{border:0; display:block; height:160px; width:120px; margin-bottom:10px; text-align:left; background:url(sloading.gif) center no-repeat;}
 
 
-/*–¬Œ≈µº∫Ω*/
+/*ÔøΩÔøΩÔøΩ≈µÔøΩÔøΩÔøΩ*/
 .maplist{height:100%;width:950px}
 
 .border{border:1px solid #CCCCCC;overflow:hidden}
@@ -323,7 +323,7 @@ a.red:hover{color:#333;}
 
 
 
-/*¡–±Ì(Õº∆¨7¡–)ø™ º*/
+/*ÔøΩ–±ÔøΩ(Õº∆¨7ÔøΩÔøΩ)ÔøΩÔøΩ º*/
 .layout_newlist{width:695px; margin:auto; position:relative;margin:8px 0 0px 0;padding:0 0px 2px 0px;border:1px #ccc solid}
 
 .new_newlist{width:1600px;float:right;margin:8px 0 0px 0;padding:0 0px 2px 0px;border:1px #ccc solid}
@@ -342,7 +342,7 @@ a.red:hover{color:#333;}
 /*width:450px;*/
 .play_right{width:696px;float:left;margin:8px 0 0px 0;padding:0 0px 2px 0px;border:1px #ccc solid}
 
-/*¡–±Ì(7¡–)Ω· ¯*/
+/*ÔøΩ–±ÔøΩ(7ÔøΩÔøΩ)ÔøΩÔøΩÔøΩÔøΩ*/
 
 
 /*Tab*/
@@ -494,6 +494,7 @@ h2#blog_url{
     float:left;
     margin-left:40px;
     width: 480px;
+    margin-bottom:20px;
     
 }
 .yqxs_thumb_single{
@@ -512,8 +513,9 @@ h2#single_title {
 #single_excerpt {
     margin-top: 8px;
     font-size: 14px;
-    height: 240px;
+    /*height: 240px;
     overflow: hidden;
+    */
 }
 .tb {
     background-color: #FBFBFB;
@@ -557,7 +559,7 @@ h1#chapter_head_bar {background:url("yuanjiao.jpg") no-repeat scroll 0 -110px tr
     font-family: Georgia,"Bitstream Charter",serif;
     background: none repeat scroll 0 0 transparent;
     border: 0 none;
-    margin: 0;
+    margin: 20px 0;
     padding: 0;
     vertical-align: baseline;
     color: #333333;
@@ -580,12 +582,13 @@ h2.yqxs_ch_title,h1#yqxs_title_chapter {
     display:none;
 }
 h1#yqxs_title_chapter{
-    color: #B90103;st
+    color: #B90103;
     font-size: 18px;
     text-align:center;
     line-height: 32px;
     font-weight:bold;
     margin-bottom:0px;
+    margin-top:40px;
 }
 .yqxs_dir_nav {
     font-size:16px;
@@ -594,4 +597,74 @@ h1#yqxs_title_chapter{
 .search_high {display:inline;border: 1px solid;color: #FF0000;padding: 0.1em;font-size:14px;font-weight: bold;}
 b.search_me {
     border: 1px solid;color: #FF0000;background-color:#ffff00;
+}
+a.pkey_btn{
+    background: url("sprites_bg.gif") repeat-x scroll 0 -319px transparent;
+    border: 1px solid #81C2F3;
+    color: #FF0000;
+    display: block;
+    float: left;
+    font-weight: bold;
+    height: 25px;
+    text-align: center;
+    width: 45px;
+}
+.weibo {
+    cursor: pointer;
+    float: left;
+    height: 32px;
+    margin: 3px 1px 3px 5px;
+    width: 32px;
+}
+.friendtitle {
+    line-height: 30px;
+    padding-left: 5px;
+    color: #B90103;
+    float: left;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+#yqxs_history{
+    background: transparent;
+    height:305px;
+    width:305px;
+    padding:20px;
+    overflow:hidden;
+    position:absolute;
+    padding-top: 25px;
+    
+}
+/*ÂçäÈÄèÊòéÁöÑÂ±Ç*/
+#yqxs_filter{
+    background:url("history.gif") no-repeat scroll 0 0 transparent;
+    height:305px;
+    width:305px;
+    z-index:99;
+    display:none;
+    position:absolute;
+    filter: Alpha(Opacity=70, Style=0);
+    opacity: 0.70;
+}
+#yqxs_history a {
+    float:left;
+    width:200px;
+    overflow:hidden;
+    line-height:18px;
+    display:block-inline;
+    
+    color:#0066CC;
+}
+#yqxs_history a:hover{
+    
+     color:#B90103;
+}
+#yqxs_history li {
+    margin:5px 30px 5px 0;
+    padding:2px;
+}
+#yqxs_history li.yqxs_today {
+    
+    border:1px solid #f00;
+
 }

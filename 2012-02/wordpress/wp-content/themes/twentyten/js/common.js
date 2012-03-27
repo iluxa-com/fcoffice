@@ -15,14 +15,56 @@ function $(objID) {
             }
         }
     );
+    //懒加载
      $("img").lazyload({
         effect       : "fadeIn"
     });
+    //修复小说单页章节列表的下划虚线最后章节不满行的问题
+    var ch_count = $('.tb .yqxs_ch_item').length;
+    if(ch_count%3!=0){
+        var fix_width = (4-ch_count%3) * 210;
+       // console.log(fix_width);
+        $('.tb .yqxs_ch_item').eq(ch_count-1).css('width',fix_width);
+    }
     
-}
+    //历史记录
+    $('#read_history').click(
+        function (e) {
+            //定位            
+            $(this).css('color','#ff0');
+            var offset = $(this).offset();
+            $('#yqxs_filter').css({
+                'top':offset.top+$(this).outerHeight(true) ,
+                'left':offset.left
+            }).show();
+            $('#yqxs_history').css({
+                
+                'z-index':100,
+                'top':offset.top+$(this).outerHeight(true) ,
+                'left':offset.left
+            }).show();
+          // console.log($(this).offset());
+            return false;                
+        }
+    );
+    
+    $('body').click(
+        function(e){
+            
+            if( $(e.target) !=$('#yqxs_history *')){
+                $('#yqxs_history').hide();
+                $('#yqxs_filter').hide();
+                $('#read_history').css('color','#fff');
+            }
+            e.stopPropagation();
+            
+        }
+    )
+  
+} );
   
 
-    );
+
 /* -------------------原代码------------------------*/
 function openWindow(url, w, h) {
     var iTop = (window.screen.availHeight - 30 - h) / 2;
@@ -54,4 +96,6 @@ function getRequest() {
     }
     return args
 }
+
+
 
