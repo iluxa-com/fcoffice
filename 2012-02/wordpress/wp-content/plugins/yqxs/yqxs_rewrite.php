@@ -9,9 +9,9 @@
 
   //$newrules['down/([^/]+?)/?$'] = 'index.php?did=$matches[1]';
 
-add_filter( 'rewrite_rules_array','yqxs_insert_rewrite_rules' );
+//add_filter( 'rewrite_rules_array','yqxs_insert_rewrite_rules' );
 add_filter( 'query_vars','yqxs_insert_query_vars' );
-add_action( 'wp_loaded','yqxs_flush_rules' );
+//add_action( 'wp_loaded','yqxs_flush_rules' );
 
   // flush_rules() if our rules are not yet included
   function yqxs_flush_rules(){
