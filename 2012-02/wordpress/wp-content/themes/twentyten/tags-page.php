@@ -41,7 +41,7 @@ onload="this.height=frame_content.document.body.scrollHeight+5"></iframe>
                                 <?php
                                                             $all_users = yqxs_get_all_users(48);
                                                              foreach($all_users as $user)  {
-                                                                echo '<li> <a href="'. get_author_posts_url($user->ID) .'">'.$user->display_name .'</li>';
+                                                                echo '<li> <a href="'. get_author_posts_url($user->ID) .'">'.$user->display_name .'</a></li>';
                                                              }
                                                             ?>
                                 

@@ -152,7 +152,8 @@ function get_chapter_title($post_id,$chapter_order) {
 
     return $title;
 
-}
+
+    }
 
 
 //meta_key
@@ -208,6 +209,22 @@ LIMIT 0 , %d", $num
     );
     return $results;
 }
+
+function yqxs_get_users_by_char($char,$num=1000) {
+    global $wpdb;
+    $sql =$wpdb->prepare(
+"SELECT ID,display_name,meta_value FROM $wpdb->users
+INNER JOIN $wpdb->usermeta ON $wpdb->users.ID = $wpdb->usermeta.user_id
+WHERE meta_key='asw' AND meta_value=%s LIMIT 0, %d",$char,$num
+    );
+
+    $results = $wpdb->get_results(
+        $sql
+    );
+    return $results;
+}
+
+
 
 function yqxs_get_all_posts($num=100) {
     global $wpdb;
@@ -1044,4 +1061,51 @@ function high_search_excerpt($excerpt) {
     $keys = explode(" ",$s);
     $excerpt = preg_replace('/('.implode('|', $keys) .')/iu','<b class="search_me">\0</b>',$excerpt);
     return $excerpt;
+}
+
+//生成作品字母索引链接
+function pkey_link($char) {
+    $char = strtoupper($char{0});
+    return home_url('/pkey/'.$char);
+}
+//生成作家字母索引链接
+function akey_link($char) {
+    $char = strtoupper($char{0});
+    return home_url('/akey/'.$char);
+}
+
+function the_down_link($post_title='【下载地址】',$post_name='') {
+    global $post;
+    if(empty($post_name) && isset($post) && is_object($post)) {
+        $post_name =$post->post_name;         
+    }
+    if(empty($post_name)) return ;
+    
+    echo '<a href="' .esc_attr(download_link($post_name)) .'" class="down_link">'.$post_title.'</a>';
+    
+}
+function download_link($post_name) {
+    //return home_url('?down='.$post_name);
+    return home_url('/down/'.$post_name);
+}
+function share_link($post_id) {
+    return home_url('/share/'.$post_id);
+}
+
+function yqxs_get_thumblink($sid=NULL,$size='thumbnail') {
+    $attachment_id = get_post_thumbnail_id($sid);
+    $image_attributes = wp_get_attachment_image_src( $attachment_id ,$size);
+    return $image_attributes[0];
+}
+
+function yqxs_redirect($page_title,$info,$page_url,$time=5) {
+    $template = dirname(__FILE__).'/jump.html';
+    if(!file_exists($template)) return FALSE;
+    
+    $content = str_replace(
+        array('[page_title]','[info]','[page_url]','[time]',),
+        array($page_title,$info,$page_url,$time),
+        file_get_contents($template)
+   );
+   echo $content;
 }
