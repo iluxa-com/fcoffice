@@ -1,0 +1,48 @@
+/* ::::: http://en.wordpress.org/wp-content/themes/rosetta/style.css?10 ::::: */
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, table, th, td { margin: 0pt; padding: 0pt; }
+fieldset, img, abbr { border: 0pt none; }
+address, caption, cite, code, dfn, em, h1, h2, h3, h4, h5, h6, th, var { font-style: normal; font-weight: normal; }
+a { text-decoration: none; }
+ul { list-style: none outside none; }
+body { color: rgb(85, 85, 85); margin: 0pt; padding: 0pt; font-size: 13px; font-family: "Lucida Grande",Verdana,"Bitstream Vera Sans",Arial,sans-serif; }
+a { color: rgb(37, 131, 173); text-decoration: none; font-weight: bold; }
+a:hover, a:active { color: rgb(213, 78, 33); }
+h3 { font-size: 25px; color: rgb(85, 85, 85); margin-bottom: 16px; font-family: Georgia,Times,"Times New Roman",serif; font-weight: normal; }
+p { font-size: 13px; line-height: 1.6em; margin-top: 16px; margin-bottom: 16px; }
+em { font-style: italic; }
+ul { list-style-type: square; }
+ul, ol { margin-left: 25px; }
+ul li, ol li { line-height: 1.6em; }
+blockquote { margin-left: 40px; font-style: italic; font-family: Georgia,Times,"Times New Roman",serif; }
+.wrapper { width: 960px; margin: 0pt auto; padding: 0pt; }
+.outer { width: 100%; margin: 0pt auto; padding: 0pt; }
+#header-wrapper { background-color: rgb(70, 70, 70); height: 129px; }
+#mid-wrapper { background-color: rgb(228, 242, 253); border-bottom: 1px solid rgb(198, 217, 233); }
+#header { padding: 15px 0pt; width: 858px; margin-left: 102px; }
+#header h1 a { text-indent: -9999px; display: block; height: 66px; width: 291px; background: url('logo.png') no-repeat scroll left bottom transparent; padding-right: 22px; margin-right: 18px; border-right: 1px solid rgb(187, 187, 187); float: left; }
+#header h2 { font-size: 40px; line-height: 70px; color: rgb(170, 170, 170); letter-spacing: -0.04em; font-family: Georgia,Times,"Times New Roman",serif; }
+#header-wrapper ul { margin-right: 14px; list-style: none outside none; padding-left: 0pt; margin-left: 0pt; margin-top: 10px; }
+#header-wrapper ul li { float: left; }
+#header-wrapper ul li a { font-weight: normal; display: block; line-height: 34px; padding: 0pt 10px; font-size: 14px; color: rgb(153, 153, 153); text-shadow: 1px 1px 1px rgb(51, 51, 51); }
+#header-wrapper ul li a:hover { color: rgb(255, 255, 255); }
+.section { margin-left: 102px; padding-top: 27px; padding-bottom: 17px; clear: both; width: 858px; border-bottom: 1px solid rgb(218, 218, 218); }
+#mid-wrapper .section { border-bottom: medium none; }
+.section:after { content: "."; display: block; height: 0pt; clear: both; visibility: hidden; }
+img.wp-smiley { border: 0pt none; display: inline; float: none; margin: 0pt; padding: 0pt; vertical-align: text-top; }
+#footer { clear: both; margin-left: 102px; margin-bottom: 60px; text-align: right; letter-spacing: 0.3em; text-transform: uppercase; }
+#footer p { margin-top: 7px; font-size: 13px; }
+h2.fancy, h2.fancy a { font-size: 18px; color: rgb(85, 85, 85); }
+#commentheader { margin-top: 40px; }
+.narrow { width: 180px; margin-right: 20px; float: left; }
+.wide { width: 640px; float: left; }
+ol#comments { list-style: none outside none; margin: 0pt; padding: 0pt; }
+ol#comments p { margin-top: 3px; }
+ol#comments .narrow { font: 11px/1.8em "Lucida Grande","Lucida Sans Unicode",Verdana,Helvetica,sans-serif; padding-top: 5px; }
+ol#comments .narrow .author { font-size: 14px; }
+li.comment { clear: both; padding: 10px 0pt 20px; border-bottom: 1px solid rgb(204, 204, 204); height: 100%; }
+li.comment:after { content: "."; display: block; height: 0pt; clear: both; visibility: hidden; }
+.blog h2 { font-size: 18px; margin-bottom: 8px; }
+.navigation { clear: left; }
+.nav-previous { float: left; }
+.nav-next { float: right; }

@@ -1,0 +1,11 @@
+.today { width: 93%; color: red; }
+.yizhou2 { border-right: 0px solid rgb(113, 205, 46); padding: 5px 0px 10px 10px; border-width: 0px; border-style: solid; border-color: rgb(113, 205, 46); }
+.yizhou2 TD { line-height: 22px; width: 730px; border-bottom: 1px dashed rgb(153, 153, 153); height: 22px; }
+HTML { background: none repeat scroll 0% 0% rgb(255, 255, 255); }
+BODY { font: 13px Arial,Verdana,Lucida,Helvetica,simsun,sans-serif; color: rgb(49, 49, 49); }
+TABLE { border-collapse: collapse; text-align: left; border-spacing: 0pt; empty-cells: show; }
+TD { border-collapse: collapse; }
+A { color: rgb(1, 106, 159); text-decoration: none; }
+A:hover { text-decoration: underline; }
+DIV { overflow: hidden; }
+.today, .today a { color: rgb(255, 0, 0); }

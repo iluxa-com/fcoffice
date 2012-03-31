@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:xn="http://www.renren.com/2009/xnml" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    
+    <title>YouYan</title>
+    <meta name="keywords" content="YouYan">
+    <meta name="author" content="YouYan">
+    <meta name="description" content="YouYan SNS Talk Service">
+
+  
+
+
+<link rel="stylesheet" type="text/css" href="index_6.css" media="all">
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+<div style="" class="UYPane">
+	<div style="width: 678px;" class="UYTitle"><div></div>		
+    	<div class="recommendWrapper"><a class="pageUp" onclick="showShareMenu('up')"><img class="pageUpImage" src="updig.png"><div class="clear"></div></a><a class="pageDown" onclick="pageVoteDowns('up')"><img src="downdig.png"></a><div class="clear"></div></div>    
+		<div class="recommendAmount">共有<span id="favPageAmount">0</span>人喜欢</div>        
+        <a class="UYrightLoginBTN" onclick="UYShowSNS();">登录</a>
+		        <a class="UYrightBoxBTN" onclick="UYShowCommunity()">社区</a>
+			<div class="clear"></div></div>
+
+    <div class="UYIntroducePane"><span id="UYTitleTXT">发表评论</span></div>    
+    <div class="UYLoginSerious"><a class="UYDisqusTopItemBasic connectBTNEMAIL connectBTNEMAILBasic"></a><a class="UYDisqusTopItemBasic connectBTNSINA connectBTNSINABasic"></a><a class="UYDisqusTopItemBasic connectBTNTENCENT connectBTNTENCENTBasic"></a><a class="UYDisqusTopItemBasic connectBTNQQ connectBTNQQBasic"></a><a class="UYDisqusTopItemBasic connectBTNRENREN connectBTNRENRENBasic"></a>
+        <div class="clear"></div>
+    </div>
+		<textarea name="comment" cols="100" rows="8" id="UYCommentCheckBoxS" style="display: block; width: 0pt; height: 0pt; margin: 0pt; padding: 0pt; resize: none; outline: medium none; border: medium none;"></textarea>
+	<div class="UYInputWrapper" id="UYInputReady">
+		<div id="UYinputPhoto"></div>
+		<div class="UYInputAllPane">
+			<div class="UYInputFrame" id="UYInputPane">				
+				<textarea style="width: 598px; color: rgb(189, 187, 187);" name="submitUY" id="submitUY" onblur="showIntro();" onfocus="hideIntro();if(use_emotions==1){showEmo();}" onkeyup="$('#UYCurrentAmount').html(calc_rest($('#submitUY').val(), 0));" onkeydown="if (event.ctrlKey &amp;&amp; event.keyCode == 13){UYCommentButtonClick(document.getElementById('UYSubmitInputBTNConnected'), 'comment');}"></textarea>
+                <div id="UYEmotionBTN" onclick="showEmotionPane()">表情</div>
+				<div id="UYEmotionPane"></div>
+				<div style="display: none;" id="UYLeftNumber"><span id="UYCurrentAmount"></span><span id="UYTotalAmount"></span></div>
+			</div>
+			<div class="UYMoreFunctionsWrapper"></div>
+			<div class="UYLeftArrow"></div>                    	
+		</div>
+    <div class="clear"></div></div>
+    <div class="UYIntroCurrentPage">显示第<span id="UYCurrentPageNum">1-10</span>条 共<span id="UYCommentAmount">2</span>条评论</div>    
+    <div class="UYsortWrapper"><a class="sortBTN" onclick="showSortMenu()">按时间排序</a>
+    <div class="clear"></div></div>
+    
+    <div class="UYLiteProfileWrapper"></div>
+    
+	<div class="UYEmptyBoxWrapper"></div>
+    
+	<div style="clear: both; font-size: 0pt;"></div>
+    
+	<div class="UYShowList">
+		<div style="clear: both; font-size: 0pt;"></div>
+		<div class="UYEmptyComment" style="display: none;"></div>
+		<div class="UYEmptyCommentEnd" style="display: none;"></div>
+	</div>
+    
+	<a style="display: none;" class="UYMoreItemsWrapper" onclick="getComments()">加载评论中..</a>
+    
+	<div id="Pagination" class="pagination"></div>
+    
+	<div id="UYFromPower">
+    	<a href="http://uyan.cc/" target="_top">Powered by 友言</a>
+    </div> 
+<div class="clear"></div></div>
+
+
+
+
+<!-- unchanged-->            
+
+
+<!-- login pane-->
+
+<!-- communitybox pane-->
+
+<!-- profile pange-->
+
+
+
+
+
+
+<table style="display: none; z-index: 15337; visibility: visible; left: 0px; top: 50px;" class="boxy-wrapper" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="top-left"></td><td class="top"></td><td class="top-right"></td></tr><tr><td class="left"></td><td class="boxy-inner"><div class="boxy-content" style="display: block;" id="disqusPane">
+<a class="close" href="#" id="closediagLogin"></a><div></div>
+<div class="UYDisqusLeftPane">
+	<a class="UYDisqusLefItem UYSinaItem currentDisqusLeftItem" onclick="UYChangeToLogin('sina',this)">新浪微博</a>
+    <a class="UYDisqusLefItem UYTencentItem" onclick="UYChangeToLogin('tencent',this)">腾讯微博</a>
+    <a class="UYDisqusLefItem UYQQzoneItem" onclick="UYChangeToLogin('qq',this)">QQ空间</a>
+    <a class="UYDisqusLefItem UYRenrenItem" onclick="UYChangeToLogin('renren',this)">人人网</a>
+    <a class="UYDisqusLefItem UYEasynetItem" onclick="UYChangeToLogin('easyweb',this)">网易微博</a>
+    <a class="UYDisqusLefItem UYSohuItem" onclick="UYChangeToLogin('sohu',this)">搜狐微博</a>
+    <a class="UYDisqusLefItem UYKaixinItem" onclick="UYChangeToLogin('kaixin',this)">开心网</a>
+    <a class="UYDisqusLefItem UYEmailItem" onclick="UYChangeToLogin('email',this)">匿名登录</a>
+</div>
+<div class="UYDisqusRightPane">
+	<div class="UYDisqusLoginPanes" id="UYDisqusLoginSINA">
+    	<div class="UYDisLoginInto">使用新浪微博帐号登录</div>
+        <div class="UYDisLoginIntoTwo">点击按钮登录至新浪微博</div>
+        <a class="UYDisLoginConBTN connectBTNSINA"></a>
+    </div>
+    <div class="UYDisqusLoginPanes" id="UYDisqusLoginTENCENT">
+        <div class="UYDisLoginInto">使用腾讯微博帐号登录</div>
+        <div class="UYDisLoginIntoTwo">点击按钮登录至腾讯微博</div>
+        <a class="UYDisLoginConBTN connectBTNTENCENT"></a>
+    </div>
+    <div class="UYDisqusLoginPanes" id="UYDisqusLoginQQ">
+        <div class="UYDisLoginInto">使用QQ空间帐号登录</div>
+        <div class="UYDisLoginIntoTwo">点击按钮登录至QQ空间</div>
+        <a class="UYDisLoginConBTN connectBTNQQ"></a>    
+    </div>
+    <div class="UYDisqusLoginPanes" id="UYDisqusLoginSOHU">
+        <div class="UYDisLoginInto">使用搜狐微博帐号登录</div>
+        <div class="UYDisLoginIntoTwo">点击按钮登录至搜狐微博</div>
+        <a class="UYDisLoginConBTN connectBTNSOHU"></a>    
+    </div>
+    <div class="UYDisqusLoginPanes" id="UYDisqusLoginRENREN">
+        <div class="UYDisLoginInto">使用人人网帐号登录</div>
+        <div class="UYDisLoginIntoTwo">点击按钮登录至人人网</div>
+        <a class="UYDisLoginConBTN connectBTNRENREN"></a>
+    </div>
+    <div class="UYDisqusLoginPanes" id="UYDisqusLoginNETEASY">
+        <div class="UYDisLoginInto">使用网易微博帐号登录</div>
+        <div class="UYDisLoginIntoTwo">点击按钮登录至网易微博</div>
+        <a class="UYDisLoginConBTN connectBTNNETEASY"></a>
+    </div>
+    <div class="UYDisqusLoginPanes" id="UYDisqusLoginKAIXIN">
+        <div class="UYDisLoginInto">使用开心网帐号登录</div>
+        <div class="UYDisLoginIntoTwo">点击按钮登录至开心网</div>
+        <a class="UYDisLoginConBTN connectBTNKAIXIN"></a>
+    </div>
+    <div class="UYDisqusLoginPanes" id="UYDisqusLoginMSN">
+        <div class="UYDisLoginInto">使用MSN帐号登录</div>
+        <div class="UYDisLoginIntoTwo">点击按钮登录至MSN</div>
+        <a class="UYDisLoginConBTN connectBTNMSN"></a>
+    </div>
+    <div class="UYDisqusLoginPanes" id="UYDisqusLoginEMAIL">
+    	<div class="loginTitlePane">匿名评论（自动支持Gravatar头像）<span id="alertLoginInner"></span></div>
+        <div class="loginAfterPane">
+        	<div class="loginItemWrapper"><div class="loginItemTitle">Email*</div><input value="" onkeydown="synchroUAE('Inner');" onkeyup="synchroUAE('Inner');" class="inputStyleInner" name="UYloginEmailADInner" id="UYloginEmailADInner" type="text"><div class="clear"></div></div>
+            <div class="loginItemWrapper"><div class="loginItemTitle">昵&nbsp;&nbsp;称&nbsp;</div><input value="" class="inputStyleInner" style="background-color: rgb(230, 230, 230);" onblur="this.style.backgroundColor='#E6E6E6';" onfocus="this.style.backgroundColor='';" name="UYloginEmailNameInner" id="UYloginEmailNameInner" type="text"><div class="clear"></div></div>
+            <div class="loginItemWrapper" style="display: none;"><div class="loginItemTitle">网址/博客</div><input value="" class="inputStyleInner" name="UYloginEmailURLInner" id="UYloginEmailURLInner" type="text"><div class="clear"></div></div>
+            <div class="bottomLoginWrapper"><a class="loginBTNPane" onclick="anLoginInner()">确定</a><div class="clear"></div></div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+</div></td><td class="right"></td></tr><tr><td class="bottom-left"></td><td class="bottom"></td><td class="bottom-right"></td></tr></tbody></table><table style="display: none; z-index: 15338; visibility: visible; left: 0px; top: 50px;" class="boxy-wrapper" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="top-left"></td><td class="top"></td><td class="top-right"></td></tr><tr><td class="left"></td><td class="boxy-inner"><div class="boxy-content" style="display: block;" id="emailTypeLogin">
+<a class="close" href="#" id="closediag"></a>
+<div class="loginTitlePane">匿名评论<span id="alertLogin"></span></div>
+<div class="loginAfterPane">
+	<div class="loginItemWrapper"><div class="loginItemTitle">Email*</div><input value="" onkeydown="synchroUAE();" onkeyup="synchroUAE();" class="inputStyle" name="UYloginEmailAD" id="UYloginEmailAD" type="text"><div class="clear"></div></div>
+    <div class="loginItemWrapper"><div class="loginItemTitle">昵&nbsp;&nbsp;称&nbsp;</div><input value="" class="inputStyle" style="background-color: rgb(230, 230, 230);" onblur="this.style.backgroundColor='#E6E6E6';" onfocus="this.style.backgroundColor='';" name="UYloginEmailName" id="UYloginEmailName" type="text"><div class="clear"></div></div>
+    <div class="loginItemWrapper" style="display: none;"><div class="loginItemTitle">网址/博客</div><input value="" class="inputStyle" name="UYloginEmailURL" id="UYloginEmailURL" type="text"><div class="clear"></div></div>
+    <div class="bottomLoginWrapper"><a class="loginBTNPane" onclick="anLogin()">确定</a><div class="clear"></div></div>
+</div>
+</div></td><td class="right"></td></tr><tr><td class="bottom-left"></td><td class="bottom"></td><td class="bottom-right"></td></tr></tbody></table><table style="display: none; z-index: 15339; visibility: visible; left: 0px; top: 50px;" class="boxy-wrapper" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="top-left"></td><td class="top"></td><td class="top-right"></td></tr><tr><td class="left"></td><td class="boxy-inner"><div class="boxy-content" style="display: block;" id="UYwebsitePane">
+    <a class="close" href="#" id="closediagwebsite"></a>
+    <div id="UYWebsiteTopPane"><span id="UYWebsiteName">36氪</span><span id="UYWebsiteURL">www.36kr.com</span></div>
+    <div id="UYGeneralInfoWrapper">
+        <div class="UYGeneralWebWrapper UYGeneralComments"><span class="UYGeneralNum" id="UYGeneralCommentNum">303267</span><br><span class="UYGeneralIntro">评论数</span></div>
+        <div class="UYGeneralWebWrapper UYGeneralLike"><span class="UYGeneralNum" id="UYGeneralLikeNum">476</span><br><span class="UYGeneralIntro">喜欢数</span></div>
+        <div class="UYGeneralWebWrapper UYGeneralUser" style="border: medium none;"><span class="UYGeneralNum" id="UYGeneralUserNum">89399</span><br><span class="UYGeneralIntro">用户数</span></div>
+        <div class="clear"></div>
+    </div>
+    <div class="UYGeneralItemsWrapper">
+        <div class="UYGeneralLeftPane">
+            <div class="UYGeneralInnerTitle">最活跃的用户</div>            
+            <div id="UYGeneralActiveAdd"></div>
+
+        </div>
+        <div class="UYGeneralRightPane">
+            <div class="UYGeneralInnerTitle">最受支持的用户</div>
+            <div id="UYGeneralLikeAdd"></div>
+        </div>
+        <div class="clear"></div>
+    </div>    
+    <div class="UYProfileBottom">
+        <a class="UYProfileBottomLink" href="http://www.uyan.cc/" target="_top">友言</a>
+        <div class="clear"></div>
+    </div>
+</div></td><td class="right"></td></tr><tr><td class="bottom-left"></td><td class="bottom"></td><td class="bottom-right"></td></tr></tbody></table><table style="display: none; z-index: 15340; visibility: visible; left: 0px; top: 50px;" class="boxy-wrapper" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="top-left"></td><td class="top"></td><td class="top-right"></td></tr><tr><td class="left"></td><td class="boxy-inner"><div class="boxy-content" style="display: block;" id="profiePane">
+    <div id="hideUserId"></div>
+<a class="close" href="#" id="closediag"></a>
+    <div id="UYProfileTopPane">
+        <img id="UYProfileImg" src="photodefault.png">
+        <div class="UYProfileRightWrapper">
+            <div class="UYBasicInfoWrapper">
+                <a href="#" id="UYProfileName" target="_top"></a><div class="UYProfileTopItemWrapper UYProfileTalkIcon" id="UYProfileComment">32</div><div class="UYProfileTopItemWrapper UYProfileLikeIcon" id="UYProfileLiked">32</div><div class="clear"></div>
+            </div>
+            <div class="UYBasicLinkWrapper">
+                <a href="#" id="UYBasicLink" target="_top">http://www.ieo.com/fe221</a>
+            </div>
+        </div>        
+        <div class="clear"></div>
+    </div>
+    <div class="UYProfileNavi">
+        <a class="UYProfileNaviBTN UYProfileNavBTNCurrent" id="UYNewsBTN" onclick="profileChangeNav('news',this);">新鲜事</a>
+        <a class="UYProfileNaviBTN" onclick="profileChangeNav('social',this);">活跃社区</a>
+        <div class="clear"></div>
+    </div>
+    <div class="UYProfileItemContainer">
+        <div id="UYProfileItemTarget"></div>
+    </div>
+    <div class="UYProfileItemSocialContainer">
+        <div id="UYProfileItemSocialTarget"></div>
+    </div>
+
+    <div class="UYProfileBottom">
+        <a class="UYProfileBottomLink" href="http://www.uyan.cc/" target="_top">友言</a>
+        <div class="clear"></div>
+    </div>
+</div></td><td class="right"></td></tr><tr><td class="bottom-left"></td><td class="bottom"></td><td class="bottom-right"></td></tr></tbody></table></body>
+</html>
