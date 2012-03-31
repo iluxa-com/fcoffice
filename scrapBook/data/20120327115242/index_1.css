@@ -1,0 +1,29 @@
+/* ::::: http://timg.sjs.sinajs.cn/t35/appstyle/opent/css/widgets/follow_button/follow_button.css ::::: */
+
+.weibo_widgets, .weibo_widgets button, .weibo_widgets input, .weibo_widgets select, .weibo_widgets textarea { font: 12px/1.125 Arial,Helvetica,sans-serif; }
+.weibo_widgets, .weibo_widgets h1, .weibo_widgets h2, .weibo_widgets h3, .weibo_widgets h4, .weibo_widgets h5, .weibo_widgets h6, .weibo_widgets dl, .weibo_widgets dt, .weibo_widgets dd, .weibo_widgets ul, .weibo_widgets ol, .weibo_widgets li, .weibo_widgets th, .weibo_widgets td, .weibo_widgets p, .weibo_widgets blockquote, .weibo_widgets pre, .weibo_widgets form, .weibo_widgets fieldset, .weibo_widgets legend, .weibo_widgets input, .weibo_widgets button, .weibo_widgets textarea, .weibo_widgets hr { margin: 0pt; padding: 0pt; }
+.weibo_widgets fieldset, .weibo_widgets img { border: 0pt none; }
+.weibo_widgets address, .weibo_widgets caption, .weibo_widgets cite, .weibo_widgets code, .weibo_widgets dfn, .weibo_widgets em, .weibo_widgets i, .weibo_widgets th, .weibo_widgets var { font-style: normal; font-weight: normal; }
+.weibo_widgets a { text-decoration: none; }
+.weibo_widgets a:hover { text-decoration: underline; }
+.weibo_widgets a { color: rgb(0, 120, 182); }
+.weibo_widgets a:hover { text-decoration: underline; }
+.weibo_widgets .approve_co { width: 14px; height: 12px; background: url('ico.png') no-repeat scroll 0pt -231px transparent; display: inline-block; }
+.attbutton a { outline: medium none; cursor: pointer; line-height: 21px; }
+.attbutton a:hover { text-decoration: none; }
+.add_attg_normal, .add_attg_normal em, .add_attg_loading, .add_attg_loading em, .add_attr_normal, .add_attr_normal em, .add_attr_loading, .add_attr_loading em { display: inline-block; height: 22px; overflow: hidden; vertical-align: middle; }
+.add_attg_normal, .add_attg_loading { padding-left: 3px; }
+.add_attg_normal em, .add_attg_loading em { color: rgb(102, 102, 102); padding-right: 4px; }
+.add_attg_normal .addImg { display: inline-block; background: url('gray_icon.gif') no-repeat scroll 0% 0% transparent; width: 16px; height: 22px; }
+.add_attg_normal em span.addImg { margin-top: 1px; margin-left: 1px; padding-left: 2px; vertical-align: -7px; }
+.add_attg_normal em span.text { vertical-align: 1px; }
+.add_attg_normal, .add_attg_normal em, .add_attg_loading, .add_attg_loading em { background: url('bg_gray.png') no-repeat scroll 0% 0% transparent; }
+.add_attg_normal { background-position: 0pt -134px; }
+.add_attg_normal em { background-position: right -157px; }
+.add_attg_normal:hover { background-position: 0pt -181px; }
+.add_attg_normal:hover em { background-position: right -205px; }
+.add_attg_normal:active { background-position: 0pt -44px; }
+.add_attg_normal:active em { background-position: right -66px; }
+.attbutton .nameId { margin-left: 10px; line-height: 22px; vertical-align: middle; }
+.attbutton .fansnum { color: rgb(102, 102, 102); }
+.showFansNum .nameId a { color: rgb(0, 130, 203); font-weight: bold; }

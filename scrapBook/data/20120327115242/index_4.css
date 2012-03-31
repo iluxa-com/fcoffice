@@ -1,0 +1,16 @@
+/* ::::: http://timg.sjs.sinajs.cn/t35/appstyle/opent/css/app/app_iframe.css ::::: */
+
+.change_btn { padding: 0pt; text-align: center; font-size: 12px; }
+html, body, p { padding: 0pt; margin: 0pt; }
+.change_btn img.icon { width: 32px; height: 32px; background: url('btn_trans.gif') repeat scroll 0pt 0pt transparent; border: medium none; }
+.change_btn .number { position: relative; display: inline-block; height: 22px; margin-bottom: 8px; padding-left: 6px; background: url('btn_trans.gif') no-repeat scroll 0pt -98px transparent; }
+.change_btn .number em { position: relative; display: inline-block; height: 22px; margin-right: -1px; padding-right: 5px; background: url('btn_trans.gif') no-repeat scroll right -98px transparent; font-family: verdana; font-size: 11px; font-style: normal; line-height: 22px; z-index: 2; }
+.change_btn img.arrow { position: absolute; width: 5px; height: 4px; left: 50%; bottom: -3px; margin-left: -2px; background: url('btn_trans.gif') no-repeat scroll -10px -136px transparent; z-index: 3; }
+.change_btn .type2 p { text-align: left; }
+.change_btn .type2 img.icon { width: 24px; height: 24px; background-position: 0pt -32px; }
+.change_btn .type2 .number { float: left; height: 24px; margin: 0pt 0pt -24px 29px; padding-left: 9px; background-position: 0pt -74px; }
+.change_btn .type2 .number em { height: 24px; padding-right: 9px; background-position: right -74px; line-height: 24px; }
+.change_btn .type2 img.arrow { position: absolute; width: 5px; height: 7px; left: -2px; top: 8px; background-position: -20px -136px; }
+.change_btn .number { display: none; }
+.change_btn .showNum .number { display: inline-block; }
+.change_btn p a { outline: medium none; }

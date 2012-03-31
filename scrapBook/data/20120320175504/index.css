@@ -1,0 +1,91 @@
+/* ::::: http://ctc.qzonestyle.gtimg.cn/qzonestyle/global/css/qzfl.css ::::: */
+
+.none { display: none ! important; }
+/* ::::: http://ctc.qzonestyle.gtimg.cn/qzonestyle/qzone_app/qzone_dev/css/global.css ::::: */
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td { margin: 0pt; padding: 0pt; }
+table { border-collapse: collapse; border-spacing: 0pt; }
+fieldset, img { border: 0pt none; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style: normal; font-weight: normal; }
+ol, ul { list-style: none outside none; }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: normal; }
+body { font: 12px helvetica,simsun,arial,clean; }
+table { font-size: inherit; }
+select, input, textarea { font: 99% simsun,arial,helvetica,clean; }
+pre, code { font: 115% monospace; }
+body * { line-height: 1.22em; }
+html, body { overflow-x: hidden; }
+.none { display: none; }
+body { text-align: center; color: rgb(153, 153, 153); background-color: rgb(255, 255, 255); }
+a { color: rgb(47, 138, 181); }
+a:link, a:visited { text-decoration: none; }
+a:hover, a:active { text-decoration: underline; }
+.lay_head_wrap, .lay_head .logo, .lay_head .nav a, .lay_aside .menu li.cur, .lay_main .lay_aside .anchor dd li { background-image: url('n_bg.png'); background-repeat: no-repeat; }
+.lay_head_wrap { background-position: 0pt -170px; height: 135px; background-repeat: repeat-x; }
+.lay_head { margin: 0pt auto; text-align: left; width: 982px; position: relative; }
+.lay_head .logo { position: absolute; top: 8px; left: 12px; width: 229px; height: 30px; }
+.lay_head .link { position: absolute; top: 39px; right: 12px; }
+.lay_head .link .line { margin: 0pt 5px; color: rgb(226, 226, 226); }
+.lay_head .nav { position: absolute; top: 65px; left: 11px; height: 34px; }
+.lay_head .nav a { float: left; height: 34px; margin-right: 23px; }
+.lay_head .nav .nav1 { width: 74px; }
+.lay_head .nav .nav1:link, .lay_head .nav .nav1:visited { background-position: 0pt -50px; }
+.lay_head .nav .nav1:hover, .lay_head .nav .nav1:active { background-position: 0pt -90px; }
+.lay_head .nav .nav2 { width: 92px; }
+.lay_head .nav .nav2:link, .lay_head .nav .nav2:visited { background-position: -80px -50px; }
+.lay_head .nav .nav2:hover, .lay_head .nav .nav2:active { background-position: -80px -90px; }
+.lay_head .nav .nav3 { width: 92px; }
+.lay_head .nav .nav3:link, .lay_head .nav .nav3:visited { background-position: -180px -50px; }
+.lay_head .nav .nav3:hover, .lay_head .nav .nav3:active { background-position: -180px -90px; }
+.lay_head .nav .nav4 { width: 92px; }
+.lay_head .nav .nav4:link, .lay_head .nav .nav4:visited { background-position: -280px -50px; }
+.lay_head .nav .nav4:hover, .lay_head .nav .nav4:active { background-position: -280px -90px; }
+.lay_head .nav .nav5 { width: 92px; }
+.lay_head .nav .nav5:link, .lay_head .nav .nav5:visited { background-position: -380px -50px; }
+.lay_head .nav .nav5:hover, .lay_head .nav .nav5:active { background-position: -380px -90px; }
+.lay_head .nav .nav7 { width: 92px; }
+.lay_head .nav .nav7:link, .lay_head .nav .nav7:visited { background-position: -580px -50px; }
+.lay_head .nav .nav7:hover, .lay_head .nav .nav7:active { background-position: -580px -90px; }
+.lay_head .nav .nav9 { width: 92px; }
+.lay_head .nav .nav9:link, .lay_head .nav .nav9:visited { background-position: -780px -50px; }
+.lay_head .nav .nav9:hover, .lay_head .nav .nav9:active { background-position: -780px -90px; }
+.lay_head .nav .nav9_now, .lay_head .nav .nav9_now:link, .lay_head .nav .nav9_now:visited, .lay_head .nav .nav9_now:hover, .lay_head .nav .nav9_now:active { background-position: -780px -130px; }
+.lay_head .soso_form { position: absolute; top: 67px; right: 0pt; width: 178px; height: 25px; background: url('soso_bg.png') no-repeat scroll left top transparent; }
+.lay_head .soso_form .input_keywords { float: left; width: 128px; height: 23px; padding: 0pt 2px; line-height: 23px; margin: 1px 0pt 0pt 22px; border: medium none; color: rgb(178, 178, 178); background-color: transparent; }
+.lay_head .soso_form .input_submit { float: left; width: 23px; height: 23px; margin-top: 1px; border: medium none; background-color: transparent; cursor: pointer; }
+.lay_foot { text-align: center; margin: 10px auto; width: 943px; border-top: 1px solid rgb(226, 226, 226); padding-top: 20px; }
+.lay_foot .copyright_en { margin: 8px 0pt; font-size: 11px; font-family: Verdana; }
+.lay_foot .footer_menu { color: rgb(153, 153, 153); }
+.lay_foot .footer_menu a { color: rgb(47, 138, 181); margin: 0pt 4px 0pt 3px; }
+.lay_main { margin: -10px auto 0pt; text-align: left; width: 982px; }
+.lay_main:after { content: "."; display: block; height: 0pt; clear: both; visibility: hidden; }
+.lay_main .lay_aside { float: left; width: 170px; }
+.lay_main .lay_aside .menu li { overflow: hidden; position: relative; font-size: 14px; background-color: rgb(244, 244, 244); border-top: 1px solid rgb(255, 255, 255); border-bottom: 1px solid rgb(237, 237, 237); padding: 10px 0pt 9px 20px; width: 140px; }
+.lay_main .lay_aside .menu li:first-child { border-radius: 5px 5px 0pt 0pt; }
+.lay_main .lay_aside .menu li:last-child { border-radius: 0pt 0pt 5px 5px; }
+.lay_main .lay_aside .menu li a:link, .lay_main .lay_aside .menu li a:visited { color: rgb(51, 51, 51); }
+.lay_main .lay_aside .menu li a:hover { color: rgb(47, 138, 181); }
+.lay_main .lay_aside .menu .submenu { padding: 0pt; width: 160px; border-bottom: 0pt none; }
+.lay_main .lay_aside .menu .submenu h4 { padding: 10px 0pt 9px 20px; background-color: rgb(228, 228, 228); color: rgb(121, 121, 121); }
+.lay_main .lay_aside .menu .submenu li { padding: 8px 0pt 7px 35px; font-size: 12px; width: 125px; }
+.lay_main .lay_cont { overflow: hidden; padding-left: 40px; padding-bottom: 100px; }
+.to_top { width: 52px; background: url('sp.png') no-repeat scroll -54px -119px transparent; height: 41px; cursor: pointer; }
+.to_top:hover { background-position: -106px -119px; }
+/* ::::: http://wiki.opensns.qq.com/static/wiki.css ::::: */
+
+div.contentSub { font-family: helvetica,'Lucida Grande',Tahoma,Verdana,Simsun,Arial,Clean,Sans-Serif; width: 752px; background-color: rgb(255, 255, 255); text-align: left; margin: 0pt auto; }
+div#bodyContent p, div#bodyContent pre { color: rgb(51, 51, 51); line-height: 24px; font-size: 12px; }
+.contentSub h1, .contentSub h2 { font-size: 14px; font-weight: bold; color: rgb(51, 51, 51); text-indent: 10px; line-height: 25px; height: 25px; width: 752px; margin-top: 10px; margin-bottom: 10px; background-color: rgb(233, 233, 233); border-radius: 3px 3px 3px 3px; }
+h1.firstHeading { font-size: 16px; line-height: 35px; height: 35px; margin-bottom: 10px; background-color: rgb(226, 238, 246); }
+.firstHeading a { font-size: 14px; font-weight: normal; float: right; display: block; height: 100%; line-height: 35px; margin-right: 10px; }
+.toc td { font-size: 12px; border: 1px solid rgb(234, 234, 234); padding-right: 10px; padding-bottom: 10px; min-width: 220px; }
+.toc #toctitle { height: 25px; margin-bottom: 3px; }
+.toc h2 { font-size: 12px; color: rgb(0, 0, 0); background: none repeat scroll 0% 0% transparent; width: auto; float: left; margin: 0pt; border-radius: 0px 0px 0px 0px; }
+.toc .toctoggle { float: right; line-height: 25px; }
+.toc ul { list-style: none outside none; padding-left: 1em; }
+.toc li { line-height: 21px; }
+.contentSub h3, .contentSub h4 { font-size: 14px; font-weight: bold; color: rgb(51, 51, 51); line-height: 25px; height: 25px; width: 752px; border-bottom: 1px dashed rgb(221, 221, 221); margin-top: 10px; margin-bottom: 10px; }
+h1 .mw-headline, h2 .mw-headline, h3 .mw-headline, h4 .mw-headline { line-height: 25px; }
+.code { font-size: 14px; color: rgb(0, 0, 0); border: 1px dashed rgb(170, 170, 170); background-color: rgb(210, 227, 255); padding: 7px; margin: 3px 0pt; }
+.code * { font-family: Consolas,'Lucida Grande',Tahoma,Verdana,Arial,sans-serif,'宋体'; line-height: 150%; }
+.printfooter, .tocnumber { display: none; }
