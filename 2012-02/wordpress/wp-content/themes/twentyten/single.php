@@ -30,7 +30,7 @@ get_header();
         echo get_the_post_thumbnail($post->ID, array(150,240), array('class' => 'yqxs_thumb_single')); ?>
      <?php endif?> 
     <div class="yqxs_excerpt_single">
-      <h2 id="single_title">《<?php the_title(); ?>》</h2>
+      <h2 id="single_title"><?php the_title(); ?></h2>
          <ul class='list_info_1'><li class='terms' style="margin:0 10px 0 0">作 者：<a target="_blank" title="点击查看<?php the_author()?>作品集" href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author()?></a></li>
         
 
@@ -196,11 +196,12 @@ function postToQQWb(){
       </div>
        <h2 class="info_header">章节列表 </h2>
       <div class="tb">
-                    <ul class="info_list" id="chapter_list">
+                    
                     <?php the_content()?>
-                    </ul>
+                    
             <div class="clear"></div>                        
       </div>
+<!--
       <?php if($post->post_content =='[cai-ji-ok]'):?>
         <div style="margin-top:20px;border: 1px solid #CCCCCC">
             <h2 class="sbar" style="margin:0;padding:0">
@@ -212,14 +213,15 @@ function postToQQWb(){
             </ul>
         </div>   
         <?php endif;?>
-                    
+      -->
+      <?php comments_template(); ?>
       </div>
       <?php else :?>
     
       <h1 id="yqxs_title_chapter">
       
-      <a href="<?php the_permalink()?>" title="<?php the_title()?>">
-      <?php the_title(); ?></a> - <?php the_chapter_title()?>
+      <a href="<?php echo esc_attr($_SERVER['REQUEST_URI']);?>" title="<?php the_title()?>">
+      <?php the_title(); ?> - <?php the_chapter_title()?></a>
       
       </h1>
      <ul class='list_info_1' style="text-align:center"><li class='terms' style="margin:0 10px 0 0">作 者：<a target="_blank" title="点击查看<?php the_author()?>作品集" href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author()?></a></li>
@@ -263,6 +265,7 @@ function postToQQWb(){
 
 
  
+
 
 
 </div>

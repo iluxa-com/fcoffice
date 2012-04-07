@@ -2,8 +2,23 @@
 define('YQURI',get_template_directory_uri());
 add_theme_support( 'post-thumbnails' );
 
+//无限下拉滚动
+add_action('wp_head','infinite_scroll');
+function infinite_scroll() {
+    if(is_single() && get_query_var('page')>0) {
+        $script = YQURI . '/js/infinitescroll_ch.js';        
+    }else {
+         $script = YQURI . '/js/infinitescroll_dir.js';
+    }
+    echo '<script type="text/javascript" src="' . $script . '?yqxs=1.0"></script>';
+//echo '<script type="text/javascript" src="http://www.infinite-scroll.com/wp-content/plugins/infinite-scroll/jquery.infinitescroll.js"></script>';
+        
+
+}
+
 //高亮当前分类
 add_action('wp_head','high_light_term');
+
 function high_light_term() {
     if(is_category()){
         $category_name = get_query_var('category_name');
@@ -106,6 +121,10 @@ function yqxs_get_the_category_list( $current_cat_ID, $separator = '', $parents=
 //设置图片懒加载
 add_filter('wp_get_attachment_image_attributes','set_for_laze_load',10,2);
 function set_for_laze_load ($attr, $attachment) {
+    //Ajax加载时不使用懒加载
+     if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])) 
+        return $attr;
+        
     if(isset($attr['src']) && defined('LAZY_LOAD')) {
         $attr ['data-original'] = $attr['src'];
         $attr['src'] = YQURI .'/images/grey.gif';
@@ -993,6 +1012,7 @@ function yqxs_the_content($content) {
                         $page
                     ), ARRAY_A
                  );
+                   
                  //取下页链接，注意要检查是否存在，即是否超过最后章节
                  $next_page = $page+1;
                  $next_res = $wpdb->get_var(
@@ -1019,9 +1039,9 @@ function yqxs_the_content($content) {
                  $content .='<h2 class="yqxs_ch_title">'.$result_arr['chapter_title'].'</h2>';
                  $content .='<div id="yqxs_ch_content">'.$result_arr['content'] .'</div>';
                  $content .='<div class="yqxs_dir_nav">';
-                 $prev_link && $content .='<a href="'.$prev_link.'">【上一章】</a>' ;
+                 $prev_link && $content .='<a id="yqxs_prev" href="'.$prev_link.'">【上一章】</a>' ;
                  $content .= '<a href="'.$permalink.'"> 【目录页】 </a>' ;
-                 $next_link && $content .='<a href="'.$next_link.'">【下一章】</a>' ;
+                 $next_link && $content .='<a id="yqxs_next" href="'.$next_link.'">【下一章】</a>' ;
                  $content .='</div>';
                  
               
@@ -1108,4 +1128,210 @@ function yqxs_redirect($page_title,$info,$page_url,$time=5) {
         file_get_contents($template)
    );
    echo $content;
+}
+
+
+
+if ( ! function_exists( 'yqxs_comment' ) ) :
+/**
+ * Template for comments and pingbacks.
+ *
+ * To override this walker in a child theme without modifying the comments template
+ * simply create your own twentyten_comment(), and that function will be used instead.
+ *
+ * Used as a callback by wp_list_comments() for displaying the comments.
+ *
+ * @since Twenty Ten 1.0
+ */
+function yqxs_comment( $comment, $args, $depth ) {
+	$GLOBALS['comment'] = $comment;
+
+
+	switch ( $comment->comment_type ) :
+		case '' :
+	?>
+	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+    
+		<div class="comment-item" id="comment-<?php comment_ID(); ?>">
+		<div class="comment-author vcard">
+			<?php echo get_avatar( $comment ); ?>
+			<?php  printf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ; ?>
+            
+           <!--         
+           
+           -->     
+		</div>
+        <!-- .comment-author .vcard -->
+		<?php if ( $comment->comment_approved == '0' ) : ?>
+			<em class="comment-awaiting-moderation">
+                <?php _e( 'Your comment is awaiting moderation.', 'twentyten' ); ?>
+            </em>
+            <div class="comment-meta commentmetadata">
+                <a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
+                
+            </div><!-- .comment-meta .commentmetadata -->            
+		<?php endif; ?>
+
+		<div class="comment-body"><?php comment_text(); ?></div>
+        
+        
+        <div class='clear'></div>
+		<div class="reply">
+            <div class='comment_time'>
+             <?php printf( '发表于： %s %s', get_comment_date(),  get_comment_time() ); ?>
+            <?php edit_comment_link( __( '(Edit)', 'twentyten' ), ' ' );?>
+            </div>
+			<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+            
+		</div><!-- .reply -->
+        
+	</div><!-- #comment-##  -->
+    <div class='clear'></div>
+	<?php
+			break;
+		case 'pingback'  :
+		case 'trackback' :
+	?>
+	<li class="post pingback">
+		<p><?php _e( 'Pingback:', 'twentyten' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'twentyten' ), ' ' ); ?></p>
+	<?php
+			break;
+	endswitch;
+}
+    
+endif;
+
+//$yqxs_comment_notes_after='';
+
+add_filter('comment_form_default_fields',yqxs_comment_fields,10,1);
+
+function yqxs_comment_fields($fields) {
+    /*
+    unset($fields['url']);
+    global $yqxs_comment_notes_after;
+    $yqxs_comment_notes_after = $fields;
+    return ;
+     *
+     */
+     unset($fields['url']);
+    // unset($fields['email']);
+    $fields['yxm'] =  yqxs_GetYinXiangMaWidget();
+    return $fields;
+}
+add_action('comment_form_before_fields',fields_wrap_start);
+function fields_wrap_start() {
+    echo '<div id="fields_wrap" style="width:310px;float: left; margin-top: 15px;">';
+}
+add_action('comment_form_after_fields',fields_wrap_end);
+function fields_wrap_end() {
+    echo '</div>';
+}
+
+add_filter('comment_form_defaults',yqxs_comment_form);
+function yqxs_comment_form($defaults) {
+    unset($defaults['comment_notes_before']);    
+    $defaults['comment_notes_after'] ='';
+    /*
+    global $yqxs_comment_notes_after;
+    
+    foreach ( (array) $yqxs_comment_notes_after as $name => $field ) {
+            $defaults['comment_notes_after'] .= $field ."\n";
+    }
+     *
+     */
+   $oldcomment = '';
+    if(isset($_SESSION['old_comment']) && !empty($_SESSION['old_comment']) ) {
+        $oldcomment =$_SESSION['old_comment'];
+        unset($_SESSION['old_comment']);
+    }    
+    $defaults['comment_field'] ='<p class="comment-form-comment"><textarea id="comment" name="comment" aria-required="true">'.$oldcomment.'</textarea></p>';
+   if(is_user_logged_in())
+       //   height=258px width= 602px
+
+       $defaults['comment_field'] ='<p class="comment-form-comment"><textarea id="comment" name="comment" style="height:258px; width: 602px" aria-required="true">'.$oldcomment.'</textarea></p>';
+
+    return $defaults;
+}
+
+
+function yqxs_GetYinXiangMaWidget()
+{
+    global $yqxs_token;
+
+	$YinXiangMaDataString = $yqxs_token;
+	$YinXiangMaWidgetHtml="\n<script type='text/javascript'>\nvar YinXiangMaDataString ='".$YinXiangMaDataString."';\n</script>\n";
+
+	$YinXiangMaWidgetHtml.="<script type='text/javascript' charset='gbk' src='".YinXiangMa_API_SERVER."/widget/"."YinXiangMa.php'></script>\n";
+	
+
+	$YinXiangMaWidgetHtml.=
+	"<noscript>
+		您的浏览器不支持或者禁用了Javascript，验证码将不能正常显示。<br/>
+		点击这里，教您如何调整您的浏览器设置。<br/>
+	</noscript>";
+
+	return $YinXiangMaWidgetHtml;
+}
+
+
+//提交评论
+add_action('pre_comment_on_post',yqxs_validate_yxm);
+function yqxs_validate_yxm() {
+    if(is_user_logged_in()) return TRUE;
+    session_start();    
+    require_once(get_template_directory() ."/yxm/YinXiangMaLib.php");
+    if(!isset($_POST['YinXiangMa_response']) OR empty($_POST['YinXiangMa_response'])) {
+        $comment_content = ( isset($_POST['comment']) ) ? trim($_POST['comment']) : null;
+        $_SESSION['old_comment'] = $comment_content;
+        $error = '验证码不能为空!';
+
+        wp_die($error,$error,array( 'response' => 403,'back_link'=>true ));
+    }
+    //验证
+    $response = YinXiangMa_validRequest($_POST['YinXiangMa_response'],@$_POST['YinXiangMa_challenge']);
+    if(TRUE === $response->is_valid) {
+        return TRUE;
+    }else {
+       $comment_content = ( isset($_POST['comment']) ) ? trim($_POST['comment']) : null;
+       $_SESSION['old_comment'] = $comment_content;
+       wp_die('验证码错误。',$response->error,array( 'response' => 403,'back_link'=>true ));
+    }
+}
+
+
+//子评论
+add_filter('comment_text',child_comment,99,2);
+function child_comment ($comment_text,$comment) {
+    if($comment->comment_parent>0) {
+         $parent = get_comment($comment->comment_parent);
+        // $content = substr(strip_tags(trim($parent->comment_content)),0,50).'...';
+         $content = mb_substr(get_comment_excerpt($comment->comment_parent),0,20,'utf-8').'...';
+       
+         $link = get_comment_link($parent);
+         $comment_text ='<blockquote class="quote_comment">@' . "<a href=\"{$link}\">" . $parent->comment_author .'</a>:'.$content.'</blockquote>'.$comment_text;
+        
+    }
+     return $comment_text;
+}
+
+add_action('wp_loaded','chapter_valid');
+function chapter_valid() {
+     /*
+                 $result_arr = $wpdb->get_row(
+                    $wpdb->prepare(
+                        "SELECT * FROM $wpdb->chapters WHERE `post_id` = %d AND `chapter_order`=%d",
+                        $post->ID,
+                        $page
+                    ), ARRAY_A
+                 );
+                                 //不存在该章节
+                 if(NULL ===$result_arr) {
+                    wp_die( '章节不存在', '章节不存在', array( 'response' => 404,'back_link'=>true ) );
+                    exit();
+                 }
+        */
+            //wp_die( '章节不存在', '章节不存在', array( 'response' => 404,'back_link'=>true ) );
+                   //var_dump(get_query_var('page'),get_query_var('name'));
+            
+
 }
