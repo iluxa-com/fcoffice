@@ -147,8 +147,12 @@
         } else {
             fold = $container.offset().top + $container.height();
         }
-
+        // console.log($(element).offset().top);
+         // console.log(settings.threshold);
+        // console.log(fold <= $(element).offset().top - settings.threshold);
+        
         return fold <= $(element).offset().top - settings.threshold;
+        
     };
     
     $.rightoffold = function(element, settings) {

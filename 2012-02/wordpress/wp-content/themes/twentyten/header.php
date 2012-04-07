@@ -1,4 +1,35 @@
 <?php
+global $yqxs_token;
+if (!session_id())
+    session_start();
+if(is_single()) {
+     require_once(get_template_directory() ."/yxm/YinXiangMaLib.php");
+    $yqxs_token = YinXiangMa_tokenRequest();
+}
+
+if(is_single()) {
+        
+        $chapter_order = get_query_var('page');
+        //var_dump($post->ID,$chapter_order);
+        if($chapter_order>0) {
+            $result_arr = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT * FROM $wpdb->chapters WHERE `post_id` =%d  AND `chapter_order`=%d ORDER BY `chapter_order` ASC",
+                $post->ID,
+                $chapter_order,
+                ARRAY_A 
+            )
+        );
+       
+        if(count($result_arr)==0) {
+            wp_die('章节不存在','章节不存在',array( 'response' => 404,'back_link'=>true ));
+            exit();
+        }
+    }
+    
+}
+
+
 /**
  * The Header for our theme.
  *
@@ -10,9 +41,7 @@
  */
 ?>
 <?php
-date_default_timezone_set('Asia/shanghai');date_default_timezone_set('Asia/hanghai');
-date_default_timezone_set('Asia/hanghai');
-date_default_timezone_set('Asia/hanghai');
+date_default_timezone_set('Asia/shanghai');
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +84,7 @@ if ($paged >= 2 || $page >= 2)
         <script type="text/javascript" src="<?php echo YQURI; ?>/js/common.js?yqxs=1.0"></script>
         <script type="text/javascript" src="<?php echo YQURI; ?>/js/Ajax_Search.js?yqxs=1.0"></script>
         <script type="text/javascript" src="<?php echo YQURI; ?>/js/history.js?yqxs=1.0"></script>
-
+        
 
 
 
@@ -166,9 +195,9 @@ if ($paged >= 2 || $page >= 2)
 <?php if (!is_page() AND !is_single() AND !is_404()) : ?>
             <div id="1" class="ad960">
 <?php
-                global $wpdb;
-                $post_arr = $wpdb->get_col(
-                                "SELECT post_id
+        global $wpdb;
+        $post_arr = $wpdb->get_col(
+            "SELECT post_id
             FROM $wpdb->postmeta
             WHERE `meta_key` = '_thumbnail_id'
             AND meta_value NOT

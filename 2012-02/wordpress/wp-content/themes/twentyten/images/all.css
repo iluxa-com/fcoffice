@@ -199,7 +199,7 @@ a.red:hover{color:#333;}
     width: 672px !important;}
     */
 .listBox li span{display:block;position:absolute;top:161px;left:23px;width:120px;background:#000;filter:alpha(opacity=70);opacity:0.7;cursor:pointer;color:#fff;height:20px;line-height:20px;}
-.listBox li p{text-align:left;padding-left:10px;    height: 100px;}
+.listBox li p{margin:0;padding:0;text-align:left;padding-left:10px;     max-width: 500px;/*height: 100px;*/}
 .listBox li.over{border:1px solid #97BF2B;background-color:#F6FF99;}
 .pagebox,.page{display:inline;font-size:12px;overflow:hidden;padding:1px 0 8px  80px;width:100%;height:100%;    }
 .pagebox span,.page span{float:left;height:23px;line-height:23px;margin-right:2px;padding:0 4px;font-size:12px;}
@@ -527,7 +527,7 @@ h2#single_title {
     padding: 20px 15px 28px;
 }
 
-.info_list li {
+.info_list li,.yqxs_ch_list li {
     background: url("sprites.gif") no-repeat scroll -188px -148px transparent;
     border-bottom: 1px dashed #CCCCCC;
     float: left;
@@ -552,7 +552,7 @@ h2.info_header {
 }
 h1#chapter_head_bar {background:url("yuanjiao.jpg") no-repeat scroll 0 -110px transparent}
 #chapter_left {width:100%}
-#chapter_hot {background:url("l_line980.jpg") repeat-y scroll 0 0 transparent}
+#chapter_hot {background:url("l_line980.jpg") repeat-y scroll 0 0 transparent;box-shadow: 14px 11px 27px #888888;}
 #chapter_line_bon{ background: url("yuanjiao-bottom-980.jpg") no-repeat }
 #chapter_list_box{width: 888px;}
 #yqxs_ch_content{
@@ -667,4 +667,20 @@ a.pkey_btn{
     
     border:1px solid #f00;
 
+}
+  .listBox li span#YinXiangMa-instr-msg,.listBox li span#YinXiangMa_challenge_container {
+    background: none repeat scroll 0 0 #000000;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: none;
+    height: 0;
+
+    line-height: 0;
+    opacity: 0.7;
+    width: 100%;
+    position:static;
+  }
+  .quote_comment {
+      background-color:#eee;
+          font-style: italic;
 }

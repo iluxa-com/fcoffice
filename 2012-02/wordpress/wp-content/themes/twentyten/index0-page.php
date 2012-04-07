@@ -14,6 +14,8 @@
 
 
 get_header(); 
+    
+
 define('LAZY_LOAD',TRUE); //使用图片懒加载
 ?>
 
@@ -26,7 +28,7 @@ define('LAZY_LOAD',TRUE); //使用图片懒加载
 
       <div class="listBox">
 
-        <ul>
+        <ul id="works_list">
         <?php //文章列表
                     //var_dump(get_query_var('page'));
                     //var_dump(get_query_var('paged'));
@@ -34,7 +36,7 @@ define('LAZY_LOAD',TRUE); //使用图片懒加载
             $page =get_query_var('page') ;
             $paged = ($paged >= $page) ? $paged :$page;
             $paged = ($paged<1) ? 1 :$paged;
-            query_posts("paged=$paged&posts_per_page=20&&orderby=modified&order=DESC"); 
+            query_posts("paged=$paged&posts_per_page=10&&orderby=modified&order=DESC"); 
 
         
                 ?>
