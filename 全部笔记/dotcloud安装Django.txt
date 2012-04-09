@@ -1,0 +1,358 @@
+
+安装nginx和uWSGI, http://studio.zeuik.com/?p=791
+
+1. 在dotcloud 首页:get started in seconds!后面的文本框输入你的Email 地址如 516974090@qq.com ，点击Try it now后，邮箱会收到一封激活邮件，同时数秒后页面跳转到Dotcloud文档，点击邮件的链接地址激活帐号。
+-------------------------------------------
+2.填写用户名密码，点Sign Up完成激活  （	用户名只能用数字和字母，如：falconchen）点击页面顶部的Dashboard进入控制面板。
+如果之前部署过应用会在右侧Applications处看到应用的链接。
+如果没有只会显示先安装CLI.
+-------------------------------------------
+3.同样，点击Dashboard旁边的Settings链接进入设置面板。记录下API Key,这个后面会用到。
+mFB3Y0AEM1DvKO27BGE8:088eacb10c2ed28242f3335ce1d0951ffa4e608e
+-------------------------------------------
+4.好了，现在开始安装CLI，
+文档链接在这里：http://docs.dotcloud.com/firststeps/install/
+其实已经很详细了。不想看英文的跟我操作。
+
+Linux下安装是很简单的，不说了。
+
+在Windows是非官方支持的安装方法，需要先安装Cygwin。
+4.1 下载cygwin链接：http://cygwin.com/setup.exe，一直点击下一步，国内有163做的镜像，下载组件速度非常快，很方便。
+4.2以下的包为必选安装，用searsh慢慢挑，找到后单击后面的空格框选中，安装Bin
+	注意的 python要选2.6以上的版本
+	
+    net/openssh
+    net/rsync
+    devel/git
+    devel/mercurial
+    python/python (make sure it’s at least 2.6!) 
+    web/wget
+
+
+4.3 完成后点下一步即可，Cygwin会补全依赖组件，然后自动联网下载。这个跟linux下的APT，YUM包管理器挺像的。然后等待安装过程结束
+
+4.4安装easy_install。easy_install是由PEAK(Python Enterprise Application Kit)开发的setuptools包里带的一个命令，使用easy_install实际上是在调用setuptools来完成安装模块的工作。更多关于setuptools和easy_install的介绍请参考这篇文章：
+http://www.juziblog.com/?p=365001
+
+	打开cygwin终端，输入以下命令
+	
+	wget http://peak.telecommunity.com/dist/ez_setup.py
+	
+	回车后继续输入
+	python ez_setup.py
+	
+	然后安装pip。pip与easy_install是类似，都是python下的模块安装命令，区别和用法请参考这篇文章：http://blog.sina.com.cn/s/blog_6768f2290100tzau.html
+	
+	easy_install pip	
+	最后用pip安装dotcloud模块
+	
+	pip install dotcloud
+	
+	安装完成后键入
+	dotcloud
+	会提示您输入api key（即第3步记录的密钥)
+	粘贴进去，注意不要混入回车或空格
+	
+4.5 回车后输入 dotcloud -h,如果显示如图说明安装成功。
+	
+
+
+-------------------------------------------
+以前用PHP+Mysql在Dotcloud上部署过一个Wordpress的博客，地址在这里：http://www.onephper.tk
+这次就换个口味，我们来部署Python+MySQL+Django，同样使用tk免费域名。
+-------------------------------------------
+5.
+为了兼容以后SAE的python应用(虽然内测资格还没到手)，我们使用与SAE上相同的版本
+Django-1.2.7，下载地址: http://www.djangoproject.com/download/1.2.7/tarball/
+
+终端输入:
+ wget http://media.djangoproject.com/releases/1.2/Django-1.2.7.tar.gz
+ tar xzvf Django-1.2.7.tar.gz
+ cd Django-1.2.7
+ pwd
+ 复制屏幕输出的内容，同样，后面会用到
+ /home/Administrator/Django-1.2.7
+
+ 
+ 为兼容Windows下做开发，使用pth文件方式安装 ,参考《The django Book》
+ http://djangobook.py3k.cn/2.0/chapter02/
+ 
+ 终端下用以下命令找到python的site packages目录
+ python -c 'import sys,pprint;pprint.pprint(sys.path)'
+ 于是确定site-packages目录如下
+ /usr/lib/python2.6/site-packages
+ 
+ cd /usr/lib/python2.6/site-packages
+ echo  /home/Administrator/Django-1.2.7 >django.pth
+  less django.pth
+  发现上面路径已经写入文件即可。
+  5.2 把django的bin目录加入系统path
+  echo export PATH="/home/Administrator/Django-1.2.7/django/bin:$PATH" >>~/.bashrc
+  
+	source ~/.bashrc
+	
+	好了，现在我们看看是否安装成功。进入交互解释器
+$ python
+Python 2.6.7 (r267:88850, Feb  2 2012, 23:50:20)
+[GCC 4.5.3] on cygwin
+Type "help", "copyright", "credits" or "license" for more information.
+执行python语句
+>>> import django
+>>> django.VERSION
+(1, 2, 7, 'final', 0)
+一切看起来很顺利！这样Django就装好了。
+-------------------------------------------
+
+
+
+6。接下来让我们继续部署dotcloud应用
+exit()退出python解释器，回到命令行下
+$ cd ~
+$ mkdir mydjango
+
+6.1在mydjango目录下创建 dotcloud.yml，这是DotCloud的Build File
+用vi或者在Windows资源管理器（我的cygwin装在F盘，mydjango目录位于F:\cygwin\home\Administrator\mydjango）下直接创建dotcloud.yml文件并向其写入
+
+www:
+  type: python
+
+6.2同样在此目录新建requirements.txt文件，并写入Django==1.2.7
+
+当然也可以使用最新版本的Django，这里安装1.2.7版本,目的是为了方便将来与SAE对接，SAE里的Django就是使用这个版本的。（仍然在求内测资格）
+
+用pip安装器执行在线安装(这货很强，可以但不限于pypi里的包，还可以从Git,Mercurial,Bazaar,SVN源里安装)
+
+关于Pypi,请参考：http://pypi.python.org/pypi
+关于pip安装器和requirements.txt请参考:http://www.pip-installer.org/en/latest/index.html
+
+6.3安装Django 
+ 命令行下执行
+pip install -r ~/mydjango/requirements.txt
+
+把Django的bin目录加入系统path
+
+$ echo export PATH="/lib/python2.6/site-packages/django/bin:$PATH" >>~/.bashrc
+$ source ~/.bashrc
+$ echo $PATH
+
+如果提示-bash: export: `****': not a valid identifier，因为cygwin会把WIN下的系统路径加入PATH，当路径存在空格时就会发生这些情况。我的办法就是把它们用""引起来，在.bashrc里手动改成如"/cygdrive/c/Program Files/TortoiseSVN/bin"的形式。或者实在用不到的就删了吧
+
+6.3创建一个django应用，我就命名为hello吧。
+$ cd mydjango/
+$ django-admin.py startproject hello
+$ ls hello 
+就看到了django自动创建的文件
+__init__.py  manage.py  settings.py  urls.py
+
+6.4在mydjango目录下创建wsgi.py文件，用于桥接python和Django 应用 
+写入以下内容：
+
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'hello.settings'
+import django.core.handlers.wsgi
+application = django.core.handlers.wsgi.WSGIHandler()
+
+6.4 PUSH 代码
+$ dotcloud push hello
+多次出错后终于，终于成功了，内牛满面。这网络，真是蛋都碎了~
+
+
+$ dotcloud push hello
+# upload /home/Administrator/mydjango ssh://dotcloud@uploader.dotcloud.com:443/hello
+# rsync
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+building file list ... done
+
+sent 223 bytes  received 12 bytes  7.46 bytes/sec
+total size is 4.63K  speedup is 19.69
+14:55:34 ---> Deploy of "hello" scheduled for revision rsync-1333983305890 at 2012-04-09 14:55:34
+14:55:34 ---> Building the application...
+14:55:35 [www] Build started for revision rsync-1333983305890 (incremental build from revision rsync-1333983054459)
+14:55:46 [www] Requirement already satisfied (use --upgrade to upgrade): Django==1.2.7 in /home/dotcloud/env/lib/python2.6/site-packages (from -r requirements.txt (line 1))
+14:55:46 [www] Cleaning up...
+14:55:52 [www] Build completed successfully. Compiled image size is 13MB
+14:55:52 ---> Initializing new services... (This may take a few minutes)
+14:55:52 ---> No new services found
+14:55:52 ---> All services have been initialized. Deploying code...
+14:55:52 [www.0] Deploying build revision rsync-1333983305890...
+14:55:57 [www.0] Running postinstall script...
+14:55:59 [www.0] Launching...
+14:55:59 [www.0] Waiting for the service to become responsive...
+14:56:00 [www.0] Re-routing traffic to the new build...
+14:56:01 [www.0] Successfully deployed build revision rsync-1333983305890
+14:56:01 ---> Deploy finished
+
+Deployment finished. Your application is available at the following URLs
+www: http://hello-falconchen.dotcloud.com/
+
+
+访问成功后给出的url：http://hello-falconchen.dotcloud.com/ 
+这个地址也可以通过下面的命令取得
+$ dotcloud info hello
+
+如果看到It works就说明部署成功了。像我的这样
+
+-------------------------------------------
+7.别名 (参考文章： http://blog.yangtse.me/2011/10/wordpress-dotcloud/)
+
+	7.1 不能使用一级域名，如onepythoner.tk, 但支持 www.onepythoner.tk这样的二级域名。
+	终端执行命令
+	$ dotcloud alias add hello.www www.onepythoner.tk
+	输出以下信息表示成功
+Ok. Now please add the following DNS record:
+www.onepythoner.tk. IN CNAME gateway.dotcloud.com.
+
+dot.tk控制面板中配置CNAME如下
+
+
+-------------------------------------------
+8 部署数据库
+
+	8.1 这里我使用mysql ，修改dotcloud.yml，内容如下
+www:
+  type: python
+db:
+  type: mysql
+  
+  保存后执行一次push
+  
+	8.2向settings.py加入数据库验证信息,
+	dotcloud中关于应用的一些环境设置放在服务器/home/dotcloud/environment.json里，包括和数据库连接有关的信息。
+	
+可以执行此信息查看
+$ dotcloud ssh hello.www
+# $SHELL
+dotcloud@hello-default-www-0:~$ vi /home/dotcloud/environment.json
+
+
+8.3创建数据库,命名为hello
+使用SSH登陆
+#注意：这不是最佳实践，为方便自动化部署，相关语句写在放在postinstall脚本可能更佳。
+	$ dotcloud ssh hello.db
+	mysql@hello-default-db-0:~$ mysql -v
+	mysql> CREATE DATABASE IF NOT EXISTS `hello`;
+	--------------
+	CREATE DATABASE IF NOT EXISTS `hello`
+	--------------
+
+	Query OK, 1 row affected (0.01 sec)
+	
+8.4 回到本地继续编辑settings.py,修改如下 
+
+	# Django settings for hello project.
+import json
+with open('/home/dotcloud/environment.json') as f:
+    env = json.load(f)
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    # ('Your Name', 'your_email@domain.com'),
+)
+
+MANAGERS = ADMINS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'hello',                      # Or path to database file if using sqlite3.
+        'USER': env['DOTCLOUD_DB_MYSQL_LOGIN'],                      # Not used with sqlite3.
+        'PASSWORD': env['DOTCLOUD_DB_MYSQL_PASSWORD'],                  # Not used with sqlite3.
+        'HOST': env['DOTCLOUD_DB_MYSQL_HOST'],                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': env['DOTCLOUD_DB_MYSQL_PORT'],                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+# Local time zone for this installation. Choices can be found here:
+#...
+为了使用管理界面，我们开启admin app
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    # Uncomment the next line to enable the admin:
+    'django.contrib.admin', #去除前面的#号
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
+)
+8.5 打开hello/urls.py文件，去除以下行的注释
+
+#from django.contrib import admin
+#admin.autodiscover()
+
+#(r'^admin/', include(admin.site.urls))
+
+8.6用postinstall自动调用syscdb
+在mydjango下新建文件postinstall（注意编码为ANSI,否则有可能部署失败），并写入以下内容：
+
+#!/bin/sh
+python hello/manage.py syncdb --noinput
+python mkadmin.py #下面用到
+
+再新建 mkadmin.py，写入以下内容，
+
+#!/usr/bin/env python
+from wsgi import *
+from django.contrib.auth.models import User
+u, created = User.objects.get_or_create(username='admin')
+if created:
+    u.set_password('password')
+    u.is_superuser = True
+    u.is_staff = True
+    u.save()
+    
+以上脚本创建了一个用户名为admin,密码为password的超级用户
+执行一次push后可以键入
+http://www.onepythoner.tk/admin/即可看到不带样式的登录管理界面
+
+-------------------------------------------
+9.处理静态文件和媒体资源
+首先在settings.py中指定
+STATIC_ROOT, STATIC_URL, MEDIA_ROOT, and MEDIA_URL. 
+
+我们把静态文件放置在/home/dotcloud/data目录下，因为data目录的数据在每次push中保持永久不变。如果文件放置在code或current目录下可能会在代码push后被擦除。
+
+修改settings.py相关常量，貌似1.2.x的django并不区分MEDIA与STATIC
+
+MEDIA_ROOT = '/home/dotcloud/data/media/'
+MEDIA_URL = '/media/'
+STATIC_ROOT = '/home/dotcloud/data/static/'
+STATIC_URL = '/static/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+
+在mydjango下新建 nginx.conf
+写入以下内容
+location /media/ { root /home/dotcloud/data ; }
+location /static/ { root /home/dotcloud/data ; }
+
+编辑postinstall，追加以下内容
+mkdir -p /home/dotcloud/data/media /home/dotcloud/data/static
+python hello/manage.py collectstatic --noinput
+
+执行一次push
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+ 
+ 
+ 
+ 
+
+ 
+
