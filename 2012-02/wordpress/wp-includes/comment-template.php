@@ -420,6 +420,7 @@ function get_comment_excerpt( $comment_ID = 0 ) {
 		$excerpt .= $blah[$i] . ' ';
 	}
 	$excerpt .= ($use_dotdotdot) ? '...' : '';
+
 	return apply_filters('get_comment_excerpt', $excerpt);
 }
 

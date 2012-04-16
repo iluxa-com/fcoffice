@@ -13,6 +13,8 @@ require_once(dirname(__FILE__).'/function.php');
 require_once(dirname(__FILE__).'/reading_cookie.php');
 require_once(dirname(__FILE__).'/yqxs_page_numbers.php');
 require_once(dirname(__FILE__).'/widgets.php');
+require_once(dirname(__FILE__).'/post_type.php');//自定义发布类型
 register_activation_hook( __FILE__, 'yqxs__install');
 register_deactivation_hook( __FILE__, 'yqxs__deactivation');
+
 ?>
