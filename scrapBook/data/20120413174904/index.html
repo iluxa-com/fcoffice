@@ -1,0 +1,1017 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+<title>MySQL 导入、导出备份 mysqldump工具用法 - linux学习之旅 - 51CTO技术博客</title>
+<meta name="description" content="-----------------------简单的线下备份-------------------------------------&nbsp;一.错误修正检测MySQL内phpBB的DB後发现,有个users的table是有问题的,使用myisamchk尝试去修护,发现还不行用预设方式修护,还..">
+<meta name="keywords" content="MySQL 导入、导出备份 mysqldump工具用法">
+<meta http-equiv="Cache-Control" content="private">
+
+
+
+
+
+
+
+<link rel="alternate" href="http://hbzylm.blog.51cto.com/rss.php?uid=613851" type="application/rss+xml" title="RSS 2.0">
+<link rel="edituri" type="application/rsd+xml" title="rsd" href="http://hbzylm.blog.51cto.com/xmlrpc.php?rsd=1">
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body><iframe src="index_1.html" style="display: none;" frameborder="0"></iframe><div id="bdshare_s"><iframe src="index_2.html" id="bdsIfr" style="position: absolute; display: none; z-index: 9999;" frameborder="0"></iframe><div style="display: none;" id="bdshare_l"><div id="bdshare_l_c"><h6>分享到</h6><ul><li><a href="#" class="bds_qzone qqkj">QQ空间</a></li><li><a href="#" class="bds_tsina xlwb">新浪微博</a></li><li><a href="#" class="bds_baidu bdsc">百度搜藏</a></li><li><a href="#" class="bds_renren rrw">人人网</a></li><li><a href="#" class="bds_tqq txwb">腾讯微博</a></li><li><a href="#" class="bds_kaixin001 kxw">开心网</a></li><li><a href="#" class="bds_tqf txpy">腾讯朋友</a></li><li><a href="#" class="bds_hi bdkj">百度空间</a></li><li><a href="#" class="bds_douban db">豆瓣网</a></li><li><a href="#" class="bds_tsohu shwb">搜狐微博</a></li><li><a href="#" class="bds_msn msn">MSN</a></li><li><a href="#" class="bds_qq qqsc">QQ收藏</a></li><li><a href="#" class="bds_taobao tjh">淘宝</a></li><li><a href="#" class="bds_tieba bdtb">百度贴吧</a></li><li><a href="#" class="bds_sohu shbsh">搜狐白社会</a></li><li><a href="#" class="bds_more">更多...</a></li></ul><p><a href="#" class="goWebsite">百度分享</a></p></div></div></div>
+
+<div id="home_top">
+<div class="top_nav" style="width: 990px;">
+<div class="left" style="margin-top: 10px; width: 470px;"><a href="http://blog.51cto.com/" target="_top"><img src="head_blog_sibebar_logo.gif" style="margin-top: -4px;" align="absmiddle"></a><a target="_top" href="http://www.51cto.com/">51CTO首页</a><img src="top_bg_xian.gif" style="margin-top: -4px;" align="absmiddle" width="16" height="25"><a href="http://blog.51cto.com/" target="_top">51CTO博客</a><img src="top_bg_xian.gif" style="margin-top: -4px;" align="absmiddle" width="16" height="25"><a href="http://4354877.blog.51cto.com/">我的博客</a><img src="top_bg_xian.gif" style="margin-top: -4px;" align="absmiddle" width="16" height="25">
+
+<a target="_top" href="http://blog.51cto.com/search.php">搜索</a>
+<a href="javascript:void(0);" style="color: rgb(255, 0, 0); text-decoration: underline;" id="showMessagerDim">每日博报</a>
+</div>
+
+<div class="right" style="width: 520px;">
+<div class="more"><img src="top_shequ.gif" align="absmiddle" width="27" height="16">社区：<a target="_top" href="http://bbs.51cto.com/">论坛</a><a target="_top" href="http://blog.51cto.com/">博客</a><a target="_top" href="http://down.51cto.com/">下载</a><a target="_top" href="http://book.51cto.com/">读书</a><a href="javascript:viod(0);">更多<img style="padding-left: 4px;" src="nav_ico1.gif" align="absmiddle"></a>            </div>            <span id="login_status"><div class="login2"><div style="float: right; padding-top: 8px;"><a href="http://home.51cto.com/index.php?s=/space/4344877" style="float: left; margin-top: -1px; text-decoration: none;" target="_self">falconchen</a><a href="http://home.51cto.com/index.php?s=/Home/index" target="_top" style="background: none repeat scroll 0% 0% transparent;"><img style="margin-top: -3px;" id="dia" title="领取2无忧币" src="dia.gif" align="absmiddle" width="20"></a><a href="http://home.51cto.com/index.php?s=/home" id="home_view" target="_top">去家园</a><a id="msg_top_num" href="http://home.51cto.com/index.php?s=/Notify/inbox" target="_top">短消息</a><span id="msg_view" style="display: none;" margin-left:5px;"=""><img src="top_newmsg.gif" align="absmiddle"><a id="msg_top_num" href="http://home.51cto.com/index.php?s=/Notify/inbox" style="color: rgb(204, 0, 0);" target="_top">新消息(0)</a></span><a href="http://home.51cto.com/index.php?s=/Index/logout/reback/http%253A%252F%252Fhbzylm.blog.51cto.com%252F613851%252F830702" target="_self" style="text-decoration: none;">[退出]</a></div><div style="float: right;">	<a href="http://home.51cto.com/index.php?s=/space/4344877" target="_self" style="text-decoration: none;">		<img src="avatar.php" style="border: 2px solid rgb(213, 213, 213); margin-top: 2px;" align="absmiddle" width="24" height="24">	</a></div></div></span>                </div>    </div></div>
+
+
+
+<div class="subMenu3" id="s3">
+<ul>
+<li><a href="http://home.51cto.com/" target="_top">家园</a></li>
+<li><a href="http://t.51cto.com/" target="_top">微博</a></li>
+<li><a href="http://blog.51cto.com/" target="_top">博客</a></li>
+<li><a href="http://bbs.51cto.com/" target="_top">论坛</a></li>
+<li><a href="http://down.51cto.com/" target="_top">下载</a></li>
+<li><a href="http://selftest.51cto.com/" target="_top">自测</a></li>
+<li><a href="http://doctor.51cto.com/" target="_top">门诊</a></li>
+<li><a href="http://blog.51cto.com/newsletter/" target="_top">周刊</a></li>
+<li><a href="http://book.51cto.com/" target="_top">读书</a></li>
+<li><a href="http://g.51cto.com/" target="_top">技术圈</a></li>
+<li><a href="http://zhidao.51cto.com/" target="_top">知道</a></li>
+</ul>
+</div>
+<!--简导航end-->
+
+
+
+<div class="headerBox">
+<div class="header">
+<div class="header_l">
+<div class="logo_blogname">
+
+
+
+<div class="blogName">
+<a href="http://hbzylm.blog.51cto.com/"><h1>linux学习之旅</h1></a>
+</div>
+</div><!--logo_blogname end-->
+<div class="blogLink">
+
+<a href="http://hbzylm.blog.51cto.com/">http://hbzylm.blog.51cto.com</a> <input id="txtUser" size="32" value="http://hbzylm.blog.51cto.com" type="hidden">   <a href="javascript:void(0);" onclick="copy();">【复制】</a> <a href="http://hbzylm.blog.51cto.com/rss.php?uid=613851" target="_top"></a><a href="http://hbzylm.blog.51cto.com/rss.php?uid=613851" target="_top">【订阅】</a>
+
+</div>
+
+
+
+<div class="editBrowse">
+<a class="edit" href="http://4354877.blog.51cto.com/main.php">编辑</a><a class="browse" href="#">浏览</a>
+</div>
+
+<div id="mod_tg" class="newmb" style="width: 170px; height: 20px; padding: 15px 0pt 0pt 10px; text-align: left; font-size: 12px; background: url('long_msg.gif') no-repeat scroll 0% 0% transparent; color: rgb(102, 102, 102); position: absolute; top: -10px; left: 209px; z-index: 9999;">
+	<a href="http://bbs.51cto.com/thread-919898-1.html" target="_top" style="color: rgb(102, 102, 102);">
+	<em style="background: none repeat scroll 0% 0% transparent; color: rgb(255, 0, 0);">雷锋后现代精神传播赛！</em></a>
+	<img onclick="mod_close();" style="position: absolute; top: 8px; left: 148px; cursor: pointer;" src="msgclose.gif" alt="关闭">
+</div>
+
+
+</div><!--header_l end-->
+<div class="header_r">
+<div class="blogInfo"><span><a href="http://hbzylm.blog.51cto.com/613851/o" title="察看570624209所有原创文章">原创</a>:13</span><span><a href="http://hbzylm.blog.51cto.com/613851/t" title="察看570624209所有翻译文章">翻译</a>:0</span><span><a href="http://hbzylm.blog.51cto.com/613851/c" title="察看570624209所有转载文章">转载</a>:2</span></div>
+<div class="blogNav"><a href="http://hbzylm.blog.51cto.com/">博 客</a>|<a href="http://hbzylm.blog.51cto.com/pic/">图库</a>|<a href="http://hbzylm.blog.51cto.com/addblog.php">写博文</a>|<a href="http://blog.51cto.com/user_index.php">管理博客</a>|<a href="http://51ctoblog.blog.51cto.com/all/26414/4" target="_top">帮 助</a></div>
+</div>
+</div>
+<!--header end-->
+</div><!--headerBox end-->
+<div class="mainNav">
+<span class="mainNavT"></span>
+<ul>
+<li><a href="#">首页</a></li>|<li><a href="http://hbzylm.blog.51cto.com/613851/d-1">ad 活动目录</a></li>|<li><a href="http://hbzylm.blog.51cto.com/613851/d-2">Exchange</a></li>|<li><a href="http://hbzylm.blog.51cto.com/613851/d-3">postfix</a></li>|<li><a href="http://hbzylm.blog.51cto.com/613851/d-4">mysql</a></li>|<li><a href="http://hbzylm.blog.51cto.com/613851/d-5">apache</a></li>|<li><a href="http://hbzylm.blog.51cto.com/613851/d-6">linux</a></li>|<li><a href="http://hbzylm.blog.51cto.com/613851/d-7">数据库</a></li>
+</ul>
+<span class="mainNavB"></span>
+</div>
+<!--mainNav end-->
+
+
+
+<!--[if IE 6]>
+  <script type="text/javascript" src="http://images.watchstor.com/newhomes/png.js"></script>
+  <script>
+    DD_belatedPNG.fix('img,input,ul,li, .get-box, div, .add, .sub, .ui-slider-handle, .footer-chopper');
+  </script>
+<![endif]-->
+
+
+
+
+<div id="add_sys_type_div" style="width: 600px; border: 1px solid rgb(88, 176, 221); background-color: rgb(255, 255, 255); position: absolute; left: 30%; top: 300px; display: none; z-index: 255;"></div>
+<div id="add_sys_type_divs" style="width: 550px; border: 1px solid rgb(88, 176, 221); background-color: rgb(255, 255, 255); position: absolute; left: 30%; top: 300px; display: none; z-index: 255;"></div>
+
+
+<div class="blogMain">
+<div class="blogLeft">
+
+
+<div class="box moduleUser">
+<div class="title">
+<h2><strong>570624209</strong> 的BLOG  </h2>
+</div>
+<div class="modCon">
+
+<div class="userImage"><img src="face.jpg" id="userface"></div>
+
+
+
+
+
+
+
+
+<div class="crumbs">
+<a href="http://home.51cto.com/index.php?s=/space/613851#message" class="writeMessage" target="_top">写留言</a><a href="http://g.51cto.com/addgroup.php?uid=4344877" class="inCircle" target="_top">邀请进圈子</a><a href="http://home.51cto.com/index.php?s=/Notify/write/uid/613851" class="message" target="_top">发消息</a> <a href="http://hbzylm.blog.51cto.com/" onclick="add_flink(613851);return false" class="joinLinks">加友情链接</a><a href="http://home.51cto.com/index.php?s=/space/613851" class="joinFriends" target="_top">进家园 加好友</a>
+</div>
+
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="infoList box">
+<div class="title">
+<h2>博客统计信息</h2>
+</div>
+<div class="modCon">
+<p>
+<span class="infoListHead"></span>
+用户名：570624209<br>
+文章数：15<br>
+评论数：3<br>
+访问量：1413<br>
+无忧币：87<br>
+<a href="http://51ctoblog.blog.51cto.com/26414/5591" target="_top">博客积分</a>：162<br>
+<a href="http://51ctoblog.blog.51cto.com/26414/5591" target="_top">博客等级</a>：2<br>
+注册日期：2008-12-10<br>
+</p><div class="icon_01"><a href="http://blog.51cto.com/active/no1/ing.html" target="_top">距离博客No.1争夺赛结束还有 <span style="color: rgb(255, 0, 0);">8</span> 天 </a></div> 
+<p></p>
+</div>
+<span class="modBot"></span>
+</div>
+
+
+<div class="hotArt box">
+<div class="title">
+<h2>热门文章</h2>
+</div>
+<div class="modCon">
+<ul>
+<li><a href="http://hbzylm.blog.51cto.com/613851/760672">最新openCA搭建详细步骤</a></li>
+<li><a href="http://hbzylm.blog.51cto.com/613851/830702">MySQL 导入、导出备份 my..</a></li>
+<li><a href="http://hbzylm.blog.51cto.com/613851/811342">Linux 下关闭防火墙设置</a></li>
+<li><a href="http://hbzylm.blog.51cto.com/613851/786948">apache mod_jk 安装笔记</a></li>
+<li><a href="http://hbzylm.blog.51cto.com/613851/803707">linux的安装mysql 报错信..</a></li>
+<li><a href="http://hbzylm.blog.51cto.com/613851/802431">redhat 5.3 安装mysql详..</a></li>
+<li><a href="http://hbzylm.blog.51cto.com/613851/755381">postfix安装配置详细步骤1</a></li>
+<li><a href="http://hbzylm.blog.51cto.com/613851/755388">exchange2007邮件服务器..</a></li>
+
+</ul>
+</div>
+<span class="modBot"></span>
+</div>
+<div class="search box">
+<div class="title"><h2>搜索BLOG文章</h2></div>
+<div class="modCon">
+<form method="post" action="http://hbzylm.blog.51cto.com/search.php?">
+<input name="step" value="2" type="hidden">
+<input name="authorid" value="613851" type="hidden">
+<input name="sch_area" value="S" type="hidden">
+<input value="" name="keyword" class="searchInput" type="text">
+<input value="搜 索" class="searchBtn" type="submit">
+</form></div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="myHome box">
+<div class="title"><h2 class="fl">我的技术圈(<a href="http://hbzylm.blog.51cto.com/mygroup.php" target="_top"><b>2</b></a>)</h2>
+<a href="http://home.51cto.com/apps/group/index.php?s=/Index/index/" class="fr" target="_top">更多&gt;&gt;</a></div>
+<div class="modCon">
+<ul>
+
+<li><a href="http://g.51cto.com/linuxops" target="_top">Linux运维趋势</a>&nbsp;&nbsp;
+
+<img src="3.gif" alt="有新成员加入">
+
+</li>
+
+<li><a href="http://g.51cto.com/linuxengineers" target="_top">Linux运维工程师</a>&nbsp;&nbsp;
+
+
+</li>
+
+</ul>
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="box recentGuests">
+<div class="title">
+<h2>最近访客</h2>
+</div>
+<div class="modCon">
+<ul>
+
+<li><a href="http://4354877.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://4354877.blog.51cto.com/">falco..</a></p>
+
+</li><li><a href="http://luxiaogua.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://luxiaogua.blog.51cto.com/">luxia..</a></p>
+
+</li><li><a href="http://2999433.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://2999433.blog.51cto.com/">zhuu5..</a></p>
+
+</li><li><a href="http://163876.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://163876.blog.51cto.com/">alextnt</a></p>
+
+</li><li><a href="http://zzabc.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://zzabc.blog.51cto.com/">zabc</a></p>
+
+</li><li><a href="http://4775042.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://4775042.blog.51cto.com/">five1cto</a></p>
+
+</li><li><a href="http://377092.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://377092.blog.51cto.com/">qwert..</a></p>
+
+</li><li><a href="http://wangwanzhong.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://wangwanzhong.blog.51cto.com/">wangw..</a></p>
+
+</li><li><a href="http://127516.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://127516.blog.51cto.com/">raymo..</a></p>
+
+</li><li><a href="http://4543916.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://4543916.blog.51cto.com/">cls8630</a></p>
+
+</li><li><a href="http://1720424.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://1720424.blog.51cto.com/">tanwe..</a></p>
+
+</li><li><a href="http://830650.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://830650.blog.51cto.com/">swtdx</a></p>
+
+</li></ul>
+<span class="clear"></span>
+</div>
+<span class="modBot"></span>
+</div>
+
+
+<div class="newComments box">
+<div class="title">
+<h2>最新评论 
+
+</h2>
+
+
+
+</div>
+<div class="modCon">
+<ul>
+
+<li><a href="http://wangwanzhong.blog.51cto.com/" class="operlink" target="_top"><b>wangwanzhong</b></a>：<a href="http://hbzylm.blog.51cto.com/613851/802431" target="_top">写的好全面呀，学习了</a></li>
+
+<li>[匿名]求指导～：<a href="http://hbzylm.blog.51cto.com/613851/760672" target="_top">在装OPENCA-TOOLS的时候～configure..</a></li>
+
+<li>[匿名]新手求指导：<a href="http://hbzylm.blog.51cto.com/613851/760672" target="_top">HELLO～我们老师要我用openssl做一..</a></li>
+
+
+</ul>
+</div>
+<span class="modBot"></span>
+</div>
+
+
+<div class="hotBlogArt box">
+<div class="title">
+  <h2 class="fl">51CTO推荐博文</h2>
+  <a href="http://blog.51cto.com/artcommend" class="fr">更多&gt;&gt;</a></div>
+<div class="modCon">
+<ul>
+<li><a href="http://flyzht.blog.51cto.com/2591716/831757" title="软件架构、领域驱动设计漫谈" target="_top">软件架构、领域驱动设计漫谈</a></li>
+<li><a href="http://lcrash.blog.51cto.com/1117432/832210" title="NBU异机恢复ORACLE成功版本" target="_top">NBU异机恢复ORACLE成功版本</a></li>
+<li><a href="http://zorro.blog.51cto.com/2139862/831986" title="Spring JmsTemplate的设计与实现解析" target="_top">Spring JmsTemplate的设计与实现解析</a></li>
+<li><a href="http://terryblog.blog.51cto.com/1764499/832082" title="SDCard Mount 流程分析（二）" target="_top">SDCard Mount 流程分析（二）</a></li>
+<li><a href="http://powertoolsteam.blog.51cto.com/2369428/832829" title="Asp.Net Forms认证在移动平台中遇到的一个问题以及调查过程" target="_top">Asp.Net Forms认证在移动平台中遇..</a></li>
+<li><a href="http://zhoufoxcn.blog.51cto.com/792419/832631" title="用C#打造自己的通用数据访问类库(续)" target="_top">用C#打造自己的通用数据访问类库(续)</a></li>
+<li><a href="http://shenzhoulong.blog.51cto.com/1191789/832671" title="windows phone 三种数据共享的方式(8)" target="_top">windows phone 三种数据共享的方..</a></li>
+<li><a href="http://yunli.blog.51cto.com/831344/832789" title="明晰单元测试" target="_top">明晰单元测试</a></li>
+<li><a href="http://kaneboy.blog.51cto.com/1308893/832571" title="使用JSOM创建一个SharePoint网站计数器" target="_top">使用JSOM创建一个SharePoint网站..</a></li>
+<li><a href="http://mahaile.blog.51cto.com/2891586/831048" title="android游戏开发(二)触屏事件处理" target="_top">android游戏开发(二)触屏事件处理</a></li>
+<li><a href="http://cnn237111.blog.51cto.com/2359144/832060" title="全排列的递归实现方法" target="_top">全排列的递归实现方法</a></li>
+
+</ul>
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="friendLink box">
+<div class="title">
+  <h2>友情链接</h2>
+</div>
+<div class="modCon">
+<ul>
+
+<li><a href="http://369369.blog.51cto.com/" title="系统网络运维" target="_top">系统网络运维</a></li>
+
+<li><a href="http://51ctoblog.blog.51cto.com/" title="51CTO博客开发" target="_top">51CTO博客开发</a></li>
+
+</ul>
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+
+</div>
+<!--left end-->
+
+
+
+<div class="blogRight">
+	<div class="artShow box">
+   	  <div class="share" id="share">
+
+    <div class="shareItem">
+		<div class="m_sharelinks"><a target="_top" href="http://doctor.51cto.com/develop-256.html" style="color: blue;">有奖门诊：专家博主携Linux新书畅聊企业信息安全！</a><a target="_top" href="http://blog.51cto.com/newsletter/151/" style="color: red;">社区周刊：那些你不知道的华为陋习！！</a><a target="_top" href="http://home.51cto.com/index.php?s=/Subscribe/index/origin/edm" style="color: red;">订阅周刊</a></div>
+		<p class="shareMored"><a href="http://hbzylm.blog.51cto.com/all/613851">博主的更多文章&gt;&gt;</a></p>
+	</div>
+      </div>
+       <div class="modCon">
+   	  <div class="showBox" style="margin: 0pt 0pt 10px;">
+      <div class="line_hd_r"></div>
+      <div class="art_tj">
+
+      </div>
+    		<div class="showHead">
+    		  <div class="showTitleBOx" style="text-align: center;">
+              <div class="showTitle">
+
+	 		<img src="arttype02.jpg">
+
+
+    		    MySQL 导入、导出备份 mysqldump工具用法
+                </div>
+  		    </div>
+   		    <span class="artTime">2012-04-10 14:39:34</span></div><!--showHead end-->
+    <div class="showTags">标签：<a href="http://blog.51cto.com/tagindex.php?keyword=%B1%B8%B7%DD" target="_top" class="operlink">备份</a> <a href="http://blog.51cto.com/tagindex.php?keyword=mysql" target="_top" class="operlink">mysql</a> <a href="http://blog.51cto.com/tagindex.php?keyword=%BB%D6%B8%B4" target="_top" class="operlink">恢复</a> <a href="http://blog.51cto.com/tagindex.php?keyword=mysqldump" target="_top" class="operlink">mysqldump</a>
+
+	</div>
+
+
+            <!--正文 begin-->
+    		<div class="showContent">
+    		  <p>-----------------------简单的线下备份-------------------------------------</p>
+<p>&nbsp;</p>
+<p>一.错误修正</p>
+<p>检测 MySQL 内 phpBB 的 DB 後发现,有个 users 的 table 是有问题的, 使用 myisamchk 尝试去修护,发现还不行用预设方式修护,还要多加个 "-o" 的参数才行,在使用myisamchk 时,为避免还有用户来存取 DB ,最好是能够将 MySQL 服务停止,不然最少也要下个 "mysqladmin flush-tables" 後, 再作 myisamchk 指令,像:</p>
+<p>myisamchk -o phpbb2_users.MYI</p>
+<p>这个动作,可能要作个2~3次,直到没有错误的讯息出现!</p>
+<p>修护完,重新启动 MySQL 服务後,就可以用 mysql 这个 client 的指令, 去 Query 一下 DB 内容,测试看是否正常.很幸运的,DB的部份在此时, 运作是正常的.</p>
+<p>当然,在你要备份之前,假如能先检测资料是否正确,那是最好不过了, 假如有需要,可以把检测的工作,排定在备份工作之前,但是记得,这个检测DB 的动作不要排定在 DB 高用量的那段时间,深夜无人上线的时段是个不错的选择!</p>
+<p>二.开始备份</p>
+<p>phpBB 讨论区的资料档,主要有两个部份,就是 php 主程式和 DB 内容, php 主程式的备份就比较简单,只要把全部档案 tar 起来就行了,就像:</p>
+<p>tar cvfz phpbb2_20020601.tgz phpbb (上面的 phpbb 是指 phpBB 的 php 网页程式存放目录.)</p>
+<p>以後有改到 phpBB 网页程式部份再重新备份一次就行,它的内容资料都写在DB 内,所以 php 程式档部份异动性应该不大.</p>
+<p>&nbsp;</p>
+<p>再来就是 MySQL DB 部份了,预设 MySQL 的 DB 档案是存在 /var/lib/mysql 内, 以 DB 名称为目录,目录内就是该 DB 的所有资料,像 phpbb2 这个 DB, 就是存在 /var/lib/mysql/phpbb2 内,在备份前,因为怕资料尚未完全写入磁碟, 而且 MySQL 会 Lock 在使用的 DB 档案,所以应该是要先把 MySQL 先 Shutdown 一下, 整个备份的程序可以下像下面的指令去完成:</p>
+<p>/etc/rc.d/init.d/mysqld stop&nbsp;</p>
+<p>tar cvfz phpbb2_db_20020601.tgz phpbb2&nbsp;</p>
+<p>/etc/rc.d/init.d/mysqld start</p>
+<p>(上面的 phpbb2 是指存放 phpbb2 这个 DB 的目录.)</p>
+<p>&nbsp;</p>
+<p>对!这样就可以了! 不过要注意的是,怕 DB 内每个 Tables 间的资料有关关联性, 所以最好是把整个 DB 一次备起来,单独只备哪个 Tables 的档案,以後回存时, 怕会有资料关联不一致的问题!</p>
+<p>三.如何回存</p>
+<p>phpBB 讨论区的回存,只需把档案解回原来存放网页的路径就可以,用以下指令解开:</p>
+<p>tar xvfz phpbb2_20020601.tgz</p>
+<p>DB 发生错误而要回存时,其实也不难,先找出最近一次完整正常的备份,先把现在错误的网页或 DB 先更名或 tar 起来,再把好的备份给解开回原来目录位置就行了,需要注意的是, MySQL 服务最好也是要先停止,回存完成後再启动服务,回存 DB 的整个程序可能像下面:</p>
+<p>/etc/rc.d/init.d/mysqld.stop&nbsp;</p>
+<p>mv phpbb2 phpbb2_error&nbsp;</p>
+<p>tar xvfz phpbb2_db_20020601.tgz&nbsp;</p>
+<p>/etc/rc.d/init.d/mysqld.start</p>
+<p>然後再去测试一下网页及资料库! 看使用上是否正常就行了..</p>
+<p>------------------------------------mysql线上备份---------------------------------------------------------</p>
+<p>MySQL的mysqldump工具的基本用法</p>
+<p>导出要用到MySQL的mysqldump工具，基本用法是： &nbsp;&nbsp;</p>
+<p>shell&gt; mysqldump [OPTIONS] database [tables] &nbsp;&nbsp;</p>
+<p>如果你不给定任何表，整个数据库将被导出。 &nbsp;&nbsp;</p>
+<p>通过执行mysqldump --help，你能得到你mysqldump的版本支持的选项表。 &nbsp;&nbsp;</p>
+<p><span style="color: rgb(255, 0, 0);">注意，如果你运行mysqldump没有--quick或--opt选项，mysqldump将在导出结果前装载整个结果集到内存中，如果你正在导出一个大的数据库，这将可能是一个问题。</span> &nbsp;&nbsp;</p>
+<p>mysqldump支持下列选项： &nbsp;&nbsp;</p>
+<p>--add-locks &nbsp;&nbsp;</p>
+<p>在每个表导出之前增加LOCK TABLES并且之后UNLOCK TABLE。(为了使得更快地插入到MySQL)。 &nbsp;&nbsp;</p>
+<p>--add-drop-table &nbsp;&nbsp;</p>
+<p>在每个create语句之前增加一个drop table。 &nbsp;&nbsp;</p>
+<p>--allow-keywords &nbsp;&nbsp;</p>
+<p>允许创建是关键词的列名字。这由表名前缀于每个列名做到。 &nbsp;&nbsp;</p>
+<p>-c, --complete-insert &nbsp;&nbsp;</p>
+<p>使用完整的insert语句(用列名字)。 &nbsp;&nbsp;</p>
+<p>-C, --compress &nbsp;&nbsp;</p>
+<p>如果客户和服务器均支持压缩，压缩两者间所有的信息。 &nbsp;&nbsp;</p>
+<p>--delayed &nbsp;&nbsp;</p>
+<p>用INSERT DELAYED命令插入行。 &nbsp;&nbsp;</p>
+<p>-e, --extended-insert &nbsp;&nbsp;</p>
+<p>使用全新多行INSERT语法。（给出更紧缩并且更快的插入语句） &nbsp;&nbsp;</p>
+<p>-#, --debug[=option_string] &nbsp;&nbsp;</p>
+<p>跟踪程序的使用(为了调试)。 &nbsp;&nbsp;</p>
+<p>--help &nbsp;&nbsp;</p>
+<p>显示一条帮助消息并且退出。 &nbsp;&nbsp;</p>
+<p>--fields-terminated-by=... &nbsp;&nbsp;</p>
+<p>　 &nbsp;&nbsp;</p>
+<p>--fields-enclosed-by=... &nbsp;&nbsp;</p>
+<p>　 &nbsp;&nbsp;</p>
+<p>--fields-optionally-enclosed-by=... &nbsp;&nbsp;</p>
+<p>　 &nbsp;&nbsp;</p>
+<p>--fields-escaped-by=... &nbsp;&nbsp;</p>
+<p>　 &nbsp;&nbsp;</p>
+<p>--fields-terminated-by=... &nbsp;&nbsp;</p>
+<p>这些选择与-T选择一起使用，并且有相应的LOAD DATA INFILE子句相同的含义。 &nbsp;&nbsp;</p>
+<p>LOAD DATA INFILE语法。 &nbsp;&nbsp;</p>
+<p>-F, --flush-logs &nbsp;&nbsp;</p>
+<p>在开始导出前，洗掉在MySQL服务器中的日志文件。 &nbsp;&nbsp;</p>
+<p>-f, --force, &nbsp;&nbsp;</p>
+<p>即使我们在一个表导出期间得到一个SQL错误，继续。 &nbsp;&nbsp;</p>
+<p>-h, --host=.. &nbsp;&nbsp;</p>
+<p>从命名的主机上的MySQL服务器导出数据。缺省主机是localhost。 &nbsp;&nbsp;</p>
+<p>-l, --lock-tables. &nbsp;&nbsp;</p>
+<p>为开始导出锁定所有表。 &nbsp;&nbsp;</p>
+<p>-t, --no-create-info &nbsp;&nbsp;</p>
+<p>不写入表创建信息(CREATE TABLE语句） &nbsp;&nbsp;</p>
+<p>-d, --no-data &nbsp;&nbsp;</p>
+<p>不写入表的任何行信息。如果你只想得到一个表的结构的导出，这是很有用的！ &nbsp;&nbsp;</p>
+<p><span style="color: rgb(255, 0, 0);">--opt &nbsp;&nbsp;</span>&nbsp;&nbsp;</p>
+<p>
+</p><div class="entrytitle_wrap" style="padding-bottom: 1.8em; color: rgb(51, 51, 51); font-family: Arial,serif; font-size: 15px; line-height: 21px; text-align: justify; background-color: rgb(255, 255, 255);">
+<div class="entrytitle" style="text-align: left;">
+<h1 style="font-weight: normal; letter-spacing: -0.1px; margin: 0px; font-family: georgia,'times new roman'; font-size: 28px;"><a href="http://www.shenmiguo.com/archives/2009/253_mysql-mysqldump.html" rel="bookmark" title="Link to mysql – mysqldump常用选项" style="color: rgb(8, 71, 106); text-decoration: none;">mysqldump<span style="background-color: rgb(255, 255, 255);">&nbsp;<b style="color: black; background-color: rgb(153, 255, 153);">常用选项</b></span></a></h1>
+</div>
+</div>
+<div class="entrybody" style="padding-bottom: 6px; color: rgb(51, 51, 51); font-family: Arial,serif; font-size: 15px; line-height: 21px; text-align: justify; background-color: rgb(255, 255, 255);">
+<div style="margin-bottom: 3pt; line-height: 18px;">mysqldump -uroot -ppassword –default-character-set=latin1 –opt –routines –master-data=1 –single-transaction &nbsp;–flush-logs –force DBName &gt; tt.txt</div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;">&nbsp;</div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;">&nbsp;</div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;"><span style="color: red;">–opt</span>&nbsp;<span style="font-family: 宋体;">等同于同时添加</span>&nbsp;–add-drop-tables –add-locking –create-option –disable-keys –extended-insert –lock-tables –quick –set-charset&nbsp;<span style="font-family: 宋体;">选项。</span></div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;"><span style="color: red;">–lock-tables</span>&nbsp;<span style="font-family: 宋体;">锁定导出的表。只适用</span>MyISAM</div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;"><span style="color: red;">–add-locking</span>&nbsp;<span style="font-family: 宋体;">插入语句加锁</span></div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;">-<span style="color: red;">-disable-keys&nbsp;</span><span style="font-family: 宋体;">告诉</span>&nbsp;mysqldump&nbsp;<span style="font-family: 宋体;">在</span>&nbsp;INSERT&nbsp;<span style="font-family: 宋体;">语句的开头和结尾增加</span>&nbsp;/*!40000 ALTER TABLE table DISABLE KEYS */;&nbsp;<span style="font-family: 宋体;">和</span>&nbsp;/*!40000 ALTER TABLE table ENABLE KEYS */;&nbsp;<span style="font-family: 宋体;">语句，这能大大提高插入语句的速度，因为它是在插入完所有数据后才重建索引的。该选项只适合</span>&nbsp;MyISAM&nbsp;<span style="font-family: 宋体;">表。</span></div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;"><span style="color: red;">–extended-insert</span>&nbsp;<span style="font-family: 宋体;">使用包括几个</span>VALUES<span style="font-family: 宋体;">列表的多行</span>INSERT<span style="font-family: 宋体;">语法。这样使转储文件更小，重载文件时可以加速插入。</span></div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;"><span style="color: red;">–quick</span>&nbsp;<span style="font-family: 宋体;">该选项在导出大表时很有用，它强制</span>&nbsp;mysqldump&nbsp;<span style="font-family: 宋体;">从服务器查询取得记录直接输出而不是取得所有记录后将它们缓存到内存中</span></div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;"><span style="color: red;">–routines</span>&nbsp;<span style="font-family: 宋体;">导出存储过程定义</span></div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;"><span style="color: red;">–single-transaction</span>&nbsp;<span style="font-family: 宋体;">该选项在导出数据之前提交一个</span>&nbsp;BEGIN SQL<span style="font-family: 宋体;">语句，</span>BEGIN&nbsp;<span style="font-family: 宋体;">不会阻塞任何应用程序且能保证导出时数据库的一致性状态。它只适用于事务表，例如</span>&nbsp;InnoDB&nbsp;<span style="font-family: 宋体;">和</span>BDB<span style="font-family: 宋体;">。本选项和</span>&nbsp;–lock-tables&nbsp;<span style="font-family: 宋体;">选项是互斥的，因为</span>&nbsp;LOCK TABLES&nbsp;<span style="font-family: 宋体;">会使任何挂起的事务隐含提交。要想导出大表的话，应结合使用</span>&nbsp;–quick&nbsp;<span style="font-family: 宋体;">选项。</span></div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;"><span style="color: red;">–flush-logs</span>&nbsp;<span style="font-family: 宋体;">开始转储前刷新</span><b style="color: black; background-color: rgb(255, 255, 102);">MySQL</b><span style="font-family: 宋体;">服务器日志文件。该选项要求</span>RELOAD<span style="font-family: 宋体;">权限。请注意如果结合–</span>all<span style="font-family: 宋体;">–</span>database(<span style="font-family: 宋体;">或</span>-A)<span style="font-family: 宋体;">选项使用该选项，根据每个转储的数据库刷新日志。例外情况是当使用–</span>lock-all-tables<span style="font-family: 宋体;">或</span>–master-data<span style="font-family: 宋体;">的时候：在这种情况下，日志只刷新一次，在所有表被锁定后刷新。如果你想要同时转储和刷新日志，应使用</span>–flush-logs<span style="font-family: 宋体;">连同</span>–lock-all-tables<span style="font-family: 宋体;">或</span>–master-data<span style="font-family: 宋体;">。</span></div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;"><span style="color: red;">–master-data</span>&nbsp;<span style="font-family: 宋体;">该选项将二进制日志的位置和文件名写入到输出中。该选项要求有</span>RELOAD<span style="font-family: 宋体;">权限，并且必须启用二进制日志。如果该选项值等于</span>1<span style="font-family: 宋体;">，位置和文件名被写入</span>CHANGE MASTER<span style="font-family: 宋体;">语句形式的转储输出，如果你使用该</span>SQL<span style="font-family: 宋体;">转储主服务器以设置从服务器，从服务器从主服务器二进制日志的正确位置开始。如果选项值等于</span>&nbsp;2<span style="font-family: 宋体;">，</span>CHANGE MASTER<span style="font-family: 宋体;">语句被写成</span>SQL<span style="font-family: 宋体;">注释。如果</span>value<span style="font-family: 宋体;">被省略，这是默认动作。</span>–master-data<span style="font-family: 宋体;">选项启用</span>–lock-all-tables<span style="font-family: 宋体;">，除非还指定</span>–single-transaction(<span style="font-family: 宋体;">在这种情况下，只在刚开始转储时短时间获得全局读锁定。又见</span>–single-transaction<span style="font-family: 宋体;">。在任何一种情况下，日志相关动作发生在转储时。该选项自动关闭</span>–lock-tables<span style="font-family: 宋体;">。</span>&nbsp;</div>
+<div style="margin-bottom: 3.9pt; line-height: 18px;"><span style="color: red;">–force</span>&nbsp;<span style="font-family: 宋体;">在表转储过程中，即使出现</span>SQL<span style="font-family: 宋体;">错误也继续</span></div>
+</div>
+&nbsp; &nbsp;<p></p>
+<p>-pyour_pass, --password[=your_pass] &nbsp;&nbsp;</p>
+<p>与服务器连接时使用的口令。如果你不指定“=your_pass”部分，mysqldump需要来自终端的口令。 &nbsp;&nbsp;</p>
+<p>-P port_num, --port=port_num &nbsp;&nbsp;</p>
+<p>与一台主机连接时使用的TCP/IP端口号。（这用于连接到localhost以外的主机，因为它使用 Unix套接字。） &nbsp;&nbsp;</p>
+<p>-q, --quick &nbsp;&nbsp;</p>
+<p>不缓冲查询，直接导出至stdout；使用mysql_use_result()做它。 &nbsp;&nbsp;</p>
+<p>-S /path/to/socket, --socket=/path/to/socket &nbsp;&nbsp;</p>
+<p>与localhost连接时（它是缺省主机)使用的套接字文件。 &nbsp;&nbsp;</p>
+<p>-T, --tab=path-to-some-directory &nbsp;&nbsp;</p>
+<p>对于每个给定的表，创建一个table_name.sql文件，它包含SQL CREATE 命令，和一个table_name.txt文件，它包含数据。 注意：这只有在mysqldump运行在mysqld守护进程运行的同一台机器上的时候才工作。.txt文件的格式根据--fields-xxx和--lines--xxx选项来定。 &nbsp;&nbsp;</p>
+<p>-u user_name, --user=user_name &nbsp;&nbsp;</p>
+<p>与服务器连接时，MySQL使用的用户名。缺省值是你的Unix登录名。 &nbsp;&nbsp;</p>
+<p>-O var=option, --set-variable var=option设置一个变量的值。可能的变量被列在下面。 &nbsp;&nbsp;</p>
+<p>-v, --verbose &nbsp;&nbsp;</p>
+<p>冗长模式。打印出程序所做的更多的信息。 &nbsp;&nbsp;</p>
+<p>-V, --version &nbsp;&nbsp;</p>
+<p>打印版本信息并且退出。 &nbsp;&nbsp;</p>
+<p>-w, --where='where-condition' &nbsp;&nbsp;</p>
+<p>只导出被选择了的记录；注意引号是强制的！ &nbsp;&nbsp;</p>
+<p>"--where=user='jimf'" "-wuserid&gt;1" "-wuserid&lt;1" &nbsp;</p>
+<p><span style="color: rgb(255, 0, 0);">最常见的mysqldump使用可能制作整个数据库的一个备份： &nbsp;</span></p>
+<p><span style="color: rgb(255, 0, 0);">mysqldump --opt database &gt; backup-file.sql &nbsp;&nbsp;</span></p>
+<p>但是它对用来自于一个数据库的信息充实另外一个MySQL数据库也是有用的： &nbsp;&nbsp;</p>
+<p>mysqldump --opt database | mysql --host=remote-host -C database &nbsp;&nbsp;</p>
+<p>由于mysqldump导出的是完整的SQL语句，所以用mysql客户程序很容易就能把数据导入了： &nbsp;&nbsp;</p>
+<p>shell&gt; mysqladmin create target_db_name &nbsp;&nbsp;</p>
+<p>shell&gt; mysql target_db_name &lt; backup-file.sql &nbsp;</p>
+<p>就是 &nbsp;</p>
+<p>shell&gt; mysql 库名 &lt; 文件名&nbsp;</p>
+<p>--------------------- 几个常用用例------------------ &nbsp;</p>
+<p>1.导出整个数据库</p>
+<p>&nbsp;mysqldump -u 用户名 -p 数据库名（直接输入数据库名字不用带路径） &gt; 导出的文件名 &nbsp; &nbsp; &nbsp;</p>
+<p>mysqldump -uroot -p boss &gt; boss_back.sql&nbsp;</p>
+<p>2.导出一个表(包括表的数据） &nbsp;mysqldump -u 用户名 -p 数据库名 表名&gt; 导出的文件名 &nbsp;</p>
+<p>mysqldump -u wcnc -p boss users&gt; boss_users.sql &nbsp;</p>
+<p>3.导出一个数据库的所有结构 &nbsp;</p>
+<p>mysqldump -u wcnc -p -d --add-drop-table boss&gt;/mysqlbackup/bossboss_db.sql &nbsp;&nbsp; &nbsp;</p>
+<p>-d 没有数据 --add-drop-table 在每个create语句之前增加一个drop table&nbsp; &nbsp;</p>
+<p>4、导出一个表的结构 &nbsp;</p>
+<p>mysqldump -u 用户名 -p -d --add-drop-table 数据库名 表名&gt;/mysqlbackup/boss_db.sql &nbsp;</p>
+<p>
+</p><p>&nbsp;</p>
+<p>还原部分分（1）mysql命令行source方法 &nbsp;和 （2）系统命令行方法</p>
+<p>1.还原全部数据库:</p>
+<p>(1)&nbsp;常用source 命令</p>
+<p>&nbsp; 进入mysql &nbsp; &nbsp; mysql -u root -p&nbsp;&nbsp;</p>
+<p>&nbsp; mysql&gt;use 数据库</p>
+<p>&nbsp; 然后使用source命令，后面参数为脚本文件（如这里用到的.sql）</p>
+<p>&nbsp; mysql&gt;source /mysqlbackup/boss_db.sql</p>
+<p>(2) 系统命令行： mysql -uroot -p123456 &lt;f:\all.sql</p>
+<p>2.还原单个数据库(需指定数据库)</p>
+<p>(1) mysql&gt;use mydb</p>
+<p>mysql&gt;source f:\mydb.sql</p>
+<p>(2) mysql -uroot -p123456 mydb &lt;f:\mydb.sql</p>
+<p>3.还原单个数据库的多个表(需指定数据库)</p>
+<p>(1) mysql&gt;use mydb</p>
+<p>mysql&gt;source f:\multables.sql</p>
+<p>(2) mysql -uroot -p123456 mydb &lt;f:\multables.sql</p>
+<p>4.还原多个数据库，（一个备份文件里有多个数据库的备份，此时不需要指定数据库）</p>
+<p>(1) mysql命令行：mysql&gt;source f:\muldbs.sql</p>
+<p>(2) 系统命令行： mysql -uroot -p123456 &lt;f:\muldbs.sql</p>
+<p>&nbsp;</p>
+<p></p>
+<p>---------------------------------第二篇------------------------</p>
+<p>最近在工作的时候，要将原来在本机开发的 MySQL存储过程迁往另一Linux操作系统下的MySQL数据库，因为表结构等已经在目标数据库中存在了， 不想直接拷贝数据库过去，所以用到了 MySQL的存储过程导出和导入，经上网搜索发现用Mysqldump工具可以实现，具体用法为：</p>
+<p>&nbsp;［root@localhost bin]# mysqldump -uroot -p -hlocalhost -P3306 -n -d -t -R DBName &gt; procedure_name.sql</p>
+<p>参数说明：</p>
+<p>-n: &nbsp; --no-create-db (没有创建数据库的信息)</p>
+<p>-d: &nbsp; --no-data &nbsp; &nbsp; (不导出数据)</p>
+<p>-t: &nbsp; --no-create-info (没有创建数据库表的信息)</p>
+<p>-R: &nbsp; --routines &nbsp; &nbsp; &nbsp;Dump stored routines (functions and procedures)</p>
+<p>-E: &nbsp;--events &nbsp;(导出数据库中events)</p>
+<p>-A: &nbsp;--all-databases (导出所有的数据库)</p>
+<p>-B: &nbsp;--databases db1 db2 (导出指定的数据库)</p>
+<p>&nbsp; &nbsp; Mysqldump是客户端工具用来备份数据库或在不同数据库之间进行数据迁移。备份内容包含创建活装载表的SQL语句:</p>
+<p>主要参数介绍：</p>
+<p>1.连接选项</p>
+<p>&nbsp; -u,--user=name</p>
+<p>&nbsp; -p,--password=name</p>
+<p>&nbsp; -h,--host=name</p>
+<p>&nbsp; -P,--port=#</p>
+<p>2.输出内容选项</p>
+<p>&nbsp;--add-drop-database (默认是自动加上的)</p>
+<p>&nbsp;--add-drop-table &nbsp; &nbsp; (默认是自动加上的)</p>
+<p>&nbsp;-n;--no-create-db</p>
+<p>&nbsp;-d;--no-data</p>
+<p>&nbsp;-t;--no-create-info</p>
+<p>3.输出格式选项</p>
+<p>--compact (精简格式，将导出时的一些备注省略)</p>
+<p>-c --complete-insert (导出数据的语句中，在insert to table values后加上各个字段，如insert into table(tab1,tab2,…) values(value1,value2,…))</p>
+<p>-T（指定数据表中的数据备份为单纯的数据文件和建表SQL两个文件）</p>
+<p>在mysqldump帮助文档中的说明：</p>
+<p>-T, --tab=name &nbsp; &nbsp; &nbsp;Creates tab separated textfile for each table to given</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;path. (creates .sql and .txt files). NOTE: This only</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; works if mysqldump is run on the same machine as the</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;mysqld daemon.</p>
+<p>这里提示，使用-T参数时必须保证运行mysqldump命令的客户端必须与mysqld服务器实例在同一台机器上。</p>
+<p>经 测试可知xx.sql建表文件是以linux的root用户创建，而xx.txt文件则是以linux的mysql用户创建，因此xxx.txt文件的存 放路径一定要保证mysql用户有读写创建文件的权限。在远程利用-T备份mysql的表时是不允许的，如果你非的这么使用你会发现在本地仅仅会创建 xxx.sql文件，而xxx.txt文件则没有，它有可能在远程运行mysqld的服务器上出现（仅仅是可能，保证远程运行mysqld的linux服 务器和本地linux有相同的路径和用户权限）。</p>
+<p>--fields-terminated-by=name（域分隔符）</p>
+<p>--fields-enclosed-by=name（域引用符）</p>
+<p>--fields-optionally-enclosed-by=name（域引用可选字符）</p>
+<p>--fields-escaped-by=name(转义字符)</p>
+<p>域引用符和域引用可选字符在一次导出中不能同时使用，域引用可选字符只对认为需要引用的字段作引用，而域引用符对所有的字段都要作引用。</p>
+<p>&nbsp;</p>
+<p>4.字符集选项</p>
+<p>--default--character-set=xx</p>
+<p>5.其他选项</p>
+<p>-F --flush-logs（备份前刷新日志）</p>
+<p>-l --lock-tables(给所有的表加读锁)</p>
+<p>---------------------------------------第三篇--------------------------------</p>
+<p>MySQL有很多可以导入数据的方法，然而这些只是数据传输中的一半，另外的一般是从MySQL数据库中导出数据。有许多的原因我们需要导出数据。一个重要的原因是用于备份数据库。数据的造价常常是昂贵的，需要谨慎处理它们。经常地备份可以帮助防止宝贵数据地丢失；另外一个原因是，也许您希望导出数据来共享。 在这个信息技术不断成长的世界中，共享数据变得越来越常见。&nbsp;</p>
+<p>比方说Macmillan USA维护护着一个将要出版的书籍的大型数据库。这个数据库在许多书店之间共享，这样他们就知道哪些书将会很快出版。医院越来越走向采用无纸病历记录，这样这些病历可以随时跟着你。世界变得越来越小，信息也被共享得越来越多。有很多中导出数据得方法，它们都跟导入数据很相似。因为，毕竟，这些都只是一种透视得方式。从数据库导出的数据就是从另一端导入的数据。这里我们并不讨论其他的数据库各种各样的导出数据的方法，您将学会如何用MySQL来实现数据导出。　　</p>
+<p>　　使用mysqldump:&nbsp;　　</p>
+<p>　　(mysqldump命令位于mysql/bin/目录中)&nbsp;&nbsp;</p>
+<p>　　mysqldump工具很多方面类似相反作用的工具mysqlimport。它们有一些同样的选项。但mysqldump能够做更多的事情。它可以把整个数据库装载到一个单独的文本文件中。这个文件包含有所有重建您的数据库所需要的SQL命令。这个命令取得所有的模式（Schema，后面有解释）并且将其转换成DDL语法（CREATE语句，即数据库定义语句），取得所有的数据，并且从这些数据中创建INSERT语句。这个工具将您的数据库中所有的设计倒转。因为所有的东西都被包含到了一个文本文件中。这个文本文件可以用一个简单的批处理和一个合适SQL语句导回到MySQL中。这个工具令人难以置信地简单而快速。决不会有半点让人头疼地地方。&nbsp;　　</p>
+<p>　　因此，如果您像装载整个数据库Meet_A_Geek的内容到一个文件中，可以使用下面的命令：&nbsp;&nbsp;</p>
+<p>　　bin/mysqldump –p Meet_A_Geek &gt; MeetAGeek_Dump_File.txt&nbsp;　　</p>
+<p>　　这个语句也允许您指定一个表进行dump(备份/导出/装载?)。如果您只是希望把数据库Meet_A_Geek中的表Orders中的整个内容导出到一个文件，可以使用下面的命令：&nbsp;&nbsp;</p>
+<p>　　bin/mysqldump –p Meet_A_Geek Orders &gt;MeetAGeek_Orders.txt&nbsp;　　</p>
+<p>　　这个非常的灵活，您甚至可以使用WHERE从句来选择您需要的记录导出到文件中。要达到这样的目的，可以使用类似于下面的命令：&nbsp;&nbsp;</p>
+<p>　　bin/mysqldump –p –where="Order_ID &gt; 2000" Meet_A_Geek Orders &gt; Special_Dump.txt&nbsp;　　</p>
+<p>　　mysqldump工具有大量的选项，部分选项如下表：&nbsp;&nbsp;</p>
+<p>　　选项/Option 作用/Action Performed&nbsp;&nbsp;</p>
+<p>　　--add-drop-table&nbsp;</p>
+<p>　　这个选项将会在每一个表的前面加上DROP TABLE IF EXISTS语句，这样可以保证导回MySQL数据库的时候不会出错，因为每次导回的时候，都会首先检查表是否存在，存在就删除&nbsp;&nbsp;</p>
+<p>　　--add-locks&nbsp;&nbsp;</p>
+<p>　　这个选项会在INSERT语句中捆上一个LOCK TABLE和UNLOCK TABLE语句。这就防止在这些记录被再次导入数据库时其他用户对表进行的操作&nbsp;　　</p>
+<p>　　-c or - complete_insert&nbsp;&nbsp;</p>
+<p>　　这个选项使得mysqldump命令给每一个产生INSERT语句加上列（field）的名字。当把数据导出导另外一个数据库时这个选项很有用。&nbsp;&nbsp;</p>
+<p>　　--delayed-insert 在INSERT命令中加入DELAY选项&nbsp;&nbsp;</p>
+<p>　　-F or -flush-logs 使用这个选项，在执行导出之前将会刷新MySQL服务器的log.&nbsp;&nbsp;</p>
+<p>　　-f or -force 使用这个选项，即使有错误发生，仍然继续导出&nbsp;&nbsp;</p>
+<p>　　--full 这个选项把附加信息也加到CREATE TABLE的语句中&nbsp;&nbsp;</p>
+<p>　　-l or -lock-tables 使用这个选项，导出表的时候服务器将会给表加锁。&nbsp;&nbsp;</p>
+<p>　　-t or -no-create- info&nbsp;&nbsp;</p>
+<p>　　这个选项使的mysqldump命令不创建CREATE TABLE语句，这个选项在您只需要数据而不需要DDL（数据库定义语句）时很方便。&nbsp;　　</p>
+<p>　　-d or -no-data 这个选项使的mysqldump命令不创建INSERT语句。&nbsp;&nbsp;</p>
+<p>在您只需要DDL语句时，可以使用这个选项。&nbsp;</p>
+<p>&nbsp;<span style="color: rgb(255, 0, 0);">　　--opt 此选项将打开所有会提高文件导出速度和创造一个可以更快导入的文件的选项。&nbsp;</span>&nbsp;</p>
+<p>　　-q or -quick 这个选项使得MySQL不会把整个导出的内容读入内存再执行导出，而是在读到的时候就写入导文件中。&nbsp;&nbsp;</p>
+<p>　　-T path or -tab = path 这个选项将会创建两个文件，一个文件包含DDL语句或者表创建语句，另一个文件包含数据。DDL文件被命名为table_name.sql,数据文件被命名为table_name.txt.路径名是存放这两个文件的目录。目录必须已经存在，并且命令的使用者有对文件的特权。&nbsp;　　</p>
+<p>　　-w "WHERE Clause" or -where = "Where clause "&nbsp;&nbsp;</p>
+<p>　　如前面所讲的，您可以使用这一选项来过筛选将要放到 导出文件的数据。&nbsp;　　</p>
+<p>　　假定您需要为一个表单中要用到的帐号建立一个文件，经理要看今年（2004年）所有的订单（Orders），它们并不对DDL感兴趣，并且需要文件有逗号分隔，因为这样就很容易导入到Excel中。 为了完成这个人物，您可以使用下面的句子：&nbsp;&nbsp;</p>
+<p>　　bin/mysqldump –p –where "Order_Date &gt;='2000-01-01'"&nbsp;</p>
+<p>　　–tab = /home/mark –no-create-info –fields-terminated-by=, Meet_A_Geek Orders&nbsp;</p>
+<p>&nbsp;</p>
+<p>　　这将会得到您想要的结果。&nbsp;　　</p>
+<p>　　schema：模式&nbsp;&nbsp;</p>
+<p>　　The set of statements, expressed in data definition language, that completely describe the structure of a data base.&nbsp;&nbsp;</p>
+<p>　　一组以数据定义语言来表达的语句集,该语句集完整地描述了数据库的结构。&nbsp;　　</p>
+<p>　　SELECT INTO OUTFILE ：&nbsp;&nbsp;</p>
+<p>　　如果您觉得mysqldump工具不够酷，就使用SELECT INTO OUTFILE吧, MySQL同样提供一个跟LOAD DATA INFILE命令有相反作用的命令，这就是SELECT INTO OUTFILE 命令，这两个命令有很多的相似之处。首先，它们有所有的选项几乎相同。现在您需要完成前面用mysqldump完成的功能，可以依照下面的步骤进行操作：&nbsp;　　</p>
+<p>　　1. 确保mysqld进程（服务）已经在运行&nbsp;&nbsp;</p>
+<p>　　2. cd /usr/local/mysql&nbsp;&nbsp;</p>
+<p>　　3. bin/mysqladmin ping ；// 如果这个句子通不过，可以用这个：mysqladmin -u root -p ping&nbsp;&nbsp;</p>
+<p>　　mysqladmin ping用于检测mysqld的状态，is alive说明正在运行，出错则可能需要用户名和密码。&nbsp;&nbsp;</p>
+<p>　　4. 启动MySQL 监听程序.&nbsp;&nbsp;</p>
+<p>　　5. bin/mysql –p Meet_A_Geek；// 进入mysql命令行，并且打开数据库Meet_A_Geek,需要输入密码&nbsp;&nbsp;</p>
+<p>　　6. 在命令行中，输入一下命令:&nbsp;&nbsp;</p>
+<p>　　SELECT * INTO OUTFILE '/home/mark/Orders.txt'&nbsp;</p>
+<p>　　FIELDS&nbsp;</p>
+<p>　　TERMINATED BY = ','&nbsp;</p>
+<p>　　FROM Orders&nbsp;</p>
+<p>　　WHERE Order_Date &gt;= '2000-01-01'&nbsp;</p>
+<p>　　</p>
+<p>　　在你按了Return（回车）之后，文件就创建了。这个句子就像一个规则的SELECT语句，只是把想屏幕的输出重定向到了文件中。这意味这您可以使用JOIN来实现多表的高级查询。这个特点也可以被用作一个报表产生器。&nbsp;　　</p>
+<p>　　比方说，您可以组合这一章中讨论的方法来产生一个非常有趣的查询，试试这个：&nbsp;　　</p>
+<p>　　在mysql目录建立一个名为Report_G.rpt 的文本文件，加入下面的行：&nbsp;&nbsp;</p>
+<p>　　USE Meet_A_Geek;&nbsp;</p>
+<p>　　INSERT INTO Customers (Customer_ID, Last_Name, First_Name)&nbsp;</p>
+<p>　　VALUES (NULL, "Kinnard", "Vicky");&nbsp;</p>
+<p>　　INSERT INTO Customers (Customer_ID, Last_Name, First_Name)&nbsp;</p>
+<p>　　VALUES (NULL, "Kinnard", "Steven");&nbsp;</p>
+<p>　　INSERT INTO Customers (Customer_ID, Last_Name, First_Name)&nbsp;</p>
+<p>　　VALUES (NULL, "Brown", "Sam");&nbsp;</p>
+<p>　　SELECT Last_Name INTO OUTFILE '/home/mark/Report.rpt'&nbsp;</p>
+<p>　　FROM Customers WHERE Customer_ID &gt; 1;&nbsp;&nbsp;</p>
+<p>　　然后确认 mysql进程在运行，并且您在mysql目录中， 输入下面的命令：&nbsp;</p>
+<p>&nbsp;</p>
+<p>　　bin/mysql &lt; Report_G.rpt检查您命名作为输出的文件，这个文件将会包含所有您在Customers表中输入的顾客的姓。 如您所见，您可以使用今天学到的导入/导出（import/export）的方法来帮助得到报表。</p>
+<p>---------------------------第四篇-----------------------------------</p>
+<p>Mysqldump参数大全（参数来源于mysql5.5.19源码）</p>
+<p>&nbsp;</p>
+<p>参数<span class="Apple-tab-span" style="white-space: pre;">	</span>参数说明</p>
+<p>--all-databases , -A<span class="Apple-tab-span" style="white-space: pre;">	</span>导出全部数据库。</p>
+<p>mysqldump -uroot -p --all-databases</p>
+<p>--all-tablespaces , -Y<span class="Apple-tab-span" style="white-space: pre;">	</span>导出全部表空间。</p>
+<p>mysqldump -uroot -p --all-databases --all-tablespaces</p>
+<p>--no-tablespaces , -y<span class="Apple-tab-span" style="white-space: pre;">	</span>不导出任何表空间信息。</p>
+<p>mysqldump -uroot -p --all-databases --no-tablespaces</p>
+<p>--add-drop-database<span class="Apple-tab-span" style="white-space: pre;">	</span>每个数据库创建之前添加drop数据库语句。</p>
+<p>mysqldump -uroot -p --all-databases --add-drop-database</p>
+<p>--add-drop-table<span class="Apple-tab-span" style="white-space: pre;">	</span>每个数据表创建之前添加drop数据表语句。(默认为打开状态，使用--skip-add-drop-table取消选项)</p>
+<p>mysqldump -uroot -p --all-databases (默认添加drop语句)&nbsp;</p>
+<p>mysqldump -uroot -p --all-databases --skip-add-drop-table (取消drop语句)</p>
+<p>--add-locks<span class="Apple-tab-span" style="white-space: pre;">	</span>在每个表导出之前增加LOCK TABLES并且之后UNLOCK TABLE。(默认为打开状态，使用--skip-add-locks取消选项)</p>
+<p>mysqldump -uroot -p --all-databases (默认添加LOCK语句)&nbsp;</p>
+<p>mysqldump -uroot -p --all-databases --skip-add-locks (取消LOCK语句)</p>
+<p>--allow-keywords<span class="Apple-tab-span" style="white-space: pre;">	</span>允许创建是关键词的列名字。这由表名前缀于每个列名做到。</p>
+<p>mysqldump -uroot -p --all-databases --allow-keywords</p>
+<p>--apply-slave-statements<span class="Apple-tab-span" style="white-space: pre;">	</span>在'CHANGE MASTER'前添加'STOP SLAVE'，并且在导出的最后添加'START SLAVE'。</p>
+<p>mysqldump -uroot -p --all-databases --apply-slave-statements</p>
+<p>--character-sets-dir<span class="Apple-tab-span" style="white-space: pre;">	</span>字符集文件的目录</p>
+<p>mysqldump -uroot -p --all-databases --character-sets-dir=/usr/local/mysql/share/mysql/charsets</p>
+<p>--comments<span class="Apple-tab-span" style="white-space: pre;">	</span>附加注释信息。默认为打开，可以用--skip-comments取消</p>
+<p>mysqldump -uroot -p --all-databases (默认记录注释)&nbsp;</p>
+<p>mysqldump -uroot -p --all-databases --skip-comments (取消注释)</p>
+<p>--compatible<span class="Apple-tab-span" style="white-space: pre;">	</span>导出的数据将和其它数据库或旧版本的 MySQL 相兼容。值可以为 ansi、mysql323、mysql40、postgresql、oracle、mssql、db2、maxdb、no_key_options、no_tables_options、no_field_options等，&nbsp;</p>
+<p>要使用几个值，用逗号将它们隔开。它并不保证能完全兼容，而是尽量兼容。</p>
+<p>mysqldump -uroot -p --all-databases --compatible=ansi</p>
+<p>--compact<span class="Apple-tab-span" style="white-space: pre;">	</span>导出更少的输出信息(用于调试)。去掉注释和头尾等结构。可以使用选项：--skip-add-drop-table --skip-add-locks --skip-comments --skip-disable-keys</p>
+<p>mysqldump -uroot -p --all-databases --compact</p>
+<p>--complete-insert, -c<span class="Apple-tab-span" style="white-space: pre;">	</span>使用完整的insert语句(包含列名称)。这么做能提高插入效率，但是可能会受到max_allowed_packet参数的影响而导致插入失败。</p>
+<p>mysqldump -uroot -p --all-databases --complete-insert</p>
+<p>--compress, -C<span class="Apple-tab-span" style="white-space: pre;">	</span>在客户端和服务器之间启用压缩传递所有信息</p>
+<p>mysqldump -uroot -p --all-databases --compress</p>
+<p>--create-options, -a<span class="Apple-tab-span" style="white-space: pre;">	</span>在CREATE TABLE语句中包括所有MySQL特性选项。(默认为打开状态)</p>
+<p>mysqldump -uroot -p --all-databases</p>
+<p>--databases, -B<span class="Apple-tab-span" style="white-space: pre;">	</span>导出几个数据库。参数后面所有名字参量都被看作数据库名。</p>
+<p>mysqldump -uroot -p --databases test mysql</p>
+<p>--debug<span class="Apple-tab-span" style="white-space: pre;">	</span>输出debug信息，用于调试。默认值为：d:t:o,/tmp/mysqldump.trace</p>
+<p>mysqldump -uroot -p --all-databases --debug&nbsp;</p>
+<p>mysqldump -uroot -p --all-databases --debug=" d:t:o,/tmp/debug.trace"</p>
+<p>--debug-check<span class="Apple-tab-span" style="white-space: pre;">	</span>检查内存和打开文件使用说明并退出。</p>
+<p>mysqldump -uroot -p --all-databases --debug-check</p>
+<p>--debug-info<span class="Apple-tab-span" style="white-space: pre;">	</span>输出调试信息并退出</p>
+<p>mysqldump -uroot -p --all-databases --debug-info</p>
+<p>--default-character-set<span class="Apple-tab-span" style="white-space: pre;">	</span>设置默认字符集，默认值为utf8</p>
+<p>mysqldump -uroot -p --all-databases --default-character-set=latin1</p>
+<p>--delayed-insert<span class="Apple-tab-span" style="white-space: pre;">	</span>采用延时插入方式（INSERT DELAYED）导出数据</p>
+<p>mysqldump -uroot -p --all-databases --delayed-insert</p>
+<p>--delete-master-logs<span class="Apple-tab-span" style="white-space: pre;">	</span>master备份后删除日志. 这个参数将自动激活 --master-data。</p>
+<p>mysqldump -uroot -p --all-databases --delete-master-logs</p>
+<p>--disable-keys<span class="Apple-tab-span" style="white-space: pre;">	</span>对于每个表，用/!40000 ALTER TABLE tbl_name DISABLE KEYS */;和/!40000 ALTER TABLE tbl_name ENABLE KEYS */;语句引用INSERT语句。这样可以更快地导入dump出来的文件，因为它是在插入所有行后创建索引的。该选项只适合MyISAM表，默认为打开状态。</p>
+<p>mysqldump -uroot -p --all-databases</p>
+<p>--dump-slave<span class="Apple-tab-span" style="white-space: pre;">	</span>该选项将导致主的binlog位置和文件名追加到导出数据的文件中。设置为1时，将会以CHANGE MASTER命令输出到数据文件；设置为2时，在命令前增加说明信息。该选项将会打开--lock-tables选项。默认值为0。</p>
+<p>mysqldump -uroot -p --all-databases --dump-slave=1&nbsp;</p>
+<p>mysqldump -uroot -p --all-databases --dump-slave=2</p>
+<p>--events, -E<span class="Apple-tab-span" style="white-space: pre;">	</span>导出事件。</p>
+<p>mysqldump -uroot -p --all-databases --events</p>
+<p>--extended-insert, -e<span class="Apple-tab-span" style="white-space: pre;">	</span>使用具有多个VALUES列的INSERT语法。这样使导出文件更小，并加速导入时的速度。默认为打开状态，使用--skip-extended-insert取消选项。</p>
+<p>mysqldump -uroot -p --all-databases&nbsp;</p>
+<p>mysqldump -uroot -p --all-databases --skip-extended-insert (取消选项)</p>
+<p>--fields-terminated-by<span class="Apple-tab-span" style="white-space: pre;">	</span>导出文件中忽略给定字段。与--all-databases选项</p>
+<p>mysqldump -uroot -p test test --tab="/home/mysql" --fields-terminated-by="#"</p>
+<p>--fields-enclosed-by<span class="Apple-tab-span" style="white-space: pre;">	</span>输出文件中的各个字段用给定字符包裹。与--all-databases选项</p>
+<p>mysqldump -uroot -p test test --tab="/home/mysql" --fields-enclosed-by="#"</p>
+<p>--fields-optionally-enclosed-by<span class="Apple-tab-span" style="white-space: pre;">	</span>输出文件中的各个字段用给定字符选择性包裹。与--all-databases选项</p>
+<p>mysqldump -uroot -p test test --tab="/home/mysql" --fields-enclosed-by="#" --fields-optionally-enclosed-by ="#"</p>
+<p>--fields-escaped-by<span class="Apple-tab-span" style="white-space: pre;">	</span>输出文件中的各个字段忽略给定字符。与--all-databases选项</p>
+<p>mysqldump -uroot -p mysql user --tab="/home/mysql" --fields-escaped-by="#"</p>
+<p>--flush-logs<span class="Apple-tab-span" style="white-space: pre;">	</span>开始导出之前刷新日志。&nbsp;</p>
+<p>请注意：假如一次导出多个数据库(使用选项--lock-all-tables 或者 --master-data 和 --flush-logs。</p>
+<p>mysqldump -uroot -p --all-databases --flush-logs</p>
+<p>--flush-privileges<span class="Apple-tab-span" style="white-space: pre;">	</span>在导出mysql数据库之后，发出一条FLUSH PRIVILEGES 语句。为了正确恢复，该选项应该用于导出mysql数据库和依赖mysql数据库数据的任何时候。</p>
+<p>mysqldump -uroot -p --all-databases --flush-privileges</p>
+<p>--force<span class="Apple-tab-span" style="white-space: pre;">	</span>在导出过程中忽略出现的SQL错误。</p>
+<p>mysqldump -uroot -p --all-databases --force</p>
+<p>--help<span class="Apple-tab-span" style="white-space: pre;">	</span>显示帮助信息并退出。</p>
+<p>mysqldump --help</p>
+<p>--hex-blob<span class="Apple-tab-span" style="white-space: pre;">	</span>使用十六进制格式导出二进制字符串字段。如果有二进制数据就必须使用该选项。影响到的字段类型有 BINARY、VARBINARY、BLOB。</p>
+<p>mysqldump -uroot -p --all-databases --hex-blob</p>
+<p>--host, -h<span class="Apple-tab-span" style="white-space: pre;">	</span>需要导出的主机信息</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases</p>
+<p>--ignore-table<span class="Apple-tab-span" style="white-space: pre;">	</span>不导出指定表。指定忽略多个表时，需要重复多次，每次一个表。每个表必须同时指定数据库和表名。例如： --ignore-table=database.table.</p>
+<p>mysqldump -uroot -p --all-databases --ignore-table=database.table1 --ignore-table=database.table2 ……</p>
+<p>--include-master-host-port<span class="Apple-tab-span" style="white-space: pre;">	</span>在--dump-slave产生的'CHANGE MASTER TO..'语句中增加'MASTER_HOST=&lt;host&gt;，MASTER_PORT=&lt;port&gt;'</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --include-master-host-port</p>
+<p>--insert-ignore<span class="Apple-tab-span" style="white-space: pre;">	</span>在插入行时使用 INSERT IGNORE语句.</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --insert-ignore</p>
+<p>--lines-terminated-by<span class="Apple-tab-span" style="white-space: pre;">	</span>输出文件的每行用给定字符串划分。与--all-databases选项。</p>
+<p>mysqldump -uroot -p --host=localhost test test --tab="/tmp/mysql" --lines-terminated-by="##"</p>
+<p>--lock-all-tables, -x<span class="Apple-tab-span" style="white-space: pre;">	</span>提交请求锁定所有数据库中的所有表，以保证数据的一致性。这是一个全局读锁，并且自动关闭 --single-transaction 和 --lock-tables 选项。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --lock-all-tables</p>
+<p>--lock-tables, -l<span class="Apple-tab-span" style="white-space: pre;">	</span>开始导出前，锁定所有表。用READ LOCAL锁定表以允许MyISAM表并行插入。对于支持事务的表例如InnoDB和BDB，--single-transaction是一个更好的选择，因为它根本不需要锁定表。&nbsp;</p>
+<p>请注意当导出多个数据库时，--lock-tables分别为每个数据库锁定表。因此，该选项不能保证导出文件中的表在数据库之间的逻辑一致性。不同数据库表的导出状态可以完全不同。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --lock-tables</p>
+<p>--log-error<span class="Apple-tab-span" style="white-space: pre;">	</span>附加警告和错误信息到给定文件</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --log-error=/tmp/mysqldump_error_log.err</p>
+<p>--master-data<span class="Apple-tab-span" style="white-space: pre;">	</span>该选项将binlog的位置和文件名追加到输出文件中。如果为1，将会输出CHANGE MASTER 命令；如果为2，输出的CHANGE MASTER命令前添加注释信息。该选项将打开--lock-tables选项。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --master-data=1;&nbsp;</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --master-data=2;</p>
+<p>--max_allowed_packet<span class="Apple-tab-span" style="white-space: pre;">	</span>服务器发送和接受的最大包长度。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --max_allowed_packet=10240</p>
+<p>--net_buffer_length<span class="Apple-tab-span" style="white-space: pre;">	</span>TCP/IP和socket连接的缓存大小。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --net_buffer_length=1024</p>
+<p>--no-autocommit<span class="Apple-tab-span" style="white-space: pre;">	</span>使用autocommit/commit 语句包裹表。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --no-autocommit</p>
+<p>--no-create-db, -n<span class="Apple-tab-span" style="white-space: pre;">	</span>只导出数据，而不添加CREATE DATABASE 语句。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --no-create-db</p>
+<p>--no-create-info, -t<span class="Apple-tab-span" style="white-space: pre;">	</span>只导出数据，而不添加CREATE TABLE 语句。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --no-create-info</p>
+<p>--no-data, -d<span class="Apple-tab-span" style="white-space: pre;">	</span>不导出任何数据，只导出数据库表结构。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --no-data</p>
+<p>--no-set-names, -N<span class="Apple-tab-span" style="white-space: pre;">	</span>等同于 --skip-set-charset</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --no-set-names</p>
+<p>--opt<span class="Apple-tab-span" style="white-space: pre;">	</span>等同于--skip-opt禁用.</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --opt</p>
+<p>--order-by-primary<span class="Apple-tab-span" style="white-space: pre;">	</span>如果存在主键，或者第一个唯一键，对每个表的记录进行排序。在导出MyISAM表到InnoDB表时有效，但会使得导出工作花费很长时间。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --order-by-primary</p>
+<p>--password, -p<span class="Apple-tab-span" style="white-space: pre;">	</span>连接数据库密码</p>
+<p>--pipe(windows系统可用)<span class="Apple-tab-span" style="white-space: pre;">	</span>使用命名管道连接mysql</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --pipe</p>
+<p>--port, -P<span class="Apple-tab-span" style="white-space: pre;">	</span>连接数据库端口号</p>
+<p>--protocol<span class="Apple-tab-span" style="white-space: pre;">	</span>使用的连接协议，包括：tcp, socket, pipe, memory.</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --protocol=tcp</p>
+<p>--quick, -q<span class="Apple-tab-span" style="white-space: pre;">	</span>不缓冲查询，直接导出到标准输出。默认为打开状态，使用--skip-quick取消该选项。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases&nbsp;</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --skip-quick</p>
+<p>--quote-names,-Q<span class="Apple-tab-span" style="white-space: pre;">	</span>使用（`）引起表和列名。默认为打开状态，使用--skip-quote-names取消该选项。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases&nbsp;</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --skip-quote-names</p>
+<p>--replace<span class="Apple-tab-span" style="white-space: pre;">	</span>使用 REPLACE INTO 取代 INSERT INTO.</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --replace</p>
+<p>--result-file, -r<span class="Apple-tab-span" style="white-space: pre;">	</span>直接输出到指定文件中。该选项应该用在使用回车换行对（</p>
+<p>r&nbsp;</p>
+<p>n）换行的系统上（例如：DOS，Windows）。该选项确保只有一行被使用。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --result-file=/tmp/mysqldump_result_file.txt</p>
+<p>--routines, -R<span class="Apple-tab-span" style="white-space: pre;">	</span>导出存储过程以及自定义函数。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --routines</p>
+<p>--set-charset<span class="Apple-tab-span" style="white-space: pre;">	</span>添加'SET NAMES default_character_set'到输出文件。默认为打开状态，使用--skip-set-charset关闭选项。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases&nbsp;</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --skip-set-charset</p>
+<p>--single-transaction<span class="Apple-tab-span" style="white-space: pre;">	</span>该选项在导出数据之前提交一个 BEGIN SQL语句，BEGIN 不会阻塞任何应用程序且能保证导出时数据库的一致性状态。它只适用于多版本存储引擎，仅InnoDB。本选项和 --lock-tables 选项是互斥的，因为 LOCK TABLES 会使任何挂起的事务隐含提交。要想导出大表的话，应结合使用 --quick 选项。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --single-transaction</p>
+<p>--dump-date<span class="Apple-tab-span" style="white-space: pre;">	</span>将导出时间添加到输出文件中。默认为打开状态，使用--skip-dump-date关闭选项。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases&nbsp;</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --skip-dump-date</p>
+<p>--skip-opt<span class="Apple-tab-span" style="white-space: pre;">	</span>禁用 --opt选项.</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --skip-opt</p>
+<p>--socket,-S<span class="Apple-tab-span" style="white-space: pre;">	</span>指定连接mysql的socket文件位置，默认路径/tmp/mysql.sock</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --socket=/tmp/mysqld.sock</p>
+<p>--tab,-T<span class="Apple-tab-span" style="white-space: pre;">	</span>为每个表在给定路径创建tab分割的文本文件。注意：仅仅用于mysqldump和mysqld服务器运行在相同机器上。</p>
+<p>mysqldump -uroot -p --host=localhost test test --tab="/home/mysql"</p>
+<p>--tables<span class="Apple-tab-span" style="white-space: pre;">	</span>覆盖--databases (-B)参数，指定需要导出的表名。</p>
+<p>mysqldump -uroot -p --host=localhost --databases test --tables test</p>
+<p>--triggers<span class="Apple-tab-span" style="white-space: pre;">	</span>导出触发器。该选项默认启用，用--skip-triggers禁用它。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --triggers</p>
+<p>--tz-utc<span class="Apple-tab-span" style="white-space: pre;">	</span>在导出顶部设置时区TIME_ZONE='+00:00' ，以保证在不同时区导出的TIMESTAMP 数据或者数据被移动其他时区时的正确性。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --tz-utc</p>
+<p>--user, -u<span class="Apple-tab-span" style="white-space: pre;">	</span>指定连接的用户名。</p>
+<p>--verbose, --v<span class="Apple-tab-span" style="white-space: pre;">	</span>输出多种平台信息。</p>
+<p>--version, -V<span class="Apple-tab-span" style="white-space: pre;">	</span>输出mysqldump版本信息并退出</p>
+<p>--where, -w<span class="Apple-tab-span" style="white-space: pre;">	</span>只转储给定的WHERE条件选择的记录。请注意如果条件包含命令解释符专用空格或字符，一定要将条件引用起来。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --where=" user='root'"</p>
+<p>--xml, -X<span class="Apple-tab-span" style="white-space: pre;">	</span>导出XML格式.</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --xml</p>
+<p>--plugin_dir<span class="Apple-tab-span" style="white-space: pre;">	</span>客户端插件的目录，用于兼容不同的插件版本。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --plugin_dir="/usr/local/lib/plugin"</p>
+<p>--default_auth<span class="Apple-tab-span" style="white-space: pre;">	</span>客户端插件默认使用权限。</p>
+<p>mysqldump -uroot -p --host=localhost --all-databases --default-auth="/usr/local/lib/plugin/&lt;PLUGIN&gt;"</p>
+    		</div><!--正文 end-->
+		
+<div class="m_sharebtn">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	  <tbody><tr>
+		<td align="center" valign="middle" width="11%" height="43"><img src="ssk.png" alt="分享至"></td>
+		<td align="left" valign="top" width="77%">
+			<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+				<a title="分享到新浪微博" class="bds_tsina"></a>
+				<a title="分享到QQ空间" class="bds_qzone"></a>
+				<a title="分享到腾讯微博" class="bds_tqq"></a>
+				<a title="分享到百度搜藏" class="bds_baidu"></a>
+				<a title="分享到人人网" class="bds_renren"></a>
+				<a title="分享到QQ收藏" class="bds_qq"></a>
+				<a title="分享到豆瓣网" class="bds_douban"></a>
+				<a title="分享到百度空间" class="bds_hi"></a>
+				<a title="分享到Myspace" class="bds_msn"></a>
+				<em title="分享到51CTO微博" class="weibo_51cto" onclick="show51share();"></em>
+				<span class="bds_more">更多</span>
+				
+				<a title="累计分享0次" class="shareCount">0</a>
+			</div>
+	
+	
+	
+	<!-- Baidu Button END --></td>
+		<td align="right" valign="middle" width="12%"><a href="javascript:favorBox('open');" title="一键收藏，随时查看，分享好友！"><img src="favorite_add_small.gif" alt="一键收藏，随时查看，分享好友！" border="0"></a></td>
+	  </tr>
+	</tbody></table>
+
+</div>			
+
+
+			
+			
+			
+    		<div class="showBottom">
+            <!--<div class="reviews"><span class="fl" style="cursor:pointer;"><a onclick="openFavoulist();" id="favourer"></a>
+
+            </span><div id="favourdiv" class="support01">0人</div>
+              <span class="fl">了这篇文章</span></div>-->
+              <table border="0" cellpadding="0" cellspacing="0" width="720">
+  <tbody><tr>
+    <td align="right"><img src="icon01.png" width="15" height="16"> <span style="cursor: pointer;"><a onclick="openFavoulist();" id="favourer"></a></span></td>
+    <td align="left" width="70"><div style="line-height: 28px;" id="favourdiv" class="support01">0人</div></td>
+    <td align="left" width="60">了这篇文章</td>
+  </tr>
+</tbody></table>
+
+
+
+
+            <div class="showType">类别：<a href="http://hbzylm.blog.51cto.com/613851/d-4" class="operlink">mysql</a>┆<a class="operlink" onclick="javascript:joingroups(830702,'hbzylm');return false;">技术圈</a>(0)┆阅读(49)┆评论(0)
+
+┆
+
+<a href="#" onclick="javascript:dfa(830702,4344877,'hbzylm','http://home.51cto.com/index.php?reback=http%253A%252F%252Fhbzylm.blog.51cto.com%252F613851%252F830702');return false;" class="operlink">
+推送到技术圈</a>┆<a href="http://hbzylm.blog.51cto.com/">返回首页</a></div>
+            <div class="prevNext">
+
+			上一篇 <a href="http://hbzylm.blog.51cto.com/613851/814920" class="operlink" title="RHEL5下NFS服务器配置步骤">RHEL5下NFS服务器配置步骤</a>
+
+
+            </div>
+
+            </div>
+
+	  </div><!--showBottom end-->
+      </div><!--modCon-->
+    <span class="modBot"></span>
+    </div><!--artShow end-->
+    <span class="blank"></span>
+
+<div class="artComm box">
+    <div class="title"><a name="replay"></a><h2>文章评论</h2></div>
+    <div class="modCon" id="artcomment">
+		<div>  &nbsp;</div><div>  &nbsp;</div>
+    </div><!--modCon-->
+        <span class="modBot"></span>
+</div><!--commBox end-->
+
+
+<span class="blank1"></span>
+<div class="box writeComm">
+<a name="comment"></a>
+<input name="action" value="comment" type="hidden">
+<input id="commenttid" name="tid" value="830702" type="hidden">
+<input name="com_count_ajax" id="com_count_ajax" value="1" type="hidden">
+
+ <div class="title">
+	<h2 class="fl">发表评论&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+	<span class="fl"><a class="mred" target="_top" href="http://51ctotopic.blog.51cto.com/2009463/793675">【有奖征文】畅谈私有云/Win Server 8，赢双份豪礼！</a></span>
+	
+</div>
+ <div class="modCon">
+ <div class="commForm">
+<dl>
+<dt>昵&nbsp;&nbsp;称：</dt>
+<dd>
+
+<input id="commentusername" name="username" disabled="disabled" value="falconchen" class="commInput" type="text"><input class="fl anonCheckbox" id="commentniming" name="niming" value="ON" onclick="changename()" type="checkbox"><span>匿名发表</span>
+
+
+</dd>
+</dl>
+
+<dl id="indexhidden">
+<dt>主&nbsp;&nbsp;页：</dt>
+<dd><input value="http://4354877.blog.51cto.com" class="commInput" id="commentindex" name="index" disabled="disabled" type="text"></dd>
+</dl>
+
+
+
+<dl id="commentyanzheng">
+
+
+<dt>验证码：</dt>
+<dd><input class="code" value="" id="commentauthnum" name="authnum" onclick="displaysecunum();" type="text">
+
+  <img class="fl" id="secunum" onclick="refimg()" style="display: none;" width="78" height="29"><p class="fl"><span style="display: none;" id="spanfont">点击图片可刷新验证码</span><span style="display: inline;" id="clickfont">请点击后输入验证码</span><span class="pl5"><a href="http://51ctoblog.blog.51cto.com/26414/5591" target="_top" style="text-decoration: underline;">博客过2级，无需填写验证码</a></span></p></dd>
+</dl>
+<dl>
+<dt>内&nbsp;&nbsp;容：</dt>
+<dd>
+<textarea class="writeCommCon f12" id="commentcontent" name="content"></textarea>
+</dd>
+</dl>
+</div>
+<div class="writeCommBot">
+  <input class="commBtn fl" name="submit" id="commentsubmit" value="" onclick="commentSubmitend2()" type="button">
+
+  <p class="fl"><input class="fl" name="favour" id="favour" checked="checked" value="1" type="checkbox"><span class="fl">同时赞一个</span></p>
+
+</div>
+<span class="blank"></span>
+</div><!--modCon-->
+<span class="modBot"></span>
+</div>
+
+
+<iframe src="index_3.html" id="iframe1" name="iframe1" width="0" height="0"></iframe>
+<!--发表评论 end-->
+</div>
+</div>
+<h1></h1>
+
+
+
+
+
+<div style="display: block;" title="返回顶部" class="backToTop tops">返回顶部</div>
+
+
+
+<div class="clear"></div>
+
+<div id="footer">
+  <div id="innerFooter">
+	<center>
+		<small>
+			Copyright By 51CTO.COM 版权所有<br><br>
+			<a href="http://blog.51cto.com/" target="_top"><img src="copyright.jpg"></a>
+	  </small>
+	</center>
+  </div>
+</div>
+
+<div style="display: none;">
+
+
+<iframe src="index_4.html" scrolling="no" width="0" frameborder="0" height="0"></iframe>
+</div>
+
+
+</body>
+</html>

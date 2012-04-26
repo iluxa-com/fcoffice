@@ -1,0 +1,90 @@
+/* ::::: http://www.safebeta.cn/templates/green/css/style.css ::::: */
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td { margin: 0pt; padding: 0pt; list-style: none outside none; }
+body { color: rgb(0, 0, 0); font: 12px Verdana,Tahoma,sans-serif,宋体,微软雅黑; background: url('bg.png') repeat-x scroll 0% 0% rgb(229, 236, 244); }
+table { border-collapse: collapse; border-spacing: 0pt; }
+fieldset, img { border: medium none; }
+ol, ul { list-style: none outside none; }
+a { color: rgb(0, 51, 102); text-decoration: none; }
+a:hover { color: rgb(255, 102, 0); text-decoration: underline; }
+textarea, input { font: 12px verdana,tahoma,sans-serif; }
+textarea { line-height: 150%; overflow: auto; padding: 3px; border: 1px solid rgb(208, 208, 208); margin: 0pt; }
+input { color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(242, 242, 242); padding: 3px; border: 1px solid rgb(208, 208, 208); margin: 0pt; }
+.clear { overflow: hidden; clear: both; height: 0px; }
+.navigation { width: 100%; margin: 0pt auto; background: none repeat scroll 0% 0% rgb(229, 236, 244); }
+.nav_top { width: 970px; height: 73px; margin: 0pt auto; text-align: right; }
+#logo { float: left; margin-top: 5px; width: 194px; height: 67px; background: url('logo.gif') repeat scroll 0% 0% transparent; display: block; }
+#logo_ad { float: left; text-align: left; margin-left: 0px; margin-top: 6px; }
+.nav_info { float: right; padding: 8px 5px 0pt 0pt; }
+.nav_login, .nav_login a { padding: 4px 0pt; text-align: right; color: rgb(54, 54, 54); margin-left: 10px; }
+.nav li { list-style: none outside none; float: left; }
+.nav a { display: block; }
+.nav { background: url('guide_mid.png') repeat scroll 0% 0% transparent; line-height: 30px; height: 30px; }
+.nav_primary { height: 30px; width: 975px; margin: 0pt auto; }
+.nav_primary a { text-decoration: none; }
+.nav_primary ul { padding: 0pt; margin: 0pt; list-style: none outside none; }
+.nav_primary li { float: left; text-align: center; width: 76px; margin-right: 5px; height: 10px ! important; }
+.nav_primary a { font-size: 14px; color: rgb(255, 255, 255); text-decoration: none; display: block; height: 30px; line-height: 30px; }
+.nav_primary .nav_current, .nav_primary a:hover { color: rgb(255, 255, 255); font-weight: bold; text-decoration: none; }
+#container { margin: 0px auto; width: 955px; padding: 10px; clear: both; }
+#pbleft { clear: left; float: left; border: 1px solid rgb(90, 153, 206); width: 650px; }
+#counttool { clear: both; height: 25px; line-height: 28px; margin: 0pt auto; width: 955px; color: rgb(0, 51, 102); }
+#counttool a { color: rgb(0, 51, 102); font-weight: bold; font-size: 14px; text-decoration: underline; }
+#counttool span { font-family: 宋体,微软雅黑，Verdana,Tahoma,sans-serif; font-size: 13px; font-weight: normal; }
+#countinfo { float: left; }
+#tool { float: right; }
+.fenxiang { height: 35px; margin-right: 5px; padding-top: 3px; margin-bottom: 10px; border: 0pt none; }
+@media all and (min-width: 0px) {
+  .newslist dl dd { margin-top: 0px; }
+}
+#sidebar { float: right; width: 300px; color: rgb(85, 85, 85); background: url('index_56.png') repeat-y scroll 0% 0% transparent; }
+#sidebar h2 { background: url('guide_mid.png') repeat-x scroll 0% 0% transparent; font-size: 14px; height: 30px; line-height: 30px; color: rgb(255, 255, 255); margin-bottom: 0px; clear: both; }
+.leftborder { background: url('guide_left.png') no-repeat scroll 0% 0% transparent; width: 3px; float: left; height: auto; }
+.rightborder { background: url('guide_right.png') no-repeat scroll 0% 0% transparent; width: 3px; float: right; }
+.midBlock { text-indent: 1em; font-weight: bold; color: rgb(255, 255, 255); float: left; }
+#sidebar ol li { line-height: 24px; height: 24px; width: 278px; overflow: hidden; }
+#sidebar ol li a, #sidebar ol li a:visited { color: rgb(51, 102, 153); }
+#sidebar ol { padding: 5px 5px 0pt; margin-bottom: 6px; width: 288px; clear: both; border: 1px solid rgb(90, 153, 206); }
+#footer { clear: both; margin: 0pt auto; text-align: center; color: rgb(51, 102, 153); }
+#footer a { color: rgb(51, 102, 153); font-weight: bold; }
+#copyright { padding: 6px 0pt 0pt; line-height: 180%; }
+#counter {  }
+.pb_mainbox_show { padding: 5px; border: 2px solid rgb(239, 239, 239); background: none repeat scroll 0% 0% rgb(240, 245, 249); }
+.pb_box_l_show { float: left; width: 100%; font-family: Verdana,Tahoma,sans-serif,宋体,微软雅黑; text-align: center; border-bottom: 1px solid rgb(242, 242, 242); padding: 0pt 0pt 10px; }
+.pb_box_l_show h1 { font-weight: bold; color: rgb(0, 0, 0); font-size: 16px; overflow: hidden; line-height: 28px; height: 28px; }
+.pb_box_l_show p { text-align: left; }
+.pb_box_right_show { color: rgb(51, 102, 153); line-height: 22px; float: left; margin: 5px 0pt; border-bottom: 1px solid rgb(51, 102, 153); }
+.pb_box_right_show span { margin: 0px 6px; overflow: hidden; color: rgb(51, 102, 153); line-height: 8px; height: 8px; }
+.pb_box_right_show a { padding-left: 4px; }
+.pb_box_lrad2_show { color: rgb(51, 51, 51); line-height: 180%; padding-top: 5px; font-size: 14px; clear: both; width: 634px; overflow: hidden; }
+.pb_box_lrad2_show a { color: rgb(0, 0, 255); text-decoration: underline; }
+.pb_box_lrad2_show p { padding: 0pt; margin: 0pt 0pt 1.1em; }
+.show_dig { width: 150px; margin-right: auto; margin-left: auto; margin-top: 10px; }
+.digBtn { float: left; display: block; width: 50px; height: 70px; text-align: center; background: url('digback.gif') no-repeat scroll center 0pt transparent; }
+.digBtn strong { color: rgb(255, 255, 255); font-family: Georgia; font-size: 16px; padding: 3px 1px 0pt 0pt; height: 45px; clear: both; display: block; text-shadow: 1px 1px 3px rgb(255, 255, 255); }
+.digBtn a { text-decoration: none ! important; color: rgb(255, 102, 0); }
+.buryBtn { float: right; display: block; width: 50px; height: 70px; text-align: center; background: url('buryback.gif') no-repeat scroll center 0pt transparent; }
+.buryBtn strong { color: rgb(255, 255, 255); font-family: Georgia; font-size: 16px; padding: 3px 1px 0pt 0pt; height: 45px; clear: both; display: block; text-shadow: 1px 1px 3px rgb(255, 255, 255); }
+.buryBtn a { text-decoration: none ! important; color: rgb(123, 177, 96); }
+#toollinks { border-top: 0px solid rgb(90, 153, 206); margin: 10px 0pt 0pt; color: rgb(102, 102, 102); text-align: right; line-height: 34px; height: 34px; font-size: 12px; }
+#toollinks a:link, #toollinks a:visited { text-decoration: none; border: 1px solid rgb(90, 153, 206); padding: 4px 8px; margin-left: 5px; width: 75px; color: rgb(0, 0, 0); background: url('bg_n_remark.png') repeat scroll 0% 0% transparent; text-align: center; }
+#toollinks a:hover, #toollinks a:active { border: 1px solid rgb(218, 65, 35); padding: 4px 8px; margin-left: 5px; width: 75px; color: rgb(255, 255, 255); background: none repeat scroll 0% 0% rgb(218, 65, 35); text-align: center; }
+.bncss { margin: 10px 0pt; padding: 7px; line-height: 20px; font-size: 14px; }
+.comment { margin-top: 10px; }
+#comments { padding: 0pt; margin: 10px 0pt; }
+#comments .comments_title { border-bottom: 1px solid rgb(90, 153, 206); line-height: 28px; height: 28px; margin: 0pt; padding: 0pt; clear: both; }
+#comments .comments_title h2 { padding: 0pt 0pt 0pt 22px; color: rgb(85, 85, 85); font-size: 14px; background: url('tools.gif') no-repeat scroll 0pt -196px transparent; height: 22px; }
+.comments_title span { float: right; padding-right: 5px; }
+#postcomment { padding: 0pt 0pt 5px; background: none repeat scroll 0% 0% rgb(229, 236, 244); }
+#postcomment div { margin: 1px 7px; border: medium none; background: none repeat scroll 0% 0% transparent; line-height: 21px; text-align: left; }
+#postcomment img { margin-right: 2px; padding-bottom: 3px; vertical-align: bottom; }
+#postcomment input { width: 80px; padding: 3px 4px; margin: 5px 5px 1px 0pt; border-bottom: 1px solid rgb(51, 102, 153); background: none repeat scroll 0% 0% rgb(250, 250, 210); font-family: Verdana; height: 14px; }
+#postcomment textarea { float: left; width: 450px; padding: 3px 4px; margin: 5px 5px 1px 0pt; border: 1px solid rgb(221, 221, 221); background: none repeat scroll 0% 0% rgb(255, 255, 255); height: 120px; overflow: auto; }
+#postcomment #send_comment { float: left; width: 78px; background: url('post_bg.gif') repeat scroll 0% 0% transparent; font-size: 14px; height: 29px; }
+.nocomment { padding: 7px 0pt 7px 5px; }
+.smileytable { float: right; }
+.cktip { padding: 3px; color: rgb(255, 0, 0); }
+.pb_box_lrad2_show img, .pb_box_lrad2_show table { clear: left; }
+/* ::::: http://www.safebeta.cn/templates/green/css/thickbox.css ::::: */
+
+* { padding: 0pt; margin: 0pt; }

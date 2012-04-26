@@ -1,0 +1,222 @@
+/* ::::: http://hbzylm.blog.51cto.com/css/skin/42.css ::::: */
+
+.header, .blogMain, .footer { width: 1000px; margin: 0pt auto; }
+.headerBox { clear: both; }
+.header { position: relative; height: 240px; background: url('headerbg.jpg') no-repeat scroll 0% 0% transparent; }
+.header_l { float: left; width: 54%; padding: 20px 0pt 0pt 20px; }
+.header_r { float: right; width: 43%; }
+.blogName { padding: 35px 0pt 0pt; float: left; }
+.blogName, .blogName a:link, .blogName a:visited { color: rgb(255, 255, 255); }
+.blogName h1 { font-weight: 700; font-size: 26px; font-family: Arial,SimSun; }
+.blogLink { font-size: 14px; clear: both; margin: 5px 0pt 0pt 10px; font-family: Arial,SimSun; }
+.blogLink, .blogLink a:link, .blogLink a:visited { color: rgb(255, 255, 255); }
+.editBrowse { width: 74px; height: 22px; background: url('editbrowse.png') no-repeat scroll 0% 0% transparent; line-height: 22px; clear: both; margin-top: 85px; }
+.editBrowse a { padding: 0pt 5px 0pt 7px; }
+.edit { color: rgb(51, 51, 51) ! important; }
+.browse { color: rgb(255, 255, 255) ! important; }
+.blogInfo { text-align: right; margin: 25px 25px 0pt 0pt; }
+.blogInfo a { padding: 0pt 0pt 0pt 20px; color: rgb(255, 255, 255); }
+.blogInfo, .blogInfo a:link, .blogInfo a:visited { color: rgb(255, 255, 255); }
+.blogInfo span { padding-left: 20px; }
+.blogNav { font-size: 14px; text-align: right; margin: 166px 10px 0pt 0pt; }
+.blogNav a { padding: 0pt 7px; }
+.blogNav, .blogNav a:link, .blogNav a:visited, .blogNav a:hover { color: rgb(255, 255, 255); }
+.mainNav { background: none repeat scroll 0% 0% rgb(94, 35, 43); width: 1000px; margin: 0pt auto 10px; padding: 10px 0pt; }
+.mainNav ul { padding-left: 20px; color: rgb(255, 255, 255) ! important; line-height: 18px ! important; }
+.mainNav li { display: inline; }
+.mainNav li a { padding: 0pt 10px; }
+.mainNav, .mainNav li a:link, .mainNav li a:visited { color: rgb(255, 255, 255); }
+.box { background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 1px solid rgb(224, 214, 189); }
+.blogLeft { float: left; width: 240px; overflow: hidden; }
+.moduleUser { margin-bottom: 10px; padding-bottom: 10px; position: relative; }
+.moduleUser { margin-bottom: 10px; padding-bottom: 10px; position: relative; }
+.userImage { text-align: center; margin: 10px 0pt 5px; }
+.userImage img { padding: 3px; border: 1px solid rgb(202, 202, 202); }
+.crumbs { background: url('crumbs.png') no-repeat scroll 0% 0% transparent; width: 177px; height: 80px; margin: 12px auto 0pt; clear: both; }
+.crumbs a { display: block; float: left; }
+.crumbs a:link, .crumbs a:visited { color: rgb(85, 85, 85); }
+.writeMessage { padding: 6px 0pt 0pt 25px; width: 40px; }
+.inCircle { padding: 6px 0pt 0pt 45px; width: 60px; }
+.message { padding: 15px 0pt 0pt 25px; width: 40px; }
+.joinLinks { padding: 15px 0pt 0pt 45px; width: 60px; }
+.joinLinks { padding: 15px 0pt 0pt 45px; width: 60px; }
+.joinFriends { color: rgb(233, 53, 4) ! important; padding: 17px 0pt 0pt 60px; width: 80px; background: url('h.png') no-repeat scroll 40px 15px transparent; }
+.infoList { margin-bottom: 10px; }
+.infoList a:link, .infoList a:visited { color: rgb(114, 41, 50); }
+.infoList p { line-height: 24px; padding: 5px 5px 5px 15px; }
+.infoListHead { display: block; }
+.myHome { margin-bottom: 10px; }
+.myHome ul { padding: 5px 0pt 10px; }
+.myHome li { line-height: 24px; padding-left: 14px; background: url('list.jpg') no-repeat scroll 5px 10px transparent; border-bottom: 1px dashed rgb(217, 217, 217); margin: 0pt 10px; }
+.search { margin-bottom: 10px; }
+.search .modCon { text-align: center; padding: 10px; }
+.searchInput { width: 200px; height: 20px; border: 1px solid rgb(217, 217, 217); margin-bottom: 10px; }
+.hotBlogArt { margin-bottom: 10px; }
+.hotBlogArt ul { padding: 5px 0pt 10px; }
+.hotBlogArt li { line-height: 24px; padding-left: 14px; background: url('list.jpg') no-repeat scroll 5px 10px transparent; border-bottom: 1px dashed rgb(217, 217, 217); margin: 0pt 10px; }
+.friendLink { margin-bottom: 10px; }
+.friendLink .modCon { line-height: 22px; }
+.friendLink ul { padding: 5px 0pt 10px; }
+.friendLink li { line-height: 24px; padding-left: 14px; background: url('list.jpg') no-repeat scroll 5px 10px transparent; border-bottom: 1px dashed rgb(217, 217, 217); margin: 0pt 10px; }
+.hotArt { margin-bottom: 10px; }
+.hotArt ul { padding: 5px 0pt 10px; }
+.hotArt li { line-height: 28px; background: url('list.jpg') no-repeat scroll 5px 13px transparent; padding-left: 15px; border-bottom: 1px dashed rgb(217, 217, 217); margin: 0pt 12px; }
+.newComments { margin-bottom: 10px; }
+.newComments ul { padding: 0pt 0pt 10px; }
+.newComments li { line-height: 22px; padding: 5px 0pt 5px 2px; border-bottom: 1px dashed rgb(217, 217, 217); margin: 0pt 12px; }
+.recentGuests { margin-bottom: 10px; }
+.recentGuests ul { width: 92%; margin: 15px auto 0pt; }
+.recentGuests li { float: left; text-align: center; width: 72px; height: 96px; }
+.recentGuests li img { width: 60px; height: 60px; border: 1px solid rgb(204, 204, 204); padding: 2px; }
+.recentGuests li p { margin-top: 8px; }
+.blogRight { float: right; width: 750px; overflow: hidden; }
+.share { padding: 0pt 10px; position: relative; }
+.showBox { border-top: 2px solid rgb(239, 239, 239); margin: 5px 0pt 0pt; clear: both; position: relative; }
+.showBox a:link, .showBox a:visited { color: rgb(114, 41, 50); }
+.art_tj { position: absolute; right: 0pt; top: 0pt; }
+.showHead { height: 60px; margin: 5px 12px 0pt; border-bottom: 1px dashed rgb(204, 204, 204); }
+.showTitleBOx { padding: 20px 0pt 0pt; overflow: hidden; }
+.artTime { color: rgb(102, 102, 102); float: right; padding: 0pt 25px 0pt 0pt; }
+.showTitle { font: bold 20px/20px SimSun; }
+.showTags { margin-left: 12px; line-height: 40px; }
+.showTags a { padding-right: 10px; }
+.showContent { line-height: 2; font-size: 14px; margin: 20px 15px; border-bottom: 1px dashed rgb(217, 217, 217); word-wrap: break-word; }
+.showContent p { padding-bottom: 15px; }
+.support01, .support02, .support03 { background: url('support.png') no-repeat scroll 0% 0% transparent; width: 64px; height: 28px; font-weight: bold; padding-left: 10px; cursor: pointer; float: left; margin: 0pt 5px; }
+.support01 { color: rgb(1, 101, 179); }
+.showType { color: rgb(102, 102, 102); text-align: right; margin: 0pt 12px; line-height: 40px; clear: both; }
+.prevNext { line-height: 50px; text-align: center; border-top: 1px dashed rgb(217, 217, 217); }
+.artComm { margin-bottom: 10px; }
+.writeComm { margin-bottom: 10px; min-height: 260px; }
+.writeComm .title { margin-bottom: 15px; }
+.commForm { height: 216px; }
+.writeComm dl { clear: both; height: 36px; }
+.writeComm dl dd span { display: block; padding-top: 9px; float: left; }
+.writeComm dl dt { width: 50px; padding-left: 20px; padding-top: 7px; }
+.writeComm dl dt, .writeComm dl dd { float: left; }
+.writeCommCon { width: 650px; float: left; height: 90px; padding: 2px; line-height: 20px; border: 1px solid rgb(214, 214, 214); }
+.commInput, .code { height: 26px; line-height: 26px; float: left; margin-right: 10px; border: 1px solid rgb(214, 214, 214); }
+.commInput { width: 380px; }
+.code { width: 90px; }
+.anonCheckbox { margin: 8px 5px 0pt 0pt; }
+.writeCommBot { width: 240px; clear: both; float: right; }
+.commBtn { background: url('commbtn.png') no-repeat scroll 0% 0% transparent; width: 102px; height: 37px; border: medium none; cursor: pointer; }
+.writeCommBot p { padding: 10px 0pt 0pt 5px; }
+.writeCommBot p span { padding: 0pt 0pt 0pt 4px; display: block; width: 100px; }
+body { font-family: 宋体,Arial Narrow,arial,serif; background: none repeat scroll 0% 0% rgb(114, 41, 50); font-size: 12px; color: rgb(44, 44, 44); }
+* { padding: 0pt; margin: 0pt; }
+em { font-style: normal; }
+img, div {  }
+table, td, tr, th { font-size: 12px; }
+table { margin: 0pt auto; }
+img { vertical-align: top; border: 0pt none; }
+h1, h2, h3, h4, h5, h6 { font-size: 12px; font-weight: normal; }
+.f12 { font-size: 12px; }
+a:link { color: rgb(114, 41, 50); text-decoration: none; }
+a:visited { color: rgb(114, 41, 50); text-decoration: none; }
+a:hover { color: rgb(114, 41, 50); text-decoration: underline; }
+a:active { color: rgb(114, 41, 50); }
+.fl { float: left; }
+.fr { float: right; }
+.clear { clear: both; display: block; }
+.blank { height: 10px; clear: both; overflow: hidden; display: block; }
+.pl5 { padding-left: 5px; }
+.title { background: url('titlebg.jpg') repeat-x scroll 0% 0% rgb(240, 229, 207); height: 23px; padding: 8px 10px 0pt 15px; }
+.title h2 { font-size: 14px; font-weight: 700; color: rgb(114, 41, 50); }
+.title a:link, .title a:visited { color: rgb(114, 41, 50); }
+.modCon { clear: both; }
+.modBot { display: block; height: 1px; overflow: hidden; clear: both; }
+img { border: 0pt none; }
+/* ::::: http://blog.51cto.com/group/css/header_master_top.css ::::: */
+
+body { margin: 0pt; }
+img { border: medium none; }
+#home_top { margin: auto; height: 35px; background-image: url('head_top_bg.gif'); font-size: 12px; }
+#home_top .top_nav { margin: auto; width: 960px; height: 35px; font-size: 12px; }
+#home_top .top_nav .left { width: 350px; float: left; text-align: left; color: rgb(105, 105, 105); margin-top: 5px; }
+#home_top .top_nav .left a { padding: 2px; color: rgb(105, 105, 105); text-decoration: none; }
+#home_top .top_nav .left a:hover { text-decoration: none; background: none repeat scroll 0% 0% rgb(74, 74, 74); color: rgb(255, 255, 255); }
+#home_top .top_nav .right { float: right; color: rgb(105, 105, 105); text-align: right; width: 470px; }
+#home_top .top_nav .right .login2 { color: rgb(105, 105, 105); text-align: right; float: right; margin-right: 6px; }
+#home_top .top_nav .right .login2 a { color: rgb(0, 95, 171); padding: 2px; margin-left: 2px; margin-right: 2px; margin-top: 5px; text-decoration: underline; }
+#home_top .top_nav .right .login2 a:hover { padding: 2px; text-decoration: none; background: none repeat scroll 0% 0% rgb(74, 74, 74); color: rgb(255, 255, 255); }
+#home_top .top_nav .right .more { float: right; padding: 8px 0pt 3px; color: rgb(105, 105, 105); text-decoration: none; }
+#home_top .top_nav .right .more a { padding: 2px; color: rgb(105, 105, 105); text-decoration: none; }
+#home_top .top_nav .right .more a:hover { padding: 2px; text-decoration: none; background: none repeat scroll 0% 0% rgb(74, 74, 74); color: rgb(255, 255, 255); }
+.subMenu3 { width: 60px; border: 1px solid rgb(206, 206, 206); text-align: center; position: absolute; display: none; background-color: rgb(255, 255, 255); z-index: 1000; }
+.subMenu3 a { padding-left: 10px; line-height: 24px; text-align: left; display: block; height: 24px; padding-top: 1px; color: rgb(0, 0, 0); text-decoration: none; }
+.subMenu3 a:hover { text-decoration: none; background: none no-repeat scroll 0% 0% rgb(235, 235, 235); color: rgb(204, 0, 0); }
+.subMenu3 ul { margin: 0pt; padding: 0pt; }
+.subMenu3 li { padding: 1px 0px 0px; list-style: none outside none; font-size: 12px; background-color: rgb(255, 255, 255); }
+/* ::::: http://blog.51cto.com/css/skin/base.css ::::: */
+
+.hotArt li, .newComments li, .hotBlogArt li, .hotBlog li, .myHome li, .myLink li, .relatedArt li, .share li, .recentGuests li, .friendLink li, .artList li, .artType li { list-style-type: none; }
+.modCon { clear: both; }
+.blank1 { height: 1px; overflow: hidden; clear: both; }
+.mainNav li a { display: inline-block; }
+/* ::::: http://bdimg.share.baidu.com/static/css/bdsstyle.css?cdnversion=20111226 ::::: */
+
+#bdshare ul, #bdshare_s ul, #bdshare ul li, #bdshare_s ul li, #bdshare_l_c ul li, #bdshare_m_c ul li, #bdshare_pop ul, #bdshare_pop ul li { list-style: none outside none; margin: 0pt; padding: 0pt; }
+#bdshare { z-index: 999999; padding-bottom: 2px; font-size: 12px; float: left; text-align: left ! important; }
+#bdshare a, #bdshare_s a, #bdshare_pop a { text-decoration: none; cursor: pointer; }
+#bdshare a:hover, #bdshare_s a:hover, #bdshare_pop a:hover { color: rgb(51, 51, 51); opacity: 0.8; }
+#bdshare h6, #bdshare_s h6 { width: 100%; font: 700 14px/22px '瀹嬩綋'; text-indent: 0.5em; border-top: 1px solid rgb(251, 251, 251); border-bottom: 1px solid rgb(242, 241, 241); background-color: rgb(246, 246, 246); float: left; padding: 5px 0pt; margin: 0pt; }
+#bdshare ul, #bdshare_s ul { width: 98%; float: left; padding: 8px 0pt; margin-left: 2px; overflow: hidden; }
+#bdshare ul li, #bdshare_s ul li { width: 47%; float: left; margin: 4px 2px; }
+#bdshare ul li a, #bdshare_s ul li a { color: rgb(86, 86, 86); font: 12px '瀹嬩綋'; display: block; width: 98%; padding: 6px 0pt; text-indent: 2.4em; border: 1px solid rgb(255, 255, 255); }
+#bdshare ul li a:hover, #bdshare_s ul li a:hover { background-color: rgb(243, 243, 243); border: 1px solid rgb(238, 238, 238); border-radius: 3px 3px 3px 3px; }
+#bdshare p, #bdshare_s p { width: 100%; height: 21px; font: 12px '瀹嬩綋'; border-top: 1px solid rgb(242, 241, 241); background-color: rgb(248, 248, 248); float: left; padding: 0pt; margin: 0pt; }
+#bdshare p a, #bdshare_s p a { width: auto; text-align: right; float: right; padding: 5px; }
+#bdshare_l { width: 212px; position: absolute; top: 0pt; background: none repeat scroll 0% 0% rgb(255, 255, 255); text-align: left; }
+#bdshare_l_c { width: 210px; float: left; border: 1px solid rgb(233, 233, 233); text-align: left; }
+#bdshare_l_c ul li { width: 47%; height: 26px; float: left; margin: 2px; }
+#bdshare_l_c ul li a { background: url('is.png') no-repeat scroll 0% 0% transparent; height: auto ! important; }
+#bdshare_l, #bdshare_m { box-shadow: 0pt 0pt 7px rgb(238, 238, 238); z-index: 99999; }
+#bdshare_l_c p a.goWebsite, #bdshare_m_c p a.goWebsite, #bdshare_pop p a.goWebsite { text-align: right; background: url('pi.gif') no-repeat scroll 0pt 5px transparent; line-height: 12px; padding-left: 12px; color: rgb(140, 140, 140); }
+#bdshare_l_c p a.goWebsite:hover, #bdshare_m_c p a.goWebsite:hover, #bdshare_pop p a.goWebsite:hover { color: rgb(0, 169, 224); }
+span.bds_more { background: url('is.png') no-repeat scroll 0pt 5px transparent ! important; }
+span.bds_more, .bds_tools a { display: block; font-family: '瀹嬩綋',Arial; height: 16px; float: left; cursor: pointer; padding-top: 6px; padding-bottom: 3px; padding-left: 22px; }
+.bds_tools_32 a { background: url('is_32.png') no-repeat scroll 0% 0% transparent; width: 37px; height: 37px; display: block; float: left; margin-right: 3px; text-indent: -100em; cursor: pointer; }
+.bds_tools_32 span.bds_more { background: url('is_32.png') no-repeat scroll 0pt 5px transparent ! important; width: 37px; height: 32px; text-indent: -100em; padding-left: 0pt; }
+.bds_more { background-image: url('is.png') ! important; background-position: 0pt 4px ! important; }
+.bdshare_b a.shareCount, .bds_tools a.shareCount, .bds_tools_32 a.shareCount { float: left; background: url('sc.png') no-repeat scroll 0% 0% transparent ! important; margin: 0pt; padding: 0pt 0pt 0pt 5px; text-align: center; color: rgb(69, 69, 69); font-family: '瀹嬩綋' ! important; }
+.bds_tools_32 a.shareCount { width: 43px; height: 32px; background-position: 0pt -60px ! important; margin-top: 5px; overflow: hidden; font-size: 14px; line-height: 32px; text-indent: 0pt ! important; }
+.bds_tools_32 a.shareCount:hover { color: rgb(69, 69, 69) ! important; background-position: -48px -60px ! important; opacity: 1 ! important; }
+.bds_qzone { background-position: 0pt -75px ! important; }
+.bds_tsina { background-position: 0pt -115px ! important; }
+.bds_baidu { background-position: 0pt -155px ! important; }
+.bds_renren { background-position: 0pt -195px ! important; }
+.bds_tqq { background-position: 0pt -235px ! important; }
+.bds_kaixin001 { background-position: 0pt -275px ! important; }
+.bds_tqf { background-position: 0pt -315px ! important; }
+.bds_hi { background-position: 0pt -355px ! important; }
+.bds_douban { background-position: 0pt -395px ! important; }
+.bds_tsohu { background-position: 0pt -435px ! important; }
+.bds_msn { background-position: 0pt -475px ! important; }
+.bds_qq { background-position: 0pt -515px ! important; }
+.bds_taobao { background-position: 0pt -555px ! important; }
+.bds_tieba { background-position: 0pt -595px ! important; }
+.bds_sohu { background-position: 0pt -675px ! important; }
+/* ::::: http://hbzylm.blog.51cto.com/neweditor/editor/css/fck_editorarea.css ::::: */
+
+.m_sharelinks { line-height: 36px; text-align: left; padding-left: 20px; background: url('ico_lb.gif') no-repeat scroll left center transparent; float: left; width: 600px; height: 36px; }
+.m_sharelinks a { margin-left: 10px; }
+.m_sharebtn { height: 50px; width: 726px; margin: 0pt auto; }
+.weibo_51cto { background: url('ico_mweibo.gif') no-repeat scroll center center transparent; display: block; width: 33px; height: 33px; float: left; margin: 3px 3px 0pt 0pt; cursor: pointer; }
+.shareMored { line-height: 36px; float: right; text-align: right; width: 100px; height: 36px; }
+.showContent { margin: 20px 15px 8px; }
+.icon_01 { background: url('bks_icon_01.gif') no-repeat scroll 13px 0pt transparent; padding: 1px 0pt 1px 35px; }
+a.mred:link { color: rgb(255, 0, 0); text-decoration: underline; }
+a.mred:visited { color: rgb(255, 0, 0); }
+a.mred:hover { color: rgb(255, 0, 0); }
+a.mred:active { color: rgb(255, 0, 0); }
+/* ::::: http://blog.51cto.com/css/blog_top/blog_top.css ::::: */
+
+body { font-size: 12px; }
+* { margin: 0pt; padding: 0pt; }
+img { border: medium none; }
+li { list-style: none outside none; }
+img { border: medium none; }
+li { list-style: none outside none; }
+.backToTop { display: none; width: 45px; height: 45px; position: fixed; right: 140px; bottom: 10px; cursor: pointer; opacity: 0.6; text-indent: -9999px; }
+.tops { background: url('topq.jpg') no-repeat scroll center center transparent; }

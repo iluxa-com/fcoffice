@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+    
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="https://developers.google.com/images/apple-touch-icon.png">
+    
+    
+    
+    
+    <!--[if lt IE 9]>
+    <script src="/js/html5shim/html5.js"></script>
+    <![endif]-->
+
+    
+    
+    
+
+    
+  
+  
+  
+  <title>Hello Google Cloud Storage - Google Cloud Storage — Google Developers</title>
+  
+  
+  
+    
+    
+    
+    
+  
+
+
+    
+
+  
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body class="two-column docs">
+    <div id="sandbar">
+      
+      <a href="https://developers.google.com/sandbar?q=&amp;page_url=/storage/docs/hellogooglestorage"></a>
+      <div id="gc-googlebar"></div>
+      <img src="google-logo.png" style="display: none;">
+      
+    </div>
+    
+    
+
+    <div id="gc-wrapper">
+      
+      <input id="gc-analytics" value="UA-24532603-1" type="hidden">
+      
+
+      
+      <div id="gc-appbar">
+        
+        <h1>
+          
+
+  <a href="https://developers.google.com/storage/">Google Cloud Storage</a>
+  <div class="plusone-container">
+    <div class="g-plusone" data-href="https://developers.google.com/storage/" data-size="medium" data-count="count" data-source="google:developers"></div>
+  </div>
+
+
+        </h1>
+        
+      </div>
+      
+
+      
+      <div id="gc-main">
+        
+      <div id="gc-sidebar">
+        
+
+  
+
+
+
+  <div class="gc-toc"><ul><li class=""><span class="tlw-title" data-title="Google Cloud Storage">Google Cloud Storage</span><ul><li class=""><a href="https://developers.google.com/storage/docs/getting-started" data-title="Introduction"><span>Introduction</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/pricingandterms" data-title="Pricing and Support"><span>Pricing and Support</span></a></li></ul></li><li class=""><span class="tlw-title" data-title="Getting Started">Getting Started</span><ul><li class=""><a href="https://developers.google.com/storage/docs/signup" data-title="Activate Google Cloud Storage"><span>Activate Google Cloud Storage</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/hellogooglestorage" data-title="Hello Google Cloud Storage!"><span>Hello Google Cloud Storage!</span></a></li></ul></li><li class=""><span class="tlw-title" data-title="Developer Guide (v2.0)">Developer Guide (v2.0)</span><ul><li class=""><a href="https://developers.google.com/storage/docs/developer-guide" data-title="API Overview"><span>API Overview</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/authentication" data-title="Authentication"><span>Authentication</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/bucketnaming" data-title="Bucket and Object Naming Guidelines"><span>Bucket and Object Naming Guidelines</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/accesscontrol" data-title="Access Control"><span>Access Control</span></a></li><li class="experimental"><a href="https://developers.google.com/storage/docs/cross-origin" data-title="Cross-Origin Resource Sharing"><span>Cross-Origin Resource Sharing<sup>試験運用中</sup></span></a></li><li class=""><a href="https://developers.google.com/storage/docs/projects" data-title="Using Projects"><span>Using Projects</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/collaboration" data-title="Sharing and Collaboration"><span>Sharing and Collaboration</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/accesslogs" data-title="Access Logs (experimental)"><span>Access Logs (experimental)</span></a></li><li class=""><a href="http://code.google.com/appengine/docs/python/googlestorage" data-title="App Engine Integration (experimental)"><span>App Engine Integration (experimental)</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/reference-guide" data-title="API Reference Guide"><span>API Reference Guide</span></a><ul><li class=""><a href="https://developers.google.com/storage/docs/reference-uris" data-title="Request URIs"><span>Request URIs</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/reference-headers" data-title="Request Headers"><span>Request Headers</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/reference-methods" data-title="Request Methods"><span>Request Methods</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/reference-status" data-title="Status Codes"><span>Status Codes</span></a></li></ul></li><li class=""><a href="https://developers.google.com/storage/docs/reference/releasenotes" data-title="Release Notes"><span>Release Notes</span></a></li></ul></li><li class=""><span class="tlw-title" data-title="Previous API Versions">Previous API Versions</span><ul><li class=""><a href="https://developers.google.com/storage/docs/reference/v1/apiversion1" data-title="API v1.0 (experimental)"><span>API v1.0 (experimental)</span></a><ul><li class=""><a href="https://developers.google.com/storage/docs/reference/v1/getting-startedv1" data-title="Getting Started"><span>Getting Started</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/reference/v1/developer-guidev1" data-title="Developer Guide"><span>Developer Guide</span></a></li></ul></li></ul></li><li class=""><span class="tlw-title" data-title="Tools &amp; Resources">Tools &amp; Resources</span><ul><li class=""><a href="https://code.google.com/apis/console" data-title="Google APIs Console"><span>Google APIs Console</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/gsmanager" data-title="Google Storage Manager"><span>Google Storage Manager</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/gsutil" data-title="GSUtil Tool"><span>GSUtil Tool</span></a><ul><li class=""><a href="https://developers.google.com/storage/docs/gsutil_install" data-title="Installing GSUtil"><span>Installing GSUtil</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/gsutil_reference_guide" data-title="Reference Guide"><span>Reference Guide</span></a></li></ul></li><li class=""><a href="https://developers.google.com/storage/docs/gspythonlibrary" data-title="Python Library"><span>Python Library</span></a></li></ul></li></ul><hr><ul><li class=""><a href="https://developers.google.com/storage/forum" data-title="Discussion Board"><span>Discussion Board</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/faq" data-title="FAQ"><span>FAQ</span></a></li><li class=""><a href="http://googledevelopers.blogspot.com/search/label/google%20storage" data-title="Blog"><span>Blog</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/pricingandterms" data-title="Pricing and Support"><span>Pricing and Support</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/terms" data-title="Terms of Service"><span>Terms of Service</span></a></li><li class=""><a href="https://developers.google.com/storage/docs/dmca" data-title="DMCA Policy"><span>DMCA Policy</span></a></li></ul></div>
+
+
+
+      </div>
+
+      <div id="gc-content">
+        
+        <div>
+          
+  
+  <h1 class="page-title">Hello Google Cloud Storage</h1>
+  
+  
+    
+
+<p>The Hello Google Cloud Storage! page provides a quick and easy way to get started using Google Cloud Storage through the <a href="https://developers.google.com/storage/docs/gsutil">GSUtil</a> tool. These exercises walk you through some basic tasks that can be done with Google Cloud Storage using GSUtil and helps you explore basic Google Cloud Storage functionality.</p>
+<p>At the end of these exercises, you can review the <a href="https://developers.google.com/storage/docs/gsutil_reference_guide">GSUtil reference guide</a> for more advanced GSUtil functionality.</p>
+
+<p class="note"><strong>Note:</strong> The exercises in this document require that you set up GSUtil and authenticate to the Google Cloud Storage service. If you are simply <a href="#download">downloading or accessing publicly-accessible objects</a>, you can go straight to <a href="https://developers.google.com/storage/docs/gsutil_install">installing the GSUtil client</a> and downloading your objects. You do not need to activate Google Cloud Storage, turn on billing, or authenticate to the Google Cloud Storage service to access publicly-accessible objects.</p>
+<h2>Prerequisites</h2>
+<p>Before you can start the exercises though, you need to fulfill the following prerequisites:</p>
+<ul class="listhead">
+<li>You must have access to Google Cloud Storage to complete these exercises.
+<p>You can access Google Cloud Storage if you were added as a project team member to an existing Google Account or if you have recently created a Google Cloud Storage account.</p>
+</li>
+<li>You must have <a href="http://www.python.org/download/">Python 2.6 or Python 2.7</a> installed.
+<p>The current version of GSUtil only supports Python 2.6 or Python 2.7.</p></li>
+<li>You must have the newest version of <a href="https://developers.google.com/storage/docs/gsutil">GSUtil</a> installed.
+<p>GSUtil is a Python application that lets you access Google Cloud Storage.</p></li>
+</ul>
+
+<p>After you have fulfilled the prerequisites above, continue to the exercises.</p>
+
+<h2>Hello Google Cloud Storage! Exercises</h2>
+<p>The following exercises help you get started using Google Cloud Storage through the <a href="https://developers.google.com/storage/docs/gsutil">GSUtil</a> command line tool. If you have not reviewed the prerequisites for starting this exercise, please do so above.</p>
+
+<p>By the end of this exercise, you will have completed the following tasks:</p>
+<ul>
+  <li>Create and delete a bucket</li>
+  <li>Upload, delete and move objects</li>
+  <li>List your buckets and objects</li>
+  <li>Share objects and buckets</li>
+</ul>
+
+<h3>Step 1: Create a bucket</h3>
+<p>First, create two buckets in your project with unique bucket names. You can do this by using the <code>mb</code> command. For example, the following command creates buckets named cats and dogs:</p>
+
+<pre>gsutil mb gs://cats gs://dogs</pre>
+
+<p class="note"><strong>Note:</strong> If you are running GSUtil on a Windows operating system you must first call the Python interpreter. For example, to create two buckets named cats and dogs you must type <code>python gsutil mb gs://cats gs://dogs</code> at the command prompt.</p>
+
+<p>Choose bucket names that are unique when you create these buckets because it is likely that if you try to create buckets named cats or dogs, you will receive the following error:
+
+
+</p><pre>Failure: GSCreateError: 409 Conflict
+<!--?xml version='1.0' encoding='UTF-8'?--><error><code>BucketNameUnavailable</code><message>The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.</message></error>.</pre>
+
+
+<p>It means that the bucket names cat or dog are already taken. Google Cloud Storage has a single namespace so your bucket names must be unique across the entire Google Cloud Storage system. Someone else has already created buckets named cats or dogs, so you won't be allowed to create buckets with those names. You'll have to modify the bucket names so that they are unique, but you must also follow the <a href="https://developers.google.com/storage/docs/bucketnaming">bucket naming guidelines</a>.</p>
+
+<p>It is also possible to specify a location constraint so that your bucket is created in a geographical location by including the <code>-l &lt;location&gt;</code> flag. For more information, see <a href="https://developers.google.com/storage/docs/developer-guide.html#specifyinglocations">Specifying Bucket Locations</a>.</p>
+
+<h3>Step 2: Upload objects into a bucket</h3>
+<p>Now that you have some buckets, try uploading a couple of objects into one of them. To do this, create a new directory, add two image files to the directory, and name the files poodle.jpg and collie.jpg. To upload the files, change to the directory you just created and use the <code>cp</code> command as follows:</p>
+<pre>gsutil cp *.jpg gs://dogs</pre>
+<p>The <code>cp</code> command behaves much like the Unix <code>cp</code> command with the recursion (<code>-R</code>) option, allowing you to copy whole directories or just the contents of directories. GSUtil also supports wildcards, which makes it easy for you to copy or move batches of files. Depending on how you upload your objects, GSUtil creates new objects with names that follow certain guidelines:</p>
+
+<ul class="listhead">
+<li>If you use the <code>-R</code> option to recursively upload a directory, GSUtil creates your object names based on the directory where it starts recursive processing.
+<p>For example, if you have a directory located at client1/low_priority/ and you recursively copy the directory using <code>gsutil cp -R client1/low_priority <em>dst_uri</em></code>, GSUtil creates new objects with low_priority in the object name, because low_priority is the directory where the recursive processing begins:</p>
+<p><code>gs://<em>dst_uri</em>/low_priority/<em>my_object</em></code></p>
+<p>The <code>-R</code> option also copies subdirectories and includes subdirectory names in the object name. For example, if client1/low_priority contained another directory named datasheets, <code>gsutil cp -R client1/low_priority <em>dst_uri</em></code> will create objects named:</p>
+
+<pre>gs://<em>dst_uri</em>/low_priority/building.cad
+gs://<em>dst_uri</em>/low_priority/schematics.cad
+gs://<em>dst_uri</em>/low_priority/datasheets/assets.txt
+gs://<em>dst_uri</em>/low_priority/datasheets/expenses.txt
+</pre>
+<p>This can be useful for organizational purposes and for use with the <a href="https://developers.google.com/storage/docs/gsmanager">Google Storage Manager</a>, but if you aren't careful, you could also embed unintended paths in file names (e.g., embedding low_priority for a customer to see in the example above).</p></li>
+<li>If you need to copy or upload a directory without prepending the directory name, you can use wildcards.
+<p>For example, if you copy files using <code>gsutil cp client1/low_priority/* <em>dst_uri</em></code>, GSUtil copies the objects in the directory without prepending the directory name:</p>
+<p><code>gs://<em>dst_uri</em>/<em>my_object</em></code></p> </li>
+</ul>
+
+<h3>Step 3: List the buckets and objects</h3>
+<p>Next, list the buckets and objects that you created. You can use the <code>ls</code> command to do this. For example, the following command lists your buckets in a specified project:</p>
+<pre>gsutil ls</pre>
+<p>The following command lists the objects that are stored in the bucket dogs:</p>
+<pre>gsutil ls gs://dogs</pre>
+
+<p><strong><em>Using the <code>-l</code> option</em></strong></p>
+<p>You can use the <code>-l</code> option to print a long listing of your objects and buckets. This provides more information than the <code>ls</code> command alone. For example, the following command lists information about all the objects inside dogs:</p>
+<pre>gsutil ls -l gs://dogs</pre>
+<p>If you want to get information about a particular bucket instead of its contents, you can include the <code>-b</code> option followed by the bucket name. For example, the following command lists information about the bucket dogs:</p>
+<pre>gsutil ls -l -b gs://dogs</pre>
+<p>To list the total size of all your buckets, you can use either of the following commands:</p>
+<ul class="listhead">
+<li><code>gsutil ls -l</code>
+<p>Provides a listing of your buckets and their total size</p></li>
+<li><code>gsutil ls -l gs://*</code>
+<p>Provides a complete list of all your objects in every bucket and the total size</p></li>
+</ul>
+<p><strong><em>Using the <code>-L</code> option</em></strong></p>
+<p>You can use the <code>-L</code> option with the <code>ls</code> command to list the most detailed information available about your objects and buckets in your project. For example, the following command provides comprehensive information such as the object size, last modified date, and cache control for all objects inside the dogs bucket:</p>
+<pre>gsutil ls -L gs://dogs/*</pre>
+<p>You can view detailed information about your buckets by using the following command:</p>
+<pre>gsutil ls -L</pre>
+<p>If you want detailed information about a particular bucket instead of its contents, you can include the <code>-b</code> option followed by the bucket name. For example, the following command provides detailed information about the bucket dogs:</p>
+<pre>gsutil ls -L -b gs://dogs</pre>
+<p><strong>Note:</strong> Although this option gives the most detailed information about your objects and buckets, it can also use more of your monthly bandwidth quota because the <code>-L</code> option uses multiple GET requests to retrieve all the information it needs. In comparison, the <code>-l</code> option will only perform one GET request for the information it needs, and is much faster than the <code>-L</code> option.</p>
+
+<h3>Step 4: Move an object</h3>
+<p>You can move objects from one bucket to another by using the <code>mv</code> command. The <code>mv</code> command can also be used to rename an object. To move all of the files that are in the dogs bucket into the cats bucket, use the following command:</p>
+<pre>gsutil mv gs://dogs/*.jpg gs://cats/</pre>
+<p>To change the name of poodle.jpg, which you just moved into the cats bucket, you use the following command:</p>
+<pre>gsutil mv gs://cats/poodle.jpg gs://cats/siamese.jpg</pre>
+
+<h3 id="download">Step 5: Download an object</h3>
+<p>You can also download objects by using the <code>cp</code> command. To download the objects that are in the cats bucket and save them in a directory named pets that's in your local directory, use the following command:</p>
+<pre>gsutil cp gs://cats/*.jpg file://pets/</pre>
+
+<h3>Step 6: Sharing objects and buckets</h3>
+<p>You can share objects and buckets with other people by using the <code>getacl</code> and <code>setacl</code> commands to modify the ACLs that are applied to objects or buckets. ACLs define who has permission to access an object or bucket. The <code>getacl</code> command retrieves an XML document that lists one bucket's ACL or one object's ACL. You can modify the XML document by adding or removing individual ACL entries with a text editor. The <code>setacl</code> command applies the ACL listed in the XML document back onto one or more buckets or objects. For example, the following command retrieves the ACL on the siamese.jpg object and saves the ACL in a text file named acl.txt:</p>
+<pre>gsutil getacl gs://cats/siamese.jpg &gt; acl.txt</pre>
+<p>If you open acl.txt in a text editor you should see the following XML document:</p>
+<pre>&lt;?xml version="1.0" ?&gt;
+&lt;AccessControlList&gt;
+  &lt;Owner&gt;
+    &lt;ID&gt;<em>your_google_storage_id</em>&lt;/ID&gt;
+  &lt;/Owner&gt;
+  &lt;Entries&gt;
+    &lt;Entry&gt;
+      &lt;Scope type="UserById"&gt;
+        &lt;ID&gt;<em>your_google_storage_id</em>&lt;/ID&gt;
+      &lt;/Scope&gt;
+      &lt;Permission&gt;FULL_CONTROL&lt;/Permission&gt;
+    &lt;/Entry&gt;
+  &lt;/Entries&gt;
+&lt;/AccessControlList&gt;
+</pre>
+<p>By modifying the ACL entries in this document, you can give other people access to the siamese.jpg object. To give other people access to buckets and objects, you grant them permissions. Google Cloud Storage lets you grant permissions for a wide range of entities, such as individual users, <a href="http://www.google.com/apps/">Google Apps</a> domains, and <a href="https://groups.google.com/">Google groups</a>. For example, by adding the following ACL entries (highlighted in bold) to the XML document you can let Jane download the siamese.jpg object and you can let everyone who is a member of the Google Cloud Storage <a href="https://groups.google.com/group/gs-discussion">group</a> download the siamese.jpg object:</p>
+<pre>&lt;?xml version="1.0" ?&gt;
+&lt;AccessControlList&gt;
+  &lt;Owner&gt;
+    &lt;ID&gt;<em>your_google_storage_id</em>&lt;/ID&gt;
+  &lt;/Owner&gt;
+  &lt;Entries&gt;
+    &lt;Entry&gt;
+      &lt;Scope type="UserById"&gt;
+        &lt;ID&gt;<em>your_google_storage_id</em>&lt;/ID&gt;
+      &lt;/Scope&gt;
+      &lt;Permission&gt;FULL_CONTROL&lt;/Permission&gt;
+    &lt;/Entry&gt;
+<strong>    &lt;Entry&gt;
+      &lt;Scope type="GroupByEmail"&gt;
+        &lt;EmailAddress&gt;gs-discussion@googlegroups.com&lt;/EmailAddress&gt;
+      &lt;/Scope&gt;
+      &lt;Permission&gt;READ&lt;/Permission&gt;
+    &lt;/Entry&gt;
+    &lt;Entry&gt;
+      &lt;Scope type="UserByEmail"&gt;
+        &lt;EmailAddress&gt;jane@gmail.com&lt;/EmailAddress&gt;
+      &lt;/Scope&gt;
+      &lt;Permission&gt;READ&lt;/Permission&gt;
+    &lt;/Entry&gt;</strong>
+  &lt;/Entries&gt;
+&lt;/AccessControlList&gt;
+</pre>
+<p>You can apply these new ACL entries to the siamese.jpg object by running the following command:</p>
+<pre>gsutil setacl acls.txt gs://cats/siamese.jpg</pre>
+<p>You can also use the <code>setacl</code> command to apply a predefined ACL to a bucket or object. To set a predefined ACL (also known as a canned ACL) on the siamese.jpg object, you can use the following command:</p>
+<pre>gsutil setacl bucket-owner-full-control gs://cats/siamese.jpg</pre>
+<p>To learn more about sharing data and modifying ACLs, see <a href="https://developers.google.com/storage/docs/accesscontrol">Access Control</a>.</p>
+
+<h3>Step 7: Delete buckets and objects</h3>
+<p>You can delete objects with the <code>rm</code> command and you can delete buckets with the <code>rb</code> command. For example, the following command deletes the collie.jpg object that's in the cats bucket:</p>
+<pre>gsutil rm gs://cats/collie.jpg</pre>
+<p>The following command deletes the dogs bucket:</p>
+<pre>gsutil rb gs://dogs</pre>
+<p>You must remove all objects from a bucket before you delete it. You can do this by using the <code>rm</code> command or by using the <code>mv</code> command to move objects from one bucket to another, which you did when you moved the objects from the dogs bucket to the cats bucket.</p>
+
+
+  
+
+        </div>
+        
+
+
+      </div>
+
+      </div>
+      
+
+      <footer id="gc-footer">
+        <a href="https://developers.google.com/footer"></a>
+          <div style="min-height: 40px;"></div>
+      </footer>
+    </div>
+    <div id="needAuth" class="msgDialogContent">
+      <h1>Authentication required</h1>
+      You need to be signed in to do that.
+      <button>Sign in</button>
+      <button>Cancel</button>
+    </div>
+    <div id="signingIn" class="msgDialogContent">
+      <h1>Signing you in...</h1>
+      Google Developers needs your<br>
+      permission to do that.
+      <button>Try again</button>
+      <button>Cancel</button>
+    </div>
+    
+    
+    <!-- Google Code for PXL - Developers - Codesite - HP - 90d Remarketing List -->
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

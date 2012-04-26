@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+   <title> [Python-Dev] PEP 287: reStructuredText Standard Docstring Format
+   </title>
+   <link rel="Index" href="http://mail.python.org/pipermail/python-dev/2002-April/index.html">
+   <link rel="made" href="mailto:guido%40python.org">
+   <meta name="robots" content="index,nofollow">
+   
+   <link rel="Previous" href="http://mail.python.org/pipermail/python-dev/2002-April/022439.html">
+   <link rel="Next" href="http://mail.python.org/pipermail/python-dev/2002-April/022221.html">
+ </head>
+<body bgcolor="#ffffff">
+   <h1>[Python-Dev] PEP 287: reStructuredText Standard Docstring Format
+   </h1>
+    <b>Guido van Rossum
+    </b> 
+    <a href="mailto:guido%40python.org" title="[Python-Dev] PEP 287: reStructuredText Standard Docstring Format">guido@python.org
+       </a><br>
+    <i>Wed, 03 Apr 2002 14:34:40 -0500</i>
+    <p></p><ul>
+        <li> Previous message: <a href="http://mail.python.org/pipermail/python-dev/2002-April/022439.html">[Python-Dev] PEP 287: reStructuredText Standard Docstring
+ Format
+</a></li>
+        <li> Next message: <a href="http://mail.python.org/pipermail/python-dev/2002-April/022221.html">[Python-Dev] PEP 287: reStructuredText Standard Docstring Format
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://mail.python.org/pipermail/python-dev/2002-April/date.html#22212">[ date ]</a>
+              <a href="http://mail.python.org/pipermail/python-dev/2002-April/thread.html#22212">[ thread ]</a>
+              <a href="http://mail.python.org/pipermail/python-dev/2002-April/subject.html#22212">[ subject ]</a>
+              <a href="http://mail.python.org/pipermail/python-dev/2002-April/author.html#22212">[ author ]</a>
+         </li>
+       </ul>
+    <hr>  
+<!--beginarticle-->
+<pre>[Jeremy]
+&gt;<i> To paraphrase Aristole, wisdom comes from choosing wisely in
+</i>&gt;<i> the particular situation.
+</i>
+I thought that wisdom came from experience, and experience from lack
+of wisdom.  (Or is that common sense?  There's a lot of wisdom in
+common sense.)
+
+I believe that reStructuredText comes from a lot of experience: long
+discussions about requirements in the doc-sig, and experience with
+e.g. Zope's StructuredText (which definitely represents the "lack of
+experience" position IMO).
+
+I think that reStructuredText is a good format for marking up
+docstrings; it's probably as good as it gets given the requirements (a
+fairly elaborate feature set, yet more readable "in the raw" than
+HTML).
+
+But if you ask me "should we use this for the standard library" I
+think I'll have to say no.  Python's library reference documentation
+is written using LaTeX, like it or not, and it's not going to change
+any time soon.  (*If* and *when* it changes, it's probably going to be
+something XMLish.  But since XML is so more verbose than LaTeX, I'm
+not sure there's much of a point to this, at least unless bitrot takes
+the LaTeX toolchain away from us.)
+
+Given this status quo, docstrings in the Python standard library
+should not try to duplicate the library reference documentation;
+instead, they should be no more than concise hints.  For such
+docstrings, a markup language, even reStructuredText, is
+inappropriate.
+
+IOW, reStructuredText is not even an option for new standard library
+modules.  I agree with Jeremy that the PEP needs to be clear and
+explicit about this.
+
+--Guido van Rossum (home page: <a href="http://www.python.org/%7Eguido/">http://www.python.org/~guido/</a>)
+
+
+
+</pre>
+<!--endarticle-->
+    <hr>
+    <p></p><ul>
+        <!--threads-->
+	<li> Previous message: <a href="http://mail.python.org/pipermail/python-dev/2002-April/022439.html">[Python-Dev] PEP 287: reStructuredText Standard Docstring
+ Format
+</a></li>
+	<li> Next message: <a href="http://mail.python.org/pipermail/python-dev/2002-April/022221.html">[Python-Dev] PEP 287: reStructuredText Standard Docstring Format
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://mail.python.org/pipermail/python-dev/2002-April/date.html#22212">[ date ]</a>
+              <a href="http://mail.python.org/pipermail/python-dev/2002-April/thread.html#22212">[ thread ]</a>
+              <a href="http://mail.python.org/pipermail/python-dev/2002-April/subject.html#22212">[ subject ]</a>
+              <a href="http://mail.python.org/pipermail/python-dev/2002-April/author.html#22212">[ author ]</a>
+         </li>
+       </ul>
+
+</body>
+</html>

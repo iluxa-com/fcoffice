@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<title>Developer's Guide (v2): Getting Started - Google Translate API v2 - Google Code</title>
+
+
+
+
+<link rel="search" type="application/opensearchdescription+xml" title="Google Code" href="https://code.google.com/osd.xml">
+
+<!--[if IE]><link rel="stylesheet" type="text/css" href="/css/iehacks.css"><![endif]-->
+
+    
+  
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body class="gc-documentation">
+    
+
+
+<div id="gb">
+ <span>
+  
+   
+    <b>wonderfulcxm@gmail.com</b>
+    |
+   
+    <a href="https://code.google.com/u/wonderfulcxm/" id="projects-dropdown" onclick="return false;"><span style="text-decoration: underline;">My favorites</span> <span style="font-size: 0.75em;">▼</span></a>
+    |
+  
+    <a id="lang-dropdown" href="https://code.google.com/" onclick="return false;"><span style="text-decoration: underline;">English</span> <span style="font-size: 0.75em;">▼</span></a>
+  
+   
+    | <a href="http://www.google.com/accounts/Logout?continue=http%3A%2F%2Fcode.google.com%2Fapis%2Flanguage%2Ftranslate%2Fv2%2Fgetting_started.html" onclick="CODESITE_click('/gb/sc/signout');"><span style="text-decoration: underline;">Sign out</span></a>
+   
+  
+ </span>
+</div>
+
+<div class="gbh" style="left: 0px;"></div>
+<div class="gbh" style="right: 0px;"></div>
+
+
+<div id="gc-container">
+<a id="top"></a>
+<div id="skipto">
+  
+  
+</div>
+
+<div id="gc-header">
+  <div id="logo"><a href="https://code.google.com/">
+  
+     <img src="code_logo.gif" alt="Google Code" style="border: 0pt none; margin: 3px 0pt 0pt;" height="40" width="167">
+  
+  </a></div>
+  <div id="search">
+    <div id="searchForm">
+      <form id="cse" action="http://www.google.com/cse" accept-charset="utf-8" onsubmit="executeGSearch(document.getElementById('gsearchInput').value); return false;">
+      
+      <div id="gsc-search-box">
+        <input value="" id="gsearchInput" name="q" maxlength="2048" class="gsc-input" autocomplete="off" title="Google Code Search" style="width: 345px;" type="text">
+        <div id="cs-searchresults" onclick="event.cancelBubble = true;"></div>
+        <input title="Search" id="gsearchButton" class="gsc-search-button" name="sa" value="Search" type="submit">
+        <div class="greytext">search developers.google.com and code.google.com</div>
+      </div>
+      </form>
+    </div> <!-- end searchForm -->
+  </div> <!-- end search -->
+
+
+
+
+</div> <!-- end gc-header -->
+
+
+<div id="codesiteContent">
+
+<a id="gc-topnav-anchor"></a>
+<div id="gc-topnav">
+  <h1>Google Translate API v2</h1>
+  <ul id="docs" class="gc-topnav-tabs">
+
+    <li id="home_link">
+      <a href="https://code.google.com/apis/language/translate/overview.html" title="Google Translate API v2 home page">Home</a>
+    </li>
+  
+    <li id="docs_link">
+      <a href="https://code.google.com/apis/language/translate/overview.html" class="selected" title="Official Google Translate API v2 documentation">Docs</a>
+    </li>
+  
+    <li>
+      <a href="http://googlecode.blogspot.com/" title="Official Google Translate API v2 blog">Blog</a>
+    </li>
+  
+    <li>
+      <a href="https://groups.google.com/forum/#%21forum/google-translate-api" title="Google Translate API v2 developer forum">Forum</a>
+    </li>
+  
+    <li>
+      <a href="https://code.google.com/apis/language/translate/v2/terms.html" title="Google Translate API v2 terms of service">Terms</a>
+    </li>
+  
+
+  
+  
+  
+  
+  <li><div style="height: 15px; width: 24px; display: inline-block; text-indent: 0pt; margin: 0pt; padding: 0pt; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;" id="___plusone_0"><iframe allowtransparency="true" hspace="0" id="I1_1334168587707" marginheight="0" marginwidth="0" name="I1_1334168587707" src="index_1.html" style="position: static; left: 0pt; top: 0pt; width: 24px; margin: 0px; border-style: none; height: 15px; visibility: visible;" tabindex="0" vspace="0" title="+1" frameborder="0" scrolling="no" width="100%"></iframe></div>&nbsp;</li>
+</ul>
+</div> <!-- end gc-topnav -->
+
+
+    <div class="g-section g-tpl-170">
+      <a name="gc-toc-anchor"></a>
+      <div class="g-unit g-first" id="gc-toc">
+        <ul class="treelist tlw-nested-only tlw-processed tlw-instance-0">
+  <li><a href="https://code.google.com/apis/language/">Language API Family</a></li>
+</ul>
+<div class="line"></div>
+<ul class="treelist tlw-nested-only tlw-processed tlw-instance-1">
+  <li>
+    <h2 class="tlw-ignore">Diacritize API</h2>
+    <ul>
+      <li><a href="https://code.google.com/apis/language/diacritize/overview.html">Overview</a></li>
+      <li style="padding-top: 0pt; padding-bottom: 0pt;">
+        <div class="tlw-title tlw-branch"><a href="javascript:void(0)" class="tlw-control" title="Expand Version  1 "><img src="cleardot.gif" alt="Expand Version  1 " class="tlw-control tlw-plus"></a><span class="tlw-title">Version  1 <sup></sup></span></div><ul style="display: none;" id="1-sub-0">
+          <li>Developer's Guide
+            <ul>
+              <li><a href="https://code.google.com/apis/language/diacritize/v1/getting_started.html">Getting Started</a></li>
+              <li><a href="https://code.google.com/apis/language/diacritize/v1/using_rest.html">Using REST</a></li>
+            </ul>
+          </li>
+          <li><a href="https://code.google.com/apis/language/diacritize/libraries.html">Libraries and Samples</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="line"></div>
+  </li>
+
+  <li>
+    <h2 class="tlw-ignore">Translate API</h2>
+    <ul>
+      <li><a href="https://code.google.com/apis/language/translate/overview.html">Overview</a></li>
+      <li style="padding-top: 0pt; padding-bottom: 0pt;">
+        <div class="tlw-title tlw-branch"><a href="javascript:void(0)" class="tlw-control" title="Collapse Version 2 "><img src="cleardot.gif" alt="Collapse Version 2 " class="tlw-control tlw-minus"></a><span class="tlw-title">Version 2 <sup></sup></span></div><ul style="display: block;" id="1-sub-1">
+          <li>Developer's Guide
+            <ul>
+              <li class="selected"><a href="https://code.google.com/apis/language/translate/v2/getting_started.html">Getting Started</a></li>
+              <li><a href="https://code.google.com/apis/language/translate/v2/using_rest.html">Using REST</a></li>
+            </ul>
+          </li>
+          <li><a href="https://code.google.com/apis/language/translate/v2/libraries.html">Libraries and Samples</a></li>
+          <li><a href="https://code.google.com/apis/language/translate/v2/pricing.html">Pricing and Terms</a></li>
+          <li><a href="https://code.google.com/apis/language/translate/v2/attribution.html">Attribution Requirements</a></li>
+          <li><a href="https://code.google.com/apis/language/translate/v2/markup.html">HTML Markup Requirements</a></li>
+          <li><a href="https://code.google.com/apis/language/translate/v2/faq.html">FAQ</a></li>
+          <li><a href="https://code.google.com/apis/language/translate/v2/terms.html">Terms of Service</a></li>
+        </ul>
+      </li>
+      <li style="padding-top: 0pt; padding-bottom: 0pt;">
+        <div class="tlw-title tlw-branch"><a href="javascript:void(0)" class="tlw-control" title="Expand Version 1 (deprecated)"><img src="cleardot.gif" alt="Expand Version 1 (deprecated)" class="tlw-control tlw-plus"></a><span class="tlw-title">Version 1 <sup>(deprecated)</sup></span></div><ul style="display: none;" id="1-sub-2">
+          <li>Developer's Guide
+            <ul>
+              <li><a href="https://code.google.com/apis/language/translate/v1/getting_started.html">Getting Started (JS)</a></li>
+              <li>Using REST
+                <ul>
+                  <li><a href="https://code.google.com/apis/language/translate/v1/using_rest_translate.html">Translate</a></li>
+                  <li><a href="https://code.google.com/apis/language/translate/v1/using_rest_langdetect.html">Language Detect</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="https://code.google.com/apis/language/translate/v1/reference.html">JS Reference</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="line"></div>
+  </li>
+  
+  <li>
+    <h2 class="tlw-ignore">Transliterate API</h2>
+    <ul>
+      <li><a href="https://code.google.com/apis/language/transliterate/overview.html">Overview</a></li>
+      <li style="padding-top: 0pt; padding-bottom: 0pt;">
+        <div class="tlw-title tlw-branch"><a href="javascript:void(0)" class="tlw-control" title="Expand Version  1"><img src="cleardot.gif" alt="Expand Version  1" class="tlw-control tlw-plus"></a><span class="tlw-title">Version  1</span></div><ul style="display: none;" id="1-sub-3">
+          <li><a href="https://code.google.com/apis/language/transliterate/v1/getting_started.html">Getting Started (JS)</a></li>
+          <li><a href="https://code.google.com/apis/language/transliterate/v1/reference.html">JS Reference</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="line"></div>
+  </li>
+
+  <li>
+    <h2 class="tlw-ignore">Virtual Keyboard API</h2>
+    <ul>
+      <li><a href="https://code.google.com/apis/language/virtualkeyboard/overview.html">Overview</a></li>
+      <li style="padding-top: 0pt; padding-bottom: 0pt;">
+        <div class="tlw-title tlw-branch"><a href="javascript:void(0)" class="tlw-control" title="Expand Version  1"><img src="cleardot.gif" alt="Expand Version  1" class="tlw-control tlw-plus"></a><span class="tlw-title">Version  1</span></div><ul style="display: none;" id="1-sub-4">
+          <li><a href="https://code.google.com/apis/language/virtualkeyboard/v1/getting_started.html">Getting Started (JS)</a></li>
+          <li><a href="https://code.google.com/apis/language/virtualkeyboard/v1/reference.html">JS Reference</a></li>
+          <li><a href="https://code.google.com/apis/language/virtualkeyboard/v1/layout_reference.html">Layout Reference</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+      </div>
+      <a name="gc-pagecontent-anchor"></a>
+      <div style="position: relative;" class="g-unit" id="gc-pagecontent">
+        
+        <h1 class="page_title">Developer's Guide (v2): Getting Started</h1>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="warning"><b>Important:</b> Google Translate API v2 is now available as a <a href="https://code.google.com/apis/language/translate/v2/pricing.html">paid service</a> only, and the number of requests your application can make per day is limited. For website translations, we encourage you to use the <a href="http://translate.google.com/translate_tools">Google Website Translator gadget</a>.</p>
+
+<p>This document details the background knowledge that you need to use the Google Translate API v2.</p>
+<h1>Contents</h1>
+<div class="toc">
+<ol>
+  <li><a href="#intro">Introduction</a></li>
+  <li><a href="#auth">Learn about identifying your application</a></li>
+  <li><a href="#background">Translate API background</a>
+    <ol>
+      <li><a href="#background-concepts">Translate concepts</a></li>
+      <li><a href="#background-operations">Translate API operations</a></li>
+    </ol>
+  </li>
+  <li><a href="#invoking">Calling style</a>
+    <ol>
+      <li><a href="#REST">REST</a></li>
+      </ol>
+  </li>
+  <li><a href="#workingWithData">Data format</a>
+    <ol>
+      <li><a href="#data-json">JSON</a></li>
+    </ol>
+  </li>
+  </ol>
+</div>
+
+<h1 id="intro">Introduction</h1>
+
+<p>This document is intended for developers who want to write applications that
+   can interact with the Google Translate API.
+   <a href="http://translate.google.com/">Google Translate</a> is a tool that
+   automatically translates text from one language to another language (e.g. French
+   to English).  You can use the Google Translate API to programmatically translate
+   text in your webpages or apps.
+</p>
+<p>You need a <a href="https://www.google.com/accounts/NewAccount">Google
+   account</a> to use this API. If you already have a Google Account, then
+   you can visit the <a href="https://code.google.com/apis/console/?api=translate&amp;promo=tr">Google APIs console</a>
+   to set up a new project and get your API key.
+</p>
+
+<h1 id="auth">Learn about identifying your application</h1>
+<p>Every request your application sends to the Google Translate API must identify your application to Google, using an API key.</p>
+<p>For information about how to use API keys, see <a href="https://code.google.com/apis/language/translate/v2/using_rest.html#auth">Identifying your application to Google</a> in the Using REST document.</p>
+
+<h1 id="background">Translate API background</h1>
+
+<h2 id="background-concepts">Translate concepts</h2>
+<p>Google Translate is a tool that automatically translates text from one language to another
+language.
+</p>
+
+<p>The <b>source text</b> is the text to be translated. The <b>source language</b>
+is the language that the source text is written in. The <b>target language</b> is
+language that the source text is translated into.
+</p>
+
+<h2 id="background-operations">Translate API operations</h2>
+<p>There are three methods to invoke in the Google Translate API:</p>
+<table>
+  <tbody><tr>
+    <th>Operation</th>
+    <th>Description</th>
+    <th> REST HTTP mapping </th>
+  </tr>
+  <tr>
+    <td><a href="#translate">translate</a></td>
+    <td>Translates source text from source language to target language</td>
+    <td><code>GET</code></td>
+  </tr>
+  <tr>
+    <td><a href="#list_languages">languages</a></td>
+    <td>List the source and target languages supported by the translate methods</td>
+    <td><code>GET</code></td>
+  </tr>
+  <tr>
+    <td><a href="#language_detect">detect</a></td>
+    <td>Detect language of source text</td>
+    <td><code>GET</code></td>
+  </tr>
+</tbody></table>
+
+<h1 id="invoking">Calling styles</h1>
+<p>There are several ways to invoke the API:</p>
+<ul>
+  <li>Using <a href="#REST">REST</a> directly
+  </li><li>Using REST from <a href="#JSONP">JavaScript</a> (no server-side code
+      required)
+  </li>
+</ul>
+
+<h2 id="REST"> REST</h2>
+<p>REST, or&nbsp;<a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">Representational State Transfer</a>, in the Google Translate API is somewhat different from traditional REST. Instead of providing access to  resources, the API provides access to a  service. As a result, the API provides a single URI that acts as the service endpoint.
+</p><p>You access the Google Translate API service endpoint using  the <code>GET</code> REST HTTP verb, as
+  described in <a href="#background-operations"> API operations</a>. You pass in the  details of all service requests as query parameters.</p>
+<h3 id="translate">Translate</h3>
+<p>The specific format for the single Google Translate API URI is:</p>
+<pre>https://www.googleapis.com/language/translate/v2?<span class="apiparam">parameters</span></pre>
+<p>where <code class="apiparam"><i>parameters</i></code>&nbsp;are any parameters to
+   apply to the query. For  details, see <a href="https://code.google.com/apis/language/translate/v2/using_rest.html#WorkingResults">Working with results</a> and <a href="https://code.google.com/apis/language/translate/v2/using_rest.html#query-params">Query
+   parameter reference</a> in the Using REST document.</p>
+<p>Here is an example of how this works in the Translate API.</p>
+
+<pre>https://www.googleapis.com/language/translate/v2?key=<span class="apiparam">INSERT-YOUR-KEY</span>&amp;q=hello%20world&amp;source=en&amp;target=de</pre>
+
+<h3 id="list_languages">Discover supported languages</h3>
+<p>The specific format to return the list of languages codes is:</p>
+<pre>https://www.googleapis.com/language/translate/v2/languages?<span class="apiparam">parameters</span></pre>
+<p>where <code class="apiparam"><i>parameters</i></code>&nbsp;are any parameters to
+   apply to the query. For  details, see <a href="https://code.google.com/apis/language/translate/v2/using_rest.html#supported-WorkingResults">Working with results</a> and <a href="https://code.google.com/apis/language/translate/v2/using_rest.html#supported-query-params">Query
+   parameter reference</a> in the Using REST document.</p>
+<p>Here is an example of how languages method works in the Translate API.</p>
+<pre>https://www.googleapis.com/language/translate/v2/languages?key=<span class="apiparam">INSERT-YOUR-KEY</span>&amp;target=zh-TW</pre>
+
+<h3 id="language_detect">Detect source language</h3>
+<p>The specific format to detect the language of a text is:</p>
+<pre>https://www.googleapis.com/language/translate/v2/detect?<span class="apiparam">parameters</span></pre>
+<p>where <code class="apiparam"><i>parameters</i></code>&nbsp;are any parameters to
+   apply to the query. For  details, see <a href="https://code.google.com/apis/language/translate/v2/using_rest.html#detect-WorkingResults">Working with results</a> and <a href="https://code.google.com/apis/language/translate/v2/using_rest.html#detect-query-params">Query
+   parameter reference</a> in the Using REST document.</p>
+<p>Here is an example of how detect method works in the Translate API.</p>
+<pre>https://www.googleapis.com/language/translate/v2/detect?key=<span class="apiparam">INSERT-YOUR-KEY</span>&amp;q=google+translate+is+fast</pre>
+
+<h3 id="JSONP"> REST from JavaScript</h3>
+<p>You can invoke the Translate API using REST from JavaScript, using the
+  <code>callback</code> query parameter and a callback function.
+  However, be aware that your API key will be viewable in the HTML source for
+  your page.
+  By default a key can be used on any site. We strongly recommend that you
+  restrict use of your key only to domains you administer, to prevent use on
+  unauthorized sites. You can specify which domains are allowed to use your
+  API key by clicking the
+  <strong>Edit allowed referers...</strong> link in the
+  <strong>Simple API Access</strong> section of the <strong>API
+  Access pane</strong> in the <a href="https://code.google.com/apis/console">APIs Console</a>.
+</p>
+
+<p>The following example uses this approach to translate some text and put it below the
+source text:</p>
+
+<pre class="prettyprint"><span class="tag">&lt;html&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;head&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;title&gt;</span><span class="pln">Translate API Example</span><span class="tag">&lt;/title&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;/head&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;body&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"sourceText"</span><span class="tag">&gt;</span><span class="pln">Hello world</span><span class="tag">&lt;/div&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"translation"</span><span class="tag">&gt;&lt;/div&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;script&gt;</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="kwd">function</span><span class="pln"> translateText</span><span class="pun">(</span><span class="pln">response</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; document</span><span class="pun">.</span><span class="pln">getElementById</span><span class="pun">(</span><span class="str">"translation"</span><span class="pun">).</span><span class="pln">innerHTML </span><span class="pun">+=</span><span class="pln"> </span><span class="str">"&lt;br&gt;"</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> response</span><span class="pun">.</span><span class="pln">data</span><span class="pun">.</span><span class="pln">translations</span><span class="pun">[</span><span class="lit">0</span><span class="pun">].</span><span class="pln">translatedText</span><span class="pun">;</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;/script&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;script&gt;</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> newScript </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">'script'</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; newScript</span><span class="pun">.</span><span class="pln">type </span><span class="pun">=</span><span class="pln"> </span><span class="str">'text/javascript'</span><span class="pun">;</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> sourceText </span><span class="pun">=</span><span class="pln"> escape</span><span class="pun">(</span><span class="pln">document</span><span class="pun">.</span><span class="pln">getElementById</span><span class="pun">(</span><span class="str">"sourceText"</span><span class="pun">).</span><span class="pln">innerHTML</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="com">// WARNING: be aware that </span><span class="apiparam"><span class="com">YOUR-API-KEY</span></span><span class="com"> inside html is viewable by all your users.</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="com">// Restrict your key to designated domains or use a proxy to hide your key</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="com">// to avoid misuage by other party.</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> source </span><span class="pun">=</span><span class="pln"> </span><span class="str">'https://www.googleapis.com/language/translate/v2?key=</span><span class="apiparam"><span class="str">YOUR-API-KEY</span></span><span class="str">&amp;source=en&amp;target=de&amp;callback=translateText&amp;q='</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> sourceText</span><span class="pun">;</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; newScript</span><span class="pun">.</span><span class="pln">src </span><span class="pun">=</span><span class="pln"> source</span><span class="pun">;</span><span class="pln"><br><br>&nbsp; &nbsp; &nbsp; </span><span class="com">// When we add this script to the head, the request is sent off.</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; document</span><span class="pun">.</span><span class="pln">getElementsByTagName</span><span class="pun">(</span><span class="str">'head'</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">].</span><span class="pln">appendChild</span><span class="pun">(</span><span class="pln">newScript</span><span class="pun">);</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;/script&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;/body&gt;</span><span class="pln"><br></span><span class="tag">&lt;/html&gt;</span></pre>
+
+<h1 id="workingWithData">Data format</h1>
+<h3 id="data-json">JSON</h3>
+<p>
+
+
+
+
+
+</p><p><a href="http://en.wikipedia.org/wiki/JSON">JSON</a> (JavaScript Object Notation) is a common Internet format that provides a simple method of representing arbitrary data structures.  According to <a href="http://www.json.org/">json.org</a>, JSON is a text format that is completely language-independent but uses conventions that are familiar to programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others.</p>
+<p></p>
+
+
+      <div style="height: 2714px;" id="gc-collapsible"></div></div>
+<!-- end gc-pagecontent -->
+   </div><!-- end gooey wrapper -->
+    </div> <!-- end codesite content -->
+
+
+<div id="gc-footer" dir="ltr">
+  <div class="text">
+    
+    ©<a href="https://www.google.com/">Google</a> -
+    <a href="https://developers.google.com/">Google Developers</a> -
+    <a href="https://www.google.com/accounts/TOS">Terms of Service</a> -
+    <a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a> -
+    <a href="https://code.google.com/more/">Site Directory</a>
+    <br> <br>
+    Google Code offered in:
+    <a href="https://code.google.com/intl/en/">English</a> -
+    <a href="https://code.google.com/intl/es/">Español</a> -
+    <a href="https://code.google.com/intl/ja/">日本語</a> -
+    <a href="https://code.google.com/intl/ko/">한국어</a> -
+    <a href="https://code.google.com/intl/pt-BR/">Português</a> -
+    <a href="https://code.google.com/intl/ru/">Pусский</a> -
+    <a href="https://code.google.com/intl/zh-CN/">中文(简体)</a> -
+    <a href="https://code.google.com/intl/zh-TW/">中文(繁體)</a>
+  </div>
+</div><!-- end gc-footer -->
+
+</div><!-- end gc-container -->
+
+
+
+
+
+
+
+
+  
+
+
+<div style="position: absolute; display: none; top: 22px; left: 1125px; width: 175px;" id="menuDiv-lang-dropdown" class="menuDiv instance0"><div class="menuCategory default first"><a href="http://code.google.com/intl/en/apis/language/translate/v2/getting_started.html" style="display: block;" class="menuItem">English</a><a href="http://code.google.com/intl/es/apis/language/translate/v2/getting_started.html" style="display: block;" class="menuItem">Español</a><a href="http://code.google.com/intl/ja/apis/language/translate/v2/getting_started.html" style="display: block;" class="menuItem">日本語</a><a href="http://code.google.com/intl/ko/apis/language/translate/v2/getting_started.html" style="display: block;" class="menuItem">한국어</a><a href="http://code.google.com/intl/pt-BR/apis/language/translate/v2/getting_started.html" style="display: block;" class="menuItem">Português (Brasil)</a><a href="http://code.google.com/intl/ru/apis/language/translate/v2/getting_started.html" style="display: block;" class="menuItem">Pусский</a><a href="http://code.google.com/intl/zh-CN/apis/language/translate/v2/getting_started.html" style="display: block;" class="menuItem">中文 (简体)</a><a href="http://code.google.com/intl/zh-TW/apis/language/translate/v2/getting_started.html" style="display: block;" class="menuItem">中文 (繁體)</a></div></div><div id="gc-collapsible-arrow"></div><div style="left: 181px; top: 74px; width: 345px;" id="cs-searchresults"><div id="cs-recommended">Suggestions</div><div id="searchResult1"></div><div id="searchResult2"></div><div id="searchResult3"></div><div id="searchResult4"></div><div id="searchResult5"></div><div id="searchResult6"></div><div id="searchResult7"></div></div><div style="position: absolute; display: none; top: 22px; left: 1031px;" id="menuDiv-projects-dropdown" class="menuDiv instance1"><b style="display: block;" class="categoryTitle projects">Projects</b><div class="menuCategory projects first"><a href="https://code.google.com/p/51szhj/" style="display: block;" class="menuItem">51szhj</a><a href="https://code.google.com/p/express/" style="display: block;" class="menuItem">express</a><a href="https://code.google.com/p/falcon-apps/" style="display: block;" class="menuItem">falcon-apps</a><a href="https://code.google.com/p/falcon-sphider/" style="display: block;" class="menuItem">falcon-sphider</a><a href="https://code.google.com/p/fcoffice/" style="display: block;" class="menuItem">fcoffice</a><a href="https://code.google.com/p/projectsfssd/" style="display: block;" class="menuItem">projectsfssd</a></div><div class="menuCategory controls"><hr class="menuSeparator"><a href="https://code.google.com/more/" style="display: block;" class="menuItem">Find developer products...</a><a href="https://code.google.com/hosting/" style="display: block;" class="menuItem">Find open source projects...</a></div></div></body>
+</html>

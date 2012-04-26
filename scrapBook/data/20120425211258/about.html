@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/">
+<title></title>
+
+
+<link rel="stylesheet" type="text/css" href="about.css" media="all">
+</head>
+<body>
+<div class="document">
+<p>Greetings dear reader,</p>
+<p>this small web application renders user's input in reStructuredText into HTML.
+It is written in mod_python. I have put it into Public Domain. I hope you find it useful.</p>
+<p>The following is the source code of it. Hail to Python for it is so short.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Jiri Barton &lt;<a class="reference" href="mailto:jbar@hosting4u.cz">jbar@hosting4u.cz</a>&gt;</td>
+</tr>
+</tbody>
+</table>
+<div class="section">
+<h1><a id="render-py" name="render-py">render.py</a></h1>
+<pre class="literal-block">from docutils.core import publish_string
+
+def index(req, content=''):
+    req.content_type = 'text/html; charset=UTF-8'
+    req.send_http_header()
+    return publish_string(
+        source=content,
+        settings_overrides={'file_insertion_enabled': 0, 'raw_enabled': 0},
+        writer_name='html')
+</pre>
+</div>
+<div class="section">
+<h1><a id="rest-html" name="rest-html">rest.html</a></h1>
+<pre class="literal-block">&lt;html&gt;
+&lt;head&gt;
+
+&lt;title&gt;reST renderer&lt;/title&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1&gt;reST to HTML conversion&lt;/h1&gt;
+
+&lt;form action="render.py" method="post"&gt;
+    &lt;label&gt;Type some reST into the box below:&lt;/label&gt;
+    &lt;br /&gt;
+    &lt;textarea name="content" rows="20" cols="80"&gt;&lt;/textarea&gt;
+    &lt;br /&gt;&lt;br /&gt;
+    &lt;input type="submit" value="Render" /&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<div class="section">
+<h1><a id="apache-conf-fragment" name="apache-conf-fragment">apache conf fragment</a></h1>
+<p>(be sure to put <tt class="docutils literal"><span class="pre">render.py</span></tt> and <tt class="docutils literal"><span class="pre">rest.html</span></tt> in the directory (such
+as <tt class="docutils literal"><span class="pre">/home/jbar/scratchpad/rest</span></tt>) and edit the path below... and don't forget to load mod_python)</p>
+<pre class="literal-block">&lt;Directory "/home/jbar/scratchpad/rest"&gt;
+    AddHandler mod_python .py
+    PythonHandler mod_python.publisher
+    PythonDebug On
+&lt;/Directory&gt;
+
+Alias /rest /home/jbar/scratchpad/rest
+</pre>
+<a href="http://www.tele3.cz/"><img src="server.gif" alt="" border="0" height="0" width="1"></a>
+</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+/* ::::: http://www.geekpark.net/public/css/style.css ::::: */
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0pt; padding: 0pt; border: 0pt none; font: inherit; vertical-align: baseline; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+input, select { vertical-align: middle; }
+body { font-family: "Microsoft Yahei","Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti ! important; }
+body { font: 13px/1.231 sans-serif; }
+select, input, textarea, button { font: 99% sans-serif; }
+html { overflow-y: auto; }
+a:hover, a:active { outline: medium none; }
+ul, ol { margin-left: 2em; }
+nav ul, nav li { margin: 0pt; list-style: none outside none; }
+sub, sup { font-size: 75%; line-height: 0; position: relative; }
+sup { top: -0.5em; }
+label, input[type="button"], input[type="submit"], input[type="image"], button { cursor: pointer; }
+button, input, select, textarea { margin: 0pt; }
+input:valid, textarea:valid {  }
+input:invalid, textarea:invalid { border-radius: 1px 1px 1px 1px; box-shadow: 0px 0px 5px red; }
+*::-moz-selection { background: none repeat scroll 0% 0% rgb(195, 233, 158); text-shadow: none; }
+.seed .cast-wall .entry *::-moz-selection { background: none repeat scroll 0% 0% rgb(255, 255, 255); text-shadow: none; }
+a:link {  }
+body, select, input, textarea { color: rgb(68, 68, 68); }
+h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+a, a:active, a:visited {  }
+.clearfix:before, .clearfix:after { content: " "; display: block; height: 0pt; visibility: hidden; }
+.clearfix:after { clear: both; }
+.clearfix {  }
+a { color: rgb(16, 158, 255); text-decoration: none; }
+a:hover { border-bottom: 1px dotted rgb(16, 158, 255); }
+a:visited, a:active { color: rgb(16, 158, 255); }
+h1, h2, h3 { color: rgb(51, 51, 51); }
+#container { line-height: 150%; background: none repeat scroll 0% 0% rgb(255, 255, 255); color: rgb(102, 102, 102); }
+html, body, #container { height: 100%; }
+.container { clear: both; width: 990px; margin: 0pt auto; position: relative; }
+#header { width: 100%; height: 42px; margin-bottom: 15px; background: none repeat scroll 0% 0% rgb(37, 37, 37); position: fixed; top: 0pt; left: 0pt; z-index: 999; }
+#header #ajaxing { width: 20px; height: 20px; background: url('loading.gif') no-repeat scroll 0% 0% transparent; position: absolute; left: -30px; top: 12px; display: none; }
+#header a { color: rgb(136, 136, 136); text-decoration: none; -moz-transition: color 0.2s ease-in-out 0s; }
+#header a:hover { color: rgb(255, 255, 255); border: medium none; }
+#header sup { display: none; }
+#header h1, #header h1 a { width: 141px; height: 40px; }
+#header h1 { float: left; margin: 0pt 20px 0pt 0pt; }
+#header h1 a { display: block; background: url('logo.png') no-repeat scroll -5px 0pt transparent; text-indent: -999em; }
+nav.global { height: 42px; line-height: 42px; float: left; border-left: 1px solid rgb(47, 47, 47); }
+nav.global li { border-left: 1px solid rgb(30, 30, 30); border-right: 1px solid rgb(47, 47, 47); float: left; }
+nav.global li a { display: inline-block; padding: 0pt 12px; }
+nav.global li.on a { background: none repeat scroll 0% 0% rgb(50, 50, 50); color: rgb(255, 255, 255) ! important; }
+#header #searchbox { border-left: 1px solid rgb(30, 30, 30); padding-left: 7px; float: left; }
+#header #search { width: 240px; height: 30px; background: none no-repeat scroll 96% center rgb(75, 73, 74); border: 1px solid rgb(26, 26, 26); color: rgb(238, 238, 238); margin-top: 5px; padding: 0pt 29px 0pt 5px; float: left; border-radius: 6px 6px 6px 6px; box-shadow: 1px 1px 1px rgb(59, 59, 59) inset; }
+#header #search:focus { outline: medium none; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); }
+#header #search:-moz-placeholder { color: rgb(153, 153, 153); }
+#header #searchbox .submit { width: 17px; height: 17px; border: medium none; cursor: pointer; background: url('icon_search.png') no-repeat scroll 0% 0% transparent; margin-top: 13px; margin-left: -29px; }
+#header .tool-box { position: absolute; right: 0pt; top: 8px; }
+#header .tool-box li { display: inline-block; padding: 0pt 6px; border-left: 1px dotted rgb(54, 54, 54); text-align: center; }
+#header .tool-box li.first { border-left: medium none; }
+#header .tool-box a { display: inline-block; vertical-align: middle; height: 20px; line-height: 20px; text-align: center; }
+#footer { padding: 0pt 10px; color: rgb(153, 153, 153); }
+#footer { padding-top: 0pt; }
+#footer .social-media-icon { background: url('social-media.png') no-repeat scroll 0pt 0pt transparent; }
+#footer .container { border-top: 1px solid rgb(221, 221, 221); margin: 0pt auto 20px; overflow: hidden; padding: 20px 0pt; }
+#footer .col { width: 20%; float: left; color: rgb(153, 153, 153); font-size: 12px; }
+#footer .col .footer-title { font-weight: bolder; color: rgb(102, 102, 102); font-size: 14px; }
+#footer .col .footer-content { margin: 8px 0pt 0pt; list-style: none outside none; }
+#footer .col .footer-content li { font-size: 12px; line-height: 20px; padding: 0pt 0pt 5px; }
+#footer .col .footer-content li a { display: inline-block; line-height: 18px; }
+#footer .col .footer-content .rss { background-position: -17px 3px; padding-left: 18px; }
+#footer .col .footer-content .rss:hover { background-position: -17px -12px; color: rgb(246, 110, 8); }
+#footer .col .footer-content .email { background-position: 0pt -26px; padding-left: 18px; }
+#footer .col .footer-content .email:hover { background-position: 0pt -41px; color: rgb(0, 153, 204); }
+#footer .col .footer-content .sina { background-position: 0pt -61px; padding-left: 22px; }
+#footer .col .footer-content .sina:hover { color: rgb(227, 37, 41); background-position: 0pt -80px; }
+#footer .col .footer-content .tencent { background-position: 0pt -100px; padding-left: 22px; }
+#footer .col .footer-content .tencent:hover { color: rgb(8, 146, 207); background-position: 0pt -119px; }
+#footer .col .footer-content .twitter { background-position: 0pt -138px; padding-left: 22px; }
+#footer .col .footer-content .twitter:hover { color: rgb(51, 204, 255); background-position: 0pt -156px; }
+#footer .col .footer-content .gplus { background-position: 0pt -174px; padding-left: 22px; }
+#footer .col .footer-content .gplus:hover { color: rgb(211, 69, 42); background-position: 0pt -192px; }
+#footer .ICP { margin-top: 20px; }
+#footer a { color: rgb(153, 153, 153); }
+#main { margin: 42px auto 0pt; position: relative; z-index: 9; }
+ul.tags { margin: 0pt; padding: 0pt; }
+ul.tags li { white-space: pre-line; word-wrap: break-word; float: left; list-style-type: none; margin: 0pt 5px 8px 0pt; }
+ul.tags li a { background: none repeat scroll 0% 0% rgb(239, 239, 239); color: rgb(102, 102, 102); padding: 0pt 10px; text-decoration: none; border-radius: 12px 12px 12px 12px; }
+ul#view-tags li.on a, ul#view-tags li a:hover { background: none repeat scroll 0% 0% rgb(102, 102, 102); color: rgb(239, 239, 239); border: medium none; -moz-transition: color 0.2s ease-in-out 0s; }
+#special-tags { margin: -1px 0pt 0pt; padding: 0pt; }
+#special-tags li a { background: -moz-linear-gradient(center top , rgb(245, 245, 245), rgb(233, 233, 233)) repeat scroll 0% 0% transparent; color: rgb(102, 102, 102); border: medium none; height: 20px; display: inline-block; }
+#view-tags #special-tags li.specialOn a, #view-tags #special-tags li a:hover { background: -moz-linear-gradient(center top , rgb(195, 231, 157), rgb(195, 233, 160)) repeat scroll 0% 0% transparent; color: rgb(102, 102, 102); border: medium none; }
+table.format tr:nth-child(2n) td { background: none repeat scroll 0% 0% rgb(239, 239, 239); }
+table.datalist tr:nth-child(2n) td { background: none repeat scroll 0% 0% rgb(243, 243, 243); }
+/* ::::: http://www.geekpark.net/public/css/icons.css ::::: */
+
+html {  }
+.entry .header h1 { padding-right: 10px; font-size: 14px; padding-bottom: 1px; }
+#newsNav a, #newsNav span, #view-tags li a, #view-tags span { color: rgb(153, 153, 153); font: 13px/20px "Lucida Grande","Lucida Sans Unicode",Verdana,Tahoma,Arial,Helvetica,Calibri,微软雅黑,宋体; border-bottom: medium none; cursor: pointer; padding: 0pt 9px; height: 20px; display: inline-block; border-radius: 12px 12px 12px 12px; }
+ul#view-tags li.on a, ul#view-tags li a:hover { background: none repeat scroll 0% 0% rgb(102, 102, 102); color: rgb(239, 239, 239); border: medium none; -moz-transition: color 0.2s ease-in-out 0s; }
+#special-tags { margin: -1px 0pt 0pt; padding: 0pt; }
+#special-tags li a { background: -moz-linear-gradient(center top , rgb(245, 245, 245), rgb(233, 233, 233)) repeat scroll 0% 0% transparent; color: rgb(102, 102, 102); border: medium none; height: 20px; display: inline-block; }
+#view-tags #special-tags li.specialOn a, #view-tags #special-tags li a:hover { background: -moz-linear-gradient(center top , rgb(195, 231, 157), rgb(195, 233, 160)) repeat scroll 0% 0% transparent; color: rgb(102, 102, 102); border: medium none; }
+#view-tags #special-tags li.specialOn-new a { background: -moz-linear-gradient(center top , rgb(195, 231, 157), rgb(195, 233, 160)) repeat scroll 0% 0% transparent; color: rgb(102, 102, 102); border: medium none; }
+.v-line { background: url('newsnav_bg.jpg') no-repeat scroll right -1px transparent; padding-right: 5px; }
+.jump_new { display: none; position: fixed; right: 0pt; top: 130px; width: 19px; height: 89px; text-align: left; text-indent: -9999em; background: url('new.gif') no-repeat scroll 0pt 0pt transparent; }
+a.cast-list-more { background: none repeat scroll 0pt 0pt rgb(239, 239, 239); border-radius: 5px 5px 5px 5px; font-size: 14px; height: 35px; line-height: 35px; margin: 30px auto 45px; padding: 0pt; display: block; cursor: pointer; text-align: center; width: 456px; color: rgb(102, 102, 102); border-bottom: medium none; }
+a.cast-list-more:hover { -moz-transition: color 0.2s ease-in-out 0s; background: none repeat scroll 0pt 0pt rgb(195, 231, 157); }
+/* ::::: http://www.geekpark.net/public/css/seed.css ::::: */
+
+#filter-box { padding: 20px 80px 8px 0pt; z-index: 10; position: fixed; top: 40px; left: 0pt; width: 100%; background: none repeat scroll 0% 0% rgb(255, 255, 255); }
+#filter-box .container { height: 34px; border-bottom: 1px solid rgb(227, 227, 227); position: relative; }
+#view-mode { width: 70px; height: 25px; overflow: hidden; position: absolute; right: 0pt; top: -3px; }
+#view-mode h3 { display: none; }
+#view-mode li { display: block; width: 35px; height: 25px; overflow: hidden; float: left; margin: 0pt; border-radius: 0pt 0pt 0pt 0pt; }
+#view-mode a { display: block; width: 25px; height: 25px; background: url('view_mode.gif') no-repeat scroll 0% 0% rgb(239, 239, 239); text-indent: -999em; }
+#view-mode a:hover { border: medium none; }
+#view-mode .thumbs a { padding-left: 10px; background-position: 2px -75px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+#view-mode .list a { padding-right: 10px; background-position: -2px -25px; border-radius: 0pt 10px 10px 0pt; }
+#view-mode .list { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+#view-mode .on a { background-color: rgb(195, 231, 161); }
+#view-mode .thumbs.on a { background-position: 2px -50px; }
+#view-tags {  }
+#castlist-box { margin-right: -10px; z-index: 9; margin-top: 112px; margin-bottom: 50px; min-height: 400px; }
+#castlist-box a:hover { border: medium none; }
+#castlist-box .loading { min-height: 30px; background: url('loading.gif') no-repeat scroll center top transparent; border: medium none; }
+#castlist-box .item .loading { background: url('loading_logo.gif') no-repeat scroll center center transparent; }
+.cast-wall { width: 100%; overflow: visible ! important; }
+.cast-list { width: 700px; overflow: visible ! important; }
+.cast-pin { overflow: hidden; margin: 0pt 0pt 20px; padding: 12px; float: left; background: none repeat scroll 0% 0% rgb(244, 244, 244); position: relative; }
+.cast-pin:hover { background: none repeat scroll 0% 0% rgb(196, 232, 158); }
+.cast-pin .photo img { vertical-align: top; }
+.cast-pin .entry { font-size: 14px; padding: 15px 0pt; position: relative; z-index: 1; }
+.cast-pin .header, .cast-pin header { margin: 0pt; padding-bottom: 15px; }
+.cast-pin h1 a { color: rgb(51, 51, 51); }
+.cast-pin .main { padding: 0pt 0pt 15px; font-size: 13px; color: rgb(102, 102, 102); }
+.cast-pin .type-3 { background: url('suggest.png') no-repeat scroll right top transparent; height: 60px; position: absolute; right: 0pt; top: 0pt; width: 80px; }
+.cast-pin .meta { color: rgb(153, 153, 153); font-size: 12px; }
+.cast-pin .meta i { color: rgb(204, 204, 204); }
+.entry .header h1 { font-size: 14px; padding: 0pt; }
+.cast-list { padding-bottom: 15px; left: 112px; }
+a.cast-list-more { font-size: 14px; height: 35px; line-height: 35px; margin: 30px auto; padding: 0pt; display: block; cursor: pointer; text-align: center; width: 456px; color: rgb(102, 102, 102); border-bottom: medium none; }
+a.cast-list-more:hover { -moz-transition: color 0.2s ease-in-out 0s; background: none repeat scroll 0pt 0pt rgb(195, 231, 157); }
+.cast-list .cast-item:nth-child(n+3) {  }
+.isotope-item { z-index: 2; }
+.isotope, .isotope .isotope-item { -moz-transition-duration: 0.8s; }
+.isotope { -moz-transition-property: height, width; }
+.isotope .isotope-item { -moz-transition-property: -moz-transform, opacity; }
+.seed .cast-card .meta a, .seed .cast-pin .meta a { color: rgb(119, 119, 119); }
+/* ::::: http://www.geekpark.net/public/css/media.css ::::: */
+
+.clearfix:before, .clearfix:after { content: " "; display: block; height: 0pt; overflow: hidden; }
+.clearfix:after { clear: both; }
+.clearfix {  }
+@media all and (orientation: portrait) {
+}
+@media all and (orientation: landscape) {
+}
+@media screen and (max-device-width: 480px) {
+}
+@media print {
+  * { background: none repeat scroll 0% 0% transparent ! important; color: black ! important; text-shadow: none ! important; filter: none ! important; }
+  a, a:visited { color: rgb(68, 68, 68) ! important; text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid rgb(153, 153, 153); page-break-inside: avoid; }
+  thead { display: table-header-group; }
+  tr, img { page-break-inside: avoid; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+/* ::::: http://www.geekpark.net/public/js/libs/autocomplete/jquery.autocomplete.css ::::: */
+
+/* ::::: http://www.geekpark.net/public/js/libs/ajaxupload/fileuploader.css ::::: */
+

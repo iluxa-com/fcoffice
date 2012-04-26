@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta charset="UTF-8">
+<title>用python爬虫抓站的一些技巧总结 | observer专栏杂记</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+
+<link rel="pingback" href="http://obmem.info/xmlrpc.php">
+<link rel="alternate" type="application/rss+xml" title="observer专栏杂记 » Feed" href="http://obmem.info/?feed=rss2">
+<link rel="alternate" type="application/rss+xml" title="observer专栏杂记 » Comments Feed" href="http://obmem.info/?feed=comments-rss2">
+<link rel="alternate" type="application/rss+xml" title="observer专栏杂记 » 用python爬虫抓站的一些技巧总结 Comments Feed" href="http://obmem.info/?feed=rss2&amp;p=476">
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://obmem.info/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://obmem.info/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="observer专栏杂记" href="http://obmem.info/">
+<link rel="start" title="Convert OGV to FLV Using ffmpeg" href="http://obmem.info/?p=20">
+<link rel="prev" title="被MPAA找上门了，太囧了" href="http://obmem.info/?p=472">
+<link rel="next" title="好久不更新天下大乱了" href="http://obmem.info/?p=483">
+<meta name="generator" content="WordPress 3.0.4">
+<link rel="canonical" href="http://obmem.info/?p=476">
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body class="single single-post postid-476">
+<div id="wrapper" class="hfeed">
+	<div id="header">
+		<div id="masthead">
+			<div id="branding" role="banner">
+								<div id="site-title">
+					<span>
+						<a href="http://obmem.info/" title="observer专栏杂记" rel="home">observer专栏杂记</a>
+					</span>
+				</div>
+				<div id="site-description">建站 编程 杂记</div>
+
+										<img src="path.jpg" alt="" height="198" width="940">
+								</div><!-- #branding -->
+
+			<div id="access" role="navigation">
+			  				<div class="skip-link screen-reader-text"><a href="#content" title="Skip to content">Skip to content</a></div>
+								<div class="menu"><ul><li><a href="http://obmem.info/" title="Home">Home</a></li><li class="page_item page-item-687"><a href="http://obmem.info/?page_id=687" title="Python">Python</a></li><li class="page_item page-item-679"><a href="http://obmem.info/?page_id=679" title="Php">Php</a></li><li class="page_item page-item-666"><a href="http://obmem.info/?page_id=666" title="About">About</a></li><li class="page_item page-item-823"><a href="http://obmem.info/?page_id=823" title="Donatiton">Donatiton</a></li></ul></div>
+			</div><!-- #access -->
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+
+		<div id="container">
+			<div id="content" role="main">
+
+
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><a href="http://obmem.info/?p=472" rel="prev"><span class="meta-nav">←</span> 被MPAA找上门了，太囧了</a></div>
+					<div class="nav-next"><a href="http://obmem.info/?p=483" rel="next">好久不更新天下大乱了 <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-above -->
+
+				<div id="post-476" class="post-476 post type-post hentry category-python category-16 tag-python tag-16">
+					<h1 class="entry-title">用python爬虫抓站的一些技巧总结</h1>
+
+					<div class="entry-meta">
+						<span class="meta-prep meta-prep-author">Posted on</span> <a href="http://obmem.info/?p=476" title="6:53 pm" rel="bookmark"><span class="entry-date">December 26, 2009</span></a> <span class="meta-sep">by</span> <span class="author vcard"><a class="url fn n" href="http://obmem.info/?author=1" title="View all posts by observer">observer</a></span>					</div><!-- .entry-meta -->
+
+					<div class="entry-content">
+						
+
+
+<p>学用python也有3个多月了，用得最多的还是各类爬虫脚本：写过抓代理本机验证的脚本，写过在discuz论坛中自动登录自动发贴的脚本，写过自动收邮件的脚本，写过简单的验证码识别的脚本，本来想写google music的抓取脚本的，结果有了强大的<a href="http://code.google.com/p/gmbox/">gmbox</a>，也就不用写了。<br>
+-<br>
+这些脚本有一个共性，都是和web相关的，总要用到获取链接的一些方法，再加上<a href="http://code.google.com/p/simplecd/">simplecd</a>这个半爬虫半网站的项目，累积不少爬虫抓站的经验，在此总结一下，那么以后做东西也就不用重复劳动了。<br>
+<span id="more-476"></span><br>
+-<br>
+<strong>1.最基本的抓站</strong></p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> <span style="color: rgb(220, 20, 60);">urllib2</span>
+content = <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">urlopen</span><span style="color: black;">(</span><span style="color: rgb(72, 61, 139);">'http://XXXX'</span><span style="color: black;">)</span>.<span style="color: black;">read</span><span style="color: black;">(</span><span style="color: black;">)</span></pre></div></div>
+
+<p>-<br>
+<strong>2.使用代理服务器</strong><br>
+这在某些情况下比较有用，比如IP被封了，或者比如IP访问的次数受到限制等等。</p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> <span style="color: rgb(220, 20, 60);">urllib2</span>
+proxy_support = <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">ProxyHandler</span><span style="color: black;">(</span><span style="color: black;">{</span><span style="color: rgb(72, 61, 139);">'http'</span>:<span style="color: rgb(72, 61, 139);">'http://XX.XX.XX.XX:XXXX'</span><span style="color: black;">}</span><span style="color: black;">)</span>
+opener = <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">build_opener</span><span style="color: black;">(</span>proxy_support, <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">HTTPHandler</span><span style="color: black;">)</span>
+<span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">install_opener</span><span style="color: black;">(</span>opener<span style="color: black;">)</span>
+content = <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">urlopen</span><span style="color: black;">(</span><span style="color: rgb(72, 61, 139);">'http://XXXX'</span><span style="color: black;">)</span>.<span style="color: black;">read</span><span style="color: black;">(</span><span style="color: black;">)</span></pre></div></div>
+
+<p>-<br>
+<strong>3.需要登录的情况</strong><br>
+登录的情况比较麻烦我把问题拆分一下：<br>
+-<br>
+<strong>3.1 cookie的处理</strong></p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> <span style="color: rgb(220, 20, 60);">urllib2</span>, <span style="color: rgb(220, 20, 60);">cookielib</span>
+cookie_support= <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">HTTPCookieProcessor</span><span style="color: black;">(</span><span style="color: rgb(220, 20, 60);">cookielib</span>.<span style="color: black;">CookieJar</span><span style="color: black;">(</span><span style="color: black;">)</span><span style="color: black;">)</span>
+opener = <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">build_opener</span><span style="color: black;">(</span>cookie_support, <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">HTTPHandler</span><span style="color: black;">)</span>
+<span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">install_opener</span><span style="color: black;">(</span>opener<span style="color: black;">)</span>
+content = <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">urlopen</span><span style="color: black;">(</span><span style="color: rgb(72, 61, 139);">'http://XXXX'</span><span style="color: black;">)</span>.<span style="color: black;">read</span><span style="color: black;">(</span><span style="color: black;">)</span></pre></div></div>
+
+<p>是的没错，如果想同时用代理和cookie，那就加入proxy_support然后operner改为</p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;">opener = <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">build_opener</span><span style="color: black;">(</span>proxy_support, cookie_support, <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">HTTPHandler</span><span style="color: black;">)</span></pre></div></div>
+
+<p>-<br>
+<strong>3.2 表单的处理</strong><br>
+登录必要填表，表单怎么填？首先利用工具截取所要填表的内容<br>
+比如我一般用firefox+httpfox插件来看看自己到底发送了些什么包<br>
+这个我就举个例子好了，以verycd为例，先找到自己发的POST请求，以及POST表单项：<br>
+<img class="alignnone size-full wp-image-477" title="post1" src="post1.png" alt="post1" height="445" width="1003"><br>
+<img class="alignnone size-full wp-image-478" title="post2" src="post2.png" alt="post2" height="372" width="682"><br>
+-<br>
+可以看到verycd的话需要填username,password,continueURI,fk,login_submit这几项，其中fk是随机生成的（其实不太随机，看上去像是把epoch时间经过简单的编码生成的），需要从网页获取，也就是说得先访问一次网页，用正则表达式等工具截取返回数据中的fk项。continueURI顾名思义可以随便写，login_submit是固定的，这从源码可以看出。还有username，password那就很显然了。<br>
+-<br>
+好的，有了要填写的数据，我们就要生成postdata</p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> <span style="color: rgb(220, 20, 60);">urllib</span>
+postdata=<span style="color: rgb(220, 20, 60);">urllib</span>.<span style="color: black;">urlencode</span><span style="color: black;">(</span><span style="color: black;">{</span>
+    <span style="color: rgb(72, 61, 139);">'username'</span>:<span style="color: rgb(72, 61, 139);">'XXXXX'</span>,
+    <span style="color: rgb(72, 61, 139);">'password'</span>:<span style="color: rgb(72, 61, 139);">'XXXXX'</span>,
+    <span style="color: rgb(72, 61, 139);">'continueURI'</span>:<span style="color: rgb(72, 61, 139);">'http://www.verycd.com/'</span>,
+    <span style="color: rgb(72, 61, 139);">'fk'</span>:fk,
+    <span style="color: rgb(72, 61, 139);">'login_submit'</span>:<span style="color: rgb(72, 61, 139);">'登录'</span>
+<span style="color: black;">}</span><span style="color: black;">)</span></pre></div></div>
+
+<p>-<br>
+然后生成http请求，再发送请求：</p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;">req = <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">Request</span><span style="color: black;">(</span>
+    url = <span style="color: rgb(72, 61, 139);">'http://secure.verycd.com/signin/*/http://www.verycd.com/'</span>,
+    data = postdata
+<span style="color: black;">)</span>
+result = <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">urlopen</span><span style="color: black;">(</span>req<span style="color: black;">)</span>.<span style="color: black;">read</span><span style="color: black;">(</span><span style="color: black;">)</span></pre></div></div>
+
+<p>-<br>
+<strong>3.3 伪装成浏览器访问</strong><br>
+某些网站反感爬虫的到访，于是对爬虫一律拒绝请求<br>
+这时候我们需要伪装成浏览器，这可以通过修改http包中的header来实现<br>
+#…</p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;">headers = <span style="color: black;">{</span>
+    <span style="color: rgb(72, 61, 139);">'User-Agent'</span>:<span style="color: rgb(72, 61, 139);">'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6'</span>
+<span style="color: black;">}</span>
+req = <span style="color: rgb(220, 20, 60);">urllib2</span>.<span style="color: black;">Request</span><span style="color: black;">(</span>
+    url = <span style="color: rgb(72, 61, 139);">'http://secure.verycd.com/signin/*/http://www.verycd.com/'</span>,
+    data = postdata,
+    headers = headers
+<span style="color: black;">)</span>
+<span style="color: rgb(128, 128, 128); font-style: italic;">#...</span></pre></div></div>
+
+<p>-<br>
+<strong>3.4 反”反盗链”</strong><br>
+某些站点有所谓的反盗链设置，其实说穿了很简单，就是检查你发送请求的header里面，referer站点是不是他自己，所以我们只需要像3.3一样，把headers的referer改成该网站即可，以黑幕著称地cnbeta为例：</p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(128, 128, 128); font-style: italic;">#...</span>
+headers = <span style="color: black;">{</span>
+    <span style="color: rgb(72, 61, 139);">'Referer'</span>:<span style="color: rgb(72, 61, 139);">'http://www.cnbeta.com/articles'</span>
+<span style="color: black;">}</span>
+<span style="color: rgb(128, 128, 128); font-style: italic;">#...</span></pre></div></div>
+
+<p>headers是一个dict数据结构，你可以放入任何想要的header，来做一些伪装。例如，有些自作聪明的网站总喜欢窥人隐私，别人通过代理访问，他偏偏要读取header中的X-Forwarded-For来看看人家的真实IP，没话说，那就直接把X-Forwarde-For改了吧，可以改成随便什么好玩的东东来欺负欺负他，呵呵。<br>
+-<br>
+<strong>3.5 终极绝招</strong><br>
+有时候即使做了3.1-3.4，访问还是会被据，那么没办法，老老实实把httpfox中看到的headers全都写上，那一般也就行了。<br>
+再不行，那就只能用终极绝招了，<a href="http://seleniumhq.org/">selenium</a>直接控制浏览器来进行访问，只要浏览器可以做到的，那么它也可以做到。类似的还有pamie，watir，等等等等。<br>
+-<br>
+<strong>4.多线程并发抓取</strong><br>
+单线程太慢的话，就需要多线程了，这里给个简单的线程池模板<br>
+这个程序只是简单地打印了1-10，但是可以看出是并发地。</p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> <span style="color: rgb(220, 20, 60);">threading</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> Thread
+<span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> <span style="color: rgb(220, 20, 60);">Queue</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> <span style="color: rgb(220, 20, 60);">Queue</span>
+<span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> <span style="color: rgb(220, 20, 60);">time</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> sleep
+<span style="color: rgb(128, 128, 128); font-style: italic;">#q是任务队列</span>
+<span style="color: rgb(128, 128, 128); font-style: italic;">#NUM是并发线程总数</span>
+<span style="color: rgb(128, 128, 128); font-style: italic;">#JOBS是有多少任务</span>
+q = <span style="color: rgb(220, 20, 60);">Queue</span><span style="color: black;">(</span><span style="color: black;">)</span>
+NUM = <span style="color: rgb(255, 69, 0);">2</span>
+JOBS = <span style="color: rgb(255, 69, 0);">10</span>
+<span style="color: rgb(128, 128, 128); font-style: italic;">#具体的处理函数，负责处理单个任务</span>
+<span style="color: rgb(255, 119, 0); font-weight: bold;">def</span> do_somthing_using<span style="color: black;">(</span>arguments<span style="color: black;">)</span>:
+    <span style="color: rgb(255, 119, 0); font-weight: bold;">print</span> arguments
+<span style="color: rgb(128, 128, 128); font-style: italic;">#这个是工作进程，负责不断从队列取数据并处理</span>
+<span style="color: rgb(255, 119, 0); font-weight: bold;">def</span> working<span style="color: black;">(</span><span style="color: black;">)</span>:
+    <span style="color: rgb(255, 119, 0); font-weight: bold;">while</span> <span style="color: rgb(0, 128, 0);">True</span>:
+        arguments = q.<span style="color: black;">get</span><span style="color: black;">(</span><span style="color: black;">)</span>
+        do_somthing_using<span style="color: black;">(</span>arguments<span style="color: black;">)</span>
+        sleep<span style="color: black;">(</span><span style="color: rgb(255, 69, 0);">1</span><span style="color: black;">)</span>
+        q.<span style="color: black;">task_done</span><span style="color: black;">(</span><span style="color: black;">)</span>
+<span style="color: rgb(128, 128, 128); font-style: italic;">#fork NUM个线程等待队列</span>
+<span style="color: rgb(255, 119, 0); font-weight: bold;">for</span> i <span style="color: rgb(255, 119, 0); font-weight: bold;">in</span> <span style="color: rgb(0, 128, 0);">range</span><span style="color: black;">(</span>NUM<span style="color: black;">)</span>:
+    t = Thread<span style="color: black;">(</span>target=working<span style="color: black;">)</span>
+    t.<span style="color: black;">setDaemon</span><span style="color: black;">(</span><span style="color: rgb(0, 128, 0);">True</span><span style="color: black;">)</span>
+    t.<span style="color: black;">start</span><span style="color: black;">(</span><span style="color: black;">)</span>
+<span style="color: rgb(128, 128, 128); font-style: italic;">#把JOBS排入队列</span>
+<span style="color: rgb(255, 119, 0); font-weight: bold;">for</span> i <span style="color: rgb(255, 119, 0); font-weight: bold;">in</span> <span style="color: rgb(0, 128, 0);">range</span><span style="color: black;">(</span>JOBS<span style="color: black;">)</span>:
+    q.<span style="color: black;">put</span><span style="color: black;">(</span>i<span style="color: black;">)</span>
+<span style="color: rgb(128, 128, 128); font-style: italic;">#等待所有JOBS完成</span>
+q.<span style="color: black;">join</span><span style="color: black;">(</span><span style="color: black;">)</span></pre></div></div>
+
+<p><strong>5.验证码的处理</strong><br>
+碰到验证码咋办？这里分两种情况处理：<br>
+-<br>
+1.google那种验证码，凉拌<br>
+-<br>
+2.简单的验证码：字符个数有限，只使用了简单的平移或旋转加噪音而没有扭曲的，这种还是有可能可以处理的，一般思路是旋转的转回来，噪音去掉，然后划分单个字符，划分好了以后再通过特征提取的方法(例如<a href="http://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a>)降维并生成特征库，然后把验证码和特征库进行比较。这个比较复杂，一篇博文是说不完的，这里就不展开了，具体做法请弄本相关教科书好好研究一下。<br>
+-<br>
+3.事实上有些验证码还是很弱的，这里就不点名了，反正我通过2的方法提取过准确度非常高的验证码，所以2事实上是可行的。<br>
+-<br>
+<strong>6.总结</strong><br>
+基本上我遇到过的所有情况，用以上方法都顺利解决了，不太清楚还有没有其他漏掉的情况，所以本文到这里就完成了，以后要是碰上其他情况，再补充相关方法好了：）</p>
+<p>本文后续见： http://obmem.info/?p=753</p>
+											</div><!-- .entry-content -->
+
+
+					<div class="entry-utility">
+						This entry was posted in <a href="http://obmem.info/?cat=5" title="View all posts in python" rel="category">python</a>, <a href="http://obmem.info/?cat=16" title="View all posts in 编程" rel="category">编程</a> and tagged <a href="http://obmem.info/?tag=python" rel="tag">python</a>, <a href="http://obmem.info/?tag=%e7%bc%96%e7%a8%8b" rel="tag">编程</a>. Bookmark the <a href="http://obmem.info/?p=476" title="Permalink to 用python爬虫抓站的一些技巧总结" rel="bookmark">permalink</a>.											</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><a href="http://obmem.info/?p=472" rel="prev"><span class="meta-nav">←</span> 被MPAA找上门了，太囧了</a></div>
+					<div class="nav-next"><a href="http://obmem.info/?p=483" rel="next">好久不更新天下大乱了 <span class="meta-nav">→</span></a></div>
+				</div><!-- #nav-below -->
+
+				
+			<div id="comments">
+
+
+			<h3 id="comments-title">28 Responses to <em>用python爬虫抓站的一些技巧总结</em></h3>
+
+
+			<ol class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-392">
+		<div id="comment-392">
+		<div class="comment-author vcard">
+			<img alt="" src="15d56ab6080d46c4d464006150628452" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn">qsun</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-392">
+			December 26, 2009 at 8:43 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Python有没有Perl的那种WWW::Mechanize的模块？那玩意用来作抓取特别好用。</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=392#respond" onclick='return addComment.moveForm("comment-392", "392", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-393">
+		<div id="comment-393">
+		<div class="comment-author vcard">
+			<img alt="" src="25a389415a5f8be07de7369fc983a980" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://obmem.info/old" rel="external nofollow" class="url">observer</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-393">
+			December 26, 2009 at 9:38 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>有的，就叫mechanize，不过我觉得python语法用来抓站本来就够简单了，用mechanize有点多此一举，还是觉得不如正则表达式+urllib2来得方便高效。</p>
+<p>而且mechanize还不够强，依旧处理不了javascript什么的，真的碰上难度大的站点，还是得自己分析网站的js代码，给出相应调整；或者干脆用更强大的selenium。</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=393#respond" onclick='return addComment.moveForm("comment-393", "393", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-394">
+		<div id="comment-394">
+		<div class="comment-author vcard">
+			<img alt="" src="169fb7d529ca2b2855ba97ce0f759da7" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn">Good</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-394">
+			December 27, 2009 at 12:11 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>不错，python简单的多线程确实适合爬虫，有正则，基本上就没什么大问题了</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=394#respond" onclick='return addComment.moveForm("comment-394", "394", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://topsy.com/tb/ff.im/-dn415" rel="external nofollow" class="url">Tweets that mention 用python爬虫抓站的一些技巧总结 | Observer专栏杂记 -- Topsy.com</a></p>
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-396">
+		<div id="comment-396">
+		<div class="comment-author vcard">
+			<img alt="" src="fb226eb9d0f75834f8c3d0a6acc97f82" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn">oldjan</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-396">
+			December 27, 2009 at 4:20 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>写得真不错 正好在学习这方面</p>
+<p>感谢你的分享</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=396#respond" onclick='return addComment.moveForm("comment-396", "396", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-397">
+		<div id="comment-397">
+		<div class="comment-author vcard">
+			<img alt="" src="da3942a989b6028f23c7585d86fa7f57" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://li2z.cn/" rel="external nofollow" class="url">bones7456</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-397">
+			December 27, 2009 at 9:29 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>宝贵的经验，太有用了，谢谢Observer！<br>
+PS：我那半成品gmbox也被提到了，哈哈。。。</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=397#respond" onclick='return addComment.moveForm("comment-397", "397", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-398">
+		<div id="comment-398">
+		<div class="comment-author vcard">
+			<img alt="" src="c13c91b003709f68a51fe6eeef7771ca" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://kikicici.com/" rel="external nofollow" class="url">犀牛</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-398">
+			December 28, 2009 at 2:45 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>请问 centos的vps能否搭建SimpleCD的运行环境</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=398#respond" onclick='return addComment.moveForm("comment-398", "398", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-399">
+		<div id="comment-399">
+		<div class="comment-author vcard">
+			<img alt="" src="240147fe1159a6f3f5ff1fcf2509b783" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn">loveandy183</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-399">
+			December 29, 2009 at 11:49 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>你好，我是菜鸟，弱弱的问一下你的“最基本的抓站”里面代码运行下，会产生什么样的效果，我这边没一点反应，我网址里填的www.g.cn</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=399#respond" onclick='return addComment.moveForm("comment-399", "399", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment odd alt depth-2" id="li-comment-10990">
+		<div id="comment-10990">
+		<div class="comment-author vcard">
+			<img alt="" src="cca68946d87af1cd3bdbad22667cd973" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://www.bing.com/" rel="external nofollow" class="url">Clara</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-10990">
+			July 24, 2011 at 10:31 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Slam dunkin like Shuaqille O’Neal, if he wrote informative articles.</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=10990#respond" onclick='return addComment.moveForm("comment-10990", "10990", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+</ul>
+</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-400">
+		<div id="comment-400">
+		<div class="comment-author vcard">
+			<img alt="" src="387b4777b3760124c3b0e5171dbb0275" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://nffish.com/" rel="external nofollow" class="url">nffish</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-400">
+			January 6, 2010 at 12:25 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>推特上看过来的,感觉好悬</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=400#respond" onclick='return addComment.moveForm("comment-400", "400", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-401">
+		<div id="comment-401">
+		<div class="comment-author vcard">
+			<img alt="" src="02b5c6de63fc63031d89f42848a4bd99" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn">tyz</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-401">
+			January 12, 2010 at 3:56 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>博主不会那么俗的，应该在家写爬龙脚本准备把大家都吓死。。。</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=401#respond" onclick='return addComment.moveForm("comment-401", "401", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-402">
+		<div id="comment-402">
+		<div class="comment-author vcard">
+			<img alt="" src="f9b1b52c6ec89b66c242519daa6c0a76" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://wpzone.cn/" rel="external nofollow" class="url">wpzone</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-402">
+			January 13, 2010 at 5:15 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>obmem.info/old的文章都很实用，让我了解了不少东西，强烈建议博主更新频繁一点</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=402#respond" onclick='return addComment.moveForm("comment-402", "402", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-403">
+		<div id="comment-403">
+		<div class="comment-author vcard">
+			<img alt="" src="934668299ae819cea7f8113d257fd325" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://null/" rel="external nofollow" class="url">adc</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-403">
+			January 23, 2010 at 6:07 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>大哥~ 能不能做一个 完整的例子呢<br>
+对我们菜鸟来说是莫大的帮助~</p>
+<p>谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢谢</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=403#respond" onclick='return addComment.moveForm("comment-403", "403", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-404">
+		<div id="comment-404">
+		<div class="comment-author vcard">
+			<img alt="" src="77c1fe91dc7bdd509ea5e1e48c563b97" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://www.frombook.com/" rel="external nofollow" class="url">尚书房</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-404">
+			February 18, 2010 at 3:38 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>不错，我现在用的是pycurl，用多线程调试起来很麻烦，pycurl的multi下载也不错。<br>
+我现在的http://www.frombook.com就是这么做的</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=404#respond" onclick='return addComment.moveForm("comment-404", "404", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-405">
+		<div id="comment-405">
+		<div class="comment-author vcard">
+			<img alt="" src="da7ec792582a1a09e68245750968f769" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://52xenos.blogspot.com/" rel="external nofollow" class="url">daniel</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-405">
+			February 22, 2010 at 7:21 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>多谢分享,总结的真的很好,忍不住转载了,保留了署名和链接.<br>
+如有冒犯,请告诉我,我会撤贴.<br>
+<a href="http://52xenos.blogspot.com/2010/02/zt-python.html" rel="nofollow">http://52xenos.blogspot.com/2010/02/zt-python.html</a></p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=405#respond" onclick='return addComment.moveForm("comment-405", "405", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-406">
+		<div id="comment-406">
+		<div class="comment-author vcard">
+			<img alt="" src="264ff6087809b9de97b42a857a0591f9" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn">ai</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-406">
+			February 24, 2010 at 7:31 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>正则表达式等工具截取返回数据中的fk项<br>
+有这样的工具不？</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=406#respond" onclick='return addComment.moveForm("comment-406", "406", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment odd alt depth-2" id="li-comment-407">
+		<div id="comment-407">
+		<div class="comment-author vcard">
+			<img alt="" src="25a389415a5f8be07de7369fc983a980" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://obmem.info/old" rel="external nofollow" class="url">observer</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-407">
+			February 25, 2010 at 9:41 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>正则表达式是python的一个模块，见我最新发的<a href="http://obmem.info/old/?p=521" rel="nofollow">VeryCD灌水机源码</a></p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=407#respond" onclick='return addComment.moveForm("comment-407", "407", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+</ul>
+</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://obmem.info/old/?p=535" rel="external nofollow" class="url">python验证码识别之Discuz(一) | Observer专栏杂记</a></p>
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://obmem.info/?p=753" rel="external nofollow" class="url">使用python爬虫抓站的一些技巧总结：进阶篇 | observer专栏杂记</a></p>
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-9846">
+		<div id="comment-9846">
+		<div class="comment-author vcard">
+			<img alt="" src="ccd350632af155b23729faf09c1f45c9" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://www.sunshaozong.com/" rel="external nofollow" class="url">zong</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-9846">
+			March 18, 2011 at 11:37 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>宝贵经验！谢谢分享！~</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=9846#respond" onclick='return addComment.moveForm("comment-9846", "9846", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-9936">
+		<div id="comment-9936">
+		<div class="comment-author vcard">
+			<img alt="" src="e8f83cd2c3de126127dc42a973aafe12" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn">seemood</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-9936">
+			April 1, 2011 at 1:59 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>请问遇到那种像新浪微博一样的，网页里面没有form元素，而是写在一个div里面的登陆网站。要怎么让爬虫登陆进去呢？</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=9936#respond" onclick='return addComment.moveForm("comment-9936", "9936", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-10451">
+		<div id="comment-10451">
+		<div class="comment-author vcard">
+			<img alt="" src="97a02ad33534eac0e867481e3ae1c548" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn">miki</cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-10451">
+			May 21, 2011 at 11:39 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>请问这可以用来抓discuz的论坛吗</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=10451#respond" onclick='return addComment.moveForm("comment-10451", "10451", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://www.52sky.org/?p=26001" rel="external nofollow" class="url">用python爬虫抓站的一些技巧总结 - Frandy's Blog</a></p>
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-13570">
+		<div id="comment-13570">
+		<div class="comment-author vcard">
+			<img alt="" src="fbec4fd299f8c69361397e800ac1e59f" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://thisisonlytest/" rel="external nofollow" class="url">fuck你全家</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-13570">
+			December 4, 2011 at 8:56 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>000000</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=13570#respond" onclick='return addComment.moveForm("comment-13570", "13570", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="comment even thread-even depth-1" id="li-comment-13572">
+		<div id="comment-13572">
+		<div class="comment-author vcard">
+			<img alt="" src="fbec4fd299f8c69361397e800ac1e59f" class="avatar avatar-40 photo" height="40" width="40">			<cite class="fn"><a href="http://thisisonlytest/" rel="external nofollow" class="url">fuck你全家</a></cite> <span class="says">says:</span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://obmem.info/?p=476#comment-13572">
+			December 4, 2011 at 9:25 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>it’s bad</p>
+</div>
+
+		<div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="http://obmem.info/?p=476&amp;replytocom=13572#respond" onclick='return addComment.moveForm("comment-13572", "13572", "respond", "476")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://ntcn.net/blog/?p=1932" rel="external nofollow" class="url">用python爬虫抓站的一些技巧总结 | 世界是平的</a></p>
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://xuhuihua.sinaapp.com/?p=19" rel="external nofollow" class="url">Python | 辉华</a></p>
+	</li>
+	<li class="post pingback">
+		<p>Pingback: <a href="http://xuhuihua.sinaapp.com/?p=23" rel="external nofollow" class="url">使用python爬虫抓站的一些技巧总结：进阶篇 （转） | 辉华</a></p>
+	</li>
+			</ol>
+
+
+
+								<div id="respond">
+				<h3 id="reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://obmem.info/?p=476#respond" style="display: none;">Cancel reply</a></small></h3>
+									<form action="http://obmem.info/wp-comments-post.php" method="post" id="commentform">
+																			<p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name</label> <span class="required">*</span><input id="author" name="author" value="" size="30" aria-required="true" type="text"></p>
+<p class="comment-form-email"><label for="email">Email</label> <span class="required">*</span><input id="email" name="email" value="" size="30" aria-required="true" type="text"></p>
+<p class="comment-form-url"><label for="url">Website</label><input id="url" name="url" value="" size="30" type="text"></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; &lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;strike&gt; &lt;strong&gt; &lt;pre lang="" line="" escaped=""&gt; </code></p>						<p class="form-submit">
+							<input name="submit" id="submit" value="Post Comment" type="submit">
+							<input name="comment_post_ID" value="476" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+						</p>
+						<p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="a9ffd4fbc1" type="hidden"></p>					</form>
+							</div><!-- #respond -->
+						
+</div><!-- #comments -->
+
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="primary" class="widget-area" role="complementary">
+			<ul class="xoxo">
+
+<li id="search-2" class="widget-container widget_search"><form role="search" method="get" id="searchform" action="http://obmem.info/">
+	<div><label class="screen-reader-text" for="s">Search for:</label>
+	<input value="" name="s" id="s" type="text">
+	<input id="searchsubmit" value="Search" type="submit">
+	</div>
+	</form></li><li id="text-3" class="widget-container widget_text"><h3 class="widget-title">捐助</h3>			<div class="textwidget"><a href="http://obmem.info/?page_id=823"><img src="btn_donatecc_lg.gif" name="submit" alt="捐助" border="0"></a>
+</div>
+		</li><li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-3"><a href="http://obmem.info/?cat=3" title="View all posts filed under Discuz">Discuz</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://obmem.info/?cat=4" title="View all posts filed under Linux">Linux</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://obmem.info/?cat=5" title="View all posts filed under python">python</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://obmem.info/?cat=7" title="View all posts filed under VPS相关">VPS相关</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://obmem.info/?cat=10" title="View all posts filed under 其他">其他</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://obmem.info/?cat=12" title="View all posts filed under 未分类">未分类</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="http://obmem.info/?cat=14" title="View all posts filed under 站长">站长</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="http://obmem.info/?cat=16" title="View all posts filed under 编程">编程</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="http://obmem.info/?cat=18" title="View all posts filed under 翻墙">翻墙</a>
+</li>
+		</ul>
+</li><li id="archives-2" class="widget-container widget_archive"><h3 class="widget-title">Archives</h3>		<ul>
+			<li><a href="http://obmem.info/?m=201101" title="January 2011">January 2011</a></li>
+	<li><a href="http://obmem.info/?m=201012" title="December 2010">December 2010</a></li>
+	<li><a href="http://obmem.info/?m=201011" title="November 2010">November 2010</a></li>
+	<li><a href="http://obmem.info/?m=201010" title="October 2010">October 2010</a></li>
+	<li><a href="http://obmem.info/?m=201009" title="September 2010">September 2010</a></li>
+	<li><a href="http://obmem.info/?m=201005" title="May 2010">May 2010</a></li>
+	<li><a href="http://obmem.info/?m=201004" title="April 2010">April 2010</a></li>
+	<li><a href="http://obmem.info/?m=201003" title="March 2010">March 2010</a></li>
+	<li><a href="http://obmem.info/?m=201002" title="February 2010">February 2010</a></li>
+	<li><a href="http://obmem.info/?m=200912" title="December 2009">December 2009</a></li>
+	<li><a href="http://obmem.info/?m=200911" title="November 2009">November 2009</a></li>
+	<li><a href="http://obmem.info/?m=200910" title="October 2009">October 2009</a></li>
+	<li><a href="http://obmem.info/?m=200909" title="September 2009">September 2009</a></li>
+		</ul>
+</li><li id="tag_cloud-3" class="widget-container widget_tag_cloud"><h3 class="widget-title">Tag Cloud</h3><div><a href="http://obmem.info/?tag=discuz" class="tag-link-3" title="9 topics" style="font-size: 16.6726pt;">Discuz</a>
+<a href="http://obmem.info/?tag=google%e7%9b%b8%e5%85%b3" class="tag-link-20" title="3 topics" style="font-size: 11.7168pt;">Google相关</a>
+<a href="http://obmem.info/?tag=hostmonster" class="tag-link-21" title="2 topics" style="font-size: 10.2301pt;">hostmonster</a>
+<a href="http://obmem.info/?tag=javascript" class="tag-link-45" title="1 topic" style="font-size: 8pt;">javascript</a>
+<a href="http://obmem.info/?tag=linux" class="tag-link-4" title="13 topics" style="font-size: 18.531pt;">Linux</a>
+<a href="http://obmem.info/?tag=mediatemple" class="tag-link-22" title="2 topics" style="font-size: 10.2301pt;">mediatemple</a>
+<a href="http://obmem.info/?tag=openvz" class="tag-link-23" title="1 topic" style="font-size: 8pt;">Openvz</a>
+<a href="http://obmem.info/?tag=python" class="tag-link-5" title="19 topics" style="font-size: 20.3894pt;">python</a>
+<a href="http://obmem.info/?tag=simplecd" class="tag-link-24" title="1 topic" style="font-size: 8pt;">SimpleCD</a>
+<a href="http://obmem.info/?tag=twisted" class="tag-link-43" title="1 topic" style="font-size: 8pt;">twisted</a>
+<a href="http://obmem.info/?tag=ubuntu" class="tag-link-25" title="1 topic" style="font-size: 8pt;">ubuntu</a>
+<a href="http://obmem.info/?tag=verycd" class="tag-link-26" title="7 topics" style="font-size: 15.4336pt;">VeryCD</a>
+<a href="http://obmem.info/?tag=vps%e7%9b%b8%e5%85%b3" class="tag-link-7" title="14 topics" style="font-size: 18.9027pt;">VPS相关</a>
+<a href="http://obmem.info/?tag=vps" class="tag-link-6" title="1 topic" style="font-size: 8pt;">VPS相关</a>
+<a href="http://obmem.info/?tag=%e5%85%b6%e4%bb%96" class="tag-link-10" title="1 topic" style="font-size: 8pt;">其他</a>
+<a href="http://obmem.info/?tag=%e5%b9%bf%e5%91%8a" class="tag-link-46" title="1 topic" style="font-size: 8pt;">广告</a>
+<a href="http://obmem.info/?tag=%e6%80%a7%e8%83%bd%e6%b5%8b%e8%af%95" class="tag-link-28" title="7 topics" style="font-size: 15.4336pt;">性能测试</a>
+<a href="http://obmem.info/?tag=%e6%90%9e%e7%ac%91" class="tag-link-30" title="1 topic" style="font-size: 8pt;">搞笑</a>
+<a href="http://obmem.info/?tag=%e6%95%b0%e6%8d%ae%e5%ba%93" class="tag-link-32" title="4 topics" style="font-size: 12.9558pt;">数据库</a>
+<a href="http://obmem.info/?tag=%e7%88%ac%e8%99%ab" class="tag-link-34" title="2 topics" style="font-size: 10.2301pt;">爬虫</a>
+<a href="http://obmem.info/?tag=%e7%ab%99%e9%95%bf" class="tag-link-14" title="12 topics" style="font-size: 18.0354pt;">站长</a>
+<a href="http://obmem.info/?tag=%e7%bc%96%e7%a8%8b" class="tag-link-16" title="26 topics" style="font-size: 22pt;">编程</a>
+<a href="http://obmem.info/?tag=%e7%bf%bb%e5%a2%99" class="tag-link-18" title="5 topics" style="font-size: 13.9469pt;">翻墙</a>
+<a href="http://obmem.info/?tag=%e8%a5%bf%e5%8e%a2%e8%ae%a1%e5%88%92" class="tag-link-36" title="1 topic" style="font-size: 8pt;">西厢计划</a>
+<a href="http://obmem.info/?tag=%e9%84%99%e8%a7%86" class="tag-link-38" title="2 topics" style="font-size: 10.2301pt;">鄙视</a>
+<a href="http://obmem.info/?tag=%e9%9a%8f%e7%ac%94" class="tag-link-41" title="2 topics" style="font-size: 10.2301pt;">随笔</a>
+<a href="http://obmem.info/?tag=%e9%aa%8c%e8%af%81%e7%a0%81" class="tag-link-42" title="5 topics" style="font-size: 13.9469pt;">验证码</a></div>
+</li>		<li id="recent-posts-2" class="widget-container widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+				<li><a href="http://obmem.info/?p=844" title="网站广告投放策略研究 (一) 轮播以及效用最大化">网站广告投放策略研究 (一) 轮播以及效用最大化</a></li>
+				<li><a href="http://obmem.info/?p=813" title="防DDoS脚本 in python">防DDoS脚本 in python</a></li>
+				<li><a href="http://obmem.info/?p=802" title="网站流量上去了，但是完全高兴不起来啊">网站流量上去了，但是完全高兴不起来啊</a></li>
+				<li><a href="http://obmem.info/?p=795" title="MacBook翻/墙术">MacBook翻/墙术</a></li>
+				<li><a href="http://obmem.info/?p=787" title="共享理财的一些实践(纯理论向IT向)">共享理财的一些实践(纯理论向IT向)</a></li>
+				</ul>
+		</li><li id="recent-comments-2" class="widget-container widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><a href="http://xuhuihua.sinaapp.com/?p=23" rel="external nofollow" class="url">使用python爬虫抓站的一些技巧总结：进阶篇 （转） | 辉华</a> on <a href="http://obmem.info/?p=476#comment-14962">用python爬虫抓站的一些技巧总结</a></li><li class="recentcomments"><a href="http://xuhuihua.sinaapp.com/?p=23" rel="external nofollow" class="url">使用python爬虫抓站的一些技巧总结：进阶篇 （转） | 辉华</a> on <a href="http://obmem.info/?p=753#comment-14961">使用python爬虫抓站的一些技巧总结：进阶篇</a></li><li class="recentcomments"><a href="http://xuhuihua.sinaapp.com/?p=19" rel="external nofollow" class="url">Python | 辉华</a> on <a href="http://obmem.info/?p=476#comment-14960">用python爬虫抓站的一些技巧总结</a></li><li class="recentcomments"><a href="http://xuhuihua.sinaapp.com/?p=19" rel="external nofollow" class="url">Python | 辉华</a> on <a href="http://obmem.info/?p=729#comment-14959">Rproxy，一个基于Twisted的反向代理，以及锻炼身体工具推荐</a></li><li class="recentcomments"><a href="http://rechingme.com/" rel="external nofollow" class="url">reching</a> on <a href="http://obmem.info/?p=726#comment-14945">AlienVPS两周监控小结</a></li></ul></li><li id="meta-2" class="widget-container widget_meta"><h3 class="widget-title">Meta</h3>			<ul>
+						<li><a href="http://obmem.info/wp-login.php">Log in</a></li>
+			<li><a href="http://obmem.info/?feed=rss2" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://obmem.info/?feed=comments-rss2" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+						</ul>
+</li>			</ul>
+		</div><!-- #primary .widget-area -->
+
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+
+			<div id="footer-widget-area" role="complementary">
+
+				<div id="first" class="widget-area">
+					<ul class="xoxo">
+								<li id="recent-posts-3" class="widget-container widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+				<li><a href="http://obmem.info/?p=844" title="网站广告投放策略研究 (一) 轮播以及效用最大化">网站广告投放策略研究 (一) 轮播以及效用最大化</a></li>
+				<li><a href="http://obmem.info/?p=813" title="防DDoS脚本 in python">防DDoS脚本 in python</a></li>
+				<li><a href="http://obmem.info/?p=802" title="网站流量上去了，但是完全高兴不起来啊">网站流量上去了，但是完全高兴不起来啊</a></li>
+				<li><a href="http://obmem.info/?p=795" title="MacBook翻/墙术">MacBook翻/墙术</a></li>
+				<li><a href="http://obmem.info/?p=787" title="共享理财的一些实践(纯理论向IT向)">共享理财的一些实践(纯理论向IT向)</a></li>
+				</ul>
+		</li>					</ul>
+				</div><!-- #first .widget-area -->
+
+				<div id="second" class="widget-area">
+					<ul class="xoxo">
+						<li id="recent-comments-3" class="widget-container widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><a href="http://xuhuihua.sinaapp.com/?p=23" rel="external nofollow" class="url">使用python爬虫抓站的一些技巧总结：进阶篇 （转） | 辉华</a> on <a href="http://obmem.info/?p=476#comment-14962">用python爬虫抓站的一些技巧总结</a></li><li class="recentcomments"><a href="http://xuhuihua.sinaapp.com/?p=23" rel="external nofollow" class="url">使用python爬虫抓站的一些技巧总结：进阶篇 （转） | 辉华</a> on <a href="http://obmem.info/?p=753#comment-14961">使用python爬虫抓站的一些技巧总结：进阶篇</a></li><li class="recentcomments"><a href="http://xuhuihua.sinaapp.com/?p=19" rel="external nofollow" class="url">Python | 辉华</a> on <a href="http://obmem.info/?p=476#comment-14960">用python爬虫抓站的一些技巧总结</a></li><li class="recentcomments"><a href="http://xuhuihua.sinaapp.com/?p=19" rel="external nofollow" class="url">Python | 辉华</a> on <a href="http://obmem.info/?p=729#comment-14959">Rproxy，一个基于Twisted的反向代理，以及锻炼身体工具推荐</a></li><li class="recentcomments"><a href="http://rechingme.com/" rel="external nofollow" class="url">reching</a> on <a href="http://obmem.info/?p=726#comment-14945">AlienVPS两周监控小结</a></li></ul></li>					</ul>
+				</div><!-- #second .widget-area -->
+
+				<div id="third" class="widget-area">
+					<ul class="xoxo">
+						<li id="tag_cloud-4" class="widget-container widget_tag_cloud"><h3 class="widget-title">Tags</h3><div><a href="http://obmem.info/?tag=discuz" class="tag-link-3" title="9 topics" style="font-size: 16.6726pt;">Discuz</a>
+<a href="http://obmem.info/?tag=google%e7%9b%b8%e5%85%b3" class="tag-link-20" title="3 topics" style="font-size: 11.7168pt;">Google相关</a>
+<a href="http://obmem.info/?tag=hostmonster" class="tag-link-21" title="2 topics" style="font-size: 10.2301pt;">hostmonster</a>
+<a href="http://obmem.info/?tag=javascript" class="tag-link-45" title="1 topic" style="font-size: 8pt;">javascript</a>
+<a href="http://obmem.info/?tag=linux" class="tag-link-4" title="13 topics" style="font-size: 18.531pt;">Linux</a>
+<a href="http://obmem.info/?tag=mediatemple" class="tag-link-22" title="2 topics" style="font-size: 10.2301pt;">mediatemple</a>
+<a href="http://obmem.info/?tag=openvz" class="tag-link-23" title="1 topic" style="font-size: 8pt;">Openvz</a>
+<a href="http://obmem.info/?tag=python" class="tag-link-5" title="19 topics" style="font-size: 20.3894pt;">python</a>
+<a href="http://obmem.info/?tag=simplecd" class="tag-link-24" title="1 topic" style="font-size: 8pt;">SimpleCD</a>
+<a href="http://obmem.info/?tag=twisted" class="tag-link-43" title="1 topic" style="font-size: 8pt;">twisted</a>
+<a href="http://obmem.info/?tag=ubuntu" class="tag-link-25" title="1 topic" style="font-size: 8pt;">ubuntu</a>
+<a href="http://obmem.info/?tag=verycd" class="tag-link-26" title="7 topics" style="font-size: 15.4336pt;">VeryCD</a>
+<a href="http://obmem.info/?tag=vps%e7%9b%b8%e5%85%b3" class="tag-link-7" title="14 topics" style="font-size: 18.9027pt;">VPS相关</a>
+<a href="http://obmem.info/?tag=vps" class="tag-link-6" title="1 topic" style="font-size: 8pt;">VPS相关</a>
+<a href="http://obmem.info/?tag=%e5%85%b6%e4%bb%96" class="tag-link-10" title="1 topic" style="font-size: 8pt;">其他</a>
+<a href="http://obmem.info/?tag=%e5%b9%bf%e5%91%8a" class="tag-link-46" title="1 topic" style="font-size: 8pt;">广告</a>
+<a href="http://obmem.info/?tag=%e6%80%a7%e8%83%bd%e6%b5%8b%e8%af%95" class="tag-link-28" title="7 topics" style="font-size: 15.4336pt;">性能测试</a>
+<a href="http://obmem.info/?tag=%e6%90%9e%e7%ac%91" class="tag-link-30" title="1 topic" style="font-size: 8pt;">搞笑</a>
+<a href="http://obmem.info/?tag=%e6%95%b0%e6%8d%ae%e5%ba%93" class="tag-link-32" title="4 topics" style="font-size: 12.9558pt;">数据库</a>
+<a href="http://obmem.info/?tag=%e7%88%ac%e8%99%ab" class="tag-link-34" title="2 topics" style="font-size: 10.2301pt;">爬虫</a>
+<a href="http://obmem.info/?tag=%e7%ab%99%e9%95%bf" class="tag-link-14" title="12 topics" style="font-size: 18.0354pt;">站长</a>
+<a href="http://obmem.info/?tag=%e7%bc%96%e7%a8%8b" class="tag-link-16" title="26 topics" style="font-size: 22pt;">编程</a>
+<a href="http://obmem.info/?tag=%e7%bf%bb%e5%a2%99" class="tag-link-18" title="5 topics" style="font-size: 13.9469pt;">翻墙</a>
+<a href="http://obmem.info/?tag=%e8%a5%bf%e5%8e%a2%e8%ae%a1%e5%88%92" class="tag-link-36" title="1 topic" style="font-size: 8pt;">西厢计划</a>
+<a href="http://obmem.info/?tag=%e9%84%99%e8%a7%86" class="tag-link-38" title="2 topics" style="font-size: 10.2301pt;">鄙视</a>
+<a href="http://obmem.info/?tag=%e9%9a%8f%e7%ac%94" class="tag-link-41" title="2 topics" style="font-size: 10.2301pt;">随笔</a>
+<a href="http://obmem.info/?tag=%e9%aa%8c%e8%af%81%e7%a0%81" class="tag-link-42" title="5 topics" style="font-size: 13.9469pt;">验证码</a></div>
+</li>					</ul>
+				</div><!-- #third .widget-area -->
+
+				<div id="fourth" class="widget-area">
+					<ul class="xoxo">
+						<li id="archives-3" class="widget-container widget_archive"><h3 class="widget-title">Archives</h3>		<ul>
+			<li><a href="http://obmem.info/?m=201101" title="January 2011">January 2011</a></li>
+	<li><a href="http://obmem.info/?m=201012" title="December 2010">December 2010</a></li>
+	<li><a href="http://obmem.info/?m=201011" title="November 2010">November 2010</a></li>
+	<li><a href="http://obmem.info/?m=201010" title="October 2010">October 2010</a></li>
+	<li><a href="http://obmem.info/?m=201009" title="September 2010">September 2010</a></li>
+	<li><a href="http://obmem.info/?m=201005" title="May 2010">May 2010</a></li>
+	<li><a href="http://obmem.info/?m=201004" title="April 2010">April 2010</a></li>
+	<li><a href="http://obmem.info/?m=201003" title="March 2010">March 2010</a></li>
+	<li><a href="http://obmem.info/?m=201002" title="February 2010">February 2010</a></li>
+	<li><a href="http://obmem.info/?m=200912" title="December 2009">December 2009</a></li>
+	<li><a href="http://obmem.info/?m=200911" title="November 2009">November 2009</a></li>
+	<li><a href="http://obmem.info/?m=200910" title="October 2009">October 2009</a></li>
+	<li><a href="http://obmem.info/?m=200909" title="September 2009">September 2009</a></li>
+		</ul>
+</li>					</ul>
+				</div><!-- #fourth .widget-area -->
+
+			</div><!-- #footer-widget-area -->
+
+			<div id="site-info">
+				<a href="http://obmem.info/" title="observer专栏杂记" rel="home">
+					observer专栏杂记				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">
+					Proudly powered by WordPress.				</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+
+</div><!-- #wrapper -->
+
+
+
+</body>
+</html>
