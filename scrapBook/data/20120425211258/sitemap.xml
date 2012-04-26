@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="../../sitemap.xsl" type="text/xsl" media="all"?>
+<site>
+<page file="index.html" text="reStructuredText" title="reStructuredText">
+<page file="default.html" text="Docutils" title="Docutils: Documentation Utilities"/>
+<page file="setext.html" text="Setext" title="Setext Documents Mirror"/>
+<page file="statemachine.html" text="statemachine.py" title=""/>
+<page file="quickstart.html" text="A ReStructuredText Primer" title="A ReStructuredText Primer"/>
+<page file="quickstart_001.html" text="text source" title=""/>
+<page file="quickref.html" text="Quick reStructuredText" title="Quick reStructuredText"/>
+<page file="cheatsheet.html" text="reStructuredText Cheat Sheet" title=""/>
+<page file="mailing-lists.html" text="Docutils-users" title="Docutils Mailing Lists"/>
+<page file="introduction.html" text="An Introduction to reStructuredText" title="An Introduction to reStructuredText"/>
+<page file="restructuredtext.html" text="reStructuredText Markup Specification" title="reStructuredText Markup Specification"/>
+<page file="directives.html" text="reStructuredText Directives" title="reStructuredText Directives"/>
+<page file="roles.html" text="reStructuredText Interpreted Text Roles" title="reStructuredText Interpreted Text Roles"/>
+<page file="alternatives.html" text="A Record of reStructuredText Syntax Alternatives" title="A Record of reStructuredText Syntax Alternatives"/>
+<page file="problems.html" text="Problems With StructuredText" title="Problems With StructuredText"/>
+<page file="rst-directives.html" text="Creating reStructuredText Directives" title="Creating reStructuredText Directives"/>
+<page file="rst-roles.html" text="Creating reStructuredText Interpreted Text Roles" title="Creating reStructuredText Interpreted Text Roles"/>
+<page file="rest.html" text="reStructuredText online renderer" title="reST renderer"/>
+<page file="about.html" text="setting it up" title=""/>
+<page file="002526.html" text="Ueli Schlaepfer on Doc-SIG, 2002-03-28" title="[Doc-SIG] Re: New PEP: reStructuredText Standard Docstring Format"/>
+<page file="022131.html" text="Guido van Rossum, enthusiastic about PEP 287 but a bit hasty (see the follow-ups) on Python-Dev, 200..." title="[Python-Dev] PEP 287: reStructuredText Standard Docstring Format"/>
+<page file="022212.html" text="Guido van Rossum on Python-Dev, 2002-04-03" title="[Python-Dev] PEP 287: reStructuredText Standard Docstring Format"/>
+<page file="022247.html" text="Guido van Rossum on Python-Dev, 2002-04-04" title="[Python-Dev] PEP 287: reStructuredText Standard Docstring Format"/>
+<page file="022443.html" text="David Abrahams on Python-Dev, 2002-04-06" title="[Python-Dev] PEP 287: reStructuredText Standard Docstring Format"/>
+<page file="027198.html" text="Eric Jones on Python-Dev, 2002-08-01" title="[Python-Dev] Docutils/reStructuredText is ready to process PEPs"/>
+<page file="rst.html" text="View document source" title=""/>
+<page file="default_001.html" text="Docutils" title="Docutils: Documentation Utilities"/>
+</page>
+</site>

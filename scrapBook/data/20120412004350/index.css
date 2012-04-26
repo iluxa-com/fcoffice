@@ -1,0 +1,110 @@
+/* ::::: https://developers.google.com/css/screen.css ::::: */
+
+html { margin: 0pt; padding: 0pt; border: 0pt none; }
+.bp-reset-element, body, h1, h2, h3, h4, h5, h6, article, aside, dialog, figure, footer, header, hgroup, nav, section, blockquote, q, th, td, caption, table, div, span, object, iframe, p, pre, a, abbr, acronym, address, code, del, dfn, em, img, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead, tr { margin: 0pt; padding: 0pt; border: 0pt none; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; }
+article, aside, dialog, figure, footer, header, hgroup, nav, section { display: block; }
+body { line-height: 1.5; font-family: "Arial",sans-serif; color: rgb(51, 51, 51); font-size: 81.25%; }
+h1, h2, h3, h4, h5, h6 { font-weight: normal; color: rgb(34, 34, 34); }
+h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }
+h2 { font-size: 2em; margin-bottom: 0.75em; }
+h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+p { margin: 0pt 0pt 1.5em; }
+a { text-decoration: underline; color: rgb(0, 106, 200); }
+a:visited { color: rgb(85, 26, 139); }
+a:focus { color: rgb(0, 106, 200); }
+a:hover { color: rgb(0, 106, 200); }
+a:active { color: red; }
+strong, dfn { font-weight: bold; }
+em, dfn { font-style: italic; }
+sup, sub { line-height: 0; }
+pre { margin: 1.5em 0pt; white-space: pre; }
+pre, code, tt { font: 1em/1.5 "Droid Sans Mono",monospace; }
+li ul, li ol { margin: 0pt; }
+ul, ol { margin: 0pt 1.5em 1.5em 0pt; padding-left: 1.5em; }
+ul { list-style-type: disc; }
+table.striped tr:nth-child(2n) td, table tr.even td { background: none repeat scroll 0% 0% rgb(239, 239, 239); }
+body { line-height: 1.67; background-color: rgb(255, 255, 255); overflow-y: scroll; min-width: 1000px; }
+#gc-googlebar { -moz-box-sizing: border-box; min-width: 952px; width: auto ! important; position: relative; background: none repeat scroll 0% 0% rgb(241, 241, 241); border-bottom: 1px solid rgb(229, 229, 229); height: 71px; overflow: hidden; padding: 21px 44px; color: rgba(255, 255, 255, 0.5); }
+#gc-appbar { -moz-box-sizing: border-box; border-bottom: 1px solid rgb(235, 235, 235); line-height: 24px; overflow: hidden; padding: 21px 44px; position: relative; }
+#gc-appbar h1 { display: block; font-size: 20px; margin: 0pt 16px 0pt 0pt; }
+#gc-appbar h1 div { vertical-align: top; }
+#gc-appbar a { color: inherit; text-decoration: none; margin-right: 24px; }
+#gc-main { display: block; padding: 0pt 44px; margin: auto; }
+#gc-footer { overflow: hidden; background: none repeat scroll 0% 0% rgb(45, 45, 45); clear: both; color: rgba(255, 255, 255, 0.5); padding: 0pt 44px; font-size: 12px; }
+#gc-footer a, #gc-footer a:visited { color: rgba(255, 255, 255, 0.5); text-decoration: none; }
+#gc-footer a:hover, #gc-footer a:visited:hover { text-decoration: underline; }
+#gc-footer > div { line-height: 3em; }
+#gc-content { padding: 0px; }
+body.two-column #gc-sidebar { width: 160px; margin-right: -160px; padding: 16px 0pt; vertical-align: top; float: left; }
+body.two-column #gc-content { margin-left: 176px; max-width: 1040px; vertical-align: top; padding-top: 14px; }
+body.two-column #gc-content > div { width: 100%; float: left; }
+body { font-family: Arial,sans-serif; }
+h1, h2, h3, h4, h5, header { font-size: 16px; line-height: 24px; font-weight: normal; color: rgb(34, 34, 34); }
+h1 { font-size: 20px; }
+ul, ol { padding-left: 2em; }
+ul { list-style-type: disc; }
+ul ul { list-style-type: circle; }
+ul ul ul { list-style-type: square; }
+a { color: rgb(17, 85, 204); }
+a:visited { color: rgb(17, 85, 204); }
+a:active { color: rgb(221, 75, 57); }
+hr { height: 0pt; border-right: 0pt none; border-width: 1px 0pt 0pt; border-style: solid none none; border-color: rgb(204, 204, 204) -moz-use-text-color -moz-use-text-color; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; background-color: rgb(204, 204, 204); margin: 1em 0pt; clear: both; }
+.note, .caution, .dogfood, .warning, .special { background-color: rgb(239, 239, 239); padding: 6px 8px 6px 10px; border-left: 6px solid rgb(153, 153, 153); }
+.msgDialogContent { display: none; text-align: center; margin-bottom: 32px; }
+.msgDialogContent button { display: none; }
+.msgDialogContent h1 { margin-bottom: 10px; }
+@media print {
+  .str { color: rgb(0, 102, 0); }
+  .kwd { color: rgb(0, 0, 102); font-weight: bold; }
+  .com { color: rgb(102, 0, 0); font-style: italic; }
+  .typ { color: rgb(68, 0, 68); font-weight: bold; }
+  .lit { color: rgb(0, 68, 68); }
+  .pun, .opn, .clo { color: rgb(68, 68, 0); }
+  .pln { color: rgb(0, 0, 0); }
+  .tag { color: rgb(0, 0, 102); font-weight: bold; }
+  .atn { color: rgb(68, 0, 68); }
+  .atv { color: rgb(0, 102, 0); }
+}
+.page-title { font-size: 2em; padding-bottom: 4px; border-bottom: 1px solid rgb(204, 204, 204); }
+body.docs .plusone-container { margin: 0pt; position: relative; top: 1px; -moz-box-orient: vertical; display: inline-block; vertical-align: middle; }
+body.docs .plusone-container {  }
+body.docs h2, body.docs h3, body.docs h4, body.docs h5, body.docs h6 { margin-top: 1.5em; }
+body.docs h2 { border-bottom: 1px solid rgb(204, 204, 204); }
+body.docs h2 { font-size: 167%; }
+body.docs h3 { font-size: 133%; font-weight: bold; }
+body.docs code, body.docs pre { color: rgb(0, 112, 0); }
+body.docs pre { padding: 6px 10px; background-color: rgb(250, 250, 250); border: 1px solid rgb(187, 187, 187); overflow: auto; }
+#gc-main .gc-toc ul { list-style: none outside none; padding: 0pt; margin: 0pt; }
+#gc-main .gc-toc > ul { margin-bottom: 8px; }
+#gc-main .gc-toc h2, #gc-main .gc-toc h3, #gc-main .gc-toc li, #gc-main .gc-toc a, #gc-main .gc-toc span { line-height: 20px; }
+#gc-main .gc-toc li { padding-top: 5px; padding-bottom: 5px; }
+#gc-main .gc-toc li > ul { padding-top: 5px; }
+#gc-main .gc-toc hr { margin: 0.6em; visibility: hidden; }
+#gc-main .gc-toc a { text-decoration: none; color: rgb(119, 119, 119); }
+#gc-main .gc-toc a:visited { color: rgb(119, 119, 119); }
+#gc-main .gc-toc a:hover { background-color: rgb(238, 238, 238); color: rgb(34, 34, 34); }
+#gc-main .gc-toc li { margin-left: -16px; position: relative; }
+#gc-main .gc-toc li a, #gc-main .gc-toc li .tlw-title { display: block; padding: 0pt; overflow: hidden; color: rgb(119, 119, 119); }
+#gc-main .gc-toc li a, #gc-main .gc-toc li .tlw-title, #gc-main .gc-toc li ul { padding-left: 16px; }
+#gc-main .gc-toc li li a, #gc-main .gc-toc li li .tlw-title, #gc-main .gc-toc li li ul { padding-left: 32px; }
+#gc-main .gc-toc li li li { margin-left: -32px; }
+#gc-main .gc-toc li li li a, #gc-main .gc-toc li li li .tlw-title, #gc-main .gc-toc li li li ul { padding-left: 48px; }
+#gc-main .gc-toc li sup { margin-left: 4px; }
+#gc-main .gc-toc li.experimental sup, #gc-main .gc-toc li.new sup { color: rgb(221, 75, 57); }
+#gc-content .listhead li { font-weight: bold; }
+#gc-content .listhead li *, #gc-content .listhead li li { font-weight: normal; }
+/* ::::: https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700 ::::: */
+
+@font-face {
+  font-family: "Open Sans";  font-style: normal;  font-weight: 400;  src: local("Open Sans"), local("OpenSans"), url('cjzkeoubrn4kerxqtauh3t8e0i7kzn-epnyo3hzu7kw.woff') format("woff");}
+@font-face {
+  font-family: "Open Sans";  font-style: normal;  font-weight: 700;  src: local("Open Sans Bold"), local("OpenSans-Bold"), url('k3k702zokiljc3wvjuplzhhcuogz7vygh680lgh-uxm.woff') format("woff");}
+@font-face {
+  font-family: "Open Sans";  font-style: normal;  font-weight: 600;  src: local("Open Sans Semibold"), local("OpenSans-Semibold"), url('mtp_ysujh_bn48vbg8snsnhcuogz7vygh680lgh-uxm.woff') format("woff");}
+@font-face {
+  font-family: "Open Sans";  font-style: normal;  font-weight: 300;  src: local("Open Sans Light"), local("OpenSans-Light"), url('dxi1orhcpsqm3vp6mxoatxhcuogz7vygh680lgh-uxm.woff') format("woff");}
+/* ::::: https://www.google.com/uds/api/search/1.0/35a6b5cbb7ddbc2bce816880d53df1f2/default+en.css ::::: */
+
+:first-child + html .gsc-inline-block { display: inline; }
+/* ::::: https://developers.google.com/storage/local_css.css ::::: */
+

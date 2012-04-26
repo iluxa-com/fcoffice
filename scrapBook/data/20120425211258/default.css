@@ -1,0 +1,13 @@
+/* ::::: http://docutils.sourceforge.net/docutils/writers/html4css1/html4css1.css ::::: */
+
+.borderless, table.borderless td, table.borderless th { border: 0pt none; }
+.first { margin-top: 0pt ! important; }
+.last, .with-subtitle { margin-bottom: 0pt ! important; }
+.hidden { display: none; }
+div.admonition, div.attention, div.caution, div.danger, div.error, div.hint, div.important, div.note, div.tip, div.warning { margin: 2em; border: medium outset; padding: 1em; }
+div.attention p.admonition-title, div.caution p.admonition-title, div.danger p.admonition-title, div.error p.admonition-title, div.warning p.admonition-title { color: red; font-weight: bold; font-family: sans-serif; }
+div.footer, div.header { clear: both; font-size: smaller; }
+h1.title { text-align: center; }
+h2.subtitle { text-align: center; }
+hr.docutils { width: 75%; }
+p.credits { font-style: italic; font-size: smaller; }

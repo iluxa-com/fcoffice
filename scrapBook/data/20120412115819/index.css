@@ -1,0 +1,178 @@
+/* ::::: http://www.oschina.net/css/space2011.css?ver=20110905 ::::: */
+
+:focus { outline: 0pt none; }
+* { padding: 0pt; margin: 0pt; }
+a { color: rgb(68, 102, 187); outline: 0pt none; }
+a:hover { color: rgb(0, 0, 170); }
+ul, ol { list-style-type: none; }
+img { border: 0pt none; }
+textarea { resize: none; }
+body { background: none repeat scroll 0% 0% rgb(249, 249, 249); text-align: center; font-size: 10pt; }
+.clear { clear: both; font-size: 1px; line-height: 0; }
+.SmallPortrait { opacity: 0.9; padding: 1px; background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); }
+a:hover .SmallPortrait { opacity: 1; border: 1px solid rgb(64, 170, 83); }
+#OSC_Screen { width: 960px; margin: 0px auto 50px; text-align: left; padding: 0pt 4px; background: none repeat scroll 0% 0% rgb(249, 249, 249); }
+#OSC_Banner2 { background: none repeat scroll 0% 0% rgb(64, 170, 83); border-right: 2px solid rgb(206, 231, 211); border-width: 0pt 2px 2px; border-style: none solid solid; border-color: -moz-use-text-color rgb(206, 231, 211) rgb(206, 231, 211); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; height: 36px; padding: 0px 5px 0pt; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; }
+#OSC_Banner2 #OSC_Channels { float: left; font-weight: bold; font-size: 11pt; height: 35px; line-height: 35px; }
+#OSC_Banner2 #OSC_Channels ul li { float: left; margin: 0px 5px 0pt 10px; }
+#OSC_Banner2 #OSC_Channels ul li a { text-decoration: none; color: rgb(238, 255, 238); padding: 2px; }
+#OSC_Banner2 #OSC_Channels ul li a:hover { color: rgb(255, 255, 102); }
+#OSC_Banner2 #OSC_Channels ul li a.home { background: url('home.gif') no-repeat scroll left center transparent; padding-left: 18px; }
+#OSC_Banner2 #OSC_UserBar { float: right; color: rgb(238, 238, 238); margin-top: 10px; }
+#OSC_Banner2 #OSC_UserBar a { color: rgb(255, 255, 255); text-decoration: none; }
+#OSC_Banner2 #OSC_UserBar a:hover { color: rgb(255, 255, 102); }
+#OSC_Topbar { margin: 2px; }
+#OSC_Topbar #VisitorInfo { font-size: 9pt; color: rgb(136, 136, 136); float: left; }
+#OSC_Topbar #VisitorInfo a { text-decoration: none; }
+#OSC_Topbar #SearchBar { float: right; background: none repeat scroll 0% 0% rgb(204, 255, 204); padding: 2px; border-radius: 3px 3px 3px 3px; }
+#OSC_Topbar #SearchBar * { color: rgb(153, 153, 153); float: left; }
+#OSC_Topbar #SearchBar select { border: 1px solid rgb(204, 204, 204); outline: 0pt none; height: 23px; margin-right: 2px; }
+#OSC_Topbar #SearchBar input.SERACH { width: 220px; margin-right: 2px; border: 1px solid rgb(204, 204, 204); font-size: 10.5pt; padding: 2px 3px 1px; }
+#OSC_Topbar #SearchBar input.SERACH:focus { border: 1px solid rgb(51, 51, 51); color: rgb(51, 51, 51); }
+#OSC_Topbar #SearchBar input.SUBMIT { width: 28px; height: 21px; margin: 1px 2px 0pt 0pt; background: url('go.gif') no-repeat scroll 0pt 0pt transparent; border: 0pt none; text-indent: -9999em; cursor: pointer; }
+#OSC_Footer { margin-top: 20px; padding-bottom: 50px; height: 38px; line-height: 38px; border-top: 2px solid rgb(204, 204, 204); color: rgb(115, 117, 115); text-align: center; }
+#OSC_Content { margin: 10px 2px; }
+a.tag { background-color: rgb(224, 234, 241); border-bottom: 1px solid rgb(62, 109, 142); border-right: 1px solid rgb(127, 159, 182); color: rgb(62, 109, 142); font-size: 8pt; line-height: 2.4; margin: 2px 2px 2px 0pt; padding: 2px 4px; text-decoration: none; white-space: nowrap; }
+a.tag:hover { background-color: rgb(62, 109, 142); color: rgb(255, 255, 255); }
+.Tags a.project { background-color: rgb(204, 255, 204); color: rgb(0, 102, 0); }
+.Tags a.project:hover { background-color: rgb(64, 170, 83); color: rgb(255, 255, 255); }
+a.rndbutton { background: url('btn.gif') repeat scroll left 0pt transparent; color: rgb(255, 255, 255); text-decoration: none; height: 30px; float: left; margin: 0pt; border: 0px solid rgb(0, 0, 0); font-weight: bold; cursor: pointer; }
+a.rndbutton:hover { background-position: left -30px; }
+a.rndbutton span { background: url('btn.gif') repeat scroll right 0pt transparent; color: rgb(255, 255, 255); float: left; margin: 0pt 0pt 0pt 12px; padding: 0pt 12px 0pt 0pt; height: 30px; line-height: 30px; }
+a.rndbutton:hover span { background-position: right -30px; color: rgb(255, 102, 0); }
+.Question .Title { padding-bottom: 5px; border-bottom: 1px solid rgb(102, 102, 102); margin: 0pt; }
+.Question .Title .Asker { float: left; width: 60px; }
+.Question .Title .Asker img { width: 42px; height: 42px; margin: 0px 0pt 0pt 2px; }
+.Question .Title .QTitle { float: left; width: 680px; }
+.Question .Title .QTitle h1 { font-size: 14pt; }
+.Question .Title .QTitle h1 a { color: rgb(0, 0, 0); text-decoration: none; outline: 0pt none; }
+.Question .Title .QTitle .stat { font-size: 9pt; color: rgb(102, 102, 102); margin: 5px 0pt 0pt; }
+.Question .Title .QTitle .stat a { text-decoration: none; margin: 0pt 2px; }
+.Question .Title .Context { float: right; width: 180px; text-align: right; color: rgb(153, 153, 153); }
+.Question .Title .Context strong { display: block; margin: 25px 0pt 0pt; }
+.Question .Title .Context a.backtolist { background: url('up.gif') no-repeat scroll right center transparent; padding-right: 22px; }
+.Question .Body { float: left; width: 690px; padding-top: 10px; overflow: hidden; }
+.Question .Body .Vote { float: left; width: 42px; margin-right: 18px; }
+.Question .Body .Vote * { display: block; }
+.Question .Body .Vote .vote-up-off { background: url('questions.png') no-repeat scroll 0pt -122px transparent; text-indent: -2000px; width: 41px; height: 22px; }
+.Question .Body .Vote .vote-down-off { background: url('questions.png') no-repeat scroll 0pt -156px transparent; text-indent: -2000px; width: 41px; height: 20px; }
+.Question .Body .Vote .vote-count-post { font-size: 18pt; font-family: Arial; font-weight: bold; color: rgb(255, 102, 0); text-align: center; }
+.Question .Body .Content { float: left; width: 620px; overflow: hidden; }
+.Question .Body .Content .detail { line-height: 22px; margin: 0pt 0pt 20px; font-size: 10.5pt; }
+.Question .detail img { max-width: 540px; }
+.Question .detail p { margin: 0pt 0pt 10px; }
+.Question .detail ol { list-style-type: decimal; list-style-position: inside; margin: 10px 0pt 20px 5px; line-height: 20px; }
+.Question .detail blockquote { margin: 15px 10px; border: 2px solid rgb(238, 238, 238); padding: 5px 5px 5px 35px; background: url('blockquote.gif') no-repeat scroll left top rgb(244, 245, 247); color: rgb(0, 102, 0); font-size: 9pt; }
+.Question .Body .Content .Tags { margin: 0pt 0pt 20px; }
+.Question .Body .Content .Tags strong {  }
+.Question .Body .Content .SameQuestions { color: rgb(102, 102, 102); line-height: 30px; }
+.Question .Body .Content .SameQuestions a { text-decoration: none; }
+.Question .Body .EditLogs { margin: 20px 0pt 10px; }
+.Question .Body .EditLogs ul {  }
+.QuestionReplies { margin: 20px 0pt 0pt; }
+.QuestionReplies h2 { font-size: 11pt; border-bottom: 1px solid rgb(204, 204, 204); padding: 0pt 0pt 3px 5px; }
+.QuestionReplies h2 em { font-style: normal; color: rgb(170, 0, 0); }
+.QuestionReplies h2 a { text-decoration: none; }
+.QuestionReplies h2 a.answer { font-weight: normal; margin-left: 10px; font-size: 10pt; }
+.QuestionReplies h2 .sort { float: right; margin-right: 10px; font-weight: normal; font-size: 10pt; color: rgb(153, 153, 153); }
+.QuestionReplies h2 .sort a.current { background: url('tick.png') no-repeat scroll left center transparent; padding-left: 16px; }
+.Question .AnswerForm { margin: 20px 0pt; }
+.Question .AnswerForm .user { float: left; width: 60px; }
+.Question .AnswerForm .user img { width: 32px; height: 32px; margin: 0pt 0pt 0pt 5px; }
+.Question .AnswerForm form { float: left; width: 600px; }
+.Question .AnswerForm form textarea {  }
+.Question .AnswerForm form input { margin-top: 10px; padding: 2px; font-weight: bold; }
+.Question .QuestionRelations { float: right; width: 240px; padding: 10px 0pt 0pt; text-align: left; overflow: hidden; }
+.Question .QuestionRelations #QuestionWizard { font-size: 14pt; text-align: center; padding: 10px 0pt; border: 1px solid rgb(204, 204, 204); margin: 0pt 0pt 10px; background: none repeat scroll 0% 0% rgb(255, 255, 255); border-radius: 5px 5px 5px 5px; height: 80px; }
+.Question .QuestionRelations #QuestionWizard a { margin: 15px 0pt 0pt 75px; font-size: 10.5pt; }
+.Question .QuestionRelations .Qlist { margin: 10px 0pt 30px; }
+.Question .QuestionRelations .Qlist strong {  }
+.Question .QuestionRelations .Qlist strong a.more { float: right; font-weight: normal; font-size: 8pt; }
+.Question .QuestionRelations .Qlist strong em { font-style: normal; color: rgb(170, 0, 0); margin-right: 3px; }
+.Question .QuestionRelations .Qlist ul { margin: 10px 0pt 0pt; line-height: 20px; }
+.Question .QuestionRelations .Qlist ul li { margin-bottom: 10px; }
+.Question .QuestionRelations .Qlist ul li a { background: url('a3.gif') no-repeat scroll left 5px transparent; padding-left: 12px; text-decoration: none; }
+.Question .QuestionRelations .Qlist ul li .date { display: block; color: rgb(153, 153, 153); font-size: 8pt; margin-left: 4px; }
+/* ::::: http://www.oschina.net/js/poshytip/tip-yellowsimple/tip-yellowsimple.css ::::: */
+
+/* ::::: http://www.oschina.net/js/2011/fancybox/jquery.fancybox-1.3.4.css ::::: */
+
+#fancybox-loading { position: fixed; top: 50%; left: 50%; width: 40px; height: 40px; margin-top: -20px; margin-left: -20px; cursor: pointer; overflow: hidden; z-index: 1104; display: none; }
+#fancybox-loading div { position: absolute; top: 0pt; left: 0pt; width: 40px; height: 480px; background-image: url('fancybox.png'); }
+#fancybox-overlay { position: absolute; top: 0pt; left: 0pt; width: 100%; z-index: 1100; display: none; }
+#fancybox-tmp { padding: 0pt; margin: 0pt; border: 0pt none; overflow: auto; display: none; }
+#fancybox-wrap { position: absolute; top: 0pt; left: 0pt; padding: 20px; z-index: 1101; outline: medium none; display: none; }
+#fancybox-outer { position: relative; width: 100%; height: 100%; background: none repeat scroll 0% 0% rgb(255, 255, 255); }
+#fancybox-content { width: 0pt; height: 0pt; padding: 0pt; outline: medium none; position: relative; overflow: hidden; z-index: 1102; border: 0px solid rgb(255, 255, 255); }
+#fancybox-close { position: absolute; top: -15px; right: -15px; width: 30px; height: 30px; background: url('fancybox.png') repeat scroll -40px 0px transparent; cursor: pointer; z-index: 1103; display: none; }
+#fancybox-left, #fancybox-right { position: absolute; bottom: 0px; height: 100%; width: 35%; cursor: pointer; outline: medium none; background: url('blank.gif') repeat scroll 0% 0% transparent; z-index: 1102; display: none; }
+#fancybox-left { left: 0px; }
+#fancybox-right { right: 0px; }
+#fancybox-left-ico, #fancybox-right-ico { position: absolute; top: 50%; left: -9999px; width: 30px; height: 30px; margin-top: -15px; cursor: pointer; z-index: 1102; display: block; }
+#fancybox-left-ico { background-image: url('fancybox.png'); background-position: -40px -30px; }
+#fancybox-right-ico { background-image: url('fancybox.png'); background-position: -40px -60px; }
+#fancybox-left:hover, #fancybox-right:hover { visibility: visible; }
+#fancybox-left:hover span { left: 20px; }
+#fancybox-right:hover span { left: auto; right: 20px; }
+.fancybox-bg { position: absolute; padding: 0pt; margin: 0pt; border: 0pt none; width: 20px; height: 20px; z-index: 1001; }
+#fancybox-bg-n { top: -20px; left: 0pt; width: 100%; background-image: url('fancybox-x.png'); }
+#fancybox-bg-ne { top: -20px; right: -20px; background-image: url('fancybox.png'); background-position: -40px -162px; }
+#fancybox-bg-e { top: 0pt; right: -20px; height: 100%; background-image: url('fancybox-y.png'); background-position: -20px 0px; }
+#fancybox-bg-se { bottom: -20px; right: -20px; background-image: url('fancybox.png'); background-position: -40px -182px; }
+#fancybox-bg-s { bottom: -20px; left: 0pt; width: 100%; background-image: url('fancybox-x.png'); background-position: 0px -20px; }
+#fancybox-bg-sw { bottom: -20px; left: -20px; background-image: url('fancybox.png'); background-position: -40px -142px; }
+#fancybox-bg-w { top: 0pt; left: -20px; height: 100%; background-image: url('fancybox-y.png'); }
+#fancybox-bg-nw { top: -20px; left: -20px; background-image: url('fancybox.png'); background-position: -40px -122px; }
+#fancybox-title { font-family: Helvetica; font-size: 12px; z-index: 1102; }
+body, table, input, textarea, select { font-family: Verdana,sans-serif,宋体; }
+/* ::::: http://www.oschina.net/js/ke/skins/default.css ::::: */
+
+.ke-icon-source { background-position: 0px 0px; width: 16px; height: 16px; }
+.ke-icon-selectall { background-position: 0px -128px; width: 16px; height: 16px; }
+.ke-icon-insertorderedlist { background-position: 0px -208px; width: 16px; height: 16px; }
+.ke-icon-insertunorderedlist { background-position: 0px -224px; width: 16px; height: 16px; }
+.ke-icon-fontname { background-position: 0px -352px; width: 21px; height: 16px; }
+.ke-icon-fontsize { background-position: 0px -368px; width: 23px; height: 16px; }
+.ke-icon-textcolor { background-position: 0px -384px; width: 20px; height: 16px; }
+.ke-icon-bgcolor { background-position: 0px -400px; width: 20px; height: 16px; }
+.ke-icon-bold { background-position: 0px -416px; width: 16px; height: 16px; }
+.ke-icon-italic { background-position: 0px -432px; width: 16px; height: 16px; }
+.ke-icon-underline { background-position: 0px -448px; width: 16px; height: 16px; }
+.ke-icon-strikethrough { background-position: 0px -464px; width: 16px; height: 16px; }
+.ke-icon-removeformat { background-position: 0px -480px; width: 16px; height: 16px; }
+.ke-icon-image { background-position: 0px -496px; width: 16px; height: 16px; }
+.ke-icon-flash { background-position: 0px -512px; width: 16px; height: 16px; }
+.ke-icon-emoticons { background-position: 0px -608px; width: 16px; height: 16px; }
+.ke-icon-link { background-position: 0px -624px; width: 16px; height: 16px; }
+.ke-icon-unlink { background-position: 0px -640px; width: 16px; height: 16px; }
+.ke-icon-about { background-position: 0px -672px; width: 16px; height: 16px; }
+.ke-container { font-family: "sans serif",tahoma,verdana,helvetica; border: 1px solid rgb(204, 204, 204); background-color: rgb(240, 240, 238); table-layout: fixed; overflow: hidden; border-collapse: separate; padding: 0pt; margin: 0pt; }
+.ke-toolbar-outer { border: 0pt none; padding: 0pt; margin: 0pt; }
+.ke-toolbar { width: 100%; border: 0pt none; padding: 0pt; margin: 0pt; border-collapse: separate; }
+.ke-toolbar td { border: 0pt none; padding: 2px 5px; margin: 0pt; }
+.ke-toolbar-table { font-size: 0pt; line-height: 0; float: left; clear: both; border: 0pt none; padding: 0pt; margin: 0pt; border-collapse: separate; }
+.ke-toolbar-separator { border-left: 1px solid rgb(160, 160, 160); border-right: 1px solid rgb(255, 255, 255); border-width: 0pt 1px; border-style: none solid; border-color: -moz-use-text-color rgb(255, 255, 255) -moz-use-text-color rgb(160, 160, 160); width: 0pt; padding: 0pt; margin: 0pt 2px; height: 16px; }
+.ke-toolbar-table td { border: 0pt none; padding: 0pt; margin: 0pt; }
+.ke-bottom-outer { border: 0pt none; padding: 0pt; margin: 0pt; }
+.ke-bottom { width: 100%; font-size: 0pt; line-height: 0; border: 0pt none; padding: 0pt; margin: 0pt; height: 11px; border-collapse: separate; }
+.ke-bottom-left { width: 100%; cursor: s-resize; border: 0pt none; margin: 0pt; padding: 0pt; text-align: center; vertical-align: middle; }
+.ke-bottom-left-img { display: inline-block; vertical-align: middle; background-position: 0px -754px; width: 15px; height: 11px; background-image: url('default.gif'); margin: 0pt; padding: 0pt; border: 0pt none; }
+.ke-bottom-right { cursor: se-resize; border: 0pt none; margin: 0pt; padding: 0pt; text-align: right; vertical-align: bottom; }
+.ke-bottom-right-img { display: inline-block; vertical-align: middle; background-position: -9px -745px; width: 7px; height: 7px; background-image: url('default.gif'); margin: 0pt; padding: 0pt; border: 0pt none; }
+.ke-textarea-outer { border: 0pt none; padding: 0pt; margin: 0pt; }
+.ke-textarea-table { width: 100%; padding: 0pt; margin: 0pt; border-width: 1px 0pt; border-style: solid none; border-color: rgb(204, 204, 204) -moz-use-text-color; background-color: rgb(255, 255, 255); border-collapse: separate; table-layout: fixed; }
+.ke-textarea-table td { border: 0pt none; padding: 0pt; margin: 0pt; }
+.ke-textarea { width: 100%; display: block; margin: 0pt; padding: 0pt; border: 0pt none; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; font-family: "Consolas","Monaco","Bitstream Vera Sans Mono","Courier New",Courier,monospace ! important; line-height: 18px; overflow: auto; resize: none; }
+.ke-textarea:focus { outline: medium none; }
+.ke-iframe { width: 100%; display: block; margin: 0pt; padding: 0pt; border: 0pt none; background-color: rgb(255, 255, 255); }
+.ke-common-icon { margin: 0pt; padding: 0pt; border: 0pt none; background-repeat: no-repeat; overflow: hidden; display: inline-block; vertical-align: middle; }
+.ke-common-icon-url { background-image: url('default.gif'); }
+.ke-icon { display: block; border: 1px solid rgb(240, 240, 238); background-color: transparent; padding: 1px 2px; margin: 1px; cursor: pointer; }
+.ke-mask { border: 0pt none; margin: 0pt; padding: 0pt; position: absolute; z-index: 19811212; top: 0pt; left: 0pt; display: none; background-color: rgb(255, 255, 255); }
+.ke-reset { margin: 0pt; padding: 0pt; border: 0pt none; }
+/* ::::: http://www.oschina.net/js/syntax-highlighter-2.1.382/styles/shCore.css ::::: */
+
+/* ::::: http://www.oschina.net/js/syntax-highlighter-2.1.382/styles/shThemeDefault.css ::::: */
+
+.ke-icon-code { background-image: url('code.gif'); background-position: 0px 0px; width: 16px; height: 16px; }
+.ke-icon-quote { background-image: url('quote.gif'); background-position: 0px 0px; width: 16px; height: 16px; }

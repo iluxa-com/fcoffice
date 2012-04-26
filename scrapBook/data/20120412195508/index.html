@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta charset="utf-8">
+  <!--meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"-->
+
+  <title>dotCloud - Using Multiple Accounts</title>
+
+  <meta name="description" content="How to use multiple accounts on the dotCloud platform.">
+  <meta name="keywords" content="dotCloud documentation, quick start guide, multiple dotCloud accounts, work environment">
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body><xscript type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js">
+</xscript>
+<xscript type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js">
+</xscript>
+<xscript type="text/javascript" src="../../_static/js/jquery.ba-urlinternal.min.js">
+</xscript>
+<xscript type="text/javascript" src="../../_static/js/jquery.ba-bbq.min.js">
+</xscript>
+
+
+
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="favicon.ico">
+
+
+
+
+
+  <div id="container">
+    <header>
+      <div class="container_12">
+        <h1 class="grid_4" id="logo"><a href="https://www.dotcloud.com/"><img src="docs-dotcloud-logo.png" alt="logo"></a></h1>
+        <div class="grid_8">
+          <iframe src="index_1.html" style="float: right; margin-top: 15px; color: rgb(170, 170, 170); width: 100%;"></iframe>
+        </div>
+      </div>
+    </header>
+    <div class="container_12">
+      <div class="grid_12" style="background-color: rgb(40, 90, 158); border-radius: 10px 10px 10px 10px; margin-bottom: 20px; color: rgb(255, 255, 255); font-size: 36px; text-shadow: 1px 1px 1px rgb(24, 55, 97);">
+        <a href="http://docs.dotcloud.com/" style="padding: 30px 30px 30px 37px; display: block; color: rgb(255, 255, 255); text-decoration: none;">Documentation</a>
+      </div>
+    </div>
+  <div id="main" role="main" class="container_12">
+    <nav class="grid_3" style="width: 218px;">
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/">First Steps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/platform-overview/">Platform Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/platform-overview/#applications-services">Applications &amp; Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/platform-overview/#naming">Naming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/platform-overview/#general-workflow">General Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/install/">Installing the CLI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/install/#installation-instructions">Installation Instructions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/quickstart/">Quick Start Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/quickstart/#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/quickstart/#a-simple-example">A Simple Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/quickstart/#congratulations">Congratulations!</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/in-depth/">In-Depth Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/in-depth/#dynamic-app-with-database">Dynamic App with Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/in-depth/#build-file-with-two-services">Build File with Two Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/in-depth/#connecting-the-database">Connecting the Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/in-depth/#push-your-code">Push Your Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/in-depth/#set-up-your-database">Set Up Your Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/in-depth/#restart-your-app">Restart Your App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/in-depth/#try-your-app">Try Your App</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/in-depth/#deleting-services">Deleting Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/how-it-works/">How It Works</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/how-it-works/#background">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/how-it-works/#the-code-store">The Code Store</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/how-it-works/#the-stack-builder">The Stack Builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/firststeps/how-it-works/#the-service-runtime">The Service Runtime</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="http://docs.dotcloud.com/guides/">Platform Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/migration/">Migrating to CLI 0.4.x</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/migration/#upgrading-the-cli">Upgrading the CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/migration/#key-changes-from-0-3-x-to-0-4-x">Key Changes from 0.3.x to 0.4.x</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/migration/#migrating-your-application">Migrating Your Application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/build-file/">Build Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/build-file/#background">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/build-file/#what-s-in-a-build-file">What’s in a Build File?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/build-file/#specifying-the-root-directory-of-a-service">Specifying the Root Directory of a Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/build-file/#scaling-a-service">Scaling a Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/build-file/#defining-environment-variable">Defining Environment Variable</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/git-hg/">Git and Mercurial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/git-hg/#automatic-mode-selection">Automatic Mode Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/git-hg/#pushing-uncomitted-changes">Pushing Uncomitted Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/git-hg/#excluding-files-from-the-push">Excluding Files From the Push</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/git-hg/#omitting-code-directory">Omitting Code Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/daemons/">Background Processes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/daemons/#defining-daemons">Defining Daemons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/daemons/#configuring-the-environment">Configuring The Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/daemons/#exit-cleanly-with-signals">Exit Cleanly With Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/daemons/#configure-logging">Configure Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/daemons/#launching-multiple-workers">Launching Multiple “Workers”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/daemons/#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/daemons/#caveats">Caveats</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/environment/">Environment File</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/environment/#what-is-the-environment-file">What is the Environment File?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/environment/#reading-the-environment">Reading the Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/environment/#adding-environment-variables">Adding Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/environment/#removing-environment-variables">Removing Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/environment/#yaml-format">YAML Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/emails/">Sending E-Mails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/periodic-tasks/">Periodic Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/periodic-tasks/#using-cron">Using cron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/periodic-tasks/#write-tasks-in-a-specific-language">Write Tasks In A Specific Language</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/periodic-tasks/#forward-the-tasks-output">Forward The Tasks Output</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/hooks/">Post-Install Hook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/ssh/">SSH Access</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/ssh/#how-to-ssh-to-a-service">How to SSH to a Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/ssh/#how-to-run-a-single-command">How to Run a Single Command</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/domains/">Custom Domains</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/domains/#adding-a-custom-domain">Adding a Custom Domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/domains/#removing-a-custom-domain">Removing a Custom Domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/domains/#naked-domains">Naked Domains</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/logs/">Consulting Logs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/logs/#streaming-the-logs">Streaming The Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/logs/#read-the-archives">Read The Archives</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/nginx/">Configuring Nginx</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/nginx/#rewrite-rules">Rewrite Rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/nginx/#restricting-access">Restricting Access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/nginx/#setting-up-error-pages">Setting Up Error Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/nginx/#maintenance-mode">Maintenance Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/nginx/#authentication">Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/nginx/#increase-http-post-max-size">Increase HTTP POST Max Size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/nginx/#combining-conditions">Combining Conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/nginx/#caveats">Caveats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/nginx/#nginx-reference-documentation">Nginx Reference Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/ssl/">SSL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/ssl/#piggyback-ssl">Piggyback SSL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/ssl/#forcing-ssl">Forcing SSL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/scaling/">Scaling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/scaling/#scaling-horizontally">Scaling Horizontally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/scaling/#horizontal-scaling-vs-ha">Horizontal Scaling vs HA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/scaling/#scaling-databases-for-ha">Scaling Databases for HA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/scaling/#scaling-vertically">Scaling Vertically</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/scaling/#important-considerations">Important Considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/scaling/#when-to-scale-up-or-down">When to Scale Up or Down</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/backups/">Scheduling Automated Backups of your data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/backups/#what-can-i-backup">What Can I Backup?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/backups/#login-to-the-service">Login to the Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/backups/#copy-the-backup-script">Copy the Backup Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/backups/#choose-between-ftp-ssh-and-s3">Choose Between FTP, SSH and S3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/backups/#do-a-manual-test-backup">Do a Manual Test Backup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/backups/#schedule-the-backup-script-with-a-crontab">Schedule the Backup Script With a Crontab</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="http://docs.dotcloud.com/guides/accounts/">Using Multiple DotCloud Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/copy/">Copy Files To And From Your Services</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/copy/#download-a-single-text-file">Download a Single Text File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/copy/#upload-a-single-text-file">Upload a Single Text File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/copy/#download-binary-or-multiple-files">Download Binary or Multiple Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/copy/#upload-binary-or-multiple-files">Upload Binary or Multiple Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/copy/#generic-ssh-scp-rsync">Generic SSH (scp, rsync...)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/copy/#connecting-from-a-service-to-another">Connecting From a Service to Another</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/5xx/">Handling Errors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/5xx/#what-can-possibly-go-wrong">What Can Possibly Go Wrong?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/5xx/#how-can-i-intercept-errors">How Can I Intercept Errors?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/s3fs/">S3FS Shared Filesystem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/s3fs/#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/s3fs/#system-packages">System Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/s3fs/#s3fs-binary-and-helper-script">S3FS binary and helper script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/s3fs/#setup-supervisor">Setup Supervisor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/s3fs/#configure-s3fs">Configure S3FS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/s3fs/#custom-service">Custom Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/s3fs/#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/guides/websockets/">WebSockets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/websockets/#enable-websockets-support">Enable WebSockets Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/websockets/#websocket-over-ssl">WebSocket over SSL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/guides/websockets/#technical-notes">Technical Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.dotcloud.com/services/">Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/java/">Java</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/java/#basic-use">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/java/#internals">Internals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/mongodb/">MongoDB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mongodb/#basics">Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mongodb/#configure-your-application">Configure Your Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mongodb/#manage-mongodb-users-and-databases">Manage MongoDB Users and Databases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mongodb/#id1">Replica Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mongodb/#advanced-configuration">Advanced Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mongodb/#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mongodb/#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/mysql/">MySQL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mysql/#basics">Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mysql/#configure-your-application">Configure Your Application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/mysql-masterslave/">MySQL Master/Slave</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mysql-masterslave/#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mysql-masterslave/#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mysql-masterslave/#dropping-a-slave">Dropping a Slave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mysql-masterslave/#internals">Internals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mysql-masterslave/#specific-changes-to-your-code">Specific Changes to your Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/mysql-masterslave/#upgrade-from-simple-mysql">Upgrade From Simple MySQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/nodejs/">Node.Js</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/nodejs/#basic-use">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/nodejs/#websockets">WebSockets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/nodejs/#node-js-workers">Node.js Workers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/nodejs/#npm-dependencies-with-package-json">NPM Dependencies (with package.json)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/nodejs/#listen-on-port-8080">Listen on Port 8080</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/nodejs/#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/nodejs/#signal-handlers">Signal Handlers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/opa/">Opa</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/opa/#basic-use">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/opa/#layout-of-an-opa-service">Layout of an Opa Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/opa/#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/opa/#caveats">Caveats</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/perl/">Perl</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/perl/#basic-use">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/perl/#internals">Internals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/perl/#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/perl/#custom-nginx-configuration">Custom Nginx Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/perl-worker/">Perl Worker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/perl-worker/#basic-use">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/perl-worker/#specify-perl-dependencies">Specify Perl Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/php/">PHP &amp; PHP Worker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/php/#basic-use">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/php/#the-php-stack">The PHP Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/php/#layout-of-a-php-instance">Layout of a PHP Instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/php/#running-background-processes-and-periodic-tasks">Running Background Processes and Periodic Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/php/#connect-to-the-services-in-your-stack">Connect to the Services in your Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/php/#installing-additional-php-packages">Installing Additional PHP Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/php/#configuring-php">Configuring PHP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/php/#configuring-nginx">Configuring Nginx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/php/#configuring-fastcgi">Configuring FastCGI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/php/#caveats">Caveats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/php/#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/postgresql/">PostgreSQL and PostGIS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/postgresql/#basics">Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/postgresql/#configure-your-application">Configure Your Application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/python/">Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/python/#basic-use">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/python/#internals">Internals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/python/#adapting-your-application">Adapting your application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/python/#custom-nginx-configuration">Custom Nginx Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/python/#custom-uwsgi-configuration">Custom uWSGI Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/python/#other-documentations">Other documentations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/python-worker/">Python worker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/python-worker/#basic-use">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/python-worker/#specify-python-dependencies">Specify Python dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/redis/">Redis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/redis/#basics">Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/redis/#configure-your-application">Configure Your Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/redis/#redis-cli">Redis CLI</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby/">Ruby</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby/#basic-use">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby/#internals">Internals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby/#adapting-your-application">Adapting Your Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby/#unsupported-gems-and-how-to-exclude-them">Unsupported gems and how to exclude them</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby/#using-specific-settings-on-your-dotcloud-deployment">Using Specific Settings on your DotCloud Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby/#use-a-specific-version-of-ruby">Use a specific version of Ruby</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby/#custom-nginx-configuration">Custom Nginx Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby-worker/">Ruby worker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby-worker/#basic-use">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby-worker/#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby-worker/#unsupported-gems-and-how-to-exclude-them">Unsupported gems and how to exclude them</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/ruby-worker/#use-a-specific-version-of-ruby">Use a specific version of Ruby</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/smtp/">SMTP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/smtp/#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/smtp/#deploying">Deploying</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/smtp/#using-your-new-smtp-service">Using Your New SMTP Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/smtp/#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/smtp/#receiving-mails">Receiving Mails</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/solr/">Solr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/solr/#basic-setup">Basic Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/solr/#custom-configuration">Custom Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/static/">Static</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/static/#basic-use">Basic Use</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/services/static/#maintenance-page">Maintenance Page</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/services/roadmap/">Components Roadmap</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/java/">Java</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/java/play/">Play!</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/php/">PHP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/php/quickstart/">PHP Hello World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/php/cakephp/">CakePHP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/php/drupal/">Drupal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/php/newrelic/">New Relic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/php/resque/">PHP-Resque</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/php/symfony/">Symfony</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/python/">Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/python/django/">Django</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/python/django-celery/">Django and Celery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/python/django-mongodb/">Django and MongoDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/python/geodjango/">GeoDjango</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/python/mobwrite/">MobWrite</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/ruby/">Ruby</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/ruby/thin/">Thin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/ruby/unicorn/">Unicorn</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/more/">More</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/more/newrelic/">New Relic Server Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/more/serverdensity/">Server Density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.dotcloud.com/tutorials/more/twilio/">Twilio</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.dotcloud.com/faq/">F.A.Q.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#can-i-build-my-business-on-dotcloud">Can I build my business on DotCloud?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#i-emailed-you-a-question-why-didn-t-you-answer">I emailed you a question. Why didn’t you answer?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#where-is-dotcloud-hosted">Where is DotCloud hosted?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#can-i-use-multiple-databases-together">Can I use multiple databases together?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#can-i-add-or-remove-components-later">Can I add or remove components later?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#you-don-t-support-my-favorite-database-language">You don’t support my favorite database/language!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#do-i-need-to-use-git-to-use-dotcloud">Do I need to use git to use DotCloud?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#can-i-git-push-my-code-to-dotcloud">Can I “git push” my code to DotCloud?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#how-can-you-be-experts-in-all-these-software-components">How can you be experts in all these software components?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#can-i-run-dotcloud-on-a-different-cloud-than-ec2">Can I run DotCloud on a different cloud than EC2?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#how-do-you-handle-scaling">How do you handle scaling?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#can-you-magically-scale-a-component-not-designed-to-scale">Can you magically scale a component not designed to scale?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#how-do-you-handle-upgrades">How do you handle upgrades?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#how-do-i-use-my-own-domain-name-with-dotcloud">How do I use my own domain name with DotCloud?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#how-can-i-use-ssl-with-dotcloud">How can I use SSL with DotCloud?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.dotcloud.com/faq/#how-can-i-setup-a-crontab">How can I setup a crontab?</a></li>
+</ul>
+</li>
+</ul>
+
+    </nav>
+
+    <div id="main_body_content_outer" class="grid_9 content" style="width: 632px; padding-right: 30px;">
+      <aside style="display: block; padding: 6px 10px; background-color: rgb(255, 249, 228); border: 1px solid rgb(255, 213, 68); margin-bottom: 24px;">This documentation is for the new DotCloud Command-Line Interface client (CLI) 0.4 released on June 22. Please <a href="http://docs.dotcloud.com/guides/migration/">update to 0.4</a> or refer to the <a href="http://olddocs.dotcloud.com/">old docs</a> for previous versions.</aside>
+      <div id="main_body_content" style="width: 632px; margin-left: 0pt;">
+	
+  <div class="section" id="using-multiple-dotcloud-accounts">
+<h1>Using Multiple DotCloud Accounts<a class="headerlink" href="#using-multiple-dotcloud-accounts" title="Permalink to this headline">¶</a></h1>
+<p>If for some reason, you need to work with multiple DotCloud accounts,
+you can use the DOTCLOUD_CONFIG_FILE environment variable to switch between
+them.</p>
+<p>To create a new DotCloud “work environment”, you should set the variable
+and then run “dotcloud setup”. Later, you won’t have to rerun “dotcloud setup”
+(setting the environment variable will be enough).</p>
+<p>For instance, to setup two accounts (a personal and a company account),
+you can do like this:</p>
+<div class="highlight-python"><pre>$ export DOTCLOUD_CONFIG_FILE=personal.conf
+$ dotcloud setup # enter your personal API key
+$ export DOTCLOUD_CONFIG_FILE=company.conf
+$ dotcloud setup # enter your company API key</pre>
+</div>
+<p>Now, when you need to operate on an account, set the environment variable
+beforehand:</p>
+<div class="highlight-python"><pre>$ export DOTCLOUD_CONFIG_FILE=personal.conf
+$ dotcloud list # see your personal projects
+$ export DOTCLOUD_CONFIG_FILE=company.conf
+$ dotcloud list # see your company's projects</pre>
+</div>
+<p>Remember: environment variables are local to a terminal or shell process.
+If you open two terminal windows, and set the environment variable in the
+first one, it won’t affect the other window.</p>
+<p>If you have to switch between accounts on a regular basis, you can use one
+of the following tricks:</p>
+<ul class="simple">
+<li>setup shell aliases in your profile, bashrc or equivalent shell configuration
+file, so that running e.g. “dc-use-personal” and “dc-use-company” will set the
+relevant variables;</li>
+<li>use wrappers to set the environment variables for you just before running
+the actual dotcloud command, so that you can use e.g. “dotcloud-personal list”
+and “dotcloud-company push”;</li>
+<li>if you are using Python, virtualenvs, and virtualenvwrapper, put the
+environment variable setting in the postactivate hook, so that when you
+“workon someproject” the DOTCLOUD_CONFIG_FILE variable is set as well.</li>
+</ul>
+</div>
+
+
+      </div>
+    </div><!-- end class="content" -->
+
+  </div><!-- end id="main" -->
+    <footer>
+      <div class="container_12">
+        <div class="grid_12" style="background-color: rgb(247, 247, 247); border: 1px solid rgb(230, 230, 230); border-radius: 10px 10px 10px 10px; color: rgb(102, 102, 102); font-size: 14px;">
+          <div style="padding: 10px 10px 10px 37px;">
+            © 2011 DotCloud
+	    ·
+	    <a href="http://docs.dotcloud.com/_sources/guides/accounts.txt" rel="nofollow">View the RST source of this page</a>
+	    ·
+	    Search: 
+	    <form style="display: inline;" class="search" action="http://docs.dotcloud.com/search/" method="get">
+	      <input value="" name="q" size="18" type="text">
+	      <input name="check_keywords" value="yes" type="hidden">
+	      <input name="area" value="default" type="hidden">
+	    </form>
+          </div>
+        </div>
+        <div class="grid_12">
+          <br>
+        </div>
+      </div>
+    </footer>
+  </div> <!-- eo #container -->
+
+
+
+</body>
+</html>

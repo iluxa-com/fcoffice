@@ -1,0 +1,35 @@
+/* ::::: http://timg.sjs.sinajs.cn/t35/style/css/thirdpart/batconcern.css ::::: */
+
+.tsina_open * { margin: 0pt; padding: 0pt; font: 12px Arial,Helvetica,"宋体",sans-serif; list-style: none outside none; border: medium none; outline: medium none; }
+.tsina_open .tclr { clear: both; }
+.tsina_open .tclr:after { content: ""; display: block; clear: both; height: 0pt; overflow: hidden; }
+.tsina_open a { color: rgb(0, 130, 203); text-decoration: none; }
+.tsina_open a:hover { text-decoration: underline; }
+.approve { width: 14px; height: 12px; background: url('ico.png') no-repeat scroll 0pt -206px transparent; display: inline-block; }
+.approve_co { width: 14px; height: 12px; background: url('ico.png') no-repeat scroll 0pt -232px transparent; display: inline-block; }
+a.btngreen, a.btngreen em, a.btngreen_l, a.btngreen_l em, a.btnnormal, a.btnnormal em, a.btnnormal_l, a.btnnormal_l em, span.btndisable_l, span.btndisable_l em { background: url('newbtnbg.png') no-repeat scroll 0% 0% transparent; }
+a.btngreen_l { background-position: 0pt -246px; display: inline-block; padding-left: 24px; color: rgb(255, 255, 255); }
+a.btngreen_l em { background-position: right -273px; display: inline-block; height: 27px; line-height: 27px; padding-right: 24px; color: rgb(255, 255, 255); font-size: 14px; }
+a.btngreen_l:hover, a.btngreen_l:hover em { text-decoration: none; cursor: pointer; }
+.tsina_open .tsina_batconcern { border: 1px solid rgb(194, 217, 242); background: none repeat scroll 0% 0% rgb(255, 255, 255); }
+.tsina_open .tsina_batconcern h6 { color: rgb(51, 51, 51); padding: 5px 0pt 0pt 20px; margin: 10px 10px 0pt; background: url('tsina_icon_logo16x16.png') no-repeat scroll 0% 0% transparent; }
+.tsina_open ul.t_user_lst { overflow: auto; position: relative; padding: 15px 16px 0pt; }
+.tsina_open ul.t_user_lst li { float: left; display: block; overflow: hidden; width: 86px; height: 90px; }
+.tsina_open ul.t_user_lst li.introduction { height: 125px; }
+.tsina_open ul.t_user_lst li .headpic { width: 60px; height: 60px; margin: 0pt auto; }
+.tsina_open ul.t_user_lst li .headpic a { display: block; width: 56px; height: 56px; border: 2px solid rgb(255, 255, 255); position: relative; }
+.tsina_open ul.t_user_lst li .headpic a.current { border: 2px solid rgb(168, 222, 134); }
+.tsina_open ul.t_user_lst li .headpic a img { border: 1px solid rgb(204, 204, 204); padding: 2px; height: 50px; width: 50px; }
+.tsina_open ul.t_user_lst li .headpic a .checkbimg { position: absolute; right: 0pt; bottom: 0pt; border: medium none; float: left; width: 12px; height: 12px; background: url('checkbox.gif') no-repeat scroll 0pt -12px transparent; overflow: hidden; }
+.tsina_open ul.t_user_lst li .headpic a.current .checkbimg { background-position: 0pt 0pt; }
+.tsina_open ul.t_user_lst li .name, .tsina_open ul.t_user_lst li .area { text-align: center; width: 86px; margin-top: 4px; word-wrap: break-word; line-height: 20px; }
+.tsina_open ul.t_user_lst li .name a { display: inline-block; height: 16px; line-height: 16px; overflow: hidden; white-space: pre; }
+.tsina_open .btn_con { text-align: center; margin: 0pt 10px 13px; }
+.tsina_open .btn_con a, .tsina_open .btn_con span { font-size: 14px; margin: 5px; white-space: nowrap; vertical-align: middle; }
+.tsina_open .btn_con a.regmib { display: inline-block; margin-left: 12px; }
+.tsina_open .vf_info { color: rgb(153, 153, 153); text-align: center; width: 60px; margin: 0pt auto; height: 35px; overflow: hidden; word-wrap: break-word; line-height: 18px; }
+.tsina_open .btn_con a.btngreen_l span { height: 27px; line-height: 27px; margin: 0pt; }
+.tsina_open .tsina_batconcern { border: 1px solid rgb(234, 233, 230); background: none repeat scroll 0% 0% rgb(234, 233, 230); }
+.tsina_open .tsina_batconcern a { color: rgb(0, 130, 203); }
+.tsina_open .vf_info { color: rgb(102, 102, 102); }
+* { margin: 0pt; padding: 0pt; }

@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  
+  <meta http-equiv="Content-Language" content="zh-CN">
+  <meta name="robots" content="index, follow">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <title>使用 StartSSL 提供的免费证书+Nginx 搭建 https 的网站 - 讨论区 - 开源中国社区</title>
+      
+  
+  
+  
+  
+  
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="最新问题列表" href="http://www.oschina.net/question/rss">
+  
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+<div id="OSC_Screen">
+	<div id="OSC_Banner2">
+        <div id="OSC_Channels">
+        	<ul>
+        	<li><a href="http://www.oschina.net/" class="home">首页</a></li>
+        	<li><a href="http://www.oschina.net/project" class="project">开源软件</a></li>
+        	<li><a href="http://www.oschina.net/question" class="question">讨论区</a></li>
+        	<li><a href="http://www.oschina.net/code/list" class="code">代码分享</a></li>
+        	<li><a href="http://www.oschina.net/news" class="news">资讯</a></li>
+        	<li><a href="http://www.oschina.net/blog" class="space">博客</a></li>
+        	<li><a href="http://www.oschina.net/android" class="space">Android</a></li>
+        	</ul>
+        </div>
+		<div id="OSC_UserBar">			
+    		    		当前访客身份：游客 [ <a href="http://www.oschina.net/home/login">登录</a> | <a href="http://www.oschina.net/home/reg">加入开源中国</a> ]
+    				</div>
+        <div class="clear"></div>
+	</div>
+	<div id="OSC_Topbar">
+		<div id="VisitorInfo">
+			当前位置：<a href="http://www.oschina.net/question">讨论区</a>&nbsp;»
+			<a href="http://www.oschina.net/question?catalog=2">技术分享</a>
+																	»&nbsp;<a href="http://www.oschina.net/p/nginx">Nginx</a>
+														</div>
+		<div id="SearchBar">
+    		<form action="http://www.oschina.net/search">
+																<input id="txt_q" name="q" class="SERACH" value="在所有的问题中搜索" onblur="(this.value=='')?this.value='在所有的问题中搜索':this.value" onfocus="if(this.value=='在所有的问题中搜索'){this.value='';};this.select();" type="text">				
+    			<select name="scope">
+					                    <option value="project">软件</option>
+                    <option value="code">代码</option>
+                    <option value="bbs" selected="selected">讨论区</option>
+                    <option value="news">新闻</option>
+                    <option value="blog">博客</option>
+				</select>
+				<input class="SUBMIT" value="搜索" type="submit">
+    		</form>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="OSC_Content">
+<div class="Question">
+	<div class="Title">
+		<div class="Asker"><a href="http://my.oschina.net/javaeye" class="ShowUserOutline" target="_top"><img src="54100_50.jpg" alt="鉴客" title="鉴客" class="SmallPortrait" user="54100" align="absmiddle"></a></div>
+		<div class="QTitle">
+			<h1><a href="http://www.oschina.net/question/54100_14729" hidefocus="true" name="top">使用 StartSSL 提供的免费证书+Nginx 搭建 https 的网站</a></h1>
+			<div class="stat">
+				<a href="http://my.oschina.net/javaeye" target="_top">鉴客</a>
+				发表于 1-3 13:12 1年前,
+				<a href="#answers" class="answer_count">0</a>回/953阅								(				
+
+<em id="p_attention_count">6</em>人收藏此话题,
+<span id="attention_it">
+	<a href="javascript:add_to_favor(14729,2)" id="favor_trigger">我要收藏</a>
+</span>				|<a href="http://www.oschina.net/question/54100_14729">举报</a>)
+			</div>
+		</div>
+		<div class="Context">
+			<strong>
+				<a href="http://www.oschina.net/question">讨论区</a>&nbsp;»
+				<a href="http://www.oschina.net/question?catalog=2" class="backtolist">技术分享</a>
+			</strong>
+        	
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="Body">
+		<div class="Vote">
+									<a id="vote_up" class="vote-up-off" href="#" title="顶：这问题很有用或者很提问清晰明了">顶</a>
+						<span class="vote-count-post">0</span>
+						<a id="vote_down" class="vote-down-off" href="#" title="踩：这问题不知道在问什么，或者没什么用">踩</a>
+					</div>
+		<div class="Content">
+						<div class="detail"><p><a href="http://www.oschina.net/uploads/img/201101/03131241_jugm.png" target="_top"><img style="cursor: pointer;" title="nginx_ssl_1" src="03131241_jugm.png" alt="nginx_ssl_1" height="398" width="536"></a></p> 
+<p>Startssl 是一家提供免费 SSL 证书的公司，我们可以用其搭建 https 网站，貌似可以被除去 Opera 外的所有主流浏览器所信任，过程简单记录如下：</p> 
+<ol> 
+ <li>打开 <a title="http://www.startssl.com/" href="http://www.startssl.com/">http://www.startssl.com/</a> ，注册一个用户，注意这个网站是用证书验证用户身份的，所以证书一定备份好。另外。。。不支持 Chrome，用 Safari 吧。 </li> 
+ <li>登陆后进入 Validations Wizard，验证你要添加 ssl 支持的域名。 </li> 
+ <li>进入 Certificates Wizard，并选择 Web Servers SSL/TLS Certificates。 </li> 
+ <li>创建一个 private key，连同密码一起保管好。（或者你也可以自己在服务器上用 openssl 创建，这里点skip就行了） </li> 
+ <li>选择一个域名，以及子域名。 </li> 
+ <li>网站会给出证书，保存为 .csr 文件。 </li> 
+ <li>使用 Tool Box 里面的 Decrypt Private Key 或者自己用 openssl 将第4步生成的 private key 解密，并将结果保存为 .key 文件。 </li> 
+ <li>按照修改 nginx 默认的虚拟主机配置文件的范例修改，关键语句如下：</li> 
+</ol> 
+<blockquote> 
+ <p>listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 443;<br>ssl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; on;<br>ssl_certificate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /etc/nginx/certs/xxxxxx.crt;<br>ssl_certificate_key&nbsp;&nbsp;&nbsp;&nbsp; /etc/nginx/certs/xxxxxx.key;<br>ssl_session_timeout&nbsp;&nbsp;&nbsp;&nbsp; 5m;</p> 
+ <p>ssl_protocols&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SSLv2 SSLv3 TLSv1;<br>ssl_ciphers&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;<br>ssl_prefer_server_ciphers&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; on;</p> 
+</blockquote> 
+<p>fast_cgi 部分也加入一行：</p> 
+<blockquote> 
+ <p>fastcgi_param&nbsp;&nbsp; HTTPS on;</p> 
+</blockquote> 
+<p>另外在<a href="http://icodex.org/2010/02/%E4%B8%BAnginx%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AEstartssl%E5%85%8D%E8%B4%B9https%E8%AF%81%E4%B9%A6/">这里</a>看到，中文版 Firefox 貌似不会信任这个证书，需要下载 Startcom 的根证书并且附在网站证书后面：</p> 
+<blockquote> 
+ <p><span style="text-decoration: line-through;">wget http://www.startssl.com/certs/ca.pem</span> 感谢 <a href="http://twitter.com/startssl/status/26056621924">@startssl</a> 的亲自指正，这个是错误的，应该是：<br>wget http://www.startssl.com/certs/sub.class1.server.ca.pem<br>cat sub.class1.server.ca.pem &gt;&gt; xxxxx.crt</p> 
+</blockquote> 
+<p>重新启动 nginx，即可顺利使用 https 打开虚拟主机了。</p> 
+<p><a href="http://www.oschina.net/uploads/img/201101/03131241_n1ax.png" target="_top"><img style="cursor: pointer;" title="nginx_ssl_2" src="03131241_n1ax.png" alt="nginx_ssl_2" height="288" width="494"></a>&nbsp;</p> 
+<p>顺便说一下，Startcom 这个公司貌似有很多人在管理证书颁发这个事情，他们的邮件回复总是非常快。比如上次我想给 <a href="http://img.gd/">img.gd</a> 申请证书，结果发现他们的域名选择里面没有 .gd，于是给他们发去了邮件，Startcom就回信问我要了管理机构网址以及 whois 地址，我回给他们后很快就又收到邮件告诉我说可以用了。再有就是昨天想给谷奥申请一个，结果系统提示申请需要手工审核，并且随后被拒绝，发信过去问原因， 告知我 Google 是著名商标，除非我有 Google 的授权，否则他们不会给这个域名颁发证书，于是只好放弃。</p><div class="clear"></div></div>
+			<div class="Tags">
+				<strong>标签：</strong>				
+												<a href="http://www.oschina.net/question/tag/nginx" class="tag project" title="高性能Web服务器 Nginx">Nginx</a> <a href="http://www.oschina.net/question/tag/startssl" class="tag project" title="免费 SSL 证书 StartSSL">StartSSL</a> <a href="http://www.oschina.net/question/tag/https" class="tag" title="">HTTPS</a> 											</div>
+						<div class="SameQuestions">
+			<span id="RQuestionAction">
+						<a href="javascript:make_question_more_detail(14729)">补充话题说明»</a>
+			</span></div>
+						<div class="EditLogs">
+	<ul></ul>
+</div>		</div>
+		<div class="clear"></div>
+				        <div class="QuestionReplies">
+        	<h2>			
+				<span class="sort">
+					<a href="http://www.oschina.net/question/54100_14729#answers" class="current">按默认排序</a>&nbsp;|
+					<a href="http://www.oschina.net/question/54100_14729?sort=time#answers">显示最新评论</a>&nbsp;|&nbsp;<a href="#top" style="padding-left: 0pt;">回页面顶部</a>
+				</span>
+				<a name="answers"></a>共有<em class="answer_count">0</em>个评论 <a href="#answerform" class="answer">发表评论»</a>
+			</h2>
+			        	<ul class="list"></ul>
+				        </div> 
+		<div class="AnswerForm">
+			<div class="user"><a href="http://www.oschina.net/question/$link.user%28$g_user%29" name="answerform"><img src="portrait.gif" alt="鉴客" title="鉴客" class="SmallPortrait" user="${__user.id}" align="absmiddle"></a></div>
+			<form id="form_answer" action="http://www.oschina.net/action/question/answer?question=14729" method="post">
+				<table style="width: 600px; height: 160px;" class="ke-container" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="ke-toolbar-outer"><table style="height: 24px;" class="ke-toolbar" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><table class="ke-toolbar-table" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><a title="粗体(Ctrl+B)" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-bold"></span></a></td><td><a title="斜体(Ctrl+I)" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-italic"></span></a></td><td><a title="下划线(Ctrl+U)" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-underline"></span></a></td><td><a title="删除线" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-strikethrough"></span></a></td><td><a title="删除格式" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-removeformat"></span></a></td><td><div class="ke-toolbar-separator"></div></td><td><a title="编号" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-insertorderedlist"></span></a></td><td><a title="项目符号" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-insertunorderedlist"></span></a></td><td><div class="ke-toolbar-separator"></div></td><td><a title="文字颜色" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-textcolor"></span></a></td><td><a title="文字背景" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-bgcolor"></span></a></td><td><a title="字体" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-fontname"></span></a></td><td><a title="文字大小" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-fontsize"></span></a></td><td><div class="ke-toolbar-separator"></div></td><td><a title="超级链接" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-link"></span></a></td><td><a title="取消超级链接" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-unlink"></span></a></td><td><a title="插入表情" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-emoticons"></span></a></td><td><a title="插入程序代码或脚本" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-icon-code"></span></a></td><td><a title="图片" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-image"></span></a></td><td><a title="插入Flash" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-flash"></span></a></td><td><a title="引用某段文字" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-icon-quote"></span></a></td><td><div class="ke-toolbar-separator"></div></td><td><a title="全选" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-selectall"></span></a></td><td><a title="HTML代码" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-source"></span></a></td><td><a title="关于" href="javascript:;" class="ke-icon" tabindex="-1"><span class="ke-common-icon ke-common-icon-url ke-icon-about"></span></a></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td class="ke-textarea-outer"><table class="ke-textarea-table" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><iframe src="index_1.html" style="height: 125px;" class="ke-iframe" tabindex="0" frameborder="0"></iframe><textarea style="display: none; height: 125px;" class="ke-textarea" tabindex="0"></textarea></td></tr></tbody></table></td></tr><tr><td class="ke-bottom-outer"><table style="height: 11px;" class="ke-bottom" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="ke-bottom-left"><span class="ke-bottom-left-img"></span></td><td style="cursor: s-resize;" class="ke-bottom-right"><span style="visibility: hidden;" class="ke-bottom-right-img"></span></td></tr></tbody></table></td></tr></tbody></table><textarea id="txt_answner" name="body" style="width: 600px; height: 160px; display: none;"></textarea>
+				<input value=" 发表评论 " id="FormSubmitButton" type="submit">
+				<span id="form_msg" style="display: none;"></span>
+				<br><br>
+				<a href="#answers">回评论顶部</a>&nbsp;|&nbsp;<a href="#top">回页面顶部</a>
+			</form>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="QuestionRelations">
+		<div id="QuestionWizard">
+			有什么技术问题吗？
+			<a href="http://www.oschina.net/question/ask" class="rndbutton"><span>我要提问</span></a>
+			<div class="clear"></div>
+		</div>
+		
+						<div id="OtherQuestionsOfUser" class="Qlist">
+			<strong><a href="http://my.oschina.net/javaeye/?ft=bbs&amp;scope=2&amp;showme=1" class="more">全部(1576)...</a><em>鉴客</em>的其他问题</strong>
+			<ul>
+						<li><a href="http://www.oschina.net/question/54100_47265" title="收集一些有用的 Node.js 资源">收集一些有用的 Node.js 资源</a><span class="date">(1回/89阅,3天前)</span></li>						<li><a href="http://www.oschina.net/question/54100_47182" title="移动互联网—不止C多，B也多！">移动互联网—不止C多，B也多！</a><span class="date">(6回/396阅,4天前)</span></li>						<li><a href="http://www.oschina.net/question/54100_47156" title="Chico UI 不支持 IE6，鉴定完毕！">Chico UI 不支持 IE6，鉴定完毕！</a><span class="date">(15回/506阅,5天前)</span></li>						<li><a href="http://www.oschina.net/question/54100_47146" title="【PPT分享】58同城分布式存储架构实践">【PPT分享】58同城分布式存储架构实践</a><span class="date">(1回/192阅,5天前)</span></li>						<li><a href="http://www.oschina.net/question/54100_46854" title="创业团队成员的「挑战」以及「成长」的问题">创业团队成员的「挑战」以及「成长」的问题</a><span class="date">(22回/1509阅,8天前)</span></li>						</ul>
+		</div>
+				<div id="Similarity" class="Qlist">
+			<strong>类似的话题</strong>
+			<ul>
+        				<li><a href="http://www.oschina.net/question/12_10555" title="Nginx SSL/HTTPS 配置">Nginx SSL/HTTPS 配置</a><span class="date">(1回/873阅,1年前)</span></li>						<li><a href="http://www.oschina.net/question/95844_10553" title="Nginx支持https">Nginx支持https</a><span class="date">(2回/464阅,1年前)</span></li>						<li><a href="http://www.oschina.net/question/54100_30401" title="Nginx Location 指令基础">Nginx Location 指令基础</a><span class="date">(0回/219阅,5个月前)</span></li>						<li><a href="http://www.oschina.net/question/12_45735" title="Nginx 的 Echo 模块 —— echo-nginx-module">Nginx 的 Echo 模块 —— echo-nginx-module</a><span class="date">(0回/113阅,19天前)</span></li>						<li><a href="http://www.oschina.net/question/12_4612" title="使用 awstats 分析 Nginx 的访问日志">使用 awstats 分析 Nginx 的访问日志</a><span class="date">(0回/218阅,3年前)</span></li>						<li><a href="http://www.oschina.net/question/54100_18007" title="配置 Ubuntu 10.10 提供 HTTPS 服务和 Digest 认证">配置 Ubuntu 10.10 提供 HTTPS 服务和 Digest 认证</a><span class="date">(1回/245阅,1年前)</span></li>						<li><a href="http://www.oschina.net/question/4873_25040" title="在nginx上运行cgi程序">在nginx上运行cgi程序</a><span class="date">(1回/114阅,8个月前)</span></li>						<li><a href="http://www.oschina.net/question/12_10385" title="Nginx 新的重载方式 (nginx -s reload)">Nginx 新的重载方式 (nginx -s reload)</a><span class="date">(3回/1478阅,1年前)</span></li>						<li><a href="http://www.oschina.net/question/8676_9210" title="《实战Nginx：取代 Apache的高性能Web服务器》pdf下载">《实战Nginx：取代 Apache的高性能Web服务器》pdf下载</a><span class="date">(28回/5222阅,1年前)</span></li>						<li><a href="http://www.oschina.net/question/55981_9566" title="nginx反向代理问题">nginx反向代理问题</a><span class="date">(8回/855阅,1年前)</span></li>						<li><a href="http://www.oschina.net/question/12_2943" title="Nginx的网友评论">Nginx的网友评论</a><span class="date">(5回/201阅,2年前)</span></li>						<li><a href="http://www.oschina.net/question/8676_7661" title="在 Linux 下安装 Nginx">在 Linux 下安装 Nginx</a><span class="date">(1回/3418阅,2年前)</span></li>						<li><a href="http://www.oschina.net/question/12_5180" title="nginx编译优化测试">nginx编译优化测试</a><span class="date">(1回/426阅,3年前)</span></li>						<li><a href="http://www.oschina.net/question/12_13" title="Nginx 的日志切割处理">Nginx 的日志切割处理</a><span class="date">(3回/1225阅,3年前)</span></li>						<li><a href="http://www.oschina.net/question/12_12" title="Nginx 编译优化测试">Nginx 编译优化测试</a><span class="date">(0回/686阅,3年前)</span></li>						<li><a href="http://www.oschina.net/question/54100_10700" title="配置 nginx 绑定指定 CPU">配置 nginx 绑定指定 CPU</a><span class="date">(3回/382阅,1年前)</span></li>						</ul>
+		</div>
+	</div>
+	<div class="clear"></div>   
+</div>
+
+
+
+
+
+
+
+
+<!--[if lt IE 7]>
+<script type="text/javascript" src="/js/minmax.js"></script>
+<![endif]-->
+
+</div>
+	<div class="clear"></div>
+	<div id="OSC_Footer">© 开源中国社区(OsChina.NET) | <a href="http://www.oschina.net/home/about">关于我们</a> | <a href="mailto:oschina.net@gmail.com">广告联系</a> | <a href="http://my.oschina.net/javayou">站长空间</a> | <a href="http://weibo.com/oschina2010" target="_top">@新浪微博</a> | <a href="http://m.oschina.net/">开源中国手机版</a> | 粤ICP备08124133号
+</div>
+</div>
+
+
+
+<div id="fancybox-tmp"></div><div id="fancybox-loading"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content"></div><a id="fancybox-close"></a><div id="fancybox-title"></div><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div></div><div style="display: none;" class="ke-reset"></div><div style="opacity: 0.5;" class="ke-mask"></div></body>
+</html>

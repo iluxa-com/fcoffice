@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh-tw" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta http-equiv="Content-Language" content="UTF-8">
+<meta content="all" name="robots">
+<meta name="author" content="0.618網絡空間">
+<meta name="description" content="傳統的應用大多使用關系型數據庫作數據存儲，但由於關系型數據庫對做系統擴展時通常需要進行大量的修改，所以這類系統起初都會靠升級系統硬件來增加性能，但如果硬件升級愈高，性價比會愈低，所...0.618網絡空間">
+<meta name="keywords" content="google,cloud,sql,免費資源,免費域名,免費空間,免費SSH,免費VPS,免費0.618,seo,0618,0.618">
+<meta name="verify-v1" content="RExw3C1gDo/KX/owfs/Ve1RgJinoNGOF3xWMxmZ8y+g=">
+<link rel="openid.server" href="http://www.myopenid.com/server">
+<link rel="openid.delegate" href="http://0618.myopenid.com/">
+<meta http-equiv="X-XRDS-Location" content="http://www.myopenid.com/xrds?username=0618.myopenid.com">
+
+
+
+
+<link rel="alternate" title="0.618網絡空間" href="http://0618.us/feed.php" type="application/rss+xml">
+
+
+<title>Google雲數據庫Google Cloud SQL使用手記 - 0.618網絡空間 - 傳統的應用大多使用關系型數據庫作數據存儲，但由於關系型數據庫對做系統擴展時通常需要進行大量的修改，所以這類系統起初都會靠升級系統硬件來增加性能，但如果硬件升級愈高，性價比會愈低，所...0.618網絡空間</title>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://0618.us/inc/rsd.php">
+
+
+
+
+<link title="搜尋 0.618網絡空間" rel="search" type="application/opensearchdescription+xml" href="http://0618.us/inc/opensearch.php">
+<link rel="canonical" href="http://0618.us/googleu002639s-cloud-database-using-the-google-cloud-sql-notes/">
+
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body id="pagelocation-index"><iframe src="index_1.html" style="display: none;" frameborder="0"></iframe><div id="bdshare_s"><iframe src="index_2.html" id="bdsIfr" style="position: absolute; display: none; z-index: 9999;" frameborder="0"></iframe><div style="display: none;" id="bdshare_l"><div id="bdshare_l_c"><h6>分享到</h6><ul><li><a href="#" class="bds_qzone qqkj">QQ空间</a></li><li><a href="#" class="bds_tsina xlwb">新浪微博</a></li><li><a href="#" class="bds_baidu bdsc">百度搜藏</a></li><li><a href="#" class="bds_renren rrw">人人网</a></li><li><a href="#" class="bds_tqq txwb">腾讯微博</a></li><li><a href="#" class="bds_kaixin001 kxw">开心网</a></li><li><a href="#" class="bds_tqf txpy">腾讯朋友</a></li><li><a href="#" class="bds_hi bdkj">百度空间</a></li><li><a href="#" class="bds_douban db">豆瓣网</a></li><li><a href="#" class="bds_tsohu shwb">搜狐微博</a></li><li><a href="#" class="bds_msn msn">MSN</a></li><li><a href="#" class="bds_qq qqsc">QQ收藏</a></li><li><a href="#" class="bds_taobao tjh">淘宝</a></li><li><a href="#" class="bds_tieba bdtb">百度贴吧</a></li><li><a href="#" class="bds_sohu shbsh">搜狐白社会</a></li><li><a href="#" class="bds_more">更多...</a></li></ul><p><a href="#" class="goWebsite">百度分享</a></p></div></div></div><div id="full" style="left: 2px; top: 693px; position: absolute;"><table border="0" cellpadding="0" cellspacing="0" width="20"><tbody><tr><td align="center"><a href="javascript:window.scroll(0,0)" title="返回頂部"><img original="contact/image/icon_top.png" src="icon_top.png" alt="Top" border="0"></a></td></tr><tr><td align="center"><a href="mailto:admin@0618.us" target="blank" title="給我伊妹兒"><img original="contact/image/icon_email.gif" src="icon_email.gif" alt="EMail" border="0"></a></td></tr><tr><td align="center"><a href="http://wpa.qq.com/msgrd?V=1&amp;Uin=3688082&amp;Site=calvinwu&amp;Menu=yes" target="_top" title="快來Q我"><img original="contact/image/icon_oicq.png" src="icon_oicq.png" alt="QQ" border="0"></a></td></tr><tr><td align="center"><a href="msnim:chat?contact=ccps@live.com" target="blank" title="MSN聯繫我"><img original="contact/image/icon_msn.gif" src="icon_msn.gif" alt="MSN" border="0"></a></td></tr><tr><td align="center"><a href="javascript:window.scroll(0,99999)" title="返回底部"><img original="contact/image/icon_bottom.png" src="icon_bottom.png" alt="Foot" border="0"></a></td></tr></tbody></table></div>
+
+
+<span style="display: none;"><a href="http://www.688d.com/0618.us" targ33et="_blank">網站信息報告</a>
+</span>
+
+
+
+
+
+
+
+<div id="wrapper">
+	<div id="header">
+		<div id="header-tools">
+			<span class="header-tools-left"></span>
+				<div id="quicklogin">
+					<form name="register" method="post" action="http://0618.us/login.php?job=verify">
+帳號：<input value="" name="username" id="username" size="8" class="text" type="text"><input name="urlreturn" value="/read.php?blogalias=googleu002639s-cloud-database-using-the-google-cloud-sql-notes&amp;page=&amp;part=" type="hidden"> &nbsp;
+密碼：<input class="text" size="8" name="password" type="password">
+<input name="submit" value="Go" class="submit" type="submit"> &nbsp;
+<input name="savecookie" value="1" id="savecookie" type="hidden"><a href="http://0618.us/login.php?job=register" title="註冊">新用戶註冊</a>
+</form>
+				</div>
+				<div id="header-tools-inner">
+					<div id="tools">
+						<a href="#" onclick="mygrid.toggleBlock('block1');"><img original="template/0.618/images/close_announce.gif" src="close_announce.gif" alt="顯/隱 公告" title="顯/隱 公告" border="0"></a>
+						<a href="#" onclick="mygrid.toggleLeft();"><img original="template/0.618/images/close_left_sidebar.gif" src="close_left_sidebar.gif" alt="關閉左側欄" title="關閉左側欄" border="0"></a>
+						<a href="#" onclick="mygrid.toggleRight();"><img original="template/0.618/images/close_right_sidebar.gif" src="close_right_sidebar.gif" alt="關閉右側欄" title="關閉右側欄" border="0"></a>
+						<a href="#" onclick="mygrid.resizeFont(0.05);"><img original="template/0.618/images/increase_size.gif" src="increase_size.gif" alt="增加字號" title="增加字號" border="0"></a>
+						<a href="#" onclick="mygrid.resizeFont(-0.05);"><img original="template/0.618/images/reduction_size.gif" src="reduction_size.gif" alt="減小字號" title="減小字號" border="0"></a>
+						<a href="#" onclick="mygrid.resize(980,'px');"><img original="template/0.618/images/small_screen.gif" src="small_screen.gif" alt="默認屏幕" title="默認屏幕" border="0"></a> 
+						<a href="#" onclick="mygrid.resize(1200,'px');"><img original="template/0.618/images/default_screen.gif" src="default_screen.gif" alt="寬屏幕" title="寬屏幕" border="0"></a>
+						<a href="#" onclick="mygrid.resize(1400,'px');"><img original="template/0.618/images/wide_screen.gif" src="wide_screen.gif" alt="超寬屏幕" title="超寬屏幕" border="0"></a>
+						<a href="#" onclick="mygrid.resize(96,'%');"><img original="template/0.618/images/full_screen.gif" src="full_screen.gif" alt="自適應屏幕" title="自適應屏幕" border="0"></a>
+						
+						<a title="点击以简体中文方式浏览" href="javascript:StranBody()" id="StranLink"><img original="template/0.618/images/zh-cn.gif" src="zh-cn.gif" alt="简体中文" title="简体中文" border="0"></a>
+						<a href="http://0618.us/index.php?lang=zh-tw"><img original="template/0.618/images/zh-tw.gif" src="zh-tw.gif" alt="繁體中文" title="繁體中文" border="0"></a>
+						<a href="http://translate.google.com/translate?js=n&amp;prev=_t&amp;hl=en&amp;ie=UTF-8&amp;layout=2&amp;eotf=1&amp;sl=zh-CN&amp;tl=en&amp;u=http%3A%2F%2Fwww.0618.us"><img original="template/0.618/images/en.gif" src="en.gif" alt="English" title="English" border="0"></a>
+						<a href="http://translate.google.com/translate?hl=en&amp;sl=zh-CN&amp;tl=th&amp;u=http%3A%2F%2Fwww.0618.us%2F"><img original="template/0.618/images/vn.gif" src="vn.gif" alt="ประเทศไทย" title="ประเทศไทย" border="0"></a>
+					</div>
+				</div>
+			<span class="header-tools-right"></span>
+		</div>
+		<div id="innerHeader">
+			<div class="blog-header">
+				<div class="blog-title">
+					<a href="http://0618.us/"><img original="template/0.618/images/logo.png" src="logo.png" title="0.618網絡空間 - 首頁" alt="0.618網絡空間 - 首頁" border="0" height="50" width="430"></a>
+				</div>
+				<div class="blog-desc">傳統的應用大多使用關系型數據庫作數據存儲，但由於關系型數據庫對做系統擴展時通常需要進行大量的修改，所以這類系統起初都會靠升級系統硬件來增加性能，但如果硬件升級愈高，性價比會愈低，所...0.618網絡空間</div>			
+			</div>
+			<div align="right">
+
+		</div>
+		</div>
+	</div>
+	<div id="menu">
+		<span class="menu-left"></span>
+			<ul><li><span id="nav_"><a href="http://0618.us/"><span id="navitem_">首頁</span></a></span></li>
+<li><span id="nav_star"><a href="http://0618.us/star.php"><span id="navitem_star">精品文章</span></a></span></li>
+<li><span id="nav_https_3A_2F_2Fmail.google.com_2Fa_2F0618.us"><a href="https://mail.google.com/a/0618.us" target="_top" title="0.618網絡空間企業郵局"><span id="navitem_https_3A_2F_2Fmail.google.com_2Fa_2F0618.us">網路郵局</span></a></span></li>
+<li><span id="nav_http_3A_2F_2Fwww.0618.us_2Fsocks"><a href="http://www.0618.us/socks" target="_top" title="0.618最新代理服務器列表"><span id="navitem_http_3A_2F_2Fwww.0618.us_2Fsocks">代理列表</span></a></span></li>
+<li><span id="nav_component_2Ftools_2F"><a href="http://0618.us/component/tools/"><span id="navitem_component_2Ftools_2F">實用工具</span></a></span></li>
+<li><span id="nav_index_3Fact_3Daddrss"><a href="http://0618.us/index.php?act=addrss" target="_parent" title="0.618網絡空間合作網站"><span id="navitem_index_3Fact_3Daddrss">友站聚合</span></a></span></li>
+<li><span id="nav_guestbook"><a href="http://0618.us/guestbook.php"><span id="navitem_guestbook">留言區</span></a></span></li>
+<li><span id="nav_tag"><a href="http://0618.us/tag.php"><span id="navitem_tag">標籤</span></a></span></li>
+<li><span id="nav_http_3A_2F_2Fwww.0618.us_2Fmobi"><a href="http://www.0618.us/mobi"><span id="navitem_http_3A_2F_2Fwww.0618.us_2Fmobi">移動分站</span></a></span></li>
+<li><span id="nav__2Fcomponent_2Fdelivery"><a href="http://0618.us/component/delivery" title="給0.618網絡空間投稿"><span id="navitem__2Fcomponent_2Fdelivery">文章投稿</span></a></span></li></ul>
+		<span class="menu-right"></span>
+	</div>
+	<div id="mainWrapper">
+		<div id="left_column">
+			<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+				<div class="sidebarOne">
+					<div class="panel">
+	<h5 onclick='showhidediv("sidebar_category");'>分類</h5>
+	<div class="panel-content" id="sidebar_category" style="display: block;">
+		<ul><li><img original="images/icons/1.png" src="1.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/notices/" title="本站最新動態，請留意網站公告。">網站公告</a> <a href="http://0618.us/feed.php?go=category_1"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li><li><img original="images/icons/2.png" src="2.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/technical-exchanges/" title="技術前沿，你我共享。">技術交流</a> <a href="http://0618.us/feed.php?go=category_2"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li><li class="indent"><img original="images/icons/3.png" src="3.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/proxy-tools/" title="代理服務器，Proxy,在線代理,Web Proxy,VPN盡在0.618。">代理工具</a> <a href="http://0618.us/feed.php?go=category_7"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li><li class="indent"><img original="images/icons/3.png" src="3.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/free-information/" title="最新的免費資訊前沿">免費資訊</a> <a href="http://0618.us/feed.php?go=category_9"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li><li class="indent"><img original="images/icons/5.png" src="5.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/free-domain/" title="提供免費域名註冊及使用技巧。">免費域名</a> <a href="http://0618.us/feed.php?go=category_5"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li><li class="indent"><img original="images/icons/2.png" src="2.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/free-hosting/" title="最新最快的精品免費空間收錄！">免費空間</a> <a href="http://0618.us/feed.php?go=category_10"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li><li class="indent"><img original="images/icons/6.png" src="6.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/free-software/" title="精品免費軟體大集合！crack888wei為該闆塊管理員，請大家多多支持免費軟體！">免費軟件</a> <a href="http://0618.us/feed.php?go=category_11"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li><li class="indent"><img original="images/icons/6.png" src="6.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/cool-website-recommend/" title="最新奇實用的網站分享。">酷站推薦</a> <a href="http://0618.us/feed.php?go=category_6"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li><li class="indent"><img original="images/icons/4.png" src="4.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/free--resources-account/" title="萬方、CNKI、國內外圖書館免費登錄帳號、迅雷VIP等精品免費資源帳號分享">免費資源帳號</a> <a href="http://0618.us/feed.php?go=category_12"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li><li class="indent"><img original="images/icons/1.png" src="1.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/seo-and-make-money-online/" title="介紹SEO技巧幾網賺資訊。">SEO與網賺</a> <a href="http://0618.us/feed.php?go=category_8"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li><li><img original="images/icons/4.png" src="4.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/network-world-view/" title="秀才不出門，可知天下事。">網觀天下</a> <a href="http://0618.us/feed.php?go=category_4"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li><li><img original="images/icons/3.png" src="3.png" alt="" style="margin: 3px 1px -4px 0px;"> <a href="http://0618.us/category/0.618-reviews/" title="0.618評論，中庸之道。">0.618評論</a> <a href="http://0618.us/feed.php?go=category_3"><img original="template/0.618/images/rss.png" src="rss.png" alt="RSS" title="追蹤這個分類的RSS" border="0"></a></li></ul>
+	</div>
+	<div class="panel-bot"></div>
+</div><div class="panel">
+	<h5 onclick='showhidediv("sidebar_google ads");'> </h5>
+	<div class="panel-content" id="sidebar_google ads" style="display: block;">
+		<table><tbody><tr><td><left><img original="images/icons/cat.png" src="cat.png"></left></td><td>
+</td></tr></tbody></table>
+	</div>
+	<div class="panel-bot"></div>
+</div><div class="panel">
+	<h5 onclick='showhidediv("sidebar_game");'>本期免費軟件推薦</h5>
+	<div class="panel-content" id="sidebar_game" style="display: block;">
+		<iframe class=" meqmdoskqkstwplismcm" id="baiduSpFrame" border="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" framespacing="0" src="index_3.html" frameborder="0" height="180" scrolling="no" width="120"></iframe>
+	</div>
+	<div class="panel-bot"></div>
+</div><div class="panel">
+	<h5 onclick='showhidediv("sidebar_rank");'>網站排名指數</h5>
+	<div class="panel-content" id="sidebar_rank" style="display: block;">
+		<center>
+<a href="http://www.alexa.com/siteinfo/www.0618.us"><a class="AlexaSiteStatsWidget" href="http://www.alexa.com/data/details/main?url=http://www.0618.us"><img style="display: inline;" original="http://xsltcache.alexa.com/site_stats/gif/t/b/d3d3LjA2MTgudXM=/s.gif" alt="Alexa Certified Site Stats for www.0618.us" src="s.gif" border="0"></a></a>
+
+<p>
+
+<a href="http://0618.us/pr" target="_top">
+<img style="display: inline;" original="http://0618.us/pr/primg/1/4.gif" src="4.gif" alt="Page Rank Check" border="0"></a></p></center>
+	</div>
+	<div class="panel-bot"></div>
+</div><div class="panel">
+	<h5 onclick='showhidediv("sidebar_comment");'>最新留言</h5>
+	<div class="panel-content" id="sidebar_comment" style="display: block;">
+		<ul><li><a href="http://0618.us/guestbook.php" title="[linhan2004]博主能推薦一個穩定的空間嗎 收費的和免費的？">博主能推薦一個穩定的空間嗎 收...</a></li><li><a href="http://0618.us/guestbook.php" title="[h14448855][emot]sleepy[/emot]">[emot]sleepy[/e...</a></li><li><a href="http://0618.us/guestbook.php" title="[hao1234567]祝：博主和全體成員新春快樂！">祝：博主和全體成員新春快樂！</a></li><li><a href="http://0618.us/guestbook.php" title="[zkyq]很開心成爲會員！">很開心成爲會員！</a></li><li><a href="http://0618.us/guestbook.php" title="[52baidu]挺好的，内容都是精品。&lt;br/&gt;&lt;br/&gt;隻是不知道個人控制面闆在哪裏，想改下密碼。">挺好的，内容都是精品。</a></li><li><a href="http://0618.us/guestbook.php" title="[最遠的流星]感謝站長發布的聖誕國外主機消息。">感謝站長發布的聖誕國外主機消息...</a></li><li><a href="http://0618.us/guestbook.php" title="[機靈]夢寐以求都想成爲會員，多謝站長，終于注冊成功了。[emot]cool[/emot]">夢寐以求都想成爲會員，多謝站長...</a></li><li><a href="http://0618.us/guestbook.php" title="[jiejie444]這裏真是個好地方~~~~想問個問題，有沒有可以免費上教育網上的六維空間這樣的pt戰的辦法？">這裏真是個好地方~~~~想問個...</a></li><li><a href="http://0618.us/guestbook.php" title="[calvinwu]歡迎各位新會員進駐0.618,我們是小眾型的免費資源分享平臺，希望大家多多支持！">歡迎各位新會員進駐0.618,...</a></li></ul>
+	</div>
+	<div class="panel-bot"></div>
+</div><div class="panel">
+	<h5 onclick='showhidediv("sidebar_Logo");'> </h5>
+	<div class="panel-content" id="sidebar_Logo" style="display: block;">
+		<center><form action="http://feedburner.google.com/fb/a/mailverify?uri=0618" method="post" class="subscribe"> 
+        <fieldset> 
+        <input class="feedinput" value="輸入E-mail..." name="email" type="text"> 
+        <input class="feedsubmit" value="訂閱0.618網絡空間" type="submit"> 
+        <input value="http://feeds.feedburner.com/~e?ffid=0618" name="url" type="hidden"> 
+        <input value="0.618網絡空間" name="title" type="hidden"> 
+        <input name="loc" value="zh_TW" type="hidden"> 
+        </fieldset> 
+        </form> 
+<br>
+
+<p><a href="http://feeds2.feedburner.com/0618"><img original="http://feeds2.feedburner.com/~fc/0618?bg=99CCFF&amp;fg=444444&amp;anim=0" src="grey.gif" style="border: 0pt none;" alt="" height="26" width="88"></a></p>
+
+<br><img original="http://i268.photobucket.com/albums/jj17/calvinwu/logo2.gif" src="grey.gif" alt="www.0618.us"></center>
+<br>
+<center>
+<br>
+<a href="http://zh.sitebro.com/zh4347701" class="logo" id="sitebro_stick_logo" target="_top" title="0.618網絡空間"><img original="http://zh.sitebro.com/img/b/stick_sitebro.png" class=" meqmdoskqkstwplismcm" src="stick_sitebro.png" alt="0.618網絡空間" title="0.618網絡空間" style="border: medium none;"></a><a href="http://ja.sitebro.com/"><img original="http://ja.sitebro.com/img/px.gif" class=" meqmdoskqkstwplismcm" src="px.gif" style="border: medium none;" height="1" width="1"></a>
+</center>
+	</div>
+	<div class="panel-bot"></div>
+</div><div class="panel">
+	<h5 onclick='showhidediv("sidebar_link");'>連結</h5>
+	<div class="panel-content" id="sidebar_link" style="display: block;">
+		<ul><li><strong>個人空間</strong></li><li class="indent"><a href="http://www.eu5.cn/" target="_top" title="有個博客 - ">有個博客</a></li><li class="indent"><a href="http://www.softinn.org/" target="_top" title="軟件志 - ">軟件志</a></li><li class="indent"><a href="http://www.efseo.com/" target="_top" title="seo低調不追風 - 國内混亂的seo(搜索引擎優化)市場下，更多需要我們踏實、耐心的做seo，低調做自己seo，不追風。">seo低調不追風</a></li><li class="indent"><a href="http://www.xianba.net/" target="_top" title="閑吧資源站 - ">閑吧資源站</a></li><li class="indent"><a href="http://www.ituwen.net/" target="_top" title="愛圖文 - 愛圖文——建站圖文教程">愛圖文</a></li><li class="indent"><a href="http://www.safecn.net/" target="_top" title="愛分享 SafeCN - ">愛分享 SafeCN</a></li><li class="indent"><a href="http://9988.in/" target="_top" title="眾享網 - ">眾享網</a></li><li class="indent"><a href="http://www.52fengbao.com/" target="_top" title="軟件風暴 - ">軟件風暴</a></li><li class="indent"><a href="http://www.duozui.net/" target="_top" title="多嘴博客 - ">多嘴博客</a></li><li class="indent"><a href="http://www.xzymoe.com/" target="_top" title="XZYMOE'S BLOG - ">XZYMOE'S BLOG</a></li><li class="indent"><a href="http://www.saifei.net/" target="_top" title="賽飛的博客 - ">賽飛的博客</a></li><li class="indent"><a href="http://www.tiaozhuji.com/" target="_top" title="國外主機 - ">國外主機</a></li><li><strong>行業網站</strong></li><li class="indent"><a href="http://www.36126.com/" target="_top" title="上來淘 - 淘寶精品網店推薦">上來淘</a></li><li class="indent"><a href="http://www.qihaa.cn/" target="_top" title="免費PHP空間 - 奇哈免費空間爲你搜集國内外優秀的免費PHP空間">免費PHP空間</a></li><li><strong>專業論壇</strong></li><li class="indent"><a href="http://www.jgwy.net/" target="_top" title="金光論壇 - ">金光論壇</a></li><li class="indent"><a href="http://www.qianluo.com/" target="_top" title="千羅網 - ">千羅網</a></li><li class="indent"><a href="http://www.iuc.com.tw/iucbbs/" target="_top" title="國聯論壇 - 電腦資訊">國聯論壇</a></li><li class="indent"><a href="http://www.muyangcheng.com/" target="_top" title="牧羊城 - ">牧羊城</a></li><li class="indent"><a href="http://www.iyinjia.com/" target="_top" title="穎佳論壇 - ">穎佳論壇</a></li></ul>
+	<div style="text-align: right; padding: 3px;"><strong><a href="http://0618.us/login.php?job=applylink">申請鏈接 </a>|<a href="http://0618.us/links.php"> 更多鏈接… </a></strong></div></div>
+	<div class="panel-bot"></div>
+</div><div class="panel">
+	<h5 onclick='showhidediv("sidebar_statistics");'>統計</h5>
+	<div class="panel-content" id="sidebar_statistics" style="display: block;">
+		訪問次數 32596994<br>今日訪問 369<br>文章數量 3341<br><a href="http://0618.us/view.php?go=userlist">會員數目 1071</a><br>線上人數 96<br>
+	</div>
+	<div class="panel-bot"></div>
+</div>
+				</div>
+			<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+		</div>
+		<div id="right_column">
+			<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+				<div class="sidebarTwo">
+					<div class="panel">
+	<h5 onclick='showhidediv("sidebar_123");'>站內搜尋</h5>
+	<div class="panel-content" id="sidebar_123" style="display: block;">
+		<form action="http://0618.us/googleu002639s-cloud-database-using-the-google-cloud-sql-notes/" id="cse-search-box" value="輸入搜索內容"><input name="act" value="websearch" type="hidden"><input name="cx" value="010345965287441224248:y95bo4q-_1g" type="hidden"><input name="cof" value="FORID:11" type="hidden"><input value="" name="q" size="25" type="text"><input name="sa" value="搜尋" type="submit"></form>
+	</div>
+	<div class="panel-bot"></div>
+</div><div class="panel">
+	<h5 onclick='showhidediv("sidebar_tagscloud");'>標籤雲</h5>
+	<div class="panel-content" id="sidebar_tagscloud" style="display: block;">
+		 <a href="http://0618.us/tags%5C" title="标簽[1]個"></a> <a href="http://0618.us/tags%5C" style="font-size: 15px;" title="标簽[2]個"></a> <a href="http://0618.us/tags%5C" style="font-size: 16px;" title="标簽[3]個"></a> <a href="http://0618.us/tags%5C" style="font-size: 17px;" title="标簽[4]個"></a> <a href="http://0618.us/tags%5C" style="font-size: 18px;" title="标簽[5]個"></a> <a href="http://0618.us/tags%5C" style=""></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5Csina%E6%84%9B%E5%95%8F%2C%E5%85%8D%E7%A9%8D%E5%88%86%2C%E4%B8%8B%E8%BC%89%E6%96%B9%E6%B3%95" title="标簽[1]個">sina愛問,免積分,下載方法</a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C" style="font-size: 19px;"></a> <a href="http://0618.us/tags%5C%E6%98%A5%E9%81%8B" title="标簽[1]個">春運</a> <a href="http://0618.us/tags%5C%E6%90%B6%E7%A5%A8" title="标簽[1]個">搶票</a> <a href="http://0618.us/tags%5C%E7%81%AB%E8%BB%8A%E7%A5%A8" title="标簽[1]個">火車票</a> <a href="http://0618.us/tags11.12.31" title="标簽[1]個">2011.12.31</a> <a href="http://0618.us/tags%5C%E6%8E%9B%E6%AD%B7" title="标簽[1]個">掛歷</a> <a href="http://0618.us/tags%5C%E7%94%B3%E8%AB%8B" title="标簽[1]個">申請</a> <a href="http://0618.us/tags%5C%E9%9B%9C%E8%AA%8C" title="标簽[1]個">雜誌</a> <a href="http://0618.us/tags%5C%E5%85%92%E7%AB%A5" title="标簽[1]個">兒童</a> <a href="http://0618.us/tags%5Cbitdefender" title="标簽[1]個">bitdefender</a> <a href="http://0618.us/tags%5C%E6%AD%A3%E7%89%88%E8%BB%9F%E4%BB%B6" title="标簽[1]個">正版軟件</a> <a href="http://0618.us/tags%5C%E6%AD%A3%E7%89%88%E8%BB%9F%E9%AB%94" style="font-size: 15px;" title="标簽[2]個">正版軟體</a> <a href="http://0618.us/tags%5C%E5%85%8D%E8%B2%BB%E7%B6%B2%E7%9B%A4" title="标簽[1]個">免費網盤</a> <a href="http://0618.us/tags%5C%E5%85%8D%E8%B2%BBcdn" style="font-size: 16px;" title="标簽[3]個">免費cdn</a> <a href="http://0618.us/tags%5C%E9%96%8B%E6%94%BE%E8%A8%BB%E5%86%8A" title="标簽[1]個">開放註冊</a> <a href="http://0618.us/tags11%E5%B9%B4%E5%BA%A6%E6%9C%83%E5%93%A1%E6%8B%9B%E5%8B%9F%E8%A8%88%E7%95%AB" title="标簽[1]個">2011年度會員招募計畫</a> <a href="http://0618.us/tags%5C%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8" title="标簽[1]個">有限公司</a> <a href="http://0618.us/tags%5C%E4%B8%8A%E5%B8%82%E5%85%AC%E5%8F%B8" title="标簽[1]個">上市公司</a> <a href="http://0618.us/tags%5C%E4%BA%A4%E6%98%93%E6%89%80" title="标簽[1]個">交易所</a> <a href="http://0618.us/tags%5C%E8%82%A1%E4%BB%BD%E5%88%B6" title="标簽[1]個">股份制</a> <a href="http://0618.us/tags%5C%E5%85%8D%E8%B2%BB%E5%82%B3%E7%9C%9F" title="标簽[1]個">免費傳真</a> <a href="http://0618.us/tags%5C%E9%96%8B%E6%94%BE%E9%9B%B2%E5%B9%B3%E8%87%BA" title="标簽[1]個">開放雲平臺</a> <a href="http://0618.us/tags%5C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86" title="标簽[1]個">反向代理</a> <a href="http://0618.us/tags%5C%E5%85%8D%E8%B2%BB%E8%A7%A3%E6%9E%90" title="标簽[1]個">免費解析</a> <a href="http://0618.us/tags%5Casp" title="标簽[1]個">asp</a> <a href="http://0618.us/tags%5C%E6%88%90%E4%BA%BA" title="标簽[1]個">成人</a> <a href="http://0618.us/tags%5C%E6%B5%B7%E8%A7%9211%E8%99%9F%E9%83%B5%E5%B1%80" title="标簽[1]個">海角11號郵局</a> <a href="http://0618.us/tags%5Cgodaddy" title="标簽[1]個">godaddy</a> <a href="http://0618.us/tags%5Ccoupon" title="标簽[1]個">coupon</a> <a href="http://0618.us/tagsusd" title="标簽[1]個">10usd</a> <a href="http://0618.us/tags%5Csolutions" title="标簽[1]個">solutions</a> <a href="http://0618.us/tags3systems" title="标簽[1]個">123systems</a> <a href="http://0618.us/tags8m" title="标簽[1]個">128m</a> <a href="http://0618.us/tags%5Cwindows8" title="标簽[1]個">windows8</a> <a href="http://0618.us/tags%5Cwin8" title="标簽[1]個">win8</a> <a href="http://0618.us/tags%5C%E9%9B%B2%E7%A9%BA%E9%96%93" style="font-size: 16px;" title="标簽[3]個">雲空間</a> <a href="http://0618.us/tags%5C%E5%88%B7%E6%A9%9F" title="标簽[1]個">刷機</a> <a href="http://0618.us/tags%5C%E8%87%AA%E5%8B%95" title="标簽[1]個">自動</a> <a href="http://0618.us/tags%5Candroid" title="标簽[1]個">android</a> <a href="http://0618.us/tags%5Cvps" style="font-size: 15px;" title="标簽[2]個">vps</a> <a href="http://0618.us/tags%5C%E5%B9%B4%E4%BB%9810%E7%BE%8E%E5%85%83" title="标簽[1]個">年付10美元</a> <a href="http://0618.us/tags%5C%E9%A3%9B%E9%80%9F" title="标簽[1]個">飛速</a> <a href="http://0618.us/tags%5C%E7%B6%B2%E7%B5%A1%E5%8A%A0%E9%80%9F%E5%99%A8" title="标簽[1]個">網絡加速器</a> <a href="http://0618.us/tags%5C%E9%85%B7%E7%AB%99" title="标簽[1]個">酷站</a> <a href="http://0618.us/tags%5Cdns" title="标簽[1]個">dns</a> <a href="http://0618.us/tags%5C%E5%85%8D%E8%B2%BB%E8%BB%9F%E9%AB%94" style="font-size: 19px;">免費軟體</a> <a href="http://0618.us/tags%5Cibook" title="标簽[1]個">ibook</a> <a href="http://0618.us/tags%5C%E5%8F%B2%E8%92%82%E5%A4%AB%C2%B7%E5%96%AC%E5%B8%83%E6%96%AF%E5%82%B3" title="标簽[1]個">史蒂夫·喬布斯傳</a> <a href="http://0618.us/tags%5C%E9%9B%BB%E5%AD%90%E6%9B%B8" title="标簽[1]個">電子書</a> <a href="http://0618.us/tags%5Ccloud" title="标簽[1]個">cloud</a> <a href="http://0618.us/tags%5Csql" title="标簽[1]個">sql</a> <a href="http://0618.us/tags%5Ccdn" title="标簽[1]個">cdn</a> <a href="http://0618.us/tags%5C%E5%85%8D%E8%B2%BB%E7%9F%AD%E8%A8%8A" title="标簽[1]個">免費短訊</a> <a href="http://0618.us/tags%5C%E5%85%8D%E8%B2%BB%E7%B0%A1%E8%A8%8A" title="标簽[1]個">免費簡訊</a> <a href="http://0618.us/tags%5C%E5%85%8D%E8%B2%BB%E7%9F%AD%E4%BF%A1" title="标簽[1]個">免費短信</a> <a href="http://0618.us/tags%5C%E5%85%8D%E8%B2%BB%E8%B3%87%E6%BA%90" title="标簽[1]個">免費資源</a> <a href="http://0618.us/tags%5Cdomain" title="标簽[1]個">domain</a> <a href="http://0618.us/tagsDQpnbG9iYWwgJGJsb2csICRkYl9wcmVmaXgsICRtYmNvbjsNCmluY2x1ZGVfb25jZSAoInBsdWdpbi90YWdzY2xvdWQvY29uZmlnLnBocCIpOw0KJGFsbHRhZ3MgPSAkYmxvZy0+Z2V0Z3JvdXBieXF1ZXJ5KCJTRUxFQ1QgKiBGUk9NIGB7JGRiX3ByZWZpeH10YWdzYCBPUkRFUiBCWSBgdGFnaWRgIERFU0MgTElNSVQgMCAsIHskbnVtfSIpOw0KaWYgKGlzX2FycmF5KCRhbGx0YWdzKSkgDQp7DQpmb3JlYWNoICgkYWxsdGFncyBhcyAkb25ldGFnKSANCgl7DQoJc3dpdGNoICgkb25ldGFnWyd0YWdjb3VudGVyJ10pIA0KCQl7DQogCQkgY2FzZSAwOg0KCQkJJHRhZ3Nob3dzLj0iIDxhIGhyZWY9XCJ0YWdzXFwiLnVybGVuY29kZSgkb25ldGFnWyd0YWduYW1lJ10pLiJcIj57JG9uZXRhZ1sndGFnbmFtZSddfTwvYT4iOw0KICAgIAkJYnJlYWs7DQogCQljYXNlIDE6DQogICAJCQkkdGFnc2hvd3MuPSIgPGEgaHJlZj1cInRhZ3NcXCIudXJsZW5jb2RlKCRvbmV0YWdbJ3RhZ25hbWUnXSkuIlwiIHRpdGxlPSfmoIfnrb7uhLdbeyRvbmV0YWdbJ3RhZ2NvdW50ZXInXX1d5LiqJz57JG9uZXRhZ1sndGFnbmFtZSddfTwvYT4iOw0KICAgIAlicmVhazsNCiAJCWNhc2UgMjoNCiAgIAkJCSR0YWdzaG93cy49IiA8YSBocmVmPVwidGFnc1xcIi51cmxlbmNvZGUoJG9uZXRhZ1sndGFnbmFtZSddKS4iXCIgc3R5bGU9XCJmb250LXNpemU6Ii4kdDIuInB4XCIgdGl0bGU9J+agh+etvu6Et1t7JG9uZXRhZ1sndGFnY291bnRlciddfV3kuKonPnskb25ldGFnWyd0YWduYW1lJ119PC9hPiI7DQogICAgCWJyZWFrOw0KCQljYXNlIDM6DQogICAJCQkkdGFnc2hvd3MuPSIgPGEgaHJlZj1cInRhZ3NcXCIudXJsZW5jb2RlKCRvbmV0YWdbJ3RhZ25hbWUnXSkuIlwiIHN0eWxlPVwiZm9udC1zaXplOiIuJHQzLiJweFwiIHRpdGxlPSfmoIfnrb7uhLdbeyRvbmV0YWdbJ3RhZ2NvdW50ZXInXX1d5LiqJz57JG9uZXRhZ1sndGFnbmFtZSddfTwvYT4iOw0KICAgIAlicmVhazsNCiAJCWNhc2UgNDoNCiAgIAkJCSR0YWdzaG93cy49IiA8YSBocmVmPVwidGFnc1xcIi51cmxlbmNvZGUoJG9uZXRhZ1sndGFnbmFtZSddKS4iXCIgc3R5bGU9XCJmb250LXNpemU6Ii4kdDQuInB4XCIgdGl0bGU9J+agh+etvu6Et1t7JG9uZXRhZ1sndGFnY291bnRlciddfV3kuKonPnskb25ldGFnWyd0YWduYW1lJ119PC9hPiI7DQogICAgCWJyZWFrOw0KIAkJY2FzZSA1Og0KICAgCQkJJHRhZ3Nob3dzLj0iIDxhIGhyZWY9XCJ0YWdzXFwiLnVybGVuY29kZSgkb25ldGFnWyd0YWduYW1lJ10pLiJcIiBzdHlsZT1cImZvbnQtc2l6ZToiLiR0NS4icHhcIiB0aXRsZT0n5qCH562+7oS3W3skb25ldGFnWyd0YWdjb3VudGVyJ119XeS4qic+eyRvbmV0YWdbJ3RhZ25hbWUnXX08L2E+IjsNCiAgICAJYnJlYWs7DQoNCgkJZGVmYXVsdDoNCgkgIAkJaWYgKCRvbmV0YWdbJ3RhZ2NvdW50ZXInXT42KQ0KCSAgCQl7DQoJCQkJJHRhZ3Nob3dzLj0iIDxhIGhyZWY9XCJ0YWdzXFwiLnVybGVuY29kZSgkb25ldGFnWyd0YWduYW1lJ10pLiJcIiBzdHlsZT1cImZvbnQtc2l6ZToiLiR0Ni4icHhcIj57JG9uZXRhZ1sndGFnbmFtZSddfTwvYT4iOw0KCQkJfQ0KCQkJZWxzZQ0KCQkJew0KCQkJCSR0YWdzaG93cy49IiA8YSBocmVmPVwidGFnc1xcIi51cmxlbmNvZGUoJG9uZXRhZ1sndGFnbmFtZSddKS4iXCIgc3R5bGU9XCJmb250LXNpemU6Ii4kdDEuInB4XCI+eyRvbmV0YWdbJ3RhZ25hbWUnXX08L2E+IjsNCgkJCX0NCiAgICAJYnJlYWs7DQoJCX0NCgl9DQp9DQplbHNlIA0Kew0KCSR0YWdzaG93cz0n5rKh5pyJ5qCH562+ISc7DQp9DQokcGhwcmV0dXJuPSR0YWdzaG93czsNCj8+.99" title="标簽[1]個">1.99</a> <a href="http://0618.us/tags%5C%E6%8F%90%E4%BA%A4" title="标簽[1]個">提交</a> <a href="http://0618.us/tags%5C%E5%A4%96%E9%8F%88" title="标簽[1]個">外鏈</a> <a href="http://0618.us/tags%5C%E9%85%B7%E7%AB%99%E6%8E%A8%E8%96%A6" style="font-size: 15px;" title="标簽[2]個">酷站推薦</a> <a href="http://0618.us/tags%5C%E7%A9%BA%E9%96%93" title="标簽[1]個">空間</a> <a href="http://0618.us/tags%5C%E4%B8%BB%E6%A9%9F" title="标簽[1]個">主機</a> <a href="http://0618.us/tags%5C%E6%89%8B%E6%9C%BA%E4%BC%91%E9%97%B2%E6%B8%B8%E6%88%8F" title="标簽[1]個">手機休閑遊戲</a> <a href="http://0618.us/tags%5Chtml5%E6%B8%B8%E6%88%8F" title="标簽[1]個">html5遊戲</a> <a href="http://0618.us/tags%5C%E6%B0%B4%E6%9E%9C%E5%BF%8D%E8%80%85" title="标簽[1]個">水果忍者</a> <a href="http://0618.us/tags%5C%E6%89%8B%E6%9C%BA%E5%B0%8F%E6%B8%B8%E6%88%8F" title="标簽[1]個">手機小遊戲</a> <a href="http://0618.us/tags%5C%E5%AE%89%E5%8D%93%E6%B8%B8%E6%88%8F" title="标簽[1]個">安卓遊戲</a> <a href="http://0618.us/tags%5Ciphone%E6%B8%B8%E6%88%8F" title="标簽[1]個">iphone遊戲</a> <a href="http://0618.us/tags%5Cwp7%E6%B8%B8%E6%88%8F" title="标簽[1]個">wp7遊戲</a> <a href="http://0618.us/tags%5C%E5%85%8D%E8%B2%BB%E6%AE%BA%E8%BB%9F" style="font-size: 19px;">免費殺軟</a> <a href="http://0618.us/tags%5C%E6%AE%BA%E6%AF%92%E8%BB%9F%E4%BB%B6" title="标簽[1]個">殺毒軟件</a> <a href="http://0618.us/tags%5C%E5%85%8D%E8%B2%BB%E8%BB%9F%E4%BB%B6" style="font-size: 19px;">免費軟件</a> <a href="http://0618.us/tags%5C%E5%96%AC%E5%B8%83%E6%96%AF" style="font-size: 16px;" title="标簽[3]個">喬布斯</a> <a href="http://0618.us/tags%5Cjobs" title="标簽[1]個">jobs</a> <a href="http://0618.us/tags%5C%E8%98%8B%E6%9E%9C" style="font-size: 15px;" title="标簽[2]個">蘋果</a> <a href="http://0618.us/tags%5Ciphone4s" title="标簽[1]個">iphone4s</a> <a href="http://0618.us/tags%5Cipad" title="标簽[1]個">ipad</a> <a href="http://0618.us/tags%5C%E4%BD%8E%E8%B0%83" title="标簽[1]個">低調</a>
+	</div>
+	<div class="panel-bot"></div>
+</div><div class="panel">
+	<h5 onclick='showhidediv("sidebar_hotview");'>熱門文章</h5>
+	<div class="panel-content" id="sidebar_hotview" style="display: block;">
+		<ul><li>[62757]<a href="http://0618.us/read.php?187">永久免費的高速在線代理服務器（2012.04.11更新）</a></li><li>[37606]<a href="http://0618.us/read.php?328">強檔軟件 - 沙盤Sandboxie 註冊碼分享</a></li><li>[31679]<a href="http://0618.us/read.php?293">最好用的破網軟件 - Freedur</a></li><li>[26078]<a href="http://0618.us/read.php?920">2010-07-28 HTTP代理列表</a></li><li>[25457]<a href="http://0618.us/read.php?79">又一免費VPN - 來自瑞典的Relakks</a></li><li>[24197]<a href="http://0618.us/read.php?348">免費VPN代理服務器 - ItsHidden</a></li><li>[20877]<a href="http://0618.us/read.php?279">重要更新：新增ws免費域名註冊激活程序</a></li><li>[20018]<a href="http://0618.us/read.php?438">微軟將在台灣打造雲端計算</a></li><li>[18170]<a href="http://0618.us/read.php?284">免費歌譜搜索引擎 - 搜譜</a></li><li>[17635]<a href="http://0618.us/read.php?668">DVD高清版《阿凡達》（Avatar）免費下載</a></li><li>[16947]<a href="http://0618.us/read.php?728">超強Youtube翻牆利器TubeWall介紹以及搭建方法</a></li><li>[14839]<a href="http://0618.us/read.php?1525">世界各地最新代理服務器</a></li><li>[13296]<a href="http://0618.us/read.php?699">上萬個BT種子線上下載</a></li><li>[12005]<a href="http://0618.us/read.php?389">日本免費學術實驗VPN使用教程 - packetiX.NET</a></li><li>[11615]<a href="http://0618.us/read.php?266">註冊中文163免費郵箱的方法</a></li><li>[10866]<a href="http://0618.us/read.php?8">關於日本免費高速空間Xrea</a></li></ul>
+	</div>
+	<div class="panel-bot"></div>
+</div><div class="panel">
+	<h5 onclick='showhidediv("sidebar_misc");'>其他</h5>
+	<div class="panel-content" id="sidebar_misc" style="display: block;">
+		<a href="http://0618.us/login.php">登錄</a><br><a href="http://0618.us/login.php?job=register">註冊</a><br><a href="http://0618.us/login.php?job=applylink">申請連結</a><br>RSS： <a href="http://0618.us/feed.php">文章</a> | <a href="http://0618.us/feed.php?go=comment">評論</a><br>編碼：UTF-8<br><a href="http://validator.w3.org/check?uri=referer" target="_top">XHTML 1.0</a>
+	</div>
+	<div class="panel-bot"></div>
+</div><div class="panel">
+	<h5 onclick='showhidediv("sidebar_sponsor");'>贊助商活動</h5>
+	<div class="panel-content" id="sidebar_sponsor" style="display: block;">
+		<!-- nuffnang -->
+
+
+<!-- nuffnang-->
+	</div>
+	<div class="panel-bot"></div>
+</div>
+				</div>
+			<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+		</div>
+		<div id="maincontent">
+			<div id="content">
+				<div id="innerContent">
+				<center>
+</center>
+					<div class="blockdivider">
+						<div id="block1">
+								<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+									<div class="announce-content"></div>
+								<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+								<br>
+							</div>
+						</div>
+					</div>
+					<div class="article-top" style="display: none;">
+						<div class="pages"></div>
+					</div>
+					<!-- 将以下代码放在<head>之后或者</body>标签之前。 -->
+
+
+<!-- 请将以下代码放在您希望呈现 +1 按钮的位置。 -->
+<div align="center"><div style="height: 24px; width: 106px; display: inline-block; text-indent: 0pt; margin: 0pt; padding: 0pt; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;" id="___plusone_0"><iframe allowtransparency="true" hspace="0" id="I1_1334167302433" marginheight="0" marginwidth="0" name="I1_1334167302433" src="index_4.html" style="position: absolute; left: -10000px; top: -10000px; width: 106px; margin: 0px; border-style: none;" tabindex="0" vspace="0" title="+1" frameborder="0" scrolling="no" width="100%"></iframe></div></div><div style="padding-top: 20px;"><a href="http://0618.us/" title="0.618網絡空間">首頁</a> &gt; <a href="http://0618.us/category/free-hosting/" title="檢視分類： 免費空間">免費空間</a> &gt; Google雲數據庫Google Cloud SQL使用手記</div>
+<div class="article-top">
+	<div class="prev-article"><a href="http://0618.us/foreign-free-cdn-incapsula/" title="上一篇 國外免費CDN - Incapsula"><img original="template/0.618/images/toolbar_previous.gif" src="toolbar_previous.gif" alt="" border="0">國外免費CDN - Incapsula</a></div>
+	<div class="next-article"><a href="http://0618.us/freewebhostingarea-stable-free-space-etc_/" title="下一篇 FreeWebhostingArea等免費穩定空間"><img original="template/0.618/images/toolbar_next.gif" src="toolbar_next.gif" alt="" border="0">FreeWebhostingArea等免費穩定空間</a></div>
+</div>
+<div class="textbox">
+	<div class="textbox-calendar">
+		<span class="textbox-calendar-day">24</span>
+		<span class="textbox-calendar-month">Oct.2011</span>
+	</div>
+	<div class="textbox-title">
+		<h4><a href="http://0618.us/googleu002639s-cloud-database-using-the-google-cloud-sql-notes/">Google雲數據庫Google Cloud SQL使用手記</a> <span id="starid2898"><img original="template/0.618/images/others/unstarred.gif" src="unstarred.gif" alt="" title="未加精品" border="0"></span>  </h4>
+		<div class="textbox-label">
+			作者: <a href="http://0618.us/user/1/" target="_top">calvinwu</a> &nbsp;&nbsp;分類：<a href="http://0618.us/category/free-hosting/" title="檢視分類： 免費空間">免費空間</a> &nbsp;&nbsp;出處：本站原創 &nbsp;&nbsp; &nbsp;&nbsp;<img original="template/0.618/images/toolbar_fontsize.gif" src="toolbar_fontsize.gif" alt="" title="字型大小" border="0"> <a href="javascript:%20doZoom(16);">大</a> | <a href="javascript:%20doZoom(14);">中</a> | <a href="javascript:%20doZoom(12);">小</a> <a href="http://0618.us/feed.php?go=entry_2898"><img original="template/0.618/images/toolbar_rss.gif" src="toolbar_rss.gif" alt="" title="訂閱本文" border="0"></a> <a href="http://0618.us/read.php?save_2898"><img original="template/0.618/images/toolbar_save.gif" src="toolbar_save.gif" alt="" title="保存本文為文字文檔" border="0"></a>
+		</div>
+	</div>
+	<p>
+<!-- Baidu Button BEGIN -->
+    </p><div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a title="分享到新浪微博" class="bds_tsina">新浪微博</a>
+        <a title="分享到腾讯微博" class="bds_tqq">騰訊微博</a>
+        <a title="分享到QQ空间" class="bds_qzone">QQ空間</a>
+        <a title="分享到开心网" class="bds_kaixin001">開心網</a>
+        <a class="bds_buzz">谷歌Buzz</a>
+        <a title="分享到百度搜藏" class="bds_baidu">百度搜藏</a>
+        <a title="分享到QQ收藏" class="bds_qq">QQ收藏</a>
+    </div>
+    
+    
+    
+<!-- Baidu Button END -->
+<p>
+	</p><div class="textbox-content" id="zoomtext">
+	 	<span style="float: right;">
+</span><br>傳統的應用大多使用關系型數據庫作數據存儲，但由於關系型數據庫對做系統擴展時通常需要進行大量的修改，所以這類系統起初都會靠升級系統硬件來增加性能，但如果硬件升級愈高，性價比會愈低，所以對這種系統做擴展很困難。而 Google App Engine 的 Datastore 是 NoSQL Database，這種數據庫擴展系統是比較簡單的，比如可以買 10 臺中級機器去組成一個高級的系統，如果不夠可以再添加機器，理論上系統可以無限伸延。NoSQL Database 是沒有 Join Table 之類的語法的，你只能靠應用程序層面來實現 Join Table，當然這會從某種程度上增加程序開發的難度。<br>對於很多熟悉關系型數據庫，又想嘗試Google App Engine的開發者來說，Datastore成了他們的夢魘，而且要把現有應用移植到 Google App Engine 的最大問題也是 Datastore，很多人因此卻步。<br>但一切都會因為Google Cloud SQL的推出而有所好轉，上次介紹了GOOGLE CLOUD SQL 主要特性和功能限制，並介紹了申請步驟，經過差不多三天的等待後，申請通過，之後我嘗試了建立Google Cloud SQL數據庫，並往其中導入數據，操作不難，感覺還不錯！<br><br>1.Google Cloud SQL 的 Console 的主界面是這樣的，你會發現左邊的導航欄會比之前多兩個鏈接:Google Cloud SQL 和 Google Cloud Storage<br><a href="http://www.img.bzlba.com/di-913194532644.jpg" class="highslide" onclick="return hs.expand(this)"><img original="http://www.img.bzlba.com/di-913194532644.jpg" src="grey.gif" class="insertimage" alt="Highslide JS" title="點擊圖片放大" border="0"></a><br> 2.Google Cloud SQL實例容量選擇有3種，分別是 1GB, 5GB 和 10GB，最大是10GB，Google Cloud SQL 主要特性和功能限制一文中已經說明<br><a href="http://www.img.bzlba.com/di-1113194534520.jpg" class="highslide" onclick="return hs.expand(this)"><img original="http://www.img.bzlba.com/di-1113194534520.jpg" src="grey.gif" class="insertimage" alt="Highslide JS" title="點擊圖片放大" border="0"></a><br>3.新增 <a href="http://our4.org/t/mysql" target="_top">MySQL</a>實例，目前只有 Google App Engine 可以訪問，在下面的輸入框填寫需要使用該實例的 GAE 的 ID 就可以了<br><a href="http://www.img.bzlba.com/di-1213194534526.jpg" class="highslide" onclick="return hs.expand(this)"><img original="http://www.img.bzlba.com/di-1213194534526.jpg" src="grey.gif" class="insertimage" alt="Highslide JS" title="點擊圖片放大" border="0"></a><br>4.進入實例的控制面板，顯示數據庫正在創建中<br><a href="http://www.img.bzlba.com/di-413194534525.jpg" class="highslide" onclick="return hs.expand(this)"><img original="http://www.img.bzlba.com/di-413194534525.jpg" src="grey.gif" class="insertimage" alt="Highslide JS" title="點擊圖片放大" border="0"></a><br>5.註意到”DashBoard”Tab頁旁邊還有“Logs”和“SQL Prompt”兩個Tab頁，點擊“SQL Prompt”就能看到SQL語句運行界面<br><a href="http://www.img.bzlba.com/di-1013194534529.jpg" class="highslide" onclick="return hs.expand(this)"><img original="http://www.img.bzlba.com/di-1013194534529.jpg" src="grey.gif" class="insertimage" alt="Highslide JS" title="點擊圖片放大" border="0"></a><br>6.新建一個數據庫”mydb”<br><a href="http://www.img.bzlba.com/di-213194543090.jpg" class="highslide" onclick="return hs.expand(this)"><img original="http://www.img.bzlba.com/di-213194543090.jpg" src="grey.gif" class="insertimage" alt="Highslide JS" title="點擊圖片放大" border="0"></a><br>7.新建一個表”User”<br><a href="http://www.img.bzlba.com/di-013194543093.jpg" class="highslide" onclick="return hs.expand(this)"><img original="http://www.img.bzlba.com/di-013194543093.jpg" src="grey.gif" class="insertimage" alt="Highslide JS" title="點擊圖片放大" border="0"></a><br>8.可以使用數據庫導入功能”Import”，但要導入的文件一定要存放在 Google Cloud Storage 上<br><a href="http://www.img.bzlba.com/di-16131945430911.jpg" class="highslide" onclick="return hs.expand(this)"><img original="http://www.img.bzlba.com/di-16131945430911.jpg" src="grey.gif" class="insertimage" alt="Highslide JS" title="點擊圖片放大" border="0"></a><br>9.導入後，執行SQL語句，查詢數據庫中的”customers”表<br><a href="http://www.img.bzlba.com/di-1613194543096.jpg" class="highslide" onclick="return hs.expand(this)"><img original="http://www.img.bzlba.com/di-1613194543096.jpg" src="grey.gif" class="insertimage" alt="Highslide JS" title="點擊圖片放大" border="0"></a>
+
+<!--
+//插件版权信息并不影响使用,请勿去除。谢谢。
+插件名称: 替换加载失败的图片
+插件作者: Calvin
+作者博客: http://0618.us/
+-->
+
+
+ 
+		<div class="wumii-hook"><div id="wumiiBtnDiv" style="clear: both; overflow: hidden; margin: 0pt; padding: 10px 0pt 0pt; text-shadow: none; text-indent: 0pt;">
+    <div id="wumiiLikeBtnDiv" style="position: static; float: left; display: inline; width: 89px; height: 28px; margin: 0pt 0pt 0pt 188px; padding: 0pt; background: url('widget_buttons_deepblue.png') no-repeat scroll 0pt 0pt transparent; text-indent: 0pt;">
+        <span id="wumiiNumLikes" style="float: left; width: 45px; height: 19px; line-height: 21px; margin: 4px 0pt 0pt; padding: 0pt; color: rgb(56, 92, 128); letter-spacing: 0pt; text-align: center; text-indent: 0pt; font-size: 12px;">0</span>
+        <span style="float: left; width: 40px; height: 29px; margin: 0pt; padding: 0pt; outline: medium none; cursor: pointer;" id="wumiiLikeBtn" hidefocus="true"></span>
+    </div>
+    <div id="wumiiRecommendBtnDiv" style="position: static; clear: none; float: left; display: inline; height: 28px; margin: 0pt; padding: 0pt 5px; text-indent: 0pt;">
+        <span id="wumiiRecommendBtn" hidefocus="true" style="float: left; display: inline; width: 60px; height: 28px; margin: 0pt 0pt 0pt 5px; padding: 0pt; background: url('widget_buttons_deepblue.png') no-repeat scroll -267px 0pt transparent; cursor: pointer; outline: medium none;"></span>
+        <img src="loading.gif" id="wumiiLoading" style="clear: none; display: none; height: 15px; margin: 7px 0pt 0pt 8px; padding: 0pt; border: 0pt none; background: none repeat scroll 0% 0% transparent; cursor: default;" alt="正在加载推荐文章">
+    </div>
+</div>
+<div class="wumii-related-items-div" style="margin: 0pt; border: medium none; padding: 0pt; clear: both; overflow: hidden;">
+    <div class="wumii-internal" style="padding: 0pt; margin: 0pt; border: medium none; clear: both; display: block;">
+        <div class="wumii-widget-title" style="margin: 0pt; border: medium none; padding: 20px 0pt 5px; text-indent: 0pt; text-align: left; font-weight: bold;">您可能也喜欢：</div>
+            <div class="wumii-image-row" style="clear: both; border: medium none; margin: 0pt 0pt 0pt -1px; padding: 0pt; overflow: hidden;">
+                    <a class="wumii-image-block" hidefocus="true" title="iCloud、Google、亞馬遜Cloud Drive、Dropbox和SkyDrive五大雲存儲服務比較" style="display: block; float: left; text-decoration: none; border-bottom: medium none; cursor: pointer; position: relative; margin: 5px 0pt; padding: 5px; width: 102px; text-align: left; outline: medium none; background-image: none; border-left: 1px solid rgb(221, 221, 221) ! important;" href="http://0618.us/icloud-google-amazon-cloud-drive-dropbox-and-skydrive-five-cloud-storage-service-is-more/" onmousedown="this.href='http://app.wumii.com/ext/redirect?url=http%3A%2F%2F0618.us%2Ficloud-google-amazon-cloud-drive-dropbox-and-skydrive-five-cloud-storage-service-is-more%2F&amp;ts=' + (new Date()).getTime() + '&amp;from=http%3A%2F%2F0618.us%2Fgoogleu002639s-cloud-database-using-the-google-cloud-sql-notes%2F' + '&amp;ref=relatedItems'; return true;" onmouseup="t=this; setTimeout(function() {t.href='http://0618.us/icloud-google-amazon-cloud-drive-dropbox-and-skydrive-five-cloud-storage-service-is-more/';}, 50); return true;">
+                        <div class="wumii-image-border" style="margin: 0pt; padding: 0pt; width: auto; height: 100px; border: 1px solid rgb(221, 221, 221);"></div>
+                        <img class="wumii-image" onerror="wumiiImageError(this);" src="22921761.jpg" style="position: absolute; border: medium none; background: none repeat scroll 0% 0% transparent; visibility: visible; padding: 0pt; margin: 0pt; width: 96px; height: 96px; clip: rect(0px, 96px, 96px, 0px); left: 8px; top: 8px;">
+                        <div class="wumii-image-title" style="height: 60px; width: 100%; margin: 3px 0pt 0pt; padding: 0pt; text-indent: 0pt; border: medium none; font: 12px/15px arial; color: rgb(51, 51, 51); overflow: hidden;">iCloud、Google、亞馬遜Cloud Drive、Dropbox和SkyDrive五大雲存儲服務比較</div>
+                    </a>
+                    <a class="wumii-image-block" hidefocus="true" title="利用Google App Engine搭建雲儲存空間" style="display: block; float: left; text-decoration: none; border-bottom: medium none; cursor: pointer; position: relative; margin: 5px 0pt; padding: 5px; width: 102px; text-align: left; outline: medium none; background-image: none; border-left: 1px solid rgb(221, 221, 221) ! important;" href="http://0618.us/built-using-google-app-engine-cloud-storage/" onmousedown="this.href='http://app.wumii.com/ext/redirect?url=http%3A%2F%2F0618.us%2Fbuilt-using-google-app-engine-cloud-storage%2F&amp;ts=' + (new Date()).getTime() + '&amp;from=http%3A%2F%2F0618.us%2Fgoogleu002639s-cloud-database-using-the-google-cloud-sql-notes%2F' + '&amp;ref=relatedItems'; return true;" onmouseup="t=this; setTimeout(function() {t.href='http://0618.us/built-using-google-app-engine-cloud-storage/';}, 50); return true;">
+                        <div class="wumii-image-border" style="margin: 0pt; padding: 0pt; width: auto; height: 100px; border: 1px solid rgb(221, 221, 221);"></div>
+                        <img class="wumii-image" onerror="wumiiImageError(this);" src="wordpress_default.gif" style="position: absolute; border: medium none; background: none repeat scroll 0% 0% transparent; visibility: visible; padding: 0pt; margin: 0pt; width: 96px; height: 96px; clip: rect(0px, 96px, 96px, 0px); left: 8px; top: 8px;">
+                        <div class="wumii-image-title" style="height: 60px; width: 100%; margin: 3px 0pt 0pt; padding: 0pt; text-indent: 0pt; border: medium none; font: 12px/15px arial; color: rgb(51, 51, 51); overflow: hidden;">利用Google App Engine搭建雲儲存空間</div>
+                    </a>
+                    <a class="wumii-image-block" hidefocus="true" title="穩定的5G容量雲存儲免費網絡硬盤 - Amazon Cloud Drive" style="display: block; float: left; text-decoration: none; border-bottom: medium none; cursor: pointer; position: relative; margin: 5px 0pt; padding: 5px; width: 102px; text-align: left; outline: medium none; background-image: none; border-left: 1px solid rgb(221, 221, 221) ! important;" href="http://0618.us/5g-stable-free-network-hard-disk-storage-capacity-of-the-cloud-amazon-cloud-drive/" onmousedown="this.href='http://app.wumii.com/ext/redirect?url=http%3A%2F%2F0618.us%2F5g-stable-free-network-hard-disk-storage-capacity-of-the-cloud-amazon-cloud-drive%2F&amp;ts=' + (new Date()).getTime() + '&amp;from=http%3A%2F%2F0618.us%2Fgoogleu002639s-cloud-database-using-the-google-cloud-sql-notes%2F' + '&amp;ref=relatedItems'; return true;" onmouseup="t=this; setTimeout(function() {t.href='http://0618.us/5g-stable-free-network-hard-disk-storage-capacity-of-the-cloud-amazon-cloud-drive/';}, 50); return true;">
+                        <div class="wumii-image-border" style="margin: 0pt; padding: 0pt; width: auto; height: 100px; border: 1px solid rgb(221, 221, 221);"></div>
+                        <img class="wumii-image" onerror="wumiiImageError(this);" src="6245624.png" style="position: absolute; border: medium none; background: none repeat scroll 0% 0% transparent; visibility: visible; padding: 0pt; margin: 0pt; width: 96px; height: 96px; clip: rect(0px, 96px, 96px, 0px); left: 8px; top: 8px;">
+                        <div class="wumii-image-title" style="height: 60px; width: 100%; margin: 3px 0pt 0pt; padding: 0pt; text-indent: 0pt; border: medium none; font: 12px/15px arial; color: rgb(51, 51, 51); overflow: hidden;">穩定的5G容量雲存儲免費網絡硬盤 - Amazon Cloud Drive</div>
+                    </a>
+                    <a class="wumii-image-block" hidefocus="true" title="Google Storage 免費雲端儲存空間" style="display: block; float: left; text-decoration: none; border-bottom: medium none; cursor: pointer; position: relative; margin: 5px 0pt; padding: 5px; width: 102px; text-align: left; outline: medium none; background-image: none; border-left: 1px solid rgb(221, 221, 221) ! important;" href="http://0618.us/google-storage-free-cloud-storage/" onmousedown="this.href='http://app.wumii.com/ext/redirect?url=http%3A%2F%2F0618.us%2Fgoogle-storage-free-cloud-storage%2F&amp;ts=' + (new Date()).getTime() + '&amp;from=http%3A%2F%2F0618.us%2Fgoogleu002639s-cloud-database-using-the-google-cloud-sql-notes%2F' + '&amp;ref=relatedItems'; return true;" onmouseup="t=this; setTimeout(function() {t.href='http://0618.us/google-storage-free-cloud-storage/';}, 50); return true;">
+                        <div class="wumii-image-border" style="margin: 0pt; padding: 0pt; width: auto; height: 100px; border: 1px solid rgb(221, 221, 221);"></div>
+                        <img class="wumii-image" onerror="wumiiImageError(this);" src="wordpress_default.gif" style="position: absolute; border: medium none; background: none repeat scroll 0% 0% transparent; visibility: visible; padding: 0pt; margin: 0pt; width: 96px; height: 96px; clip: rect(0px, 96px, 96px, 0px); left: 8px; top: 8px;">
+                        <div class="wumii-image-title" style="height: 60px; width: 100%; margin: 3px 0pt 0pt; padding: 0pt; text-indent: 0pt; border: medium none; font: 12px/15px arial; color: rgb(51, 51, 51); overflow: hidden;">Google Storage 免費雲端儲存空間</div>
+                    </a>
+                    <a class="wumii-image-block" hidefocus="true" title="谷歌退出中國大陸，Google.cn跳轉到Google.com.hk" style="display: block; float: left; text-decoration: none; border-bottom: medium none; cursor: pointer; position: relative; margin: 5px 0pt; padding: 5px; width: 102px; text-align: left; outline: medium none; background-image: none; border-left: 1px solid rgb(221, 221, 221) ! important;" href="http://0618.us/google-to-withdraw-the-chinese-mainland-google_cn-jump-to-google_com_hk/" onmousedown="this.href='http://app.wumii.com/ext/redirect?url=http%3A%2F%2F0618.us%2Fgoogle-to-withdraw-the-chinese-mainland-google_cn-jump-to-google_com_hk%2F&amp;ts=' + (new Date()).getTime() + '&amp;from=http%3A%2F%2F0618.us%2Fgoogleu002639s-cloud-database-using-the-google-cloud-sql-notes%2F' + '&amp;ref=relatedItems'; return true;" onmouseup="t=this; setTimeout(function() {t.href='http://0618.us/google-to-withdraw-the-chinese-mainland-google_cn-jump-to-google_com_hk/';}, 50); return true;">
+                        <div class="wumii-image-border" style="margin: 0pt; padding: 0pt; width: auto; height: 100px; border: 1px solid rgb(221, 221, 221);"></div>
+                        <img class="wumii-image" onerror="wumiiImageError(this);" src="24156338.jpg" style="position: absolute; border: medium none; background: none repeat scroll 0% 0% transparent; visibility: visible; padding: 0pt; margin: 0pt; width: 96px; height: 96px; clip: rect(0px, 96px, 96px, 0px); left: 8px; top: 8px;">
+                        <div class="wumii-image-title" style="height: 60px; width: 100%; margin: 3px 0pt 0pt; padding: 0pt; text-indent: 0pt; border: medium none; font: 12px/15px arial; color: rgb(51, 51, 51); overflow: hidden;">谷歌退出中國大陸，Google.cn跳轉到Google.com.hk</div>
+                    </a>
+            </div>
+    </div>
+        <div style="margin: 0pt; border: medium none; padding: 5px 0pt; clear: both; text-align: right;">
+            <a href="http://www.wumii.com/widget/relatedItems" target="_top" title="无觅相关文章插件" style="font: 12px arial; color: rgb(187, 187, 187); border-bottom: medium none; word-wrap: normal; display: none;">无觅</a>
+            <img class=" meqmdoskqkstwplismcm" style="display: none;" src="pixel.png">
+        </div>
+</div>
+
+</div>
+
+	</div>
+	<div class="textbox-bottom">
+		時間：23:04　<a href="http://0618.us/googleu002639s-cloud-database-using-the-google-cloud-sql-notes/#reply" title="發表您的評論">評論(0)</a>　<a href="javascript:%20void(0);" title="檢視引用地址" onclick='showhidediv("tb2898"); if (document.getElementById("tbb2898")) document.getElementById("tbb2898").innerHTML=decodetburl("6%110%122%122%118%64%53%53%54%60%55%62%52%123%121%53%122%104%52%118%110%118%69%122%67%56%62%63%62%44%103%115%118%65%107%126%122%120%103%67%56%61%55%107%63", 1, 2898);'>引用(0)</a>　<a href="http://0618.us/googleu002639s-cloud-database-using-the-google-cloud-sql-notes/">閱讀(751)</a>　Tags: <a href="http://0618.us/tags/google/" title="Tags:  google" rel="tag">google</a> , <a href="http://0618.us/tags/cloud/" title="Tags:  cloud" rel="tag">cloud</a> , <a href="http://0618.us/tags/sql/" title="Tags:  sql" rel="tag">sql</a>
+	</div>
+	<div id="tb2898" style="display: none;" class="textbox-tburl"><strong>引用地址：</strong>  <span id="tbb2898"></span><br><strong>注意：</strong> 該地址僅在今日23:59:59之前有效</div>
+</div>
+<div id="commentWrapper" class="comment-wrapper">
+	<a name="topreply"></a>
+	<div id="addnew"></div><iframe src="index_5.html" frameborder="0" height="239" scrolling="no" width="550"></iframe>	<div class="comment-pages">
+	
+	</div>
+</div>
+	<a name="reply"></a>
+	<div id="commentForm">
+		<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+		<form name="visitorinput" id="visitorinput" method="post" action="javascript:%20ajax_submit('addreply');">
+			<div class="formbox-comment">
+				<div class="formbox-comment-title">發表評論</div>
+				<div class="formbox-comment-input">
+					
+					<input name="v_replier" id="v_replier" size="30" class="text" value="" type="text">&nbsp; *暱稱
+					<a href="http://0618.us/login.php?job=register" title="註冊">[註冊]</a>
+					<br>
+					<input name="v_password" id="v_password" size="30" class="text" value="" type="password">&nbsp; 密碼 (訪客無需密碼)
+					<br>
+					<input name="v_repurl" id="v_repurl" size="30" class="text" value="" type="text">&nbsp; 網址
+					<br>
+					<input name="v_repemail" id="v_repemail" size="30" class="text" value="" type="text">&nbsp; *電子郵件
+					
+					
+					<div id="commentbox-openid" style="display: none;">
+						<input name="openid_url" id="openid_url" size="28" class="text" value="" {disable_openurl}="" type="text">&nbsp; 您也可用<a href="http://www.openid.hk/" target="_top">OpenID</a>登錄
+					</div>
+        			
+				</div>
+				<div class="formbox-comment-tool">
+					<div id="choose-options-panel">
+						<a onclick="showhidediv('commentbox-openid')" style="cursor: pointer;"><img original="template/0.618/images/openid.png" src="grey.gif" alt="OpenID登入" title="OpenID登入" border="0"></a>
+						<a onclick="showhidediv('set')" style="cursor: pointer;"><img original="template/0.618/images/options.png" src="grey.gif" alt="權限選項" title="開啟HTML, 開啟UBB, 評論隱藏, 記住我" border="0"></a>
+						<a onclick="showhidediv('emots')" style="cursor: pointer;"><img original="template/0.618/images/emots.png" src="grey.gif" alt="表情" title="開啟表情" border="0"></a>
+					</div>
+					<div id="set" class="choose-options" style="display: none;">
+						<div class="choose-options-content">
+							<input name="stat_html" id="stat_html" value="1" style="background-color: rgb(238, 238, 238);" disabled="disabled" type="checkbox"> 開啟HTML
+							<input name="stat_ubb" id="stat_ubb" value="1" style="background-color: rgb(238, 238, 238);" checked="checked" type="checkbox"> 開啟UBB
+							<input name="stat_emot" id="stat_emot" value="1" style="background-color: rgb(238, 238, 238);" checked="checked" type="checkbox"> 開啟表情
+							<input name="stat_property" id="stat_property" value="1" onclick="promptreppsw();" style="background-color: rgb(238, 238, 238);" type="checkbox"> 評論隱藏
+							
+							<input name="stat_rememberme" id="stat_rememberme" value="1" onclick="quickremember();" style="background-color: rgb(238, 238, 238);" type="checkbox">  記住我 
+						</div>
+					</div>
+					<div id="emots" class="choose-options" style="display: none;">
+						<div class="choose-options-content">
+							<a href="javascript:%20insertemot('anger');"><img original="images/emot/thumbnail/anger.gif" src="anger.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('bad');"><img original="images/emot/thumbnail/bad.gif" src="bad.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('cool');"><img original="images/emot/thumbnail/cool.gif" src="cool.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('cry');"><img original="images/emot/thumbnail/cry.gif" src="cry.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('dog');"><img original="images/emot/thumbnail/coffee.gif" src="coffee.gif" alt="emot" border="0"></a><br><a href="javascript:%20insertemot('envy');"><img original="images/emot/thumbnail/envy.gif" src="envy.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('fear');"><img original="images/emot/thumbnail/fear.gif" src="fear.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('grin');"><img original="images/emot/thumbnail/grin.gif" src="grin.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('kill');"><img original="images/emot/thumbnail/kill.gif" src="kill.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('love');"><img original="images/emot/thumbnail/love.gif" src="love.gif" alt="emot" border="0"></a><br><a href="javascript:%20insertemot('pig');"><img original="images/emot/thumbnail/ok.gif" src="ok.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('puke');"><img original="images/emot/thumbnail/puke.gif" src="puke.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('question');"><img original="images/emot/thumbnail/question.gif" src="question.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('shock');"><img original="images/emot/thumbnail/shock.gif" src="shock.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('shuai');"><img original="images/emot/thumbnail/shuai.gif" src="shuai.gif" alt="emot" border="0"></a><br><a href="javascript:%20insertemot('shy');"><img original="images/emot/thumbnail/shy.gif" src="shy.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('sleepy');"><img original="images/emot/thumbnail/sleepy.gif" src="sleepy.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('smile');"><img original="images/emot/thumbnail/smile.gif" src="smile.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('smoke');"><img original="images/emot/thumbnail/hamarneh.gif" src="hamarneh.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('stupid');"><img original="images/emot/thumbnail/stupid.gif" src="stupid.gif" alt="emot" border="0"></a><br><a href="javascript:%20insertemot('sweat');"><img original="images/emot/thumbnail/sweat.gif" src="sweat.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('thumbdown');"><img original="images/emot/thumbnail/thumbdown.gif" src="thumbdown.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('unhappy');"><img original="images/emot/thumbnail/unhappy.gif" src="unhappy.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('uplook');"><img original="images/emot/thumbnail/uplook.gif" src="uplook.gif" alt="emot" border="0"></a><a href="javascript:%20insertemot('zan');"><img original="images/emot/thumbnail/zan.gif" src="zan.gif" alt="emot" border="0"></a><br>
+						</div>
+					</div>
+					<div id="ubb"><div style="margin: 4px 0px;"><img original="editor/ubb/images/bar.gif" src="grey.gif" alt=""> &nbsp;<a href="javascript:%20bold();"><img original="editor/ubb/images/bold.gif" title="粗體" src="grey.gif" alt="" border="0"></a> &nbsp;<a href="javascript:%20italicize();"><img original="editor/ubb/images/italic.gif" title="斜體" src="grey.gif" alt="" border="0"></a> &nbsp;<a href="javascript:%20underline();"><img original="editor/ubb/images/underline.gif" title="底線" src="grey.gif" alt="" border="0"></a> &nbsp;<img original="editor/ubb/images/bar.gif" src="grey.gif" alt=""> &nbsp;<a href="javascript:%20image();"><img original="editor/ubb/images/insertimage.gif" title="插入圖片" src="grey.gif" alt="" border="0"></a> &nbsp;<a href="javascript:%20hyperlink();"><img original="editor/ubb/images/url.gif" title="插入超連結" src="grey.gif" alt="" border="0"></a> &nbsp;<a href="javascript:%20email();"><img original="editor/ubb/images/email.gif" title="插入郵件地址" src="grey.gif" alt="" border="0"></a> &nbsp;<a href="javascript:%20quoteme();"><img original="editor/ubb/images/quote.gif" title="插入引用文字" src="grey.gif" alt="" border="0"></a></div></div>
+			    </div>
+				  
+				<textarea name="v_content" id="v_content" cols="70" rows="10" onkeydown="ctrlenterkey(event);" onfocus="if (securitycodejs!=null) {document.getElementById('showsecuritycode').innerHTML=securitycodejs; securitycodejs=null;}"></textarea><br>	<span id="showsecuritycode"></span>
+				<div style="padding-top: 10px;">
+					<input name="v_id" id="v_id" value="2898" type="hidden"><input name="v_reppsw" id="v_reppsw" value="" type="hidden">
+					<input name="btnSubmit" id="btnSubmit" value="送出" class="button" onclick="ajax_submit('addreply'); return false;" type="button">&nbsp;
+					<input name="reset" id="reset" value="重設" class="button" type="reset">
+				</div>
+			</div>
+		</form>
+		<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+	</div>
+					<div class="article-bottom" style="display: none;">
+						<div class="pages"></div>
+						<br>
+						<div align="center">
+
+</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="mainWrapper-bottom">
+			<span class="fcorners-bottom">
+				<span class="fcorners-bottom span"></span>
+			</span>
+		</div>
+	</div>
+	<div id="footer">
+		<div id="footer-top">
+			<span class="fcorners-top">
+				<span class="fcorners-top span"></span>
+			</span>
+		</div>
+		<div id="innerFooter">
+			<div id="skin">
+				Copyright © 2008-2011 0.618網絡空間. All Rights Reserved. <a href="http://www.miibeian.gov.cn/" target="_top">粤ICP備08023457號-3</a>
+				
+				<span style="float: right; padding-right: 2px;">
+				<a href="http://0618.us/sitemap.xml">網站地圖</a> | <a href="http://0618.us/about.html">關於我們</a> | <a href="http://0618.us/faq.html">常見問題</a> | 
+				<a href="http://0618.us/contact.html">聯繫方式</a>
+				</span>
+				<br>0.618網絡空間法律顧問: <a href="http://www.itlaw.com.cn/">ITlaw-莊毅雄</a>           
+			</div>
+			<div id="w3c">
+				<a href="http://0618.us/feed.php"><img original="template/0.618/images/but-rss.gif" src="grey.gif" alt="feed" border="0" height="14" width="29"></a>　
+				<a href="http://jigsaw.w3.org/css-validator/"><img original="template/0.618/images/css.gif" src="grey.gif" alt="Valid CSS!" border="0" height="14" width="29"></a>　
+				<a href="http://validator.w3.org/check?uri=referer"><img original="template/0.618/images/xhtml10.gif" src="grey.gif" alt="Valid XHTML 1.0 Transitional" border="0" height="14" width="47"></a>
+			</div>
+			<!-- 调用php 生成的js代码,如有疑问请联系http://fengyin.name 解决 -->
+			<div id="processtime"></div>
+		</div>
+	</div>
+
+
+
+<a href="http://www.wumii.com/widget/relatedItems.htm" style="border: 0pt none;">
+    <img original="http://static.wumii.com/images/pixel.png" class=" meqmdoskqkstwplismcm" src="pixel.png" alt="0.618網絡空間" style="border: 0pt none; padding: 0pt; margin: 0pt;">
+</a>
+
+</body>
+</html>

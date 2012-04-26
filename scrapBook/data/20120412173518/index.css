@@ -1,0 +1,48 @@
+/* ::::: http://puppet-lint.com/stylesheets/stylesheet.css ::::: */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0pt; padding: 0pt; border: 0pt none; font: inherit; vertical-align: baseline; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { line-height: 1; }
+ol, ul { list-style: none outside none; }
+body { font-size: 15px; font-family: Arial,Arial,Helvetica,sans-serif; line-height: 1.5; background: none repeat scroll 0% 0% rgb(209, 209, 209); }
+a { color: rgb(99, 165, 42); text-decoration: none; }
+a:hover { text-decoration: underline; color: rgb(144, 211, 85); }
+h1.title { margin: 30px 20px 10px; font-size: 60px; font-weight: bold; font-style: italic; font-family: Georgia,serif; text-align: center; }
+.wrapper { width: 675px; margin: 0pt auto; }
+#container { border: 1px solid rgb(42, 42, 42); background: url('pattern.png') repeat scroll 0% 0% rgb(221, 221, 221); box-shadow: 0pt 0pt 5px rgb(177, 177, 177); }
+p.tagline { padding: 20px 20px 0pt; color: rgb(255, 255, 255); font-size: 17px; }
+#main { margin-top: 20px; padding: 0pt 20px 90px; background-color: rgb(255, 255, 255); }
+.download-bar { background: none repeat scroll 0% 0% rgb(34, 34, 34); border: 5px solid rgb(68, 68, 68); padding: 10px; margin: 0pt -35px 20px; position: relative; }
+.download-bar .inner { overflow: hidden; }
+.download-bar .blc { border-width: 10px; border-style: solid; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; border-color: transparent transparent black; width: 0pt; height: 0pt; display: block; position: absolute; bottom: -15px; left: 0pt; -moz-transform: rotate(45deg); }
+.download-bar .trc { border-width: 10px; border-style: solid; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; border-color: black transparent transparent; width: 0pt; height: 0pt; display: block; position: absolute; top: -15px; right: 0pt; -moz-transform: rotate(45deg); }
+.download-bar a.code { background: url('code.png') no-repeat scroll 0pt 2px transparent; padding-left: 35px; margin-top: 8px; display: block; float: left; text-indent: 0pt; width: auto; height: auto; opacity: 1; }
+.current-section { position: fixed; top: 0pt; left: 50%; width: 693px; margin-left: -352px; background: none repeat scroll 0% 0% rgb(34, 34, 34); border: 5px solid rgb(68, 68, 68); color: rgb(255, 255, 255); opacity: 0; visibility: hidden; }
+.current-section p { padding: 5px 27px; font-size: 24px; font-weight: bold; }
+.current-section a { float: right; text-indent: -10000px; background: url('top.png') no-repeat scroll 0pt 0pt transparent; width: 20px; height: 20px; opacity: 0.8; margin-right: 12px; margin-top: 12px; }
+.current-section a:hover { opacity: 1; }
+.current-section a.zip { margin-right: 8px; }
+a.zip, a.zip span { background: url('zip.png') no-repeat scroll 0pt 0pt transparent; width: 30px; height: 21px; opacity: 0.8; display: inline-block; text-indent: -10000px; }
+a.tar, a.tar span { background: url('tar.png') no-repeat scroll 0pt 0pt transparent; width: 30px; height: 21px; opacity: 0.8; display: inline-block; text-indent: -10000px; }
+a.code { background: url('code.png') no-repeat scroll 0pt 2px transparent; width: 30px; height: 21px; opacity: 0.8; display: inline-block; text-indent: -10000px; }
+a.zip:hover, a.tar:hover, a.code:hover { opacity: 1; }
+a.download-button { border: 1px solid black; border-radius: 3px 3px 3px 3px; display: inline-block; text-indent: 0pt ! important; width: auto; float: right; background: -moz-linear-gradient(center top , rgb(55, 173, 212), rgb(27, 101, 126)) repeat scroll 0% 0% transparent; height: auto; margin-left: 10px; }
+a.download-button span { background-position: 10px 5px; width: auto; height: auto; padding: 5px 10px 5px 45px; display: inline-block; text-indent: 0pt ! important; color: rgb(255, 255, 255); }
+footer { margin-bottom: 60px; padding-bottom: 60px; }
+footer .owner { background: none repeat scroll 0% 0% rgb(34, 34, 34); border: 5px solid rgb(68, 68, 68); padding: 5px 15px; margin: -67px -10px 35px; color: rgb(214, 214, 214); }
+footer .creds small { float: right; font-size: 10px; text-align: right; margin-left: 15px; }
+footer .owner .avatar { background-color: rgb(102, 102, 102); display: block; margin: -19px 10px 0pt 0pt; width: 60px; float: left; }
+footer .owner img { display: block; border: 1px solid rgb(42, 42, 42); margin: 5px; }
+footer .owner p { font-family: Georgia,serif; }
+footer .owner p a { font-size: 16px; font-style: italic; }
+.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6, .markdown-body p, .markdown-body pre, .markdown-body ul, .markdown-body ol, .markdown-body dl, .markdown-body table, .markdown-body blockquote { margin-bottom: 20px; }
+.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 { font-weight: bold; }
+.markdown-body h2 { font-size: 24px; color: rgb(85, 115, 152); }
+.markdown-body h3 { font-size: 20px; }
+.markdown-body pre { padding: 10px 70px 10px 0pt; margin-left: -20px; margin-right: -20px; font-family: 'Monaco','Lucida Console',monospace; font-size: 13px; line-height: 20px; box-shadow: 0pt 0pt 5px rgb(0, 0, 0) inset; word-wrap: break-word; background-color: rgb(59, 59, 59); color: rgb(214, 214, 214); }
+.markdown-body pre.lines { font-size: 12px; margin: 0pt 10px 0pt -20px; padding: 10px; float: left; display: block; text-align: right; box-shadow: none; background-color: rgb(42, 42, 42); color: rgb(214, 214, 214); }
+.markdown-body ul, .markdown-body ol { padding-left: 30px; }
+.markdown-body ul { list-style-type: disc; }
+.markdown-body li, .markdown-body li p, .markdown-body dd, .markdown-body dd p { margin-bottom: 10px; }
+/* ::::: http://puppet-lint.com/stylesheets/pygment_trac.css ::::: */
+

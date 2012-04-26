@@ -1,0 +1,56 @@
+/* ::::: http://docs.dotcloud.com/_static/basic.css ::::: */
+
+img { border: 0pt none; }
+a.headerlink { visibility: hidden; }
+h1:hover > a.headerlink, h2:hover > a.headerlink, h3:hover > a.headerlink, h4:hover > a.headerlink, h5:hover > a.headerlink, h6:hover > a.headerlink, dt:hover > a.headerlink { visibility: visible; }
+pre { overflow-x: auto; overflow-y: hidden; }
+@media print {
+  div.document, div.documentwrapper, div.bodywrapper { margin: 0pt ! important; width: 100%; }
+  div.sphinxsidebar, div.related, div.footer, #top-link { display: none; }
+}
+/* ::::: http://docs.dotcloud.com/_static/css/docs.css ::::: */
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0pt; padding: 0pt; border: 0pt none; outline: 0pt none; font-size: 100%; vertical-align: baseline; background: none repeat scroll 0% 0% transparent; }
+body { line-height: 1; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+nav ul { list-style: none outside none; }
+a { margin: 0pt; padding: 0pt; font-size: 100%; vertical-align: baseline; background: none repeat scroll 0% 0% transparent; }
+input, select { vertical-align: middle; }
+body { font: 13px/1.5 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,sans-serif; }
+a:focus { outline: 1px dotted; }
+h1 { font-size: 25px; }
+ul { list-style: disc outside none; }
+li { margin-left: 30px; }
+p, dl, hr, h1, h2, h3, h4, h5, h6, ol, ul, pre, table, address, fieldset { margin-bottom: 20px; }
+.container_12 { margin-left: auto; margin-right: auto; width: 960px; }
+.grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, .grid_7, .grid_8, .grid_9, .grid_10, .grid_11, .grid_12 { display: inline; float: left; position: relative; margin-left: 20px; margin-right: 20px; }
+.container_12 .grid_3 { width: 200px; }
+.container_12 .grid_4 { width: 280px; }
+.container_12 .grid_8 { width: 600px; }
+.container_12 .grid_9 { width: 680px; }
+.container_12 .grid_12 { width: 920px; }
+button.ui-button::-moz-focus-inner { border: 0pt none; padding: 0pt; }
+body { line-height: 1.429em; background-color: rgb(255, 255, 255); background-image: url('bodybg.png'); background-repeat: repeat-x; color: rgb(81, 81, 81); font-size: 14px; }
+a { color: rgb(40, 90, 158); }
+header { background-repeat: repeat-x; width: 100%; min-width: 960px; height: 116px; float: left; position: relative; color: white; padding-bottom: 0pt; margin-bottom: -5px; }
+nav > ul { list-style-type: none; }
+nav > ul > li { color: rgb(79, 79, 79); font-size: 14px; margin-left: 0pt; background-image: url('new-nav-section.png'); background-repeat: repeat-x; background-position: 0pt 1px; }
+nav > ul > li > a { text-decoration: none; display: block; color: rgb(66, 66, 66); border: 1px solid rgb(217, 217, 217); border-radius: 5px 5px 5px 5px; padding-left: 37px; height: 27px; font-family: 'Helvetica Neue'; font-size: 18px; font-weight: 300; padding-top: 6px; margin-bottom: 8px; background-image: url('new-nav-disc-closed.png'); background-position: 15px 7px; background-repeat: no-repeat; }
+nav > ul > li.current > a { border: 1px solid rgb(207, 207, 207); border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; margin-bottom: 0pt; background-image: url('new-nav-disc-open.png'); background-position: 11px 12px; }
+nav > ul > li.current {  }
+nav > ul > li > ul { display: none; }
+nav > ul > li.current > ul { display: block; background-color: rgb(247, 247, 247); border-right: 1px solid rgb(230, 230, 230); border-width: medium 1px 1px; border-style: none solid solid; border-color: -moz-use-text-color rgb(230, 230, 230) rgb(230, 230, 230); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; padding-top: 5px; padding-bottom: 6px; margin-bottom: 8px; }
+nav > ul > li.current > ul > li { margin-left: 37px; }
+nav > ul > li > ul > li > a { color: rgb(82, 82, 82); text-decoration: none; }
+nav > ul > li > ul > li.current > a { font-weight: bold; }
+nav > ul > li > ul > li > ul { margin-left: -15px; margin-bottom: 0pt; }
+nav > ul > li > ul > li > ul > li { display: none; }
+nav > ul > li > ul > li > ul > li > a { color: rgb(148, 148, 148); text-decoration: none; white-space: nowrap; overflow: hidden; display: block; width: 150px; }
+nav > ul > li:last-child > ul { display: none; }
+nav > ul > li:last-child > a { background-image: none; border-radius: 5px 5px 5px 5px; }
+h1#logo { margin-top: 27px; }
+#main h1 { color: rgb(40, 90, 158); font-family: 'Helvetica Neue'; font-size: 30px; font-weight: 300; margin-top: 15px; line-height: 1em; }
+a.headerlink { display: none ! important; }
+pre { padding: 0.8em; background-color: rgb(17, 17, 17); font-size: 13px; color: rgb(238, 238, 238); overflow: auto; font-family: Menlo,"DejaVu Sans Mono","Courier New",Monospace; line-height: 1.2; }
+/* ::::: http://docs.dotcloud.com/_static/pygments.css ::::: */
+

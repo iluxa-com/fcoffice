@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<title>  Dotcloud架设Django的几个问题 | 动漫驿站</title>
+<meta name="description" content="Dotcloud架设Django的几个问题">
+<link rel="alternate" type="application/rss+xml" title="动漫驿站 RSS Feed" href="http://dmyz.org/feed">
+<link rel="alternate" type="application/atom+xml" title="动漫驿站 Atom Feed" href="http://dmyz.org/feed/atom"> 
+<link rel="icon" type="image/x-icon" href="favicon.ico"> 
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="pingback" href="http://dmyz.org/xmlrpc.php">
+
+<!--[if lt IE 7]>
+<link rel="stylesheet" href="http://dmyz.org/wp-content/themes/monochrome/ie6.css" type="text/css" />
+<![endif]--> 
+
+<link rel="alternate" type="application/rss+xml" title="动漫驿站 » Dotcloud架设Django的几个问题 Comments Feed" href="http://dmyz.org/archives/292/feed">
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://dmyz.org/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://dmyz.org/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Django网站添加WebIM" href="http://dmyz.org/archives/283">
+<link rel="next" title="HTML5+Javascript开发Android应用" href="http://dmyz.org/archives/298">
+<link rel="canonical" href="http://dmyz.org/archives/292">
+<link rel="shortlink" href="http://dmyz.org/?p=292">
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+
+<div id="wrapper">
+
+ <div id="header">
+
+  <div id="header_top">
+      <div class="header_menu"><ul id="menu-topmenu" class="menu"><li id="menu-item-24" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-24"><a href="http://dmyz.org/">Home</a></li>
+<li id="menu-item-218" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-218"><a href="http://dmyz.org/archives/category/tech">Tech</a></li>
+<li id="menu-item-220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-220"><a href="http://dmyz.org/archives/category/front">Front</a></li>
+<li id="menu-item-221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-221"><a href="http://dmyz.org/archives/category/pm">Product</a></li>
+<li id="menu-item-127" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-127"><a href="http://dmyz.org/archives/category/uncategory">Other</a></li>
+</ul></div>   
+  </div>
+
+  </div><!-- #header end -->
+
+  <div id="contents" class="clearfix">
+
+   <div id="left_col">
+
+        <div id="header_meta">
+     <ul id="bread_crumb" class="clearfix">
+      <li id="bc_home"><a href="http://dmyz.org/">HOME</a></li>
+      <li id="bc_cat"><a href="http://dmyz.org/archives/category/python" title="View all posts in Python" rel="category tag">Python</a> . <a href="http://dmyz.org/archives/category/tech" title="View all posts in Tech" rel="category tag">Tech</a></li>
+      <li>Dotcloud架设Django的几个问题</li>
+     </ul>
+    </div>
+    
+
+    <div class="post clearfix" id="single_post">
+     <div class="post_content_wrapper">
+      <h2 class="post_title"><span>Dotcloud架设Django的几个问题</span></h2>
+      <div class="post_content">
+       <p>几个月前写过一篇<a href="http://dmyz.org/archives/226" title="在Dotcloud上架设Django网站[更新为0.4版]">《在Dotcloud上架设Django网站》</a>的文章，有读者将自己遇到的问题留在评论里，也有通过Gtalk联系我进行讨论的同学，在大家的帮助下解决了不少问题，现一并整理在这此。</p>
+<h2>关于404错误</h2>
+<p>这里说的是服务器（在Dotcloud上一般是nginx）的404错误，Django返回的404错误会有详细的提示，不在讨论范围内。服务器404错误通常——当然也有例外——是Dotcloud设置不当引起的。最常见的是三种情况：</p>
+<p><strong>1.目录结构错误</strong></p>
+<p>最简单，但可运行的目录结构如下，dmyz是Django项目目录，其他的是配置文件，他们都在dmyz-on-dotcloud之下。</p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;">dmyz-on-dotcloud/
+├── dmyz
+│&nbsp;&nbsp; ├── <span style="color: rgb(0, 0, 205);">__init__</span>.<span style="color: black;">py</span>
+│&nbsp;&nbsp; ├── manage.<span style="color: black;">py</span>
+│&nbsp;&nbsp; ├── settings.<span style="color: black;">py</span>
+│&nbsp;&nbsp; └── urls.<span style="color: black;">py</span>
+├── dotcloud.<span style="color: black;">yml</span>
+├── requirements.<span style="color: black;">txt</span>
+└── wsgi.<span style="color: black;">py</span></pre></div></div>
+
+<p><span id="more-292"></span><br>
+<strong>2.wsgi.py文件错误</strong></p>
+<p>基本的wsgi.py文件写法如下:</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> <span style="color: rgb(220, 20, 60);">os</span>
+<span style="color: rgb(220, 20, 60);">os</span>.<span style="color: black;">environ</span><span style="color: black;">[</span><span style="color: rgb(72, 61, 139);">'DJANGO_SETTINGS_MODULE'</span><span style="color: black;">]</span> = <span style="color: rgb(72, 61, 139);">'dmyz.settings'</span> <span style="color: rgb(204, 204, 204); font-style: italic;">#项目名</span>
+&nbsp;
+<span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> django.<span style="color: black;">core</span>.<span style="color: black;">handlers</span>.<span style="color: black;">wsgi</span>
+application = django.<span style="color: black;">core</span>.<span style="color: black;">handlers</span>.<span style="color: black;">wsgi</span>.<span style="color: black;">WSGIHandler</span><span style="color: black;">(</span><span style="color: black;">)</span></pre></td></tr></tbody></table></div>
+
+<p>唯一可能出错的就是项目名了，也就是第2行，这里的’dmyz.settings’应该是Django项目文件夹的名称，比如你的Django项目名为abc，那这里就设置成’abc.settings’。</p>
+<p><strong>3.文件错误</strong></p>
+<p>这倒是很偶然碰到的，某同学（因为觉得这事太丢人了所以当事人强烈要求隐藏真实姓名）出现了404错误一直找不到问题所在，后来才发现是settings文件某行少了一个逗号，因为它在本机运行和在Dotcloud运行会调用不同的settings文件，所以没发现这个错误。这也说明，如果settings文件错误同样会引发404错误。不过只要能在本机先检查一次，这个问题完全是可以避免的。</p>
+<p><strong>4.环境变量问题</strong></p>
+<p>具体见本文评论。在dotcloud上运行时，加入sys.path中的目录是dmyz-on-dotcloud而不是dmyz，所以如果在INSTALLED_APPS或是其他引用模块的场合（比如from account import view需要改成 form dmyz.account import view），不加上项目名的话，也会导致404错误，比较好的解决方案是将当前项目文件夹添加到PYTHONPATH变量，在settings.py文件里加入以下代码：</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="line_numbers"><pre>1
+2
+3
+</pre></td><td class="code"><pre class="python" style="font-family: monospace;">PROJECT_DIR = <span style="color: rgb(220, 20, 60);">os</span>.<span style="color: black;">path</span>.<span style="color: black;">abspath</span><span style="color: black;">(</span><span style="color: rgb(220, 20, 60);">os</span>.<span style="color: black;">path</span>.<span style="color: black;">dirname</span><span style="color: black;">(</span>__file__<span style="color: black;">)</span><span style="color: black;">)</span>
+<span style="color: rgb(255, 119, 0); font-weight: bold;">if</span> PROJECT_DIR <span style="color: rgb(255, 119, 0); font-weight: bold;">not</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">in</span> <span style="color: rgb(220, 20, 60);">sys</span>.<span style="color: black;">path</span>:
+    <span style="color: rgb(220, 20, 60);">sys</span>.<span style="color: black;">path</span>.<span style="color: black;">append</span><span style="color: black;">(</span>PROJECT_DIR<span style="color: black;">)</span></pre></td></tr></tbody></table></div>
+
+<h2>静态文件和数据库文件问题</h2>
+<p>在不进行特别的settings文件设置的情况下，静态文件夹和数据库文件要和Django项目文件夹放在同一级目录下：</p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;">dmyz-on-dotcloud/
+├── dmyz
+│&nbsp;&nbsp; ├── <span style="color: rgb(0, 0, 205);">__init__</span>.<span style="color: black;">py</span>
+│&nbsp;&nbsp; ├── manage.<span style="color: black;">py</span>
+│&nbsp;&nbsp; ├── settings.<span style="color: black;">py</span>
+│&nbsp;&nbsp; └── urls.<span style="color: black;">py</span>
+├── dev.<span style="color: black;">db</span> <span style="color: rgb(204, 204, 204); font-style: italic;">#sqlite数据库文件</span>
+├── dotcloud.<span style="color: black;">yml</span>
+├── requirements.<span style="color: black;">txt</span>
+├── static <span style="color: rgb(204, 204, 204); font-style: italic;">#静态文件夹</span>
+│&nbsp;&nbsp; ├── css
+│&nbsp;&nbsp; ├── images
+│&nbsp;&nbsp; └── js
+└── wsgi.<span style="color: black;">py</span></pre></div></div>
+
+<p>如果一定要把dev.db文件放到Django项目目录下，也可以修改settings文件。</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(204, 204, 204); font-style: italic;">#当dev.db文件在Django项目目录下</span>
+<span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> <span style="color: rgb(220, 20, 60);">os</span>
+PROJECT_PATH = <span style="color: rgb(220, 20, 60);">os</span>.<span style="color: black;">path</span>.<span style="color: black;">dirname</span><span style="color: black;">(</span>__file__<span style="color: black;">)</span>
+PROJECT_NAME = <span style="color: rgb(220, 20, 60);">os</span>.<span style="color: black;">path</span>.<span style="color: black;">basename</span><span style="color: black;">(</span>PROJECT_PATH<span style="color: black;">)</span>
+&nbsp;
+DATABASES = <span style="color: black;">{</span>
+    <span style="color: rgb(72, 61, 139);">'default'</span>: <span style="color: black;">{</span>
+        <span style="color: rgb(72, 61, 139);">'ENGINE'</span>: <span style="color: rgb(72, 61, 139);">'django.db.backends.sqlite3'</span>,
+        <span style="color: rgb(72, 61, 139);">'NAME'</span>: <span style="color: rgb(220, 20, 60);">os</span>.<span style="color: black;">path</span>.<span style="color: black;">join</span><span style="color: black;">(</span>PROJECT_PATH,<span style="color: rgb(72, 61, 139);">'dev.db'</span><span style="color: black;">)</span>,
+        ……
+    <span style="color: black;">}</span>
+<span style="color: black;">}</span></pre></td></tr></tbody></table></div>
+
+<blockquote><p>当修改数据库文件，不能使用 <span style="background: none repeat scroll 0% 0% rgb(102, 102, 102); color: rgb(252, 252, 252);">dotcloud push dev.db</span> 来更新，否则会报错 <span style="color: red;">error: The application name “dev.db” is invalid.</span> 。dotcloud虽然和git很像但毕竟不是git，只要用它的<span style="background: none repeat scroll 0% 0% rgb(102, 102, 102); color: rgb(252, 252, 252);">dotcloud push dmyz</span> 命令就可以把dmyz-on-dotcloud里的内容都上传了。</p></blockquote>
+<p>但无论我怎么修改STATIC_ROOT/STATICFILES_DIRS，它都会无视Django项目目录和App目录下的static文件夹，所以没有找到把static文件夹也放到Django项目目录下的方法。虽然也可以用postinstall运行collectstatic命令转移static文件夹，但还是多走了一步，如果各位找到很好的设置方法请分享一下吧=)</p>
+<h2>域名设置</h2>
+<p>首先利用alias命令绑定域名：</p>
+<div class="com">
+$ dotcloud alias add dmyz.www dot.dmyz.org<br>
+$ dotcloud url dmyz.www<br>
+www: http://54bbccc9.dotcloud.com/<br>
+www: http://dot.dmyz.org/
+</div>
+<p>然后解析域名，创建一条CNAME记录到gateway.dotcloud.com就可以了。</p>
+<p>但要注意的是，alias命令不能绑定空域名，也就是说不能直接绑定 dmyz.org。我们也不能直接做一个CNAME，将dmyz.org转到www.dmyz.org，这就是很常见的域名www解析问题了，因为很常见，所以有很多解决方案，偷懒的做法是直接把dmyz.org做一个A记录到174.129.25.170，这样当用户访问dmyz.org时，它就会自动跳转到www.dmyz.org。</p>
+<h2>收费问题</h2>
+<p>之前Dotcloud打出99$/月的价格，导致大多数人都对它没了兴趣。其实如果你不需要绑定自己的域名，免费版相比专业版，只是没有足够的服务支持(SLA)而已，没有其他功能上的限制，相比它带来的便利，这点小限制还是可以接受的。</p>
+<div id="crp_related"><h3>Related Posts</h3><ul><li><span style="color: rgb(106, 1, 1);">●</span>&nbsp;<a href="http://dmyz.org/archives/226" rel="bookmark" class="crp_title">在Dotcloud上架设Django网站[更新为0.4版]</a></li><li><span style="color: rgb(106, 1, 1);">●</span>&nbsp;<a href="http://dmyz.org/archives/84" rel="bookmark" class="crp_title">Python批量解压rar</a></li><li><span style="color: rgb(106, 1, 1);">●</span>&nbsp;<a href="http://dmyz.org/archives/348" rel="bookmark" class="crp_title">在Dotcloud上搭建NodeJS+MongoDB环境</a></li><li><span style="color: rgb(106, 1, 1);">●</span>&nbsp;<a href="http://dmyz.org/archives/197" rel="bookmark" class="crp_title">Sphinx生成Django文档</a></li><li><span style="color: rgb(106, 1, 1);">●</span>&nbsp;<a href="http://dmyz.org/archives/354" rel="bookmark" class="crp_title">从零开始搭建Django Solr的环境</a></li></ul></div>             </div>
+<div id="share">
+<ul><li>
+<div class="facebook"></div>
+<a href="http://www.facebook.com/sharer.php?u=http://dmyz.org/archives/292&amp;t=Dotcloud%E6%9E%B6%E8%AE%BEDjango%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98" target="_top" rel="nofollow">分享到Facebook</a>
+</li>
+<li>
+<div class="xiaonei"></div>
+<a href="http://share.xiaonei.com/share/buttonshare.do?link=http://dmyz.org/archives/292&amp;title=Dotcloud%E6%9E%B6%E8%AE%BEDjango%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98" target="_top" rel="nofollow">分享到人人网</a>
+</li>
+<li>
+<div class="douban"></div>
+<a href="http://www.douban.com/recommend/?url=http%3A%2F%2Fdmyz.org%2Farchives%2F292&amp;title=Dotcloud%E6%9E%B6%E8%AE%BEDjango%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98&amp;sel=&amp;v=1" target="_top" rel="nofollow">分享到豆瓣</a>
+</li>
+<li>
+<div class="twitter"></div><a href="http://twitter.com/home?status=Dotcloud%E6%9E%B6%E8%AE%BEDjango%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98%20http://dmyz.org/archives/292" title="分享到Twitter" target="_top" rel="nofollow">分享到Twitter</a>
+</li>
+<li><div class="sina"></div><a href="http://v.t.sina.com.cn/share/share.php?url=http://dmyz.org/archives/292&amp;title=Dotcloud%E6%9E%B6%E8%AE%BEDjango%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98" target="_top" rel="nofollow" "="" title="分享到新浪微博">分享到新浪微博</a></li>
+</ul>
+</div>
+     </div>
+
+    </div>
+
+
+
+    <div id="comments_wrapper">
+     <a name="comments"></a>
+<div style="margin-top: 15px;" id="ds-thread" class="ds-thread" data-thread-id="13926" data-title="Dotcloud架设Django的几个问题" data-url="http://dmyz.org/archives/292"><div style="display: none;" class="ds-waiting"><img alt="..." src="data:image/gif;base64,R0lGODlhEAALAPQAAP///z2LqeLt8dvp7u7090GNqz2LqV+fuJ/F1IW2ycrf51aatHWswaXJ14i4ys3h6FmctUCMqniuw+vz9eHs8fb5+meku+Tu8vT4+cfd5bbT3tbm7PH2+AAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCwAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7AAAAAAAAAAAA" style="margin: 0pt 0pt 3px 5px;" height="11" width="16"></div><div style="display: none;" class="ds-meta"><a class="ds-like-thread-button"><span class="ds-ui-icon"></span> <span class="ds-thread-like-text">喜欢</span><span class="ds-thread-cancel-like">取消喜欢</span></a><span class="ds-like-panel"></span></div><div class="ds-login-buttons"><div class="ds-border-highlight"></div><p>使用社交帐号登录:</p><ul class="ds-service-list"><li><span class="ds-connected-sites"><a href="http://duoshuo.com/login/weibo/" rel="nofollow" class="ds-service-icon ds-weibo ds-weibo-active"></a></span><a href="http://duoshuo.com/login/weibo/" rel="nofollow">微博</a></li><li><span class="ds-connected-sites"><a href="http://duoshuo.com/login/qq/" rel="nofollow" class="ds-service-icon ds-qq ds-qq-active"></a></span><a href="http://duoshuo.com/login/qq/" rel="nofollow">QQ</a></li><li><span class="ds-connected-sites"><a href="http://duoshuo.com/login/renren/" rel="nofollow" class="ds-service-icon ds-renren ds-renren-active"></a></span><a href="http://duoshuo.com/login/renren/" rel="nofollow">人人</a></li><li><span class="ds-connected-sites"><a href="http://duoshuo.com/login/douban/" rel="nofollow" class="ds-service-icon ds-douban ds-douban-active"></a></span><a href="http://duoshuo.com/login/douban/" rel="nofollow">豆瓣</a></li><li><span class="ds-connected-sites"><a href="http://duoshuo.com/login/kaixin/" rel="nofollow" class="ds-service-icon ds-kaixin ds-kaixin-active"></a></span><a href="http://duoshuo.com/login/kaixin/" rel="nofollow">开心</a></li><li><a class="ds-more-services">更多»</a></li></ul><ul class="ds-service-list ds-additional-services"><li><span class="ds-connected-sites"><a href="http://duoshuo.com/login/netease/" rel="nofollow" class="ds-service-icon ds-netease ds-netease-active"></a></span><a href="http://duoshuo.com/login/netease/" rel="nofollow">网易</a></li><li><span class="ds-connected-sites"><a href="http://duoshuo.com/login/sohu/" rel="nofollow" class="ds-service-icon ds-sohu ds-sohu-active"></a></span><a href="http://duoshuo.com/login/sohu/" rel="nofollow">搜狐</a></li><li><span class="ds-connected-sites"><a href="http://duoshuo.com/login/baidu/" rel="nofollow" class="ds-service-icon ds-baidu ds-baidu-active"></a></span><a href="http://duoshuo.com/login/baidu/" rel="nofollow">百度</a></li></ul></div><a name="respond"></a><div class="ds-replybox"><form method="post" action="http://dmyz.org/archives/292" onsubmit="return false;"><input name="thread_id" value="13926" type="hidden"><input name="parent_id" value="" type="hidden"><input name="author_name" value="" type="hidden"><input name="author_email" value="" type="hidden"><input name="author_url" value="" type="hidden"><div class="ds-replybox-main"><div class="ds-textarea-wrapper"><textarea name="message" title="Ctrl+Enter快捷提交" placeholder="说点什么吧 ..."></textarea><pre class="ds-hidden-text"></pre></div><div class="ds-post-toolbar"><div class="ds-post-options"><span class="ds-sync" style="color: rgb(153, 153, 153);">不想登录？直接点击发布即可作为游客留言。</span></div><button class="ds-post-button" type="submit">发 布</button><div class="ds-toolbar-buttons"><a class="ds-toolbar-button ds-add-emote" title="插入表情"></a><a class="ds-toolbar-button ds-add-image" title="插入图片"></a></div></div></div></form></div><div class="ds-comments-info"><select class="ds-sort"><option value="desc">从新到旧排序</option><option value="asc">从旧到新排序</option></select><ul class="ds-comments-tabs"><li class="ds-tab"><a class="ds-comments-tab-duoshuo ds-current"><span class="ds-highlight">14</span>条评论</a></li></ul></div><ul class="ds-comments"><li class="ds-post ds-first" data-post-id="21787"><div class="ds-post-self" data-post-id="21787" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><img src="noavatar_default.png"></div><div class="ds-comment-body"><div class="ds-comment-header"><span class="ds-user-name">奥利西斯</span></div><p></p><p>顺便再求教一下dotcloud里面的日志怎么弄回本地？SSH上用vim看着太痛苦了，我vim又用得不好，nano也不熟</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-10-09T18:42:14+08:00" title="2011年10月9日 18:42:14">2011年10月9日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div><div class="ds-children-wrapper"><div class="ds-children-control"><a class="ds-collapse"><span class="ds-ui-icon"></span></a><a class="ds-expand"></a></div><div class="ds-collapse-padding"></div><ul class="ds-children"><li class="ds-post" data-post-id="70320"><div class="ds-post-self" data-post-id="70320" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><a href="http://weibo.com/perchouli" rel="nofollow" target="_top"><img src="1"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" href="http://weibo.com/perchouli" rel="nofollow" target="_top">Perchouli</a></div><p></p><p>日志可以打包下载，也可以直接输出到本地，我常用的是这条命令，FYI：<br>dotcloud run dmyz.www "ls /var/log/nginx/*access.log | xargs cat" &gt; access.log</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-10-09T19:18:13+08:00" title="2011年10月9日 19:18:13">2011年10月9日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div></li></ul></div></li><li class="ds-post" data-post-id="21780"><div class="ds-post-self" data-post-id="21780" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><img src="noavatar_default.png"></div><div class="ds-comment-body"><div class="ds-comment-header"><span class="ds-user-name">奥利西斯</span></div><p></p><p>不错。不过我想问下404是不是需要做些什么设置？或者必须要包含什么内容？<br>我设置的404文件无论如何都读不出来，总是使用默认的404。我已经把404.html放在static下面了</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-10-09T00:52:54+08:00" title="2011年10月9日 0:52:54">2011年10月9日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div><div class="ds-children-wrapper"><div class="ds-children-control"><a class="ds-collapse"><span class="ds-ui-icon"></span></a><a class="ds-expand"></a></div><div class="ds-collapse-padding"></div><ul class="ds-children"><li class="ds-post" data-post-id="21784"><div class="ds-post-self" data-post-id="21784" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><a href="http://weibo.com/perchouli" rel="nofollow" target="_top"><img src="1"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" href="http://weibo.com/perchouli" rel="nofollow" target="_top">Perchouli</a></div><p></p><p>1.在settings文件中设置DEBUG = False ，这样就不会出现默认的Django 404页面了；<br>2.把自定义的404页面放到模板目录下，所以如果模板目录不是static的话，放到static下会找不到</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-10-09T17:13:34+08:00" title="2011年10月9日 17:13:34">2011年10月9日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div><div class="ds-children-wrapper"><div class="ds-children-control"><a class="ds-collapse"><span class="ds-ui-icon"></span></a><a class="ds-expand"></a></div><div class="ds-collapse-padding"></div><ul class="ds-children"><li class="ds-post" data-post-id="21786"><div class="ds-post-self" data-post-id="21786" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><img src="noavatar_default.png"></div><div class="ds-comment-body"><div class="ds-comment-header"><span class="ds-user-name">奥利西斯</span></div><p></p><p>现在不是默认的django404啊= =是nginx404...我自定义了一个静态404，放在项目根目录的static下，但是遇到404还是给我默认的nginx404</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-10-09T18:40:48+08:00" title="2011年10月9日 18:40:48">2011年10月9日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div><div class="ds-children-wrapper"><div class="ds-children-control"><a class="ds-collapse"><span class="ds-ui-icon"></span></a><a class="ds-expand"></a></div><div class="ds-collapse-padding"></div><ul class="ds-children"><li class="ds-post" data-post-id="21788"><div class="ds-post-self" data-post-id="21788" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><a href="http://weibo.com/perchouli" rel="nofollow" target="_top"><img src="1"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" href="http://weibo.com/perchouli" rel="nofollow" target="_top">Perchouli</a></div><p></p><p>nginx404说明Django项目本身配置出错了，先检查一下相应的配置吧，这篇博文就是针对ngnix404错误的。Django还没启动，所以看不到Django定制的404错误页面。<br></p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-10-09T19:31:56+08:00" title="2011年10月9日 19:31:56">2011年10月9日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div><div class="ds-children-wrapper"><div class="ds-children-control"><a class="ds-collapse"><span class="ds-ui-icon"></span></a><a class="ds-expand"></a></div><div class="ds-collapse-padding"></div><ul class="ds-children"><li class="ds-post" data-post-id="21789"><div class="ds-post-self" data-post-id="21789" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><img src="noavatar_default.png"></div><div class="ds-comment-body"><div class="ds-comment-header"><span class="ds-user-name">奥利西斯</span></div><p></p><p>不是，项目本身配置好了已经，可以正常进去，其他的都没有什么问题。但是一旦出现了404错误的时候跳不到我设置好的404.html，而是跳到nginx404</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-10-09T23:03:13+08:00" title="2011年10月9日 23:03:13">2011年10月9日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div></li><li class="ds-post" data-post-id="21790"><div class="ds-post-self" data-post-id="21790" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><img src="noavatar_default.png"></div><div class="ds-comment-body"><div class="ds-comment-header"><span class="ds-user-name">奥利西斯</span></div><p></p><p>悲剧，我找到问题所在了。因为我使用了jinja2的模版系统，而系统在错误的情况下渲染不了jinjia2的标签，所以那两个404和500会出错，于是系统就调用nginx404了……改成默认标签就没问题了。</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-10-09T23:59:04+08:00" title="2011年10月9日 23:59:04">2011年10月9日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div><div class="ds-children-wrapper"><div class="ds-children-control"><a class="ds-collapse"><span class="ds-ui-icon"></span></a><a class="ds-expand"></a></div><div class="ds-collapse-padding"></div><ul class="ds-children"><li class="ds-post" data-post-id="21791"><div class="ds-post-self" data-post-id="21791" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><a href="http://weibo.com/perchouli" rel="nofollow" target="_top"><img src="1"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" href="http://weibo.com/perchouli" rel="nofollow" target="_top">Perchouli</a></div><p></p><p>抱歉是我理解错了。<br>谢谢分享，jinjia的模板还没在dotcloud的项目里用过，学习了。</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-10-10T01:05:01+08:00" title="2011年10月10日 1:05:01">2011年10月10日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div></li></ul></div></li></ul></div></li></ul></div></li></ul></div></li></ul></div></li><li class="ds-post" data-post-id="21682"><div class="ds-post-self" data-post-id="21682" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><img src="noavatar_default.png"></div><div class="ds-comment-body"><div class="ds-comment-header"><span class="ds-user-name">wesley1988</span></div><p></p><p>我的项目在本地能跑，所以应该不是项目的问题。是在INSTALLED_APPS 那里，我发现如果我不加上我的项目名，就是说不用 'wesley.account'而用'account'的话也会报404错误，这是怎么回事？</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-09-26T02:56:22+08:00" title="2011年9月26日 2:56:22">2011年9月26日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div><div class="ds-children-wrapper"><div class="ds-children-control"><a class="ds-collapse"><span class="ds-ui-icon"></span></a><a class="ds-expand"></a></div><div class="ds-collapse-padding"></div><ul class="ds-children"><li class="ds-post" data-post-id="21686"><div class="ds-post-self" data-post-id="21686" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><a href="http://weibo.com/perchouli" rel="nofollow" target="_top"><img src="1"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" href="http://weibo.com/perchouli" rel="nofollow" target="_top">Perchouli</a></div><p></p><p>这个我没写，谢谢补充。<br>因为在dotcloud上运行时，目录是dmyz-on-dotcloud，而不是dmyz，所以app直接放在项目目录下，在INSTALLED_APPS里直接添加app名也会导致404错误。<br>可以在setting目录里加上这段代码<br></p><br><br><p>PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))<br>if PROJECT_DIR not in sys.path:<br>    sys.path.append(PROJECT_DIR)<br><br>就是把当前项目目录加入到path里，这样就解决了。</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-09-27T02:49:56+08:00" title="2011年9月27日 2:49:56">2011年9月27日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div><div class="ds-children-wrapper"><div class="ds-children-control"><a class="ds-collapse"><span class="ds-ui-icon"></span></a><a class="ds-expand"></a></div><div class="ds-collapse-padding"></div><ul class="ds-children"><li class="ds-post" data-post-id="21707"><div class="ds-post-self" data-post-id="21707" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><img src="noavatar_default.png"></div><div class="ds-comment-body"><div class="ds-comment-header"><span class="ds-user-name">wesley1988</span></div><p></p><p>明白了！谢谢！</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-09-29T22:36:24+08:00" title="2011年9月29日 22:36:24">2011年9月29日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div></li></ul></div></li></ul></div></li><li class="ds-post" data-post-id="21609"><div class="ds-post-self" data-post-id="21609" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><img src="f35f160f032fc46f34841216c4033e5c"></div><div class="ds-comment-body"><div class="ds-comment-header"><span class="ds-user-name">ayanamist</span></div><p></p><p>你把数据库放app文件夹里，每次更新，数据库就没了……应该放到/home/dotcloud文件夹里才比较好吧……</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-09-18T01:29:48+08:00" title="2011年9月18日 1:29:48">2011年9月18日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div><div class="ds-children-wrapper"><div class="ds-children-control"><a class="ds-collapse"><span class="ds-ui-icon"></span></a><a class="ds-expand"></a></div><div class="ds-collapse-padding"></div><ul class="ds-children"><li class="ds-post" data-post-id="21610"><div class="ds-post-self" data-post-id="21610" data-thread-id="13926"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><a href="http://weibo.com/perchouli" rel="nofollow" target="_top"><img src="1"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" href="http://weibo.com/perchouli" rel="nofollow" target="_top">Perchouli</a></div><p></p><p>没太明白…dotcloud push命令上传的文件都会在 */home/dotcloud/版本号* 的文件夹里，如果想把数据库放在*/home/dotcloud* 的话要怎么传上去呢？</p><p></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-09-18T03:38:35+08:00" title="2011年9月18日 3:38:35">2011年9月18日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div></li></ul></div></li></ul><div style="display: none;" class="ds-paginator"><div class="ds-border"></div><a data-page="1" class="ds-current">1</a></div><p class="ds-powered-by"><a href="http://duoshuo.com/" target="_top" rel="nofollow">动漫驿站正在使用多说</a></p></div>
+	
+		<div id="ds-ssr">
+
+		
+            <ol id="commentlist">
+                	<li class="comment even thread-even depth-1" id="li-comment-933">
+		<article id="comment-933" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">ayanamist</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-933"><time pubdate="" datetime="2011-09-18T09:29:48+00:00">2011-09-18 at 9:29 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>你把数据库放app文件夹里，每次更新，数据库就没了……应该放到/home/dotcloud文件夹里才比较好吧……</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="li-comment-934">
+		<article id="comment-934" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">Perchouli</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-934"><time pubdate="" datetime="2011-09-18T11:38:35+00:00">2011-09-18 at 11:38 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>没太明白…dotcloud push命令上传的文件都会在 */home/dotcloud/版本号* 的文件夹里，如果想把数据库放在*/home/dotcloud* 的话要怎么传上去呢？</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	</li>
+</ul>
+</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-1006">
+		<article id="comment-1006" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">wesley1988</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1006"><time pubdate="" datetime="2011-09-26T10:56:22+00:00">2011-09-26 at 10:56 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>我的项目在本地能跑，所以应该不是项目的问题。是在INSTALLED_APPS 那里，我发现如果我不加上我的项目名，就是说不用 ‘wesley.account’而用’account’的话也会报404错误，这是怎么回事？</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="li-comment-1010">
+		<article id="comment-1010" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">Perchouli</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1010"><time pubdate="" datetime="2011-09-27T10:49:56+00:00">2011-09-27 at 10:49 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>这个我没写，谢谢补充。<br>
+因为在dotcloud上运行时，目录是dmyz-on-dotcloud，而不是dmyz，所以app直接放在项目目录下，在INSTALLED_APPS里直接添加app名也会导致404错误。<br>
+可以在setting目录里加上这段代码</p>
+
+<div class="wp_syntax"><div class="code"><pre class="python" style="font-family: monospace;">&nbsp;
+PROJECT_DIR = <span style="color: rgb(220, 20, 60);">os</span>.<span style="color: black;">path</span>.<span style="color: black;">abspath</span><span style="color: black;">(</span><span style="color: rgb(220, 20, 60);">os</span>.<span style="color: black;">path</span>.<span style="color: black;">dirname</span><span style="color: black;">(</span>__file__<span style="color: black;">)</span><span style="color: black;">)</span>
+<span style="color: rgb(255, 119, 0); font-weight: bold;">if</span> PROJECT_DIR <span style="color: rgb(255, 119, 0); font-weight: bold;">not</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">in</span> <span style="color: rgb(220, 20, 60);">sys</span>.<span style="color: black;">path</span>:
+    <span style="color: rgb(220, 20, 60);">sys</span>.<span style="color: black;">path</span>.<span style="color: black;">append</span><span style="color: black;">(</span>PROJECT_DIR<span style="color: black;">)</span></pre></div></div>
+
+<p>就是把当前项目目录加入到path里，这样就解决了。</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	<ul class="children">
+	<li class="comment even depth-3" id="li-comment-1031">
+		<article id="comment-1031" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">wesley1988</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1031"><time pubdate="" datetime="2011-09-30T06:36:24+00:00">2011-09-30 at 6:36 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>明白了！谢谢！</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	</li>
+</ul>
+</li>
+</ul>
+</li>
+	<li class="comment odd alt thread-even depth-1" id="li-comment-1104">
+		<article id="comment-1104" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">奥利西斯</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1104"><time pubdate="" datetime="2011-10-09T08:52:54+00:00">2011-10-09 at 8:52 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>不错。不过我想问下404是不是需要做些什么设置？或者必须要包含什么内容？<br>
+我设置的404文件无论如何都读不出来，总是使用默认的404。我已经把404.html放在static下面了</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-admin bypostauthor even depth-2" id="li-comment-1108">
+		<article id="comment-1108" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">Perchouli</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1108"><time pubdate="" datetime="2011-10-10T01:13:34+00:00">2011-10-10 at 1:13 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>1.在settings文件中设置DEBUG = False ，这样就不会出现默认的Django 404页面了；<br>
+2.把自定义的404页面放到模板目录下，所以如果模板目录不是static的话，放到static下会找不到</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	<ul class="children">
+	<li class="comment odd alt depth-3" id="li-comment-1110">
+		<article id="comment-1110" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">奥利西斯</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1110"><time pubdate="" datetime="2011-10-10T02:40:48+00:00">2011-10-10 at 2:40 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>现在不是默认的django404啊= =是nginx404…我自定义了一个静态404，放在项目根目录的static下，但是遇到404还是给我默认的nginx404</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-admin bypostauthor even depth-4" id="li-comment-1112">
+		<article id="comment-1112" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">Perchouli</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1112"><time pubdate="" datetime="2011-10-10T03:31:56+00:00">2011-10-10 at 3:31 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>nginx404说明Django项目本身配置出错了，先检查一下相应的配置吧，这篇博文就是针对ngnix404错误的。Django还没启动，所以看不到Django定制的404错误页面。</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	<ul class="children">
+	<li class="comment odd alt depth-5" id="li-comment-1113">
+		<article id="comment-1113" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">奥利西斯</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1113"><time pubdate="" datetime="2011-10-10T07:03:13+00:00">2011-10-10 at 7:03 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>不是，项目本身配置好了已经，可以正常进去，其他的都没有什么问题。但是一旦出现了404错误的时候跳不到我设置好的404.html，而是跳到nginx404</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	</li>
+	<li class="comment even depth-5" id="li-comment-1114">
+		<article id="comment-1114" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">奥利西斯</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1114"><time pubdate="" datetime="2011-10-10T07:59:04+00:00">2011-10-10 at 7:59 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>悲剧，我找到问题所在了。因为我使用了jinja2的模版系统，而系统在错误的情况下渲染不了jinjia2的标签，所以那两个404和500会出错，于是系统就调用nginx404了……改成默认标签就没问题了。</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	</li>
+	<li class="comment byuser comment-author-admin bypostauthor odd alt depth-5" id="li-comment-1115">
+		<article id="comment-1115" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">Perchouli</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1115"><time pubdate="" datetime="2011-10-10T09:05:01+00:00">2011-10-10 at 9:05 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>抱歉是我理解错了。<br>
+谢谢分享，jinjia的模板还没在dotcloud的项目里用过，学习了。</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-1111">
+		<article id="comment-1111" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">奥利西斯</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1111"><time pubdate="" datetime="2011-10-10T02:42:14+00:00">2011-10-10 at 2:42 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>顺便再求教一下dotcloud里面的日志怎么弄回本地？SSH上用vim看着太痛苦了，我vim又用得不好，nano也不熟</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-admin bypostauthor odd alt depth-2" id="li-comment-1854">
+		<article id="comment-1854" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">Perchouli</span> on <a rel="nofollow" href="http://dmyz.org/archives/292#comment-1854"><time pubdate="" datetime="2011-10-10T03:18:13+00:00">2011-10-10 at 3:18 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>日志可以打包下载，也可以直接输出到本地，我常用的是这条命令，FYI：<br>
+dotcloud run dmyz.www “ls /var/log/nginx/*access.log | xargs cat” &gt; access.log</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	</li>
+</ul>
+</li>
+            </ol>
+
+		            
+    </div>    </div>
+
+        <div id="previous_next_post" class="clearfix">
+     <p id="previous_post"><a href="http://dmyz.org/archives/283" rel="prev">Django网站添加WebIM</a></p>
+     <p id="next_post"><a href="http://dmyz.org/archives/298" rel="next">HTML5+Javascript开发Android应用</a></p>
+    </div>
+    
+   </div><!-- #left_col end -->
+
+   <div id="right_col">
+  
+    <div id="information_area" class="clearfix">
+   <div class="side_box" id="information">
+    <h3>PROFILE</h3>
+    <div id="information_contents"><div class="textwidget"><ul>
+<li><img src="avatar.gif" style="float: left; margin: 0pt 10px 5px 0pt;" height="90" width="90"></li>
+<li style="text-indent: 2em;"><p id="welcome">欢迎访问Perchouli的博客，使用下方的标签云来筛选你需要的内容，其他问题可以直接评论或是给我发邮件。</p></li>
+<li><div class="mail"></div><a href="mailto:jp.chenyang@gmail.com">jp.chenyang@gmail.com</a></li>
+</ul></div></div>
+   </div>
+      <div id="entries_rss">
+    <a href="http://dmyz.org/feed" title="Entries RSS">RSS FEED</a>
+   </div>
+     </div>
+  
+    <!--div class="side_box" id="search_area_top">
+   <div id="search_area" class="clearfix">
+        <form method="get" id="searchform" action="http://dmyz.org/">
+     <div><input type="text" value="Search" name="s" id="search_input" onfocus="this.value=''; changefc('white');" /></div>
+     <div><input type="image" src="http://dmyz.org/wp-content/themes/monochrome/img/search_button.gif" alt="Search from this blog." title="Search from this blog." id="search_button" /></div>
+    </form>
+       </div>
+     </div-->
+  
+  <div class="side_box" id="categories-3">
+<h3>TAGS</h3>
+		<ul>
+	<li class="cat-item cat-item-77"><a href="http://dmyz.org/archives/category/front" title="View all posts filed under Front">Front</a> (7)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://dmyz.org/archives/category/uncategory" title="View all posts filed under Other">Other</a> (13)
+</li>
+	<li class="cat-item cat-item-78"><a href="http://dmyz.org/archives/category/pm" title="View all posts filed under Product">Product</a> (9)
+</li>
+	<li class="cat-item cat-item-27"><a href="http://dmyz.org/archives/category/python" title="View all posts filed under Python">Python</a> (19)
+</li>
+	<li class="cat-item cat-item-79"><a href="http://dmyz.org/archives/category/tech" title="View all posts filed under Tech">Tech</a> (29)
+</li>
+	<li class="cat-item cat-item-38"><a href="http://dmyz.org/archives/category/uncategory/old" title="View all posts filed under Time Capsule">Time Capsule</a> (2)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://dmyz.org/archives/category/web" title="View all posts filed under Website">Website</a> (7)
+</li>
+		</ul>
+</div>
+	        <div class="side_box" id="wp-cumulus">
+							<h3>TAGCLOUD</h3>
+						<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/swfobject/ --><div id="wpcumuluswidgetcontent4356743"><embed type="application/x-shockwave-flash" src="tagcloud.swf" id="tagcloudflash" name="tagcloudflash" bgcolor="#ffffff" quality="high" wmode="transparent" allowscriptaccess="always" flashvars="tcolor=0x000000&amp;tcolor2=0x666666&amp;hicolor=0x33A8E5&amp;tspeed=100&amp;distr=true&amp;mode=tags&amp;tagcloud=%3Ctags%3E%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fandroid%27+class%3D%27tag-link-106%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.545454545455pt%3B%27%3EAndroid%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fcss%27+class%3D%27tag-link-81%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.545454545455pt%3B%27%3ECSS%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fdjango%27+class%3D%27tag-link-53%27+title%3D%2714+topics%27+style%3D%27font-size%3A+40pt%3B%27%3EDjango%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fdotcloud%27+class%3D%27tag-link-83%27+title%3D%273+topics%27+style%3D%27font-size%3A+18.909090909091pt%3B%27%3EDotcloud%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Feaster-eggs%27+class%3D%27tag-link-69%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EEaster+Eggs%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Ffirefox%27+class%3D%27tag-link-52%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EFirefox%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fhtml5%27+class%3D%27tag-link-24%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.545454545455pt%3B%27%3EHTML5%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fjavascript%27+class%3D%27tag-link-97%27+title%3D%273+topics%27+style%3D%27font-size%3A+18.909090909091pt%3B%27%3EJavascript%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Flinux%27+class%3D%27tag-link-66%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3ELinux%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fmod_rewrite%27+class%3D%27tag-link-46%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3Emod_rewrite%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fmysql%27+class%3D%27tag-link-55%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EMysql%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fnodejs%27+class%3D%27tag-link-98%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.545454545455pt%3B%27%3ENodeJS%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fnosql%27+class%3D%27tag-link-67%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3ENosql%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fonlinegalgame%27+class%3D%27tag-link-96%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.545454545455pt%3B%27%3EonlineGalGame%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fparamiko%27+class%3D%27tag-link-57%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3Eparamiko%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fphotoshop%27+class%3D%27tag-link-29%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EPhotoshop%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fpy2exe%27+class%3D%27tag-link-30%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.545454545455pt%3B%27%3Epy2exe%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fpyqt%27+class%3D%27tag-link-35%27+title%3D%273+topics%27+style%3D%27font-size%3A+18.909090909091pt%3B%27%3EPyQt%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fpystatgrab%27+class%3D%27tag-link-58%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3Epystatgrab%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fqq%27+class%3D%27tag-link-59%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EQQ%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fqueue%27+class%3D%27tag-link-49%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EQueue%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fssh%27+class%3D%27tag-link-56%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3ESSH%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fthreading%27+class%3D%27tag-link-42%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.545454545455pt%3B%27%3Ethreading%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fubuntu%27+class%3D%27tag-link-68%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EUbuntu%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Funrar%27+class%3D%27tag-link-31%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EUnRAR%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fwebgame%27+class%3D%27tag-link-17%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EWebgame%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fweb%25e6%25a1%2586%25e6%259e%25b6%27+class%3D%27tag-link-54%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EWeb%E6%A1%86%E6%9E%B6%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fword%27+class%3D%27tag-link-26%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EWord%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e4%25b8%2589%25e5%259b%25bd%25e6%259d%2580%27+class%3D%27tag-link-63%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E4%B8%89%E5%9B%BD%E6%9D%80%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%258a%25a8%25e6%25bc%25ab%27+class%3D%27tag-link-12%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E5%8A%A8%E6%BC%AB%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%258a%25a8%25e6%25bc%25ab%25e9%25a9%25bf%25e7%25ab%2599%27+class%3D%27tag-link-11%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.545454545455pt%3B%27%3E%E5%8A%A8%E6%BC%AB%E9%A9%BF%E7%AB%99%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%258d%258a%25e6%2588%2590%25e5%2593%2581%27+class%3D%27tag-link-16%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E5%8D%8A%E6%88%90%E5%93%81%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%258e%259f%25e5%259e%258b%27+class%3D%27tag-link-89%27+title%3D%273+topics%27+style%3D%27font-size%3A+18.909090909091pt%3B%27%3E%E5%8E%9F%E5%9E%8B%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%259b%25a2%25e8%25b4%25ad%27+class%3D%27tag-link-60%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E5%9B%A2%E8%B4%AD%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%25a4%259a%25e7%25ba%25bf%25e7%25a8%258b%27+class%3D%27tag-link-50%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E5%A4%9A%E7%BA%BF%E7%A8%8B%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%25b8%2583%25e5%25b1%2580%27+class%3D%27tag-link-8%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E5%B8%83%E5%B1%80%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e6%258b%259f%25e4%25ba%25ba%25e5%258c%2596%27+class%3D%27tag-link-51%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E6%8B%9F%E4%BA%BA%E5%8C%96%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e6%25a1%2586%25e6%259e%25b6%25e5%25b1%2582%27+class%3D%27tag-link-9%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E6%A1%86%E6%9E%B6%E5%B1%82%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e6%25a1%258c%25e6%25b8%25b8%27+class%3D%27tag-link-62%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E6%A1%8C%E6%B8%B8%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e6%25b5%258f%25e8%25a7%2588%25e5%2599%25a8%27+class%3D%27tag-link-25%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E6%B5%8F%E8%A7%88%E5%99%A8%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e7%2597%2585%25e6%25af%2592%27+class%3D%27tag-link-28%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E7%97%85%E6%AF%92%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e7%25bd%2591%25e7%25bb%259c%25e8%2590%25a5%25e9%2594%2580%27+class%3D%27tag-link-61%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E7%BD%91%E7%BB%9C%E8%90%A5%E9%94%80%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e7%25bd%2591%25e9%25a1%25b5%25e8%25ae%25be%25e8%25ae%25a1%27+class%3D%27tag-link-7%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.545454545455pt%3B%27%3E%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e8%25bf%2585%25e9%259b%25b7api%27+class%3D%27tag-link-65%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E8%BF%85%E9%9B%B7API%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e9%2587%258d%25e5%25ae%259a%25e5%2590%2591%27+class%3D%27tag-link-47%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E9%87%8D%E5%AE%9A%E5%90%91%3C%2Fa%3E%3C%2Ftags%3E" height="230" width="200"></div>	        </div>
+				<div class="side_box" id="recent-posts-4">
+		<h3>RECENT POSTS</h3>
+		<ul>
+				<li><a href="http://dmyz.org/archives/374" title="从Discuz中整合用户数据到Django">从Discuz中整合用户数据到Django</a></li>
+				<li><a href="http://dmyz.org/archives/362" title="一折">一折</a></li>
+				<li><a href="http://dmyz.org/archives/354" title="从零开始搭建Django Solr的环境">从零开始搭建Django Solr的环境</a></li>
+				<li><a href="http://dmyz.org/archives/350" title="Django用uploadify实现图片批量上传">Django用uploadify实现图片批量上传</a></li>
+				<li><a href="http://dmyz.org/archives/348" title="在Dotcloud上搭建NodeJS+MongoDB环境">在Dotcloud上搭建NodeJS+MongoDB环境</a></li>
+				<li><a href="http://dmyz.org/archives/344" title="初学前端的MVC架构">初学前端的MVC架构</a></li>
+				<li><a href="http://dmyz.org/archives/336" title="在Django中使用LESS">在Django中使用LESS</a></li>
+				<li><a href="http://dmyz.org/archives/326" title="Django复制记录的方法">Django复制记录的方法</a></li>
+				<li><a href="http://dmyz.org/archives/320" title="最佳CP算法">最佳CP算法</a></li>
+				<li><a href="http://dmyz.org/archives/316" title="Justproto：Linux下Axure的替代方案">Justproto：Linux下Axure的替代方案</a></li>
+				</ul>
+		</div>
+<div class="side_box" id="archives-3">
+<h3>Archives</h3>
+		<ul>
+			<li><a href="http://dmyz.org/archives/date/2012/03" title="March 2012">March 2012</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2012/02" title="February 2012">February 2012</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2012/01" title="January 2012">January 2012</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/12" title="December 2011">December 2011</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/11" title="November 2011">November 2011</a>&nbsp;(3)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/10" title="October 2011">October 2011</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/09" title="September 2011">September 2011</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/08" title="August 2011">August 2011</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/07" title="July 2011">July 2011</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/06" title="June 2011">June 2011</a>&nbsp;(4)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/05" title="May 2011">May 2011</a>&nbsp;(3)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/04" title="April 2011">April 2011</a>&nbsp;(4)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/03" title="March 2011">March 2011</a>&nbsp;(4)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/01" title="January 2011">January 2011</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/12" title="December 2010">December 2010</a>&nbsp;(3)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/11" title="November 2010">November 2010</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/10" title="October 2010">October 2010</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/09" title="September 2010">September 2010</a>&nbsp;(5)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/08" title="August 2010">August 2010</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/07" title="July 2010">July 2010</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/01" title="January 2010">January 2010</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2009/05" title="May 2009">May 2009</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2009/03" title="March 2009">March 2009</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2007/12" title="December 2007">December 2007</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2007/08" title="August 2007">August 2007</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2006/09" title="September 2006">September 2006</a>&nbsp;(1)</li>
+		</ul>
+</div>
+<div class="side_box" id="ds-recent-comments-2">
+<h3>RECENT COMMENTS</h3>
+<ul id="ds-recent-comments" class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-avatar-size="32" data-excerpt-length="70"><li class="ds-comment ds-show-avatars" data-post-id="2972550"><a class="ds-avatar" rel="author nofollow" target="_top" href="http://www.douban.com/people/jobshuo/"><img src="u45773533-106.jpg" height="32" width="32"></a><div class="ds-meta"><a rel="author" target="_top" href="http://www.douban.com/people/jobshuo/">云升似鲤</a><span class="ds-time" datetime="2012-04-04T23:10:33+08:00" title="2012年4月4日 23:10:33">4月4日</span></div><div class="ds-thread-title">在 <a href="http://dmyz.org/archives/6#comments">关于《动漫驿站》和本站</a> 中评论</div><div class="ds-excerpt">好奇怪的域名诶...追着动漫驿站过来的...</div></li><li class="ds-comment ds-show-avatars" data-post-id="2944083"><a class="ds-avatar" rel="author nofollow" target="_top" href="http://weibo.com/perchouli"><img src="1" height="32" width="32"></a><div class="ds-meta"><a rel="author" target="_top" href="http://weibo.com/perchouli">Perchouli</a><span class="ds-time" datetime="2012-04-03T13:38:37+08:00" title="2012年4月3日 13:38:37">4月3日</span></div><div class="ds-thread-title">在 <a href="http://dmyz.org/archives/350#comments">Django用uploadify实现图片批量上传</a> 中评论</div><div class="ds-excerpt">没有传参。 这里是把request.user.id作为参数传给upload_image，如果没有登录或是其他问题导致request.user.id为空，就会出现这个错误。</div></li><li class="ds-comment ds-show-avatars" data-post-id="2943173"><div class="ds-avatar"><img src="50" height="32" width="32"></div><div class="ds-meta">板凳<span class="ds-time" datetime="2012-04-03T11:51:11+08:00" title="2012年4月3日 11:51:11">4月3日</span></div><div class="ds-thread-title">在 <a href="http://dmyz.org/archives/350#comments">Django用uploadify实现图片批量上传</a> 中评论</div><div class="ds-excerpt">'uploader' 	: '{%url upload_image request.user.id %}', 请问如何设置url？出这种Caught NoReverseMatch while rendering: Reverse for 'uploadify…</div></li><li class="ds-comment ds-show-avatars" data-post-id="2801969"><div class="ds-avatar"><img src="noavatar_default.png" height="32" width="32"></div><div class="ds-meta">游客<span class="ds-time" datetime="2012-03-27T15:02:06+08:00" title="2012年3月27日 15:02:06">3月27日</span></div><div class="ds-thread-title">在 <a href="http://dmyz.org/archives/270#comments">关于本站的其他</a> 中评论</div><div class="ds-excerpt">佩服一个</div></li><li class="ds-comment ds-show-avatars" data-post-id="2676939"><a class="ds-avatar" rel="author nofollow" target="_top" href="http://www.tuletech.cn/"><img src="noavatar_default.png" height="32" width="32"></a><div class="ds-meta"><a rel="author" target="_top" href="http://www.tuletech.cn/">万君社</a><span class="ds-time" datetime="2012-03-23T11:04:39+08:00" title="2012年3月23日 11:04:39">3月23日</span></div><div class="ds-thread-title">在 <a href="http://dmyz.org/archives/110#comments">Django+Mysql安装配置详解(Linux)[更新为1.3版]</a> 中评论</div><div class="ds-excerpt">广州途乐计算机科技共同邀请您编写 </div></li></ul></div>
+
+  
+</div><!-- #right_col end -->
+  </div><!-- #contents end -->
+
+
+  <div id="footer">
+   <ul id="copyright">
+    <li style="background: none repeat scroll 0% 0% transparent;">
+                Copyright ©&nbsp; 2004-2012     &nbsp;<a href="http://dmyz.org/archives/tag/%E5%8A%A8%E6%BC%AB%E9%A9%BF%E7%AB%99/">动漫驿站</a></li>
+    <li><a href="http://dmyz.org/archives/6/">关于《动漫驿站》和本站</a></li>
+    <li><a href="#">Powered by WordPress</a></li>
+<li style="display: none;"></li>
+    <li><a href="http://dmyz.org/archives/270/">Theme by Perchouli</a></li>
+<li style="display: none;"></li>
+   </ul>
+  </div>
+ 
+</div><!-- #wrapper end -->
+
+<div id="return_top">
+ <a href="#wrapper">&nbsp;</a>
+</div>
+
+<div style="border: medium none; position: fixed; top: 0px; left: 20px;">
+ <a href="http://dmyz.org/archives/6"><img src="about.gif"></a>
+</div> 
+
+ 
+
+
+
+<div id="sb-container"><div id="sb-overlay"></div><div id="sb-wrapper"><div id="sb-title"><div id="sb-title-inner"></div></div><div id="sb-wrapper-inner"><div id="sb-body"><div id="sb-body-inner"></div><div id="sb-loading"><div id="sb-loading-inner"><span>loading</span></div></div></div></div><div id="sb-info"><div id="sb-info-inner"><div id="sb-counter"></div><div id="sb-nav"><a id="sb-nav-close" title="Close" onclick="Shadowbox.close()"></a><a id="sb-nav-next" title="Next" onclick="Shadowbox.next()"></a><a id="sb-nav-play" title="Play" onclick="Shadowbox.play()"></a><a id="sb-nav-pause" title="Pause" onclick="Shadowbox.pause()"></a><a id="sb-nav-previous" title="Previous" onclick="Shadowbox.previous()"></a></div></div></div></div></div><iframe src="index_1.html" style="position: absolute; top: -2000px; left: 0pt;" id="easyXDM_default7510_provider" name="easyXDM_default7510_provider" frameborder="0"></iframe><div id="ds-indicator"><img src="loading.gif"></div></body>
+</html>

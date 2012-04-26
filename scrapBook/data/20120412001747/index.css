@@ -1,0 +1,79 @@
+#gbar, #guser { font-size: 13px; padding-top: 4px ! important; }
+#gbar { float: left; height: 22px; }
+#guser { padding-bottom: 7px ! important; text-align: right; }
+.gbh, .gbd { border-top: 1px solid rgb(201, 215, 241); font-size: 1px; }
+.gbh { height: 0pt; position: absolute; top: 24px; width: 100%; }
+#gbs, .gbm { background: none repeat scroll 0% 0% rgb(255, 255, 255); left: 0pt; position: absolute; text-align: left; visibility: hidden; z-index: 1000; }
+.gbm { border-width: 1px; border-style: solid; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; border-color: rgb(201, 215, 241) rgb(51, 102, 204) rgb(51, 102, 204) rgb(162, 186, 231); z-index: 1001; }
+.gb1 { margin-right: 0.5em; }
+.gb1, .gb3 {  }
+.gb2 { display: block; padding: 0.2em 0.5em; }
+.gb2, .gb3 { text-decoration: none ! important; border-bottom: medium none; }
+a.gb1, a.gb4 { text-decoration: underline ! important; }
+a.gb1, a.gb2, a.gb3, a.gb4 { color: rgb(0, 0, 204) ! important; }
+a.gb2:hover { background: none repeat scroll 0% 0% rgb(51, 102, 204); color: rgb(255, 255, 255) ! important; }
+/* ::::: https://code.google.com/apis/console/gwt/standard/standard.css ::::: */
+
+body, table td, select { font-family: Arial Unicode MS,Arial,sans-serif; font-size: small; }
+body { color: black; margin: 0px; border: 0px none; padding: 0px; background: none repeat scroll 0% 0% rgb(255, 255, 255); direction: ltr; }
+a, a:visited, a:hover { color: rgb(0, 0, 170); }
+.gwt-Button { margin: 0pt; padding: 3px 5px; text-decoration: none; font-size: small; cursor: pointer; background: url('hborder.png') repeat-x scroll 0px -27px transparent; border: 1px outset rgb(204, 204, 204); }
+.gwt-Button:active { border: 1px inset rgb(204, 204, 204); }
+.gwt-Button:hover { border-color: rgb(153, 204, 255) rgb(102, 153, 238) rgb(102, 153, 238) rgb(119, 170, 255); }
+.gwt-Image {  }
+.NX { background-color: rgb(255, 238, 136); padding: 2px 15px; font-weight: bold; }
+.MX { cursor: pointer; position: relative; top: 2px; right: -10px; }
+.gux-confirm-panel-r1 { background-color: rgb(255, 238, 136); border-left: 1px solid rgb(255, 253, 240); border-right: 1px solid rgb(255, 253, 240); margin: 0pt 1px; padding-top: 1px; }
+.gux-confirm-panel-r2 { background-color: rgb(255, 238, 136); border-left: 1px solid rgb(255, 253, 240); border-right: 1px solid rgb(255, 253, 240); padding-top: 1px; }
+.gux-confirm-panel-c { background-color: rgb(255, 238, 136); padding: 2px 15px; }
+.gux-confirm-panel-message { color: rgb(0, 0, 0); font-weight: bold; }
+.I- { list-style-type: none; background-color: rgb(216, 226, 242); border: 1px solid rgb(201, 215, 241); padding: 0pt; }
+.F- .I- { padding: 0.231em 0pt; }
+.J- img { border: medium none; position: absolute; top: 0.308em; left: 0.308em; }
+.I- li, .L- li { position: relative; }
+.J- a { display: block; text-decoration: none; border-top: 1px solid transparent; border-bottom: 1px solid transparent; background-color: transparent; margin: -1px 0pt; padding: 0.2em 0.23em 0.23em 1.85em; font-weight: bold; overflow: hidden; color: rgb(0, 0, 0); outline: medium none; }
+.J- .E- { display: none; position: absolute; top: 0pt; right: -13px; width: 13px; height: 26px; }
+.J- a:hover, .J- a:visited, .J- a:active { color: rgb(0, 0, 0); outline: medium none; }
+.D- a { background-color: rgb(235, 239, 249); border-width: 1px medium; border-style: solid none; border-color: rgb(201, 215, 241) -moz-use-text-color; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; margin-left: -0.5em; padding-left: 2.35em; }
+.D- .E- { background: url('undefined') repeat scroll 0% 0% transparent; display: block; }
+.K- { display: none; position: absolute; top: 4px; right: 4px; width: 16px; height: 16px; }
+.M- .K- { background: url('undefined') repeat scroll 0% 0% transparent; display: block; }
+.A0, .A0:visited, .A0:hover, .A0:active { position: relative; color: rgb(51, 51, 51); text-decoration: none; padding: 0.077em 0.462em 0.154em; margin: 0pt 0pt 5px; border-style: solid; border-width: 1px; border-color: rgb(187, 187, 187) rgb(153, 153, 153) rgb(153, 153, 153) rgb(187, 187, 187); border-radius: 2px 2px 2px 2px; font: bold 13px/13px Arial,sans-serif; text-shadow: 0pt 1px 1px rgb(255, 255, 255); background: -moz-linear-gradient(center top , white, rgb(221, 221, 221)) repeat scroll 0% 0% transparent; display: block; overflow: hidden; }
+.C0 { width: 163px; float: left; white-space: nowrap; line-height: 1.154em; overflow: hidden; }
+.D0 { position: absolute; font-size: 0.692em; top: 0.333em; right: 0.667em; }
+.I0 { list-style: none outside none; background-color: rgb(235, 239, 249); margin: 0pt 0pt -1px; padding: 0pt; display: block; border-bottom: 1px solid rgb(201, 215, 241); }
+.H0 { display: inline; }
+.F0 { float: right; display: inline; margin-right: 0.7em; }
+.FY { background: none repeat scroll 0% 0% rgb(255, 255, 255); border-width: 1px medium 1px 1px; border-style: solid none solid solid; border-color: rgb(201, 215, 241) -moz-use-text-color rgb(201, 215, 241) rgb(201, 215, 241); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; padding: 1em; min-height: 30em; }
+.JY { float: left; width: 186px; background: none repeat scroll 0% 0% rgb(235, 239, 249); padding: 5px 0pt 5px 5px; border-top: 1px solid rgb(201, 215, 241); border-bottom: 1px solid rgb(201, 215, 241); }
+.GY { border: 1px solid rgb(201, 215, 241); background: none repeat scroll 0% 0% rgb(235, 239, 249); padding: 0.31em 0pt 0.31em 0.31em; margin: 0pt 0pt 1em 190px; }
+.EY, .HY { display: none; }
+html, body, div, h1, h2, h3, h4, h5, h6, p, img, dl, dt, dd, ol, ul, li, table, caption, tbody, tfoot, thead, tr, th, td, form, fieldset, embed, object, applet { margin: 0pt; padding: 0pt; border: 0pt none; }
+body { font: 81.25%/1.5 Arial,Helvetica,sans-serif; color: rgb(0, 0, 0); background: none repeat scroll 0% 0% rgb(255, 255, 255); margin: 0pt; padding: 0pt; }
+a { color: rgb(66, 114, 219); cursor: pointer; text-decoration: underline; }
+a:hover, a:visited { color: rgb(66, 114, 219); }
+a:active { color: rgb(204, 17, 17); }
+table { border-collapse: collapse; border-width: 0pt; empty-cells: show; }
+ul { padding: 0pt 0pt 0.77em 0.77em; }
+li { line-height: 150%; font-size: 1em; }
+p { padding: 0pt 0pt 0.462em; }
+h2 { line-height: 120%; font-size: 1.5em; }
+h3 { line-height: 120%; font-size: 1.17em; }
+p, table { font-size: inherit; }
+code { font-size: inherit; font-family: "Courier New",Courier,monospace; }
+table td, table th { font-size: inherit; }
+.gwt-Button { border-radius: 2px 2px 2px 2px; }
+.OE, .BE .IE, .BE .KE, .PD .JE, .PD .IE, .AE .JE { display: none; }
+.LX { margin-top: 1em; }
+.HX { float: left; margin-left: 1.2em; }
+.JX { display: inline-block; vertical-align: top; width: 100%; overflow: visible; }
+.KX { margin: 6px auto 0pt; }
+.IX { position: fixed; right: 0pt; bottom: 0pt; }
+.P4 { margin-bottom: 1em; }
+.P4 th { font-weight: normal; padding: 0.23em 0.62em 0.23em 2em; text-align: left; }
+.P4 td, .D5 span { color: green; }
+.D5 { padding-left: 2em; }
+.B5 { display: none; }
+#guser { margin-right: 1em; }
+#gbar { margin-left: 1em; }
+.footer { clear: both; text-align: center; margin: 0pt 1em 2em; padding-top: 0.5em; border-top: 1px solid rgb(201, 215, 241); color: rgb(119, 119, 119); }

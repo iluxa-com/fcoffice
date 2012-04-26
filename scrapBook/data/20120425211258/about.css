@@ -1,0 +1,6 @@
+pre.literal-block, pre.doctest-block { margin-left: 2em; margin-right: 2em; background-color: rgb(238, 238, 238); }
+span.pre { white-space: pre; }
+table.docutils { margin-top: 0.5em; margin-bottom: 0.5em; }
+table.docutils td, table.docutils th, table.docinfo td, table.docinfo th { padding-left: 0.5em; padding-right: 0.5em; vertical-align: top; }
+table.docutils th.field-name, table.docinfo th.docinfo-name { font-weight: bold; text-align: left; white-space: nowrap; padding-left: 0pt; }
+tt.docutils { background-color: rgb(238, 238, 238); }

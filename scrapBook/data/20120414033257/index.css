@@ -1,0 +1,141 @@
+/* ::::: http://tech2ipo.com/wp-content/themes/newThemeBySeeker/style.css?var=12.13 ::::: */
+
+/* ::::: http://tech2ipo.com/wp-content/themes/newThemeBySeeker/css/reseter.css ::::: */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0pt; padding: 0pt; border: 0pt none; outline: 0pt none; font-weight: inherit; font-style: inherit; font-size: 100%; vertical-align: baseline; font-family: Arial,Helvetica,sans-serif; }
+:focus { outline: 0pt none; }
+a img, iframe { border: medium none; }
+img { display: block; }
+ol, ul, dl { list-style: none outside none; }
+a, a:link { text-decoration: none; color: rgb(12, 86, 143); }
+a:hover { text-decoration: none; }
+input, textarea, select, button { font-size: 100%; font-family: inherit; }
+.clearfix:after { content: "."; display: block; height: 0pt; clear: both; visibility: hidden; }
+.clearfix { display: inline-block; }
+.clearfix { display: block; }
+/* ::::: http://tech2ipo.com/wp-content/themes/newThemeBySeeker/css/base.css?var=11.01 ::::: */
+
+body { font-family: "宋体",Arial,Helvetica,sans-serif; font-size: 12px; color: rgb(102, 102, 102); background: url('bg-x.png') repeat-x scroll left top transparent; }
+#wraper { width: 950px; margin: 0pt auto; }
+#header { height: 120px; position: relative; }
+#logo { width: 185px; height: 60px; position: absolute; left: 0pt; top: 10px; }
+#logo a { display: block; width: 100%; height: 100%; background: url('logo-185-60.png') no-repeat scroll left top transparent; text-indent: -9999px; }
+#quickLink { position: absolute; right: 0px; top: 40px; z-index: 100; }
+#quickLink li { float: left; margin-left: 15px; position: relative; }
+#quickLink li a { display: inline-block; height: 24px; line-height: 24px; background: none repeat scroll 0% 0% rgb(255, 255, 255); border-width: 1px; border-style: solid; border-color: rgb(237, 237, 237) rgb(224, 224, 224) rgb(203, 203, 203); border-radius: 3px 3px 3px 3px; font-weight: bold; color: rgb(5, 96, 171); padding: 0pt 10px; box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1); }
+#quickLink li a:hover { color: rgb(69, 148, 213); }
+#search { background: url('bg.png') no-repeat scroll left top transparent; width: 222px; height: 25px; position: absolute; right: 0pt; top: 87px; z-index: 98; }
+#search input { left: 3px; top: 3px; padding: 2px; height: 14px; line-height: 14px; border: 0pt none; color: rgb(102, 102, 102); position: absolute; width: 186px; }
+#search a { text-indent: -9999px; position: absolute; width: 23px; height: 23px; top: 1px; right: 2px; background: url('bg.png') no-repeat scroll left -30px transparent; }
+.menu-mainmenu-container { z-index: 103; }
+#nav { font-size: 14px; position: absolute; top: 86px; left: 0pt; }
+#nav li { float: left; margin-right: 20px; position: relative; }
+#nav li a { padding: 0pt 12px 0pt 0pt; background: none repeat scroll 0% 0% transparent; font-weight: bold; line-height: 28px; height: 30px; display: inline-block; color: rgb(5, 96, 171); }
+#nav li a em { font-style: normal; line-height: 28px; padding: 0pt 0pt 0pt 12px; display: block; font-size: 14px; }
+#nav li a em span, #quickLink li a span { display: inline-block; width: 8px; height: 7px; background: url('arrows_down.png') repeat scroll 0pt 0pt transparent; margin-left: 4px; }
+#nav li a:hover, #nav li.has-second a.hover:hover { color: rgb(69, 148, 213); }
+#nav li a:active, #nav li.current-menu-item a:active { background: url('navbg_150_90.png') no-repeat scroll right top transparent; color: rgb(12, 86, 143); }
+#nav li a:active em, #nav li.current-menu-item a:active em { background: url('navbg_150_90.png') no-repeat scroll left top transparent; }
+#nav li.current-menu-item a, #nav li.has-second a:hover, #nav li.has-second a.hover, #nav li.current-menu-item a.hover { background: url('navbg_150_90.png') no-repeat scroll right -30px transparent; color: rgb(69, 148, 213); }
+#nav li.current-menu-item a em, #nav li.has-second a:hover em, #nav li.has-second a.hover em { background: url('navbg_150_90.png') no-repeat scroll left -30px transparent; }
+#nav li.has-second a em { width: 75px; }
+#nav li.has-second a:active, #nav li.has-second a.hover { color: rgb(5, 96, 171); }
+#nav li .sub-menu, #quickLink li .sub-menu { position: absolute; padding-top: 5px; background: none repeat scroll 0% 0% rgb(255, 255, 255); width: 95px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); top: 25px; border-left: 1px solid rgb(213, 213, 213); border-right: 1px solid rgb(213, 213, 213); border-bottom: 1px solid rgb(203, 203, 203); border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; left: 1px; z-index: 500; display: none; }
+#nav li .sub-menu a, #nav li .sub-menu a em { background: none repeat scroll 0% 0% transparent; }
+#nav li .sub-menu a em { width: 71px; display: inline-block; overflow: hidden; }
+#nav li .sub-menu a:hover, #nav li .sub-menu a:hover em { background: none repeat scroll 0% 0% transparent; }
+#nav li.has-second .sub-menu a:active, #nav li.has-second .sub-menu a.active { background: url('navbg_150_90.png') no-repeat scroll right -60px transparent; }
+#nav li.has-second .sub-menu a:active em, #nav li.has-second .sub-menu a.active em { background: url('navbg_150_90.png') no-repeat scroll left -60px transparent; }
+#quickLink li .sub-menu { left: 0px; padding: 0pt 0pt 5px; top: 24px; width: 97px; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2); }
+#quickLink li .sub-menu li { padding: 0pt; margin: 0pt; }
+#quickLink li .sub-menu li a { border: medium none; box-shadow: none; line-height: 28px; font-size: 13px; font-weight: normal; }
+.pageWidth:after { content: "."; display: block; height: 1px; visibility: hidden; clear: both; }
+.pageWidth { width: 950px; margin: 0pt auto; }
+#footer { height: auto ! important; background: url('bg.png') repeat-x scroll left -60px rgb(244, 244, 244); padding-top: 15px; margin-top: 30px; }
+#footer .footerLink { float: left; padding-bottom: 10px; }
+#footer .footerLink a { display: inline-block; margin: 0pt 5px; }
+.copyRight { margin: 0pt auto; padding-bottom: 20px; float: right; }
+.copyRight p { text-align: center; }
+.copyRight p a, .copyRight p a:link { color: rgb(12, 86, 143); }
+#content { padding-top: 20px; min-height: 300px; height: auto ! important; }
+.articleContent { float: left; width: 680px; margin-bottom: 20px; }
+.articleList { height: auto ! important; position: relative; border-right: 1px solid rgb(218, 218, 218); border-width: 1px; border-style: solid; border-color: rgb(232, 232, 232) rgb(218, 218, 218) rgb(218, 218, 218) rgb(232, 232, 232); margin-bottom: 20px; border-radius: 3px 3px 3px 3px; box-shadow: 0pt 1px 3px rgba(0, 0, 0, 0.27); }
+.articleList h3.articleTitle { padding: 12px 20px 4px; font-size: 24px; font-weight: bold; color: rgb(51, 51, 51); font-family: microsoft yahei; }
+.articleList h3.articleTitle a, .articleList h3.articleTitle a:link { color: rgb(51, 51, 51); }
+.articleList .articleInfo { padding: 5px 20px; color: rgb(153, 153, 153); font-size: 12px; }
+.articleList .articleInfo a, .articleList .articleInfo a:link { color: rgb(12, 86, 143); }
+.articleList .articleDetail { min-height: 110px; height: auto ! important; padding: 0pt 20px 5px; color: rgb(51, 51, 51); font-size: 14px; line-height: 28px; }
+#articlePost .articleDetail { padding-bottom: 0px; }
+#articlePost .articleDetail img, #articlePost .articleDetail img.aligncenter { float: none; margin: 0pt auto; border: 1px solid rgb(239, 239, 239); padding: 2px; }
+#articlePost .articleDetail p { word-wrap: break-word; line-height: 24px; margin: 24px 0pt; text-align: left; }
+#articlePost .articleDetail img.alignleft { display: inline-block; float: left; margin-right: 5px; }
+.articleTool { position: absolute; left: 0pt; bottom: 0pt; width: 100%; height: 30px; background: none repeat scroll 0% 0% rgb(244, 244, 244); clear: both; }
+#articlePost .articleTool { position: relative; margin: 10px; width: auto; }
+.googleMore { position: absolute; top: 5px; left: 10px; }
+.articleTool .localTool { float: right; text-align: right; }
+.articleTool .localTool a, .articleTool .localTool a:link { font-size: 12px; line-height: 30px; float: right; }
+.shareJia { position: relative; display: inline; color: rgb(102, 102, 102); font-size: 12px; line-height: 30px; float: right; }
+.shareJia:hover { background: none repeat scroll 0% 0% rgb(225, 225, 225); }
+.articleTool .localTool a:hover { background: none repeat scroll 0% 0% rgb(225, 225, 225); }
+.articleTool .localTool a strong, .shareJia strong { padding: 0pt 10px 0pt 30px; font-weight: normal; display: inline-block; background: url('articltool_30_13.png') no-repeat scroll 10px top transparent; }
+#wraper .shareJia strong { background-position: 10px -30px; }
+.sideBar { float: right; width: 248px; border-right: 1px solid rgb(214, 214, 214); border-bottom: 1px solid rgb(214, 214, 214); border-top: 1px solid rgb(227, 227, 227); margin-bottom: 20px; background: none repeat scroll 0% 0% rgb(243, 243, 243); box-shadow: 0pt 1px 3px rgba(0, 0, 0, 0.27); border-radius: 3px 3px 3px 3px; overflow: hidden; }
+.sideBar h3 { clear: both; background: none repeat scroll 0% 0% rgb(231, 231, 231); font-weight: bold; color: rgb(51, 51, 51); font-size: 14px; height: 30px; line-height: 30px; padding: 0pt 12px; }
+.sideBar h3 a, .sideBar h3 a:link { font-weight: normal; font-size: 12px; float: right; color: rgb(12, 86, 143); }
+.sideBar .authorList { padding: 10px 0px 0px; position: relative; left: 10px; }
+.sideBar .authorList li { background: none repeat scroll 0% 0% transparent; margin-right: 10px; float: left; width: 49px; overflow: hidden; line-height: 25px; height: 74px; padding: 0pt 0pt 5px; }
+.sideBar .authorList li a, .sideBar .authorList li a:link { color: rgb(12, 86, 143); }
+.sideBar ul { padding: 10px 10px 10px 15px; }
+.sideBar ul li { font-size: 12px; line-height: 24px; background: url('dot.png') no-repeat scroll left 10px transparent; padding: 0pt 0pt 0pt 10px; }
+.sideBar ul li a, .sideBar ul li a:link { color: rgb(12, 86, 143); }
+.pages { text-align: center; margin: 0pt 0pt 10px; }
+#ckepop { padding: 10px 5px; margin: 0pt 20px; background: none repeat scroll 0% 0% rgb(244, 244, 244); }
+.relatedPosts { padding: 10px 20px; clear: both; }
+.relatedPosts h3 { color: rgb(51, 51, 51); font-size: 14px; font-weight: bold; line-height: 25px; border-bottom: 1px solid rgb(236, 236, 236); }
+.relatedPosts ul li { font-size: 12px; line-height: 24px; background: url('dot.png') no-repeat scroll left 10px transparent; padding: 0pt 0pt 0pt 10px; }
+.relatedPosts ul li a, .relatedPosts ul li a:link { color: rgb(12, 86, 143); }
+.relatedPosts ul li em { float: right; }
+#book { overflow: hidden; padding-top: 10px; margin-bottom: 0px; padding-left: 10px; }
+#book a { background: url('icon_all.png') no-repeat scroll 0% 0% transparent; width: 32px; height: 32px; float: left; margin-right: 7px; padding-bottom: 10px; display: inline; }
+.articleTool .jtico { background: url('jiathis_ico.png') no-repeat scroll left center transparent; cursor: pointer; display: block ! important; height: 16px ! important; line-height: 16px ! important; overflow: hidden; padding-left: 20px ! important; text-align: left; }
+#wraper .articleTool .jtico_renren { background-position: 0pt -160px; }
+#wraper .articleTool .jtico_douban9dian { background-position: 0pt -960px; }
+#wraper .articleTool .jtico_tqq { background-position: 0pt -144px; }
+#wraper .articleTool .jtico_tsina { background-position: 0pt -96px; }
+#wraper .articleTool .jtico_qzone { background-position: 0pt -64px; }
+.shareJiaSub { display: none; position: absolute; right: 0pt; top: 30px; width: 100px; background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 1px solid rgb(232, 232, 232); }
+.shareJiaSub a { display: block; padding: 5px; }
+#rssWrap { width: 185px; position: absolute; right: -10px; top: 12px; line-height: 16px; height: 16px; vertical-align: middle; color: rgb(0, 0, 0); z-index: 103; }
+#weibo, #tqq, #rss, #email { display: inline-block; width: 16px; line-height: 16px; height: 16px; text-align: right; font-size: 12px; color: rgb(12, 86, 143); font-weight: bold; vertical-align: text-bottom; margin-right: 7px; }
+#weibo { background: url('icon_all_001.png') no-repeat scroll right -180px transparent; }
+#tqq { background: url('icon_all_001.png') no-repeat scroll right -210px transparent; }
+#email { background: url('icon_all_001.png') no-repeat scroll right -150px transparent; }
+#rss { background: url('icon_all.png') no-repeat scroll right top transparent; }
+#subBook { top: 16px; width: 120px; position: absolute; right: -65px; display: none; background: none repeat scroll 0% 0% rgb(255, 255, 255); border: 1px solid rgb(202, 202, 202); }
+#subBook a { display: block; padding: 5px 0pt 5px 34px; height: 20px; line-height: 20px; width: 135px; background: url('icon_all.png') no-repeat scroll 0% 0% transparent; }
+#subBook a.sk_rss { background-position: -204px 6px; }
+#subBook a.sk_google { background-position: -204px -24px; }
+#subBook a.sk_xianguo { background-position: -204px -54px; }
+#subBook a.sk_douban { background-position: -204px -84px; }
+#subBook a.sk_youdao { background-position: -204px -114px; }
+#subBook a.sk_email { background-position: -204px -144px; }
+#currentAuthor { padding: 10px; }
+.currentAuthorImg { float: left; width: 80px; height: 80px; }
+.currentAuthorInfo { float: right; word-wrap: break-word; overflow: hidden; width: 140px; }
+.currentAuthorInfo h3 { background: none repeat scroll 0% 0% transparent; text-align: left; padding-left: 0pt; }
+.currentAuthorInfo p { line-height: 18px; word-wrap: break-word; overflow: hidden; }
+/* ::::: http://v1.jiathis.com/code/css/jiathis_share.css ::::: */
+
+#ckepop dl, #ckepop dt, #ckepop dd, #ckepop ol, #ckepop ul, #ckepop li, #ckepop fieldset, #ckepop form, #ckepop label, #ckepop legend, #ckepop table, #ckepop caption, #ckepop tbody, #ckepop tfoot, #ckepop thead, #ckepop tr, #ckepop th, #ckepop td, #ckepop span { vertical-align: middle; margin: 0pt; padding: 0pt; font-family: 'Microsoft YaHei',arial,tahoma,宋体,sans-serif; }
+#ckepop .jtico { text-align: left; overflow: hidden; display: block ! important; height: 16px ! important; line-height: 16px ! important; padding-left: 20px ! important; background: url('jiathis_ico_001.png') no-repeat scroll left center transparent; cursor: pointer; }
+#ckepop .jtico:hover { opacity: 0.8; }
+#ckepop .jtico_qzone { background-position: 0px -64px; }
+#ckepop .jtico_tsina { background-position: 0px -96px; }
+#ckepop .jtico_t163 { background-position: 0px -128px; }
+#ckepop .jtico_tqq { background-position: 0px -144px; }
+#ckepop .jtico_xianguo { background-position: 0px -592px; }
+#ckepop .jtico_chouti { background-position: 0px -928px; }
+#ckepop .jtico_more, #ckepop .jtico_jiathis { background-position: 0px -1408px; }
+#ckepop .jtico_msn { background-position: 0px -1424px; }
+#ckepop .button, #ckepop .jiathis_txt { float: left; font-size: 12px; text-decoration: none; line-height: 18px ! important; }
+#ckepop .separator, #ckepop .jiathis_separator { display: block; float: left; margin: 0pt 5px; line-height: 16px ! important; }

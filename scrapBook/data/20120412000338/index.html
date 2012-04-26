@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<title>Google Storage for Developers初体验 | 未完待续</title>
+
+	
+	<link type="text/plain" rel="author" href="http://ioio.name/humans.txt">
+	<link rel="alternate" type="application/rss+xml" title="未完待续 RSS Feed" href="http://ioio.name/feed">
+	<link rel="pingback" href="http://ioio.name/xmlrpc.php">
+
+	<link rel="SHORTCUT ICON" href="favicon.ico">
+	<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico"> 
+	<!--link rel="icon" type="image/vnd.microsoft.icon" href="http://ioio.name/wp-content/themes/renegade/favicon.ico" /--> 
+
+	
+	
+	
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" href="http://ioio.name/wp-content/themes/renegade/ie.css" type="text/css" media="all" />
+	<![endif]-->
+
+	
+
+	
+	
+	<link rel="alternate" type="application/rss+xml" title="未完待续 » Google Storage for Developers初体验 评论 Feed" href="http://ioio.name/google-storage-for-developers-preview.html/feed">
+
+
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://ioio.name/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://ioio.name/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Godaddy $0.99域名优惠码(2010/06/25)" href="http://ioio.name/godaddy-soccer99.html">
+<link rel="next" title="App Engine SDK 1.35发布" href="http://ioio.name/app-engine-sdk-1-3-5-released.html">
+<meta name="generator" content="WordPress 3.3.1">
+<link rel="canonical" href="http://ioio.name/google-storage-for-developers-preview.html">
+<link rel="shortlink" href="http://ioio.name/?p=1397">
+
+
+<!-- wp thread comment 1.4.9.4.002 -->
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body class="single single-post postid-1397 single-format-standard">
+<div id="notify-container" style="display: none; text-align: center;"><span style="background-color: rgb(255, 238, 136); font-size: 13px; margin: 0pt; padding: 5px;">
+  <a href="https://auctions.godaddy.com/trpItemListing.aspx?&amp;miid=44468827" target="_top">Domain For Sale, Buy Now for $10</a> | <a href="https://auctions.godaddy.com/trpItemListing.aspx?&amp;miid=44468818" target="_top">Domain For Sale</a> | <a href="http://www.macspot.net/" target="_top">Mac Spot</a>.</span></div>
+<!--[if lt IE 7]>  <div style='border: 1px solid #F7941D; background: #FEEFDA; text-align: center; clear: both; height: 75px; position: relative;'>    <div style='position: absolute; right: 3px; top: 3px; font-family: courier new; font-weight: bold;'><a href='#' onclick='javascript:this.parentNode.parentNode.style.display="none"; return false;'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-cornerx.jpg' style='border: none;' alt='Close this notice'/></a></div>    <div style='width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: black;'>      <div style='width: 75px; float: left;'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-warning.jpg' alt='Warning!'/></div>      <div style='width: 275px; float: left; font-family: Arial, sans-serif;'>        <div style='font-size: 14px; font-weight: bold; margin-top: 12px;'>You are using an outdated browser</div>        <div style='font-size: 12px; margin-top: 6px; line-height: 12px;'>For a better experience using this site, please upgrade to a modern web browser.</div>      </div>      <div style='width: 75px; float: left;'><a href='http://www.firefox.com' target='_blank'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-firefox.jpg' style='border: none;' alt='Get Firefox 3.5'/></a></div>      <div style='width: 75px; float: left;'><a href='http://www.browserforthebetter.com/download.html' target='_blank'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-ie8.jpg' style='border: none;' alt='Get Internet Explorer 8'/></a></div>      <div style='width: 73px; float: left;'><a href='http://www.apple.com/safari/download/' target='_blank'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-safari.jpg' style='border: none;' alt='Get Safari 4'/></a></div>      <div style='float: left;'><a href='http://www.google.com/chrome' target='_blank'><img src='http://www.ie6nomore.com/files/theme/ie6nomore-chrome.jpg' style='border: none;' alt='Get Google Chrome'/></a></div>    </div>  </div>  <![endif]-->
+
+<div class="bgBar">
+	<div class="bgBarInner"></div>
+</div>
+
+<div class="wrap">
+
+	<div class="topbar">
+
+		<div class="nav">
+			<ul>
+				<li class="subscribe"><a href="http://ioio.name/feed" target="_top">Subscribe</a></li>				<li class="home-link"><a href="http://ioio.name/">Home</a></li>
+				<li class="page_item page-item-984"><a href="http://ioio.name/mt">(mt) Media Temple</a></li>
+<li class="page_item page-item-930"><a href="http://ioio.name/about">About</a></li>
+<li class="page_item page-item-1011"><a href="http://ioio.name/godaddy">Godaddy</a></li>
+<li class="page_item page-item-909"><a href="http://ioio.name/acm">Online Judge System Research</a></li>
+<li class="page_item page-item-1606"><a href="http://ioio.name/status">Wp-Status</a></li>
+	
+			</ul>
+		</div><!-- /menu -->
+
+	</div><!-- /topbar -->
+
+	<div class="header">
+
+		<h1><a href="http://ioio.name/">未完待续</a></h1><h4>To Be Continued</h4>
+	</div><!-- /header -->
+
+	<div class="content">
+
+		<div class="c1">
+
+			
+  
+	
+	<!-- post -->
+	<div class="post-1397 post type-post status-publish format-standard hentry category-general tag-amazon-s3 tag-gae tag-google-app-engine tag-google-storage tag-gs" id="post-1397">
+		<h1 class="post-title"><a href="http://ioio.name/google-storage-for-developers-preview.html" rel="bookmark">Google Storage for Developers初体验</a></h1>
+		<div class="post-text">
+		<p>周日还在写邮件询问<a href="http://code.google.com/apis/storage/docs/overview.html" target="_top">Google Storage</a>的事，它现在只针对美国开发者开放。周一还是意外收到邮件拿到了邀请，免不得晚上熬夜把玩了一番。现在收到邀请的开发者配额有100GB的数据存储空间和300GB的月流量，超过使用可以向他们开发团队申请增加。<br>
+<a href="http://ioio.name/wp-content/uploads/2010/06/gs_invite.png"><img src="gs_invite-300x152.png" alt="" title="gs_invite" class="alignnone size-medium wp-image-1398" height="152" width="300"></a></p>
+<p>Google Storage for Developers（简称GS）目前提供三种形式的管理工具，基于网页界面的<a href="https://sandbox.google.com/storage/" target="_top">Google Storage Manager</a>，开源的命令行管理工具<a href="http://code.google.com/apis/storage/docs/gsutil.html" target="_top">GSUtil Tool</a>和<a href="http://code.google.com/apis/storage/docs/gspythonlibrary.html" target="_top">Python Library</a>（改进过的<a href="http://code.google.com/p/boto" target="_top">boto</a>，原为Amazon S3的）。</p>
+<p><strong>Google Storage Manager</strong><br>
+<a href="http://ioio.name/wp-content/uploads/2010/06/google_storage_manager.png"><img src="google_storage_manager-300x129.png" alt="" title="google_storage_manager" class="alignnone size-medium wp-image-1399" height="129" width="300"></a><br>
+<a href="https://sandbox.google.com/storage/" target="_top">Google Storage Manager</a>的界面比较简单，只能新建Bucket(存储库)，新建文件夹，批量上传，批量删除和共享文件，虽然GS有严格的访问控制权限（ACLs），但在Google Storage Manager里面还无法管理权限分配。同时还提供了一个类似书签的地方保存经常使用的存储库和文件夹用于快捷访问。<br>
+Google Storage Manager 不能单独使用IE访问，可以使用下面版本的浏览器访问：</p>
+<ul>
+<li>Google Chrome 4.1+</li>
+<li>Chrome Frame for IE</li>
+<li>Firefox 3.6+</li>
+<li>Safari 4.0+</li>
+</ul>
+<p>这主要原因可能是IE原生不支持多文件的选取与上传。</p>
+<p><strong>GSUtil Tool</strong><br>
+<a href="http://ioio.name/wp-content/uploads/2010/06/gsutil_tool.png"><img src="gsutil_tool-300x186.png" alt="" title="gsutil_tool" class="alignnone size-medium wp-image-1400" height="186" width="300"></a><br>
+<a href="http://code.google.com/apis/storage/docs/gsutil.html" target="_top">GSUtil Tool</a>是更强大的命令行管理工具，可以安装在Linux和Mac OS上，也可以通过Cygwin安装在Windows上。第一次运行GSUtil Tool时候需要进行简单的配置，如果还没有手工配置直接输入命令就会出现提示，输入授权ID和访问KEY重新执行刚才的命令就可以了。<br>
+<a href="http://ioio.name/wp-content/uploads/2010/06/gs_boto.png"><img src="gs_boto-300x83.png" alt="" title="gs_boto" class="alignnone size-medium wp-image-1402" height="83" width="300"></a></p>
+<p>通过GSUtil Tool可以直接像操作本地文件一样操作远程文件，它提供一些类似本地shell的命令：<br>
+创建存储库</p>
+
+<div class="wp_syntax"><div class="code"><pre class="shell" style="font-family: monospace;">gsutil mb gs://cats gs://dogs</pre></div></div>
+
+<p>上传文件</p>
+
+<div class="wp_syntax"><div class="code"><pre class="shell" style="font-family: monospace;">gsutil cp *.jpg gs://dogs</pre></div></div>
+
+<p>列出存储库或文件</p>
+
+<div class="wp_syntax"><div class="code"><pre class="shell" style="font-family: monospace;">gsutil ls
+gsutil ls gs://dogs</pre></div></div>
+
+<p>移动或改名</p>
+
+<div class="wp_syntax"><div class="code"><pre class="shell" style="font-family: monospace;">gsutil mv gs://dogs/*.jpg gs://cats/
+gsutil mv gs://cats/poodle.jpg gs://cats/siamese.jpg</pre></div></div>
+
+<p>下载</p>
+
+<div class="wp_syntax"><div class="code"><pre class="shell" style="font-family: monospace;">gsutil cp gs://cats/*.jpg file://pets/</pre></div></div>
+
+<p>改变授权</p>
+
+<div class="wp_syntax"><div class="code"><pre class="shell" style="font-family: monospace;">gsutil setacl acls.txt gs://cats/siamese.jpg
+gsutil setacl bucket-owner-full-control gs://cats/siamese.jpg</pre></div></div>
+
+<p>删除文件或者存储库</p>
+
+<div class="wp_syntax"><div class="code"><pre class="shell" style="font-family: monospace;">gsutil rm gs://cats/collie.jpg
+gsutil rb gs://dogs</pre></div></div>
+
+<p><strong>Python Library</strong><br>
+<a href="http://code.google.com/apis/storage/docs/gspythonlibrary.html" target="_top">Python Library</a>是提供的一组Python API用于访问Google Storage，它源自boto（AS3的访问接口）。使用Python Library访问Google Storage仍然需要依赖GSUtil。目前Google App Engine已经支持使用Python Library访问Google Storage。</p>
+<p>此外Google Storage API提供了非常RESTful的接口用于访问Google Storage，除了使用上面的工具，你还可以自己动手通过API访问Google Storage。<br>
+我在GAE上放了一个<a href="http://storage-cdn.appspot.com/" target="_top">DEMO</a>用于遍历存储库中文件及提供下载链接，欢迎<a href="http://commondatastorage.googleapis.com/ioio/diveintohtml5.tar.gz" target="_top">测试速度</a>。</p>
+<p>Demo源码下载 <a class="downloadlink" href="http://ioio.name/downloads/37" title=" downloaded 369 times">Google Storage on GAE Demo (369)</a></p>
+<p><em>题外话：</em><br>
+Google Storage的出现弥补了<a href="http://code.google.com/appengine/" target="_top">Google App Engine</a>文件存储的缺陷，但是GAE文件执行时间的问题导致还是无法利用GAE来传送大文件到GS。虽然网站上已经对资源的标了价格，但目前Google还没有提供查询资源使用情况及付费的入口。另一方面GS比S3吸引力更大的地方是有免费配额，无疑为在项目初期选择它又多了一道砝码。<br>
+-EOF</p>
+		</div>
+		<div class="post-meta">
+			<div class="row">
+				<a href="http://ioio.name/google-storage-for-developers-preview.html#comments" class="post-comments" title="《Google Storage for Developers初体验》上的评论">18 Comments</a>				<span class="post-author">by <a href="http://ioio.name/author/admin" title="由 枯藤昏鸦 发布" rel="author">枯藤昏鸦</a> &nbsp;/&nbsp; </span>
+				<span class="post-date">六月 29, 2010 &nbsp;/&nbsp; </span>
+				<span class="post-cat">Posted in: <a href="http://ioio.name/category/general" title="查看 就是不分类 中的全部文章" rel="category tag">就是不分类</a></span>
+							</div>
+			<div class="row"><span class="post-tag">Tagged: <a href="http://ioio.name/tag/amazon-s3" rel="tag">Amazon S3</a>, <a href="http://ioio.name/tag/gae" rel="tag">GAE</a>, <a href="http://ioio.name/tag/google-app-engine" rel="tag">Google App Engine</a>, <a href="http://ioio.name/tag/google-storage" rel="tag">Google Storage</a>, <a href="http://ioio.name/tag/gs" rel="tag">GS</a></span></div>
+		</div>
+<div class="post-meta">
+<ioio:share><a class="qzone" title="分享到QQ空间" target="_top" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Fioio.name%2Fgoogle-storage-for-developers-preview.html&amp;title=Google%20Storage%20for%20Developers%E5%88%9D%E4%BD%93%E9%AA%8C%20%7C%20%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD&amp;site=%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD"><img src="share_bt.png" alt="分享到QQ空间"></a><a class="sina" title="分享到新浪微博" target="_top" href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Fioio.name%2Fgoogle-storage-for-developers-preview.html&amp;appkey=&amp;title=&amp;pic=&amp;ralateUid="></a></ioio:share>
+</div>
+			<div class="post-nav">
+			<div class="alignleft"><span>« Previous post</span><br><a href="http://ioio.name/godaddy-soccer99.html" rel="prev">Godaddy $0.99域名优惠码(2010/06/25)</a></div>
+			<div class="alignright textalignright"><span>Next post »</span><br><a href="http://ioio.name/app-engine-sdk-1-3-5-released.html" rel="next">App Engine SDK 1.35发布</a></div>
+		</div>
+
+		<div class="sep"></div>
+
+		<!-- comments begin here -->
+<div id="comments">
+<div>
+
+
+</div>
+	<h2 class="comment-heading" id="comments">18 Responses<a href="#respond">Leave one →</a></h2>
+
+	<div class="navigation">
+			</div>
+
+	<ol class="commentlist">
+		<li class="comment even thread-even depth-1" id="comment-796">
+	<div class="comment-body" id="div-comment-796">
+		<div class="comment-meta">
+			<img alt="" src="2de66d92ac8d311a1d1fce594004db30" class="avatar avatar-32 photo" height="32" width="32">			<h4><a href="http://neolee.com/" rel="external nofollow" class="url">老N</a></h4> &nbsp;/&nbsp;
+			<a href="http://ioio.name/google-storage-for-developers-preview.html/comment-page-1#comment-796" class="comment-date">2010/06/29</a>
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=796#respond" onclick="quote('796', '老N', 'comment','div-comment-796', false, false); try { addComment.moveForm('comment-796', '796', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a>
+					</div>
+		<div class="comment-text">
+						<div id="q-796">
+<p>google 终于出网盘了？ 如果能公用就好好了。 这个只是给developer的。。。</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,796,1,'老N');">回复</a>]</p><div class="comment-childs chalt" id="comment-797"><img alt="" src="03487f19b54904dbf98f5ba4f10b04bb" class="avatar avatar-32 photo" height="32" width="32"><p><cite>枯藤昏鸦</cite> 回复:<br><small class="commentmetadata">六月 29th, 2010
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=797#respond" onclick="quote('797', '枯藤昏鸦', 'comment','div-comment-797', false, false); try { addComment.moveForm('comment-797', '797', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a> at 11:36 下午</small></p><div id="q-797">
+<p><a href="#comment-796" rel="nofollow">@老N</a>, 给普通用户用的就是Google Docs</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,797,2,'枯藤昏鸦');">回复</a>]</p></div>		</div>
+			</div><!-- /comment-body -->
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-801">
+	<div class="comment-body" id="div-comment-801">
+		<div class="comment-meta">
+			<img alt="" src="257f3fdccdd0e08cbaea7a35172994e7" class="avatar avatar-32 photo" height="32" width="32">			<h4>昏鸦</h4> &nbsp;/&nbsp;
+			<a href="http://ioio.name/google-storage-for-developers-preview.html/comment-page-1#comment-801" class="comment-date">2010/06/30</a>
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=801#respond" onclick="quote('801', '昏鸦', 'comment','div-comment-801', false, false); try { addComment.moveForm('comment-801', '801', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a>
+					</div>
+		<div class="comment-text">
+						<div id="q-801">
+<p>楼主，那美女是谁啊？</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,801,1,'昏鸦');">回复</a>]</p><div class="comment-childs chalt" id="comment-804"><img alt="" src="03487f19b54904dbf98f5ba4f10b04bb" class="avatar avatar-32 photo" height="32" width="32"><p><cite>枯藤昏鸦</cite> 回复:<br><small class="commentmetadata">六月 30th, 2010
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=804#respond" onclick="quote('804', '枯藤昏鸦', 'comment','div-comment-804', false, false); try { addComment.moveForm('comment-804', '804', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a> at 11:15 上午</small></p><div id="q-804">
+<p><a href="#comment-801" rel="nofollow">@昏鸦</a>, 俺不认识。</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,804,2,'枯藤昏鸦');">回复</a>]</p></div>		</div>
+			</div><!-- /comment-body -->
+</li>
+<li class="comment even thread-even depth-1" id="comment-802">
+	<div class="comment-body" id="div-comment-802">
+		<div class="comment-meta">
+			<img alt="" src="5fc879196b2cf2d036fdf2dbac2b32b1" class="avatar avatar-32 photo" height="32" width="32">			<h4><a href="https://moses.appspot.com/" rel="external nofollow" class="url">Moses</a></h4> &nbsp;/&nbsp;
+			<a href="http://ioio.name/google-storage-for-developers-preview.html/comment-page-1#comment-802" class="comment-date">2010/06/30</a>
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=802#respond" onclick="quote('802', 'Moses', 'comment','div-comment-802', false, false); try { addComment.moveForm('comment-802', '802', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a>
+					</div>
+		<div class="comment-text">
+						<div id="q-802">
+<p>用了, 感觉不错, 但是对 Google Storage Manager 的文件夹操作不是很理解,  文档裡写明 Bucket 下的结构是平级的, 而用 Google Storage Manager 创建的文件夹在 gsutil 下看会被加上特殊符号, 感觉很怪.</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,802,1,'Moses');">回复</a>]</p><div class="comment-childs chalt" id="comment-805"><img alt="" src="03487f19b54904dbf98f5ba4f10b04bb" class="avatar avatar-32 photo" height="32" width="32"><p><cite>枯藤昏鸦</cite> 回复:<br><small class="commentmetadata">六月 30th, 2010
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=805#respond" onclick="quote('805', '枯藤昏鸦', 'comment','div-comment-805', false, false); try { addComment.moveForm('comment-805', '805', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a> at 11:17 上午</small></p><div id="q-805">
+<p><a href="#comment-802" rel="nofollow">@Moses</a>, 应该是作为路径标识符使用的。</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,805,2,'枯藤昏鸦');">回复</a>]</p></div>		</div>
+			</div><!-- /comment-body -->
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-806">
+	<div class="comment-body" id="div-comment-806">
+		<div class="comment-meta">
+			<img alt="" src="4c6f8b5565e4884f532c5c92b3b1a115" class="avatar avatar-32 photo" height="32" width="32">			<h4><a href="http://monai.mobi/yamiedie/" rel="external nofollow" class="url">雅蠛蝶</a></h4> &nbsp;/&nbsp;
+			<a href="http://ioio.name/google-storage-for-developers-preview.html/comment-page-1#comment-806" class="comment-date">2010/06/30</a>
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=806#respond" onclick="quote('806', '雅蠛蝶', 'comment','div-comment-806', false, false); try { addComment.moveForm('comment-806', '806', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a>
+					</div>
+		<div class="comment-text">
+						<div id="q-806">
+<p>也是昨天收到的邀请码，速度还行</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,806,1,'雅蠛蝶');">回复</a>]</p><div class="comment-childs chalt" id="comment-2069"><img alt="" src="c92286c8ed3fbd0d87fdaafd67347d9c" class="avatar avatar-32 photo" height="32" width="32"><p><cite><a href="http://blog.v2xy.com/" rel="external nofollow" class="url">xyu_ovi</a></cite> 回复:<br><small class="commentmetadata">三月 19th, 2011
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=2069#respond" onclick="quote('2069', 'xyu_ovi', 'comment','div-comment-2069', false, false); try { addComment.moveForm('comment-2069', '2069', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a> at 11:45 下午</small></p><div id="q-2069">
+<p>我靠！居然真的遇到monai.mobi的主人了！这个实在是～～～～～</p>
+<p>膜拜啊！请摸奶大神到我的博客留个言吧！</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,2069,2,'xyu_ovi');">回复</a>]</p></div>		</div>
+			</div><!-- /comment-body -->
+</li>
+<li class="comment even thread-even depth-1" id="comment-893">
+	<div class="comment-body" id="div-comment-893">
+		<div class="comment-meta">
+			<img alt="" src="286a65e82cbedfda1f625f7fff6cebf7" class="avatar avatar-32 photo" height="32" width="32">			<h4><a href="http://www.niehui.info/" rel="external nofollow" class="url">拆墙部队</a></h4> &nbsp;/&nbsp;
+			<a href="http://ioio.name/google-storage-for-developers-preview.html/comment-page-1#comment-893" class="comment-date">2010/07/12</a>
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=893#respond" onclick="quote('893', '拆墙部队', 'comment','div-comment-893', false, false); try { addComment.moveForm('comment-893', '893', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a>
+					</div>
+		<div class="comment-text">
+						<div id="q-893">
+<p>哇靠，你居然拿到了。</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,893,1,'拆墙部队');">回复</a>]</p>		</div>
+			</div><!-- /comment-body -->
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-918">
+	<div class="comment-body" id="div-comment-918">
+		<div class="comment-meta">
+			<img alt="" src="fcd13734781560882a172342af55ed6b" class="avatar avatar-32 photo" height="32" width="32">			<h4>BaoGuo</h4> &nbsp;/&nbsp;
+			<a href="http://ioio.name/google-storage-for-developers-preview.html/comment-page-1#comment-918" class="comment-date">2010/07/15</a>
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=918#respond" onclick="quote('918', 'BaoGuo', 'comment','div-comment-918', false, false); try { addComment.moveForm('comment-918', '918', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a>
+					</div>
+		<div class="comment-text">
+						<div id="q-918">
+<p>申请很久了，到现在都没有拿到…………<br>
+有什么诀窍么？</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,918,1,'BaoGuo');">回复</a>]</p><div class="comment-childs chalt" id="comment-960"><img alt="" src="b8cfcc6bdb86535761c4fa6f2ad4a401" class="avatar avatar-32 photo" height="32" width="32"><p><cite><a href="http://www.x2009.net/" rel="external nofollow" class="url">电脑知识收藏夹</a></cite> 回复:<br><small class="commentmetadata">七月 23rd, 2010
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=960#respond" onclick="quote('960', '电脑知识收藏夹', 'comment','div-comment-960', false, false); try { addComment.moveForm('comment-960', '960', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a> at 8:55 上午</small></p><div id="q-960">
+<p>应该没有诀窍，我的貌似也是在上个月申请的，昨天刚收到。</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,960,2,'电脑知识收藏夹');">回复</a>]</p><div class="comment-childs" id="comment-981"><img alt="" src="fcd13734781560882a172342af55ed6b" class="avatar avatar-32 photo" height="32" width="32"><p><cite>Baoguo</cite> 回复:<br><small class="commentmetadata">七月 27th, 2010
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=981#respond" onclick="quote('981', 'Baoguo', 'comment','div-comment-981', false, false); try { addComment.moveForm('comment-981', '981', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a> at 9:16 下午</small></p><div id="q-981">
+<p>我昨天也拿到了，哈哈，开心啊，赶紧玩一把</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,981,3,'Baoguo');">回复</a>]</p></div></div>		</div>
+			</div><!-- /comment-body -->
+</li>
+<li class="comment even thread-even depth-1" id="comment-978">
+	<div class="comment-body" id="div-comment-978">
+		<div class="comment-meta">
+			<img alt="" src="2e4748be349d4583b9c1d2cfbc7b048a" class="avatar avatar-32 photo" height="32" width="32">			<h4><a href="http://oxyz.tk/" rel="external nofollow" class="url">MC柯</a></h4> &nbsp;/&nbsp;
+			<a href="http://ioio.name/google-storage-for-developers-preview.html/comment-page-1#comment-978" class="comment-date">2010/07/27</a>
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=978#respond" onclick="quote('978', 'MC柯', 'comment','div-comment-978', false, false); try { addComment.moveForm('comment-978', '978', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a>
+					</div>
+		<div class="comment-text">
+						<div id="q-978">
+<p>我也收到邀请了，但是不知道要怎么耍</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,978,1,'MC柯');">回复</a>]</p>		</div>
+			</div><!-- /comment-body -->
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-1034">
+	<div class="comment-body" id="div-comment-1034">
+		<div class="comment-meta">
+			<img alt="" src="4bf47b48d7951ad2a9326a970120b7b9" class="avatar avatar-32 photo" height="32" width="32">			<h4><a href="http://fly3q.com/" rel="external nofollow" class="url">3q博客</a></h4> &nbsp;/&nbsp;
+			<a href="http://ioio.name/google-storage-for-developers-preview.html/comment-page-1#comment-1034" class="comment-date">2010/08/08</a>
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=1034#respond" onclick="quote('1034', '3q博客', 'comment','div-comment-1034', false, false); try { addComment.moveForm('comment-1034', '1034', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a>
+					</div>
+		<div class="comment-text">
+						<div id="q-1034">
+<p>我终于也收到了</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,1034,1,'3q博客');">回复</a>]</p>		</div>
+			</div><!-- /comment-body -->
+</li>
+<li class="comment even thread-even depth-1" id="comment-1115">
+	<div class="comment-body" id="div-comment-1115">
+		<div class="comment-meta">
+			<img alt="" src="7bf9cae1cc3a65712f35ce99cbe9fe8d" class="avatar avatar-32 photo" height="32" width="32">			<h4>Baiyssy</h4> &nbsp;/&nbsp;
+			<a href="http://ioio.name/google-storage-for-developers-preview.html/comment-page-1#comment-1115" class="comment-date">2010/09/06</a>
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=1115#respond" onclick="quote('1115', 'Baiyssy', 'comment','div-comment-1115', false, false); try { addComment.moveForm('comment-1115', '1115', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a>
+					</div>
+		<div class="comment-text">
+						<div id="q-1115">
+<p>那个遍历文件的程序能给我一个吗？我想在手机上用<br>
+谢谢~~~</p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,1115,1,'Baiyssy');">回复</a>]</p><div class="comment-childs chalt" id="comment-1135"><img alt="" src="03487f19b54904dbf98f5ba4f10b04bb" class="avatar avatar-32 photo" height="32" width="32"><p><cite>枯藤昏鸦</cite> 回复:<br><small class="commentmetadata">九月 12th, 2010
+		<a class="comment-quote-link" href="http://ioio.name/google-storage-for-developers-preview.html?replytocom=1135#respond" onclick="quote('1135', '枯藤昏鸦', 'comment','div-comment-1135', false, false); try { addComment.moveForm('comment-1135', '1135', 'respond', '1397'); } catch(e) {}; return false;">
+		<img src="quote-comment.png"></a> at 10:30 下午</small></p><div id="q-1135">
+<p>Demo的源码  <a href="http://ioio.name/downloads/37" rel="nofollow">http://ioio.name/downloads/37</a></p>
+</div>
+<p class="thdrpy">[<a href="javascript:void(0)" onclick="movecfm(event,1135,2,'枯藤昏鸦');">回复</a>]</p></div>		</div>
+			</div><!-- /comment-body -->
+</li>
+	</ol>
+
+	<div class="navigation">
+			</div>
+
+	<ol class="trackbacklist">
+			<li class="pingback even thread-even depth-1" id="comment-795">
+				<a href="http://www.perday.tv/news/archives/142899" rel="external nofollow" class="url">Google Storage for Developers初体验 « 每日IT新闻，最新IT资讯，聚合多站点消息，保证你与世界同步</a></li>
+	<li class="pingback odd alt thread-odd thread-alt depth-1" id="comment-798">
+				<a href="http://topsy.com/ioio.name/google-storage-for-developers-preview.html?utm_source=pingback&amp;utm_campaign=L2" rel="external nofollow" class="url">Tweets that mention Google Storage for Developers初体验 -- Topsy.com</a></li>
+	</ol>
+
+
+
+
+	<h2 class="comment-heading">Leave a Reply</h2>
+
+	<div id="respond">
+
+	
+		<form action="http://ioio.name/wp-comments-post.php" method="post" id="commentform">
+
+		<div class="cancel-comment-reply">
+			<p><a rel="nofollow" id="cancel-comment-reply-link" href="http://ioio.name/google-storage-for-developers-preview.html#respond" style="display: none;">点击这里取消回复。</a></p>
+		</div>
+
+		
+		
+			<p class="cform-name">
+				<input name="author" id="author" tabindex="1" aria-required="true" value="" type="text">
+				<label for="author">Name <span class="required">*</span></label>
+			</p>
+
+			<p class="cform-mail">
+				<input name="email" id="email" tabindex="2" aria-required="true" value="" type="text">
+				<label for="email">E-mail <span class="required">*</span></label>
+			</p>
+
+			<p class="cform-web">
+				<input name="url" id="url" tabindex="3" value="" type="text">
+				<label for="url">Website</label>
+			</p>
+
+		
+		<p><textarea name="comment" id="comment" tabindex="4"></textarea></p>
+
+		<input name="submit" id="submit" tabindex="5" value="Submit Comment" class="button" type="submit">
+
+		<input name="comment_post_ID" value="1397" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+
+		<p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="0e4edab5a0" type="hidden"></p><p><input id="comment_reply_ID" name="comment_reply_ID" value="0" type="hidden"><input id="comment_reply_dp" name="comment_reply_dp" value="0" type="hidden"></p><div id="cancel_reply" style="display: none;"><a href="javascript:void(0)" onclick="movecfm(null,0,1,null);" style="color: red;">点击取消回复</a></div>
+
+
+		</form><strong>NOTICE:</strong> You should type some Chinese word (like “你好”) in your comment to pass the spam-check, thanks for your patience!<!-- /commentform -->
+
+		</div><!-- /respond -->
+
+</div><!-- /comments -->
+
+<!-- comments end here -->	
+	</div>
+	<!--/post -->
+		
+		
+	<div class="navigation">
+			</div>
+	<div class="navigation">
+		<div class="alignleft"></div>
+		<div class="alignright"></div>
+	</div>
+
+	
+		</div><!-- /c1 -->
+
+		<div class="c2">
+
+<ul id="widgets">
+<li class="widget widget_search">
+
+
+</li>
+<li id="text-6" class="widget widget_text"><h2 class="widgettitle">推荐</h2>
+			<div class="textwidget"><a href="http://novel.hongxiu.com/a/423572/"><img src="20120211120856.jpg"></a><br>
+<a href="http://novel.hongxiu.com/a/423572/">《人鱼的泡沫爱情》</a></div>
+		</li>
+<li id="text-4" class="widget widget_text">			<div class="textwidget">
+<div><a href="http://lib.closetou.com/diveintohtml5/">DIVE INTO HTML 5 中文版</a>
+</div>
+
+<div><a href="http://ioio.name/html-css-get-up-guide.html">HTML&amp;CSS 入门指南</a>
+</div>
+
+<div>
+<a href="http://ioio.name/javascript-get-up-guide.html">JavaScript 入门指南</a>
+</div>
+</div>
+		</li>
+<li id="text-5" class="widget widget_text"><h2 class="widgettitle">分享</h2>
+			<div class="textwidget"><div>
+<ioio:share><a class="qzone" title="分享到QQ空间" target="_top" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Fioio.name%2Fgoogle-storage-for-developers-preview.html&amp;title=Google%20Storage%20for%20Developers%E5%88%9D%E4%BD%93%E9%AA%8C%20%7C%20%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD&amp;site=%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD"><img src="share_bt.png" alt="分享到QQ空间"></a><a class="sina" title="分享到新浪微博" target="_top" href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Fioio.name%2Fgoogle-storage-for-developers-preview.html&amp;appkey=&amp;title=&amp;pic=&amp;ralateUid="></a></ioio:share>
+</div></div>
+		</li>
+<li id="search-3" class="widget widget_search"><form method="get" id="searchform" action="http://ioio.name/">
+	<input onfocus="if (this.value == 'Search') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search';}" value="Search" name="s" id="s" type="text">
+
+</form></li>
+<li id="tag_cloud-3" class="widget widget_tag_cloud"><h2 class="widgettitle">标签</h2>
+<div class="tagcloud"><a href="http://ioio.name/tag/mtmediatemple" class="tag-link-86" title="5 个话题" style="font-size: 12.5161pt;">(mt)MediaTemple</a>
+<a href="http://ioio.name/tag/net" class="tag-link-89" title="4 个话题" style="font-size: 11.3118pt;">.NET</a>
+<a href="http://ioio.name/tag/acm" class="tag-link-7" title="7 个话题" style="font-size: 14.3226pt;">ACM</a>
+<a href="http://ioio.name/tag/alexa" class="tag-link-9" title="2 个话题" style="font-size: 8pt;">Alexa</a>
+<a href="http://ioio.name/tag/android" class="tag-link-10" title="11 个话题" style="font-size: 17.0323pt;">Android</a>
+<a href="http://ioio.name/tag/api" class="tag-link-123" title="5 个话题" style="font-size: 12.5161pt;">API</a>
+<a href="http://ioio.name/tag/app-engine" class="tag-link-11" title="3 个话题" style="font-size: 9.80645pt;">App Engine</a>
+<a href="http://ioio.name/tag/apps" class="tag-link-12" title="3 个话题" style="font-size: 9.80645pt;">APPS</a>
+<a href="http://ioio.name/tag/asp" class="tag-link-13" title="2 个话题" style="font-size: 8pt;">ASP</a>
+<a href="http://ioio.name/tag/asp-net" class="tag-link-14" title="3 个话题" style="font-size: 9.80645pt;">ASP.NET</a>
+<a href="http://ioio.name/tag/c" class="tag-link-17" title="3 个话题" style="font-size: 9.80645pt;">C++</a>
+<a href="http://ioio.name/tag/code-jam" class="tag-link-20" title="2 个话题" style="font-size: 8pt;">Code Jam</a>
+<a href="http://ioio.name/tag/coupon-code" class="tag-link-149" title="12 个话题" style="font-size: 17.4839pt;">Coupon Code</a>
+<a href="http://ioio.name/tag/css" class="tag-link-85" title="7 个话题" style="font-size: 14.3226pt;">CSS</a>
+<a href="http://ioio.name/tag/design" class="tag-link-22" title="2 个话题" style="font-size: 8pt;">Design</a>
+<a href="http://ioio.name/tag/dns" class="tag-link-23" title="5 个话题" style="font-size: 12.5161pt;">DNS</a>
+<a href="http://ioio.name/tag/domain" class="tag-link-24" title="25 个话题" style="font-size: 22pt;">Domain</a>
+<a href="http://ioio.name/tag/email" class="tag-link-25" title="3 个话题" style="font-size: 9.80645pt;">Email</a>
+<a href="http://ioio.name/tag/exam" class="tag-link-26" title="3 个话题" style="font-size: 9.80645pt;">Exam</a>
+<a href="http://ioio.name/tag/favicon" class="tag-link-77" title="3 个话题" style="font-size: 9.80645pt;">favicon</a>
+<a href="http://ioio.name/tag/gae" class="tag-link-103" title="19 个话题" style="font-size: 20.3441pt;">GAE</a>
+<a href="http://ioio.name/tag/godaddy" class="tag-link-93" title="21 个话题" style="font-size: 20.9462pt;">Godaddy</a>
+<a href="http://ioio.name/tag/golang" class="tag-link-28" title="2 个话题" style="font-size: 8pt;">Golang</a>
+<a href="http://ioio.name/tag/google" class="tag-link-29" title="14 个话题" style="font-size: 18.5376pt;">GOOGLE</a>
+<a href="http://ioio.name/tag/google-storage" class="tag-link-150" title="3 个话题" style="font-size: 9.80645pt;">Google Storage</a>
+<a href="http://ioio.name/tag/gtalk" class="tag-link-30" title="2 个话题" style="font-size: 8pt;">GTalk</a>
+<a href="http://ioio.name/tag/hangzhou" class="tag-link-32" title="3 个话题" style="font-size: 9.80645pt;">HangZhou</a>
+<a href="http://ioio.name/tag/host" class="tag-link-76" title="4 个话题" style="font-size: 11.3118pt;">Host</a>
+<a href="http://ioio.name/tag/html" class="tag-link-101" title="5 个话题" style="font-size: 12.5161pt;">HTML</a>
+<a href="http://ioio.name/tag/html5" class="tag-link-98" title="7 个话题" style="font-size: 14.3226pt;">HTML5</a>
+<a href="http://ioio.name/tag/http" class="tag-link-111" title="3 个话题" style="font-size: 9.80645pt;">HTTP</a>
+<a href="http://ioio.name/tag/icpc" class="tag-link-36" title="3 个话题" style="font-size: 9.80645pt;">ICPC</a>
+<a href="http://ioio.name/tag/java" class="tag-link-129" title="3 个话题" style="font-size: 9.80645pt;">Java</a>
+<a href="http://ioio.name/tag/javascript" class="tag-link-137" title="11 个话题" style="font-size: 17.0323pt;">JavaScript</a>
+<a href="http://ioio.name/tag/jquery" class="tag-link-39" title="2 个话题" style="font-size: 8pt;">jQuery</a>
+<a href="http://ioio.name/tag/mac-os-x" class="tag-link-159" title="9 个话题" style="font-size: 15.828pt;">Mac OS X</a>
+<a href="http://ioio.name/tag/mercurial" class="tag-link-83" title="3 个话题" style="font-size: 9.80645pt;">Mercurial</a>
+<a href="http://ioio.name/tag/mvc" class="tag-link-43" title="5 个话题" style="font-size: 12.5161pt;">MVC</a>
+<a href="http://ioio.name/tag/online-judge" class="tag-link-97" title="4 个话题" style="font-size: 11.3118pt;">Online Judge</a>
+<a href="http://ioio.name/tag/python" class="tag-link-44" title="14 个话题" style="font-size: 18.5376pt;">Python</a>
+<a href="http://ioio.name/tag/robots" class="tag-link-78" title="2 个话题" style="font-size: 8pt;">robots</a>
+<a href="http://ioio.name/tag/theme" class="tag-link-53" title="4 个话题" style="font-size: 11.3118pt;">Theme</a>
+<a href="http://ioio.name/tag/ubuntu" class="tag-link-62" title="8 个话题" style="font-size: 15.0753pt;">Ubuntu</a>
+<a href="http://ioio.name/tag/vps" class="tag-link-94" title="3 个话题" style="font-size: 9.80645pt;">VPS</a>
+<a href="http://ioio.name/tag/wordpress" class="tag-link-75" title="6 个话题" style="font-size: 13.5699pt;">WordPress</a></div>
+</li>
+		<li id="recent-posts-3" class="widget widget_recent_entries">		<h2 class="widgettitle">近期文章</h2>
+		<ul>
+				<li><a href="http://ioio.name/object-oriented-javascript-note-4.html" title="Object-Oriented JavaScript笔记(四)">Object-Oriented JavaScript笔记(四)</a></li>
+				<li><a href="http://ioio.name/about-story-board.html" title="新项目: Story Board">新项目: Story Board</a></li>
+				<li><a href="http://ioio.name/javascript-inherits.html" title="实现JavaScript类继承(inherits)">实现JavaScript类继承(inherits)</a></li>
+				<li><a href="http://ioio.name/object-oriented-javascript-note-3.html" title="Object-Oriented JavaScript笔记(三)">Object-Oriented JavaScript笔记(三)</a></li>
+				<li><a href="http://ioio.name/object-oriented-javascript-note-2.html" title="Object-Oriented JavaScript笔记(二)">Object-Oriented JavaScript笔记(二)</a></li>
+				</ul>
+		</li>
+<li id="archives-3" class="widget widget_archive"><h2 class="widgettitle">文章归档</h2>
+		<select name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;"> <option value="">选择月份</option> 	<option value="http://ioio.name/2012/04"> 2012 年四月 </option>
+	<option value="http://ioio.name/2012/03"> 2012 年三月 </option>
+	<option value="http://ioio.name/2012/02"> 2012 年二月 </option>
+	<option value="http://ioio.name/2012/01"> 2012 年一月 </option>
+	<option value="http://ioio.name/2011/12"> 2011 年十二月 </option>
+	<option value="http://ioio.name/2011/11"> 2011 年十一月 </option>
+	<option value="http://ioio.name/2011/10"> 2011 年十月 </option>
+	<option value="http://ioio.name/2011/09"> 2011 年九月 </option>
+	<option value="http://ioio.name/2011/08"> 2011 年八月 </option>
+	<option value="http://ioio.name/2011/07"> 2011 年七月 </option>
+	<option value="http://ioio.name/2011/06"> 2011 年六月 </option>
+	<option value="http://ioio.name/2011/05"> 2011 年五月 </option>
+	<option value="http://ioio.name/2011/04"> 2011 年四月 </option>
+	<option value="http://ioio.name/2011/03"> 2011 年三月 </option>
+	<option value="http://ioio.name/2011/02"> 2011 年二月 </option>
+	<option value="http://ioio.name/2011/01"> 2011 年一月 </option>
+	<option value="http://ioio.name/2010/12"> 2010 年十二月 </option>
+	<option value="http://ioio.name/2010/11"> 2010 年十一月 </option>
+	<option value="http://ioio.name/2010/10"> 2010 年十月 </option>
+	<option value="http://ioio.name/2010/09"> 2010 年九月 </option>
+	<option value="http://ioio.name/2010/08"> 2010 年八月 </option>
+	<option value="http://ioio.name/2010/07"> 2010 年七月 </option>
+	<option value="http://ioio.name/2010/06"> 2010 年六月 </option>
+	<option value="http://ioio.name/2010/05"> 2010 年五月 </option>
+	<option value="http://ioio.name/2010/04"> 2010 年四月 </option>
+	<option value="http://ioio.name/2010/03"> 2010 年三月 </option>
+	<option value="http://ioio.name/2010/02"> 2010 年二月 </option>
+	<option value="http://ioio.name/2010/01"> 2010 年一月 </option>
+	<option value="http://ioio.name/2009/12"> 2009 年十二月 </option>
+	<option value="http://ioio.name/2009/11"> 2009 年十一月 </option>
+	<option value="http://ioio.name/2009/10"> 2009 年十月 </option>
+	<option value="http://ioio.name/2009/09"> 2009 年九月 </option>
+	<option value="http://ioio.name/2009/08"> 2009 年八月 </option>
+	<option value="http://ioio.name/2009/07"> 2009 年七月 </option>
+	<option value="http://ioio.name/2009/06"> 2009 年六月 </option>
+	<option value="http://ioio.name/2009/05"> 2009 年五月 </option>
+	<option value="http://ioio.name/2009/04"> 2009 年四月 </option>
+	<option value="http://ioio.name/2009/03"> 2009 年三月 </option>
+	<option value="http://ioio.name/2009/02"> 2009 年二月 </option>
+	<option value="http://ioio.name/2009/01"> 2009 年一月 </option>
+	<option value="http://ioio.name/2008/12"> 2008 年十二月 </option>
+	<option value="http://ioio.name/2008/11"> 2008 年十一月 </option>
+	<option value="http://ioio.name/2008/10"> 2008 年十月 </option>
+	<option value="http://ioio.name/2008/09"> 2008 年九月 </option>
+	<option value="http://ioio.name/2008/08"> 2008 年八月 </option>
+	<option value="http://ioio.name/2008/07"> 2008 年七月 </option>
+	<option value="http://ioio.name/2008/06"> 2008 年六月 </option>
+	<option value="http://ioio.name/2008/05"> 2008 年五月 </option>
+	<option value="http://ioio.name/2008/04"> 2008 年四月 </option>
+	<option value="http://ioio.name/2008/03"> 2008 年三月 </option>
+	<option value="http://ioio.name/2008/02"> 2008 年二月 </option>
+	<option value="http://ioio.name/2008/01"> 2008 年一月 </option>
+	<option value="http://ioio.name/2007/12"> 2007 年十二月 </option>
+	<option value="http://ioio.name/2007/11"> 2007 年十一月 </option>
+	<option value="http://ioio.name/2007/10"> 2007 年十月 </option>
+	<option value="http://ioio.name/2007/09"> 2007 年九月 </option>
+	<option value="http://ioio.name/2007/08"> 2007 年八月 </option>
+	<option value="http://ioio.name/2007/07"> 2007 年七月 </option>
+	<option value="http://ioio.name/2007/06"> 2007 年六月 </option>
+	<option value="http://ioio.name/2007/05"> 2007 年五月 </option>
+	<option value="http://ioio.name/2007/04"> 2007 年四月 </option>
+	<option value="http://ioio.name/2007/03"> 2007 年三月 </option>
+	<option value="http://ioio.name/2007/02"> 2007 年二月 </option>
+	<option value="http://ioio.name/2007/01"> 2007 年一月 </option>
+	<option value="http://ioio.name/2006/12"> 2006 年十二月 </option>
+	<option value="http://ioio.name/2006/11"> 2006 年十一月 </option>
+	<option value="http://ioio.name/2006/10"> 2006 年十月 </option>
+	<option value="http://ioio.name/2006/09"> 2006 年九月 </option>
+	<option value="http://ioio.name/2006/08"> 2006 年八月 </option>
+	<option value="http://ioio.name/2006/07"> 2006 年七月 </option>
+	<option value="http://ioio.name/2006/06"> 2006 年六月 </option>
+	<option value="http://ioio.name/2006/05"> 2006 年五月 </option>
+	<option value="http://ioio.name/2006/04"> 2006 年四月 </option>
+	<option value="http://ioio.name/2006/03"> 2006 年三月 </option>
+	<option value="http://ioio.name/2006/02"> 2006 年二月 </option>
+	<option value="http://ioio.name/2006/01"> 2006 年一月 </option>
+	<option value="http://ioio.name/2005/12"> 2005 年十二月 </option>
+ </select>
+</li>
+<li id="linkcat-2" class="widget widget_links"><h2 class="widgettitle">Blogroll</h2>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://atrl.name/" target="_top">atrl.name</a></li>
+<li><a href="http://shuai.be/" target="_top">Blog of Jones</a></li>
+<li><a href="http://dbconf.net/" target="_top">db.conf's blog</a></li>
+<li><a href="http://icolin.org/" target="_top">iColin Blog</a></li>
+<li><a href="http://www.kele5240.com/" target="_top">Kele's blog</a></li>
+<li><a href="http://leeiio.me/" target="_top">Leeiio Chaos Made</a></li>
+<li><a href="http://lucyinsite.com/" target="_top">Lucy的知悟园</a></li>
+<li><a href="http://www.neoease.com/" target="_top">NeoEase</a></li>
+<li><a href="http://ohbug.com/" target="_top">Oh Bug!</a></li>
+<li><a href="http://uedx.net/" target="_top">Seanmao's Blog</a></li>
+<li><a href="http://xpjsky.com/" target="_top">Striving For SUN</a></li>
+<li><a href="http://imtimmy.com/" target="_top">Timmy's Blog</a></li>
+<li><a href="http://www.xiaomingtu.com/" target="_top">XiaomingTu</a></li>
+<li><a href="http://www.isingapore.org/" target="_top">从新到新</a></li>
+<li><a href="http://www.iamxiaozhai.com/" target="_top">候鸟的碎舞</a></li>
+<li><a href="http://halfroom.com/" target="_top">凋零的羽</a></li>
+<li><a href="http://www.jouke.cn/" target="_top">哦子大王奇遇记</a></li>
+<li><a href="http://ooxx.me/" target="_top">大猫の意淫网志</a></li>
+<li><a href="http://fuhei.net/" target="_top">康湿妇</a></li>
+<li><a href="http://ipfox.net/" target="_top">没事乱吼</a></li>
+<li><a href="http://qilei.org/" target="_top">浆抱罗斯</a></li>
+<li><a href="http://www.yangqixin.com/" target="_top">清新BLOG</a></li>
+<li><a href="http://imcat.in/" target="_top">猫言猫语</a></li>
+<li><a href="http://www.passxj.com/" target="_top">行骏-IT Player</a></li>
+<li><a href="http://freeleaf.me/" target="_top">非专业玩设计</a></li>
+
+	</ul>
+</li>
+
+<li id="stats-3" class="widget widget_stats"><h2 class="widgettitle">统计</h2>
+<ul>
+<li><strong>统计概述</strong>
+<ul>
+<li><strong>1</strong> 名作者</li>
+<li><strong>689</strong> 篇文章</li>
+<li><strong>209</strong> 个标签</li>
+<li><strong>719</strong> 条评论</li>
+<li><strong>369</strong> 名评论者</li>
+<li><strong>26</strong> 个链接</li>
+<li><strong>1</strong> 个文章分类</li>
+<li><strong>1</strong> 个链接分类</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>10 评论最多的文章</strong>
+<ul>
+<li><a href="http://ioio.name/wallop-invites.html" title="查看 分享Wallop邀请 文章下的所有评论">分享Wallop邀请</a> - 83 条评论</li><li><a href="http://ioio.name/new-comprehensive-guide-to-college-english-version-texts-mp3.html" title="查看 全新版大学英语综合教程课文MP3 文章下的所有评论">全新版大学英语综合教程课文MP3</a> - 33 条评论</li><li><a href="http://ioio.name/free-cool-handle-hosting.html" title="查看 免费提供空间 文章下的所有评论">免费提供空间</a> - 18 条评论</li><li><a href="http://ioio.name/google-storage-for-developers-preview.html" title="查看 Google Storage for Developers初体验 文章下的所有评论">Google Storage for Developers初体验</a> - 18 条评论</li><li><a href="http://ioio.name/receive-20-photos-from-kachayu.html" title="查看 收到喀嚓鱼免费冲印的20张照片 文章下的所有评论">收到喀嚓鱼免费冲印的20张照片</a> - 16 条评论</li><li><a href="http://ioio.name/google-wave-invitation.html" title="查看 拿到Google Wave邀请 文章下的所有评论">拿到Google Wave邀请</a> - 16 条评论</li><li><a href="http://ioio.name/introducing-the-new-imac-and-ilife-08.html" title="查看 Introducing the new iMac and iLife '08. 文章下的所有评论">Introducing the new iMac and iLife '08.</a> - 15 条评论</li><li><a href="http://ioio.name/core-javascript-pitfalls.html" title="查看 JavaScript性能陷阱 文章下的所有评论">JavaScript性能陷阱</a> - 13 条评论</li><li><a href="http://ioio.name/img-bed.html" title="查看 图床 文章下的所有评论">图床</a> - 13 条评论</li><li><a href="http://ioio.name/nortondns.html" title="查看 诺顿推出公用DNS服务器NortonDNS 文章下的所有评论">诺顿推出公用DNS服务器NortonDNS</a> - 12 条评论</li></ul>
+</li>
+</ul>
+<ul>
+<li><a href="http://ioio.name/stats/">本站统计</a></li>
+</ul>
+</li>
+<li id="meta-3" class="widget widget_meta"><h2 class="widgettitle">功能</h2>
+			<ul>
+						<li><a href="http://ioio.name/wp-login.php">登录</a></li>
+			<li><a href="http://ioio.name/feed" title="使用 RSS 2.0 订阅本站点内容">文章 <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://ioio.name/comments/feed" title="使用 RSS 订阅本站点的所有文章的近期评论">评论 <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://wordpress.org/" title="基于 WordPress，一个优美、先进的个人信息发布平台。">WordPress.org</a></li>
+						</ul>
+</li>
+<li id="text-3" class="widget widget_text"><h2 class="widgettitle">Sponsored</h2>
+			<div class="textwidget"><a href="http://x.ioio.name/mt" title="(mt) Media Temple"><img src="mt-234x60-dk__d118c45.png" alt="MT"></a>
+<br>
+<a href="http://x.ioio.name/ixwebhosting" target="_top">
+<img class=" rgutabdmwkapjnoklifr" src="image-3703708-10475619" alt="Banner" border="0" height="90" width="120"></a>
+<a target="_top" href="http://x.ioio.name/godaddy-ssl"><img class=" rgutabdmwkapjnoklifr" src="gan_impression" alt="$12.99 SSL Certificates at Go Daddy" border="0"></a>
+<br>
+<a href="http://x.ioio.name/bluehost" target="_top">BlueHost $3.95</a></div>
+		</li>
+</ul><!-- /widgets -->
+		</div><!-- /c2 -->
+
+	</div><!-- /content -->
+
+	<div class="footer">
+
+		<a href="http://frostpress.com/themes/comet/" target="_top" id="frostpress" title="Theme from Frostpress"></a>
+		<a href="http://www.wordpress.org/" target="_top" id="wordpress" title="Powered by Wordpress"></a>
+
+		<div class="footer-text">
+					</div>
+
+		
+	</div><!-- /footer -->
+
+</div><!-- /wrap -->
+
+	
+
+
+
+
+</body>
+</html>

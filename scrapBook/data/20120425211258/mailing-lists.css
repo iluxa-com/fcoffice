@@ -1,0 +1,12 @@
+/* ::::: http://docutils.sourceforge.net/docutils/writers/html4css1/html4css1.css ::::: */
+
+.first { margin-top: 0pt ! important; }
+.last, .with-subtitle { margin-bottom: 0pt ! important; }
+div.footer, div.header { clear: both; font-size: smaller; }
+div.sidebar { margin: 0pt 0pt 0.5em 1em; border: medium outset; padding: 1em; background-color: rgb(255, 255, 238); width: 40%; float: right; clear: right; }
+h1.title { text-align: center; }
+ol.simple, ul.simple { margin-bottom: 1em; }
+p.sidebar-title { font-family: sans-serif; font-weight: bold; font-size: larger; }
+table.docinfo { margin: 2em 4em; }
+table.docutils td, table.docutils th, table.docinfo td, table.docinfo th { padding-left: 0.5em; padding-right: 0.5em; vertical-align: top; }
+table.docutils th.field-name, table.docinfo th.docinfo-name { font-weight: bold; text-align: left; white-space: nowrap; padding-left: 0pt; }
