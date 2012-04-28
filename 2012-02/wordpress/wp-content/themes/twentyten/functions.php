@@ -1335,3 +1335,30 @@ function chapter_valid() {
             
 
 }
+
+//取所有公告
+
+function get_recent_announces($no_posts = 10, $before = '<li>', $after = '</li>', $show_pass_post = false, $skip_posts = 0) {
+    global $wpdb, $tableposts;
+    $request = "SELECT ID, post_title, post_date, post_content FROM $wpdb->posts WHERE post_status = 'publish' AND post_type='announce'";
+        if(!$show_pass_post) { $request .= "AND post_password ='' "; }
+    $request .= "ORDER BY post_date DESC LIMIT $skip_posts, $no_posts";
+    $posts = $wpdb->get_results($request);
+    $output = '';
+    foreach ($posts as $post) {
+        $post_title = stripslashes($post->post_title);
+//         $post_date = mysql2date('j.m.Y', $post->post_date);
+        $permalink = get_permalink($post->ID);
+        $time =  date('m-d',strtotime($post->post_date)) ;
+        $id = ($time === date('m-d'))? 'anc_today' : 'anc_pass';
+        
+        $output .= $before . '<a id="'. $id .'" class="linktit" href="' . $permalink . '" rel="bookmark" title="链接到: ' . $post_title . '">' . esc_html("[$time]&nbsp;&nbsp;").$post_title . '</a>'. $after;
+    }
+    return $output;
+} 
+
+//全部公告链接
+function announce_list_link() {
+    return home_url('/announces');
+}
+

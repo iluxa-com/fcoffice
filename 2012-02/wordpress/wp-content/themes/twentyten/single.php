@@ -11,7 +11,16 @@ reading_cookie(10);
 get_header();
 
 
+
 ?>
+
+<?php if(get_query_var('announce')) ://按内容类型选用模板?>
+<?php require('announce_single.php');?>
+<?php return;?>
+<?php endif;?>
+
+
+
 
 <?php $current_page = get_query_var('page'); ?>
 
@@ -224,7 +233,10 @@ function postToQQWb(){
       <?php the_title(); ?> - <?php the_chapter_title()?></a>
       
       </h1>
-     <ul class='list_info_1' style="text-align:center"><li class='terms' style="margin:0 10px 0 0">作 者：<a target="_blank" title="点击查看<?php the_author()?>作品集" href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author()?></a></li>
+      
+     <ul class='list_info_1' style="text-align:center">
+     
+     <li class='terms' style="margin:0 10px 0 0">作 者：<a target="_blank" title="点击查看<?php the_author()?>作品集" href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author()?></a></li>
     
 
     <li class='terms'>发布日期：<?php the_time('Y-m-d')?></li>
@@ -240,7 +252,8 @@ function postToQQWb(){
         
         <div class="blank_4px"></div>
        
-		</div></div>
+		</div>
+        </div>
          
 		<div class="line_l_bon"<?php if($current_page>0) :?>id="chapter_line_bon"<?php endif;?>>
         </div>
@@ -269,5 +282,7 @@ function postToQQWb(){
 
 
 </div>
+
+
 
 <?php get_footer(); ?>
