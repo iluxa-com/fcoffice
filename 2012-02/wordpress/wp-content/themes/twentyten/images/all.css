@@ -56,7 +56,7 @@ a.current_cat{color:#FE0000;background-color:#eee;}
 #nav li a{padding:0 5px;color:#fff;text-decoration:none;}
 #nav li a:hover{color:#000;}
 #nav li a.hover{color:#FF0;}
-#main{width:980px;margin:5px auto 0;height:100%;}
+#main{width:980px;margin:5px auto 0;height:auto;}
 .left{width:720px;margin:auto 10px auto auto;float:left;display:inline;}
 .index_bg5 .left{margin:auto;}
 
@@ -684,3 +684,28 @@ a.pkey_btn{
       background-color:#eee;
           font-style: italic;
 }
+.yqxs_ch_list .announce_li {
+    background: url("sprites.gif") no-repeat scroll -188px -148px transparent;
+    border-bottom: 1px dashed #CCCCCC;    
+    height: 17px;
+    line-height: 22px;
+    overflow: hidden;
+    padding: 5px 0 5px 1.5em;
+    width:100%;
+}
+#scroll_div {
+    float: left;
+    height: 1.7em;
+    overflow: hidden;
+    width: 320px;
+    line-height:1.7em;
+}
+#anc_ico {
+background:url("sprites.gif") no-repeat scroll -184px -121px transparent;
+padding-left:20px;float:left;
+}
+#scroll_div a,#anc_ico a {
+    padding:0;
+    background:#fff;
+}
+#anc_today {color:#f00;}

@@ -6,6 +6,9 @@ function $(objID) {
 
  $(document).ready(
     function(){
+    //滚动公告
+    $("#scroll_div").Scroll({line:1,speed:500,timer:3000,up:"but_up",down:"but_down"});
+    
     //点击搜索栏外的隐藏结果，替代原有报错的代码
     $('body').click(
         function(event) {

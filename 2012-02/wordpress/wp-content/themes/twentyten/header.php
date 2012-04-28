@@ -81,6 +81,7 @@ if ($paged >= 2 || $page >= 2)
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
         <script type="text/javascript" src="/wp-content/plugins/yqxs/js/jquery-1.6.2.min.js?yqxs=1.0"></script>
         <script type="text/javascript" src="<?php echo YQURI; ?>/js/jquery.lazyload.js?yqxs=1.0"></script>
+        <script type="text/javascript" src="<?php echo YQURI; ?>/js/jquery.scroll.js?yqxs=1.0"></script>
         <script type="text/javascript" src="<?php echo YQURI; ?>/js/common.js?yqxs=1.0"></script>
         <script type="text/javascript" src="<?php echo YQURI; ?>/js/Ajax_Search.js?yqxs=1.0"></script>
         <script type="text/javascript" src="<?php echo YQURI; ?>/js/history.js?yqxs=1.0"></script>
@@ -173,8 +174,18 @@ if ($paged >= 2 || $page >= 2)
                             <a href="#" onClick="this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.hltm.cc/');" onMouseOut="window.status='红旅动漫';return true;" onMouseOver="window.status='将本站设为首页';return true;" style="behavior: url(#default#homepage);" target="_self">设红旅为首页</a>
                             <a href="javascript:void(0);" onClick="window.external.AddFavorite('http://www.hltm.cc/','红旅动漫');"class="addFav">收藏红旅动漫</a>
                         </span>
-                        <a href="http://www.hltm.cc/topiclist/20121yuexinfan.html">2012年一月新番主题</a>&nbsp;
-                        <a href="http://www.hltm.cc/topiclist/201110yuexinfan.html">2011年十月新番主题</a>&nbsp;			                                                <a href="http://www.hltm.cc/zt/index.html">往期全部新番主题</a>&nbsp;
+                        <em id="anc_ico"><a href="<?php echo announce_list_link();?>">本站公告：</a></em>
+                        <div id="scroll_div">
+                        
+                                <ul>
+                                <?php echo get_recent_announces()?>
+           
+                    </ul>
+                        </div>
+                       
+
+                        
+                        
 
                                                    			本站共有<font color=red>1776</font>部动漫，今日更新<font color=red>7</font>部动漫  		</div>
                 </div>
