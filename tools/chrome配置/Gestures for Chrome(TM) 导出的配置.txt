@@ -1,0 +1,96 @@
+{
+  "name": "Chrome Gestures",
+  "version": "1.12.1",
+  "normal_actions": {
+    "L": {
+      "name": "back",
+      "args": []
+    },
+    "R": {
+      "name": "forward",
+      "args": []
+    },
+    "UD": {
+      "name": "scroll to bottom",
+      "args": []
+    },
+    "UL": {
+      "name": "select left tab",
+      "args": []
+    },
+    "D": {
+      "name": "scroll down",
+      "args": []
+    },
+    "DR": {
+      "name": "close this tab",
+      "args": []
+    },
+    "#FlipBack": {
+      "name": "back",
+      "args": []
+    },
+    "#FlipForward": {
+      "name": "forward",
+      "args": []
+    },
+    "UR": {
+      "name": "select right tab",
+      "args": []
+    },
+    "DU": {
+      "name": "scroll to top",
+      "args": []
+    },
+    "DL": {
+      "name": "close other tabs",
+      "args": []
+    }
+  },
+  "linkdrag_actions": {
+    "D": {
+      "name": "open in new tab",
+      "args": []
+    },
+    "DU": {
+      "name": "open in background tab",
+      "args": []
+    },
+    "U": {
+      "name": "copy url",
+      "args": []
+    },
+    "UD": {
+      "name": "copy url and text",
+      "args": []
+    }
+  },
+  "textdrag_actions": {
+    "DR": {
+      "name": "search with #1 in new tab",
+      "args": [
+        "http://www.google.com/search?q=%s",
+        "Google"
+      ]
+    },
+    "UL": {
+      "name": "copy text",
+      "args": []
+    },
+    "UR": {
+      "name": "copy html",
+      "args": []
+    }
+  },
+  "mouse_track": true,
+  "visualized_arrow": true,
+  "superdrag": false,
+  "useMousewheel": false,
+  "useTabList": false,
+  "useSmoothScroll": false,
+  "ScrollSpeedValue": 0.2,
+  "useScrollAcceleration": false,
+  "AccelerationValue": 5,
+  "suppress_contextmenu": true,
+  "minimumUnit": 10
+}
