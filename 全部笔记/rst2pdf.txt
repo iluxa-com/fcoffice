@@ -1,0 +1,57 @@
+===============================================
+使用rst2pdf_将restructedText转成pdf文件
+===============================================
+
+.. contents::
+
+步骤如下:
+===============================================
+1.安装rst2pdf模块，推荐使用pip__
+
+2.修改样式表字体以支持中文
+
+    在rst2pdf的安装文件夹找到style目录（如F:\cygwin\lib\python2.6\site-packages\rst2pdf\styles) 
+    
+.. note:: 当然放在其他文件夹也是可以的，这里只是为了方便管理。
+
+    新建文件, chinese.style,写入以下内容::
+
+        {
+        "styles":
+        {
+        "base":
+        {
+        "wordWrap": "CJK"
+        }
+
+        },
+        "embeddedFonts" : [["msyh.ttf","msyh.ttf","msyh.ttf","msyhbd.ttf"]],
+
+        "fontsAlias" : {
+
+        "stdFont": "msyh",
+
+        "stdBold": "msyhbd",
+
+        "stdItalic": "msyh",
+
+        "stdMono":"msyh"
+        }
+        }
+
+    保存文件
+
+..notes:: 本人使用了雅黑字体，"embeddedFonts" : [["msyh.ttf","msyh.ttf","msyh.ttf","msyhbd.ttf"]] 为内嵌字体，这里无论如何都要指明超过三种。
+
+3.指定字体目录
+
+    由于本人在 cygwin_ 环境使用，指定的字体目录为windows下的字体目录：/cygdrive/c/windows/fonts
+
+
+假如在当前目录下存在编辑好的rst文档，如uml.txt,于是生成pdf文件的命令为::
+
+$ rst2pdf uml.txt -o uml2.pdf --font-path="/cygdrive/c/windows/fonts" --stylesheets=chinese   --stylesheet-path=/lib/python2.6/site-packages/rst2pdf/styles
+
+
+
+

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en" class="
+    
+     js flexbox canvas canvastext postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms no-csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    
+    
+    <meta name="description" content="Dropbox is a free service that lets you bring your photos, docs, and videos anywhere and share them easily. Never email yourself a file again!">
+    <meta name="keywords" content="online storage, free storage, file sharing, share files, awesome, cloud storage, online backup, cross platform, sync, sharing, mac, windows, os x, linux, backup, collaboration, file versioning, file revisions, remote access, undelete">
+    <meta name="google-site-verification" content="TnuSyOnBMNmtugbpL1ZvW2PbSF9LKvoTzrvOGS9h-b0">
+    <meta name="google-site-verification" content="EZKIczQcM1-DVUMz8heu1dIhNtxNbLqbaA9-HbOnCQ4">
+    <meta name="norton-safeweb-site-verification" content="tz8iotmk-pkhui406y41y5bfmfxdwmaa4a-yc0hm6r0fga7s6j0j27qmgqkmc7oovihzghbzhbdjk-uiyrz438nxsjdbj3fggwgl8oq2nf4ko8gi7j4z7t78kegbidl4">
+    <title>
+                Authentication tutorial -
+        Dropbox
+    </title>
+
+    <link rel="shortcut icon" href="favicon.ico">
+
+    
+
+    <link rel="apple-touch-icon" href="https://www.dropbox.com/static/26180/images/dropbox_webclip.png">
+    <link rel="P3Pv1" href="https://www.dropbox.com/w3c/p3p.xml">
+
+
+
+
+    
+
+
+    
+
+    
+    <!--[if lte IE 8]> 
+    <style>
+    .sick-input input[type=password] {
+      padding-top: 7px !important;
+      padding-bottom: 3px !important;
+    }
+    .sick-input.small input {
+      padding-top: 4px !important;
+      padding-bottom: 2px !important;
+    }
+    .sick-input.small input[type=password] {
+      padding-top: 6px !important;
+      padding-bottom: 0px !important;
+    }
+    </style>
+    <![endif]-->
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body style="min-height: 582px;" class="en  gecko">
+
+    
+
+    <div id="modal-behind" style="display: none;"></div>
+
+    <div id="modal" style="display: none;">
+        <div id="modal-box">
+            <a id="modal-x" onclick="javascript: Modal.hide(); Event.stop(event); return false;" href="#"></a>
+            <h2 id="modal-title"></h2>
+            <div id="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-overlay" style="display: none;" onclick="Modal.hide(); Event.stop(event); return false;"></div>
+    <div id="floaters"></div><div id="trash-can" style="display: none;"></div><div id="grave-yard" style="display: none;"></div>
+
+
+    <div class="external-drop-indicator top" style="display: none;"></div>
+    <div class="external-drop-indicator right" style="display: none;"></div>
+    <div class="external-drop-indicator bottom" style="display: none;"></div>
+    <div class="external-drop-indicator left" style="display: none;"></div>
+
+
+    <div id="translate-div" style="display: none; margin-bottom: -10px;">
+        <form id="translation-suggest-form" onsubmit="TranslationSuggest.submit_suggest(event); return false;" action="https://www.dropbox.com/translation_suggest" method="POST">
+            <input name="locale" value="en" type="hidden">
+            <input name="locale_url" value="https://www.dropbox.com/developers/start/authentication" type="hidden">
+            <input id="translation-msg-id" name="msg_id" value="" type="hidden">
+            <p class="clean"><label for="bad_text">Please paste or type the improper translation</label></p>
+            <div id="part-one">
+                <p>
+                    <span class="error-message" id="bad-i18n-text-error" style="display: none;">We couldn't find that string on this page.</span>
+                    <textarea style="width: 1px;" autocomplete="off" name="bad_text" id="bad-i18n-text" class="act_as_block textinput" rows="3" cols="40"></textarea>
+                </p>
+                <div style="display: none;" id="bad-i18n-text-complete" class="autocomplete"></div>
+            </div>
+            <div id="part-two">
+                                    <div class="emo hotbox" id="translation-msg-display" style="margin-bottom: 10px;"></div>
+                  <p class="clean">Original English text</p>
+                  <div class="green-hotbox" id="translation-orig-msg-display" style="margin-bottom: 10px;"></div>
+                  <p class="clean"><label for="suggested_text">Suggested translation</label></p>
+                  <p><textarea style="width: 1px;" name="suggested_text" class="textinput act_as_block" rows="3" cols="40"></textarea></p>
+                  <p class="clean"><label for="explanation">Explanation of the problem</label></p>
+                  <p><textarea style="width: 1px;" name="explanation" class="textinput act_as_block" rows="3" cols="40"></textarea></p>
+                  <div class="modal-buttons">
+                      <input class="freshbutton" onclick="TranslationSuggest.start_wizard(event);return false;" value="Back" id="translation-back-button" type="button">
+                      <input class="freshbutton-blue" onclick="TranslationSuggest.submit_suggest(event); return false;" value="Suggest translation" type="submit">
+                  </div>
+            </div>
+        </form>
+    </div>
+
+<div id="notify-wrapper">
+  <span id="notify" style="display: none;">
+    <span id="notify-msg">Sorry, there was a problem loading this page.</span>
+  </span>
+</div>
+
+
+<div id="outer-frame">
+    <div id="page-header">
+
+
+<div id="account-header">
+  <ul class="nav">
+          <li><a class="header-nav-link" href="https://www.dropbox.com/referrals" target=""><img src="icon_spacer.gif" alt="" class="sprite s_gift link-img">Get free space!</a></li>
+
+                <li class="ui-button">
+                    <a class="header-nav-link" href="#" onclick="return false;">
+                      
+<span id="emsnippet-9cee1c24f33f5f9c">falcon chen</span>
+
+ <img src="icon_spacer.gif" alt="" class="sprite s_login_arrow link-img">
+                    </a>
+                    <div class="sub-nav chat-bubble">
+                        <ul>
+                            <li>
+                                <div class="name">falcon chen</div>
+                                <div class="email force-no-break">
+<span id="emsnippet-f2c28240127e9b65">falcon_chen@qq.com</span>
+
+</div>
+                            </li>
+                            <li>
+                                    
+                                <div class="quota-text">1.7 MB of 2.5 GB used</div>
+                                <div class="quota_graph_container">
+                                   <div class="quota_graph_bar " style="width: 0%;"></div>
+                                </div>
+                            </li>
+                            <li><a href="https://www.dropbox.com/account" target=""><img src="icon_spacer.gif" alt="" class="sprite s_settings_16 ">Settings</a></li>
+                            <li><a href="https://www.dropbox.com/install" target=""><img src="icon_spacer.gif" alt="" class="sprite s_install ">Install</a></li>
+                            <li><a href="https://www.dropbox.com/plans" target=""><img src="icon_spacer.gif" alt="" class="sprite s_star_16 ">Upgrade</a></li>
+                            <li><a href="https://www.dropbox.com/logout"><img src="icon_spacer.gif" alt="" class="sprite s_signout ">Sign out</a></li>
+                        </ul>
+                        <div class="chat-bubble-arrow-border"></div>
+                        <div class="chat-bubble-arrow"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div id="page-logo-header" class="noborder">
+        <a href="https://www.dropbox.com/home"><img src="logo210.png" alt="Dropbox home" id="db-logo"></a>
+
+
+    </div>
+
+
+    <div id="modal-locale-selector" style="display: none;">
+      <ul>
+        <li><a class="locale-option" data-locale="en">English</a></li>
+        <li><a class="locale-option" data-locale="es">Español</a></li>
+        <li><a class="locale-option" data-locale="fr">Français</a></li>
+        <li><a class="locale-option" data-locale="de">Deutsch</a></li>
+        <li><a class="locale-option" data-locale="ja">日本語</a></li>
+      </ul>
+    </div>
+    
+    <div id="page-content">
+        
+
+
+
+
+
+<div id="nav">
+	<ul>
+
+
+
+
+	<li class="head">
+        <a href="https://www.dropbox.com/developers">
+
+        <img src="icon_spacer.gif" alt="" class="sprite s_home link-sprite">API home
+            </a>
+        </li>
+    </ul>
+	<ul>
+
+
+
+
+	<li class="head">
+        <a href="https://www.dropbox.com/developers/apps">
+
+        <img src="icon_spacer.gif" alt="" class="sprite s_star_16 link-sprite">My apps
+            </a>
+        </li>
+    </ul>
+	<ul>
+
+
+
+
+	<li class="head">
+        <a href="https://www.dropbox.com/developers/start">
+
+        <img src="icon_spacer.gif" alt="" class="sprite s_bricks link-sprite">Getting started
+            </a>
+        </li>
+		<li>
+		<a href="https://www.dropbox.com/developers/start/core">Core concepts</a>  </li>
+		<li>
+		<a href="https://www.dropbox.com/developers/start/setup">Setup</a>  </li>
+	        <li class="selected">
+		<a href="https://www.dropbox.com/developers/start/authentication">Authentication</a>  </li>
+		<li>
+		<a href="https://www.dropbox.com/developers/start/files">Files and folders</a>  </li>
+    </ul>
+	<ul>
+
+
+
+
+	<li class="head">
+        <a href="https://www.dropbox.com/developers/reference">
+
+        <img src="icon_spacer.gif" alt="" class="sprite s_report link-sprite">Reference
+            </a>
+        </li>
+		<li>
+		<a href="https://www.dropbox.com/developers/reference/sdk">Development kits</a>  </li>
+		<li>
+		<a href="https://www.dropbox.com/developers/reference/api">REST API</a>  </li>
+		<li>
+		<a href="https://www.dropbox.com/developers/reference/bestpractice">Best practices</a>  </li>
+		<li>
+		<a href="https://www.dropbox.com/developers/reference/branding">Branding guide</a>  </li>
+		<li>
+		<a href="https://www.dropbox.com/developers/reference/tos">Terms and conditions</a>  </li>
+    </ul>
+<ul id="more">
+      <li>
+          <a href="https://www.dropbox.com/developers/announcements"><img src="icon_spacer.gif" alt="" class="sprite s_transmit_gray link-sprite">Announcements</a>      </li>
+      <li><a href="http://forums.dropbox.com/forum.php?id=5"><img src="icon_spacer.gif" alt="" class="sprite s_group link-sprite">Developer forum</a></li>
+      <li><a href="#" onclick="Apps.developer_support(); return false;"><img src="icon_spacer.gif" alt="" class="sprite s_bug link-sprite">Dropbox API support</a></li>
+    </ul>
+</div>
+
+
+<div id="dev-support-modal" style="display: none;">
+    <p>
+        Couldn't find an answer in the <a href="http://forums.dropbox.com/forum.php?id=5">Forums</a>? Tell us what problems or questions you have with the Dropbox API. Please allow up to 1-2 business days for a response.
+    </p>
+    <form action="https://www.dropbox.com/developers/bugreports" id="dev-support-form">
+        <div>
+            <input name="category" value="Developer / API" type="hidden">
+            <input name="user_email" value="falcon_chen@qq.com" type="hidden">
+            <p>
+                Subject<br>
+                <input value="" style="width: 1px;" name="subject" id="subject" class="textinput act_as_block" type="text">
+            </p>
+            <p>
+                Details<br>
+                <textarea style="width: 1px;" name="details" rows="8" cols="20" class="textinput act_as_block"></textarea>
+            </p>
+            <p style="text-align: right; margin-bottom: 0pt;">
+                <input value="Submit" class="freshbutton-blue" onclick="Apps.submit_developer_support(event); return false;" type="submit">
+            </p>
+        </div>
+    </form>
+</div>
+<div id="right-content">
+<div id="programming_language_selector_container" style="">
+    <span style="width: 150px; height: 26px; position: relative; display: inline-block;"><ul id="programming_language_selector" class="ul_select_menu">
+        <li class="" id="switch-ios" data-value="ios"><img src="icon_spacer.gif" alt="" class="sprite s_iphone_small "> iOS</li>
+        <li class="" id="switch-android" data-value="android"><img src="icon_spacer.gif" alt="" class="sprite s_android_small "> Android</li>
+        <li class="selected" id="switch-python" data-value="python"><img src="icon_spacer.gif" alt="" class="sprite s_python_small "> Python</li>
+        <li class="" id="switch-ruby" data-value="ruby"><img src="icon_spacer.gif" alt="" class="sprite s_ruby_small "> Ruby</li>
+    </ul></span>
+</div>
+
+<h1>Adding authentication to your app</h1>
+
+<div id="python-main" style="">
+<p>Dropbox authentication is compliant with the <a href="http://www.oauth.net/" target="_top">OAuth v1 specification</a>. There are plenty of materials and libraries you can use to get up to speed on OAuth quickly, but using the methods included with the Python SDK, you don't have to start from scratch.</p>
+<p>In this tutorial, we're going to walk through some sample code that shows you how to authenticate using the SDK. Feel free to follow along this tutorial by copying and pasting the given code into your own <strong>tutorial.py</strong> or scroll to the bottom to see the code in its entirety.</p>
+<p>The first thing you have to do is find your app key and secret pair. As described in the <a href="https://www.dropbox.com/developers/start">Getting Started guide</a>, the app key and secret are used to authenticate a Dropbox session and must be included with every API call. You can find these keys in the <a href="https://www.dropbox.com/developers/start/setup">Setup tutorial</a> or via the <a href="https://www.dropbox.com/developers/apps">My Apps</a> section of the Dropbox website. Once you have your keys, we'll use them to access your Dropbox account and the Dropbox API.</p>
+<h2>Configure a session object</h2>
+<p>As discussed in the <a href="https://www.dropbox.com/developers/start/setup">Setup tutorial</a>, when you create an app, you'll be prompted to decide whether you want to create your own app folder in the user's Dropbox (<code>app_folder</code> - recommended) or whether you want full Dropbox access (<code>dropbox</code>). Be sure to insert your choice as the <code>access_type</code> parameter when configuring a session object. And you'll need to include your app key and secret as well.</p>
+
+<pre class="prettyprint"><span class="com"># Include the Dropbox SDK libraries</span><span class="pln">
+</span><span class="kwd">from</span><span class="pln"> dropbox </span><span class="kwd">import</span><span class="pln"> client</span><span class="pun">,</span><span class="pln"> rest</span><span class="pun">,</span><span class="pln"> session
+
+</span><span class="com"># Get your app key and secret from the Dropbox developer website</span><span class="pln">
+APP_KEY </span><span class="pun">=</span><span class="pln"> </span><span class="str">'INSERT_APP_KEY_HERE'</span><span class="pln">
+APP_SECRET </span><span class="pun">=</span><span class="pln"> </span><span class="str">'INSERT_SECRET_HERE'</span><span class="pln">
+
+</span><span class="com"># ACCESS_TYPE should be 'dropbox' or 'app_folder' as configured for your app</span><span class="pln">
+ACCESS_TYPE </span><span class="pun">=</span><span class="pln"> </span><span class="str">'INSERT_ACCESS_TYPE_HERE'</span><span class="pln">
+sess </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="typ">DropboxSession</span><span class="pun">(</span><span class="pln">APP_KEY</span><span class="pun">,</span><span class="pln"> APP_SECRET</span><span class="pun">,</span><span class="pln"> ACCESS_TYPE</span><span class="pun">)</span></pre>
+
+<h2>Get a request token</h2>
+<p>Now we're all set to start authenticating. We'll start by using the session object to get a request token via the <code><a href="https://www.dropbox.com/static/developers/dropbox-python-sdk-1.4-docs/index.html#dropbox.session.DropboxSession.obtain_request_token" target="_top">obtain_request_token</a></code> SDK method.</p>
+
+<pre class="prettyprint"><span class="pln">request_token </span><span class="pun">=</span><span class="pln"> sess</span><span class="pun">.</span><span class="pln">obtain_request_token</span><span class="pun">()</span></pre>
+<h2>User authentication and authorization</h2>
+<p>With a request token in hand, it's time for the user to authorize our app. To do this, we'll send the user to the Dropbox website to allow your app access to their Dropbox account. The request token is passed to <code><a href="https://www.dropbox.com/static/developers/dropbox-python-sdk-1.4-docs/index.html#dropbox.session.DropboxSession.build_authorize_url" target="_top">build_authorize_url</a></code> to create a unique authorization URL to send the user to and, optionally, specify the website to return the user to after they finish granting access to your app.</p>
+<pre class="prettyprint"><span class="pln">url </span><span class="pun">=</span><span class="pln"> sess</span><span class="pun">.</span><span class="pln">build_authorize_url</span><span class="pun">(</span><span class="pln">request_token</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> </span><span class="str">"url:"</span><span class="pun">,</span><span class="pln"> url
+</span><span class="kwd">print</span><span class="pln"> </span><span class="str">"Please visit this website and press the 'Allow' button, then hit 'Enter' here."</span><span class="pln">
+raw_input</span><span class="pun">()</span></pre>
+<p>For the purpose of this tutorial, and to avoid the hassle of setting up a web server environment, we're just printing the URL and asking the user to press the Enter key to confirm that they've authorized your app. However, in most real-world apps, you'll probably want to automatically send the user to the authorization URL, and probably also pass in a callback URL so that the user is seamlessly redirected back to your app after pressing a button.</p>
+<p>The URL created ensures the user is logged in to Dropbox and presents a web page that looks something like this:</p>
+<div class="screenshot"><img src="oauth.png" width="583px"></div>
+<p>We don't want anyone other than the user who requested access using this URL, which is why the request tokens are only live for five minutes. If the user sits on this link for greater than five minutes, we'll politely request they return to your app to try again.</p>
+
+<h2>Get an access token</h2>
+<p>Once the user has successfully granted permission to your app, we can upgrade the now-authorized request token to an access token. We'll do that by passing the request token via <code><a href="https://www.dropbox.com/static/developers/dropbox-python-sdk-1.4-docs/index.html#dropbox.session.DropboxSession.obtain_access_token" target="_top">obtain_access_token</a></code>:</p>
+
+<pre class="prettyprint"><span class="com"># This will fail if the user didn't visit the above URL and hit 'Allow'</span><span class="pln">
+access_token </span><span class="pun">=</span><span class="pln"> sess</span><span class="pun">.</span><span class="pln">obtain_access_token</span><span class="pun">(</span><span class="pln">request_token</span><span class="pun">)</span></pre>
+
+<p>The access token is all you'll need for all future API requests on behalf of this user, so you should store it away for safe-keeping (even though we don't for this tutorial). By storing the access token, you won't need to go through these steps again unless the user reinstalls your app or revokes access via the Dropbox website.</p>
+<p>Now that the hard part is done, all you'll need to sign your other API calls is to to pass the session object to <code><a href="https://www.dropbox.com/static/developers/dropbox-python-sdk-1.4-docs/index.html#dropbox.client.DropboxClient" target="_top">DropboxClient</a></code> and attach the object to your requests.</p>
+<p>Let's try this out by calling <code><a href="https://www.dropbox.com/static/developers/dropbox-python-sdk-1.4-docs/index.html#dropbox.client.DropboxClient.account_info" target="_top">account_info</a></code> which will return a dictionary with information about the user's linked account:</p><p>
+
+</p><pre class="prettyprint"><span class="pln">client </span><span class="pun">=</span><span class="pln"> client</span><span class="pun">.</span><span class="typ">DropboxClient</span><span class="pun">(</span><span class="pln">sess</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> </span><span class="str">"linked account:"</span><span class="pun">,</span><span class="pln"> client</span><span class="pun">.</span><span class="pln">account_info</span><span class="pun">()</span></pre>
+
+<h2>Wrap it up</h2>
+<p>If you've made it this far, you have all the tools you need to see the basics of the API in full effect. For your reference, here's the entirety of <strong>tutorial.py</strong> so far:</p>
+
+<pre class="prettyprint"><span class="com"># Include the Dropbox SDK libraries</span><span class="pln">
+</span><span class="kwd">from</span><span class="pln"> dropbox </span><span class="kwd">import</span><span class="pln"> client</span><span class="pun">,</span><span class="pln"> rest</span><span class="pun">,</span><span class="pln"> session
+
+</span><span class="com"># Get your app key and secret from the Dropbox developer website</span><span class="pln">
+APP_KEY </span><span class="pun">=</span><span class="pln"> </span><span class="str">'INSERT_APP_KEY_HERE'</span><span class="pln">
+APP_SECRET </span><span class="pun">=</span><span class="pln"> </span><span class="str">'INSERT_SECRET_HERE'</span><span class="pln">
+
+</span><span class="com"># ACCESS_TYPE should be 'dropbox' or 'app_folder' as configured for your app</span><span class="pln">
+ACCESS_TYPE </span><span class="pun">=</span><span class="pln"> </span><span class="str">'INSERT_ACCESS_TYPE_HERE'</span><span class="pln">
+
+sess </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="typ">DropboxSession</span><span class="pun">(</span><span class="pln">APP_KEY</span><span class="pun">,</span><span class="pln"> APP_SECRET</span><span class="pun">,</span><span class="pln"> ACCESS_TYPE</span><span class="pun">)</span><span class="pln">
+
+request_token </span><span class="pun">=</span><span class="pln"> sess</span><span class="pun">.</span><span class="pln">obtain_request_token</span><span class="pun">()</span><span class="pln">
+
+url </span><span class="pun">=</span><span class="pln"> sess</span><span class="pun">.</span><span class="pln">build_authorize_url</span><span class="pun">(</span><span class="pln">request_token</span><span class="pun">)</span><span class="pln">
+
+</span><span class="com"># Make the user sign in and authorize this token</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> </span><span class="str">"url:"</span><span class="pun">,</span><span class="pln"> url
+</span><span class="kwd">print</span><span class="pln"> </span><span class="str">"Please visit this website and press the 'Allow' button, then hit 'Enter' here."</span><span class="pln">
+raw_input</span><span class="pun">()</span><span class="pln">
+
+</span><span class="com"># This will fail if the user didn't visit the above URL and hit 'Allow'</span><span class="pln">
+access_token </span><span class="pun">=</span><span class="pln"> sess</span><span class="pun">.</span><span class="pln">obtain_access_token</span><span class="pun">(</span><span class="pln">request_token</span><span class="pun">)</span><span class="pln">
+
+client </span><span class="pun">=</span><span class="pln"> client</span><span class="pun">.</span><span class="typ">DropboxClient</span><span class="pun">(</span><span class="pln">sess</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">print</span><span class="pln"> </span><span class="str">"linked account:"</span><span class="pun">,</span><span class="pln"> client</span><span class="pun">.</span><span class="pln">account_info</span><span class="pun">()</span></pre>
+<p>Now that we're authenticated, let's see about making a call to Dropbox. In the next tutorial, we'll upload a file to Dropbox, get its metadata, and then download it back to our app.</p>
+
+</div>
+<div id="ruby-main" style="display: none;">
+<p>Dropbox authentication is compliant with the <a href="http://www.oauth.net/" target="_top">OAuth v1 specification</a>. There are plenty of materials and libraries you can use to get up to speed on OAuth quickly, but using the methods included with the Ruby SDK, you don't have to start from scratch.</p>
+<p>In this tutorial, we're going to walk through some sample code that shows you how to authenticate using the SDK. Feel free to follow along this tutorial by copying and pasting the given code into your own <strong>tutorial.rb</strong> or scroll to the bottom to see the code in its entirety.</p>
+<p>The first thing you have to do is find your app key and secret pair. As described in the <a href="https://www.dropbox.com/developers/start">Getting Started guide</a>, the app key and secret are used to authenticate a Dropbox session and must be included with every API call. You can find these keys in the <a href="https://www.dropbox.com/developers/start/setup">Setup tutorial</a> or via the <a href="https://www.dropbox.com/developers/apps">My Apps</a> section of the Dropbox website. Once you have your keys, we'll use them to access your Dropbox account and the Dropbox API.</p>
+
+<h2>Configure a session object</h2>
+<p>As discussed in the <a href="https://www.dropbox.com/developers/start/setup">Setup tutorial</a>, when you create an app, you'll be prompted to decide whether you want to create your own app folder in the user's Dropbox (<code>app_folder</code> - recommended) or whether you want full Dropbox access (<code>dropbox</code>). Be sure to insert your choice as the <code>access_type</code> parameter when configuring a session object. And you'll need to include your app key and secret as well.</p>
+
+<pre class="prettyprint"><span class="com"># This references the Dropbox SDK gem install with "gem install dropbox-sdk"</span><span class="pln">
+</span><span class="kwd">require</span><span class="pln"> </span><span class="str">'dropbox_sdk'</span><span class="pln">
+
+</span><span class="com"># Get your app key and secret from the Dropbox developer website</span><span class="pln">
+APP_KEY </span><span class="pun">=</span><span class="pln"> </span><span class="str">'INSERT-APP-KEY-HERE'</span><span class="pln">
+APP_SECRET </span><span class="pun">=</span><span class="pln"> </span><span class="str">'INSERT-APP-SECRET-HERE'</span><span class="pln">
+
+</span><span class="com"># ACCESS_TYPE should be ':dropbox' or ':app_folder' as configured for your app</span><span class="pln">
+ACCESS_TYPE </span><span class="pun">=</span><span class="pln"> </span><span class="pun">:</span><span class="pln">INSERT_ACCESS_TYPE_HERE
+session </span><span class="pun">=</span><span class="pln"> </span><span class="typ">DropboxSession</span><span class="pun">.</span><span class="kwd">new</span><span class="pun">(</span><span class="pln">APP_KEY</span><span class="pun">,</span><span class="pln"> APP_SECRET</span><span class="pun">)</span></pre>
+
+<h2>Get a request token</h2>
+<p>Now we're all set to start authenticating. We'll start by using the session object to get a request token via the <code><a href="https://www.dropbox.com/static/developers/dropbox-ruby-sdk-1.3-docs/DropboxSession.html#method-i-get_request_token" target="_top">get_request_token</a></code> SDK method. </p>
+
+<pre class="prettyprint"><span class="pln">session</span><span class="pun">.</span><span class="pln">get_request_token</span></pre>
+
+<p>That's all there is to it. The Ruby SDK automatically attaches your new request token to your session object.</p>
+
+<h2>User authentication and authorization</h2>
+<p>With a request token in hand, it's time for the user to authorize our app. To do this, we'll send the user to the Dropbox website to allow your app access to their Dropbox account. The request token is passed to <code><a href="https://www.dropbox.com/static/developers/dropbox-ruby-sdk-1.3-docs/DropboxSession.html#method-i-get_authorize_url" target="_top">get_authorize_url</a></code> to create a unique authorization URL to send the user to and, optionally, specify the website to return the user to after they finish granting access to your app.</p>
+
+<pre class="prettyprint"><span class="pln">authorize_url </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">get_authorize_url
+
+</span><span class="com"># make the user sign in and authorize this token</span><span class="pln">
+puts </span><span class="str">"AUTHORIZING"</span><span class="pun">,</span><span class="pln"> authorize_url
+puts </span><span class="str">"Please visit this website and press the 'Allow' button, then hit 'Enter' here."</span><span class="pln">
+gets</span></pre>
+
+<p>For the purpose of this tutorial, we're just printing the URL and asking the user to press the Enter key to confirm that they've authorized your app. However, in most real-world apps, you'll probably want to automatically send the user to the authorization URL, and probably also pass in a callback URL so that the user is seamlessly redirected back to your app after pressing a button.</p>
+<p>The URL created ensures the user is logged in to Dropbox and presents a web page that looks something like this:</p>
+<div class="screenshot"><img src="oauth.png" width="583px"></div>
+<p>We don't want anyone other than the user who requested access using this URL, which is why the request tokens are only live for five minutes. If the user sits on this link for greater than five minutes, we'll politely request they return to your app to try again.</p>
+
+<h2>Get an access token</h2>
+<p>Once the user has successfully granted permission to your app, we can upgrade the now-authorized request token to an access token. We'll do that by passing the request token via <code><a href="https://www.dropbox.com/static/developers/dropbox-ruby-sdk-1.3-docs/DropboxSession.html#method-i-get_access_token" target="_top">get_access_token</a></code>:</p>
+
+<pre class="prettyprint"><span class="com"># This will fail if the user didn't visit the above URL and hit 'Allow'</span><span class="pln">
+session</span><span class="pun">.</span><span class="pln">get_access_token</span></pre>
+
+<p>The access token is all you'll need for all future API requests on behalf of this user, so you should store it away for safe-keeping (even though we don't for this tutorial). By storing the access token, you won't need to go through these steps again unless the user reinstalls your app or revokes access via the Dropbox website.</p>
+<p>Now that the hard part is done, all you'll need to sign your other API calls is to to pass the session object to <code><a href="https://www.dropbox.com/static/developers/dropbox-ruby-sdk-1.3-docs/DropboxClient.html" target="_top">DropboxClient</a></code> and attach the object to your requests.</p>
+<p>Let's try this out by calling <code><a href="https://www.dropbox.com/static/developers/dropbox-ruby-sdk-1.3-docs/DropboxClient.html#method-i-account_info" target="_top">account_info</a></code>, which will return a dictionary with information about the user's linked account:</p><p>
+
+</p><pre class="prettyprint"><span class="pln">client </span><span class="pun">=</span><span class="pln"> </span><span class="typ">DropboxClient</span><span class="pun">.</span><span class="kwd">new</span><span class="pun">(</span><span class="pln">session</span><span class="pun">,</span><span class="pln"> ACCESS_TYPE</span><span class="pun">)</span><span class="pln">
+puts </span><span class="str">"linked account:"</span><span class="pun">,</span><span class="pln"> client</span><span class="pun">.</span><span class="pln">account_info</span><span class="pun">().</span><span class="pln">inspect</span></pre>
+
+<h2>Wrap it up</h2>
+<p>If you've made it this far, you have all the tools you need to see the basics of the Dropbox API in full effect. For your reference, here's the entirety of <strong>tutorial.rb</strong> so far:</p>
+
+<pre class="prettyprint"><span class="com"># This references the Dropbox SDK gem install with "gem install dropbox-sdk"</span><span class="pln">
+</span><span class="kwd">require</span><span class="pln"> </span><span class="str">'dropbox_sdk'</span><span class="pln">
+
+APP_KEY </span><span class="pun">=</span><span class="pln"> </span><span class="str">'INSERT-APP-KEY-HERE'</span><span class="pln">
+APP_SECRET </span><span class="pun">=</span><span class="pln"> </span><span class="str">'INSERT-APP-SECRET-HERE'</span><span class="pln">
+ACCESS_TYPE </span><span class="pun">=</span><span class="pln"> </span><span class="pun">:</span><span class="pln">app_folder  </span><span class="com">#The two valid values here are :app_folder and :dropbox</span><span class="pln">
+
+session </span><span class="pun">=</span><span class="pln"> </span><span class="typ">DropboxSession</span><span class="pun">.</span><span class="kwd">new</span><span class="pun">(</span><span class="pln">APP_KEY</span><span class="pun">,</span><span class="pln"> APP_SECRET</span><span class="pun">)</span><span class="pln">
+
+session</span><span class="pun">.</span><span class="pln">get_request_token
+
+authorize_url </span><span class="pun">=</span><span class="pln"> session</span><span class="pun">.</span><span class="pln">get_authorize_url
+
+</span><span class="com"># Make the user sign in and authorize this token</span><span class="pln">
+puts </span><span class="str">"AUTHORIZING"</span><span class="pun">,</span><span class="pln"> authorize_url
+puts </span><span class="str">"Please visit that website and hit 'Allow', then hit Enter here."</span><span class="pln">
+gets
+
+</span><span class="com"># This will fail if the user didn't visit the above URL and hit 'Allow'</span><span class="pln">
+session</span><span class="pun">.</span><span class="pln">get_access_token
+
+client </span><span class="pun">=</span><span class="pln"> </span><span class="typ">DropboxClient</span><span class="pun">.</span><span class="kwd">new</span><span class="pun">(</span><span class="pln">session</span><span class="pun">,</span><span class="pln"> ACCESS_TYPE</span><span class="pun">)</span><span class="pln">
+puts </span><span class="str">"linked account:"</span><span class="pun">,</span><span class="pln"> client</span><span class="pun">.</span><span class="pln">account_info</span><span class="pun">().</span><span class="pln">inspect</span></pre>
+
+<p>Now that we're authenticated, let's see about making a call to Dropbox. In the next tutorial, we'll upload a file to Dropbox, get its metadata, and then download it back to our app.</p>
+
+</div>
+
+<div id="android-main" style="display: none;">
+<p>The first thing you have to do is find your app key and secret. As described in the <a href="https://www.dropbox.com/developers/start">Getting Started guide</a>, the app key and secret are used by a Dropbox session to make API calls. You can find these values in the <a href="https://www.dropbox.com/developers/start/setup">Setup tutorial</a> or via the <a href="https://www.dropbox.com/developers/apps">My Apps</a> section of the Dropbox website. Once you have your keys, we'll use them to access your Dropbox account and the Dropbox API.</p>
+
+<p>We'll need to put your app key and app secret in your code so we can use them to create a session and access your Dropbox account and the API. Replace <code>INSERT_APP_KEY_HERE</code> and <code>INSERT_SECRET_HERE</code> with your app key and app secret in the code below.</p>
+<pre class="prettyprint"><span class="kwd">final</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">private</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> APP_KEY </span><span class="pun">=</span><span class="pln"> </span><span class="str">"INSERT_APP_KEY_HERE"</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">final</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">private</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> APP_SECRET </span><span class="pun">=</span><span class="pln"> </span><span class="str">"INSERT_SECRET_HERE"</span><span class="pun">;</span></pre>
+<p>When you created an app, you were prompted to decide whether you wanted to create your own app folder in the user's Dropbox (<code>APP_FOLDER</code>) or whether you wanted full Dropbox access (<code>DROPBOX</code>). Insert your choice here where it says <code>INSERT_APP_ACCESS_TYPE_HERE</code>.</p>
+<pre class="prettyprint"><span class="kwd">final</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">private</span><span class="pln"> </span><span class="typ">AccessType</span><span class="pln"> ACCESS_TYPE </span><span class="pun">=</span><span class="pln"> </span><span class="typ">AccessType</span><span class="pun">.</span><span class="pln">INSERT_APP_ACCESS_TYPE_HERE</span><span class="pun">;</span></pre>
+<h2>Create a Dropbox session</h2>
+<p>The app keys are in place, now let's use them to create a new session. We'll use this session to create a new <code>DropboxAPI</code> object called <code>mDBApi</code>. You probably want to keep one of these around as an instance variable.</p>
+<pre class="prettyprint"><span class="com">// In the class declaration section:</span><span class="pln">
+</span><span class="kwd">private</span><span class="pln"> </span><span class="typ">DropboxAPI</span><span class="pun">&lt;</span><span class="typ">AndroidAuthSession</span><span class="pun">&gt;</span><span class="pln"> mDBApi</span><span class="pun">;</span><span class="pln">
+
+
+</span><span class="com">// And later in some initialization function:</span><span class="pln">
+</span><span class="typ">AppKeyPair</span><span class="pln"> appKeys </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">AppKeyPair</span><span class="pun">(</span><span class="pln">APP_KEY</span><span class="pun">,</span><span class="pln"> APP_SECRET</span><span class="pun">);</span><span class="pln">
+</span><span class="typ">AndroidAuthSession</span><span class="pln"> session </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">AndroidAuthSession</span><span class="pun">(</span><span class="pln">appKeys</span><span class="pun">,</span><span class="pln"> ACCESS_TYPE</span><span class="pun">);</span><span class="pln">
+mDBApi </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">DropboxAPI</span><span class="pun">&lt;</span><span class="typ">AndroidAuthSession</span><span class="pun">&gt;(</span><span class="pln">session</span><span class="pun">);</span></pre>
+<h2>Start the authentication process</h2>
+<p>The next step in the process is for the user to authorize your app through either the official Dropbox mobile app or via the Dropbox mobile web site. The user will be sent to a screen with your app icon and name and buttons to allow or deny access to their Dropbox. If authenticated, your session will have the user's access token pair to use with API calls. Here we get the session and start the authentication process. <code>startAuthentication()</code> is a function that redirects the user to the Dropbox mobile app or, failing to identify its install, redirects to the mobile website for user authorization via the default mobile browser.</p>
+<pre class="prettyprint"><span class="com">// MyActivity below should be your activity class name</span><span class="pln">
+mDBApi</span><span class="pun">.</span><span class="pln">getSession</span><span class="pun">().</span><span class="pln">startAuthentication</span><span class="pun">(</span><span class="typ">MyActivity</span><span class="pun">.</span><span class="kwd">this</span><span class="pun">);</span></pre>
+<h2>Return to your app after user authorization</h2>
+<p>Upon authentication, users are returned to the activity from which they came. To finish authentication after the user returns to your app, you'll need to put the following code in your <code>onResume</code> function.</p>
+<p>Please note, it's important that the order and the timing of these calls stay the same. In fact, it might be easier to just copy this code verbatim rather than writing it from scratch.</p>
+<pre class="prettyprint"><span class="kwd">protected</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> onResume</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">super</span><span class="pun">.</span><span class="pln">onResume</span><span class="pun">();</span><span class="pln">
+
+    </span><span class="com">// ...</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">mDBApi</span><span class="pun">.</span><span class="pln">getSession</span><span class="pun">().</span><span class="pln">authenticationSuccessful</span><span class="pun">())</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="com">// MANDATORY call to complete auth.</span><span class="pln">
+            </span><span class="com">// Sets the access token on the session</span><span class="pln">
+            mDBApi</span><span class="pun">.</span><span class="pln">getSession</span><span class="pun">().</span><span class="pln">finishAuthentication</span><span class="pun">();</span><span class="pln">
+
+            </span><span class="typ">AccessTokenPair</span><span class="pln"> tokens </span><span class="pun">=</span><span class="pln"> mDBApi</span><span class="pun">.</span><span class="pln">getSession</span><span class="pun">().</span><span class="pln">getAccessTokenPair</span><span class="pun">();</span><span class="pln">
+
+            </span><span class="com">// Provide your own storeKeys to persist the access token pair</span><span class="pln">
+            </span><span class="com">// A typical way to store tokens is using SharedPreferences</span><span class="pln">
+            storeKeys</span><span class="pun">(</span><span class="pln">tokens</span><span class="pun">.</span><span class="pln">key</span><span class="pun">,</span><span class="pln"> tokens</span><span class="pun">.</span><span class="pln">secret</span><span class="pun">);</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">IllegalStateException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="typ">Log</span><span class="pun">.</span><span class="pln">i</span><span class="pun">(</span><span class="str">"DbAuthLog"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"Error authenticating"</span><span class="pun">,</span><span class="pln"> e</span><span class="pun">);</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="com">// ...</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p>The <code>finishAuthentication()</code> method will bind the user's access tokens to the session. You'll now be able to retrieve them via <code>mDBApi.getSession().getAccessTokenPair()</code>.</p>
+<p>You'll need these tokens again after your app closes, so it's important to save them for future access. If you don't, the user will have to re-authenticate every time they access their Dropbox from your app.</p>
+<p>A common way to implement storing keys is through Android's <code>SharedPreferences</code> API. To learn how, check out the <a href="http://developer.android.com/reference/android/content/SharedPreferences.html" target="_top">Android documentation</a>. In the meantime, for simplicity, the code above pretends the <code>storeKeys</code> function invokes whatever method you'd like to use to store your keys in a more permanent location.</p>
+
+<p>If in the process of authenticating you run into an error message like "Another app on your phone may be trying to pose as the app you are currently using." it means more than one app installed on the phone has a callback activity registered for a single app key (e.g. DBRoulette and the current app you're building). You can fix this error by deleting one of the offending apps or by switching to a new app key.
+</p>
+<p>And that's all you need to perform further API calls. Next up, let's rev the API engine and see what we can do. The next tutorial will go over some of the most common API functionality: uploading, downloading, and retrieving metadata.</p>
+
+</div>
+<div id="ios-main" style="display: none;">
+<p>Now that you've gotten the SDK building with your project, the next step is to integrate it into your app, allowing users to link their Dropbox accounts to your app. The first step is to find your app's key/secret pair, which can be found on the <a href="https://www.dropbox.com/developers/apps">My Apps</a> page.</p>
+<p>Once you have your app key and secret, you can create the <code>DBSession</code> object for your app. To do this, add the following code in your application delegate's <code>application:didFinishLaunchingWithOptions:</code> method:</p>
+	<pre class="prettyprint"><span class="com">#import &lt;DropboxSDK/DropboxSDK.h&gt;</span><span class="pln">
+
+</span><span class="pun">...</span><span class="pln">
+
+</span><span class="typ">DBSession</span><span class="pun">*</span><span class="pln"> dbSession </span><span class="pun">=</span><span class="pln">
+    </span><span class="pun">[[[</span><span class="typ">DBSession</span><span class="pln"> alloc</span><span class="pun">]</span><span class="pln">
+      initWithAppKey</span><span class="pun">:@</span><span class="str">"APP_KEY"</span><span class="pln">
+      appSecret</span><span class="pun">:@</span><span class="str">"APP_SECRET"</span><span class="pln">
+      root</span><span class="pun">:</span><span class="pln">ACCESS_TYPE</span><span class="pun">]</span><span class="pln"> </span><span class="com">// either kDBRootAppFolder or kDBRootDropbox</span><span class="pln">
+     autorelease</span><span class="pun">];</span><span class="pln">
+</span><span class="pun">[</span><span class="typ">DBSession</span><span class="pln"> setSharedSession</span><span class="pun">:</span><span class="pln">dbSession</span><span class="pun">];</span><span class="pln">
+</span></pre>
+<p>Somewhere in your app, add an event to launch the Dropbox authentication process, which should look something like this:</p>
+<pre class="prettyprint"><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">void</span><span class="pun">)</span><span class="pln">didPressLink </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(![[</span><span class="typ">DBSession</span><span class="pln"> sharedSession</span><span class="pun">]</span><span class="pln"> isLinked</span><span class="pun">])</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="pun">[[</span><span class="typ">DBSession</span><span class="pln"> sharedSession</span><span class="pun">]</span><span class="pln"> link</span><span class="pun">];</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p>Calling <code>link</code> on the session will open the Dropbox app if it's installed or Safari otherwise. From there, the user will be prompted to link his account to your app with the appropriate access type. Once authenticated, your app will be launched with the URL scheme <code>db-APP_KEY</code>. The easiest way to register for this scheme is right-click on your app's plist file and select <strong>Open As → Source Code</strong>, and add the following code below the first &lt;dict&gt; tag, substituting <code>APP_KEY</code> with your app's key:</p>
+<pre class="prettyprint"><span class="tag">&lt;key&gt;</span><span class="pln">CFBundleURLTypes</span><span class="tag">&lt;/key&gt;</span><span class="pln">
+</span><span class="tag">&lt;array&gt;</span><span class="pln">
+    </span><span class="tag">&lt;dict&gt;</span><span class="pln">
+        </span><span class="tag">&lt;key&gt;</span><span class="pln">CFBundleURLSchemes</span><span class="tag">&lt;/key&gt;</span><span class="pln">
+        </span><span class="tag">&lt;array&gt;</span><span class="pln">
+            </span><span class="tag">&lt;string&gt;</span><span class="pln">db-APP_KEY</span><span class="tag">&lt;/string&gt;</span><span class="pln">
+        </span><span class="tag">&lt;/array&gt;</span><span class="pln">
+    </span><span class="tag">&lt;/dict&gt;</span><span class="pln">
+</span><span class="tag">&lt;/array&gt;</span></pre>
+<p>Now that your app is registered for the correct scheme, you need to add the following code to your application delegate in order to complete the authentication flow:</p>
+<pre class="prettyprint"><span class="pun">-</span><span class="pln"> </span><span class="pun">(</span><span class="pln">BOOL</span><span class="pun">)</span><span class="pln">application</span><span class="pun">:(</span><span class="typ">UIApplication</span><span class="pln"> </span><span class="pun">*)</span><span class="pln">application handleOpenURL</span><span class="pun">:(</span><span class="pln">NSURL </span><span class="pun">*)</span><span class="pln">url </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">([[</span><span class="typ">DBSession</span><span class="pln"> sharedSession</span><span class="pun">]</span><span class="pln"> handleOpenURL</span><span class="pun">:</span><span class="pln">url</span><span class="pun">])</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">([[</span><span class="typ">DBSession</span><span class="pln"> sharedSession</span><span class="pun">]</span><span class="pln"> isLinked</span><span class="pun">])</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="typ">NSLog</span><span class="pun">(@</span><span class="str">"App linked successfully!"</span><span class="pun">);</span><span class="pln">
+            </span><span class="com">// At this point you can start making API calls</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> YES</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+    </span><span class="com">// Add whatever other url handling code your app requires here</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> NO</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p>Build and run your app. Find the link button you put in your app and press it. Once you press it, either the Dropbox app or Safari should be launched, and you should have the option to link your app to your Dropbox account. Make sure you are logged in using the same email address you used to create the app keys. Once you link with Dropbox, you should be redirected back to your app. If this happens successfully, you're ready to move on to the next section and start making requests to Dropbox using the SDK.</p>
+
+</div>
+<div id="show-after-switch" style="">
+<br>
+<a href="https://www.dropbox.com/developers/start/files" class="freshbutton-blue next-section">Next section »</a>
+</div>
+
+</div>
+
+
+    </div>
+
+    <div id="page-full-footer">
+            <div class="footer-col">
+                <ul>
+                    <li class="header">Dropbox</li>
+                    <li><a href="https://www.dropbox.com/install">Install</a></li>
+                    <li><a href="https://www.dropbox.com/anywhere">Mobile</a></li>
+                    <li><a href="https://www.dropbox.com/plans">Pricing</a></li>
+                    <li><a href="https://www.dropbox.com/teams">Teams</a></li>
+                    <li><a href="https://www.dropbox.com/tour">Tour</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <ul>
+                    <li class="header">Community</li>
+                    <li><a href="https://www.dropbox.com/referrals" onmouseup="javascript: MCLog.log('referrals_via_footer');">Referrals</a></li>
+                    <li><a href="http://twitter.com/dropbox" target="_top">Twitter</a></li>
+                    <li><a href="http://facebook.com/Dropbox" target="_top">Facebook</a></li>
+                    <li><a href="https://www.dropbox.com/developers">Developers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <ul>
+                    <li class="header">About us</li>
+                    <li><a href="http://blog.dropbox.com/">Dropbox Blog</a></li>
+                    <li><a href="https://www.dropbox.com/about">Our team</a></li>
+                    <li><a href="https://www.dropbox.com/press">Press</a></li>
+                    <li><a href="https://www.dropbox.com/jobs">Jobs</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <ul>
+                    <li class="header">Support</li>
+                    <li><a href="https://www.dropbox.com/help">Help Center</a></li>
+                    <li><a href="https://www.dropbox.com/terms">Privacy &amp; Terms</a></li>
+                    <li><a href="https://www.dropbox.com/dmca">Copyright</a></li>
+                    <li><a href="https://www.dropbox.com/contact">Contact us</a></li>
+                </ul>
+            </div>
+
+
+            <div id="locale-container" class="ui-button">
+              <span id="locale-link" class="link-span"><img src="icon_spacer.gif" alt="" class="sprite s_world_grey "> <a>English</a> <img src="icon_spacer.gif" alt="" class="sprite s_sort-uptick-off "></span>
+              <div id="locale-menu" class="sub-nav chat-bubble-bottom">
+                <ul>
+                  <li><a class="locale-option" data-locale="en">English</a></li>
+                  <li><a class="locale-option" data-locale="es">Español</a></li>
+                  <li><a class="locale-option" data-locale="fr">Français</a></li>
+                  <li><a class="locale-option" data-locale="de">Deutsch</a></li>
+                  <li><a class="locale-option" data-locale="ja">日本語</a></li>
+                </ul>
+                <div class="chat-bubble-arrow-border"></div>
+                <div class="chat-bubble-arrow"></div>
+              </div>
+            </div>
+
+           <div class="clear"></div>
+        </div>
+    </div>
+
+
+
+
+
+<!--[if IE]>
+<iframe id="hashkeeper" name='hashkeeper' width="1" height="1" style="display: none" src="/blank" onload="HashKeeper.reloading=false;"></iframe>
+<![endif]-->
+
+<div id="ieconsole" style="position: absolute; top: 0pt; left: 0pt; font-family: Courier;"></div>
+<div id="FB_HiddenContainer" style="position: absolute; top: -10000px; width: 0px; height: 0px; left: 0pt;"></div>
+
+
+
+
+<div id="notice-container" class="clearfix" style="display: none;">
+</div>
+
+
+</body>
+</html>
