@@ -1,0 +1,117 @@
+/* ::::: http://www.cnbeta.com/default.css?v=111010 ::::: */
+
+* { margin: 0px; padding: 0px; }
+html { border: 0px none; height: 100%; }
+body { background: url('bg.png') repeat-x scroll 0% 0% rgb(229, 236, 244); min-width: 950px; min-height: 100%; height: auto; font-size: 12px; text-align: center; font-family: Verdana; }
+img { border: 0px none; }
+a:link, a:visited { color: rgb(0, 51, 102); text-decoration: none; }
+a:hover { color: rgb(238, 0, 0); text-decoration: none; }
+.topad { position: relative; bottom: 15px; right: 0px; }
+div#wrapper { margin: 0px auto; width: 950px; }
+div.title { background: url('guide_mid.png') repeat-x scroll 0% 0% transparent; height: 24px; }
+div.title span { height: 24px; line-height: 24px; display: block; }
+div.title .leftBorder { background: url('guide_left.png') no-repeat scroll 0% 0% transparent; width: 3px; float: left; }
+div.title .midBlock { text-indent: 1em; font-weight: bold; color: rgb(255, 255, 255); float: left; }
+div.title .ADMenuOn { font-weight: bold; float: left; color: rgb(255, 204, 0); width: 100px; text-align: center; background: url('news.jpg') no-repeat scroll right top transparent; }
+div.title .ADMenuOff { background: url('index_19.png') repeat scroll 0% 0% transparent; float: left; text-align: center; cursor: pointer; color: rgb(255, 255, 255); font-weight: bold; width: 100px; }
+div.title .rightBorder { background: url('guide_right.png') no-repeat scroll 0% 0% transparent; width: 3px; float: right; }
+div.subTitle { border-left: 1px solid rgb(51, 102, 153); border-right: 1px solid rgb(51, 102, 153); background: url('bg_subtitle.png') repeat-x scroll 0% 0% transparent; height: 18px; }
+div.span { height: 0px; clear: both; }
+div#head { position: relative; left: 0px; top: 10px; width: 950px; height: 140px; }
+#head #h_left { position: absolute; left: 0px; width: 600px; }
+#h_left #logo { position: relative; height: 60px; }
+#h_left #guider { margin-top: 10px; width: 600px; text-align: left; }
+#guider #all span { height: 24px; line-height: 24px; display: block; }
+#all .leftBorder { background: url('guide_left.png') no-repeat scroll 0% 0% transparent; width: 3px; float: left; }
+#all .newsBlockLeft { background: url('guide_news_left.png') no-repeat scroll 0% 0% transparent; width: 4px; float: left; height: 24px; }
+#all .newsBlockMid { background: url('guide_news_mid.png') repeat-x scroll 0% 0% transparent; width: 56px; text-align: center; float: left; height: 24px; }
+#all .newsBlockRight { background: url('guide_news_right.png') no-repeat scroll 0% 0% transparent; width: 3px; float: left; height: 24px; }
+#all .otherBlock { background: url('guide_mid.png') repeat-x scroll 0% 0% transparent; width: 531px; float: left; height: 24px; }
+#all .rightBorder { background: url('guide_right.png') no-repeat scroll 0% 0% transparent; width: 3px; float: left; }
+#guider #all a:link, #guider #all a:visited { padding: 0px 5px; color: rgb(255, 255, 255); font-weight: bold; text-decoration: none; }
+#guider #all a:hover { padding: 0px 5px; color: rgb(255, 204, 0); font-weight: bold; text-decoration: none; }
+#guider #all strong { color: rgb(0, 51, 102); }
+#guider #news span { height: 27px; line-height: 27px; display: block; }
+#news .leftBorder { background: url('news_left.png') no-repeat scroll 0% 0% transparent; width: 3px; float: left; }
+#news .midBlock { background: url('news_mid.png') repeat-x scroll 0% 0% transparent; width: 594px; float: left; }
+#news .rightBorder { background: url('news_right.png') no-repeat scroll 0% 0% transparent; width: 3px; float: right; }
+#guider #news a:link, #guider #news a:visited { padding: 0px 2px; color: rgb(0, 0, 0); text-decoration: none; }
+#guider #news a:hover { padding: 0px 2px; color: rgb(255, 0, 0); text-decoration: none; }
+#head #h_right { position: absolute; right: 0px; width: 340px; }
+#h_right #tiny { margin: 10px 0px; letter-spacing: -2px; }
+#tiny a, a:link, a:visited { letter-spacing: normal; color: rgb(0, 51, 102); text-decoration: none; font-weight: normal; }
+#tiny a:hover { color: rgb(238, 0, 0); text-decoration: none; font-weight: normal; }
+#h_right #userInfo { border: 1px solid rgb(0, 0, 0); background: url('bg_userinfo.png') repeat-x scroll center center transparent; width: 338px; height: 74px; }
+#AdForward { margin-top: 2px; }
+div#main { width: 950px; height: auto; }
+#main #content { width: 600px; text-align: left; float: left; }
+#content #confident { border: 1px solid rgb(51, 102, 153); height: 231px; }
+#confident #c_flash { border-right: 1px solid rgb(51, 102, 153); width: 253px; height: 231px; line-height: 231px; float: left; }
+#confident #c_focusAndHot { width: 344px; float: left; }
+#c_focusAndHot div#c_focus { margin: 1px; border-bottom: 1px dashed rgb(51, 102, 153); text-align: center; }
+#c_focus dt { margin-bottom: 3px; border: 1px solid rgb(255, 204, 0); background-color: rgb(255, 226, 116); height: 28px; line-height: 28px; font-weight: bold; font-size: 14px; text-align: center; color: rgb(24, 24, 24); }
+#c_focus dt a:link, #c_focus dt a:visited { font-weight: bold; color: rgb(0, 0, 0); text-decoration: none; }
+#c_focus dt a:hover { font-weight: bold; color: rgb(238, 0, 0); text-decoration: none; }
+#c_focus dd { padding: 2px; width: 338px; height: 63px; line-height: 130%; text-align: left; text-indent: 2em; overflow: hidden; }
+#c_focus dd a:link, #c_focus dd a:visited { font-weight: bold; color: rgb(0, 51, 102); text-decoration: none; }
+#c_focus dd a:hover { font-weight: bold; color: rgb(238, 0, 0); text-decoration: none; }
+#c_focusAndHot div#c_hot { margin-top: 3px; border-bottom: 1px dashed rgb(51, 102, 153); background: url('index_58.png') repeat-y scroll 0% 0% transparent; width: 344px; height: 65px; line-height: 130%; overflow: hidden; }
+#c_hot ol li { padding-left: 3px; line-height: 130%; height: 15px; overflow: hidden; white-space: nowrap; }
+#c_hot ol li a:link, #c_hot ol li a:visited { font-weight: normal; color: rgb(0, 51, 102); text-decoration: none; }
+#c_hot ol li a:hover { font-weight: normal; color: rgb(238, 0, 0); text-decoration: none; }
+#newsmenu { margin-top: 2px; }
+#ADcon0 .newslist { margin: 0px 0px 5px; padding: 4px 10px; border: 1px solid rgb(51, 102, 153); background: url('bg_newslist.png') repeat-y scroll 0% 0% transparent; }
+.newslist dl dt.topic { margin: 6px 0px; font-weight: bold; font-size: 14px; }
+.newslist dl dd.author span { padding: 0px 0px 6px; border-bottom: 1px solid rgb(51, 102, 153); color: rgb(51, 102, 153); font-weight: normal; }
+.newslist dl dd.desc { padding: 12px 0px; min-height: 1px; height: auto; line-height: 150%; }
+.newslist dl dd.desc:after { content: "."; display: block; height: 0pt; clear: both; visibility: hidden; }
+.newslist dl dd.desc { display: inline-block; }
+.newslist dl dd.desc { display: block; }
+.newslist dl dd.desc img { float: right; }
+.newslist dl dd.detail { margin: 0px -10px; background: url('bg_newlist_op.png') repeat-x scroll 0% 0% transparent; height: 27px; line-height: 27px; }
+.newslist dl dd.detail span { padding: 0px 10px; color: rgb(51, 102, 153); }
+.newslist dl dd.detail em { margin-top: -27px; padding: 0px 10px; color: rgb(51, 102, 153); text-align: right; float: right; }
+.newslist dl dd.detail em a:link, .newslist dl dd.detail em a:visited { color: rgb(0, 51, 102); text-decoration: none; font-weight: normal; }
+.newslist dl dd.detail em a:hover { color: rgb(238, 0, 0); text-decoration: none; font-weight: normal; }
+@media all and (min-width: 0px) {
+  .newslist dl dd.detail em { margin-top: 0px; }
+}
+#news-bottom { background: url('index_108.png') repeat-x scroll 0% 0% transparent; height: 24px; border: medium none; }
+#news-bottom-left { background: url('index_107.png') no-repeat scroll left top transparent; height: 24px; }
+#news-bottom-list { background: url('index_109.png') no-repeat scroll right top transparent; height: 24px; padding-top: 4px; padding-left: 12px; text-align: center; }
+#news-bottom-list a { padding-left: 3px; padding-right: 3px; }
+#main #sideBar { width: 338px; text-align: left; float: right; }
+#sideBar #searcher {  }
+#sideBar #fm_r { margin-top: 10px; }
+#fm_r #fm { width: 165px; float: left; }
+#fm_r #fm ul { list-style-type: none; border-right: 1px solid rgb(51, 102, 153); border-width: 0px 1px 1px; border-style: none solid solid; border-color: -moz-use-text-color rgb(51, 102, 153) rgb(51, 102, 153); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; background: url('bg_fm.png') repeat-y scroll 0% 0% transparent; }
+#fm_r #r { width: 165px; float: right; }
+#fm_r #r_content { border-right: 1px solid rgb(51, 102, 153); border-width: 0px 1px 1px; border-style: none solid solid; border-color: -moz-use-text-color rgb(51, 102, 153) rgb(51, 102, 153); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; background: url('bg_fm.png') repeat-y scroll 0% 0% transparent; }
+#essential_feedback { margin-top: 10px; clear: both; }
+#essential_feedback div.title { position: relative; }
+#essential_feedback img#rssTag { position: absolute; right: 5px; top: 5px; }
+#essential_feedback #essential_feedback_content { padding: 0px 5px 5px; border-right: 1px solid rgb(51, 102, 153); border-width: 0px 1px 1px; border-style: none solid solid; border-color: -moz-use-text-color rgb(51, 102, 153) rgb(51, 102, 153); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; background: url('bg_vote.png') repeat-y scroll 0% 0% transparent; }
+#essential_feedback_content dl { padding: 5px 0px; border-bottom: 1px dashed rgb(51, 102, 153); }
+#essential_feedback_content dt { text-align: right; padding: 5px 0px 0px; font-style: italic; color: gray; line-height: 150%; }
+#essential_feedback_content dt strong { font-style: normal; }
+#essential_feedback_content dd { padding: 5px 0px 0px; text-align: justify; line-height: 130%; }
+#comment-news-bottom { letter-spacing: -2px; background: url('index_108.png') repeat-x scroll 0% 0% transparent; font-size: 12px; height: 24px; border: medium none; }
+#comment-news-bottom-left { background: url('index_107.png') no-repeat scroll left top transparent; height: 24px; }
+#comment-news-bottom-list { background: url('index_109.png') no-repeat scroll right top transparent; height: 24px; padding-top: 4px; padding-left: 12px; text-align: left; }
+#comment-news-bottom-list a { padding-left: 3px; padding-right: 3px; letter-spacing: -2px; }
+#sideBar #votes { margin-top: 10px; clear: both; }
+#votes dl { padding: 5px; border-right: 1px solid rgb(51, 102, 153); border-width: 0px 1px 1px; border-style: none solid solid; border-color: -moz-use-text-color rgb(51, 102, 153) rgb(51, 102, 153); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; background: url('bg_vote.png') repeat-y scroll 0% 0% transparent; }
+#votes dl p { line-height: 150%; }
+#votes dl p a:visited, a:link { padding: 0px 2px; color: rgb(0, 51, 102); font-weight: bold; text-decoration: none; }
+#votes dl p a:hover { padding: 0px 2px; color: red; font-weight: bold; text-decoration: none; }
+#votes dl dd { text-indent: -1em; padding-left: 1em; line-height: 1.5em; font-weight: normal; }
+div#foot { padding-top: 10px; padding-bottom: 10px; width: 950px; height: 100px; clear: both; }
+#EditorRecommendBox { margin-top: 10px; clear: both; }
+#ERBox { border-right: 1px solid rgb(51, 102, 153); border-width: 0px 1px 1px; border-style: none solid solid; border-color: -moz-use-text-color rgb(51, 102, 153) rgb(51, 102, 153); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; color: rgb(51, 102, 153); }
+#ERBox dl { border-bottom: 1px dashed rgb(0, 0, 0); line-height: 1.3em; }
+.a1 { padding: 0px 5px 5px; background: none repeat scroll 0% 0% rgb(247, 251, 243); }
+.a2 { padding: 0px 5px 5px; background: none repeat scroll 0% 0% rgb(247, 255, 212); }
+#ERBox dl dt { padding: 5px 0pt; font-weight: bold; font-size: 14px; color: rgb(102, 153, 51); line-height: 1.5em; }
+#ERBox dl dt a:link, #ERBox dl dt a:visited { color: rgb(102, 153, 51); font-weight: bold; text-decoration: none; }
+#ERBox dl dt a:hover { color: rgb(153, 0, 0); font-weight: bold; text-decoration: none; }
+#ERBox dl dd { text-indent: 2em; }

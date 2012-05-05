@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="edge">
+<meta charset="UTF-8">
+<title>个人中心 - Qzone</title>
+
+<script type="text/javascript">
+	document.domain = 'qq.com';
+
+	var siDomain =  parent.siDomain || 'qzonestyle.gtimg.cn';
+	var imgcacheDomain= parent.imgcacheDomain || 'imgcache.qq.com';
+	var skindomain = (parent.g_SPrefix || '') + 'i.gtimg.cn';
+</script>
+<script type="text/javascript">
+	(function() {
+		var _jsbegin = '<script type="text/javascript" src="', _jsend = '" charset="utf-8"><\/script>';
+
+		var qzjs = ( parent.g_V && typeof(parent.g_V.qz)=='string') ? 
+			'http://'+ imgcacheDomain +'/ac/qzone/qzfl/qzfl'+parent.g_V.qz+'.js'
+	   	: 'http://'+ imgcacheDomain +'/qzone/qzfl/qzfl.js';
+
+		var sarr = [
+			qzjs, 
+			//'http://'+ siDomain +'/ac/qzfl/appclientlib.js',
+			//'http://'+ siDomain +'/qzone/biz/comm/js/qbs.js',
+			'http://'+ siDomain +'/ac/qzfl/stat.js'
+		];
+
+		var str = _jsbegin + sarr.join(_jsend + _jsbegin) + _jsend;
+		document.write(str);
+	})();
+	
+</script><script type="text/javascript" src="qzfl_2.1.1.4.js" charset="utf-8"></script><script type="text/javascript" src="stat.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+QZONE.FP = parent.QZONE.FP;
+</script>
+
+<script type="text/javascript">
+function getStyle() {
+	var g_StyleID;
+	try { g_StyleID = QZONE.FP.getQzoneConfig().styleId; } 
+	catch(e) {
+	}
+	g_StyleID = g_StyleID || 1;
+	//QZFL.css.insertCSSLink("http://"+ skindomain  +"/qzone_v6/gb/skin/" + g_StyleID + ".css");
+	//QZFL.css.insertCSSLink("http://"+ siDomain  +"/open_proj/sns_icenter.css");
+	document.write('<link rel="stylesheet" rev="stylesheet" href="http://'+ skindomain  +'/qzone_v6/gb/skin/' + g_StyleID + '.css" type="text/css" media="screen" \/><link rel="stylesheet" rev="stylesheet" href="http://'+ siDomain  +'/open_proj/sns_icenter.css" type="text/css" media="screen" \/>');
+}
+/*if (QZFL.userAgent.ie == 6) {
+	setTimeout(getStyle, 400);
+} else {
+	getStyle();
+}*/
+	getStyle();
+</script>
+
+
+
+<link rel="stylesheet" type="text/css" href="index_4.css" media="all">
+</head>
+<body>
+<div class="col_main_sidebar">
+	<div class="collet_box fn_authSpace" style="display: none;" id="reccont_new">
+		<div class="box_hd" style="display: none;"><h3>认证空间</h3></div>
+		<div class="box_bd" id="reccont">
+		</div>
+		<div class="box_ft">
+			<a href="http://ctc.qzs.qq.com/217/liked" class="fs_more">更多</a> <a href="javascript:;" id="more">换一组</a>
+		</div>
+		<div class="fs_like_loading" id="loading" style="display: none;">Loading...</div>
+	</div>
+
+	<div class="collet_box fn_authSpace" id="reccont_old" style="display: none;">
+		<div class="box_bd">
+		<div class="fs_like clearfix box_list_avatar_h bor3" id="feedad" style="display: none;">
+		</div>
+		<ul class="box_list_avatar_h clearfix" id="gdtcont" style="height: auto;">
+		</ul>
+		</div>
+		<div class="box_ft"><a href="http://ctc.qzs.qq.com/217/liked">更多</a></div>
+	</div>
+</div>
+
+
+
+<script>
+
+	var QM = parent.QM, GDT;
+	try{
+		QM.AuthPage.module.hide(); 
+	} catch(e) {
+	}
+
+	var util = {
+		pgv : function(n, d) {
+			var opts = {
+				referURL: 'http://user.qzone.qq.com/inforcenter',
+				referDomain: 'user.qzone.qq.com',
+				referPath: '/inforcenter'
+			};
+			if(typeof(TCISD) != 'undefined') {
+				TCISD.pv('brand.qq.com', '/ic_qbs/' + d + '_' + n, opts);
+			}
+		}
+	};
+
+	// 点击更多的逻辑
+	var NextOrder = (function() {
+		var loadstat = false;
+		var a = {};
+		a.init = function() {
+			$e('#more').bind('click', function(evt) {
+				a.getNextOrder();
+				QZFL.event.preventDefault(evt);
+				return false;
+			});
+		};
+		a.getNextOrder = function() {
+			if(loadstat) {
+				return
+			}
+			loading.show();
+			loadstat = true;
+			OrderManage.get(OrderManage.pid, a.nextCallback);
+			TCISD.hotClick('getnext_forss', 'qzone.qq.com');
+		};
+		a.nextCallback = function(o) {
+			loadstat = false;
+			loading.hide();
+			OrderManage.callback(o);
+		};
+		return a;
+	})();
+
+	OrderManage = (function() {
+		var a  = {};
+
+		a.pid = '';
+		a.init = function() {
+			$e('#reccont').bind('click', a.pgvclick);
+		};
+		a.get = function(id, callback) {
+			a.pid = id;
+			GDT.get(a.pid, null, 1, false, callback, { adposcount:1, count: 3});
+		};
+
+		var reqnum = 0;
+		a.rendertype = '';
+		a.getAd = function() {
+			var AdManage;
+			try{
+				var win  = parent.$('adModule').contentWindow;
+				GDT = win.GDT;
+				AdManage = win.AdManage;
+				a.pid = AdManage.pidconf.likeright;
+
+				AdManage.dealPos(a.pid, function() {
+					try{
+						a.rendertype = AdManage.righttype;
+						a.initTypeDealer();
+						// 避免重复调用
+						GDT.dealpos(a.pid, OrderManage.callback);
+					} catch(e) {
+					}
+				});
+			} catch(e) {
+				reqnum ++;
+				if(reqnum<40) {
+					setTimeout(arguments.callee, 300);
+				}
+			}
+		}
+
+		a._dealnickname = function(nickname, count) {
+			nickname = nickname || '';
+			// 先恢复字符串
+			nickname = QZFL.string.restHTML(nickname);
+			count = count || 8;
+			var len = QZFL.string.getRealLen(nickname);
+			if(len>count) {
+				nickname = QZFL.string.cut(nickname, count-2, '...');
+			}
+			// 编码字符串
+			nickname = QZFL.string.escHTML(nickname);
+			return nickname;
+		};
+
+		a.callback = function(o) {
+			a.likeCallback(o);
+			a.initNameCard();
+		};
+
+		a.initTypeDealer = function() {
+			if (a.rendertype== 'new') {
+				/*tt*/
+				var tpl = '<div class="fs_like"><div class="fs_like_detail clearfix _js_likedetail"> <a {olink} class="ui_avatar q_namecard" link="nameCard_{aid}" pgv="{friendnum}"><img src="{logo}" alt=""></a> <div class="like_info"> <a {olink} class="name q_namecard" link="nameCard_{aid}" pgv="{friendnum}">{nickname}</a><a href="http://page.opensns.qq.com/intro.html" target="_blank"><i class="ico_authSpace"></i></a> <div class="op clearfix"><a href="javascript:;" liked="{liked}" class="focus bgr2 _js_like" lqq="{aid}" oid="{cl}">关注</a><span class="focus_num">{friendnum}位好友关注</span></div> </div> </div> <div class="bubble bor _js_bubble"> <div class="arr bor2"> <div class="bor_bg"></div> </div> <div class="cont"> <p class="c_tx3">{friendlike}</p> </div> </div> </div>';
+				a.getLikeInfo = function(o) {
+					var de = a.getinfo(217, o.ext.alist);
+					// 取得喜欢的uin
+					o.aid = de.aid;
+					// 用户是否喜欢这个空间
+					o.liked = (o.ext && o.ext.qzoneliked) ?  'liked' : '';
+					// 用户logo
+					o.logo = QZONE.FP.getPURL(o.aid, 50);
+					// 昵称
+					o.nickname = a._dealnickname(o.txt, 10);
+					// 广告链接
+					o.olink = GDT.getOrderLink(a.pid, o.cl);
+				};
+				a.getFriendLike = function(o) {
+					var info  = a.getinfo(2017, o.ext.alist);
+					var arr = [] ;
+					var nickarr = [], ulist = info.aid.list, fcount, user, nick;
+					for (var i = 0 ; i < 2; i++) {
+						user = ulist[i];
+						if(user) {
+							nick = a._dealnickname(user.nickname, 8);
+							nickarr.push('<a href="http://user.qzone.qq.com/'+ user.uin+'" target="_blank">'+nick+'</a>');
+						}
+					}
+					fcount = info.aid.count;
+					if(fcount<=2) {
+						arr = [
+							nickarr.join("，"),
+							'共' + fcount+ '位好友'
+						];
+					} else {
+						arr = [
+							nickarr.join("，"),
+							'等'+fcount+'位好友'
+						];
+					}
+					o.friendlike = arr.join("");
+					o.friendnum = fcount;
+
+					a.pgvOrder(fcount);
+				};
+				a.pgvclick = function(evt) {
+					var target = QZFL.event.getTarget(evt), pgv;
+					target = $e(target);
+					pgv = target.getAttr('pgv');
+
+					// 找找父元素是否是要统计的
+					if(!pgv) {
+						target = target.getParent();
+						pgv = target.getAttr('pgv');
+					}
+
+					if(pgv){
+						var path = a.getPgvPath(pgv);
+						util.pgv(path, 'v6page_click');
+					}
+				};
+				a.getPgvPath = function(count) {
+					var n = Math.ceil(count/3);
+					var path = '';
+					
+					var nstart = n<=5 ? n : 6;
+					var start = ((nstart-1)*3+1);
+					if (n<=5) {
+						path = start + 'to' + (n*3);
+					} else {
+						path = start + 'to_maxnum';
+					}
+					return path;
+				};
+				a.pgvOrder = function(count) {
+					if (count && a._needPgvOrder) {
+						var path = a.getPgvPath(count);
+						util.pgv(path, 'v6page_view');
+					}
+				};
+
+
+				a.filter = function(list) {
+					var finfo, qinfo;
+					var dlist = [], ext, fcount, aid;
+					QZFL.object.each(list, function(o) {
+						ext = o.ext;
+						if(!ext) {
+							return;
+						}
+						fcount = 0;
+						aid = 0;
+						finfo  = a.getinfo(2017, ext.alist);
+						qinfo  = a.getinfo(217, ext.alist);
+						fcount = finfo && finfo.aid && finfo.aid.count;
+						aid = qinfo && qinfo.aid;
+						// 没有好友的过滤, 没有认证号码的也过滤
+						if(!finfo || fcount < 1 || !aid) {
+							return;
+						}
+						dlist.push(o);
+					});
+					return dlist;
+				};
+				a.likeCallback = function(o) {
+					if(o && o.ret) {
+						var list = o.data;
+						list = a.filter(list);
+						if(list.length == 0) {
+							return;
+						}
+						GDT.viewpos(a.pid);
+						var arr = [], de;
+						// 是否需要曝光到tcss
+						a._needPgvOrder = ((Math.random()*100) < 1);
+
+						for (var i = 0, len=list.length; i < len; i++) {
+							de = list[i];
+							a.getLikeInfo(de);
+							a.getFriendLike(de);
+							arr.push(GDT.format(tpl, de));
+						}
+						var likecont = $e('#reccont');
+						likecont.setHtml(arr.join(''));
+						$e('#reccont_new').show();
+
+						a.initMouseEvent();
+						
+						var likebtn =likecont.find('._js_like'); 
+						likebtn.bind('click', a.like);
+						likebtn.each(function(v,k) {
+							var obj = $e(v);
+							var liked = (obj.getAttr('liked') == 'liked');
+							a.setLikeBtnStatus(obj, liked);
+						});
+
+						setTimeout(pageheight, 300);
+						QM.AuthPage.show();
+					}
+				};
+				a.hideAllbubble = function() {
+					var reccont = $e("#reccont");
+					reccont.find('._js_bubble').hide();
+				};
+				// 鼠标mouse over 的时候显示对应的好友信息
+				a.initMouseEvent = function() {
+					var reccont = $e("#reccont");
+					a.hideAllbubble();
+					reccont.find('._js_bubble').get(0).show();
+					reccont.find('._js_likedetail').bind('mouseover', a.likemouseover);
+				};
+				a.likemouseover = function(evt) {
+					var target = QZFL.event.getTarget(evt);
+					target = $e(target);
+					if(!target.hasClass('_js_likedetail')) {
+						target = QZFL.dom.getAncestorBy(target.elements[0], function(el) {
+							return QZFL.css.hasClassName(el, '_js_likedetail');
+						})
+						if(!target) {
+							return;
+						}
+						target = $e(target);
+					}
+					a.hideAllbubble();
+					target.getNext().show();
+				};
+				// 设置喜欢，取消喜欢按钮的状态
+				a.setLikeBtnStatus = function(obj, stus) {
+					if(stus) {
+						obj.addClass("cancel_focus").removeClass("bgr2");
+						obj.setHtml('取消关注');
+						obj.setAttr('liked', 'liked');
+					} else {
+						obj.removeClass("cancel_focus").addClass("bgr2");
+						obj.setHtml('<i class="ui_ico ico_thumb"></i>关注');
+						obj.setAttr('liked', '');
+					}
+				};
+				/*tt*/
+			} else {
+				var tpl = '<li class="li_hover"> <a  href="{rl}" target="_blank" onclick="return GDT.click(\'{pid}\', \'{cl}\', false, true);" class="ui_avatar q_namecard" link="nameCard_{aid}"><img src="{logo}" alt=""></a> <a href="{rl}" target="_blank"  onclick="return GDT.click(\'{pid}\', \'{cl}\', false, true);" title="认证空间" class="name textoverflow q_namecard" link="nameCard_{aid}">{txt}</a><a href="http://page.opensns.qq.com/intro.html" target="_blank"><i class="ico_authSpace"></i></a> <div class="op"><a href="javascript:;" lqq="{aid}" oid="{cl}" class="_js_like"><i class="ui_ico ico_thumb"></i>关注</a></div> </li>';
+
+				a.likeCallback = function(o) {
+					if(o && o.ret) {
+						var list = a.filter(o.data);
+						if(list.length == 0) {
+							return;
+						}
+
+						GDT.viewpos(a.pid);
+						var str = '', de;
+						for (var i = 0, len=list.length; i < len; i++) {
+							de = list[i];
+							// aid 是认证QQ, 来自 ext.alist.217.aid
+							de.logo = QZONE.FP.getPURL(de.aid, 50);
+							de.pid = a.pid;
+							// 用户的昵称存在txt 中
+							de.txt = a._dealnickname(de.txt, 8);
+							str  += GDT.format(tpl, de);
+						}
+						$e('#gdtcont').setHtml(str);
+						$e('#reccont_old').show();
+						
+						$e('#gdtcont ._js_like').bind('click', a.like);
+						setTimeout(pageheight, 300);
+						QM.AuthPage.show();
+					}
+				};
+				a.filter = function(list) {
+					var arr = [], alist, ext, qinfo;
+					QZFL.object.each(list, function(v,k) {
+						ext = v.ext;
+						if (!ext) {
+							return;
+						}
+
+						qinfo  = a.getinfo(217, ext.alist);
+						aid = qinfo && qinfo.aid;
+						// 没有认证号码的过滤
+						if(aid) {
+							v.aid = aid;
+							arr.push(v);
+						}
+					});
+					var len = -1;
+					var alen = arr.length;
+					len = (alen == 4) ? 3 : len;
+					len = (alen == 1  ) ? 0 : len;
+
+					if(len>=0) {
+						arr = arr.slice(0, len);
+					}
+					return arr;
+				};
+				// 设置喜欢，取消喜欢按钮的状态
+				a.setLikeBtnStatus = function(obj, stus) {
+					if(stus) {
+						obj.setHtml('取消关注');
+						obj.setAttr('liked', 'liked');
+					} else {
+						obj.setHtml('<i class="ui_ico ico_thumb"></i>关注');
+						obj.setAttr('liked', '');
+					}
+				};
+			}
+		};
+
+		a.getinfo = function(type, alist) {
+			var info;
+			if(alist && alist[type+'']) {
+				info = alist[type+''];
+			}
+			return info;
+		};
+
+		a.initNameCard = function() {
+			var d = ENV.get("namecardLoaded"),dom = document.body;
+			if (!d) {
+				d = new QZONE.JsLoader();
+				d.onload = function(){
+					ENV.set("namecardLoaded", true);
+					QZONE.namecard.init(dom);
+				};
+				d.load('http://' + siDomain + '/qzone/v5/namecardv2.js?max_age=31104000', null, "utf-8");
+			} else {
+				QZONE.namecard.init(dom);
+			}
+		};
+		a.like = function(evt) {
+			var $a = QZFL.event, oid, uin, liked;
+			evt = $a.getEvent(evt);
+			var target = $a.getTarget(evt);
+			var obj = $e(target);
+			oid = obj.getAttr('oid');
+			uin = obj.getAttr('lqq');
+			liked = obj.getAttr('liked');
+			if(liked == 'liked') {
+				 QZONE.FP.cancelILike(uin, function() {
+					 a.unlikeCb(obj);
+				 });
+			} else {
+				GDT.like( uin, a.pid,  oid, function(o) {
+					a.likeCb(o, obj);
+				});
+			}
+		};
+		a.unlikeCb = function(obj) {
+			a.setLikeBtnStatus(obj, 0);
+		};
+		a.likeCb = function(o, obj) {
+			var oid , uin;
+			oid = obj.getAttr('oid');
+			uin = obj.getAttr('lqq');
+
+			if(o && (o.ret==0 || o.ret==-20) ) {
+				a.setLikeBtnStatus(obj, 1);
+			}
+		};
+
+		return a;
+	})();
+			
+	var loading = (function() {
+		var timer;
+		var a = {};
+		a.hide = function() {
+			if(timer) {
+				clearTimeout(timer);
+				timer = null;
+			}
+			$e('#loading').hide();
+		}
+		a.show = function() {
+			timer = setTimeout(function() {
+				$e('#loading').show();
+			}, 500);
+		}
+		return a;
+	}) ()
+
+	var _page_retrynum = 0;
+	function pageheight() {
+		var thisfun = arguments.callee;
+		var h = getheight(document);
+		if (h==0 && _page_retrynum<30) {
+			_page_retrynum ++;
+			setTimeout(thisfun, 500);
+			return;
+		}
+		var f = (function() {
+			var n = 0, max=5;
+			return function() {
+				var _fun = arguments.callee;
+				var h = getheight(document);
+
+				if (h>0) {
+					frameElement.style.height = h + 'px';
+				}
+				n++;
+				if (n<max) {
+					setTimeout(_fun, 500);
+				}
+			};
+		})();
+		f();
+	}
+
+	function fixiframe() {
+		var m = frameElement;
+		var w = 220;
+		m.style.width = w+'px';
+		m.setAttribute('frameborder', '0');
+		m.setAttribute('scrolling', 'no')
+	}
+
+	function getheight(doc) {
+		var s = QZFL.dom.getFirstChild(document.body).offsetHeight;
+		return s;
+	}
+
+
+	function init() {
+		fixiframe();
+		OrderManage.init();
+		OrderManage.getAd();
+		NextOrder.init();
+	}
+
+	QZFL.pageEvents.pageBaseInit();
+	QZFL.pageEvents.onloadRegister(init);
+
+</script>
+
+</body>
+</html>

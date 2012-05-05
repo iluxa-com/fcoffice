@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms no-csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta charset="utf-8">
+  <!-- www.phpied.com/conditional-comments-block-downloads/ -->
+  <!-- Always force latest IE rendering engine
+       (even in intranet) & Chrome Frame
+       Remove this if you use the .htaccess -->
+  <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <![endif]-->
+  
+  <title>用Sphinx写书</title>
+  
+  <!-- http://dev.w3.org/html5/markup/meta.name.html -->
+  <meta name="application-name" content="tech">
+  
+  <!-- Speaking of Google, don't forget to set your site up:
+       http://google.com/webmasters -->
+  <meta name="google-site-verification" content="">
+
+  <!--  Mobile Viewport Fix
+      j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag
+      device-width: Occupy full width of the screen in its current orientation
+      initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height
+      user-scalable = yes allows the user to zoom in -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  
+  <!-- Place favicon.ico and apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="http://hyry.dip.jp/tech/static/favicon.png">
+
+  <!-- All JavaScript at the bottom, except for Modernizr which enables 
+       HTML5 elements & feature detects -->
+    
+
+  <!-- include stylesheets -->
+  
+
+  
+<meta name="keywords" content="web2py, python"><meta name="copyright" content="Copyright 2012"><meta name="description" content="HYRY Studio"><meta name="generator" content=""><meta name="author" content="HYRY Studio &lt;ruoyu0088@gmail.com&gt;">
+
+
+  
+
+  
+
+  <!-- uncomment here to load jquery-ui
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" type="text/css" media="all" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+  uncomment to load jquery-ui //-->
+  
+    
+    
+    <title>安装编辑环境 — 用Sphinx写书</title>
+    
+    
+    
+    
+    
+    
+    
+    
+    <link rel="top" title="用Sphinx写书" href="http://hyry.dip.jp/tech/book/page/sphinx/index.html">
+    <link rel="next" title="扩展程序" href="http://hyry.dip.jp/tech/book/page/sphinx/exts.html">
+    <link rel="prev" title="用Sphinx写书" href="http://hyry.dip.jp/tech/book/page/sphinx/index.html"> 
+  
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+  <div class="wrapper"><!-- for sticky footer -->
+  
+    <div class="topbar">
+      <div class="container">    
+        <div class="sixteen columns">
+          <div id="navbar"></div>
+          
+          <div id="menu"><ul class="sf-menu"><li class="web2py-menu-expand"><a href="http://hyry.dip.jp/tech/default/index">Home</a><ul class="web2py-menu-vertical"><li><a href="http://hyry.dip.jp/tech/default/userpage">My Page</a></li><li><a href="http://hyry.dip.jp/tech/slice/index">Slices</a></li><li><a href="http://hyry.dip.jp/tech/code/index">Codes</a></li><li><a href="http://hyry.dip.jp/tech/book/index">Books</a></li><li><a href="http://hyry.dip.jp/tech/forum/index">Forum</a></li><li><a href="http://hyry.dip.jp/tech/blog/index">Blog</a></li></ul></li><li class="web2py-menu-expand"><a href="http://hyry.dip.jp/tech/book/index">Books</a><ul class="web2py-menu-vertical"><li><a href="http://hyry.dip.jp/tech/book/page/sphinx/index.html">用Sphinx写书</a></li><li><a href="http://hyry.dip.jp/tech/book/page/prolog/index.html">Prolog和人工智能</a></li><li><a href="http://hyry.dip.jp/tech/book/page/scipyex/index.html">Python科学计算习题集</a></li><li><a href="http://hyry.dip.jp/tech/book/page/python/index.html">一点一滴学Python</a></li><li><a href="http://hyry.dip.jp/tech/book/page/scipy/index.html">Python科学计算</a></li></ul></li><li class="web2py-menu-expand"><a href="http://hyry.dip.jp/tech/default/user/login?_next=/tech/book/page/sphinx/setup.html%3Flanguage%3Den">Login</a><ul class="web2py-menu-vertical"><li><a href="http://hyry.dip.jp/tech/default/user/register?_next=/tech/book/page/sphinx/setup.html%3Flanguage%3Den">Register</a></li><li><a href="http://hyry.dip.jp/tech/default/user/request_reset_password?_next=/tech/book/page/sphinx/setup.html%3Flanguage%3Den">Lost password?</a></li></ul></li><li class="web2py-menu-expand"><a href="#" onclick="javascript:void(0);return false;">Language</a><ul class="web2py-menu-vertical"><li><a href="http://hyry.dip.jp/tech/book/page/sphinx/setup.html?language=zh-cn">Chinese</a></li><li><a href="http://hyry.dip.jp/tech/book/page/sphinx/setup.html?language=ja">Japanese</a></li><li><a href="http://hyry.dip.jp/tech/book/page/sphinx/setup.html?language=en">English</a></li></ul></li></ul>
+          </div>
+        </div>
+      </div>
+    </div><!-- topbar -->
+    
+    <div class="flash"></div>
+    
+    
+    <div class="main">
+      <div class="container">                 
+        
+        
+        <div class="sixteen columns center">
+          
+          
+
+
+
+
+    <div class="related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px;">
+          <a href="http://hyry.dip.jp/tech/book/page/sphinx/genindex.html" title="总目录" accesskey="I">索引</a></li>
+        <li class="right">
+          <a href="http://hyry.dip.jp/tech/book/page/sphinx/exts.html" title="扩展程序" accesskey="N">下一页</a> |</li>
+        <li class="right">
+          <a href="http://hyry.dip.jp/tech/book/page/sphinx/index.html" title="用Sphinx写书" accesskey="P">上一页</a> |</li>
+        <li><a href="http://hyry.dip.jp/tech/book/page/sphinx/index.html">用Sphinx写书</a> »</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="id1">
+<h1>安装编辑环境<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="pythonsphinx">
+<h2>Python和Sphinx<a class="headerlink" href="#pythonsphinx" title="永久链接至标题">¶</a></h2>
+<p>首先到Python的官方网站下载并安装2.6或2.7系列的Python运行环境。</p>
+<div class="imagebox" style="background-image: url('link.png');"><p><a class="reference external" href="http://python.org/getit/">http://python.org/getit/</a></p>
+<p>Python的下载地址</p>
+</div><p>Sphinx是一套使用reStructuredText作为标记语言的文档生成工具。本环境所提供的所有插件均可在Sphinx v1.1.2中正常使用，如果需要单独升级Sphinx库，可以在控制台中输入如下命令：</p>
+<div class="highlight-none"><div class="highlight"><pre>easy_install -U sphinx
+</pre></div>
+</div>
+<p>如果高版本的Sphinx无法正确运行插件，请使用如下命令安装1.1.2版本的Sphinx：</p>
+<div class="highlight-none"><div class="highlight"><pre>easy_install sphinx==1.1.2
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title first">reStructuredText</p>
+<p>restructuredText是一种简单易用的所见即所得的纯文本标记语法。可以通过转换工具将其转换为HTML、latex、PDF等多种格式。通常restructuredText的扩展名为”rst”。</p>
+</div>
+</div>
+<div class="section" id="leo">
+<h2>Leo<a class="headerlink" href="#leo" title="永久链接至标题">¶</a></h2>
+<p>Leo是一个用Python编写的提纲式程序编辑器，我们用它组织和编辑构成书籍内容的reStructuredText文档，并管理Sphinx的插件程序、HTML模板以及配置文档等。</p>
+<div class="imagebox" style="background-image: url('link.png');"><p><a class="reference external" href="http://sourceforge.net/projects/leo/files/Leo/">http://sourceforge.net/projects/leo/files/Leo/</a></p>
+<p>Leo的下载地址，可以下载源程序版或打包版，由于系统中已经安装了Python环境，因此推荐安装源程序版</p>
+</div></div>
+<div class="section" id="miktex">
+<h2>MiKTeX<a class="headerlink" href="#miktex" title="永久链接至标题">¶</a></h2>
+<div class="imagebox" style="background-image: url('link.png');"><p><a class="reference external" href="http://miktex.org/">http://miktex.org/</a></p>
+<p>MiKTex是一个Windows下的Tex编译环境，我们用它将Sphinx自动生成的LaTex源文件编译成PDF文件</p>
+</div><p>安装完成之后，执行：</p>
+<div class="highlight-none"><div class="highlight"><pre>xelatex sample.tex
+</pre></div>
+</div>
+<p>就可以将“sample.tex”编译成“sample.pdf”。</p>
+</div>
+<div class="section" id="id2">
+<span id="sec-book-folder"></span><h2>书籍目录<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="imagebox" style="background-image: url('link.png');"><p><a class="reference external" href="http://hyry.dip.jp/files/books.zip">http://hyry.dip.jp/files/books.zip</a></p>
+<p>下载本书的编辑环境</p>
+</div><p>编写书籍项目的目录结构如下：</p>
+<div class="highlight-none"><div class="highlight"><pre>[books]
+    master.leo     -- 管理所有内容的leo文件
+    [exts]         -- 插件和模板
+    [sphinxbook]   -- 本书的文件夹
+    [xxxbook]      -- 其它书籍的文件夹
+</pre></div>
+</div>
+<p>其中exts文件夹中包含了所有Sphinx插件程序以及LaTex和HTML的模板。而其它文件夹均为Sphinx书籍的文件夹。每本书籍的目录结构如下：</p>
+<div class="highlight-none"><div class="highlight"><pre>[sphinxbook]
+    make.bat      -- 编译书籍的批处理脚本
+    [source]      -- 书籍的源文件
+        conf.py   -- 书籍配置
+        *.rst     -- 各个章节的reStructuredText文件
+        [images]  -- 保存所有插图的文件夹
+        [codes]   -- 保存所有代码的文件夹
+    [build]
+        [latex]   -- PDF的编译输出文件夹
+        [html]    -- HTML的编译输出文件夹
+</pre></div>
+</div>
+<p>在书籍文件夹下运行“make.bat html”命令将书籍编译成HTML格式，而运行“make.bat latex”则编译成LaTex格式。这些命令可以通过Leo的按钮工具栏(<a class="reference internal" href="http://hyry.dip.jp/tech/book/page/sphinx/leo.html#sec-leo-buttons"><em>按钮工具栏</em></a>)运行。</p>
+<div class="imagebox" style="background-image: url('warning.png');">为了保证程序能正常运行，请保证所有路径中没有空格或中文。</div></div>
+<div class="section" id="id3">
+<h2>字体<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>使用合适的字体可以使编辑环境用起来更舒适，使书籍更容易阅读。在“master.leo”中使用“YaHei Mono”字体，它中文字体采用微软雅黑，英文字体采用等宽的Consolas字体。可以通过如下节点中的QT样式表修改Leo编辑器所使用的字体：</p>
+<div class="highlight-none"><div class="highlight"><pre>@chapters--&gt;@settings--&gt;qtGui plugin--&gt;@data qt-gui-plugin-style-sheet
+</pre></div>
+</div>
+<div class="imagebox" style="background-image: url('link.png');"><p>yahei_mono.7z</p>
+<p>YaHei Mono字体：中文字体采用微软雅黑，英文字体采用等宽的Consolas字体</p>
+</div><p>书籍的HTML版本的字体可以通过书籍模板的样式表进行修改，而PDF版本的字体通过书籍配置文件“conf.py”中的latex_preamble配置进行修改，例如本书中采用如下字体配置：</p>
+<div class="highlight-none"><div class="highlight"><pre>\setCJKsansfont[BoldFont={STXihei},ItalicFont={STXihei}]{STXihei}
+\setCJKromanfont[BoldFont={STXihei},ItalicFont={STXihei}]{STXihei}
+\setCJKmainfont[BoldFont={STXihei},ItalicFont={STXihei}]{STXihei}
+\setCJKmonofont[BoldFont={STXihei},ItalicFont={STXihei}]{STXihei}
+</pre></div>
+</div>
+<p>STXihei字体的中文名为华文细黑，在网络上可以搜索到它的下载地址。</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="http://hyry.dip.jp/tech/book/page/sphinx/index.html">
+              <img class="logo" src="cover_sphinx.png" alt="Logo">
+            </a></p>
+  <h3><a href="http://hyry.dip.jp/tech/book/page/sphinx/index.html">內容目录</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">安装编辑环境</a><ul>
+<li><a class="reference internal" href="#pythonsphinx">Python和Sphinx</a></li>
+<li><a class="reference internal" href="#leo">Leo</a></li>
+<li><a class="reference internal" href="#miktex">MiKTeX</a></li>
+<li><a class="reference internal" href="#id2">书籍目录</a></li>
+<li><a class="reference internal" href="#id3">字体</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>上一个主题</h4>
+  <p class="topless"><a href="http://hyry.dip.jp/tech/book/page/sphinx/index.html" title="上一章">用Sphinx写书</a></p>
+  <h4>下一个主题</h4>
+  <p class="topless"><a href="http://hyry.dip.jp/tech/book/page/sphinx/exts.html" title="下一章">扩展程序</a></p>
+  <h3>本页</h3>
+  <ul class="this-page-menu">
+    <li><a href="http://hyry.dip.jp/tech/book/page/sphinx/_sources/setup.txt" rel="nofollow">显示源代码</a></li>
+  </ul>
+<div id="searchbox" style="display: none;">
+  <h3>快速搜索</h3>
+    <form class="search" action="http://hyry.dip.jp/tech/book/page/sphinx/search.html" method="get">
+      <input value="" name="q" type="text">
+      <input value="搜索" type="submit">
+      <input name="check_keywords" value="yes" type="hidden">
+      <input name="area" value="default" type="hidden">
+    </form>
+    <p class="searchtip" style="font-size: 90%;">
+    输入相关的模块，术语，类或者函数名称进行搜索
+    </p>
+</div>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px;">
+          <a href="http://hyry.dip.jp/tech/book/page/sphinx/genindex.html" title="总目录">索引</a></li>
+        <li class="right">
+          <a href="http://hyry.dip.jp/tech/book/page/sphinx/exts.html" title="扩展程序">下一页</a> |</li>
+        <li class="right">
+          <a href="http://hyry.dip.jp/tech/book/page/sphinx/index.html" title="用Sphinx写书">上一页</a> |</li>
+        <li><a href="http://hyry.dip.jp/tech/book/page/sphinx/index.html">用Sphinx写书</a> »</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        © 版权所有 2011, HYRY Studio.
+      使用 <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  
+
+
+<div id="comments">loading...</div>
+
+
+
+          
+        </div>
+        
+        
+        
+      </div><!-- container -->
+    </div><!-- main -->
+    
+    <div class="push"></div>
+  </div><!-- wrapper -->
+
+  <div class="mainfooter">
+    <div class="container">    
+      <div class="sixteen columns">
+         <!-- this is default footer -->
+        <div class="footer-content clearfix">
+          <div class="copyright"><a href="http://hyry.dip.jp/">HYRY Studio</a> Copyright © 2012</div>
+          <div style="float: right;">
+            
+            <span style="font-size: 10px;">This site is powered by <a href="http://web2py.com/">web2py</a></span>
+          </div>
+        </div>
+            
+      </div>
+    </div><!-- container -->
+  </div><!-- footer -->
+  
+  <!--[if lt IE 7 ]>
+    <script src="/tech/static/js/dd_belatedpng.js"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+    <![endif]-->
+  
+
+
+</body>
+</html>

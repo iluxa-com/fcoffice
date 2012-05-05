@@ -1,0 +1,273 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn" class="os_winxp">
+<head>
+<noscript><meta http-equiv="refresh" content="0; url=http://ctc.qzs.qq.com/qzone/v6/troubleshooter/noscript.html" /></noscript>
+<meta charset="UTF-8" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<script type="text/javascript">
+document.domain="qq.com";var _s_=new Date(),g_T={};g_T.fwp=[_s_];document.namespaces&&document.namespaces.add&&(document.namespaces.add('qz', 'http://qzone.qq.com/'),document.namespaces.add('x', 'http://qzone.qq.com/'));var g_V={qz:'_2.1.1.4',ci:'_802_120428'
+,view:'_082',ofp_v6:'_0426',old_qm_4_module:'_beta813'
+,qm_4_fixed:'_802_1',ofp_delay_module:'_812b',ic:'_134b_3',ic_delay:'31536002',_jsBegin:'<script type="text/javascript" src="',_jsEnd:'"><\/script>'},g_Test="0",g_ISP={p:"30",i:"1",f:"1",c:'121.35.55.166'},blogconf="",photoconf="",g_type="F",g_iUin=20050606,g_iLoginUin=516974090,g_isLite=0,g_Set="s2.",g_ICSet="",g_SPrefix="ctc.",g_DPrefix="",g_dns_name="qzone",g_UserBitmap="1c8789700511c0c1",g_LoginBitmap="1841cdf001400181",siDomain="ctc.qzonestyle.gtimg.cn",imgcacheDomain="ctc.qzs.qq.com",g_Property="GoRE",g_IZone_Flag=+"1";g_T.fwp[1] = new Date();
+</script>
+<title>官方Qzone -- 腾讯博客 [http://qzone.qzone.qq.com]</title>
+<meta name="keywords" content="QQ空间,黄钻,免费装扮,开心农场,QQ农场,QQ牧场" />
+<meta name="description" content="" />
+
+<link href="http://ctc.qzonestyle.gtimg.cn/qzone_v6/gb/skin/v6/1.css?max_age=31536000&amp;d=1333188324128" rel="stylesheet" /><link href="http://ctc.qzonestyle.gtimg.cn/qzone_v6/home_fixed.css?max_age=31536000&amp;d=1334659684120" rel="stylesheet" />
+
+<!--[if IE]><base href="http://ctc.qzs.qq.com/"></base><![endif]-->
+<!--[if !(IE)]><!--><base href="http://ctc.qzs.qq.com/" /><!--<![endif]-->
+
+<style id="mainJSBg" type="text/css">
+.lay_background{background-repeat:no-repeat;background-position:center top;background-attachment:scroll;background-image:url(http://ctc.i.gtimg.cn/qzone/space_item/orig/1/67073_top.jpg);}
+body{background-image:url(http://ctc.i.gtimg.cn/qzone/space_item/orig/1/67073_bg.jpg); background-repeat:repeat;}</style>
+<style id="mainJSTitleBar" type="text/css">.lay_headContainer {height:220px;}</style>
+
+
+<style id="mainJSContentFlower" type="text/css">
+.mode_lace .lay_lace_t,.mode_lace .lay_lace_b{background-image:url(http://ctc.i.gtimg.cn/qzone/space_item/orig/6/67078/lace_hd_ft.png);}
+.mode_lace .lay_lace_m{background-image:url(http://ctc.i.gtimg.cn/qzone/space_item/orig/6/67078/lace_repeat.png);}
+</style>
+<style type="text/css" id="dynamicStyle">
+.ownermode{display:none;}
+.clientmode{display:;}
+.editmode{display:none;}
+.customoff{display:;}
+.alphamode{display:none;}
+</style>
+<link rel="alternate" type="application/rss+xml" title="RSS news feed" href="http://feeds.qzone.qq.com/cgi-bin/cgi_rss_out?uin=20050606"/>
+<link rel="Shortcut Icon" href="http://ctc.qzonestyle.gtimg.cn/qzonestyle/qzone_client_v5/img/favicon.ico" type="image/x-icon"/>
+</head>
+<body id="QZ_Body" class="bg_body mode_bg_opacity0  mode_lace">
+<div class="lay_invisible">
+	<a href="http://qz.qq.com/" tabindex="1" class="blind">用读屏软件的朋友请点击这里</a>
+	<a href="http://user.qzone.qq.com/20050606#pageContent">跳到内容区</a>
+	样式加载失败,请尝试<a href="http://user.qzone.qq.com/20050606/clinic" title="空间小助手"><strong>空间小助手</strong></a>
+</div>
+
+
+<div class="none" id="QZ_Custom_Container"></div>
+<div class="lay_topfixed">
+	<div class="lay_topfixed_inner">
+		<div class="gb_toolbar" id="QZ_Toolbar_Container">
+		
+		<div class="wrap clearfix">
+			<a id="aNavBarLogo" href="http://user.qzone.qq.com/516974090" class="logo fl" title="QQ空间"><span class="none">QQ空间6.0</span></a>
+			<div class="banner fl">
+				<ul>
+					
+						
+							<li id="liGuestPage" class="tablist"><a id="aHisMainPage" href="http://user.qzone.qq.com/20050606/main" class="tablist_link a_txt" title="查看他的主页"><span class="tablist_link_i">他的主页<b class="a_trig"></b></span></a></li>
+						
+						
+							
+								<li><a id="aHisFacade" href="javascript:;" class="a_txt" title="查看他的装扮"><span>他的装扮</span></a></li>
+							
+						
+					
+				</ul>
+			</div>
+			<div class="search animation fl"><div id="divSearchBox" class="search_inner"><i class="ui_ico ico_sousoulogo"></i><input id="inputSearchBox" type="text" class="input_search" value="搜人/应用/音乐" title="搜人/应用/音乐" /><input id="inputSearchButton" value="&nbsp;" title="点击开始搜索" type="button" class="bt_search" /><input id="inputClearButton1" value="×" type="button" class="clear_search" /></div></div>
+			<div id="divTbMusicPanel" class="music fl" style="display:none;"><div class="music_play fl"><a id="lnkTbMusicCtrl" href="javascript:;" class="music_bt rd_link state_play" title="点击播放/暂停"><strong class="ui_ico"></strong></a><a id="lnkTbMusicLCD" href="javascript:;" class="music_txt rd_link" title="打开音乐设置面板"><span id="song_name" class=""></span><b class="a_trig"></b></a><div id="divTbMusicMenu" class="music_list drop_box playmusic_frame player_scroll_active no_bgm" style="display:none;"></div></div></div>
+			<div id="divPayVip" class="vip sep_line fr tablist">
+				<a id="aPayVip" target="_blank" class="tablist_link" title="点击到支付中心开通黄钻" href="http://pay.qq.com/qzone/index.shtml?ch=self&amp;aid=zone.tbarshuang"><span class="tablist_link_i"><span class="icon ico_vip"></span><span id="spanNavVipTxt">开通</span><b class="a_trig"></b></span></a>
+				<div id="divVipMenu" class="pop_list drop_box">
+					<ul>
+						<li><a id="aPayBySelf" title="直接开通" href="http://pay.qq.com/qzone/index.shtml?ch=self&amp;aid=zone.tbarshuang" target="_blank">直接开通</a></li>
+						<li><a id="aPayByFriend" title="向好友索取" href="javascript:;">向好友索取</a></li>
+						<li><a id="aPayToFriend" title="赠送给好友" href="http://pay.qq.com/qzone/index.shtml?ch=send&amp;aid=zone.tbar.send&amp;ADTAG=pay.service.qzone.send" target="_blank">赠送给好友</a></li>
+					</ul>
+				</div>
+			</div>
+			
+				<div class="msg sep_line fr"><div class="inner">
+					<div id="divMsgFriend" class="tablist msg_item">
+						<a id="aMsgFriend" href="javascript:;" class="tablist_link" title="空间消息"><span class="ui_ico ico_msg"></span></a>
+						<span class="ui_sup none"><b id="spanMsgNumFriend"></b></span>
+						
+						<div id="divFriendMsgMenu" class="pop_list drop_box">
+							<ul>
+								<li><a id="aFriendMsgItem" href="javascript:;" title="好友消息">好友消息</a></li>
+								<li><a id="aMailMsgItem" href="javascript:;" title="短消息">短消息</a></li>
+								<li><a id="aSysMsgItem" href="javascript:;" title="系统消息">系统消息</a></li>
+							</ul>
+						</div>
+						
+					</div>
+					<div id="divMsgCampus" class="tablist msg_item">
+						<a id="aMsgCampus" href="javascript:;" target="_blank" class="tablist_link" title="朋友消息"><span class="ui_ico ico_pengyou"></span><span class="ui_sup none"><b id="spanMsgNumCampus"></b></span></a>
+					</div>
+				</div></div>
+			
+			
+				<div id="divUserManage" class="tablist setup fr"><a id="aUserManage" title="空间快速设置" class="a_setup tablist_link"><span class="ui_ico ico_setup"></span></a><div id="divUserMenu" class="pop_list drop_box"><ul id="ulUserMenuList"><li><a id="aUserModify" href="javascript:;" title="修改资料">修改资料</a></li><li><a id="aCustomSetting" href="javascript:;" title="主页排版">主页排版</a></li><li><a id="aUserSetting" href="javascript:;" title="空间设置">空间设置</a></li><li><a id="aUserFriendManage" href="javascript:;" title="好友管理">好友管理</a></li><li class="list_top_sep"><a id="aHelpCenter" href="http://service.qq.com/special_auto/qzone.html" target="_blank" title="帮助中心">帮助中心</a></li></ul></div></div><div class="userinfo fr"><span class="now_hover userinfo_tit"><span class="user_ava"><img alt="空间头像" src='http://qlogo3.store.qq.com/qzone/516974090/516974090/30' /></span><span id="spanUserNick" class="user_name">516974090</span></span><a id="aUserExit" class="logout" href="javascript:;">[退出]</a></div>
+				
+					<div class="goback fr  sep_line_r"><a id="aGo2Infocenter" href="http://user.qzone.qq.com/516974090/infocenter"><i class="ico ico_goback"></i>返回个人中心</a></div>
+				
+			
+			<div id="divRouteAppBox" onclick="QZFL.event.cancelBubble();" class="appbox pop_box pop_bg pop_bor none"><div id="divRouteAppBoxFolder" class="inner pop_bor2 clearfix baseapp_wrap"><div class="applist"><ul id="ulRouteAppList" class="clearfix"></ul></div></div></div>
+			<div id="divAppBox" onclick="QZFL.event.cancelBubble();" class="appbox pop_box pop_bg pop_bor none"><div id="divAppBoxFolder" class="inner pop_bor2 clearfix"><div class="applist"  id="divApplist"><div id="divAppTab" class="mod_tab applist_tab"></div><ul id="ulAppList" class="clearfix"></ul><div id="divAppWarn" style="text-align:center;padding: 30px 0 40px;font-size:16px;display:none;">您已经隐藏了所有的应用</div><div id="divAppListNav" class="applist_nav"></div></div><div id="divHideApplist" class="applist" style="display:none;"><div id="divHideAppTab" class="mod_tab applist_tab"></div><ul id="ulHideAppList" class="clearfix"></ul><div id="divHideAppListNav" class="applist_nav"></div><div id="divHideAppWarn" style="text-align:center;padding: 30px 0 40px;font-size:16px;display:none;">您还没有隐藏的应用</div></div><div id="divListOp" class="list_op"></div></div></div>
+			<div id="divMallPromotion" class="appbox pop_box pop_bg pop_bor none"></div>
+		</div>
+		<div id="divEditorNavMask" style="display:none;"></div>
+	</div>
+	
+	</div>
+</div>
+<div class="lay_background " id="layBackground">
+
+	<div class="lay_position">
+		<div class="lay_headContainer " id="headContainer">
+			<div class="fn_info">
+				<h1 class="title"><span class="text ui_mr10">官方Qzone -- 腾讯博客</span><a href="javascript:;" class="diamon noline none" id="diamon"></a></h1>
+				<div class="description">
+					
+					<span class="text ui_mr10">
+					
+						<span class="text" id="QZ_Space_Desc"></span><a href="http://qzone.qzone.qq.com" class="url">http://qzone.qzone.qq.com</a>
+					
+					</span>
+					
+				</div>
+				
+			</div>
+			<div class="gb_navigation none" id="QZ_Nav_Container"></div>
+		</div>
+		<div class="lay_pageContainer" id="LayPageContainer">
+			<div class="lay_lace_t"></div>
+				<div class="lay_lace_m">
+				
+					
+						<div class="page_home_fixed none"  id="pageContent">
+	<div class="lay_col bg4 clearfix" id="QM_Main_Container">
+		<div class="col_menu" id="QM_Group_Container_1">
+			<div class="collet_box fn_profile none" id="QM_Container_11"></div>
+			<div class="collet_box fn_accessLog none" id="QM_Container_12">
+				<div class="box_hd" id="QM_3_Title"></div>
+				<div class="box_bd" id="QM_3_Body"></div>
+				<div class="box_ft" id="QM_3_Bottom"></div>
+				<hr class="bbor2" />
+			</div>
+			<div class="collet_box fn_myLike none" id="QM_Container_13">
+				<div class="box_hd" id="QM_217_Title"></div>
+				<div class="box_bd" id="QM_217_Body"></div>
+				<div class="box_ft" id="QM_217_Bottom"></div>
+				<hr class="bbor2" />
+			</div>
+		</div>
+		<div class="col_main lbor2 bg" id="QM_Group_Container_2">
+			<div class="col_main_feed">
+				<div class="fn_info">
+					<div class="name ui_fontYahei">官方Qzone</div>
+					<div class="op" id="QM_1_Op_Container"></div>
+					<div class="info" id="QM_1_Info_Container">
+					</div>
+				</div>
+				<div class="mod_commnets_poster mod_comments_poster_noavatar" id="QM_334_Accessory_Container">
+					<div class="comments_poster_bd">
+						<div class="comments_box">
+							<textarea class="textinput bor2" spellcheck="false" id="QM_334_Accessory_TA" title="留个言给主人吧"></textarea>
+						</div>
+						<p class="hint none" id="QM_334_Accessory_HINT"></p>
+					</div>
+					<div class="comments_poster_ft">
+						<div class="comments_poster_op">
+							<input type="button" class="poster_btn gb_bt" value="发表" id="QM_334_Accessory_SubmitBTN"/>
+						</div>
+						<div class="comments_poster_addons">
+							<a href="javascript:;" class="add_emoticon c_tx3" id="QM_334_Accessory_EMBTN"><i class="ui_ico"></i>表情</a>
+						</div>
+					</div>
+				</div>
+				<div class="fn_feedControl bbor2" id="FeedController_Contaienr">
+					<div class="mode_menu_tag2">
+						<ul>
+							<li class="nowtag"><a href="javascript:;" id="FeedController_News">他的动态</a></li>
+							<li><a href="javascript:;" id="FeedController_Msg">最新留言</a><em id="FeedController_Msg_Cnt" class="ui_sup none"><b>5</b></em></li>
+						</ul>
+					</div>
+				</div>
+				<div class="fn_feedContainer" id="QM_Feeds_Container">
+					<!--[if IE]><iframe title="主人动态内容区" id="QM_Feeds_Iframe" width="100%" height="1400" frameBorder="0" scrolling="no" allowtransparency="true" src="http://rsh.qzone.qq.com/cgi-bin/feeds/feeds_html_module?i_uin=20050606&amp;i_login_uin=516974090&amp;mode=4&amp;style=1&amp;version=6&amp;needDelOpr=true&amp;transparence=true&amp;hideExtend=false&amp;showcount=10&amp;MORE_FEEDS_CGI=http%3A%2F%2Frsh.qzone.qq.com%2Fcgi-bin%2Ffeeds%2Ffeeds_html_act_all"></iframe><![endif]-->
+					<!--[if !(IE)]><!--><iframe title="主人动态内容区" id="QM_Feeds_Iframe" style="width:100%;border-width:0;overflow:hidden;" height="1400" src="http://rsh.qzone.qq.com/cgi-bin/feeds/feeds_html_module?i_uin=20050606&amp;i_login_uin=516974090&amp;mode=4&amp;style=1&amp;version=6&amp;needDelOpr=true&amp;transparence=true&amp;hideExtend=false&amp;showcount=10&amp;MORE_FEEDS_CGI=http%3A%2F%2Frsh.qzone.qq.com%2Fcgi-bin%2Ffeeds%2Ffeeds_html_act_all"></iframe><!--<![endif]-->
+					<div class="noData ui_mb10 bgr3 c_tx3 none" id="QM_Feeds_Default_View"></div>
+				</div>
+				<div class="fn_feedContainer none" id="QM_Container_21"></div>
+			</div>
+			<div class="col_main_sidebar">
+				<div id="GFP_SideBar"></div>
+				<p id="loading_icon" style="text-align:center;"><img src="http://qzonestyle.gtimg.cn/qzone_v6/gb/img/loading_32.gif" /></p>
+				
+			</div>
+		</div>
+	</div>
+</div>	
+					
+				
+				
+				<div class="page_app mod_wrap none" id="pageApp">
+					<div class="mod_wrap_inner">
+						<div class="mod_wrap_hd">
+							<h2 id="pageAppTitle"></h2>
+							<div class="op"><a href="http://user.qzone.qq.com/516974090/infocenter" class="ownermode" id="pageAppReturnBTN">返回个人中心</a></div>
+						</div>
+						<div class="mod_wrap_bd">
+							<div class="mod_wrap_iframe " id="app_container"></div>
+						</div>
+					</div>
+				</div>
+				<div class="page_app none" id="page3rdApp"></div>
+			</div>
+			<div class="lay_lace_b"></div>
+		</div>
+		<div class="lay_copyright">
+	<p class="copyright_link"><a href="http://ctc.qzs.qq.com/qzone/mall/v5/web/vip/index_tell.html" class="c_tx2" target="_blank">黄钻贵族</a> | <a href="http://20050606.qzone.qq.com/" class="c_tx2" target="_blank">官方Qzone</a> | <a href="http://t.qq.com/qzone" class="c_tx2" target="_blank">官方微博</a> | <a href="http://connect.qq.com/" class="c_tx2" target="_blank">QQ互联</a> | <a href="http://page.opensns.qq.com/" class="c_tx2" target="_blank">认证服务</a> | <a href="http://blog.qq.com/" class="c_tx2" target="_blank">腾讯博客</a> | <a href="http://service.qq.com/special_auto/qzone.html" class="c_tx2" target="_blank">腾讯客服</a> | <a href="http://wiki.open.qq.com/wiki/%E8%85%BE%E8%AE%AF%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0%E4%BE%B5%E6%9D%83%E6%8A%95%E8%AF%89%E6%8C%87%E5%BC%95" class="c_tx2" target="_blank">应用侵权投诉</a> | <a href="http://www.qq.com/culture.shtml" class="c_tx2" target="_blank">粤网文[2011]0483-070号</a></p>
+	<p class="copyright_en">Copyright &copy; 1998 - 2012 Tencent.<a href="http://www.tencent.com/en-us/le/copyrightstatement.shtml" class="c_tx2" target="_blank">All Rights Reserved.</a></p>
+	<p class="copyright_cn">腾讯公司 <a href="http://www.tencent.com/zh-cn/le/copyrightstatement.shtml" class="c_tx2" target="_blank">版权所有</a></p>
+</div>
+		<div class="lay_shop_item" id="QZ_Shop_Items_Container"></div>
+	</div>
+</div>
+<div id="QZ_Float_Items_Container" class="lay_shop_item_fixed"></div>
+
+<script type="text/javascript">
+g_T.fwp[4] = new Date();
+var g_hasCustomStyle=0,g_diyTitle="",g_diySkin=0,g_SceneID=64182,g_SeoAppId='0',g_neatstyle=0,g_7DDressNo=0,g_StyleID="v6/1",g_fullMode=6,g_Mode="gfp_fixed",g_frameStyle=1,g_version=6,g_isFriend=0,g_NowTime=1335624998,g_timestamp=0,g_Dressup={items:[{type:44,itemno:74980,posx:0,posy:0,posz:0,height:0,width:0,flag:1},{type:25,itemno:67077,posx:0,posy:0,posz:0,height:0,width:0,flag:0},{type:13,itemno:67076,posx:50,posy:150,posz:0,height:70,width:528,flag:1},{type:6,itemno:67075,posx:680,posy:0,posz:0,height:90,width:174,flag:0},{type:19,itemno:67074,posx:0,posy:0,posz:0,height:220,width:0,flag:2},{type:16,itemno:73384,posx:1000,posy:0,posz:0,height:1,width:1,flag:0},{type:26,itemno:67078,posx:0,posy:0,posz:0,height:0,width:0,flag:0},{type:1,itemno:67073,posx:0,posy:80,posz:0,height:0,width:0,flag:31} ],windows:[{appid:1,mode:2,posx:0,posy:0,posz:0,height:434,width:0,wndid:1},{appid:311,mode:2,posx:0,posy:2,posz:0,height:510,width:0,wndid:0},{appid:152,mode:2,posx:1,posy:0,posz:0,height:2271,width:1,wndid:2}]},iv={},g_StaticFlag="0",g_TransparentLevel=25600,g_isDirectApp=1,g_isBGScroll=0,ownermode=(g_iLoginUin==g_iUin),ownerProfileSummary=["官方Qzone",1,7,"中国@广东@深圳","官方Qzone -- 腾讯博客","","2005-6-6"],g_fl=0,g_ReadOnly=1,g_Errno=0,g_isOFP="0",g_isHideTitle="0",g_icLayout="0",g_Data={},g_isFromPengYou="",g_isBrandQzone="",g_isFamousQzone="1",g_xwMode="",g_needDec=1,g_isFastPav="1",g_scenarioidle="0",g_iEmoji=[];
+
+g_T.fwp[3] = new Date();
+
+window.g_ic_alpha = 0;
+g_T["main"]=[new Date];//removed ?
+window.g_EmoticonsMap = {vip:1, soso:1, jia:1, dyh:1, dream:1, tg:1, love:1, wennuan:1, panda:1, ggj:1, weiai:1, lol:1, dl:1, mum:1, joy:1, sea:1};
+(function(v,b,e,i,s,a,c){
+var arJs=[b,i,a,'qzfl/qzfl',g_V.qz,'.js',e,b,s,'/qzone/v6/interface/interface_v6'+g_V.ci+'.js?max_age=2592000',e];
+if(((/^http\:\/\/(?:user|new)\.qzone\.qq\.com\/\d{5,10}\/preview/i).test(location.href))){
+	arJs.push(b,s,'/c/=/qzone/v6/nshop/menuview.js,/qzone/v6/nshop/otherview.js',e);
+	arJs.push(b,s,'/qzone/v6/promotion/preview/plugin.js?max_age=2592000',e);//for preview, very important
+	arJs.push(b,s,'/qzone/v6/promotion/preview/previewer.js?max_age=2592000',e);//for 7ddressup preview, very important
+	arJs.push(b,s,'/qzone/v6/nshop/action.js',e);
+}
+arJs.push(b,s,'/qzone/v6/qm/qm_4_fixed'+g_V.qm_4_fixed+'.js?max_age=2592000',e);arJs.push(b,s,'/qzone/v6/guest/gfp_fixed.js?max_age=2592000',e);
+
+arJs.push(b,s,'/c/=/qzone/v6/nshop/menuview.js,/qzone/v6/nshop/otherview.js',e);arJs.push(b,s,'/qzone/biz/vpage/v6/f.js',e);
+document.write(arJs.join(''));})(g_V,g_V._jsBegin+'http://',g_V._jsEnd,imgcacheDomain,siDomain,'/ac/qzone/','v5/G/common/');
+g_T.fwp[2] = new Date();
+var g_userProfile = {"uin":+"20050606","nickname":"官方Qzone","spacename":"官方Qzone","desc":"","signature":"","avatar":"http:\/\/b85.photo.store.qq.com\/psb?\/208200113\/ydz0CDlFRy6TDYy.WPtFxRhAnL8WMiwqOoLpD.bu6ZQ!\/b\/YY45tjKxXQAAYkmLqzKjXAAA","sex_type":+"0","sex":+"1","animalsign_type":+"0","animalsign":+"9","constellation_type":+"0","constellation":+"2","age_type":+"0","age":+"7","islunar":+"0","birthday_type":+"0","birthyear":+"2005","birthday":"06-06","bloodtype":+"3","address_type":+"0","country":"中国","province":"广东","city":"深圳","home_type":+"0","hco":"中国","hp":"广东","hc":"深圳","marriage":+"1","lover":"","career":"互联网","company":"","compaddr_type":+"0","cco":"","cp":"","cc":"","cb":"深圳市南山区科技中一路腾讯大厦","mailname":"","mailcellphone":"","mailaddr":""};
+
+</script>
+<script type="text/javascript">
+g_T.fwp[5] = new Date();
+QZONE.Global.init();
+g_T.fwp[6] = new Date();
+QZFL.imports('http://'+siDomain+'/qzone/v6/navigation/navigation_bar.js', QZFL.emptyfn);
+g_T.fwp[7] = new Date();
+if(window.g_SPrefix && window.TCISD && TCISD.valueStat && TCISD.valueStat.config && (g_SPrefix != 'ctc.' && g_SPrefix != 'cnc.')){ TCISD.valueStat.config.reportAll = true; }
+</script>
+
+<script type="text/javascript">
+(function(){
+	try{if(parent!=self && (parent.document.domain!=document.domain	|| (document.referrer && !/^http(s)?:\/\/[.\w-]+\.qq\.com\//i.test(document.referrer))	) ) {	throw new Error("can't be iframed");	}	}catch(e){	window.open(location.href, "_top");	}
+})();
+</script>
+</body>
+</html>

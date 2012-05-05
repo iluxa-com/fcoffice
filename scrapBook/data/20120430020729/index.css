@@ -1,0 +1,144 @@
+/* ::::: http://common.cnblogs.com/blog/css/common.css?id=20120424 ::::: */
+
+img { border: 0px none; }
+#MySignature { margin-top: 10px; }
+#blog_post_info_block { margin-top: 20px; }
+#EntryTag { font-size: 12px; }
+.sendMsg2This:link, .sendMsg2This:visited, .sendMsg2This:active { font-size: 12px; text-decoration: none; background: url('icomsg.gif') no-repeat scroll left top transparent; }
+.sendMsg2This:hover { background: url('icomsg.gif') no-repeat scroll left bottom transparent; }
+.div_my_zzk { margin-top: 5px; margin-bottom: 5px; }
+.input_my_zzk { width: 100px; vertical-align: middle; height: 20px; }
+input.btn_my_zzk { vertical-align: middle; padding: 2px; font-size: 12px; }
+.comment_pager { text-align: left; padding-bottom: 5px; }
+.comment_pager_current { color: Red; }
+.login_tips { background-image: url('icon_addcomment.gif'); background-repeat: no-repeat; margin-top: 10px; padding: 0px 0px 10px 25px; font-weight: bold; }
+.login_tips a { text-decoration: underline; }
+.clear { clear: both; }
+.comment_quote { padding: 5px; border: 1px solid rgb(204, 204, 204); }
+#comment_nav { text-align: right; }
+#comment_nav a { padding-left: 10px; }
+#digg_block { margin-top: 10px; }
+#author_profile { float: left; width: 280px; margin-top: 0px; margin-bottom: 10px; color: rgb(0, 0, 0); margin-left: 0px; font-size: 12px; }
+#author_profile a:hover { text-decoration: underline; }
+.author_avatar { vertical-align: top; float: left; margin-right: 5px; padding-top: 5px; padding-left: 2px; border: 0px none; }
+.author_profile_info { float: left; line-height: 18px; }
+#author_profile_follow {  }
+#author_profile_follow a:link {  }
+#div_digg { float: right; margin-bottom: 10px; margin-right: 30px; font-size: 12px; width: 120px; text-align: center; margin-top: 10px; }
+.diggit { float: left; width: 46px; height: 52px; background: url('upup.gif') no-repeat scroll 0% 0% transparent; text-align: center; cursor: pointer; margin-top: 2px; padding-top: 5px; }
+.diggnum { font-size: 14px; color: rgb(7, 93, 179); font-family: Verdana; }
+.buryit { float: right; margin-left: 20px; width: 46px; height: 52px; background: url('downdown.gif') no-repeat scroll 0% 0% transparent; text-align: center; cursor: pointer; margin-top: 2px; padding-top: 5px; }
+.burynum { font-size: 14px; color: rgb(7, 93, 179); font-family: Verdana; }
+.diggword { margin-top: 5px; margin-left: 0px; font-size: 12px; color: gray; }
+#profile_block { margin-top: 5px; line-height: 1.5; text-align: left; }
+#post_next_prev { line-height: 1.8; font-size: 12px; }
+#post_next_prev a.p_n_p_prefix:link { text-decoration: none; }
+#post_next_prev a.p_n_p_prefix:hover { text-decoration: underline; }
+.itnews { line-height: 150%; }
+.c_ad_block { margin-top: 10px; line-height: 1.5; }
+#green_channel { padding: 10px 5px; margin-bottom: 0px; margin-top: 10px; border: 1px dashed rgb(192, 192, 192); font-size: 9pt; color: rgb(0, 0, 0); width: 390px; }
+#green_channel a { background: url('undefined') repeat-x scroll 0% 0% transparent; display: inline-block; padding: 3px 8px; color: rgb(255, 255, 255); text-decoration: none; font-weight: bold; cursor: pointer; margin-right: 10px; border-radius: 5px 5px 5px 5px; box-shadow: 0pt 1px 3px rgba(0, 0, 0, 0.5); text-shadow: 0pt -1px 1px rgba(0, 0, 0, 0.25); font-size: 9pt; }
+#green_channel a:hover { background-image: url('undefined'); }
+#green_channel #green_channel_digg { background-color: rgb(45, 174, 191); }
+#green_channel #green_channel_follow { background-color: rgb(227, 49, 0); }
+#green_channel #green_channel_favorite { background-color: rgb(255, 181, 21); }
+#green_channel #green_channel_contact { background-color: rgb(238, 238, 238); color: rgb(85, 85, 85); }
+#green_channel #green_channel_weibo img { vertical-align: middle; border: medium none; }
+#green_channel #green_channel_weibo { background: none repeat scroll 0% 0% transparent; padding: 3px 2px; box-shadow: none; text-shadow: none; }
+.ad_text_commentbox { margin-top: 5px; margin-bottom: 5px; }
+#site_nav_under { margin-top: 5px; }
+#site_nav_under a { margin-right: 10px; }
+#ad_under_comment2 { margin-bottom: 5px; }
+#ad_under_comment2 img { margin-bottom: 5px; }
+.recent_comment_author { text-align: right; margin-right: 4px; }
+input::-moz-focus-inner { border: 0pt none; padding: 0pt; }
+/* ::::: http://common.cnblogs.com/Skins/SimpleBlue/style.css?id=20120424 ::::: */
+
+#EntryTag { font-size: 9pt; }
+#digg_block { margin-top: 10px; }
+#author_profile { float: left; width: 280px; margin-top: 0px; margin-bottom: 10px; color: rgb(0, 0, 0); margin-left: 0px; font-size: 12px; }
+#author_profile a:hover { text-decoration: underline; }
+.author_avatar { vertical-align: top; float: left; margin-right: 5px; padding-top: 5px; padding-left: 2px; border: 0px none; }
+.author_profile_info { float: left; line-height: 18px; }
+#author_profile_follow {  }
+#author_profile_follow a:link {  }
+#div_digg { float: right; margin-bottom: 10px; margin-right: 30px; font-size: 12px; width: 120px; text-align: center; margin-top: 10px; }
+.diggit { float: left; width: 46px; height: 52px; background: url('upup.gif') no-repeat scroll 0% 0% transparent; text-align: center; cursor: pointer; margin-top: 2px; padding-top: 5px; }
+.diggnum { font-size: 14px; color: rgb(7, 93, 179); font-family: Verdana; }
+.buryit { float: right; margin-left: 20px; width: 46px; height: 52px; background: url('downdown.gif') no-repeat scroll 0% 0% transparent; text-align: center; cursor: pointer; margin-top: 2px; padding-top: 5px; }
+.burynum { font-size: 14px; color: rgb(7, 93, 179); font-family: Verdana; }
+.diggword { margin-top: 5px; margin-left: 0px; font-size: 12px; color: gray; }
+* { margin: 0pt; padding: 0pt; }
+body { color: rgb(51, 51, 51); background: none repeat scroll 0% 0% rgb(222, 231, 222); font-family: verdana,Arial,Helvetica,sans-serif; font-size: 10pt; line-height: 1.8em; }
+img { border: 0pt none; }
+li { list-style: none outside none; }
+input, textarea { border: 1px solid rgb(153, 153, 153); }
+h1, h2, h3, h4, h5, h6, th { font-weight: bold; color: rgb(0, 0, 0); }
+a { text-decoration: none; color: rgb(51, 51, 51); }
+a:hover { color: rgb(153, 153, 153); }
+#sideBar {  }
+#mainContent {  }
+.forFlow {  }
+#footer { text-align: center; }
+#blogTitle { padding: 16px; }
+#blogTitle .title { font-size: 17pt; }
+#blogTitle .subtitle { font-size: 10.5pt; color: rgb(153, 153, 153); }
+#navigator { background: none repeat scroll 0% 0% rgb(246, 246, 246); border-style: solid; border-color: rgb(204, 204, 204); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; border-width: 1px 0pt; height: 17px; padding: 6px; color: rgb(153, 153, 153); }
+.blogStats { float: right; color: rgb(153, 153, 153); }
+#navList li { float: left; margin-right: 20px; font-size: 10.5pt; }
+#sideBar h3, #MyIng .ing_title { margin: 16px 0pt 0pt -8px; font-size: 14px; text-align: left; }
+#calendar { margin-top: 16px; text-align: center; }
+.postTitle, .entrylistPosttitle, .feedback_area_title { border-bottom: 1px solid rgb(221, 221, 221); font-size: 14px; font-weight: bold; margin: 20px 0pt 10px; }
+.postTitle { margin-top: 10px; }
+.postBody p { margin-top: 12px; }
+.postBody { font-size: 14px; line-height: 1.8; }
+.postBody span {  }
+.postCon a, .postBody a, .feedbackCon a { border-bottom: 1px dotted rgb(51, 51, 51); color: rgb(0, 0, 0); }
+.postCon a:hover, .postBody a:hover, .feedbackCon a:hover { border-color: rgb(153, 153, 153); }
+.postDesc, .entrylistItemPostDesc { border-bottom: 1px dotted rgb(153, 153, 153); color: rgb(153, 153, 153); text-align: right; padding-bottom: 20px; }
+.feedbackItem { padding: 8px; border-bottom: 1px dotted rgb(204, 204, 204); }
+.feedbackManage { float: right; }
+.feedbackCon { margin-left: 1em; color: rgb(102, 102, 102); }
+.btn_my_zzk { border: 0px none; }
+#sideBarMain { padding-left: 0px; }
+p { margin-top: 0px; margin-bottom: 0px; }
+body { color: rgb(51, 51, 51); background: none repeat scroll 0% 0% rgb(222, 231, 222); }
+div.feedbackItem div.feedbackCon { color: rgb(136, 136, 136); font-size: 12px; line-height: 135%; padding: 7px; }
+ul#navList li { margin: 5px; }
+div#navigator { padding: 0pt; height: 0px; border: medium none; }
+div.blogStats { position: absolute; top: 110px; color: rgb(102, 102, 102); right: 30px; }
+body ul#navList { position: absolute; top: 28px; right: 30px; font-size: 12px; }
+ul#navList a { display: block; font-size: 12px; padding: 2px 0pt; width: 45px; margin: 0px; color: rgb(255, 255, 255); text-align: center; }
+ul#navList a:hover { color: rgb(33, 97, 115); }
+div#footer { display: none; }
+#sideBar { border-width: 1px 3px 3px 1px; border-style: solid; border-color: rgb(206, 215, 206); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; position: absolute; top: 86px; left: 8px; background: none repeat scroll 0% 0% rgb(255, 255, 255); padding: 0px; width: 280px; }
+div#sideBarMain { padding: 0px 20px 30px; }
+#mainContent { background: none repeat scroll 0% 0% rgb(222, 231, 222); margin-left: 300px; margin-right: 5px; margin-top: 10px; }
+div.forFlow { border-width: 1px 3px 3px 1px; border-style: solid; border-color: rgb(206, 215, 206); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; background: none repeat scroll 0% 0% rgb(255, 255, 255); padding: 45px 37px 40px; margin-left: 0px; left: 0px; }
+div.postDesc, div.entrylistItemPostDesc { border: medium none; }
+div#blogTitle { background: url('header.gif') repeat-x scroll left top transparent; height: 76px; padding: 0pt; }
+div#blogTitle .title { text-indent: 30px; padding-top: 15px; }
+div#blogTitle .title a { color: rgb(255, 255, 255); }
+div#blogTitle .subtitle { text-indent: 50px; color: rgb(33, 97, 115); margin-bottom: 0pt; }
+div#navigator a { font-size: 14px; }
+a { color: rgb(57, 154, 178); text-decoration: none; }
+a:hover { color: rgb(156, 186, 57); }
+div.postDesc a:first-child { color: rgb(136, 136, 136); }
+#leftcontentcontainer ul { overflow: hidden; }
+/* ::::: http://common.cnblogs.com/blog/css/common2.css ::::: */
+
+p { margin: 5px auto; text-indent: 0px; }
+.postBody p, .postCon p { margin: 5px auto; }
+.postBody p, .postCon p { text-indent: 0px; }
+.login_tips a { text-decoration: underline; }
+#div_digg .diggnum { line-height: 1.5em; }
+#div_digg .burynum { line-height: 1.5em; }
+#green_channel a:link, #green_channel a:visited, #green_channel a:active { color: rgb(255, 255, 255); border: medium none; }
+/* ::::: http://common.cnblogs.com/css/shStyle.css ::::: */
+
+/* ::::: http://www.cnblogs.com/coderzh/customcss.aspx?id=20472 ::::: */
+
+body { font-family: '微软雅黑',verdana,Arial,sans-serif; font-size-adjust: none; font-style: normal; font-variant: normal; font-weight: normal; }
+.postCon a, .postBody a, .feedbackCon a { border-bottom: 0px none; color: rgb(0, 102, 170); }
+div#sideBar { width: 250px; }
+#mainContent { margin-left: 272px; }
