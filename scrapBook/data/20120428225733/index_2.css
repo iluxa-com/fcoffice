@@ -1,0 +1,81 @@
+/* ::::: http://ctc.i.gtimg.cn/qzone_v6/gb/skin/v6/1.css ::::: */
+
+a, .c_tx { color: rgb(37, 149, 183); }
+body, .c_tx2 { color: rgb(84, 84, 84); }
+.c_tx3 { color: rgb(168, 168, 168); }
+.bg6, .bg6 a, .bg6_hover:hover, .bg6_hover:hover a, .c_tx6 { color: rgb(255, 255, 255); }
+.bor, .tbor, .bbor, .lbor, .rbor, .bgr { border-color: rgb(199, 233, 245); }
+.bor2, .bgr2, .tbor2, .bbor2, .lbor2, .rbor2 { border-color: rgb(211, 236, 245); }
+.bor3, .bgr3, .tbor3, .bbor3, .lbor3, .rbor3 { border-color: rgb(219, 241, 249); }
+.bor_bg4 { border-color: rgb(240, 250, 255); }
+.bor_bg6 { border-color: rgb(128, 212, 237); }
+.bg2, .bgr2, .bg2_hover:hover { background-color: rgb(239, 249, 253); }
+.bg6_hover:hover, .bg6 { background-color: rgb(128, 212, 237); }
+.bg_mode .mode_gb, .mode_menu_tag .menuon, .mode_menu_tag .menulefton, .mode_menu_tag2 .nowtag a, .mode_tab2_nonce { background-color: rgb(255, 255, 255); }
+/* ::::: http://ctc.qzonestyle.gtimg.cn/open_proj/sns_icenter.css ::::: */
+
+html { font-size: 62.5%; font-family: Tahoma; }
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td, hr { margin: 0pt; padding: 0pt; }
+body { line-height: 1.333; font-size: 1.2rem; }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+li { list-style: none outside none; }
+fieldset, img, a img, iframe { border-width: 0pt; border-style: none; }
+img {  }
+a:link, a:visited { text-decoration: none; }
+hr { height: 0pt; }
+.none { display: none; }
+.clearfix:before, .clearfix:after { content: "."; display: block; height: 0pt; visibility: hidden; }
+.clearfix:after { clear: both; }
+.clearfix {  }
+.textoverflow { display: inline-block; white-space: nowrap; word-wrap: normal; overflow: hidden; max-width: 100%; vertical-align: -2px; }
+.bg_mode img { border: medium none; vertical-align: middle; }
+.bg_mode { font-size: 12px; background: none repeat scroll 0% 0% transparent; font-family: Arial,Simsun,"Arial Unicode MS",Mingliu,Helvetica; }
+.mode_gb { background: none repeat scroll 0% 0% transparent; }
+.qbs { width: 160px; overflow: hidden; }
+.qbs p { margin: 0pt; }
+.qbs .qbs_cont { clear: both; padding: 12px 0pt 0pt; line-height: 1.6em; }
+.qbs .qbs_cont a { text-decoration: none; }
+.qbs .qbs_cont a:hover { text-decoration: underline; }
+.qbs .qbs_pri strong { color: rgb(245, 80, 36); font-family: simsun; }
+.h_bor { border-style: none none dashed; border-bottom-width: 1px; margin: 18px auto; width: 160px; }
+.mode_gb_cont { width: 160px; }
+.ad_mode, .sns_mode { width: 160px; line-height: 16px; }
+.ad_mode h3, .sns_mode h3 { font-size: 12px; padding-bottom: 13px; }
+.ad_mode a, .sns_mode a { text-decoration: none; }
+.may_like .who_like { padding-bottom: 8px; }
+.may_like .bubble { padding: 8px 0pt 8px 8px; width: 150px; border-width: 1px; border-style: solid; position: relative; }
+.may_like .bubble .arr { border-left: 5px dashed transparent; border-right: 5px dashed transparent; border-style: dashed dashed solid; border-top: 5px dashed transparent; border-width: 5px; font-size: 0pt; left: 23px; position: absolute; top: -11px; width: 0pt; line-height: 1.5; }
+.may_like .bubble .arr div { border-left: 5px dashed transparent; border-right: 5px dashed transparent; border-style: dashed dashed solid; border-top: 5px dashed transparent; border-width: 5px; font-size: 0pt; left: -5px; position: absolute; top: -4px; width: 0pt; }
+.may_like .cont .ui_avatar { float: left; width: 50px; height: 50px; }
+.may_like .cont .ui_avatar img { width: 50px; height: 50px; border-radius: 5px 5px 5px 5px; }
+.may_like .cont .like_info { float: left; padding-left: 12px; }
+.may_like .cont .like_who { padding-bottom: 6px; }
+.may_like .cont .like_who .name { padding-right: 3px; max-width: 60px; overflow: hidden; height: 16px; }
+.may_like .cont .op_use { display: inline-block; border-width: 1px; border-style: solid; padding: 2px 4px; }
+.play_mode .app_img { width: 160px; height: 210px; }
+.play_mode .app_img_link { display: block; width: 160px; height: 210px; }
+.fs_play .who_like { padding-bottom: 0pt; }
+.fs_play .bubble { margin-top: 8px; }
+.fs_play .fs_like { margin-bottom: 14px; }
+.fs_play .cont .like_who { width: 84px; }
+.fs_play .cont .like_who .name { width: 84px; max-width: 100%; padding-right: 0pt; display: inline-block; }
+.fs_play .fs_like .like_app { margin-top: 4px; }
+.fs_play .fs_like .like_app_link { display: block; height: 16px; }
+.fs_play .fs_like .like_app_link .like_app_img { float: left; margin-right: 5px; }
+.fs_play .fs_like .like_app_link .like_app_img img { width: 16px; height: 16px; }
+.fs_play .fs_like .like_app_link .like_app_name { width: 120px; }
+.fs_play .last_fs_like { margin-bottom: 0pt; }
+.sns_recommend { width: 160px; }
+.sns_recommend .sns_recommend_list { width: 52px; height: 18px; line-height: 17px; border-width: 1px; border-style: solid; text-align: center; float: left; z-index: 10; vertical-align: middle; }
+.sns_recommend .sns_recommend_list .sns_recommend_cat { width: 52px; height: 18px; display: block; }
+.sns_recommend .sns_recommend_list .sns_recommend_cat:hover { text-decoration: none; }
+.sns_recommend .now_recommend_list { position: relative; }
+.sns_recommend .now_recommend_list .trig { border-width: 5px; border-bottom: 5px dashed transparent; border-right: 5px dashed transparent; border-left: 5px dashed transparent; border-style: solid dashed dashed; font-size: 0pt; width: 0pt; height: 0pt; line-height: 0; position: absolute; top: 19px; left: 50%; margin-left: -5px; }
+.sns_recommend .behind_recommend_list { margin-left: -1px; }
+.sns_recommend .sns_recommend_img { position: relative; width: 160px; height: 160px; }
+.sns_recommend .sns_recommend_img .sns_recommend_img_link { display: block; width: 160px; height: 160px; position: absolute; top: 0pt; left: 0pt; }
+.clearfix:before, .clearfix:after { content: "."; display: block; height: 0pt; visibility: hidden; }
+.clearfix:after { clear: both; }
+.clearfix {  }
+.textoverflow { display: inline-block; max-width: 100%; overflow: hidden; vertical-align: -2px; white-space: nowrap; word-wrap: normal; }
+a:hover { text-decoration: underline; }

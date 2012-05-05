@@ -1,0 +1,116 @@
+.error { color: rgb(255, 0, 0); font-size: 12px; }
+/* ::::: http://hi.bdimg.com/static/cblog/css/ui/ucard/ucard.css?v=50de96ca.css ::::: */
+
+.clearfix:after { content: "."; display: block; height: 0pt; line-height: 0; clear: both; visibility: hidden; }
+/* ::::: http://hi.bdimg.com/static/cblog/css/ui/comment_editor/bdeditor.css ::::: */
+
+.ToolbarContainer { border: 1px solid rgb(169, 204, 223); }
+.EditorContainer { border-right: 1px solid rgb(221, 221, 221); border-width: 2px 1px 1px; border-style: solid; border-color: rgb(237, 237, 237) rgb(221, 221, 221) rgb(221, 221, 221); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-image: none; display: block; }
+.ToolbarStrip { background: url('bgstrip.gif') repeat-x scroll left top transparent; padding: 0pt; }
+.ToolbarItem {  }
+.ToolbarItem .img { background: url('strip.gif') no-repeat scroll 0% 0% transparent; border: medium none; margin: 0pt 2px 2px 0pt; padding-left: 24px; height: 24px; line-height: 24px; padding-right: 5px; cursor: default ! important; }
+.ToolbarItem .Smiley { background-position: 4px -1276px; padding-top: 1px; }
+/* ::::: http://hi.bdimg.com/static/cblog/css/ui/mods_datauri.css?v=a1661a70.css ::::: */
+
+.error { color: red; }
+.clearfix:after { content: "."; display: block; height: 0pt; clear: both; visibility: hidden; }
+.clearfix { display: inline-block; }
+.clearfix { display: block; }
+/* ::::: http://hitn.bdimg.com/2402050202/css/item/56cd0436178350310a55a91b.css ::::: */
+
+body { background: none repeat scroll 0% 0% rgb(255, 255, 255); }
+#header { height: 183px; background: url('b1132aad9ce1380a4b36d69d.jpg') no-repeat scroll center top transparent; }
+#header div.lc {  }
+#header div.rc {  }
+#header div.tit { top: 8px; left: 20px; line-height: 70px; font-size: 20px; font-family: 黑体; }
+#header div.tit a.titlink { color: rgb(74, 127, 248); text-decoration: none; }
+#header div.tit a.titlink:visited { color: rgb(74, 127, 248); text-decoration: none; }
+#header div.desc { top: 65px; left: 20px; color: rgb(75, 75, 75); font-size: 13px; }
+#tabline { top: 185px; background-color: rgb(255, 255, 255); }
+#tab { top: 121px; }
+#tab a.on, #tab a.on:link, #tab a.on:visited { margin-top: 2px; line-height: 20px; color: rgb(0, 0, 0); font-size: 14px; }
+#tab span { color: rgb(0, 0, 0); font-size: 14px; }
+#tab a:link { color: rgb(0, 0, 0); text-decoration: none; font-size: 14px; }
+#tab a:visited { color: rgb(0, 0, 0); text-decoration: none; font-size: 14px; }
+.stage {  }
+#page { height: 30px; font-size: 14px; font-family: Arial; text-align: center; }
+.modth { height: 24px; }
+.modhead { padding: 4px 4px 0pt; }
+.modtit { color: rgb(102, 102, 102); font-size: 12px; font-weight: bold; }
+.modbox { padding: 10px 10px 0pt; background: none repeat scroll 0% 0% rgb(255, 255, 255); }
+.modtl { line-height: 1px; }
+.modtc {  }
+.modtr { line-height: 1px; }
+.modbl { background-color: rgb(255, 255, 255); line-height: 1px; }
+.modbc { background-color: rgb(255, 255, 255); line-height: 1px; }
+.modbr { background-color: rgb(255, 255, 255); line-height: 1px; }
+#m_blog div.tit { font-size: 14px; font-weight: bold; }
+#m_blog div.date { margin: 5px 0pt 8px; color: rgb(102, 102, 102); }
+#m_blog div.cnt { color: rgb(51, 51, 51); line-height: 20px; font-size: 14px; }
+#m_blog div.cnt div { font-size: 14px; }
+#m_blog div.opt { color: rgb(102, 102, 102); font-size: 12px; }
+#m_blog div.opt a { color: rgb(74, 127, 248); font-size: 12px; }
+#m_blog div.opt a:visited { color: rgb(74, 127, 248); }
+#m_blog div.line { margin-top: 17px; line-height: 17px; border-top: 1px dashed rgb(166, 166, 166); }
+#in_comment { width: 710px; }
+#in_comment div.tit { margin-bottom: 12px; color: rgb(51, 51, 51); font-size: 14px; font-weight: bold; }
+#in_send div.tit { margin: 10px 0pt; color: rgb(51, 51, 51); font-size: 14px; font-weight: bold; }
+/* ::::: http://hi.bdimg.com/static/cblog/css/space_datauri.css?v=b27686c7.css ::::: */
+
+body, form { margin: 0pt; }
+body, td, div { font-family: Arial; word-wrap: break-word; visibility: visible ! important; filter: none; }
+td, div { font-size: 12px; line-height: 18px; }
+body {  }
+html body center, html body center #usrbar, html body center #ft, html body center #usrbar nobr, html body center #usrbar strong, html body center #usrbar a, html body center #usrbar a:link, html body center #usrbar a:visited, html body center #ft a, html body center #ft a:link, html body center #ft a:visited { max-width: none ! important; text-transform: none ! important; direction: inherit ! important; vertical-align: baseline ! important; word-spacing: normal ! important; font-variant: normal ! important; text-decoration: none ! important; font-size-adjust: none ! important; border: medium none ! important; background: none repeat scroll 0% 0% transparent ! important; overflow: visible ! important; width: auto ! important; clear: both ! important; float: none ! important; margin: 0pt ! important; position: static ! important; visibility: visible ! important; letter-spacing: normal ! important; font-size: 12px ! important; font-family: Arial ! important; filter: none ! important; }
+html body center { display: block ! important; }
+html body center #main, html body center #usrbar, html body center #ft { position: relative ! important; top: auto ! important; bottom: auto ! important; left: auto ! important; right: auto ! important; }
+html body center #main { z-index: 10000 ! important; padding: 0pt 10px; min-width: 756px; max-width: 1000px; }
+#header { position: relative; }
+#header div.lc { position: relative; height: 100%; font-size: 0pt; }
+#header div.rc { position: relative; right: 0pt; height: 100%; font-size: 0pt; }
+#header div.tit { position: absolute; }
+#header div.desc { position: absolute; }
+#tabline { position: absolute; width: 100%; height: 1px; line-height: 1px; font-size: 0pt; }
+#tab { position: absolute; padding-left: 10px; height: 22px; line-height: 22px; width: 99% ! important; }
+#tab a.on { float: left; padding: 0pt 10px 0pt 12px; font-size: 13px; font-weight: bold; }
+#tab span { float: left; font-size: 13px; }
+#tab a { float: left; padding: 0pt 14px; font-size: 13px; }
+.stage { padding-top: 10px; width: 100%; height: auto; }
+.stagepad { padding: 0pt 10px 10px; margin: 0pt auto; }
+.f14 { font-size: 14px; }
+#m_blog div.cnt, #m_albumlist div.desc, #m_blog div.tit, #m_artclg div.item, #m_comment div.item, #m_links div.item, #m_cang div.item, #m_album div.image, #m_links div.item, #in_comment div.desc, #m_friblog div.item { overflow: hidden; }
+#m_blog div.cnt { word-wrap: break-word; overflow: hidden; position: relative ! important; }
+#m_blog div.cnt * { line-height: normal; }
+#m_blog table { table-layout: auto ! important; }
+#in_comment div.tit, #in_send div.tit, #in_reader div.tit { text-align: left; }
+.x-blog-opt-sp { padding: 0pt 4px; }
+#spVerifyKey, #spVerifyKey input { ime-mode: disabled; }
+.userbar { height: 40px; background: url('undefined') repeat-x scroll 0pt -1px transparent; border-bottom: 1px solid rgb(192, 192, 192); }
+.userbar * { margin: 0pt; padding: 0pt; list-style: none outside none; }
+#nav { height: 40px; line-height: 30px; padding-left: 20px; width: 980px; margin: 0pt auto; }
+#nav .logo { float: left; margin-top: 4px; }
+#nav .topmenu { margin-left: 130px; padding-top: 6px; }
+#nav li { float: left; margin: 0pt 10px; }
+#nav li a, #nav li a:link { display: block; width: 70px; font-size: 14px; text-align: center; font-family: 微软雅黑,宋体; color: rgb(0, 0, 0) ! important; }
+#nav li a:visited { text-decoration: none; color: rgb(0, 0, 0) ! important; }
+#nav li a:hover { text-decoration: underline; color: rgb(0, 0, 0) ! important; }
+#nav .manage { float: right; color: rgb(102, 102, 102); line-height: 30px; }
+#nav .manage a, #nav .manage a:link, #nav .manage a:visited { text-decoration: underline; color: rgb(51, 51, 51) ! important; font-size: 12px ! important; }
+#nav .manage dt, #nav .manage dd { float: left; }
+#nav .manage dd { padding: 0pt 10px; }
+#nav .manage dd.nolink { padding: 0pt 5px; }
+#nav li.vline { margin: 6px 0pt; border-left: 1px dotted rgb(198, 197, 201); height: 18px; line-height: 0; }
+#nav #topMsgLi { position: relative; z-index: 65535; }
+/* ::::: http://hi.bdimg.com/static/base/css/base.css?v=1334907755.css ::::: */
+
+.msglist { width: 233px; height: 80px; padding-top: 7px; border: medium none; text-align: left; background: url('messagebgnew.gif') no-repeat scroll 0% 0% transparent; position: absolute; z-index: 99999; }
+.msglist .t_ccc { color: rgb(176, 176, 176); }
+.msglist .icon1 { background: url('msgicon1.gif') no-repeat scroll 0pt 8px transparent; }
+.msglist .icon3 { background: url('msgicon1.gif') no-repeat scroll 0pt -41px transparent; }
+.msglist .icon4 { background: url('msgicon1.gif') no-repeat scroll 0pt -65px transparent; }
+.msglist div { width: 150px; line-height: 24px; height: 24px; padding-left: 18px; margin: 0pt 12px; cursor: pointer; font-size: 12px; font-weight: normal; }
+#msgInbox { height: 13px; position: absolute; right: 3px; top: 9px; width: 16px ! important; }
+.msglist .sound { background: url('sy.gif') no-repeat scroll 0pt 0pt transparent; }
+.msglist #topMsgPlayBtn { width: 14px; height: 9px; position: absolute; right: 28px; top: 7px; z-index: 65001; margin: 0pt; padding: 0pt; overflow: hidden; }
+.msglist .sound {  }
+.msglist #topMsgCloseBtn { background: url('cl.gif') no-repeat scroll 0pt 0pt transparent; width: 9px; height: 9px; position: absolute; right: 6px; top: 7px; z-index: 65001; margin: 0pt; padding: 0pt; }

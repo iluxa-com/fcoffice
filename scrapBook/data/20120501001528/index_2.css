@@ -1,0 +1,27 @@
+/* ::::: http://qzs.qq.com/qzonestyle/qzone_app/qzone_open/like_this.css ::::: */
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, a, img, strong, li, ol, ul, form, label, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0pt; padding: 0pt; }
+body { color: rgb(153, 153, 153); font: 12px/1.5em Tahoma,"hiragino sans gb",Helvetica,Arial; text-align: center; height: 100%; }
+div { text-align: left; }
+a { text-decoration: none; color: rgb(73, 142, 175); }
+a:hover { text-decoration: underline; }
+a:active { outline: medium none; }
+*::-moz-selection { color: rgb(255, 255, 255); background-color: rgb(51, 51, 51); }
+code::-moz-selection { background-color: rgb(51, 51, 51); }
+.qz_like_mode .qz_like_op, .qz_like_mode .qz_liked_op, .qz_like_mode .qz_liked_op_tx3 { margin-bottom: 4px; overflow: auto; }
+.qz_like_mode .qz_like_bt { background: url('like_bg.png') no-repeat scroll 0% 0% transparent; display: block; float: left; text-decoration: none; vertical-align: -12.5px; line-height: 21px; width: 50px; height: 21px; margin-right: 3px; margin-bottom: 6px; padding: 0pt; overflow: hidden; }
+@media not all {
+  .qz_like_mode .qz_like_bt { vertical-align: 0pt; }
+}
+.qz_like_mode .qz_like_bt span { padding-left: 22px; }
+.qz_like_mode .qz_like_stat { background-image: url('like_bg.png'); background-repeat: no-repeat; display: block; float: left; height: 21px; padding-left: 9px; }
+.qz_like_mode .qz_like_stat span { font-size: 11px; font-weight: normal; background-image: url('like_bg.png'); background-repeat: no-repeat; display: block; line-height: 21px; height: 21px; margin-right: -1px; padding-right: 5px; }
+.qz_like_op .qz_like_stat a, .qz_liked_op .qz_like_stat a { text-decoration: none; }
+.style_2 .qz_like_op a { width: 50px ! important; height: 21px ! important; }
+.style_2 .qz_like_bt { color: rgb(84, 137, 186); }
+.style_2 .qz_like_op .qz_like_bt { background-position: 0pt 0pt; }
+.style_2 .qz_like_op .qz_like_stat { background-position: 0pt -105px; }
+.style_2 .qz_like_stat, .style_2 .qz_like_stat a { color: rgb(79, 150, 192); }
+.style_2 .qz_like_op .qz_like_stat span { background-position: 100% -105px; }
+.style_2 .qz_like_op .qz_like_bt span, .style_3 .qz_like_op .qz_like_bt span, .style_4 .qz_like_op .qz_like_bt span { padding-left: 22px; }
+.qz_like_mode .qz_like_text { vertical-align: -3px; line-height: 15px; margin-left: 4px; }

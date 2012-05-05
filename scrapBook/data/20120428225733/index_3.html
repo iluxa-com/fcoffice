@@ -1,0 +1,526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh-cn" xml:lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta name="robots" content="all">
+<meta name="author" content="Tencent-ISRD">
+<meta name="copyright" content="">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<title>广告位模块</title>
+<script type="text/javascript">
+	document.domain = 'qq.com';
+
+	var imgcacheDomain= parent.imgcacheDomain || 'imgcache.qq.com';
+	var siDomain =  parent.siDomain || 'qzonestyle.gtimg.cn';
+	var skindomain = (parent.g_SPrefix || '') + 'i.gtimg.cn';
+</script>
+
+<script type="text/javascript">
+	(function() {
+		var _jsbegin = '<script type="text/javascript" src="', _jsend = '" charset="utf-8"><\/script>';
+		function writeScript(jsarr) {
+			var str = _jsbegin + jsarr.join(_jsend + _jsbegin) + _jsend;
+			document.write(str);
+		}
+		var sarr = [];
+		var qzjs = ( parent.g_V && typeof(parent.g_V.qz)=='string') ? 
+		'http://'+ imgcacheDomain +'/ac/qzone/qzfl/qzfl'+parent.g_V.qz+'.js'
+		: 'http://'+ imgcacheDomain +'/qzone/qzfl/qzfl.js';
+
+			var sarr = [
+				qzjs, 
+				//'http://'+ siDomain +'/ac/qzfl/appclientlib.js',
+				'http://'+ siDomain +'/ac/qzfl/stat.js'
+			];
+		
+		var str = _jsbegin + sarr.join(_jsend + _jsbegin) + _jsend;
+		document.write(str);
+	})();
+</script><script type="text/javascript" src="qzfl_2.1.1.4.js" charset="utf-8"></script><script type="text/javascript" src="stat.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+QZONE.FP = parent.QZONE.FP;
+</script>
+
+<script type="text/javascript">
+(function() {
+	var g_StyleID, styleFix ;
+	try { g_StyleID = QZONE.FP.getQzoneConfig().styleId; } 
+	catch(e) {
+	}
+	g_StyleID = g_StyleID || 1;
+	styleFix = (QZFL.userAgent.ie == 6) ? '?2' : '' ;
+	/*QZFL.css.insertCSSLink("http://"+ skindomain  +"/qzone_v6/gb/skin/" + g_StyleID + ".css");
+		QZFL.css.insertCSSLink("http://"+ siDomain  +"/open_proj/sns_icenter.css");*/
+	document.write('<link rel="stylesheet" rev="stylesheet" href="http://'+ skindomain  +'/qzone_v6/gb/skin/' + g_StyleID + '.css" type="text/css" media="screen" \/><link rel="stylesheet" rev="stylesheet" href="http://'+ siDomain  +'/open_proj/sns_icenter.css'+ styleFix +'" type="text/css" media="screen" \/>');
+})();
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="index_3.css" media="all">
+</head>
+<body class="bg">
+	<div class="gg_main gg_main_v6">
+		<div class="gg1">
+			<div style="height: 120px; width: 220px;" class="gg_img" id="gdtcont">
+				<a href="http://c.gdt.qq.com/gdt_click.fcg?viewId=FZ%213MKx0BwC7L2kmz8p9lpNxFEVXkhXLFUxrcVH1eHl5YIGf0eimAJagb5MZ88hGKHx0LtrPH4IkGuqIuzmfJoYZoLPF0Ua_6QhSF_uEQ34pySxM%21MGQQpQ95vB4Ak3tYWQ_DvDf33L8_mtOKHhux%21dj9QILvbOKhshE1H73q9ku8cGQ_7O21WIEmQV5MZd3Pr7lrhMFqlIPm4Au1hQQjY0h%21mireoEx15wXIt1D3s8cxzei6pxJlhs4lgkl9trimH9TkPM9CBvOszWfWl5xI5PMbwihgBuHne_PiI%219MIcohFEvTCTjCU0o2eiWDJE3Qxo3Sql5eo9UViyFz_yoOacpDkQRyBQuznBKt6O%21eSg&amp;url=ttc&amp;jtype=0" title="" class="gg_img_big" id="order_img_link" target="_top"><img src="0_001.dat" style="height: 120px; width: 220px;" alt="" id="order_img"></a>
+				<div class="gg_change">
+					<a href="javascript:;" id="next"><span>换一个</span></a>
+				</div>
+				<div class="gg_loading" id="loading" style="display: none;">Loading...</div>
+			</div>
+		<div id="zancont" class="gg_zan"><a class="gg_zan_bt c_tx" zan="1" style="width: 35px;" href="http://ctc.qzs.qq.com/qzone/biz/gdt/comm/javascript;"><i class="icon_zan"></i>赞</a>2人觉得很赞</div></div>
+	</div>
+
+
+<script type="text/javascript">
+	
+	function getParameter(name,cancelBubble){
+		var r = new RegExp("(\\?|#|&)"+name+"=([^&#]*)(&|#|$)");
+		var m = location.href.match(r);
+		if ((!m || m=="") && !cancelBubble) m = top.location.href.match(r);
+		return (!m?"":m[2]);
+	}
+	TCISD = QZONE.FP.getStatPackage();
+
+	var pid, QM, GPAdManage, GDT ;
+
+	function resizePage(callback) {
+		
+		var img = $('order_img');
+
+		if (img.complete) { 
+			callback();
+			return; 
+		}
+
+		img.onload = function () { 
+			callback();
+		};
+	}
+
+	var loading = (function() {
+		var timer;
+		var a = {};
+		a.hide = function() {
+			if(timer) {
+				clearTimeout(timer);
+				timer = null;
+			}
+			$e('#loading').hide();
+		}
+		a.show = function() {
+			timer = setTimeout(function() {
+				$e('#loading').show();
+			}, 500);
+		}
+		return a;
+	}) ()
+
+	var NextOrder = (function() {
+		var loadstat = false;
+		var a = {};
+		a.init = function() {
+			//QM.ColorfulLife.clickNextBtn = a.getNextOrder;
+			//QM.ColorfulLife.setBottom('<a href="javascript:;" onclick="QM.ColorfulLife.clickNextBtn();return false;">换一个</a>');
+			$e('#next').bind('click', function(evt) {
+				a.getNextOrder();
+				QZFL.event.preventDefault(evt);
+				return false;
+			});
+		};
+		a.getNextOrder = function() {
+			if(loadstat) {
+				return
+			}
+			loading.show();
+			loadstat = true;
+			getGDTAD('504404262895080655', a.nextCallback);
+			TCISD.hotClick('getnextorder', 'qzone.qq.com');
+		};
+		a.nextCallback = function(o) {
+			loadstat = false;
+			loading.hide();
+			gdtcallback(o);
+		};
+		return a;
+	})();
+
+	var InteractManage = (function() {
+		var a = {};
+		var itvcont, zancont, haszan;
+
+		var likestat, urltolike, likeinfo;
+		a.deallikeurl = function(aconf, data) {
+			haszan = true;
+			likeinfo = likestat = aconf.aid;
+			urltolike  = likeinfo.url;
+			if(urltolike) {
+				a.setlikeurlMsg(likestat);
+			} else {
+				a.clearZan();
+			}
+		};
+		a.setZanEvt = function() {
+			if(zancont) {
+				zancont.find('.gg_zan_bt').bind('click', a.zanEvent);
+			}
+		};
+		a.zanEvent = function(evt) {
+			if(zancont) {
+				var zanbtn = zancont.find('.gg_zan_bt');
+				var stat = !!parseInt(zanbtn.getAttr('zan'), 10);
+				a.optlikeurl(urltolike, stat);
+			}
+			QZFL.event.preventDefault(evt);
+			return false;
+		};
+		a.likeurloptSucc = function(o, opt) {
+			if(!o || !o.result) {
+				return;
+			}
+			var code = o.result.code;
+			if(code==0) {
+				likestat.like = opt ? 1 : 0;
+				var optnum = opt ? 1 : -1;
+				likestat.count += optnum;
+				a.setlikeurlMsg(likestat);
+				var tip = opt ?  '赞成功'  : '取消赞成功';
+				QZONE.FP.showMsgbox(tip, 1, 1500);
+				return;
+			}
+
+			if(code) {
+				var msg = a.likegeterr(o.result.code);
+				QZONE.FP.showMsgbox(msg, 2, 1500);
+				if(code == -1) {
+					QZONE.FP.showLoginBox();
+				}
+			}
+		};
+		a.setlikeurlMsg = function(likestat) {
+			if(!likestat){
+				a.clearZan();
+				return;
+			}
+
+			var str = a.getlikeurlstr(likestat);
+			if(!zancont) {
+				zancont = $e("#gdtcont").getParent().create('div', {'class': 'gg_zan', 'id' : 'zancont'});
+			}
+			zancont.show();
+			zancont.setHtml(str);
+			a.setZanEvt();
+			pageheight();
+		};
+		a.likegeterr = function(code) {
+			var str = a.likeerrmap[code];
+			if(!str) {
+				str = a.likeerrmap[4];
+			}
+			return str;
+		};
+
+		a.likeerrmap = {
+			'-1' : '请重新登录',
+			4 : '系统繁忙，请稍后再试',
+			9 : '您的登录态有问题，请重新登录',
+			21 : '请不要重复赞',
+			23 : '您要赞的网页不存在',
+			24 : '暂时无法获取该网业信息或网址不正确'
+		};
+		a.optlikeurl = function(opturl, opt) {
+			var uin = QZONE.FP.getQzoneConfig('loginUin');
+			var data = {
+				'url' : opturl,
+				'uin' : uin,
+				'like' : opt ? 1 : 0,
+				'source' : 'qzone',
+				'token' :  QZONE.FP.getACSRFToken()
+			};
+			var url = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzsharesetlike';
+			var fs = new QZFL.FormSender(url, "post", data, 'utf-8');
+			fs.onSuccess = function(o) { 
+				a.likeurloptSucc(o, opt);
+			};
+			fs.onError = function() {};
+			fs.send();
+		};
+
+		a.getlikeurlstr = function(likedata) {
+			 var likestr = '', tmpstr= '',  count = likedata.count, friends= likedata.list || [], ilike = !!likedata.like;	
+			 var friendnum = friends.length;
+			 if(ilike) {
+				 likestr += '<a class="gg_zan_bt gg_zan_bt_c c_tx" zan="0" style="width: 40px;" href="javascript;">取消赞</a>';
+			 } else {
+				 likestr += '<a class="gg_zan_bt c_tx" zan="1" style="width: 35px;" href="javascript;"><i class="icon_zan"></i>赞</a>';
+			 }
+			 
+			 // 除我之外的赞人数
+			 var expcount = ilike ?  count - 1 : count;
+
+			 if(count>0) {
+				 if(expcount==1) {
+					 if(friendnum==1) {
+						 //只有一个好友的情况
+						 tmpstr = a.getNicknamestr(friends)+'觉得很赞';
+					 }
+				 } else if(expcount>=2) {
+					 // 多个好友的情况
+					 if(friendnum >= 1) {
+						 // 展示好友个数个好友的条件 主要是展示2个好友的条件
+						 var num = (friendnum<3 && count==friendnum && !ilike) ? friendnum : 1;
+						 var extra =  (friendnum!=expcount  ||  num<friendnum) ? '等' + a.getViewCount(count) + '人' : '' ;
+						 var very = '很';
+						 if((ilike && count>=3)) {
+							 very = '';
+						 }
+						 // 拉取num 个好友的昵称
+						 tmpstr = a.getNicknamestr(friends, num)+ extra+'觉得'+ very +'赞';
+					 }
+				 }
+				 // 没有好友和我也没有赞的情况
+				 tmpstr = (tmpstr) ? tmpstr :  a.getViewCount(expcount) +'人觉得很赞';
+
+				 if(ilike) {
+					 tmpstr = (count==1) ?  '我觉得很赞' : '我和' + tmpstr;
+				 }
+
+				 likestr += tmpstr;
+			 }
+
+			 return likestr;
+		};
+		a.getViewCount = function(num) {
+			num = parseInt(num, 10);
+			var str = num;
+			if(num > (1e8-1)) {
+				str = a._getnum(num/1e8) + '亿';
+			} else if(num > (1e4-1)) {
+				str = a._getnum(num/1e4) + '万';
+			}
+			return str;
+		};
+		a._getnum = function(num) {
+			num = num + '';
+			num = num.replace(/(\d*)(\.(\d)\d*)?/, function($all, $pre, $n, $fix) {
+				var str = '';
+				str = $pre ? $pre : str;
+				str = $fix ? str + '.' + $fix : str;
+				return str;
+			});
+			return num;
+		};
+		a.getNicknamestr = function(userlist , num) {
+			num = num || userlist.length;
+			var arr = [], tmpstr = '';
+			for (var i = 0 ; i < num; i++) {
+				var user = userlist[i];
+				var nickname = a._dealnickname(user.nickname, 8);
+				var tmpstr = '<a href="http://user.qzone.qq.com/'+ user.uin +'" class="c_tx" target="_blank">'+ nickname +'</a>';
+				arr.push(tmpstr);
+			}
+			return arr.join('、');
+		};
+		a._dealnickname = function(nickname, count) {
+			nickname = nickname || '';
+			// 先恢复字符串
+			nickname = QZFL.string.restHTML(nickname);
+			count = count || 8;
+			var len = QZFL.string.getRealLen(nickname);
+			if(len>count) {
+				nickname = QZFL.string.cut(nickname, count-2, '...');
+			}
+			// 编码字符串
+			nickname = QZFL.string.escHTML(nickname);
+			return nickname;
+		};
+		a.deallikeurlinfo = function(o) {
+			if(o && o.result && !o.result.code) {
+				var ret = o.result;
+				likestat = ret;
+				a.setlikeurlMsg(likestat);
+			} else {
+				a.clearZan();
+			}
+		};
+		a.createbtCont = function() {
+			if(!itvcont) {
+				itvcont = $e("#gdtcont").getParent().create('div', {'class': 'gg_bt', 'id': 'interactive'});
+			}
+			itvcont.show();
+		};
+		a.initCont = function() {
+			if(itvcont){
+				itvcont.hide().setHtml('');
+			}
+			haszan = false;
+			$e('#tuannum').hide();
+
+		};
+		a.clearZan = function() {
+			if(zancont) {
+				zancont.hide().setHtml('');
+			}
+			pageheight();
+		};
+		a.clearCont = function() {
+			if(zancont && !haszan) {
+				a.clearZan();
+			}
+		};
+		a.deal = function(aconf, data) {
+			var atype = parseInt(aconf['atype'], 10);
+			var fun = a.map[atype];
+			if(!fun) {
+				return;
+			}
+			fun(aconf, data);
+		};
+		
+		a.process = function(d0, pid) {
+			a.initCont();
+			if (d0.alist && d0.alist.length > 0) {
+				var len = Math.min(2, d0.alist.length);
+				for (var i = 0; i < len; i++) {
+					var aconf = d0.alist[i];
+					a.deal(aconf, d0);
+				}
+			}
+			a.clearCont();
+		};
+
+		a.map = {
+			2015: a.deallikeurl
+		}
+		return a;
+	}) ();
+
+
+	var _page_retrynum = 0;
+	function pageheight() {
+		var thisfun = arguments.callee;
+		var h = getheight(document);
+		if (h==0 && _page_retrynum<30) {
+			_page_retrynum ++;
+			setTimeout(thisfun, 400);
+			return;
+		}
+		var f = (function() {
+			var n = 0, max=5;
+			return function() {
+				var _fun = arguments.callee;
+				var h = getheight(document);
+				if (h>0) {
+					frameElement.style.height = h + 'px';
+				}
+				n++;
+				if (n<max) {
+					setTimeout(_fun, 300);
+				}
+			};
+		})();
+		f();
+	}
+
+
+	function fixiframe() {
+		var m = frameElement;
+		var w = 220;
+		m.style.width = w+'px';
+		m.setAttribute('frameborder', '0');
+		m.setAttribute('scrolling', 'no')
+	}
+
+	function getheight(dom){
+		var s = QZFL.dom.getFirstChild(document.body).offsetHeight;
+		return s;
+	}
+
+	function getGDTAD(id, callback) {
+		pid = id;
+		GDT.get(pid, null, 1, false, callback, { adposcount:1, count: 1 });
+	}
+
+	function activeFrame() {
+		QM.ColorfulLife.show();
+	}
+
+	function gdtcallback(o) {
+		if(o.ret) {
+			var cfg = o.cfg;
+			if(cfg && cfg.w && cfg.h) {
+				$e('#order_img').setStyle('height', cfg.h + 'px').setStyle('width', cfg.w + 'px');
+				$e('#gdtcont').setStyle('height', cfg.h + 'px').setStyle('width', cfg.w + 'px');
+			}
+
+			var d = o.data;
+			d0 = (d && d[0]) ? d[0] : '';
+			if(!d0) {
+				return;
+			}
+
+			GDT.view(pid, d0['cl']);
+
+			$e('#order_img').setAttr('src', d0['img']);
+			function nf() {
+				return GDT.click(pid, d0.cl, false, true);
+			}
+			$e('#order_img_link').setAttr('href', d0['rl']).unBind('click').bind('click', nf);
+
+			InteractManage.process(d0, pid);
+
+			fixiframe();
+			pageheight();
+
+			activeFrame();
+			resizePage(function() {
+				pageheight();
+			});
+		} 
+	}
+
+	function init() {
+		if(!parent.QM) {
+			return;
+		}
+		QM = parent.QM;
+		NextOrder.init();
+		getAd();
+	}
+
+	var reqnum = 0;
+	function getAd() {
+		var AdManage;
+		try{
+			var win  = parent.$('adModule').contentWindow;
+			GDT = win.GDT;
+			AdManage = win.AdManage;
+			pid = win.AdManage.pidconf.rcgdt;
+
+			AdManage.dealPos(pid, function() {
+				try{
+					// 避免重复调用
+					GDT.dealpos(pid, gdtcallback);
+				} catch(e) {
+				}
+			});
+		} catch(e) {
+			reqnum ++;
+			if(reqnum<200) {
+				setTimeout(arguments.callee, 100);
+			}
+		}
+	}
+
+	QZFL.pageEvents.pageBaseInit();
+	QZFL.pageEvents.onloadRegister(init);
+
+</script>
+
+</body>
+</html>
