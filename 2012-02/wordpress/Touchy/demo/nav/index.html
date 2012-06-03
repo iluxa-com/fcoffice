@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- Viewport scale setting (required): http://labs.doat.com/touchybp/#meta-viewport -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <!-- iPhone standalone settings: http://labs.doat.com/touchybp/#standalone -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon" href="img/icon.png"/>
+        <link rel="apple-touch-startup-image" href="img/splash.png" />        
+        
+        <!-- Initial configuration script -->
+        <script>
+            // Determines if the agent has a touch interface:  http://labs.doat.com/touchybp/#istouch
+            var isTouch = location.href.indexOf('istouch=true') !== -1 ? true : ('ontouchstart' in window);
+            // TouchyJs configuration: http://labs.doat.com/touchyjs/#configuration
+            var touchyjsConfig = {
+                'fixedPositioning': true, // default
+                'browserHistory': true // default
+            };
+        </script>
+        
+        <!-- Normalize css by : http://labs.doat.com/touchybp/#normalize.mobile.css -->
+        <script> 
+            var csspath = isTouch ? 'normalize.mobile.css' : 'normalize.css';
+            document.write('<link rel="stylesheet" href="../../css/normalize.css/' + csspath + '"><\/script>');
+        </script>
+        <!-- TouchyPHP:getFile lets you reduce http requests: http://labs.doat.com/touchyphp/#getFile -->
+        <link href="../../css/style.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet" />
+
+        <!-- Hide content before rendering: http://labs.doat.com/touchyjs/#nav-dependancy  -->
+        <style type="text/css"> .touchyjs-content { display: none; } </style>
+    </head>
+    <body>
+        <div class="touchyjs-header">
+            <h1><a href="" onclick="TouchyJS.Nav.goTo('page1'); return false;">Loading...</a></h1>
+            <a href="" onclick="TouchyJS.Nav.back(); return false;" class="btn-back">Back</a>
+            <tml:searchbar onsubmit="search" defaulttext="Type to search"></tml:searchbar>
+        </div>
+        <div class="touchyjs-content" id="search">
+            <div>
+
+            </div>
+        </div>
+   
+        <div class="touchyjs-content" id="item">
+            <div>
+                <h2></h2>
+                <p></p>
+            </div>
+        </div>
+        
+        <script>
+            if(!isTouch) {
+                document.write('<script src="../../js/libs/jquery-1.6.2.min.js"><\/script>');
+            } else {
+                document.write('<script src="../../js/libs/zepto.min.js"><\/script>');
+            }
+        </script>
+        
+        <script src="../../js/libs/touchy.min.js"></script>
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
