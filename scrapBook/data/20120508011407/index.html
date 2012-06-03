@@ -1,0 +1,792 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+<title>Python模块整理(七)：选项模块Optparse - diege - 51CTO技术博客</title>
+<meta name="description" content="对于一般的程序参数可使用sys.argv，对于复杂的程序参数可以使用optparse一、简单演示实例1#！/usr/bin/envpythonimportoptparsedefmain():&nbsp;&nbsp;&nbsp;p=optparse.OptionParser()&nbsp;&nbsp;&nbsp;p.add_..">
+<meta name="keywords" content="Python模块整理(七)：选项模块Optparse">
+<meta http-equiv="Cache-Control" content="private">
+
+
+
+
+
+
+
+<link rel="alternate" href="http://ipseek.blog.51cto.com/rss.php?uid=1041109" type="application/rss+xml" title="RSS 2.0">
+<link rel="edituri" type="application/rsd+xml" title="rsd" href="http://ipseek.blog.51cto.com/xmlrpc.php?rsd=1">
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+
+<div id="home_top">
+<div class="top_nav" style="width: 990px;">
+<div class="left" style="margin-top: 10px; width: 470px;"><a href="http://blog.51cto.com/" target="_top"><img src="head_blog_sibebar_logo.gif" style="margin-top: -4px;" align="absmiddle"></a><a target="_top" href="http://www.51cto.com/">51CTO首页</a><img src="top_bg_xian.gif" style="margin-top: -4px;" width="16" height="25" align="absmiddle"><a href="http://blog.51cto.com/" target="_top">51CTO博客</a><img src="top_bg_xian.gif" style="margin-top: -4px;" width="16" height="25" align="absmiddle"><a href="http://4354877.blog.51cto.com/">我的博客</a><img src="top_bg_xian.gif" style="margin-top: -4px;" width="16" height="25" align="absmiddle">
+
+<a target="_top" href="http://blog.51cto.com/search.php">搜索</a>
+<a href="javascript:void(0);" style="color: rgb(255, 0, 0); text-decoration: underline;" id="showMessagerDim">每日博报</a>
+</div>
+
+<div class="right" style="width: 520px;">
+<div class="more"><img src="top_shequ.gif" width="27" height="16" align="absmiddle">社区：<a target="_top" href="http://bbs.51cto.com/">论坛</a><a target="_top" href="http://blog.51cto.com/">博客</a><a target="_top" href="http://down.51cto.com/">下载</a><a target="_top" href="http://book.51cto.com/">读书</a><a href="javascript:viod(0);">更多<img style="padding-left: 4px;" src="nav_ico1.gif" align="absmiddle"></a>            </div>            <span id="login_status"><div class="login2"><div style="float: right; padding-top: 8px;"><a href="http://home.51cto.com/index.php?s=/space/4344877" style="float: left; margin-top: -1px; text-decoration: none;" target="_self">falconchen</a><a href="http://home.51cto.com/index.php?s=/Home/index" target="_top" style="background: none repeat scroll 0% 0% transparent;"><img style="margin-top: -3px;" id="dia" title="领取2无忧币" src="dia.gif" width="20" align="absmiddle"></a><a href="http://home.51cto.com/index.php?s=/home" id="home_view" target="_top">去家园</a><a id="msg_top_num" href="http://home.51cto.com/index.php?s=/Notify/inbox" target="_top">短消息</a><span id="msg_view" style="display: none;" margin-left:5px;"=""><img src="top_newmsg.gif" align="absmiddle"><a id="msg_top_num" href="http://home.51cto.com/index.php?s=/Notify/inbox" style="color: rgb(204, 0, 0);" target="_top">新消息()</a></span><a href="http://home.51cto.com/index.php?s=/Index/logout/reback/http%253A%252F%252Fipseek.blog.51cto.com%252F1041109%252F809906" target="_self" style="text-decoration: none;">[退出]</a></div><div style="float: right;">	<a href="http://home.51cto.com/index.php?s=/space/4344877" target="_self" style="text-decoration: none;">		<img src="avatar.php" style="border: 2px solid rgb(213, 213, 213); margin-top: 2px;" width="24" height="24" align="absmiddle">	</a></div></div></span>                </div>    </div></div>
+
+
+
+<div class="subMenu3" id="s3">
+<ul>
+<li><a href="http://home.51cto.com/" target="_top">家园</a></li>
+<li><a href="http://t.51cto.com/" target="_top">微博</a></li>
+<li><a href="http://blog.51cto.com/" target="_top">博客</a></li>
+<li><a href="http://bbs.51cto.com/" target="_top">论坛</a></li>
+<li><a href="http://down.51cto.com/" target="_top">下载</a></li>
+<li><a href="http://selftest.51cto.com/" target="_top">自测</a></li>
+<li><a href="http://doctor.51cto.com/" target="_top">门诊</a></li>
+<li><a href="http://blog.51cto.com/newsletter/" target="_top">周刊</a></li>
+<li><a href="http://book.51cto.com/" target="_top">读书</a></li>
+<li><a href="http://g.51cto.com/" target="_top">技术圈</a></li>
+<li><a href="http://zhidao.51cto.com/" target="_top">知道</a></li>
+</ul>
+</div>
+<!--简导航end-->
+
+
+
+<div class="headerBox">
+<div class="header">
+<div class="header_l">
+<div class="logo_blogname">
+
+
+
+<div class="blogName">
+<a href="http://ipseek.blog.51cto.com/"><h1>diege</h1></a>
+</div>
+</div><!--logo_blogname end-->
+<div class="blogLink">
+
+<a href="http://ipseek.blog.51cto.com/">http://ipseek.blog.51cto.com</a> <input id="txtUser" size="32" value="http://ipseek.blog.51cto.com" type="hidden">   <a href="javascript:void(0);" onclick="copy();">【复制】</a> <a href="http://ipseek.blog.51cto.com/rss.php?uid=1041109" target="_top"></a><a href="http://ipseek.blog.51cto.com/rss.php?uid=1041109" target="_top">【订阅】</a>
+
+</div>
+
+
+
+<div class="editBrowse">
+<a class="edit" href="http://4354877.blog.51cto.com/main.php">编辑</a><a class="browse" href="#">浏览</a>
+</div>
+
+<div id="mod_tg" class="newmb" style="width: 170px; height: 20px; padding: 15px 0pt 0pt 10px; text-align: left; font-size: 12px; background: url('long_msg.gif') no-repeat scroll 0% 0% transparent; color: rgb(102, 102, 102); position: absolute; top: -10px; left: 209px; z-index: 9999;">
+	<a href="http://bbs.51cto.com/thread-925271-1.html" target="_top" style="color: rgb(102, 102, 102);">
+	<em style="background: none repeat scroll 0% 0% transparent; color: rgb(255, 0, 0);">订阅点评社区周刊有奖！</em></a>
+	<img onclick="mod_close();" style="position: absolute; top: 8px; left: 148px; cursor: pointer;" src="msgclose.gif" alt="关闭">
+</div>
+
+
+</div><!--header_l end-->
+<div class="header_r">
+<div class="blogInfo"><span><a href="http://ipseek.blog.51cto.com/1041109/o" title="察看foxdiege所有原创文章">原创</a>:49</span><span><a href="http://ipseek.blog.51cto.com/1041109/t" title="察看foxdiege所有翻译文章">翻译</a>:0</span><span><a href="http://ipseek.blog.51cto.com/1041109/c" title="察看foxdiege所有转载文章">转载</a>:4</span></div>
+<div class="blogNav"><a href="http://ipseek.blog.51cto.com/">博 客</a>|<a href="http://ipseek.blog.51cto.com/pic/">图库</a>|<a href="http://ipseek.blog.51cto.com/addblog.php">写博文</a>|<a href="http://blog.51cto.com/user_index.php">管理博客</a>|<a href="http://51ctoblog.blog.51cto.com/all/26414/4" target="_top">帮 助</a></div>
+</div>
+</div>
+<!--header end-->
+</div><!--headerBox end-->
+<div class="mainNav">
+<span class="mainNavT"></span>
+<ul>
+<li><a href="#">首页</a></li>|<li><a href="http://ipseek.blog.51cto.com/1041109/d-1">FreeBSD</a></li>|<li><a href="http://ipseek.blog.51cto.com/1041109/d-2">RHEL&amp;CentOS</a></li>|<li><a href="http://ipseek.blog.51cto.com/1041109/d-3">Shell</a></li>|<li><a href="http://ipseek.blog.51cto.com/1041109/d-4">SQL&amp;NoSql</a></li>|<li><a href="http://ipseek.blog.51cto.com/1041109/d-5">Python</a></li>|<li><a href="http://ipseek.blog.51cto.com/1041109/d-8">WebServer</a></li>|<li><a href="http://ipseek.blog.51cto.com/1041109/d-6">Ubuntu&amp;Debian</a></li>|<li><a href="http://ipseek.blog.51cto.com/1041109/d-7">生活随笔</a></li>
+</ul>
+<span class="mainNavB"></span>
+</div>
+<!--mainNav end-->
+
+
+
+<!--[if IE 6]>
+  <script type="text/javascript" src="http://images.watchstor.com/newhomes/png.js"></script>
+  <script>
+    DD_belatedPNG.fix('img,input,ul,li, .get-box, div, .add, .sub, .ui-slider-handle, .footer-chopper');
+  </script>
+<![endif]-->
+
+
+
+
+<div id="add_sys_type_div" style="width: 600px; border: 1px solid rgb(88, 176, 221); background-color: rgb(255, 255, 255); position: absolute; left: 30%; top: 300px; display: none; z-index: 255;"></div>
+<div id="add_sys_type_divs" style="width: 550px; border: 1px solid rgb(88, 176, 221); background-color: rgb(255, 255, 255); position: absolute; left: 30%; top: 300px; display: none; z-index: 255;"></div>
+
+
+<div class="blogMain">
+<div class="blogLeft">
+
+
+<div class="box moduleUser">
+<div class="title">
+<h2><strong>foxdiege</strong> 的BLOG  </h2>
+</div>
+<div class="modCon">
+
+<div class="userImage"><img src="face.jpg" id="userface"></div>
+
+
+
+
+
+
+
+
+<div class="crumbs">
+<a href="http://home.51cto.com/index.php?s=/space/1041109#message" class="writeMessage" target="_top">写留言</a><a href="http://g.51cto.com/addgroup.php?uid=4344877" class="inCircle" target="_top">邀请进圈子</a><a href="http://home.51cto.com/index.php?s=/Notify/write/uid/1041109" class="message" target="_top">发消息</a> <a href="http://ipseek.blog.51cto.com/" onclick="add_flink(1041109);return false" class="joinLinks">加友情链接</a><a href="http://home.51cto.com/index.php?s=/space/1041109" class="joinFriends" target="_top">进家园 加好友</a>
+</div>
+
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="infoList box">
+<div class="title">
+<h2>博客统计信息</h2>
+</div>
+<div class="modCon">
+<p>
+<span class="infoListHead"></span>
+用户名：foxdiege<br>
+文章数：54<br>
+评论数：0<br>
+访问量：9299<br>
+无忧币：282<br>
+<a href="http://51ctoblog.blog.51cto.com/26414/5591" target="_top">博客积分</a>：516<br>
+<a href="http://51ctoblog.blog.51cto.com/26414/5591" target="_top">博客等级</a>：3<br>
+注册日期：2009-11-20<br>
+</p><div class="icon_01"><a href="http://blog.51cto.com/active/no1/ing.html" target="_top">距离博客No.1争夺赛结束还有 <span style="color: rgb(255, 0, 0);">44</span> 天 </a></div> 
+<p></p>
+</div>
+<span class="modBot"></span>
+</div>
+
+
+<div class="hotArt box">
+<div class="title">
+<h2>热门文章</h2>
+</div>
+<div class="modCon">
+<ul>
+<li><a href="http://ipseek.blog.51cto.com/1041109/793031">Python学习笔记整理(十一..</a></li>
+<li><a href="http://ipseek.blog.51cto.com/1041109/789896">Python学习笔记整理(六)P..</a></li>
+<li><a href="http://ipseek.blog.51cto.com/1041109/788166">Python学习笔记整理(四)P..</a></li>
+<li><a href="http://ipseek.blog.51cto.com/1041109/791852">Python学习笔记整理(十)P..</a></li>
+<li><a href="http://ipseek.blog.51cto.com/1041109/807513">Python模块整理(三)：子..</a></li>
+<li><a href="http://ipseek.blog.51cto.com/1041109/784716">Python学习笔记整理(一)p..</a></li>
+<li><a href="http://ipseek.blog.51cto.com/1041109/809465">Python模块整理(五)：多..</a></li>
+<li><a href="http://ipseek.blog.51cto.com/1041109/809906">Python模块整理(七)：选..</a></li>
+
+</ul>
+</div>
+<span class="modBot"></span>
+</div>
+<div class="search box">
+<div class="title"><h2>搜索BLOG文章</h2></div>
+<div class="modCon">
+<form method="post" action="http://ipseek.blog.51cto.com/search.php?">
+<input name="step" value="2" type="hidden">
+<input name="authorid" value="1041109" type="hidden">
+<input name="sch_area" value="S" type="hidden">
+<input value="" name="keyword" class="searchInput" type="text">
+<input value="搜 索" class="searchBtn" type="submit">
+</form></div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="myHome box">
+<div class="title"><h2 class="fl">我的技术圈(<a href="http://ipseek.blog.51cto.com/mygroup.php" target="_top"><b>0</b></a>)</h2>
+<a href="http://home.51cto.com/apps/group/index.php?s=/Index/index/" class="fr" target="_top">更多&gt;&gt;</a></div>
+<div class="modCon">
+<ul>
+
+</ul>
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="box recentGuests">
+<div class="title">
+<h2>最近访客</h2>
+</div>
+<div class="modCon">
+<ul>
+
+<li><a href="http://4354877.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://4354877.blog.51cto.com/">falco..</a></p>
+
+</li><li><a href="http://1124821.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://1124821.blog.51cto.com/">liuyy..</a></p>
+
+</li><li><a href="http://wangjiashui.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://wangjiashui.blog.51cto.com/">暮流</a></p>
+
+</li><li><a href="http://wwdhks.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://wwdhks.blog.51cto.com/">wwdhks</a></p>
+
+</li><li><a href="http://longshaohang.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://longshaohang.blog.51cto.com/">longs..</a></p>
+
+</li><li><a href="http://lizi0322.blog.51cto.com/"><img src="2632811_1323847268.jpg"></a>
+<p><a href="http://lizi0322.blog.51cto.com/">莉子</a></p>
+
+</li><li><a href="http://225449.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://225449.blog.51cto.com/">quqi99</a></p>
+
+</li><li><a href="http://80435.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://80435.blog.51cto.com/">guiwz</a></p>
+
+</li><li><a href="http://2930775.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://2930775.blog.51cto.com/">ming1..</a></p>
+
+</li><li><a href="http://2760053.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://2760053.blog.51cto.com/">3lxl3</a></p>
+
+</li><li><a href="http://yaozb.blog.51cto.com/"><img src="2762349_1298519118.jpg"></a>
+<p><a href="http://yaozb.blog.51cto.com/">yunwe..</a></p>
+
+</li><li><a href="http://43507.blog.51cto.com/"><img src="face_001.jpg"></a>
+<p><a href="http://43507.blog.51cto.com/">112211</a></p>
+
+</li></ul>
+<span class="clear"></span>
+</div>
+<span class="modBot"></span>
+</div>
+
+
+<div class="newComments box">
+<div class="title">
+<h2>最新评论 
+
+</h2>
+
+
+
+</div>
+<div class="modCon">
+<ul>
+
+
+</ul>
+</div>
+<span class="modBot"></span>
+</div>
+
+
+<div class="hotBlogArt box">
+<div class="title">
+  <h2 class="fl">51CTO推荐博文</h2>
+  <a href="http://blog.51cto.com/artcommend" class="fr">更多&gt;&gt;</a></div>
+<div class="modCon">
+<ul>
+<li><a href="http://xiaominghimi.blog.51cto.com/2614927/855506" title="【iOS-cocos2d-X 游戏开发之十】自定义各类模版&amp;触屏事件讲解！" target="_top">【iOS-cocos2d-X 游戏开发之十】..</a></li>
+<li><a href="http://hipercomer.blog.51cto.com/4415661/855223" title="简单的实验说明C++中的Name Mangling" target="_top">简单的实验说明C++中的Name Mangling</a></li>
+<li><a href="http://xys289187120.blog.51cto.com/3361352/723156" title="Unity3D 游戏引擎之游戏对象的访问绘制线与绘制面详解（十七）" target="_top">Unity3D 游戏引擎之游戏对象的访..</a></li>
+<li><a href="http://winwyf.blog.51cto.com/4561999/851412" title="Android网络开发-请求队列" target="_top">Android网络开发-请求队列</a></li>
+<li><a href="http://zhanghd.blog.51cto.com/4960367/851518" title="Silverlight中使用摄像头" target="_top">Silverlight中使用摄像头</a></li>
+<li><a href="http://supercharles888.blog.51cto.com/609344/854073" title="HTML5 利用Canvas API 组合图形" target="_top">HTML5 利用Canvas API 组合图形</a></li>
+<li><a href="http://powertoolsteam.blog.51cto.com/2369428/851942" title="Wijmo 更优美的jQuery UI部件集：C1 Wijmo Grids 更多惊喜" target="_top">Wijmo 更优美的jQuery UI部件集：..</a></li>
+<li><a href="http://mikewang.blog.51cto.com/3826268/852214" title="MediaPlayer使用之四 VideoView的使用" target="_top">MediaPlayer使用之四 VideoView的..</a></li>
+<li><a href="http://randy2009.blog.51cto.com/764602/851613" title="利用Struts2 实现文件下载" target="_top">利用Struts2 实现文件下载</a></li>
+<li><a href="http://spinlock.blog.51cto.com/607469/851646" title="大型web系统中缓存的使用" target="_top">大型web系统中缓存的使用</a></li>
+<li><a href="http://baidutech.blog.51cto.com/4114344/743454" title="Shell脚本测试总结" target="_top">Shell脚本测试总结</a></li>
+
+</ul>
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+<div class="friendLink box">
+<div class="title">
+  <h2>友情链接</h2>
+</div>
+<div class="modCon">
+<ul>
+
+<li><a href="http://51ctoblog.blog.51cto.com/" title="51CTO博客开发" target="_top">51CTO博客开发</a> <img src="tubiao3.gif" alt="本周内更新"></li>
+
+</ul>
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div>
+
+
+
+</div>
+<!--left end-->
+
+
+
+<div class="blogRight">
+	<div class="artShow box">
+   	  <div class="share" id="share">
+
+    <div class="shareItem">
+		<div class="m_sharelinks"><a target="_top" href="http://bbs.51cto.com/thread-925271-1.html" style="color: red;">订阅点评有奖！说说你眼中的社区周刊</a><a target="_top" href="http://down.51cto.com/3490841" style="color: blue;">2012年最有价值的Android开发精品文章荟萃【800篇】</a><a target="_top" href="http://ipseek.blog.51cto.com/" style="color: blue;"></a></div>
+		<p class="shareMored"><a href="http://ipseek.blog.51cto.com/all/1041109">博主的更多文章&gt;&gt;</a></p>
+	</div>
+      </div>
+       <div class="modCon">
+   	  <div class="showBox" style="margin: 0pt 0pt 10px;">
+      <div class="line_hd_r"></div>
+      <div class="art_tj">
+
+      </div>
+    		<div class="showHead">
+    		  <div class="showTitleBOx" style="text-align: center;">
+              <div class="showTitle">
+
+             <img src="arttype01.jpg">
+
+
+    		    Python模块整理(七)：选项模块Optparse
+                </div>
+  		    </div>
+   		    <span class="artTime">2012-03-18 21:58:12</span></div><!--showHead end-->
+    <div class="showTags">标签：<a href="http://blog.51cto.com/tagindex.php?keyword=%D7%D6%B5%E4" target="_top" class="operlink">字典</a> <a href="http://blog.51cto.com/tagindex.php?keyword=%B3%CC%D0%F2" target="_top" class="operlink">程序</a> <a href="http://blog.51cto.com/tagindex.php?keyword=%D0%DD%CF%D0" target="_top" class="operlink">休闲</a> <a href="http://blog.51cto.com/tagindex.php?keyword=default" target="_top" class="operlink">default</a> <a href="http://blog.51cto.com/tagindex.php?keyword=%D6%B0%B3%A1" target="_top" class="operlink">职场</a>
+
+	</div>
+
+			<div class="CopyrightStatement lh22">
+            原创作品，允许转载，转载时请务必以超链接形式标明文章 <a href="http://ipseek.blog.51cto.com/1041109/809906" target="_top" style="text-decoration: underline;">原始出处</a> 、作者信息和本声明。否则将追究法律责任。<a href="http://ipseek.blog.51cto.com/1041109/809906">http://ipseek.blog.51cto.com/1041109/809906</a>
+            </div>
+
+
+            <!--正文 begin-->
+    		<div class="showContent">
+    		  <p>对于一般的程序参数可使用sys.argv，对于复杂的程序参数可以使用optparse<br>
+一、简单演示<br>
+实例1<br>
+#！/usr/bin/env python<br>
+import optparse<br>
+def main():<br>
+&nbsp;&nbsp;&nbsp; p=optparse.OptionParser()<br>
+&nbsp;&nbsp;&nbsp; p.add_option('--sysadmin','-s',default='diege')<br>
+&nbsp;&nbsp;&nbsp; options,arguments=p.parse_args() #options和赋值给选项的值构成选项字典的key和value，注value和arguments没有关系<br>
+&nbsp;&nbsp;&nbsp; print 'Hello,%s' % options<br>
+&nbsp;&nbsp;&nbsp; print 'Hello,%s' % options.sysadmin #options.sysadmin 获取到选项对应的参数值<br>
+<br>
+if __name__=='__main__':<br>
+&nbsp;&nbsp;&nbsp; main()<br>
+#python optparse-example1.py <br>
+Hello,{'sysadmin': 'diege'}<br>
+Hello,diege<br>
+# python optparse-example1.py -s lily<br>
+Hello,{'sysadmin': 'lily'} #{选项: 选项的参数【不是程序的参数】}<br>
+Hello,lily<br>
+<br>
+二、optparse使用模式<br>
+1、非选项使用模式<br>
+非选项模式就是没有设置选项options，只有参数arguments<br>
+#optparse-example2.py <br>
+import os,optparse<br>
+def main():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p=optparse.OptionParser(description="Python 'ls' command clone",prog="pyls",version="0.1a",usage="%prog [directory]")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options,arguments=p.parse_args()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if len(arguments)==1:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path=arguments[0]<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; #print options&nbsp; #options 打印出来是一个空的字典 {} 在options,arguments前没有使用p.add_option<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; #print arguments&nbsp; #arguments打印出来是一个列表['/usr/local/'] 是传给程序的参数<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for filename in os.listdir(path):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print filename<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p.print_help() #如果参数少于1或多于1个，调用内建的help信息，介绍如果使用工具<br>
+<br>
+<br>
+if __name__=="__main__":<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; main() <br>
+# python optparse-example2.py <br>
+Usage: pyls [directory]<br>
+<br>
+Python 'ls' command clone<br>
+<br>
+Options:<br>
+&nbsp; --version&nbsp;&nbsp; show program's version number and exit<br>
+&nbsp; -h, --help&nbsp; show this help message and exit<br>
+2、True/False使用模式<br>
+p.add_option里的关键参数default=False和action='store_true'<br>
+在程序中使用一个选项来设置True/False，经典示例设置"--quit"选项（该参数关闭所有标准输出），和"--verbose"选项（将触发额外输出）<br>
+Optparse_example3.py<br>
+import optparse,os<br>
+def main():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p=optparse.OptionParser(description="Python 'ls' command clone",prog="pyls",version="0.1a",usage="%prog [directory]")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p.add_option("--verbose",'-v',action='store_true',help="Enables Verbose Output",default=False)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p.add_option("--quiet","-q",action='store_true',help="Enables Quiet Output",default=False) <br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; #default=False 默认不启用这个模式，要使用这个模式的给-v/-q，如果设置default=True则默认启用这个模式<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; #如果两个选项都使用default=True,则在if判断里第一个模式使用。而不是p.add_option的顺序，推荐默认都使用default=False<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options,arguments=p.parse_args()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if len(arguments)==1:<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; print options<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if options.verbose:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Verbose Mode Enabled"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path=arguments[0]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for filename in os.listdir(path):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if options.verbose:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Filename:%s" % filename<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; elif options.quiet:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pass #这里可以定义安静输出到LOG等操作<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print filename<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p.print_help()<br>
+if __name__=="__main__":<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; main()<br>
+# python Optparse_example3.py <br>
+Usage: pyls [directory]<br>
+<br>
+Python 'ls' command clone<br>
+<br>
+Options:<br>
+&nbsp; --version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; show program's version number and exit<br>
+&nbsp; -h, --help&nbsp;&nbsp;&nbsp;&nbsp; show this help message and exit<br>
+&nbsp; -v, --verbose&nbsp; Enables Verbose Output<br>
+&nbsp; -q, --quiet&nbsp;&nbsp;&nbsp; Enables Quiet Output<br>
+# python Optparse_example3.py /tmp/<br>
+{'verbose': False, 'quiet': False}<br>
+# python Optparse_example3.py /tmp/ -v<br>
+{'verbose': True, 'quiet': False}<br>
+&nbsp; <br>
+3、记数选项模式<br>
+p.add_option里的关键参数action="count",dest="verbose"<br>
+如果tcpdump中的-vvv，ps的-ww等<br>
+Optparse_example4.py<br>
+import optparse,os<br>
+def main():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p=optparse.OptionParser(description="Python 'ls' command clone",prog="pyls",version="0.1a",usage="%prog [directory]")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #p.add_option('-v',action="count",dest="verbose") #这里的dest对应options里的key options.verbose调用值<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; #dest="verbose"和'--verbose'一样,使用dest="verbose"也没有长选项--verbose.可以使用('--verbose','-v',action="count")<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; p.add_option('--verbose','-v',action="count",help="Enables Verbose Output") #加一个帮助<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options,arguments=p.parse_args()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if len(arguments)==1:<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; #print options<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; #print arguments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if options.verbose:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Verbose Mode Enabled at Level:%s" % options.verbose<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path=arguments[0]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for filename in os.listdir(path):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if options.verbose==1:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Filename:%s" % filename<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; elif options.verbose==2:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fullpath=os.path.join(path,filename)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Filename:%s |Byte Size:%s" % (filename,os.path.getsize(fullpath))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print filename<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p.print_help()<br>
+<br>
+if __name__=="__main__":<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; main()<br>
+# python Optparse_example4.py /tmp/ <br>
+{'verbose': None}<br>
+# python Optparse_example4.py /tmp/ -v<br>
+{'verbose': 1}<br>
+# python Optparse_example4.py /tmp/ -vv<br>
+{'verbose': 2}<br>
+<br>
+4、选择使用模式<br>
+p.add_option里的关键参数action="store",type="choice",dest="chatty",choices=["normal","verbose","quiet"],default="normal"<br>
+import optparse,os<br>
+def main():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p=optparse.OptionParser(description="Python 'ls' command clone",prog="pyls",version="0.1a",usage="%prog [directory]")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p.add_option('--chatty','-c',action="store",type="choice",dest="chatty",choices=["normal","verbose","quiet"],default="normal")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options,arguments=p.parse_args()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print options<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if len(arguments)==1:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if options.chatty=="verbose":<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Verbose Mode Enabled"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path=arguments[0]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for filename in os.listdir(path):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if options.chatty=="verbose":<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Filename:%s" % filename<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; elif options.chatty=="quiet":<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pass<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print filename<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p.print_help()<br>
+if __name__=="__main__":<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; main()<br>
+ofreebsd# python Optparse_example5.py<br>
+{'chatty': 'normal'}<br>
+Usage: pyls [directory]<br>
+<br>
+Python 'ls' command clone<br>
+<br>
+Options:<br>
+&nbsp; --version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; show program's version number and exit<br>
+&nbsp; -h, --help&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; show this help message and exit<br>
+&nbsp; -c CHATTY, --chatty=CHATTY<br>
+&nbsp;ofreebsd# python Optparse_example5.py -c /tmp/<br>
+Usage: pyls [directory]<br>
+<br>
+pyls: error: option -c: invalid choice: '/tmp/' (choose from 'normal', 'verbose', 'quiet')<br>
+# python Optparse_example5.py -c verbose /tmp/<br>
+{'chatty': 'verbose'}<br>
+Verbose Mode Enabled<br>
+# python Optparse_example5.py -c quiet /tmp/<br>
+{'chatty': 'quiet'}<br>
+也可以使用长格式<br>
+# python Optparse_example5.py --chatty=verbose /tmp<br>
+{'chatty': 'verbose'}<br>
+Verbose Mode Enabled<br>
+Filename:.snap<br>
+Filename:.X11-unix<br>
+<br>
+5、具有多参数的选项使用模式<br>
+默认情况下身optparse选项只能有一个参数。但是可以指定参数的个数也是可以的。实例让ls同时输出三个目录的内容.<br>
+p.add_option里的关键参数action="store",nargs=3<br>
+Optparse_example6.py <br>
+import optparse,os<br>
+def main():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p=optparse.OptionParser(description="Python 'ls' command clone",prog="pyls",version="0.1a",usage="%prog [--dir dir1 dir2 dir3]")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p.add_option('--dir','-d',action="store",dest="dir",nargs=3,help="Show more than one dir")#dest和help都是可选的<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options,arguments=p.parse_args()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if options.dir:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print options<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for dir in options.dir:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Listing of %s:\n" % dir<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for filename in os.listdir(dir):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print filename<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p.print_help()<br>
+<br>
+if __name__=="__main__":<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; main()<br>
+<br>
+# python Optparse_example6.py -d /tmp /root/<br>
+Usage: pyls [--dir dir1 dir2 dir3]<br>
+pyls: error: -d option requires 3 arguments<br>
+# python Optparse_example6.py -d /tmp /root/ /data/<br>
+{'dir': ('/tmp', '/root/', '/data/')}<br>
+我们发现在options字典里，传递dir选项的三个参数是一个元组。<br>
+注意：这里的三个参数，不是说可以选择输入1,2或者3个参数，而是必须输入三个。如果可以自由选择输入1,2或3个参数那不是很爽？<br>
+&nbsp;</p><p>本文出自 “<a href="http://ipseek.blog.51cto.com/">diege</a>” 博客，请务必保留此出处<a href="http://ipseek.blog.51cto.com/1041109/809906">http://ipseek.blog.51cto.com/1041109/809906</a></p>
+    		</div><!--正文 end-->
+		
+<div class="m_sharebtn">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tbody><tr>
+		<td valign="middle" width="11%" height="43" align="center"><img src="ssk.png" alt="分享至"></td>
+		<td valign="top" width="77%" align="left">
+			<div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+				<a class="bds_tsina"></a>
+				<a class="bds_qzone"></a>
+				<a class="bds_tqq"></a>
+				<a class="bds_baidu"></a>
+				<a class="bds_renren"></a>
+				<a class="bds_qq"></a>
+				<a class="bds_douban"></a>
+				<a class="bds_hi"></a>
+				<a class="bds_msn"></a>
+				<em title="分享到51CTO微博" class="weibo_51cto" onclick="show51share();"></em>
+				<span class="bds_more">更多</span>
+				
+				<a class="shareCount"></a>
+			</div>
+	
+	
+	
+	<!-- Baidu Button END --></td>
+		<td valign="middle" width="12%" align="right"><a href="javascript:favorBox('open');" title="一键收藏，随时查看，分享好友！"><img src="favorite_add_small.gif" alt="一键收藏，随时查看，分享好友！" border="0"></a></td>
+	  </tr>
+	</tbody></table>
+
+</div>			
+
+
+			
+			
+			
+    		<div class="showBottom">
+            <!--<div class="reviews"><span class="fl" style="cursor:pointer;"><a onclick="openFavoulist();" id="favourer"></a>
+
+            </span><div id="favourdiv" class="support01">0人</div>
+              <span class="fl">了这篇文章</span></div>-->
+              <table width="720" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr>
+    <td align="right"><img src="icon01.png" width="15" height="16"> <span style="cursor: pointer;"><a onclick="openFavoulist();" id="favourer"></a></span></td>
+    <td width="70" align="left"><div style="line-height: 28px;" id="favourdiv" class="support01">0人</div></td>
+    <td width="60" align="left">了这篇文章</td>
+  </tr>
+</tbody></table>
+
+
+
+
+            <div class="showType">类别：<a href="http://ipseek.blog.51cto.com/1041109/d-5" class="operlink">Python</a>┆<a class="operlink" onclick="javascript:joingroups(809906,'ipseek');return false;">技术圈</a>(0)┆阅读(108)┆评论(0)
+
+┆
+
+<a href="#" onclick="javascript:dfa(809906,4344877,'ipseek','http://home.51cto.com/index.php?reback=http%253A%252F%252Fipseek.blog.51cto.com%252F1041109%252F809906');return false;" class="operlink">
+推送到技术圈</a>┆<a href="http://ipseek.blog.51cto.com/">返回首页</a></div>
+            <div class="prevNext">
+
+			上一篇 <a href="http://ipseek.blog.51cto.com/1041109/809469" class="operlink" title="一些随笔">一些随笔</a>
+
+
+			下一篇 <a href="http://ipseek.blog.51cto.com/1041109/810798" class="operlink" title="Python模块整理(八)：MySQLdb">Python模块整理(八)：MySQLdb</a>
+
+
+            </div>
+
+            </div>
+
+	  </div><!--showBottom end-->
+      </div><!--modCon-->
+    <span class="modBot"></span>
+    </div><!--artShow end-->
+    <span class="blank"></span>
+
+
+    <div class="relatedArt box">
+    <div class="title" name="zhuanti" id="zhuanti"><h2>相关文章</h2></div>
+    <div class="modCon">
+<ul>
+
+<li><a href="http://jsmww.blog.51cto.com/739067/379939" title="MSI安装程序安装参数 " target="_top">MSI安装程序安装参数 </a></li>
+
+
+<li><a href="http://wws5201985.blog.51cto.com/216275/796621" title="八天学会MongoDB：第四天 索引操作" target="_top">八天学会MongoDB：第四天 索引操作</a></li>
+
+
+<li><a href="http://litaobest.blog.51cto.com/365195/101128" title="ORACLE部分经典笔记" target="_top">ORACLE部分经典笔记</a></li>
+
+
+<li><a href="http://science.blog.51cto.com/1396632/288178" title="Delphi几种程序自杀的方法" target="_top">Delphi几种程序自杀的方法</a></li>
+
+
+<li><a href="http://lovvvve.blog.51cto.com/3828397/712842" title="初步认识linux" target="_top">初步认识linux</a></li>
+
+
+<li><a href="http://cownew.blog.51cto.com/413531/86706" title="[转载]国内这些号称开源的程序真的开源了吗？ " target="_top">[转载]国内这些号称开源的程序真的开源了吗？ </a></li>
+
+
+
+</ul>
+
+
+
+<span class="blank6"></span>
+</div><!--modCon end-->
+<span class="modBot"></span>
+</div><!--相关文章 end-->
+
+<div class="artComm box">
+    <div class="title"><a name="replay"></a><h2>文章评论</h2></div>
+    <div class="modCon" id="artcomment">
+		<div>  &nbsp;</div><div>  &nbsp;</div>
+    </div><!--modCon-->
+        <span class="modBot"></span>
+</div><!--commBox end-->
+
+
+<span class="blank1"></span>
+<div class="box writeComm">
+<a name="comment"></a>
+<input name="action" value="comment" type="hidden">
+<input id="commenttid" name="tid" value="809906" type="hidden">
+<input name="com_count_ajax" id="com_count_ajax" value="1" type="hidden">
+
+ <div class="title">
+	<h2 class="fl">发表评论&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+	<span class="fl"><a class="mred" target="_top" href="http://doctor.51cto.com/develop-258.html">【有奖门诊】开源框架专家深度剖析Spring</a></span>
+	
+</div>
+ <div class="modCon">
+ <div class="commForm">
+<dl>
+<dt>昵&nbsp;&nbsp;称：</dt>
+<dd>
+
+<input id="commentusername" name="username" disabled="disabled" value="falconchen" class="commInput" type="text"><input class="fl anonCheckbox" id="commentniming" name="niming" value="ON" onclick="changename()" type="checkbox"><span>匿名发表</span>
+
+
+</dd>
+</dl>
+
+<dl id="indexhidden">
+<dt>主&nbsp;&nbsp;页：</dt>
+<dd><input value="http://4354877.blog.51cto.com" class="commInput" id="commentindex" name="index" disabled="disabled" type="text"></dd>
+</dl>
+
+
+
+<dl id="commentyanzheng">
+
+
+<dt>验证码：</dt>
+<dd><input class="code" value="" id="commentauthnum" name="authnum" onclick="displaysecunum();" type="text">
+
+  <img class="fl" id="secunum" onclick="refimg()" style="display: none;" width="78" height="29"><p class="fl"><span style="display: none;" id="spanfont">点击图片可刷新验证码</span><span style="display: inline;" id="clickfont">请点击后输入验证码</span><span class="pl5"><a href="http://51ctoblog.blog.51cto.com/26414/5591" target="_top" style="text-decoration: underline;">博客过2级，无需填写验证码</a></span></p></dd>
+</dl>
+<dl>
+<dt>内&nbsp;&nbsp;容：</dt>
+<dd>
+<textarea class="writeCommCon f12" id="commentcontent" name="content"></textarea>
+</dd>
+</dl>
+</div>
+<div class="writeCommBot">
+  <input class="commBtn fl" name="submit" id="commentsubmit" value="" onclick="commentSubmitend2()" type="button">
+
+  <p class="fl"><input class="fl" name="favour" id="favour" checked="checked" value="1" type="checkbox"><span class="fl">同时赞一个</span></p>
+
+</div>
+<span class="blank"></span>
+</div><!--modCon-->
+<span class="modBot"></span>
+</div>
+
+
+<iframe src="index_1.html" id="iframe1" name="iframe1" width="0" height="0"></iframe>
+<!--发表评论 end-->
+</div>
+</div>
+<h1></h1>
+
+
+
+
+
+<div style="display: none;" title="返回顶部" class="backToTop tops">返回顶部</div>
+
+
+
+<div class="clear"></div>
+
+<div id="footer">
+  <div id="innerFooter">
+	<center>
+		<small>
+			Copyright By 51CTO.COM 版权所有<br><br>
+			<a href="http://blog.51cto.com/" target="_top"><img src="copyright.jpg"></a>
+	  </small>
+	</center>
+  </div>
+</div>
+
+<div style="display: none;">
+
+
+<iframe src="index_2.html" scrolling="no" width="0" frameborder="0" height="0"></iframe>
+</div>
+
+
+</body>
+</html>
