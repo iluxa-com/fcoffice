@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<title>  Django利用API实现AJAX操作 | 动漫驿站</title>
+<meta name="description" content="Django利用API实现AJAX操作">
+<link rel="alternate" type="application/rss+xml" title="动漫驿站 RSS Feed" href="http://dmyz.org/feed">
+<link rel="alternate" type="application/atom+xml" title="动漫驿站 Atom Feed" href="http://dmyz.org/feed/atom"> 
+<link rel="icon" type="image/x-icon" href="favicon.ico"> 
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="pingback" href="http://dmyz.org/xmlrpc.php">
+
+<!--[if lt IE 7]>
+<link rel="stylesheet" href="http://dmyz.org/wp-content/themes/monochrome/ie6.css" type="text/css" />
+<![endif]--> 
+
+<link rel="alternate" type="application/rss+xml" title="动漫驿站 » Django利用API实现AJAX操作 Comments Feed" href="http://dmyz.org/archives/257/feed">
+
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://dmyz.org/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://dmyz.org/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="新浪微博的插件——轻博客" href="http://dmyz.org/archives/253">
+<link rel="next" title="OnlineGalGame测试版发布" href="http://dmyz.org/archives/264">
+<link rel="canonical" href="http://dmyz.org/archives/257">
+<link rel="shortlink" href="http://dmyz.org/?p=257">
+
+
+
+<link rel="stylesheet" type="text/css" href="index.css" media="all">
+</head>
+<body>
+
+<div id="wrapper">
+
+ <div id="header">
+
+  <div id="header_top">
+      <div class="header_menu"><ul id="menu-topmenu" class="menu"><li id="menu-item-24" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-24"><a href="http://dmyz.org/">Home</a></li>
+<li id="menu-item-218" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-218"><a href="http://dmyz.org/archives/category/tech">Tech</a></li>
+<li id="menu-item-220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-220"><a href="http://dmyz.org/archives/category/front">Front</a></li>
+<li id="menu-item-221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-221"><a href="http://dmyz.org/archives/category/pm">Product</a></li>
+<li id="menu-item-127" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-127"><a href="http://dmyz.org/archives/category/uncategory">Other</a></li>
+</ul></div>   
+  </div>
+
+  </div><!-- #header end -->
+
+  <div id="contents" class="clearfix">
+
+   <div id="left_col">
+
+        <div id="header_meta">
+     <ul id="bread_crumb" class="clearfix">
+      <li id="bc_home"><a href="http://dmyz.org/">HOME</a></li>
+      <li id="bc_cat"><a href="http://dmyz.org/archives/category/python" title="View all posts in Python" rel="category tag">Python</a> . <a href="http://dmyz.org/archives/category/tech" title="View all posts in Tech" rel="category tag">Tech</a></li>
+      <li>Django利用API实现AJAX操作</li>
+     </ul>
+    </div>
+    
+
+    <div class="post clearfix" id="single_post">
+     <div class="post_content_wrapper">
+      <h2 class="post_title"><span>Django利用API实现AJAX操作</span></h2>
+      <div class="post_content">
+       <p>Django的缺点之一，就是它不支持AJAX。好吧，我知道这么一说又会有一群人反驳：Django有各种模块可以提供AJAX功能；写一个XML的view来实现AJAX；整合pyjams就什么功能都有了云云。嘛，都可以，我这也只是分享一个可行的方案，并不是唯一的。如果这个方案正好适合你的项目，那直接拿去用不是更省时间吗？</p>
+<p>首先说一下现在项目的情况，前端工程师想用AJAX的方式（依赖于jQuery），通过POST/GET/PUT请求，提交JSON/XML/YAML格式的数据给后台数据库暴露出的一个API地址，以实现对后台数据的操作。如果在view里写一个函数来做比较麻烦，所以使用<a href="https://github.com/toastdriven/django-tastypie">tastypie</a>直接根据定义的model生成一个API。</p>
+<h2>Install&amp;Begin</h2>
+<p>需要安装<a href="https://github.com/toastdriven/django-tastypie">django-tastpie</a>, <a href="https://bitbucket.org/akoha/python-digest/downloads">python-digest</a>, <a href="http://labix.org/python-dateutil#head-2f49784d6b27bae60cde1cff6a535663cf87497b">python-dateutil</a>, <a href="http://code.google.com/p/mimeparse/downloads/detail?name=mimeparse-0.1.3.tar.gz/">mimeparse</a>。最近因为某些原因国外的https访问经常会受到影响，所以附上下载链接。当然能用pip/easy_install之类的命令来安装最好，已经给出了模块名，这里不再重复写一次命令了。</p>
+<p>还是和以前一样，先以最快的方式先把tastypie跑起来：<span id="more-257"></span></p>
+<p>创建名为products应用为例，需要编辑products/models.py，新建products/api.py，然后编辑项目的urls.py：<br>
+<span style="color: green;">products/models.py</span>范例用，超简单，没什么可说的。</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> django.<span style="color: black;">db</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> models
+<span style="color: rgb(255, 119, 0); font-weight: bold;">class</span> Product<span style="color: black;">(</span>models.<span style="color: black;">Model</span><span style="color: black;">)</span>:
+    name = models.<span style="color: black;">CharField</span><span style="color: black;">(</span>max_length=<span style="color: rgb(255, 69, 0);">16</span><span style="color: black;">)</span>
+    brand = models.<span style="color: black;">CharField</span><span style="color: black;">(</span>max_length=<span style="color: rgb(255, 69, 0);">32</span><span style="color: black;">)</span>
+    <span style="color: rgb(255, 119, 0); font-weight: bold;">def</span> <span style="color: rgb(0, 0, 205);">__unicode__</span><span style="color: black;">(</span><span style="color: rgb(0, 128, 0);">self</span><span style="color: black;">)</span>:
+        <span style="color: rgb(255, 119, 0); font-weight: bold;">return</span> <span style="color: rgb(0, 128, 0);">self</span>.<span style="color: black;">title</span></pre></td></tr></tbody></table></div>
+
+<p><span style="color: green;">products/api.py</span></p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> tastypie.<span style="color: black;">resources</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> ModelResource
+<span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> product.<span style="color: black;">models</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> Product
+<span style="color: rgb(255, 119, 0); font-weight: bold;">class</span> ProductResource<span style="color: black;">(</span>ModelResource<span style="color: black;">)</span>:
+    <span style="color: rgb(255, 119, 0); font-weight: bold;">class</span> Meta:
+        queryset = Product.<span style="color: black;">objects</span>.<span style="color: rgb(0, 128, 0);">all</span><span style="color: black;">(</span><span style="color: black;">)</span>
+        resource_name = <span style="color: rgb(72, 61, 139);">'p'</span> <span style="color: rgb(136, 136, 136); font-style: italic;">#可选，不设置的话默认为product</span></pre></td></tr></tbody></table></div>
+
+<p><span style="color: green;">urls.py</span>，引入在api中定义的ProductResource</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> django.<span style="color: black;">conf</span>.<span style="color: black;">urls</span>.<span style="color: black;">defaults</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> patterns, include, url
+<span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> product.<span style="color: black;">api</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> ProductResource
+urlpatterns = patterns<span style="color: black;">(</span><span style="color: rgb(72, 61, 139);">''</span>,
+    url<span style="color: black;">(</span>r<span style="color: rgb(72, 61, 139);">'^api/'</span>, include<span style="color: black;">(</span>ProductResource<span style="color: black;">(</span><span style="color: black;">)</span>.<span style="color: black;">urls</span><span style="color: black;">)</span><span style="color: black;">)</span>,
+<span style="color: black;">)</span></pre></td></tr></tbody></table></div>
+
+<p><a rel="shadowbox" href="jsonview.png"><img src="jsonview.png" alt="" title="jsonview" class="alignright size-full wp-image-259" width="300" height="310"></a></p>
+<p>api定义完成，访问<a href="#">http://127.0.0.1:8000/api/p/?format=json</a>可以看到JSON格式的数据，如右图。因为我装了JSONView for chrome，所以输出的JSON格式比默认的友好一些。</p>
+<p><span class="f">models.py</span>和<span class="f">urls.py</span>都是基础配置，所以主要说一下<span class="f">api.py</span>。这里使用了ModelResource而不是Django提供的Resource，这样就脱离了Django的ORM，提供了扩展到NOSQL的可能性。网上有一个名为tastymongo的项目，作者的目的似乎是想实现tastypie和mongodb的整合，但是一直没有更新，所以我们项目中是直接利用<a href="http://dmyz.org/archives/251">mongoengine</a>将这两者整合在一起。</p>
+<h2>POST &amp; INSERT</h2>
+<p>以POST请求发送一个JSON数据给/api/p/这个地址实现数据的添加，在views.py中建立一个简单的函数，载入product/add.htm模板。html代码如下：</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre></td><td class="code"><pre class="javascript" style="font-family: monospace;"><span style="color: rgb(51, 153, 51);">&lt;</span>html<span style="color: rgb(51, 153, 51);">&gt;</span>
+  <span style="color: rgb(51, 153, 51);">&lt;</span>head<span style="color: rgb(51, 153, 51);">&gt;</span>
+    <span style="color: rgb(51, 153, 51);">&lt;</span>title<span style="color: rgb(51, 153, 51);">&gt;</span>Tastyapi<span style="color: rgb(51, 153, 51);">&lt;/</span>title<span style="color: rgb(51, 153, 51);">&gt;</span>
+  <span style="color: rgb(51, 153, 51);">&lt;/</span>head<span style="color: rgb(51, 153, 51);">&gt;</span>
+  <span style="color: rgb(51, 153, 51);">&lt;</span>body<span style="color: rgb(51, 153, 51);">&gt;</span>
+    <span style="color: rgb(51, 153, 51);">&lt;</span>form<span style="color: rgb(51, 153, 51);">&gt;</span>
+      <span style="color: rgb(51, 153, 51);">&lt;</span>input type<span style="color: rgb(51, 153, 51);">=</span><span style="color: rgb(51, 102, 204);">"text"</span> id<span style="color: rgb(51, 153, 51);">=</span><span style="color: rgb(51, 102, 204);">"brand"</span> <span style="color: rgb(51, 153, 51);">/&gt;</span>
+      <span style="color: rgb(51, 153, 51);">&lt;</span>input type<span style="color: rgb(51, 153, 51);">=</span><span style="color: rgb(51, 102, 204);">"text"</span> id<span style="color: rgb(51, 153, 51);">=</span><span style="color: rgb(51, 102, 204);">"name"</span> <span style="color: rgb(51, 153, 51);">/&gt;</span>
+      <span style="color: rgb(51, 153, 51);">&lt;</span>input type<span style="color: rgb(51, 153, 51);">=</span><span style="color: rgb(51, 102, 204);">"button"</span> onclick<span style="color: rgb(51, 153, 51);">=</span><span style="color: rgb(51, 102, 204);">"ajax_insert()"</span> value<span style="color: rgb(51, 153, 51);">=</span><span style="color: rgb(51, 102, 204);">"insert"</span> <span style="color: rgb(51, 153, 51);">/&gt;</span>
+    <span style="color: rgb(51, 153, 51);">&lt;/</span>form<span style="color: rgb(51, 153, 51);">&gt;</span>
+  <span style="color: rgb(51, 153, 51);">&lt;</span>script type<span style="color: rgb(51, 153, 51);">=</span><span style="color: rgb(51, 102, 204);">"text/javascript"</span> src<span style="color: rgb(51, 153, 51);">=</span><span style="color: rgb(51, 102, 204);">"https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"</span> <span style="color: rgb(51, 153, 51);">&gt;&lt;/</span>script<span style="color: rgb(51, 153, 51);">&gt;</span>
+  <span style="color: rgb(51, 153, 51);">&lt;</span>script type<span style="color: rgb(51, 153, 51);">=</span><span style="color: rgb(51, 102, 204);">"text/javascript"</span> <span style="color: rgb(51, 153, 51);">&gt;</span>
+&nbsp;
+  <span style="color: rgb(0, 51, 102); font-weight: bold;">function</span> ajax_insert<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span>
+  <span style="color: rgb(0, 153, 0);">{</span>
+    <span style="color: rgb(0, 51, 102); font-weight: bold;">var</span> pname <span style="color: rgb(51, 153, 51);">=</span> $<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'#name'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">val</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span>
+    <span style="color: rgb(0, 51, 102); font-weight: bold;">var</span> pbrand <span style="color: rgb(51, 153, 51);">=</span> $<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'#brand'</span><span style="color: rgb(0, 153, 0);">)</span>.<span style="color: rgb(102, 0, 102);">val</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span>
+    $.<span style="color: rgb(102, 0, 102);">ajax</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">{</span>
+      type <span style="color: rgb(51, 153, 51);">:</span> <span style="color: rgb(51, 102, 204);">"POST"</span><span style="color: rgb(51, 153, 51);">,</span> <span style="color: rgb(0, 102, 0); font-style: italic;">//要插入数据，所以是POST协议 </span>
+      url <span style="color: rgb(51, 153, 51);">:</span> <span style="color: rgb(51, 102, 204);">"/api/p/"</span><span style="color: rgb(51, 153, 51);">,</span> <span style="color: rgb(0, 102, 0); font-style: italic;">//注意结尾的斜线，否则会出现500错误</span>
+      data <span style="color: rgb(51, 153, 51);">:</span> <span style="color: rgb(51, 102, 204);">'{"name" : "'</span><span style="color: rgb(51, 153, 51);">+</span>pname<span style="color: rgb(51, 153, 51);">+</span><span style="color: rgb(51, 102, 204);">'", "brand" : "'</span><span style="color: rgb(51, 153, 51);">+</span>pbrand<span style="color: rgb(51, 153, 51);">+</span><span style="color: rgb(51, 102, 204);">'"}'</span><span style="color: rgb(51, 153, 51);">,</span> <span style="color: rgb(0, 102, 0); font-style: italic;">//JSON数据</span>
+      success<span style="color: rgb(51, 153, 51);">:</span> <span style="color: rgb(0, 51, 102); font-weight: bold;">function</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(0, 153, 0);">{</span>
+        <span style="color: rgb(0, 0, 102);">alert</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'Submit Success'</span><span style="color: rgb(0, 153, 0);">)</span>
+      <span style="color: rgb(0, 153, 0);">}</span><span style="color: rgb(51, 153, 51);">,</span>
+      dataType <span style="color: rgb(51, 153, 51);">:</span> <span style="color: rgb(51, 102, 204);">'json'</span><span style="color: rgb(51, 153, 51);">,</span> <span style="color: rgb(0, 102, 0); font-style: italic;">//在ie浏览器下我没有加dataTpye结果报错，所以建议加上</span>
+      contentType <span style="color: rgb(51, 153, 51);">:</span> <span style="color: rgb(51, 102, 204);">'application/json'</span><span style="color: rgb(51, 153, 51);">,</span>
+    <span style="color: rgb(0, 153, 0);">}</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span>
+  <span style="color: rgb(0, 153, 0);">}</span>
+  <span style="color: rgb(51, 153, 51);">&lt;/</span>script<span style="color: rgb(51, 153, 51);">&gt;</span>
+  <span style="color: rgb(51, 153, 51);">&lt;/</span>body<span style="color: rgb(51, 153, 51);">&gt;</span>
+<span style="color: rgb(51, 153, 51);">&lt;/</span>html<span style="color: rgb(51, 153, 51);">&gt;</span></pre></td></tr></tbody></table></div>
+
+<p>这个时候如果进行操作，会返回401错误，因为还没有进行用户验证。毕竟api涉及对后台数据的操作，如果不验证提交者的身份，对于网站安全来说不是什么好事。要实现验证唯一需要修改的是<span class="f">api.py</span>文件：</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre class="python" style="font-family: monospace;"><span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> tastypie.<span style="color: black;">resources</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> ModelResource
+<span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> product.<span style="color: black;">models</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> Product
+<span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> tastypie.<span style="color: black;">authentication</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> BasicAuthentication
+<span style="color: rgb(255, 119, 0); font-weight: bold;">from</span> tastypie.<span style="color: black;">authorization</span> <span style="color: rgb(255, 119, 0); font-weight: bold;">import</span> DjangoAuthorization
+<span style="color: rgb(255, 119, 0); font-weight: bold;">class</span> ProductResource<span style="color: black;">(</span>ModelResource<span style="color: black;">)</span>:
+    <span style="color: rgb(255, 119, 0); font-weight: bold;">class</span> Meta:
+        queryset = Product.<span style="color: black;">objects</span>.<span style="color: rgb(0, 128, 0);">all</span><span style="color: black;">(</span><span style="color: black;">)</span>
+        resource_name = <span style="color: rgb(72, 61, 139);">'p'</span>
+        authorization = DjangoAuthorization<span style="color: black;">(</span><span style="color: black;">)</span>
+        <span style="color: rgb(136, 136, 136); font-style: italic;">#authorization = Authorization()</span>
+        <span style="color: rgb(136, 136, 136); font-style: italic;">#authentication = BasicAuthentication()</span></pre></td></tr></tbody></table></div>
+
+<p>设置只有只有登录的用户能通过API操作数据。代码第10行的Authorization()验证方式是允许任何人使用这个API，11行的BasicAuthentication()是使用 HTTP的验证方式，就是我们常看到的，弹出一个难看的文本框，然后让你输入用户名和密码，这种验证方式不太友好，通常不会提供给普通用户使用。</p>
+<h2>PUT &amp; DELETE</h2>
+<p>切换AJAX的请求为PUT或DELETE，可以进行更新或是删除操作，但要指定唯一的id或是slug：</p>
+
+<div class="wp_syntax"><table><tbody><tr><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre class="javascript" style="font-family: monospace;">  <span style="color: rgb(0, 51, 102); font-weight: bold;">function</span> ajax_delete<span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span>
+  <span style="color: rgb(0, 153, 0);">{</span>
+    $.<span style="color: rgb(102, 0, 102);">ajax</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">{</span>
+      type <span style="color: rgb(51, 153, 51);">:</span> <span style="color: rgb(51, 102, 204);">"DELETE"</span><span style="color: rgb(51, 153, 51);">,</span>
+      url <span style="color: rgb(51, 153, 51);">:</span> <span style="color: rgb(51, 102, 204);">"/api/p/1/"</span><span style="color: rgb(51, 153, 51);">,</span> #删除id为<span style="color: rgb(204, 0, 0);">1</span>的记录
+      success<span style="color: rgb(51, 153, 51);">:</span> <span style="color: rgb(0, 51, 102); font-weight: bold;">function</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(0, 153, 0);">{</span>
+        <span style="color: rgb(0, 0, 102);">alert</span><span style="color: rgb(0, 153, 0);">(</span><span style="color: rgb(51, 102, 204);">'Submit Success'</span><span style="color: rgb(0, 153, 0);">)</span>
+      <span style="color: rgb(0, 153, 0);">}</span><span style="color: rgb(51, 153, 51);">,</span>
+    dataType <span style="color: rgb(51, 153, 51);">:</span> <span style="color: rgb(51, 102, 204);">'json'</span><span style="color: rgb(51, 153, 51);">,</span>
+    contentType <span style="color: rgb(51, 153, 51);">:</span> <span style="color: rgb(51, 102, 204);">'application/json'</span><span style="color: rgb(51, 153, 51);">,</span>
+    <span style="color: rgb(0, 153, 0);">}</span><span style="color: rgb(0, 153, 0);">)</span><span style="color: rgb(51, 153, 51);">;</span>
+  <span style="color: rgb(0, 153, 0);">}</span></pre></td></tr></tbody></table></div>
+
+<p>更新操作使用PUT请求，可以直接<a href="http://django-tastypie.readthedocs.org/en/latest/interacting.html#sending-data">参考手册</a>，和添加操作相比，它要指定唯一的slug或是id；和删除操作相比，它要加上提交的data。</p>
+<h2>Afterword</h2>
+<p>Django是一个开放的框架，虽然它已经解决了很多问题，但本身确实有很多做得不够好的地方，不妨碍我们去选择更适合自己的方案。tastypie很适合团队分工合作，即使是完全不懂Django的前端，一样能通过API进行操作，而且可以与NOSQL数据库配合使用，至于其他的功能和用法期待大家挖掘吧。</p>
+<div id="crp_related"><h3>Related Posts</h3><ul><li><span style="color: rgb(106, 1, 1);">●</span>&nbsp;<a href="http://dmyz.org/archives/354" rel="bookmark" class="crp_title">从零开始搭建Django Solr的环境</a></li><li><span style="color: rgb(106, 1, 1);">●</span>&nbsp;<a href="http://dmyz.org/archives/248" rel="bookmark" class="crp_title">Django多语言翻译轻量解决方案</a></li><li><span style="color: rgb(106, 1, 1);">●</span>&nbsp;<a href="http://dmyz.org/archives/276" rel="bookmark" class="crp_title">近期技术总结[NodeJS+CoffeeScript]</a></li><li><span style="color: rgb(106, 1, 1);">●</span>&nbsp;<a href="http://dmyz.org/archives/298" rel="bookmark" class="crp_title">HTML5+Javascript开发Android应用</a></li><li><span style="color: rgb(106, 1, 1);">●</span>&nbsp;<a href="http://dmyz.org/archives/283" rel="bookmark" class="crp_title">Django网站添加WebIM</a></li></ul></div>             </div>
+<div id="share">
+<ul><li>
+<div class="facebook"></div>
+<a href="http://www.facebook.com/sharer.php?u=http://dmyz.org/archives/257&amp;t=Django%E5%88%A9%E7%94%A8API%E5%AE%9E%E7%8E%B0AJAX%E6%93%8D%E4%BD%9C" target="_top" rel="nofollow">分享到Facebook</a>
+</li>
+<li>
+<div class="xiaonei"></div>
+<a href="http://share.xiaonei.com/share/buttonshare.do?link=http://dmyz.org/archives/257&amp;title=Django%E5%88%A9%E7%94%A8API%E5%AE%9E%E7%8E%B0AJAX%E6%93%8D%E4%BD%9C" target="_top" rel="nofollow">分享到人人网</a>
+</li>
+<li>
+<div class="douban"></div>
+<a href="http://www.douban.com/recommend/?url=http%3A%2F%2Fdmyz.org%2Farchives%2F257&amp;title=Django%E5%88%A9%E7%94%A8API%E5%AE%9E%E7%8E%B0AJAX%E6%93%8D%E4%BD%9C&amp;sel=&amp;v=1" target="_top" rel="nofollow">分享到豆瓣</a>
+</li>
+<li>
+<div class="twitter"></div><a href="http://twitter.com/home?status=Django%E5%88%A9%E7%94%A8API%E5%AE%9E%E7%8E%B0AJAX%E6%93%8D%E4%BD%9C%20http://dmyz.org/archives/257" title="分享到Twitter" target="_top" rel="nofollow">分享到Twitter</a>
+</li>
+<li><div class="sina"></div><a href="http://v.t.sina.com.cn/share/share.php?url=http://dmyz.org/archives/257&amp;title=Django%E5%88%A9%E7%94%A8API%E5%AE%9E%E7%8E%B0AJAX%E6%93%8D%E4%BD%9C" target="_top" rel="nofollow" "="" title="分享到新浪微博">分享到新浪微博</a></li>
+</ul>
+</div>
+     </div>
+
+    </div>
+
+
+
+    <div id="comments_wrapper">
+     <a name="comments"></a>
+<div style="margin-top: 15px;" id="ds-thread" class="ds-thread" data-thread-id="13920" data-title="Django利用API实现AJAX操作" data-url="http://dmyz.org/archives/257"><div style="display: none;" class="ds-waiting"><img alt="..." src="data:image/gif;base64,R0lGODlhEAALAPQAAP///z2LqeLt8dvp7u7090GNqz2LqV+fuJ/F1IW2ycrf51aatHWswaXJ14i4ys3h6FmctUCMqniuw+vz9eHs8fb5+meku+Tu8vT4+cfd5bbT3tbm7PH2+AAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCwAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7AAAAAAAAAAAA" style="margin: 0pt 0pt 3px 5px;" width="16" height="11"></div><div style="display: none;" class="ds-meta"><a class="ds-like-thread-button"><span class="ds-ui-icon"></span> <span class="ds-thread-like-text">喜欢</span><span class="ds-thread-cancel-like">取消喜欢</span></a><span class="ds-like-panel"></span></div><div class="ds-login-buttons"><div class="ds-border-highlight"></div><p>使用社交帐号登录:</p><ul class="ds-service-list"><li><span class="ds-connected-sites"><a href="http://dmyz.duoshuo.com/login/weibo/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow" class="ds-service-icon ds-weibo ds-weibo-active"></a></span><a href="http://dmyz.duoshuo.com/login/weibo/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow">微博</a></li><li><span class="ds-connected-sites"><a href="http://dmyz.duoshuo.com/login/qq/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow" class="ds-service-icon ds-qq ds-qq-active"></a></span><a href="http://dmyz.duoshuo.com/login/qq/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow">QQ</a></li><li><span class="ds-connected-sites"><a href="http://dmyz.duoshuo.com/login/renren/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow" class="ds-service-icon ds-renren ds-renren-active"></a></span><a href="http://dmyz.duoshuo.com/login/renren/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow">人人</a></li><li><span class="ds-connected-sites"><a href="http://dmyz.duoshuo.com/login/douban/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow" class="ds-service-icon ds-douban ds-douban-active"></a></span><a href="http://dmyz.duoshuo.com/login/douban/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow">豆瓣</a></li><li><span class="ds-connected-sites"><a href="http://dmyz.duoshuo.com/login/kaixin/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow" class="ds-service-icon ds-kaixin ds-kaixin-active"></a></span><a href="http://dmyz.duoshuo.com/login/kaixin/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow">开心</a></li><li><a class="ds-more-services">更多»</a></li></ul><ul class="ds-service-list ds-additional-services"><li><span class="ds-connected-sites"><a href="http://dmyz.duoshuo.com/login/netease/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow" class="ds-service-icon ds-netease ds-netease-active"></a></span><a href="http://dmyz.duoshuo.com/login/netease/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow">网易</a></li><li><span class="ds-connected-sites"><a href="http://dmyz.duoshuo.com/login/sohu/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow" class="ds-service-icon ds-sohu ds-sohu-active"></a></span><a href="http://dmyz.duoshuo.com/login/sohu/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow">搜狐</a></li><li><span class="ds-connected-sites"><a href="http://dmyz.duoshuo.com/login/baidu/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow" class="ds-service-icon ds-baidu ds-baidu-active"></a></span><a href="http://dmyz.duoshuo.com/login/baidu/?sso=1&amp;redirect_uri=http%3A%2F%2Fdmyz.org%2Fwp-login.php%3Faction%3Dduoshuo_login%26redirect_to%3Dhttp%3A%2F%2Fdmyz.org%2Farchives%2F257" rel="nofollow">百度</a></li></ul></div><a name="respond"></a><div class="ds-replybox"><form method="post" action="http://dmyz.org/archives/257" onsubmit="return false;"><input name="thread_id" value="13920" type="hidden"><input name="parent_id" value="" type="hidden"><input name="author_name" value="" type="hidden"><input name="author_email" value="" type="hidden"><input name="author_url" value="" type="hidden"><div class="ds-replybox-main"><div class="ds-textarea-wrapper"><textarea name="message" title="Ctrl+Enter快捷提交" placeholder="任何疑问或是意见，欢迎在评论中提出。(Ctrl+Enter快速提交)"></textarea><pre class="ds-hidden-text"></pre></div><div class="ds-post-toolbar"><div class="ds-post-options"><span class="ds-sync" style="color: rgb(153, 153, 153);">不想登录？直接点击发布即可作为游客留言。</span></div><button class="ds-post-button" type="submit">发 布</button><div class="ds-toolbar-buttons"><a class="ds-toolbar-button ds-add-emote" title="插入表情"></a><a class="ds-toolbar-button ds-add-image" title="插入图片"></a></div></div></div></form></div><div class="ds-comments-info"></div><ul class="ds-comments"><li class="ds-post" data-post-id="21235"><div class="ds-post-self" data-post-id="21235" data-thread-id="13920"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><img src="638a087063f028fcd507096785abd8a1"></div><div class="ds-comment-body"><div class="ds-comment-header"><span class="ds-user-name">indexofire</span></div><p>文中的几个错误：<br>1. 代码中apps的名字是accounts，而文章中是product。<br>2. models.py里__unicode__()返回的self.title貌似没有这个字段，是self.name吧<br><br>ps: tastypie+1</p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-06-30T20:55:43+08:00" title="2011年6月30日 20:55:43">2011年6月30日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div><div class="ds-children-wrapper"><div class="ds-children-control"><a class="ds-collapse"><span class="ds-ui-icon"></span></a><a class="ds-expand"></a></div><div class="ds-collapse-padding"></div><ul class="ds-children"><li class="ds-post" data-post-id="21243"><div class="ds-post-self" data-post-id="21243" data-thread-id="13920"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><a href="http://weibo.com/perchouli" rel="nofollow" target="_top"><img src="1" data-user-id="2288"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" href="http://weibo.com/perchouli" rel="nofollow" target="_top">Perchouli</a></div><p>啊…果然～非常感谢～已经更正了 =)</p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-07-01T23:44:33+08:00" title="2011年7月1日 23:44:33">2011年7月1日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div></li></ul></div></li><li class="ds-post" data-post-id="21230"><div class="ds-post-self" data-post-id="21230" data-thread-id="13920"><div class="ds-post-color"></div><div class="ds-post-main"><div class="ds-avatar"><a href="http://simple-is-better.com/" rel="nofollow" target="_top"><img src="a1b92ffe5893beb5ed55895de7563370"></a></div><div class="ds-comment-body"><div class="ds-comment-header"><a class="ds-user-name ds-highlight" href="http://simple-is-better.com/" rel="nofollow" target="_top">python.cn(news, jobs)</a></div><p>已推荐到：<a href="http://simple-is-better.com/news/497" target="_top">http://simple-is-better.com/news/497</a></p><div class="ds-comment-footer"><span class="ds-time" datetime="2011-06-30T10:54:07+08:00" title="2011年6月30日 10:54:07">2011年6月30日</span><a class="ds-post-reply"><span class="ds-ui-icon"></span>回复</a> <a class="ds-post-report"><span class="ds-ui-icon"></span> 举报</a></div></div></div></div></li></ul><div style="display: none;" class="ds-paginator"><div class="ds-border"></div><a data-page="1" class="ds-current">1</a></div><p class="ds-powered-by"><img src="duoshuo.jpg" alt="duoshuo"></p></div>
+	
+		<div id="ds-ssr">
+
+		
+            <ol id="commentlist">
+                	<li class="comment even thread-even depth-1" id="li-comment-532">
+		<article id="comment-532" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn"><a href="http://simple-is-better.com/" rel="external nofollow" class="url">python.cn(news, jobs)</a></span> on <a rel="nofollow" href="http://dmyz.org/archives/257#comment-532"><time pubdate="" datetime="2011-06-30T18:54:07+00:00">2011-06-30 at 6:54 PM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>已推荐到：http://simple-is-better.com/news/497</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	</li>
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-537">
+		<article id="comment-537" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">indexofire</span> on <a rel="nofollow" href="http://dmyz.org/archives/257#comment-537"><time pubdate="" datetime="2011-07-01T04:55:43+00:00">2011-07-01 at 4:55 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>文中的几个错误：<br>
+1. 代码中apps的名字是accounts，而文章中是product。<br>
+2. models.py里__unicode__()返回的self.title貌似没有这个字段，是self.name吧</p>
+<p>ps: tastypie+1</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	<ul class="children">
+	<li class="comment byuser comment-author-admin bypostauthor even depth-2" id="li-comment-545">
+		<article id="comment-545" class="comment">
+			<footer class="comment-meta">
+				<cite class="comment-author vcard">
+					<span class="fn">Perchouli</span> on <a rel="nofollow" href="http://dmyz.org/archives/257#comment-545"><time pubdate="" datetime="2011-07-02T07:44:33+00:00">2011-07-02 at 7:44 AM</time></a> <span class="says">said:</span>				</cite><!-- .comment-author .vcard -->
+			</footer>
+
+			<div class="comment-content"><p>啊…果然～非常感谢～已经更正了 =)</p>
+</div>
+			
+		</article><!-- #comment-## -->
+	</li>
+</ul>
+</li>
+            </ol>
+
+		            
+    </div>    </div>
+
+        <div id="previous_next_post" class="clearfix">
+     <p id="previous_post"><a href="http://dmyz.org/archives/253" rel="prev">新浪微博的插件——轻博客</a></p>
+     <p id="next_post"><a href="http://dmyz.org/archives/264" rel="next">OnlineGalGame测试版发布</a></p>
+    </div>
+    
+   </div><!-- #left_col end -->
+
+   <div id="right_col">
+  
+    <div id="information_area" class="clearfix">
+   <div class="side_box" id="information">
+    <h3>PROFILE</h3>
+    <div id="information_contents"><div class="textwidget"><ul>
+<li><img src="avatar.gif" style="float: left; margin: 0pt 10px 5px 0pt;" width="90" height="90"></li>
+<li style="text-indent: 2em;"><p id="welcome">欢迎访问Perchouli的博客，使用下方的标签云来筛选你需要的内容，其他问题可以直接评论或是给我发邮件。</p></li>
+<li><div class="mail"></div><a href="mailto:jp.chenyang@gmail.com">jp.chenyang@gmail.com</a></li>
+</ul></div></div>
+   </div>
+      <div id="entries_rss">
+    <a href="http://dmyz.org/feed" title="Entries RSS">RSS FEED</a>
+   </div>
+     </div>
+  
+    <!--div class="side_box" id="search_area_top">
+   <div id="search_area" class="clearfix">
+        <form method="get" id="searchform" action="http://dmyz.org/">
+     <div><input type="text" value="Search" name="s" id="search_input" onfocus="this.value=''; changefc('white');" /></div>
+     <div><input type="image" src="http://dmyz.org/wp-content/themes/monochrome/img/search_button.gif" alt="Search from this blog." title="Search from this blog." id="search_button" /></div>
+    </form>
+       </div>
+     </div-->
+  
+  <div class="side_box" id="categories-3">
+<h3>TAGS</h3>
+		<ul>
+	<li class="cat-item cat-item-77"><a href="http://dmyz.org/archives/category/front" title="View all posts filed under Front">Front</a> (7)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://dmyz.org/archives/category/uncategory" title="View all posts filed under Other">Other</a> (13)
+</li>
+	<li class="cat-item cat-item-78"><a href="http://dmyz.org/archives/category/pm" title="View all posts filed under Product">Product</a> (9)
+</li>
+	<li class="cat-item cat-item-27"><a href="http://dmyz.org/archives/category/python" title="View all posts filed under Python">Python</a> (20)
+</li>
+	<li class="cat-item cat-item-79"><a href="http://dmyz.org/archives/category/tech" title="View all posts filed under Tech">Tech</a> (30)
+</li>
+	<li class="cat-item cat-item-38"><a href="http://dmyz.org/archives/category/uncategory/old" title="View all posts filed under Time Capsule">Time Capsule</a> (2)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://dmyz.org/archives/category/web" title="View all posts filed under Website">Website</a> (7)
+</li>
+		</ul>
+</div>
+	        <div class="side_box" id="wp-cumulus">
+							<h3>TAGCLOUD</h3>
+						<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/swfobject/ --><div id="wpcumuluswidgetcontent3792738"><embed type="application/x-shockwave-flash" src="tagcloud.swf" id="tagcloudflash" name="tagcloudflash" bgcolor="#ffffff" quality="high" wmode="transparent" allowscriptaccess="always" flashvars="tcolor=0x000000&amp;tcolor2=0x666666&amp;hicolor=0x33A8E5&amp;tspeed=100&amp;distr=true&amp;mode=tags&amp;tagcloud=%3Ctags%3E%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fandroid%27+class%3D%27tag-link-106%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.4pt%3B%27%3EAndroid%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fcss%27+class%3D%27tag-link-81%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.4pt%3B%27%3ECSS%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fdjango%27+class%3D%27tag-link-53%27+title%3D%2715+topics%27+style%3D%27font-size%3A+40pt%3B%27%3EDjango%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fdotcloud%27+class%3D%27tag-link-83%27+title%3D%273+topics%27+style%3D%27font-size%3A+18.666666666667pt%3B%27%3EDotcloud%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Feaster-eggs%27+class%3D%27tag-link-69%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EEaster+Eggs%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Ffirefox%27+class%3D%27tag-link-52%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EFirefox%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fhtml5%27+class%3D%27tag-link-24%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.4pt%3B%27%3EHTML5%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fjavascript%27+class%3D%27tag-link-97%27+title%3D%273+topics%27+style%3D%27font-size%3A+18.666666666667pt%3B%27%3EJavascript%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Flinux%27+class%3D%27tag-link-66%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3ELinux%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fmod_rewrite%27+class%3D%27tag-link-46%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3Emod_rewrite%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fmysql%27+class%3D%27tag-link-55%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EMysql%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fnodejs%27+class%3D%27tag-link-98%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.4pt%3B%27%3ENodeJS%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fnosql%27+class%3D%27tag-link-67%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3ENosql%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fonlinegalgame%27+class%3D%27tag-link-96%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.4pt%3B%27%3EonlineGalGame%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fparamiko%27+class%3D%27tag-link-57%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3Eparamiko%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fphotoshop%27+class%3D%27tag-link-29%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EPhotoshop%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fpy2exe%27+class%3D%27tag-link-30%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.4pt%3B%27%3Epy2exe%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fpyqt%27+class%3D%27tag-link-35%27+title%3D%273+topics%27+style%3D%27font-size%3A+18.666666666667pt%3B%27%3EPyQt%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fpystatgrab%27+class%3D%27tag-link-58%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3Epystatgrab%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fqq%27+class%3D%27tag-link-59%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EQQ%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fqueue%27+class%3D%27tag-link-49%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EQueue%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fssh%27+class%3D%27tag-link-56%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3ESSH%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fthreading%27+class%3D%27tag-link-42%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.4pt%3B%27%3Ethreading%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fubuntu%27+class%3D%27tag-link-68%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EUbuntu%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Funrar%27+class%3D%27tag-link-31%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EUnRAR%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fwebgame%27+class%3D%27tag-link-17%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EWebgame%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fweb%25e6%25a1%2586%25e6%259e%25b6%27+class%3D%27tag-link-54%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EWeb%E6%A1%86%E6%9E%B6%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2Fword%27+class%3D%27tag-link-26%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3EWord%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e4%25b8%2589%25e5%259b%25bd%25e6%259d%2580%27+class%3D%27tag-link-63%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E4%B8%89%E5%9B%BD%E6%9D%80%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%258a%25a8%25e6%25bc%25ab%27+class%3D%27tag-link-12%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E5%8A%A8%E6%BC%AB%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%258a%25a8%25e6%25bc%25ab%25e9%25a9%25bf%25e7%25ab%2599%27+class%3D%27tag-link-11%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.4pt%3B%27%3E%E5%8A%A8%E6%BC%AB%E9%A9%BF%E7%AB%99%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%258d%258a%25e6%2588%2590%25e5%2593%2581%27+class%3D%27tag-link-16%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E5%8D%8A%E6%88%90%E5%93%81%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%258e%259f%25e5%259e%258b%27+class%3D%27tag-link-89%27+title%3D%273+topics%27+style%3D%27font-size%3A+18.666666666667pt%3B%27%3E%E5%8E%9F%E5%9E%8B%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%259b%25a2%25e8%25b4%25ad%27+class%3D%27tag-link-60%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E5%9B%A2%E8%B4%AD%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%25a4%259a%25e7%25ba%25bf%25e7%25a8%258b%27+class%3D%27tag-link-50%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E5%A4%9A%E7%BA%BF%E7%A8%8B%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e5%25b8%2583%25e5%25b1%2580%27+class%3D%27tag-link-8%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E5%B8%83%E5%B1%80%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e6%258b%259f%25e4%25ba%25ba%25e5%258c%2596%27+class%3D%27tag-link-51%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E6%8B%9F%E4%BA%BA%E5%8C%96%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e6%25a1%2586%25e6%259e%25b6%25e5%25b1%2582%27+class%3D%27tag-link-9%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E6%A1%86%E6%9E%B6%E5%B1%82%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e6%25a1%258c%25e6%25b8%25b8%27+class%3D%27tag-link-62%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E6%A1%8C%E6%B8%B8%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e6%25b5%258f%25e8%25a7%2588%25e5%2599%25a8%27+class%3D%27tag-link-25%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E6%B5%8F%E8%A7%88%E5%99%A8%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e7%2597%2585%25e6%25af%2592%27+class%3D%27tag-link-28%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E7%97%85%E6%AF%92%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e7%25bd%2591%25e7%25bb%259c%25e8%2590%25a5%25e9%2594%2580%27+class%3D%27tag-link-61%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E7%BD%91%E7%BB%9C%E8%90%A5%E9%94%80%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e7%25bd%2591%25e9%25a1%25b5%25e8%25ae%25be%25e8%25ae%25a1%27+class%3D%27tag-link-7%27+title%3D%272+topics%27+style%3D%27font-size%3A+14.4pt%3B%27%3E%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e8%25bf%2585%25e9%259b%25b7api%27+class%3D%27tag-link-65%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E8%BF%85%E9%9B%B7API%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fdmyz.org%2Farchives%2Ftag%2F%25e9%2587%258d%25e5%25ae%259a%25e5%2590%2591%27+class%3D%27tag-link-47%27+title%3D%271+topic%27+style%3D%27font-size%3A+8pt%3B%27%3E%E9%87%8D%E5%AE%9A%E5%90%91%3C%2Fa%3E%3C%2Ftags%3E" width="200" height="230"></div>	        </div>
+				<div class="side_box" id="recent-posts-4">
+		<h3>RECENT POSTS</h3>
+		<ul>
+				<li><a href="http://dmyz.org/archives/381" title="Django托管在Github上的实践">Django托管在Github上的实践</a></li>
+				<li><a href="http://dmyz.org/archives/374" title="从Discuz中整合用户数据到Django">从Discuz中整合用户数据到Django</a></li>
+				<li><a href="http://dmyz.org/archives/362" title="一折">一折</a></li>
+				<li><a href="http://dmyz.org/archives/354" title="从零开始搭建Django Solr的环境">从零开始搭建Django Solr的环境</a></li>
+				<li><a href="http://dmyz.org/archives/350" title="Django用uploadify实现图片批量上传">Django用uploadify实现图片批量上传</a></li>
+				<li><a href="http://dmyz.org/archives/348" title="在Dotcloud上搭建NodeJS+MongoDB环境">在Dotcloud上搭建NodeJS+MongoDB环境</a></li>
+				<li><a href="http://dmyz.org/archives/344" title="初学前端的MVC架构">初学前端的MVC架构</a></li>
+				<li><a href="http://dmyz.org/archives/336" title="在Django中使用LESS">在Django中使用LESS</a></li>
+				<li><a href="http://dmyz.org/archives/326" title="Django复制记录的方法">Django复制记录的方法</a></li>
+				<li><a href="http://dmyz.org/archives/320" title="最佳CP算法">最佳CP算法</a></li>
+				</ul>
+		</div>
+<div class="side_box" id="archives-3">
+<h3>Archives</h3>
+		<ul>
+			<li><a href="http://dmyz.org/archives/date/2012/04" title="April 2012">April 2012</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2012/03" title="March 2012">March 2012</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2012/02" title="February 2012">February 2012</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2012/01" title="January 2012">January 2012</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/12" title="December 2011">December 2011</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/11" title="November 2011">November 2011</a>&nbsp;(3)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/10" title="October 2011">October 2011</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/09" title="September 2011">September 2011</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/08" title="August 2011">August 2011</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/07" title="July 2011">July 2011</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/06" title="June 2011">June 2011</a>&nbsp;(4)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/05" title="May 2011">May 2011</a>&nbsp;(3)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/04" title="April 2011">April 2011</a>&nbsp;(4)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/03" title="March 2011">March 2011</a>&nbsp;(4)</li>
+	<li><a href="http://dmyz.org/archives/date/2011/01" title="January 2011">January 2011</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/12" title="December 2010">December 2010</a>&nbsp;(3)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/11" title="November 2010">November 2010</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/10" title="October 2010">October 2010</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/09" title="September 2010">September 2010</a>&nbsp;(5)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/08" title="August 2010">August 2010</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/07" title="July 2010">July 2010</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2010/01" title="January 2010">January 2010</a>&nbsp;(2)</li>
+	<li><a href="http://dmyz.org/archives/date/2009/05" title="May 2009">May 2009</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2009/03" title="March 2009">March 2009</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2007/12" title="December 2007">December 2007</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2007/08" title="August 2007">August 2007</a>&nbsp;(1)</li>
+	<li><a href="http://dmyz.org/archives/date/2006/09" title="September 2006">September 2006</a>&nbsp;(1)</li>
+		</ul>
+</div>
+<div class="side_box" id="ds-recent-comments-2">
+<h3>RECENT COMMENTS</h3>
+<ul id="ds-recent-comments" class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-avatar-size="32" data-excerpt-length="70"><li class="ds-comment ds-show-avatars" data-post-id="4261930"><a class="ds-avatar" rel="author nofollow" target="_top" href="http://weibo.com/perchouli"><img src="1" data-user-id="2288" width="32" height="32"></a><div class="ds-meta"><a rel="author" target="_top" href="http://weibo.com/perchouli">Perchouli</a><span class="ds-time" datetime="2012-04-27T22:06:27+08:00" title="2012年4月27日 22:06:27">4月27日</span></div><div class="ds-thread-title">在 <a href="http://dmyz.org/archives/169#comments">迅雷已开放的部分API+代码范例[迅雷7可用]</a> 中评论</div><div class="ds-excerpt">对，当时是在winxp平台下跑的vb脚本。已经很久没有类似的需求了，没有更新。不确定代码还能用。</div></li><li class="ds-comment ds-show-avatars" data-post-id="4260628"><a class="ds-avatar" rel="author nofollow" target="_top" href="http://t.qq.com/hellophp"><img src="50" data-user-id="315544" width="32" height="32"></a><div class="ds-meta"><a rel="author" target="_top" href="http://t.qq.com/hellophp">hellophp</a><span class="ds-time" datetime="2012-04-27T21:51:28+08:00" title="2012年4月27日 21:51:28">4月27日</span></div><div class="ds-thread-title">在 <a href="http://dmyz.org/archives/169#comments">迅雷已开放的部分API+代码范例[迅雷7可用]</a> 中评论</div><div class="ds-excerpt">大侠这是用的什么语言啊 ? VB?</div></li><li class="ds-comment ds-show-avatars" data-post-id="2972550"><a class="ds-avatar" rel="author nofollow" target="_top" href="http://www.douban.com/people/jobshuo/"><img src="u45773533-106.jpg" data-user-id="258488" width="32" height="32"></a><div class="ds-meta"><a rel="author" target="_top" href="http://www.douban.com/people/jobshuo/">云升似鲤</a><span class="ds-time" datetime="2012-04-04T23:10:33+08:00" title="2012年4月4日 23:10:33">4月4日</span></div><div class="ds-thread-title">在 <a href="http://dmyz.org/archives/6#comments">关于《动漫驿站》和本站</a> 中评论</div><div class="ds-excerpt">好奇怪的域名诶...追着动漫驿站过来的...</div></li><li class="ds-comment ds-show-avatars" data-post-id="2944083"><a class="ds-avatar" rel="author nofollow" target="_top" href="http://weibo.com/perchouli"><img src="1" data-user-id="2288" width="32" height="32"></a><div class="ds-meta"><a rel="author" target="_top" href="http://weibo.com/perchouli">Perchouli</a><span class="ds-time" datetime="2012-04-03T13:38:37+08:00" title="2012年4月3日 13:38:37">4月3日</span></div><div class="ds-thread-title">在 <a href="http://dmyz.org/archives/350#comments">Django用uploadify实现图片批量上传</a> 中评论</div><div class="ds-excerpt">没有传参。 这里是把request.user.id作为参数传给upload_image，如果没有登录或是其他问题导致request.user.id为空，就会出现这个错误。</div></li><li class="ds-comment ds-show-avatars" data-post-id="2943173"><div class="ds-avatar"><img src="50_001.dat" data-user-id="257047" width="32" height="32"></div><div class="ds-meta">板凳<span class="ds-time" datetime="2012-04-03T11:51:11+08:00" title="2012年4月3日 11:51:11">4月3日</span></div><div class="ds-thread-title">在 <a href="http://dmyz.org/archives/350#comments">Django用uploadify实现图片批量上传</a> 中评论</div><div class="ds-excerpt">'uploader' 	: '{%url upload_image request.user.id %}', 请问如何设置url？出这种Caught NoReverseMatch while rendering: Reverse for 'uploadify…</div></li></ul></div>
+
+  
+</div><!-- #right_col end -->
+  </div><!-- #contents end -->
+
+
+  <div id="footer">
+   <ul id="copyright">
+    <li style="background: none repeat scroll 0% 0% transparent;">
+                Copyright ©&nbsp; 2004-2012     &nbsp;<a href="http://dmyz.org/archives/tag/%E5%8A%A8%E6%BC%AB%E9%A9%BF%E7%AB%99/">动漫驿站</a></li>
+    <li><a href="http://dmyz.org/archives/6/">关于《动漫驿站》和本站</a></li>
+    <li><a href="#">Powered by WordPress</a></li>
+<li style="display: none;"></li>
+    <li><a href="http://dmyz.org/archives/270/">Theme by Perchouli</a></li>
+<li style="display: none;"></li>
+   </ul>
+  </div>
+ 
+</div><!-- #wrapper end -->
+
+<div id="return_top">
+ <a href="#wrapper">&nbsp;</a>
+</div>
+
+<div style="border: medium none; position: fixed; top: 0px; left: 20px;">
+ <a href="http://dmyz.org/archives/6"><img src="about.gif"></a>
+</div> 
+
+ 
+<div id="ds-indicator"><img src="loading.gif"></div>
+
+
+<iframe src="index_1.html" style="position: absolute; top: -2000px; left: 0pt;" id="easyXDM_default953_provider" name="easyXDM_default953_provider" frameborder="0"></iframe><div id="sb-container"><div id="sb-overlay"></div><div id="sb-wrapper"><div id="sb-title"><div id="sb-title-inner"></div></div><div id="sb-wrapper-inner"><div id="sb-body"><div id="sb-body-inner"></div><div id="sb-loading"><div id="sb-loading-inner"><span>loading</span></div></div></div></div><div id="sb-info"><div id="sb-info-inner"><div id="sb-counter"></div><div id="sb-nav"><a id="sb-nav-close" title="Close" onclick="Shadowbox.close()"></a><a id="sb-nav-next" title="Next" onclick="Shadowbox.next()"></a><a id="sb-nav-play" title="Play" onclick="Shadowbox.play()"></a><a id="sb-nav-pause" title="Pause" onclick="Shadowbox.pause()"></a><a id="sb-nav-previous" title="Previous" onclick="Shadowbox.previous()"></a></div></div></div></div></div></body>
+</html>
