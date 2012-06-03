@@ -43,4 +43,4 @@
     }
     echo json_encode($ret_arr);
     
-    
+    32℃~25℃
